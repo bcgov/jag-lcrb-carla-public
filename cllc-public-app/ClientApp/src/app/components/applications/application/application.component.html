@@ -19,8 +19,7 @@
             Provide Comment on {{ application?.applicationType?.name }}
             Application
           </h1>
-          <h1
-            class="ngtest-page-title"
+          <h1 class="ngtest-page-title"
             *ngIf="this.isOpenedByLGForApproval && application?.applicationType.isShowLGZoningConfirmation">
             Provide Confirmation of Zoning for {{ application?.applicationType?.name }}
           </h1>
@@ -39,15 +38,12 @@
             </div>
           </section>
           <!--Picnic Area Declaration-->
-          <section
-            class="ngtest-property-details"
-            *ngIf="
+          <section class="ngtest-property-details" *ngIf="
               application?.applicationType?.name == ApplicationTypeNames.PicnicAreaEndorsement ||
               application?.applicationType?.name == ApplicationTypeNames.ChangetoApprovedPicnicArea
             ">
             <h3 class="blue-header">PICNIC AREA DECLARATION</h3>
-            <section
-              class="padded-section content-bottom"
+            <section class="padded-section content-bottom"
               *ngIf="application?.applicationType?.name == ApplicationTypeNames.PicnicAreaEndorsement">
               <div style="position: relative">
                 <section>
@@ -86,9 +82,7 @@
                   <br />
                 </section>
                 <br />
-                <app-field
-                  label="I have read and understand the above terms and conditions"
-                  [isFullWidth]="true"
+                <app-field label="I have read and understand the above terms and conditions" [isFullWidth]="true"
                   [valid]="isValidOrNotTouchedRequireTrue('picnicReadAndAccept')"
                   errorMessage="Please confirm have read and understand the term and conditions."
                   [showChevrons]="false">
@@ -99,8 +93,7 @@
                 </app-field>
                 <app-field
                   label="I confirm local zoning allows for the operation of a picnic area endorsement, including a sale area if applicable."
-                  [isFullWidth]="true"
-                  [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
+                  [isFullWidth]="true" [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
                   errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
                   [showChevrons]="false">
                   <mat-radio-group formControlName="picnicConfirmZoning">
@@ -110,8 +103,7 @@
                 </app-field>
                 <app-field
                   label="I confirm my local government/Indigenous Nation supports the proposed capacity for the picnic area endorsement."
-                  [isFullWidth]="true"
-                  [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
+                  [isFullWidth]="true" [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
                   errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
                   [showChevrons]="false">
                   <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
@@ -122,8 +114,7 @@
               </div>
             </section>
 
-            <section
-              class="padded-section content-bottom"
+            <section class="padded-section content-bottom"
               *ngIf="application?.applicationType?.name == ApplicationTypeNames.ChangetoApprovedPicnicArea">
               <div style="position: relative">
                 <section>
@@ -162,9 +153,7 @@
                   <br />
                 </section>
                 <br />
-                <app-field
-                  label="I have read and understand the above terms and conditions."
-                  [isFullWidth]="true"
+                <app-field label="I have read and understand the above terms and conditions." [isFullWidth]="true"
                   [valid]="isValidOrNotTouchedRequireTrue('picnicReadAndAccept')"
                   errorMessage="Please confirm have read and understand the term and conditions."
                   [showChevrons]="false">
@@ -175,8 +164,7 @@
                 </app-field>
                 <app-field
                   label="I confirm local zoning allows for the operation of a picnic area endorsement, including a sale area if applicable."
-                  [isFullWidth]="true"
-                  [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
+                  [isFullWidth]="true" [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmZoning')"
                   errorMessage="Please confirm local zoning allows for the operation of a picnic area endorsement."
                   [showChevrons]="false">
                   <mat-radio-group formControlName="picnicConfirmZoning">
@@ -186,8 +174,7 @@
                 </app-field>
                 <app-field
                   label="I confirm my local government/Indigenous Nation supports the proposed capacity for the picnic area endorsement."
-                  [isFullWidth]="true"
-                  [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
+                  [isFullWidth]="true" [valid]="isValidOrNotTouchedRequireTrue('picnicConfirmLGFNCapacity')"
                   errorMessage="Please confirm local government/First Nation supports the proposed capacity for the picnic area endorsement."
                   [showChevrons]="false">
                   <mat-radio-group formControlName="picnicConfirmLGFNCapacity">
@@ -203,19 +190,13 @@
             <h3 class="blue-header">Manufacturer previous year production amount</h3>
             <section class="padded-section content-bottom">
               <div class="row">
-                <label class="col-md-6 col-xs-12"
-                  ><strong
-                    >Manufacturer production amount (less spillage) for the previous year, or if the manufacturer has
+                <label class="col-md-6 col-xs-12"><strong>Manufacturer production amount (less spillage) for the
+                    previous year, or if the manufacturer has
                     not been in operation for 12 months, an estimate of the production volumes for the 12 months after
-                    submitting the exemption application:</strong
-                  ></label
-                >
+                    submitting the exemption application:</strong></label>
                 <div class="col-md-3 col-xs-12" style="align-content: start">
-                  <input
-                    class="form-control"
-                    type="number"
-                    onkeypress="return event.charCode >= 48 && event.charCode<=57"
-                    min="1"
+                  <input class="form-control" type="number"
+                    onkeypress="return event.charCode >= 48 && event.charCode<=57" min="1"
                     formControlName="manufacturerProductionAmountForPrevYear" />
                 </div>
                 <div class="col-md-3 col-xs-12" style="align-content: start">
@@ -231,11 +212,8 @@
           <section *ngIf="application?.applicationType?.name == 'Tied House Exemption Removal'">
             <h3 class="blue-header">IDENTIFY THE LICENCE TO REMOVE</h3>
             <section class="padded-section">
-              <app-field
-                label="Search for the licence you wish to remove the tied house exemption:"
-                errorMessage="Please select a value"
-                [required]="true"
-                [valid]="isValidOrNotTouched('assignedLicence')">
+              <app-field label="Search for the licence you wish to remove the tied house exemption:"
+                errorMessage="Please select a value" [required]="true" [valid]="isValidOrNotTouched('assignedLicence')">
                 <app-related-licence-picker (valueSelected)="onLicenceSelect($event)"></app-related-licence-picker>
               </app-field>
             </section>
@@ -271,8 +249,7 @@
           <section *ngIf="htmlContent?.beforeStarting" class="padded-section content-bottom">
             <app-more-less-content>
               <div class="ngtest-before-starting-content" [innerHTML]="htmlContent.beforeStarting"></div>
-              <span
-                *ngIf="
+              <span *ngIf="
                   application?.applicationType?.name ===
                     ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
                   application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
@@ -293,8 +270,7 @@
                 <span *ngIf="form.get('indigenousNation').value.websiteUrl">
                   (
                   <a [href]="form.get('indigenousNation').value.websiteUrl" target="_blank">
-                    {{ this.form.get('indigenousNation').value.websiteUrl }} </a
-                  >)
+                    {{ this.form.get('indigenousNation').value.websiteUrl }} </a>)
                 </span>
                 to ensure your successful submission.
               </strong>
@@ -319,13 +295,11 @@
           </section>
 
           <!-- Local Government advise -->
-          <section
-            *ngIf="
+          <section *ngIf="
               form.get('indigenousNation').value.websiteUrl &&
               showFormControl(application?.applicationType?.lGandPoliceSelectors) &&
               form.get('assignedLicence.id').value
-            "
-            appRemoveIfFeatureOff="LGApprovals">
+            " appRemoveIfFeatureOff="LGApprovals">
             Please review the information at
             <a target="blank" [href]="form.get('indigenousNation').value.websiteUrl">
               {{ form.get('indigenousNation').value.websiteUrl }}
@@ -343,19 +317,12 @@
                 Provide a list of all shareholders, class of shares, number of voting and non-voting per shareholder,
                 and date shares issued/transferred/cancelled. See example:
               </p>
-              <img
-                src="assets/central-securities-register-example.png"
+              <img src="assets/central-securities-register-example.png"
                 style="border: solid #e0e0e0 1px; margin: 10px; width: 500px" />
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="CentralSecuritiesRegister"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedCentralSecuritiesRegisterDocuments = $event"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
+              <app-file-uploader *ngIf="true || applicationId" documentType="CentralSecuritiesRegister"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedCentralSecuritiesRegisterDocuments = $event"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'">
               </app-file-uploader>
               <p>
                 <strong>
@@ -458,16 +425,10 @@
                 </a>
                 if one or more of the shareholders is a company:
               </p>
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="SupportingDocuments"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
+              <app-file-uploader *ngIf="true || applicationId" documentType="SupportingDocuments"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
               <hr />
             </section>
@@ -479,29 +440,21 @@
               </h4>
               <h4 *ngIf="this.businessTypeIsSociety()">List of Directors and Officers</h4>
               <p>
-                Provide the Notice of Articles for your <span *ngIf="this.businessTypeIsSociety()">Society</span
-                ><span *ngIf="this.businessTypeIsCorporation()">Corporation</span>. Alternatively, you can provide list
+                Provide the Notice of Articles for your <span *ngIf="this.businessTypeIsSociety()">Society</span><span
+                  *ngIf="this.businessTypeIsCorporation()">Corporation</span>. Alternatively, you can provide list
                 of all current directors/officers by full legal name, position and date of appointment.
               </p>
               <!-- <p *ngIf="this.isLiquor() && !this.businessTypeIsSociety()">
                 <strong>Directors and Officers are <u>not</u> required to submit a Personal History Summary form for liquor-related applications.</strong>
               </p> -->
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="NOA"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedNOA = $event"
-                [entityId]="applicationId"
+              <app-file-uploader *ngIf="true || applicationId" documentType="NOA"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedNOA = $event" [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
               </app-file-uploader>
               <p *ngIf="!this.isLiquor()">
-                <strong
-                  ><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Cannabis
-                  Associate Security Screening form below.</strong
-                >
+                <strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Cannabis
+                  Associate Security Screening form below.</strong>
               </p>
             </section>
 
@@ -509,8 +462,8 @@
             <section *ngIf="this.businessTypeIsSoleProp()">
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Sole proprietors must complete a
-                <span *ngIf="this.isLiquor()"> Personal History Summary </span
-                ><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span>
+                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
+                  Associate Security Screening</span>
                 <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
                 </a>
@@ -524,19 +477,13 @@
               <p>Provide a copy of your partnership agreement.</p>
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Each partner must submit a completed
-                <span *ngIf="this.isLiquor()"> Personal History Summary </span
-                ><span *ngIf="!this.isLiquor()">Cannabis Associate Security Screening</span> form below.
+                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
+                  Associate Security Screening</span> form below.
               </p>
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="PartnershipAgreement"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD PARTNERSHIP AGREEMENT, DRAG FILES HERE OR'">
+              <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipAgreement"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedPartnershipAgreement = $event"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD PARTNERSHIP AGREEMENT, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
 
@@ -560,22 +507,15 @@
                   </a>
                 </span>
               </p>
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="OrganizationDetails"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="true"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedOrganizationDetails = $event"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
+              <app-file-uploader *ngIf="true || applicationId" documentType="OrganizationDetails"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedOrganizationDetails = $event"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD ORGANIZATION DETAILS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
 
             <!-- Other -->
-            <section
-              *ngIf="
+            <section *ngIf="
                 !this.businessTypeIsPartnership() &&
                 !this.businessTypeIsCorporation() &&
                 !this.businessTypeIsSoleProp() &&
@@ -592,16 +532,10 @@
                 </a>
                 requirements
               </p>
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="OtherTypes"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedOtherDocuments = $event"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
+              <app-file-uploader *ngIf="true || applicationId" documentType="OtherTypes"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedOtherDocuments = $event"
+                [entityId]="applicationId" [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
             <!-- personal disclosure documents-->
@@ -621,21 +555,13 @@
                 <h4>Personal History Summary Documents</h4>
                 <p>
                   Each liquor affiliate must provide a complete
-                  <a
-                    href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
+                  <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/forms/lcrb004_personal_history_summary.pdf"
                     target="_blank">
-                    Personal History Summary Form </a
-                  >.
+                    Personal History Summary Form </a>.
                 </p>
-                <app-file-uploader
-                  *ngIf="application?.id"
-                  documentType="PHS"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [extensions]="['pdf']"
-                  (numberOfUploadedFiles)="uploadedPHS = $event"
-                  [entityId]="application.id"
+                <app-file-uploader *ngIf="application?.id" documentType="PHS" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                  (numberOfUploadedFiles)="uploadedPHS = $event" [entityId]="application.id"
                   [uploadHeader]="'TO UPLOAD PERSONAL HISTORY SUMMARY FORMS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </div>
@@ -655,9 +581,9 @@
                   </a>
                   for security screenings and financial integrity checks.
                   {{
-                    application?.applicationType?.name === ApplicationTypeNames.Marketer
-                      ? 'Cannabis Marketing'
-                      : 'Retail store licence or authorization'
+                  application?.applicationType?.name === ApplicationTypeNames.Marketer
+                  ? 'Cannabis Marketing'
+                  : 'Retail store licence or authorization'
                   }}
                   applications cannot be processed until all required materials have been received.
                 </p>
@@ -675,8 +601,7 @@
 
                 <p>
                   Please provide the
-                  <a
-                    href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
+                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
                     target="_blank">
                     documents
                   </a>
@@ -686,15 +611,9 @@
                 <h4>Cannabis Associate Security Screening</h4>
                 <p>
                   Each associate must provide a complete Cannabis Associate Security Screening form.
-                  <app-file-uploader
-                    *ngIf="application?.id"
-                    documentType="CAS"
-                    fileTypes="FILE MUST BE IN PDF FORMAT."
-                    [multipleFiles]="false"
-                    entityName="application"
-                    [extensions]="['pdf']"
-                    (numberOfUploadedFiles)="uploadedCAS = $event"
-                    [entityId]="application.id"
+                  <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
+                    [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
+                    (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
                     [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
                   </app-file-uploader>
                 </p>
@@ -705,17 +624,11 @@
                     Each associate must provide a complete a
                     <a
                       href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
-                      Financial Integrity Form </a
-                    >.
+                      Financial Integrity Form </a>.
                   </p>
-                  <app-file-uploader
-                    *ngIf="application?.id"
-                    documentType="FinancialIntegrity"
-                    fileTypes="FILE MUST BE IN PDF FORMAT."
-                    [multipleFiles]="false"
-                    entityName="application"
-                    [extensions]="['pdf']"
-                    (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                  <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
+                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
                     [entityId]="application.id"
                     [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
                   </app-file-uploader>
@@ -731,14 +644,9 @@
                 in the applicant corporation must provide their full legal name and date of birth. They do not need to
                 provide a Personal History Summary or Cannabis Associate Security Screening form.
               </p>
-              <app-file-uploader
-                *ngIf="true || applicationId"
-                documentType="IndividualsWithLessThan10"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="false"
-                entityName="application"
-                [extensions]="['pdf']"
-                (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
+              <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedIndividualsWithLessThan10 = $event"
                 [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'">
               </app-file-uploader>
@@ -854,23 +762,15 @@
                   </p>
                   <p>Select the primary criteria your establishment meets for a temporary relocation.</p>
                   <mat-radio-group formControlName="temporaryRelocationCriteria">
-                    <mat-radio-button class="mr-5" [value]="845280000"
-                      ><span class="wrap-mat-radio-label"
-                        >Repairs due to fire, flood, or other event beyond the licensee's control</span
-                      ></mat-radio-button
-                    >
-                    <mat-radio-button class="mr-5" [value]="845280001"
-                      ><span class="wrap-mat-radio-label"
-                        >Significant alterations to, or renovations of the store by someone other than the
-                        licensee</span
-                      ></mat-radio-button
-                    >
-                    <mat-radio-button class="mr-5" [value]="845280002"
-                      ><span class="wrap-mat-radio-label"
-                        >Significant alterations to, or renovations of the store by the licensee under reasonable
-                        grounds the store cannot continue operating during the alterations or renovations</span
-                      ></mat-radio-button
-                    >
+                    <mat-radio-button class="mr-5" [value]="845280000"><span class="wrap-mat-radio-label">Repairs due to
+                        fire, flood, or other event beyond the licensee's control</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="845280001"><span class="wrap-mat-radio-label">Significant
+                        alterations to, or renovations of the store by someone other than the
+                        licensee</span></mat-radio-button>
+                    <mat-radio-button class="mr-5" [value]="845280002"><span class="wrap-mat-radio-label">Significant
+                        alterations to, or renovations of the store by the licensee under reasonable
+                        grounds the store cannot continue operating during the alterations or
+                        renovations</span></mat-radio-button>
                   </mat-radio-group>
                 </section>
                 <br />
@@ -885,15 +785,9 @@
                 </ul>
                 <br />
                 <section>
-                  <app-file-uploader
-                    *ngIf="applicationId"
-                    documentType="Temporary Relocation Criteria Documents"
-                    [enableFileDeletion]="true"
-                    [disableUploads]="false"
-                    fileTypes="FILE MUST BE IN PDF FORMAT."
-                    [multipleFiles]="true"
-                    entityName="application"
-                    [entityId]="applicationId"
+                  <app-file-uploader *ngIf="applicationId" documentType="Temporary Relocation Criteria Documents"
+                    [enableFileDeletion]="true" [disableUploads]="false" fileTypes="FILE MUST BE IN PDF FORMAT."
+                    [multipleFiles]="true" entityName="application" [entityId]="applicationId"
                     [uploadHeader]="'TO UPLOAD DOCUMENTS, DRAG FILE HERE OR'">
                   </app-file-uploader>
                 </section>
@@ -905,26 +799,19 @@
             <h3 class="blue-header">ESTABLISHMENT DETAILS</h3>
             <section class="padded-section content-bottom">
               <div style="position: relative">
-                <section
-                  *ngIf="
+                <section *ngIf="
                     application?.applicationType?.establishmentName === FormControlState.Show ||
                     application?.applicationType?.establishmentName === FormControlState.ReadOnly
                   ">
-                  <label *ngIf="application?.applicationType?.establishmentName === FormControlState.ReadOnly" for=""
-                    >Establishment Name</label
-                  >
-                  <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly" for=""
-                    >Proposed Establishment Name</label
-                  >
-                  <label
-                    *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly"
-                    class="error-states ng-star-inserted"
-                    >*</label
-                  >
+                  <label *ngIf="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
+                    for="">Establishment Name</label>
+                  <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly"
+                    for="">Proposed Establishment Name</label>
+                  <label *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly"
+                    class="error-states ng-star-inserted">*</label>
                   <br />
 
-                  <p
-                    *ngIf="
+                  <p *ngIf="
                       application?.licenseType == 'Cannabis Retail Store' ||
                       application?.licenseType == 'S119 CRS Authorization'
                     ">
@@ -936,8 +823,7 @@
                     cannot also use language that encourages intoxication.
                   </p>
 
-                  <p
-                    *ngIf="
+                  <p *ngIf="
                       application?.licenseType == 'Cannabis Retail Store' ||
                       application?.licenseType == 'S119 CRS Authorization'
                     ">
@@ -945,8 +831,7 @@
                     trademarks and any type of branding.
                   </p>
 
-                  <p
-                    *ngIf="
+                  <p *ngIf="
                       application?.licenseType == 'Cannabis Retail Store' ||
                       application?.licenseType == 'S119 CRS Authorization'
                     ">
@@ -956,33 +841,24 @@
                       Cannabis Store Name Approval Process.
                     </a>
                     &nbsp;
-                    <a href="https://www2.gov.bc.ca/gov/content?id=3BA008CC60AE436FBD25309AB6C1C9F0" target="_blank"
-                      >Check the LCRB’s website</a
-                    >
+                    <a href="https://www2.gov.bc.ca/gov/content?id=3BA008CC60AE436FBD25309AB6C1C9F0"
+                      target="_blank">Check the LCRB’s website</a>
                     for a list of all currently licensed cannabis stores in British Columbia.
                   </p>
                 </section>
-                <div
-                  *ngIf="
+                <div *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization'
                   ">
-                  <app-field
-                    *ngIf="showFormControl(application?.applicationType?.establishmentName)"
-                    [label]="getEstablishmentLabel(application?.applicationType)"
-                    [required]="true"
-                    [valid]="isValidOrNotTouched('establishmentName')"
-                    errorMessage="{{
+                  <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)"
+                    [label]="getEstablishmentLabel(application?.applicationType)" [required]="true"
+                    [valid]="isValidOrNotTouched('establishmentName')" errorMessage="{{
                       form.get('establishmentName').errors && form.get('establishmentName').errors['forbiddenName']
                         ? 'The store name contains at least one word that doesn’t comply with naming requirements. The application can’t be submitted until the prohibited word(s) are removed.'
                         : 'Establishment Name is a required field'
                     }}">
-                    <input
-                      class="form-control"
-                      style="width: 500px"
-                      type="text"
-                      (change)="checkPossibleProblematicWords()"
-                      formControlName="establishmentName"
+                    <input class="form-control" style="width: 500px" type="text"
+                      (change)="checkPossibleProblematicWords()" formControlName="establishmentName"
                       id="establishmentName" />
                   </app-field>
                   <!--[readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"-->
@@ -992,50 +868,37 @@
                   </div>
                 </div>
                 <!-- Non Cannabis Establishment Name input-->
-                <div
-                  *ngIf="
+                <div *ngIf="
                     application?.licenseType != 'Cannabis Retail Store' &&
                     application?.licenseType != 'S119 CRS Authorization'
                   ">
                   <!-- <label for="">Establishment Name</label> -->
                   <app-field *ngIf="showFormControl(application?.applicationType?.establishmentName)" [required]="true">
-                    <input
-                      class="form-control"
-                      style="width: 500px"
-                      type="text"
+                    <input class="form-control" style="width: 500px" type="text"
                       [readonly]="application?.applicationType?.establishmentName === FormControlState.ReadOnly"
-                      formControlName="establishmentName"
-                      id="establishmentName" />
+                      formControlName="establishmentName" id="establishmentName" />
                   </app-field>
                   <p *ngIf="application?.applicationType?.establishmentName !== FormControlState.ReadOnly">
                     Establishment names are subject to approval by LCRB
                   </p>
                   <p *ngIf="canRenameEstablishment()">
                     As part of the application, you can change the name of the establishment.
-                    <strong
-                      >If the name of the establishment is changing, you must provide a drawing or a photo of your
-                      proposed establishment sign below.</strong
-                    >
+                    <strong>If the name of the establishment is changing, you must provide a drawing or a photo of your
+                      proposed establishment sign below.</strong>
                   </p>
                 </div>
-                
+
                 <!-- Application To Transition To Liquor Primary Licence Application Establishment Name fields -->
-                <div *ngIf="application?.applicationType?.name == ApplicationTypeNames.ApplicationToTransitionToLiquorPrimaryLicence">
-                <label for=""
-                    >Capacity</label>
-                <app-field>
-                 <input
-                      class="form-control"
-                      readonly
-                      style="width: 500px"
-                      type="text"
-                      [value]="licenceCapacity"
+                <div
+                  *ngIf="application?.applicationType?.name == ApplicationTypeNames.ApplicationToTransitionToLiquorPrimaryLicence">
+                  <label for="">Capacity</label>
+                  <app-field>
+                    <input class="form-control" readonly style="width: 500px" type="text" [value]="licenceCapacity"
                       id="licenceCapacity" />
                   </app-field>
+                </div>
               </div>
-              </div>
-              <div
-                formGroupName="assignedLicence"
+              <div formGroupName="assignedLicence"
                 *ngIf="showFormControl(application?.applicationType?.currentEstablishmentAddress)">
                 <h3 class="blue-header" *ngIf="isTemporaryRelocation()">
                   {{ application?.licenseType }} CURRENT LOCATION ADDRESS
@@ -1047,19 +910,11 @@
                   <p>The establishment is currently located at the following address:</p>
                   <address class="row">
                     <app-field class="col-md-12 col-xs-12" label="Address" [isFullWidth]="true">
-                      <input
-                        class="form-control"
-                        type="text"
-                        readonly
-                        formControlName="establishmentAddressStreet"
+                      <input class="form-control" type="text" readonly formControlName="establishmentAddressStreet"
                         id="establishmentAddressStreet" />
                     </app-field>
                     <app-field class="col-md-4 col-xs-12" label="City" [isFullWidth]="true">
-                      <input
-                        class="form-control"
-                        type="text"
-                        readonly
-                        formControlName="establishmentAddressCity"
+                      <input class="form-control" type="text" readonly formControlName="establishmentAddressCity"
                         id="establishmentAddressCity" />
                     </app-field>
                     <section class="col-md-4 col-xs-12">
@@ -1069,12 +924,8 @@
                     </section>
                     <section class="col-md-4 col-xs-12">
                       <app-field label="Postal Code">
-                        <input
-                          class="form-control"
-                          type="text"
-                          readonly
-                          formControlName="establishmentAddressPostalCode"
-                          id="establishmentAddressPostalCode" />
+                        <input class="form-control" type="text" readonly
+                          formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode" />
                       </app-field>
                     </section>
                     <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
@@ -1084,37 +935,26 @@
                   <div class="light-blue-bg" style="display: flex">
                     <div style="flex: 0 0 210px">
                       <app-field label="Parcel Identifier (PID)">
-                        <input
-                          type="text"
-                          readonly
-                          class="form-control"
-                          (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                          style="width: 200px"
-                          formControlName="establishmentParcelId"
-                          id="establishmentParcelId" />
+                        <input type="text" readonly class="form-control" (keydown)="rejectIfNotDigitOrBackSpace($event)"
+                          style="width: 200px" formControlName="establishmentParcelId" id="establishmentParcelId" />
                       </app-field>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <h3
-                class="blue-header"
-                *ngIf="
+              <h3 class="blue-header" *ngIf="
                   showFormControl(application?.applicationType?.newEstablishmentAddress) && !isTemporaryRelocation()
                 ">
                 ADDRESS
               </h3>
-              <h3
-                class="blue-header"
-                *ngIf="
+              <h3 class="blue-header" *ngIf="
                   showFormControl(application?.applicationType?.newEstablishmentAddress) && isTemporaryRelocation()
                 ">
                 TEMPORARY ADDRESS
               </h3>
 
-              <div
-                class="ngtest-new-address content-bottom"
+              <div class="ngtest-new-address content-bottom"
                 *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)">
                 <p *ngIf="application?.licenseType !== 'Rural Agency Store'">
                   The proposed location of the establishment:
@@ -1123,67 +963,34 @@
                   Include any information necessary for finding the site (i.e. route number, mile marker, etc.).
                 </p>
                 <address class="row">
-                  <app-field
-                    class="col-md-12 col-xs-12"
-                    label="Address"
-                    [required]="true"
-                    [isFullWidth]="true"
+                  <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                     [valid]="isValidOrNotTouched('establishmentAddressStreet')"
                     errorMessage="Please enter the street address">
-                    <input
-                      class="form-control"
-                      type="text"
-                      formControlName="establishmentAddressStreet"
-                      id="establishmentAddressStreet"
-                      [matAutocomplete]="auto" />
+                    <input class="form-control" type="text" formControlName="establishmentAddressStreet"
+                      id="establishmentAddressStreet" [matAutocomplete]="auto" />
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddressOptionSelect($event)">
                       <mat-option *ngFor="let address of addresses | async" [value]="address">
                         "{{ address.fullAddress }}"
                       </mat-option>
                     </mat-autocomplete>
                   </app-field>
-                  <app-field
-                    class="col-md-4 col-xs-12"
-                    label="City"
-                    [required]="true"
-                    [isFullWidth]="true"
-                    [valid]="isValidOrNotTouched('establishmentAddressCity')"
-                    errorMessage="Please enter the city">
-                    <input
-                      class="form-control"
-                      type="text"
-                      type="text"
-                      value=""
-                      autocomplete="off"
-                      formControlName="establishmentAddressCity"
-                      id="establishmentAddressCity" />
+                  <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+                    [valid]="isValidOrNotTouched('establishmentAddressCity')" errorMessage="Please enter the city">
+                    <input class="form-control" type="text" type="text" value="" autocomplete="off"
+                      formControlName="establishmentAddressCity" id="establishmentAddressCity" />
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
-                      <input
-                        class="form-control"
-                        type="text"
-                        autocomplete="off"
-                        readonly
-                        type="text"
+                      <input class="form-control" type="text" autocomplete="off" readonly type="text"
                         value="British Columbia" />
                     </app-field>
                   </section>
                   <section class="col-md-4 col-xs-12">
-                    <app-field
-                      label="Postal Code"
-                      [required]="true"
-                      [isFullWidth]="true"
+                    <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
                       [valid]="isValidOrNotTouched('establishmentAddressPostalCode')"
                       errorMessage="Please enter the postal code">
-                      <input
-                        class="form-control"
-                        type="text"
-                        type="text"
-                        value=""
-                        autocomplete="off"
-                        formControlName="establishmentAddressPostalCode"
-                        id="establishmentAddressPostalCode" />
+                      <input class="form-control" type="text" type="text" value="" autocomplete="off"
+                        formControlName="establishmentAddressPostalCode" id="establishmentAddressPostalCode" />
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
@@ -1191,50 +998,29 @@
                   </app-field>
                 </address>
 
-                <app-field
-                  label="Is the proposed establishment on Treaty First Nation Land?"
+                <app-field label="Is the proposed establishment on Treaty First Nation Land?"
                   *ngIf="showFormControl(application?.applicationType?.newEstablishmentAddress)"
-                  [valid]="isValidOrNotTouched('isOnINLand')"
-                  [showChevrons]="false"
-                  [isFullWidth]="true">
+                  [valid]="isValidOrNotTouched('isOnINLand')" [showChevrons]="false" [isFullWidth]="true">
                   <mat-radio-group formControlName="isOnINLand">
                     <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                     <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
                   </mat-radio-group>
                 </app-field>
 
-                <app-field
-                  label="PIN"
-                  [valid]="isValidOrNotTouched('pin')"
-                  *ngIf="form.get('isOnINLand').value"
-                  errorMessage="Please enter the PIN"
-                  [valid]="isValidOrNotTouched('pin')"
-                  [showChevrons]="false"
+                <app-field label="PIN" [valid]="isValidOrNotTouched('pin')" *ngIf="form.get('isOnINLand').value"
+                  errorMessage="Please enter the PIN" [valid]="isValidOrNotTouched('pin')" [showChevrons]="false"
                   [isFullWidth]="true">
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="width: 200px"
-                    (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                    maxlength="9"
-                    formControlName="pin"
-                    id="pin" />
+                  <input type="text" class="form-control" style="width: 200px"
+                    (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="9" formControlName="pin" id="pin" />
                 </app-field>
 
                 <div class="light-blue-bg" style="display: flex">
                   <div style="flex: 0 0 210px">
-                    <app-field
-                      label="Parcel Identifier (PID)"
-                      [valid]="isValidOrNotTouched('establishmentParcelId')"
+                    <app-field label="Parcel Identifier (PID)" [valid]="isValidOrNotTouched('establishmentParcelId')"
                       errorMessage="Please enter the Parcel Identifier (format: 9 digits)">
-                      <input
-                        type="text"
-                        class="form-control"
-                        style="width: 200px"
-                        (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                        maxlength="9"
-                        formControlName="establishmentParcelId"
-                        id="establishmentParcelId" />
+                      <input type="text" class="form-control" style="width: 200px"
+                        (keydown)="rejectIfNotDigitOrBackSpace($event)" maxlength="9"
+                        formControlName="establishmentParcelId" id="establishmentParcelId" />
                     </app-field>
                   </div>
 
@@ -1270,23 +1056,16 @@
 
                 <!-- Proof of Zoning-->
                 <section *ngIf="showZoning()">
-                  <app-proof-of-zoning
-                    *ngIf="application"
-                    [application]="application"
-                    [formGroup]="form"
+                  <app-proof-of-zoning *ngIf="application" [application]="application" [formGroup]="form"
                     #proofOfZoning>
                   </app-proof-of-zoning>
                   <hr />
                 </section>
 
                 <section>
-                  <app-field
-                    label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
-                    [valid]="isValidOrNotTouched('isAlr')"
-                    [showChevrons]="false"
-                    errorMessage="Specify ALR status"
-                    [isFullWidth]="true"
-                    *ngIf="application?.applicationType?.hasALRQuestion">
+                  <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                    [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
+                    [isFullWidth]="true" *ngIf="application?.applicationType?.hasALRQuestion">
                     <mat-radio-group formControlName="isAlr">
                       <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                       <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
@@ -1300,8 +1079,7 @@
                           By submitting this application to LCRB, you are confirming that your licenced establishment
                           will adhere to the requirements laid out in the
                           <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">
-                            Agricultural Land Reserve (ALR) Use Regulation </a
-                          >.
+                            Agricultural Land Reserve (ALR) Use Regulation </a>.
                         </strong>
                       </p>
                     </div>
@@ -1317,28 +1095,16 @@
             <section class="padded-section content-bottom">
               <div style="position: relative">
                 <div>
-                  <app-field
-                    [required]="true"
-                    label="Federal Licence Number"
-                    [isFullWidth]="true"
+                  <app-field [required]="true" label="Federal Licence Number" [isFullWidth]="true"
                     [valid]="isValidOrNotTouched('federalLicenceNumber')"
                     errorMessage="Please enter the Federal licence number">
-                    <input
-                      class="form-control"
-                      type="text"
-                      formControlName="federalLicenceNumber"
+                    <input class="form-control" type="text" formControlName="federalLicenceNumber"
                       id="federalLicenceNumber" />
                   </app-field>
-                  <app-field
-                    [required]="true"
-                    label="Federal Licence Name"
-                    [isFullWidth]="true"
+                  <app-field [required]="true" label="Federal Licence Name" [isFullWidth]="true"
                     [valid]="isValidOrNotTouched('federalLicenceName')"
                     errorMessage="Please enter the Federal licence name">
-                    <input
-                      class="form-control"
-                      type="text"
-                      formControlName="federalLicenceName"
+                    <input class="form-control" type="text" formControlName="federalLicenceName"
                       id="federalLicenceName" />
                   </app-field>
                 </div>
@@ -1347,57 +1113,27 @@
               <div class="ngtest-new-address content-bottom">
                 <p>The location of the federal production site:</p>
                 <address class="row">
-                  <app-field
-                    class="col-md-12 col-xs-12"
-                    label="Address"
-                    [required]="true"
-                    [isFullWidth]="true"
-                    [valid]="isValidOrNotTouched('fpAddressStreet')"
-                    errorMessage="Please enter the street address">
-                    <input
-                      class="form-control"
-                      type="text"
-                      autocomplete="address-line1"
-                      formControlName="fpAddressStreet"
-                      id="fpAddressStreet" />
+                  <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
+                    [valid]="isValidOrNotTouched('fpAddressStreet')" errorMessage="Please enter the street address">
+                    <input class="form-control" type="text" autocomplete="address-line1"
+                      formControlName="fpAddressStreet" id="fpAddressStreet" />
                   </app-field>
-                  <app-field
-                    class="col-md-4 col-xs-12"
-                    label="City"
-                    [required]="true"
-                    [isFullWidth]="true"
-                    [valid]="isValidOrNotTouched('fpAddressCity')"
-                    errorMessage="Please enter the city">
-                    <input
-                      class="form-control"
-                      type="text"
-                      autocomplete="address-level2"
-                      formControlName="fpAddressCity"
-                      id="fpAddressCity" />
+                  <app-field class="col-md-4 col-xs-12" label="City" [required]="true" [isFullWidth]="true"
+                    [valid]="isValidOrNotTouched('fpAddressCity')" errorMessage="Please enter the city">
+                    <input class="form-control" type="text" autocomplete="address-level2"
+                      formControlName="fpAddressCity" id="fpAddressCity" />
                   </app-field>
                   <section class="col-md-4 col-xs-12">
                     <app-field label="Province" [isFullWidth]="true">
-                      <input
-                        class="form-control"
-                        autocomplete="address-level1"
-                        readonly
-                        type="text"
+                      <input class="form-control" autocomplete="address-level1" readonly type="text"
                         value="British Columbia" />
                     </app-field>
                   </section>
                   <section class="col-md-4 col-xs-12">
-                    <app-field
-                      label="Postal Code"
-                      [required]="true"
-                      [isFullWidth]="true"
-                      [valid]="isValidOrNotTouched('fpAddressPostalCode')"
-                      errorMessage="Please enter the postal code">
-                      <input
-                        class="form-control"
-                        type="text"
-                        autocomplete="postal-code"
-                        formControlName="fpAddressPostalCode"
-                        id="fpAddressPostalCode" />
+                    <app-field label="Postal Code" [required]="true" [isFullWidth]="true"
+                      [valid]="isValidOrNotTouched('fpAddressPostalCode')" errorMessage="Please enter the postal code">
+                      <input class="form-control" type="text" autocomplete="postal-code"
+                        formControlName="fpAddressPostalCode" id="fpAddressPostalCode" />
                     </app-field>
                   </section>
                   <app-field class="col-md-4 col-xs-12" label="Country" [isFullWidth]="true">
@@ -1412,19 +1148,14 @@
             <div *ngIf="application?.applicationType?.name.includes('Tied House Exemption Application')">
               <h3 class="blue-header">Tied House Manufacturer Licence</h3>
               <app-field [required]="false">
-                <input
-                  class="form-control"
-                  style="width: 500px"
-                  type="text"
-                  [readonly]="true"
+                <input class="form-control" style="width: 500px" type="text" [readonly]="true"
                   formControlName="relatedLicenceNumber" />
               </app-field>
             </div>
           </section>
 
           <!-- Letter of Intent -->
-          <section
-            *ngIf="
+          <section *ngIf="
               showFormControl(application?.applicationType?.letterOfIntent) &&
               application?.applicationType.name != 'Lounge Area Endorsement' &&
               application?.applicationType.name != 'Special Event Area Endorsement'
@@ -1445,10 +1176,7 @@
               <!-- Request Change to Term / Condition -->
               <section *ngIf="application?.termConditionId">
                 <app-field label="Term & Condition to be changed" [required]="false">
-                  <textarea
-                    readonly
-                    style="width: 800px"
-                    class="form-control"
+                  <textarea readonly style="width: 800px" class="form-control"
                     formControlName="termConditionOriginalText"></textarea>
                 </app-field>
                 <app-field label="Describe reason for change" errorMessage="Please enter the reason for the change">
@@ -1463,41 +1191,27 @@
               <section>
                 <app-file-uploader
                   *ngIf="application?.id && !application?.applicationType?.name.includes('Temporary Expanded')"
-                  documentType="letterOfIntent"
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [useDocumentTypeForName]="true"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [extensions]="['pdf']"
-                  (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                  [entityId]="application?.id"
-                  [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
+                  documentType="letterOfIntent" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                  [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+                  [entityId]="application?.id" [uploadHeader]="'TO UPLOAD LETTER OF INTENT, DRAG FILES HERE OR'">
                 </app-file-uploader>
 
                 <app-file-uploader
                   *ngIf="applicationId && application?.applicationType?.name.includes('Temporary Expanded')"
-                  documentType="letterOfIntent"
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [useDocumentTypeForName]="true"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [extensions]="['pdf']"
-                  (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
-                  [entityId]="applicationId"
-                  [uploadHeader]="'TO UPLOAD LG/IN COMMENTS, DRAG FILES HERE OR'">
+                  documentType="letterOfIntent" [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [useDocumentTypeForName]="true"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application"
+                  [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedletterOfIntentDocuments = $event"
+                  [entityId]="applicationId" [uploadHeader]="'TO UPLOAD LG/IN COMMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
             </section>
           </section>
 
           <!-- Local Government and Police Jurisdiction -->
-          <section
-            class="pt-3"
-            *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
+          <section class="pt-3" *ngIf="showFormControl(application?.applicationType?.lGandPoliceSelectors)"
             appRemoveIfFeatureOff="LGApprovals">
             <h3 class="blue-header">Local Government/Indigenous Nation and Police Jurisdiction</h3>
             <div class="content-bottom">
@@ -1510,21 +1224,11 @@
                 type the first three characters of the name.
               </p>
 
-              <app-field
-                label="Local Government/Indigenous Nation"
-                [required]="false"
-                [valid]="isValidOrNotTouched('indigenousNation')"
-                errorMessage="Please select a value">
-                <input
-                  type="text"
-                  class="form-control"
-                  style="width: 500px"
-                  placeholder="Type to search and then select a value"
-                  formControlName="indigenousNation"
-                  [matAutocomplete]="lgAutoCompleteBox"
-                  #lgAutoCompleteTrigger
-                  type="text"
-                  value=""
+              <app-field label="Local Government/Indigenous Nation" [required]="false"
+                [valid]="isValidOrNotTouched('indigenousNation')" errorMessage="Please select a value">
+                <input type="text" class="form-control" style="width: 500px"
+                  placeholder="Type to search and then select a value" formControlName="indigenousNation"
+                  [matAutocomplete]="lgAutoCompleteBox" #lgAutoCompleteTrigger type="text" value=""
                   autocomplete="off" />
                 <mat-autocomplete #lgAutoCompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                   <mat-option *ngFor="let item of autocompleteLocalGovernmemts" [value]="item">
@@ -1579,19 +1283,11 @@
               </section>
 
               <br /><br />
-              <app-field
-                label="Police Jurisdiction"
-                [required]="false"
-                [valid]="isValidOrNotTouched('policeJurisdiction')"
-                errorMessage="Please select a value">
-                <input
-                  type="text"
-                  class="form-control"
-                  style="width: 500px"
-                  placeholder="Type to search and then select a value"
-                  formControlName="policeJurisdiction"
-                  [matAutocomplete]="pdAutocompleteBox"
-                  #pdAutoCompleteTrigger />
+              <app-field label="Police Jurisdiction" [required]="false"
+                [valid]="isValidOrNotTouched('policeJurisdiction')" errorMessage="Please select a value">
+                <input type="text" class="form-control" style="width: 500px"
+                  placeholder="Type to search and then select a value" formControlName="policeJurisdiction"
+                  [matAutocomplete]="pdAutocompleteBox" #pdAutoCompleteTrigger />
                 <mat-autocomplete #pdAutocompleteBox="matAutocomplete" [displayWith]="autocompleteDisplay">
                   <mat-option *ngFor="let item of autocompletePoliceDurisdictions" [value]="item">
                     {{ item.name }}
@@ -1623,11 +1319,8 @@
             <hr />
 
             <section *ngIf="application?.applicationType?.hasALRQuestion">
-              <app-field
-                label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
-                [valid]="isValidOrNotTouched('isAlr')"
-                [showChevrons]="false"
-                errorMessage="Specify ALR status"
+              <app-field label="Is your establishment located on the Agricultural Land Reserve (ALR)?"
+                [valid]="isValidOrNotTouched('isAlr')" [showChevrons]="false" errorMessage="Specify ALR status"
                 [isFullWidth]="true">
                 <mat-radio-group formControlName="isAlr">
                   <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
@@ -1642,8 +1335,7 @@
                       By submitting this application to LCRB, you are confirming that your licenced establishment will
                       adhere to the requirements laid out in the
                       <a href="http://www.bclaws.ca/civix/document/id/complete/statreg/30_2019" target="_blank">
-                        Agricultural Land Reserve (ALR) Use Regulation </a
-                      >.
+                        Agricultural Land Reserve (ALR) Use Regulation </a>.
                     </strong>
                   </p>
                 </div>
@@ -1656,36 +1348,19 @@
             <h3 class="blue-header">Establishment Contact Details</h3>
             <div style="flex: 0 0 210px" class="content">
               <p>The phone and email address used to contact your establishment:</p>
-              <app-field
-                label="Establishment Email"
-                [required]="false"
-                [valid]="isValidOrNotTouched('establishmentEmail')"
-                errorMessage="Please enter an email address">
-                <input
-                  type="text"
-                  class="form-control"
-                  style="width: 200px"
-                  autocomplete="email"
+              <app-field label="Establishment Email" [required]="false"
+                [valid]="isValidOrNotTouched('establishmentEmail')" errorMessage="Please enter an email address">
+                <input type="text" class="form-control" style="width: 200px" autocomplete="email"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
-                  formControlName="establishmentEmail"
-                  id="establishmentEmail" />
+                  formControlName="establishmentEmail" id="establishmentEmail" />
               </app-field>
             </div>
             <div style="flex: 0 0 210px" class="content-bottom">
-              <app-field
-                label="Establishment Phone"
-                [required]="false"
-                [valid]="isValidOrNotTouched('establishmentPhone')"
-                errorMessage="Please enter a phone number ">
-                <input
-                  type="text"
-                  class="form-control"
-                  style="width: 200px"
-                  mask="(000) 000-0000"
-                  autocomplete="tel"
+              <app-field label="Establishment Phone" [required]="false"
+                [valid]="isValidOrNotTouched('establishmentPhone')" errorMessage="Please enter a phone number ">
+                <input type="text" class="form-control" style="width: 200px" mask="(000) 000-0000" autocomplete="tel"
                   [readonly]="application?.applicationType?.storeContactInfo === FormControlState.ReadOnly"
-                  formControlName="establishmentPhone"
-                  id="establishmentPhone" />
+                  formControlName="establishmentPhone" id="establishmentPhone" />
               </app-field>
             </div>
             <p>&nbsp;</p>
@@ -1698,12 +1373,8 @@
 
           <!--2024-02-21 LCSD-6975 waynezen: new logic to display isHasPatio-->
           <div *ngIf="!isPatioActive(application?.applicationType) && application?.applicationType?.showPatio">
-            <app-field
-              label="Will the establishment have a patio?"
-              [valid]="isValidOrNotTouched('isHasPatio')"
-              [showChevrons]="false"
-              errorMessage="Specify if application will have a patio"
-              [isFullWidth]="true">
+            <app-field label="Will the establishment have a patio?" [valid]="isValidOrNotTouched('isHasPatio')"
+              [showChevrons]="false" errorMessage="Specify if application will have a patio" [isFullWidth]="true">
               <mat-radio-group formControlName="isHasPatio">
                 <mat-radio-button class="mr-5" [value]="true">Yes</mat-radio-button>
                 <mat-radio-button class="mr-5" [value]="false">No</mat-radio-button>
@@ -1711,8 +1382,7 @@
             </app-field>
           </div>
 
-          <div
-            *ngIf="
+          <div *ngIf="
               htmlContent.patio && showDynamicForm(application?.applicationType?.formReference, dynamicsForm?.tabs)
             ">
             <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.patio"></section>
@@ -1736,101 +1406,62 @@
                     <!-- if the field is visible-->
                     <section *ngIf="formField.visible">
                       <!-- if it's a textbox, show it like a text box-->
-                      <app-field
-                        *ngIf="
+                      <app-field *ngIf="
                           formField.controltype == 'TextBoxControl' &&
                           formField.datafieldname !== 'establishmentParcelId'
-                        "
-                        [label]="formField.label"
-                        [required]="formField.required"
+                        " [label]="formField.label" [required]="formField.required"
                         [errorMessage]="'This field is required.'">
-                        <input
-                          class="form-control"
-                          style="width: 500px"
-                          type="text"
-                          [formControlName]="formField.datafieldname"
-                          [id]="formField.datafieldname" />
+                        <input class="form-control" style="width: 500px" type="text"
+                          [formControlName]="formField.datafieldname" [id]="formField.datafieldname" />
                       </app-field>
 
                       <!-- Integer field -->
 
-                      <app-field
-                        *ngIf="formField.controltype == 'IntegerControl'"
-                        [label]="formField.label"
-                        [required]="formField.required"
-                        [errorMessage]="'This field is required.'">
-                        <input
-                          class="form-control"
-                          style="width: 500px"
-                          type="text"
-                          [formControlName]="formField.datafieldname"
-                          [id]="formField.datafieldname"
+                      <app-field *ngIf="formField.controltype == 'IntegerControl'" [label]="formField.label"
+                        [required]="formField.required" [errorMessage]="'This field is required.'">
+                        <input class="form-control" style="width: 500px" type="text"
+                          [formControlName]="formField.datafieldname" [id]="formField.datafieldname"
                           (keydown)="rejectIfNotDigitOrBackSpace($event)" />
                       </app-field>
 
                       <!-- show text area-->
 
                       <div class="padded-section" *ngIf="formField.controltype == 'TextAreaControl'">
-                        <app-field
-                          [label]="formField.label"
+                        <app-field [label]="formField.label"
                           [required]="formField.required || formField.datafieldname == 'otherBusinessesDetails'"
-                          [errorMessage]="'This field is required.'"
-                          [isFullWidth]="true"
-                          [valid]="isValidOrNotTouched(formField.datafieldname)"
-                          [showChevrons]="false">
-                          <textarea
-                            [readonly]="
+                          [errorMessage]="'This field is required.'" [isFullWidth]="true"
+                          [valid]="isValidOrNotTouched(formField.datafieldname)" [showChevrons]="false">
+                          <textarea [readonly]="
                               (application?.applicationType?.name === 'Temporary Delicensing' ||
                                 application?.applicationType?.name ===
                                   'Temporary Patron Participation Entertainment Endorsement') &&
                               (isOpenedByLGForApproval || lGHasApproved())
-                            "
-                            rows="8"
-                            style="width: 100%"
-                            maxlength="5000"
-                            [formControlName]="formField.datafieldname"
+                            " rows="8" style="width: 100%" maxlength="5000" [formControlName]="formField.datafieldname"
                             [id]="formField.datafieldname"></textarea>
                         </app-field>
                       </div>
 
                       <!-- date time controls-->
-                      <app-field
-                        *ngIf="formField.controltype == 'DateTimeControl'"
-                        [label]="formField.label"
-                        [required]="formField.required"
-                        [errorMessage]="'This field is required.'">
-                        <input
-                          type="text"
-                          style="background-color: #fff; width: 200px; margin-left: 15px"
-                          [formControlName]="formField.datafieldname"
-                          [id]="formField.datafieldname"
-                          placeholder="yyyy-mm-dd"
-                          readonly
-                          class="form-control"
-                          [matDatepicker]="picker"
-                          (focus)="picker.open()"
-                          (click)="picker.open()" />
+                      <app-field *ngIf="formField.controltype == 'DateTimeControl'" [label]="formField.label"
+                        [required]="formField.required" [errorMessage]="'This field is required.'">
+                        <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px"
+                          [formControlName]="formField.datafieldname" [id]="formField.datafieldname"
+                          placeholder="yyyy-mm-dd" readonly class="form-control" [matDatepicker]="picker"
+                          (focus)="picker.open()" (click)="picker.open()" />
                         <mat-datepicker #picker></mat-datepicker>
                       </app-field>
 
                       <!-- pick list-->
                       <div *ngIf="formField.controltype == 'PicklistControl'">
-                        <app-field
-                          [label]="formField.label"
-                          [required]="formField.required"
+                        <app-field [label]="formField.label" [required]="formField.required"
                           [errorMessage]="'This field is required.'"
                           [valid]="isValidOrNotTouched(formField.datafieldname)">
-                          <mat-card
-                            *ngIf="formField.controltype == 'PicklistControl'"
-                            class="mat-elevation-z0"
+                          <mat-card *ngIf="formField.controltype == 'PicklistControl'" class="mat-elevation-z0"
                             style="margin-bottom: 10px">
                             <section style="width: 100%">
                               <div>
-                                <mat-button-toggle-group
-                                  *ngIf="formField.options.length <= 3"
-                                  aria-label="Font Style"
-                                  [formControlName]="formField.datafieldname"
-                                  [id]="formField.datafieldname">
+                                <mat-button-toggle-group *ngIf="formField.options.length <= 3" aria-label="Font Style"
+                                  [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                                   <mat-button-toggle *ngFor="let option of formField.options" [value]="option.value">
                                     {{ option.label }}
                                   </mat-button-toggle>
@@ -1838,14 +1469,11 @@
 
                                 <div class="auto-width" *ngIf="formField.options.length > 3">
                                   <mat-form-field>
-                                    <mat-select
-                                      [(value)]="selected"
-                                      placeholder="-- Select --"
-                                      [formControlName]="formField.datafieldname"
-                                      [id]="formField.datafieldname">
+                                    <mat-select [(value)]="selected" placeholder="-- Select --"
+                                      [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                                       <mat-option *ngFor="let option of formField.options" [value]="option.value">{{
                                         option.label
-                                      }}</mat-option>
+                                        }}</mat-option>
                                     </mat-select>
                                   </mat-form-field>
                                 </div>
@@ -1856,20 +1484,15 @@
                       </div>
                       <!-- lookup field-->
 
-                      <app-field
-                        *ngIf="formField.controltype == 'LookupControl'"
-                        [label]="formField.label"
-                        [required]="formField.required"
-                        [errorMessage]="'This field is required.'">
+                      <app-field *ngIf="formField.controltype == 'LookupControl'" [label]="formField.label"
+                        [required]="formField.required" [errorMessage]="'This field is required.'">
                         Lookup Not Implemented
                       </app-field>
 
                       <!-- Radio Control -->
-                      <app-field
-                        *ngIf="formField.controltype == 'RadioControl'"
+                      <app-field *ngIf="formField.controltype == 'RadioControl'"
                         [valid]="!showValidationMessages || isValidYesNoFieldRequireTrue(formField.datafieldname)"
-                        [required]="formField.required"
-                        [errorMessage]="'This field is required.'"
+                        [required]="formField.required" [errorMessage]="'This field is required.'"
                         [showChevrons]="false">
                         <mat-checkbox [formControlName]="formField.datafieldname" [id]="formField.datafieldname">
                           <span class="error-states" *ngIf="formField.required">*</span>
@@ -1885,9 +1508,7 @@
               </div>
             </div>
             <!-- Dormancy Declarations-->
-            <div
-              class="content"
-              *ngIf="
+            <div class="content" *ngIf="
                 application?.applicationType?.showDeclarations &&
                 application?.applicationType?.name == ApplicationTypeNames.Dormancy
               ">
@@ -1895,8 +1516,7 @@
               <div class="padded-section content-bottom">
                 <ng-container>
                   <section>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         application?.licenseType != 'Cannabis Retail Store' &&
                         application?.licenseType != 'S119 CRS Authorization' &&
                         application?.applicationType?.name !== ApplicationTypeNames.Marketer &&
@@ -1907,8 +1527,7 @@
                       making an application referred to in section 12; (ii) when making a report or when required and as
                       specified by the general manager under section 59.
                     </div>
-                    <div
-                      *ngIf="
+                    <div *ngIf="
                         (application?.licenseType == 'Cannabis Retail Store' ||
                           application?.licenseType == 'S119 CRS Authorization') &&
                         application?.applicationType?.name !== ApplicationTypeNames.Marketer &&
@@ -1941,44 +1560,29 @@
               </div>
             </div>
             <div class="content-bottom">
-              <div
-                *ngIf="
+              <div *ngIf="
                   application?.applicationType?.name === 'Temporary Delicensing' ||
                   application?.applicationType?.name === 'Temporary Patron Participation Entertainment Endorsement'
                 ">
                 <app-field label="Start date" [required]="true" errorMessage="Please enter the start date">
-                  <input
-                    type="text"
-                    style="background-color: #fff; width: 200px; margin-left: 15px"
+                  <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px"
                     formControlName="tempSuspensionOrPatronParticipationStart"
-                    id="tempSuspensionOrPatronParticipationStart"
-                    placeholder="yyyy-mm-dd"
-                    [disabled]="isOpenedByLGForApproval || lGHasApproved()"
-                    class="form-control"
-                    [matDatepicker]="picker1"
-                    (focus)="picker1.open()"
-                    (click)="picker1.open()" />
+                    id="tempSuspensionOrPatronParticipationStart" placeholder="yyyy-mm-dd"
+                    [disabled]="isOpenedByLGForApproval || lGHasApproved()" class="form-control"
+                    [matDatepicker]="picker1" (focus)="picker1.open()" (click)="picker1.open()" />
                 </app-field>
                 <mat-datepicker #picker1></mat-datepicker>
 
                 <app-field label="End date" [required]="true" errorMessage="Please enter the end date">
-                  <input
-                    type="text"
-                    style="background-color: #fff; width: 200px; margin-left: 15px"
-                    formControlName="tempSuspensionOrPatronParticipationEnd"
-                    id="tempSuspensionOrPatronParticipationEnd"
-                    placeholder="yyyy-mm-dd"
-                    [disabled]="isOpenedByLGForApproval || lGHasApproved()"
-                    class="form-control"
-                    [matDatepicker]="picker2"
-                    (focus)="picker2.open()"
-                    (click)="picker2.open()" />
+                  <input type="text" style="background-color: #fff; width: 200px; margin-left: 15px"
+                    formControlName="tempSuspensionOrPatronParticipationEnd" id="tempSuspensionOrPatronParticipationEnd"
+                    placeholder="yyyy-mm-dd" [disabled]="isOpenedByLGForApproval || lGHasApproved()"
+                    class="form-control" [matDatepicker]="picker2" (focus)="picker2.open()" (click)="picker2.open()" />
                 </app-field>
                 <mat-datepicker #picker2></mat-datepicker>
               </div>
             </div>
-            <div
-              *ngIf="
+            <div *ngIf="
                 application?.applicationType?.name === ApplicationTypeNames.TemporaryChangetoaLiquorLicence_Other &&
                 application?.applicationType?.discretionRequest == true
               ">
@@ -1994,17 +1598,12 @@
                       discretion should be submitted at least two months prior to the proposed event.
                     </p>
 
-                    <app-file-uploader
-                      *ngIf="applicationId"
-                      documentType="Discretion Request"
+                    <app-file-uploader *ngIf="applicationId" documentType="Discretion Request"
                       fileTypes="FILE MUST BE IN PDF FORMAT."
                       [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                      [multipleFiles]="true"
-                      entityName="application"
-                      [useDocumentTypeForName]="true"
-                      (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event"
-                      [entityId]="applicationId"
+                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                      entityName="application" [useDocumentTypeForName]="true"
+                      (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
                       [uploadHeader]="'TO UPLOAD DISCRETION REQUEST'">
                     </app-file-uploader>
                   </div>
@@ -2021,17 +1620,12 @@
                       form.
                     </p>
 
-                    <app-file-uploader
-                      *ngIf="applicationId"
-                      documentType="Supporting Document"
+                    <app-file-uploader *ngIf="applicationId" documentType="Supporting Document"
                       fileTypes="FILE MUST BE IN PDF FORMAT."
                       [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                      [multipleFiles]="true"
-                      entityName="application"
-                      [useDocumentTypeForName]="true"
-                      (numberOfUploadedFiles)="proofOfValidInterestDocuments = $event"
-                      [entityId]="applicationId"
+                      [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                      entityName="application" [useDocumentTypeForName]="true"
+                      (numberOfUploadedFiles)="proofOfValidInterestDocuments = $event" [entityId]="applicationId"
                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS'">
                     </app-file-uploader>
                   </div>
@@ -2108,25 +1702,14 @@
                   Note: The type of establishment may affect licensing conditions, such as [whether or not minors are
                   permitted (Family Food Service)] or when liquor may be served. Refer to Liquor Primary section in the
                   (
-                  <a
-                    href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/liquor-law-policy/liquor-licence-terms-conditions-manuals"
+                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/liquor-law-policy/liquor-licence-terms-conditions-manuals"
                     target="_blank">
-                    Liquor Policy Manual</a
-                  >) for more information.
+                    Liquor Policy Manual</a>) for more information.
                 </p>
 
-                <app-field
-                  label="Establishment Type"
-                  [required]="true"
-                  [isFullWidth]="true"
-                  [showChevrons]="false"
-                  [valid]="isValidOrNotTouched('description1')"
-                  errorMessage="Please enter a description">
-                  <input
-                    formControlName="description1"
-                    style="width: 100%"
-                    maxlength="80"
-                    minlength="3"
+                <app-field label="Establishment Type" [required]="true" [isFullWidth]="true" [showChevrons]="false"
+                  [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter a description">
+                  <input formControlName="description1" style="width: 100%" maxlength="80" minlength="3"
                     id="description1" />
                 </app-field>
               </div>
@@ -2136,17 +1719,9 @@
               <div class="padded-section">
                 <app-field
                   label="Please briefly outline the proposed change, including the general construction proposal and time frames for construction:"
-                  [required]="true"
-                  [isFullWidth]="true"
-                  [showChevrons]="false"
-                  [valid]="isValidOrNotTouched('description1')"
-                  errorMessage="Please enter a description">
-                  <textarea
-                    formControlName="description1"
-                    rows="8"
-                    style="width: 100%"
-                    maxlength="5000"
-                    minlength="10"
+                  [required]="true" [isFullWidth]="true" [showChevrons]="false"
+                  [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter a description">
+                  <textarea formControlName="description1" rows="8" style="width: 100%" maxlength="5000" minlength="10"
                     id="description1"></textarea>
                 </app-field>
               </div>
@@ -2155,17 +1730,9 @@
               <div class="padded-section">
                 <app-field
                   label="Describe proposed change(s) such as moving, adding or changing approved picnic area(s). Including any increase in capacity."
-                  [required]="true"
-                  [isFullWidth]="true"
-                  [showChevrons]="false"
-                  [valid]="isValidOrNotTouched('description1')"
-                  errorMessage="Please enter a description ">
-                  <textarea
-                    formControlName="description1"
-                    rows="8"
-                    style="width: 100%"
-                    maxlength="5000"
-                    minlength="10"
+                  [required]="true" [isFullWidth]="true" [showChevrons]="false"
+                  [valid]="isValidOrNotTouched('description1')" errorMessage="Please enter a description ">
+                  <textarea formControlName="description1" rows="8" style="width: 100%" maxlength="5000" minlength="10"
                     id="description1"></textarea>
                 </app-field>
               </div>
@@ -2174,18 +1741,13 @@
 
           <!-- Cooler access -->
           <ng-container *ngIf="application?.applicationType?.publicCooler == 'Yes'">
-            <app-field
-              label="Is the public permitted to walk into the cooler space?"
-              [required]="false"
-              errorMessage="This field is required."
-              [valid]="isValidOrNotTouched('hasCoolerAccess')">
+            <app-field label="Is the public permitted to walk into the cooler space?" [required]="false"
+              errorMessage="This field is required." [valid]="isValidOrNotTouched('hasCoolerAccess')">
               <mat-card class="mat-elevation-z0" style="margin-bottom: 10px">
                 <section style="width: 100%">
                   <div>
-                    <mat-button-toggle-group
-                      [ngClass]="{ invalid: isTouchedAndInvalid('hasCoolerAccess') }"
-                      formControlName="hasCoolerAccess"
-                      aria-label="Font Style">
+                    <mat-button-toggle-group [ngClass]="{ invalid: isTouchedAndInvalid('hasCoolerAccess') }"
+                      formControlName="hasCoolerAccess" aria-label="Font Style">
                       <mat-button-toggle [value]="true">Yes</mat-button-toggle>
                       <mat-button-toggle [value]="false">No</mat-button-toggle>
                     </mat-button-toggle-group>
@@ -2203,10 +1765,7 @@
             <section *ngIf="application?.applicationType?.signage === FormControlState.Show">
               <div *ngIf="htmlContent.signage">
                 <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.signage"></section>
-                <img
-                  src="assets/sample-signage.png"
-                  style="width: 700px"
-                  alt="Sample Signage"
+                <img src="assets/sample-signage.png" style="width: 700px" alt="Sample Signage"
                   *ngIf="application?.licenseType == 'Food Primary' || application?.licenseType == 'Liquor Primary'" />
               </div>
 
@@ -2227,8 +1786,7 @@
                   <img src="assets/sample-signage.png" style="width: 700px" alt="Sample Signage" />
                 </section>
 
-                <p
-                  *ngIf="
+                <p *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization'
                   ">
@@ -2236,8 +1794,7 @@
                   a green cross). It must not imply an association with another business (other than another non-medical
                   cannabis retail store).
                 </p>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization'
                   ">
@@ -2246,24 +1803,15 @@
                 </p>
               </div>
 
-              <img
-                *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'"
-                src="assets/tua-site-plan-example.png"
-                style="width: 700px"
-                alt="Sample Signage" />
+              <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'"
+                src="assets/tua-site-plan-example.png" style="width: 700px" alt="Sample Signage" />
 
               <section>
-                <app-file-uploader
-                  *ngIf="applicationId"
-                  documentType="Signage"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
+                <app-file-uploader *ngIf="applicationId" documentType="Signage" fileTypes="FILE MUST BE IN PDF FORMAT."
                   [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedSignageDocuments = $event"
-                  [entityId]="applicationId"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                  entityName="application" [useDocumentTypeForName]="true"
+                  (numberOfUploadedFiles)="uploadedSignageDocuments = $event" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD SIGNAGE DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -2273,10 +1821,8 @@
             <section style="display: flex; justify-content: space-between; width: 100%">
               <div class="question-label">Will the store’s exterior change?</div>
               <div style="flex: 0 0 85px">
-                <mat-button-toggle-group
-                  [ngClass]="{ invalid: isTouchedAndInvalid('proposedChange') }"
-                  formControlName="proposedChange"
-                  aria-label="Font Style">
+                <mat-button-toggle-group [ngClass]="{ invalid: isTouchedAndInvalid('proposedChange') }"
+                  formControlName="proposedChange" aria-label="Font Style">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="No">No</mat-button-toggle>
                 </mat-button-toggle-group>
@@ -2288,17 +1834,11 @@
               <label for="">Exterior Renderings</label>
               <p>Upload renderings of the planned changes to the store's exterior:</p>
               <section>
-                <app-file-uploader
-                  *ngIf="applicationId"
-                  documentType="Exterior Renderings"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event"
-                  [entityId]="applicationId"
+                <app-file-uploader *ngIf="applicationId" documentType="Exterior Renderings"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                  entityName="application" [useDocumentTypeForName]="true"
+                  (numberOfUploadedFiles)="uploadedPhotosOrRenderingsDocuments = $event" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD EXTERIOR RENDERINGS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -2316,18 +1856,14 @@
                 <!-- if there is configured floor plan text, show it-->
                 <div *ngIf="htmlContent.floorPlan">
                   <section class="ngtest-preamble-content" [innerHTML]="htmlContent?.floorPlan"></section>
-                  <img
-                    *ngIf="this.showFloorPlanSample()"
-                    src="assets/Food-Primary-floor-plan-sample.png"
-                    style="width: 700px"
-                    alt="Sample Floor Plan" />
+                  <img *ngIf="this.showFloorPlanSample()" src="assets/Food-Primary-floor-plan-sample.png"
+                    style="width: 700px" alt="Sample Floor Plan" />
                   <img *ngIf="this.showMFGImages()" src="assets/MFG-FLOOR.png" />
                 </div>
 
                 <!-- otherwise switch to legacy mode-->
                 <div *ngIf="!htmlContent.floorPlan">
-                  <div
-                    *ngIf="
+                  <div *ngIf="
                       application?.licenseType == 'Cannabis Retail Store' ||
                       application?.licenseType == 'S119 CRS Authorization' ||
                       application?.licenseType == 'Producer Retail Store'
@@ -2363,15 +1899,11 @@
                           cannabis and cannabis accessories in a store window.
                         </mat-checkbox>
                       </section>
-                      <img
-                        src="assets/floor-plan-example.png"
-                        width="300"
-                        alt="Floor plan"
+                      <img src="assets/floor-plan-example.png" width="300" alt="Floor plan"
                         style="display: block; margin: auto" />
                     </div>
                   </div>
-                  <div
-                    *ngIf="
+                  <div *ngIf="
                       application?.licenseType != 'Cannabis Retail Store' &&
                       application?.licenseType != 'S119 CRS Authorization' &&
                       application?.licenseType != 'Producer Retail Store'
@@ -2400,17 +1932,11 @@
                 The below floor plan is on file.
               </p>
               <section>
-                <app-file-uploader
-                  *ngIf="application?.id"
-                  documentType="Floor Plan"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event"
-                  [entityId]="application?.id"
+                <app-file-uploader *ngIf="application?.id" documentType="Floor Plan"
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                  entityName="application" [useDocumentTypeForName]="true"
+                  (numberOfUploadedFiles)="uploadedFloorPlanDocuments = $event" [entityId]="application?.id"
                   [uploadHeader]="'TO UPLOAD FLOOR PLANS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
@@ -2423,21 +1949,12 @@
                     total stamped on the floor plan or the sum of occupant loads across all service areas, as listed in
                     the occupant load stamp.
                   </p>
-                  <app-field
-                    [required]="true"
-                    label="Total occupant load"
+                  <app-field [required]="true" label="Total occupant load"
                     [valid]="!showValidationMessages || form.get('totalOccupantLoad').valid"
                     errorMessage="Total occupant load is required.">
-                    <input
-                      class="form-control"
-                      formControlName="totalOccupantLoad"
-                      id="totalOccupantLoad"
-                      style="width: 250px"
-                      type="number"
-                      min="1"
-                      placeholder="Total occupant load"
-                      (input)="validateInput($event)"
-                  /></app-field>
+                    <input class="form-control" formControlName="totalOccupantLoad" id="totalOccupantLoad"
+                      style="width: 250px" type="number" min="1" placeholder="Total occupant load"
+                      (input)="validateInput($event)" /></app-field>
                 </section>
               </div>
             </div>
@@ -2448,14 +1965,9 @@
           <section *ngIf="application.applicationType.serviceAreas" class="padded-section content-bottom">
             <div *ngIf="htmlContent?.serviceAreas" [innerHTML]="htmlContent.serviceAreas"></div>
 
-            <app-field
-              [valid]="!showValidationMessages || form.get('serviceAreas').valid"
-              errorMessage="All fields are required."
-              [showChevrons]="false"
-              [isFullWidth]="true">
-              <app-capacity-table
-                formControlName="serviceAreas"
-                [areaCategory]="getAreaCategoryNumber('Service')"
+            <app-field [valid]="!showValidationMessages || form.get('serviceAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+              <app-capacity-table formControlName="serviceAreas" [areaCategory]="getAreaCategoryNumber('Service')"
                 [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
               </app-capacity-table>
               <!-- Occupant load cheackbox -->
@@ -2485,10 +1997,8 @@
                   same area?
                 </div>
                 <div style="flex: 0 0 85px">
-                  <mat-button-toggle-group
-                    [ngClass]="{ invalid: isTouchedAndInvalid('holdsOtherManufactureLicence1') }"
-                    formControlName="holdsOtherManufactureLicence1"
-                    aria-label="Font Style">
+                  <mat-button-toggle-group [ngClass]="{ invalid: isTouchedAndInvalid('holdsOtherManufactureLicence1') }"
+                    formControlName="holdsOtherManufactureLicence1" aria-label="Font Style">
                     <mat-button-toggle [value]="true">Yes</mat-button-toggle>
                     <mat-button-toggle [value]="false">No</mat-button-toggle>
                   </mat-button-toggle-group>
@@ -2510,14 +2020,9 @@
           <h3 class="blue-header" *ngIf="application.applicationType.outsideAreas">OUTSIDE AREAS</h3>
           <section *ngIf="application.applicationType.outsideAreas" class="padded-section content-bottom">
             <div *ngIf="htmlContent?.outdoorAreas" [innerHTML]="htmlContent.outdoorAreas"></div>
-            <app-field
-              [valid]="!showValidationMessages || form.get('outsideAreas').valid"
-              errorMessage="All fields are required."
-              [showChevrons]="false"
-              [isFullWidth]="true">
-              <app-capacity-table
-                formControlName="outsideAreas"
-                [areaCategory]="getAreaCategoryNumber('OutsideArea')"
+            <app-field [valid]="!showValidationMessages || form.get('outsideAreas').valid"
+              errorMessage="All fields are required." [showChevrons]="false" [isFullWidth]="true">
+              <app-capacity-table formControlName="outsideAreas" [areaCategory]="getAreaCategoryNumber('OutsideArea')"
                 [enabled]="!isOpenedByLGForApproval && !lGHasApproved()">
               </app-capacity-table>
             </app-field>
@@ -2529,10 +2034,8 @@
                   same area?
                 </div>
                 <div style="flex: 0 0 85px">
-                  <mat-button-toggle-group
-                    [ngClass]="{ invalid: isTouchedAndInvalid('holdsOtherManufactureLicence2') }"
-                    formControlName="holdsOtherManufactureLicence2"
-                    aria-label="Font Style">
+                  <mat-button-toggle-group [ngClass]="{ invalid: isTouchedAndInvalid('holdsOtherManufactureLicence2') }"
+                    formControlName="holdsOtherManufactureLicence2" aria-label="Font Style">
                     <mat-button-toggle [value]="true">Yes</mat-button-toggle>
                     <mat-button-toggle [value]="false">No</mat-button-toggle>
                   </mat-button-toggle-group>
@@ -2551,36 +2054,22 @@
           </section>
 
           <!-- Capacity Area -->
-          <h3
-            class="blue-header"
-            *ngIf="
+          <h3 class="blue-header" *ngIf="
               application.applicationType.capacityArea &&
               application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
             ">
             CAPACITY AREA
           </h3>
-          <section
-            *ngIf="
+          <section *ngIf="
               application.applicationType.capacityArea &&
               application?.applicationType?.name != ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP
-            "
-            class="padded-section content-bottom"
-            formGroupName="capacityArea">
+            " class="padded-section content-bottom" formGroupName="capacityArea">
             <div *ngIf="htmlContent?.capacityArea" [innerHTML]="htmlContent.capacityArea"></div>
-            <app-field
-              label="Capacity"
-              [required]="true"
+            <app-field label="Capacity" [required]="true"
               [valid]="!showValidationMessages || form.get('capacityArea.capacity').valid"
-              errorMessage="Capacity is required."
-              [showChevrons]="false"
-              [isFullWidth]="false">
-              <input
-                class="form-control"
-                formControlName="capacity"
-                id="capacity"
-                placeholder="Enter Capacity"
-                mask="0*"
-                [readonly]="isOpenedByLGForApproval || lGHasApproved()" />
+              errorMessage="Capacity is required." [showChevrons]="false" [isFullWidth]="false">
+              <input class="form-control" formControlName="capacity" id="capacity" placeholder="Enter Capacity"
+                mask="0*" [readonly]="isOpenedByLGForApproval || lGHasApproved()" />
             </app-field>
           </section>
 
@@ -2588,19 +2077,15 @@
 
           <br />
           <hr *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange" />
-          <mat-card
-            *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange"
-            class="mat-elevation-z0"
-            style="margin-bottom: 10px">
+          <mat-card *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSStructuralChange"
+            class="mat-elevation-z0" style="margin-bottom: 10px">
             <section style="display: flex; justify-content: space-between; width: 100%">
               <div class="question-label">
                 Does the proposed change involve a shared vestibule or changes to the entrances, exits or windows?
               </div>
               <div style="flex: 0 0 85px">
-                <mat-button-toggle-group
-                  [ngClass]="{ invalid: isTouchedAndInvalid('proposedChange') }"
-                  formControlName="proposedChange"
-                  aria-label="Font Style">
+                <mat-button-toggle-group [ngClass]="{ invalid: isTouchedAndInvalid('proposedChange') }"
+                  formControlName="proposedChange" aria-label="Font Style">
                   <mat-button-toggle value="Yes">Yes</mat-button-toggle>
                   <mat-button-toggle value="No">No</mat-button-toggle>
                 </mat-button-toggle-group>
@@ -2635,15 +2120,11 @@
             </section>
 
             <!-- Cannabis Retail Store has an additional image-->
-            <div
-              *ngIf="
+            <div *ngIf="
                 application?.licenseType == 'Cannabis Retail Store' ||
                 application?.licenseType == 'S119 CRS Authorization'
               ">
-              <img
-                src="assets/site-plan-example.png"
-                width="350"
-                alt="Site plan"
+              <img src="assets/site-plan-example.png" width="350" alt="Site plan"
                 style="display: block; margin: auto" />
               <p>
                 If the proposed store is located inside a building with other businesses (e.g. a mall), submit two site
@@ -2674,25 +2155,16 @@
               </p>
             </div>
 
-            <img
-              *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'"
-              src="assets/sample-signage.png"
-              style="width: 700px"
-              alt="Sample Signage" />
+            <img *ngIf="application?.applicationType?.name === 'Temporary Use Area Endorsement'"
+              src="assets/sample-signage.png" style="width: 700px" alt="Sample Signage" />
             <img *ngIf="this.showMFGImages()" src="assets/MFG-SITE.png" alt="Sample Site Plan" />
 
             <section>
-              <app-file-uploader
-                *ngIf="applicationId"
-                documentType="Site Plan"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
+              <app-file-uploader *ngIf="applicationId" documentType="Site Plan" fileTypes="FILE MUST BE IN PDF FORMAT."
                 [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                [multipleFiles]="true"
-                entityName="application"
-                [useDocumentTypeForName]="true"
-                (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event"
-                [entityId]="applicationId"
+                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                entityName="application" [useDocumentTypeForName]="true"
+                (numberOfUploadedFiles)="uploadedSitePlanDocuments = $event" [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD SITE PLAN DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
@@ -2716,18 +2188,12 @@
             </section>
 
             <section>
-              <app-file-uploader
-                *ngIf="applicationId"
-                documentType="Site Photos"
+              <app-file-uploader *ngIf="applicationId" documentType="Site Photos"
                 fileTypes="FILE MUST BE IN PDF, JPG, JPEG OR PNG FORMAT."
                 [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                [multipleFiles]="true"
-                entityName="application"
-                [useDocumentTypeForName]="true"
-                [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-                (numberOfUploadedFiles)="uploadedSitePhotos = $event"
-                [entityId]="applicationId"
+                [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                entityName="application" [useDocumentTypeForName]="true" [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
+                (numberOfUploadedFiles)="uploadedSitePhotos = $event" [entityId]="applicationId"
                 [uploadHeader]="'TO UPLOAD SITE PHOTOS DOCUMENTS, DRAG FILES HERE OR'">
               </app-file-uploader>
             </section>
@@ -2754,15 +2220,12 @@
                   Is the proposed location inside a grocery store?
                 </div>
                 <div class="question-label" *ngIf="htmlContent.grocery" [innerHTML]="htmlContent.grocery"></div>
-                <mat-radio-group
-                  [ngClass]="{ invalid: isTouchedAndInvalid('isLocatedInGroceryStore') }"
+                <mat-radio-group [ngClass]="{ invalid: isTouchedAndInvalid('isLocatedInGroceryStore') }"
                   formControlName="isLocatedInGroceryStore">
-                  <mat-radio-button class="mr-5" [value]="true"
-                    ><span class="wrap-mat-radio-label">Yes</span></mat-radio-button
-                  >
-                  <mat-radio-button class="mr-5" [value]="false"
-                    ><span class="wrap-mat-radio-label">No</span></mat-radio-button
-                  >
+                  <mat-radio-button class="mr-5" [value]="true"><span
+                      class="wrap-mat-radio-label">Yes</span></mat-radio-button>
+                  <mat-radio-button class="mr-5" [value]="false"><span
+                      class="wrap-mat-radio-label">No</span></mat-radio-button>
                 </mat-radio-group>
               </section>
             </mat-card>
@@ -2800,18 +2263,12 @@
                 </ul>
               </section>
               <section>
-                <app-file-uploader
-                  *ngIf="applicationId"
-                  documentType="Grocery Declaration"
+                <app-file-uploader *ngIf="applicationId" documentType="Grocery Declaration"
                   [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
                   [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  fileTypes="FILE MUST BE IN PDF FORMAT."
-                  [multipleFiles]="false"
-                  entityName="application"
-                  [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedGroceryDocuments = $event"
-                  [entityId]="applicationId"
-                  [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
+                  fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                  [useDocumentTypeForName]="true" (numberOfUploadedFiles)="uploadedGroceryDocuments = $event"
+                  [entityId]="applicationId" [uploadHeader]="'TO UPLOAD GROCERY DECLARATION, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
             </div>
@@ -2821,8 +2278,7 @@
           <section class="ngtest-hours-of-sale" *ngIf="application?.applicationType?.showHoursOfSale">
             <h3 class="blue-header">HOURS OF SALE</h3>
             <div class="padded-section content-bottom">
-              <p
-                *ngIf="
+              <p *ngIf="
                   application?.applicationType?.name === ApplicationTypeNames.FP ||
                   application?.applicationType?.name === ApplicationTypeNames.FPRelo
                 ">
@@ -2830,8 +2286,7 @@
                 hours by submitting an Extend Hours of Service Beyond Standard Service Hours application from the
                 application dashboard after you submit your Food Primary application. LG/IN approval is required.
               </p>
-              <p
-                *ngIf="
+              <p *ngIf="
                   application?.applicationType?.name !== ApplicationTypeNames.FP &&
                   application?.applicationType?.name !== ApplicationTypeNames.FPRelo
                 ">
@@ -2942,16 +2397,14 @@
               <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">
                 Hours of Sale are required
               </p>
-              <span
-                *ngIf="
+              <span *ngIf="
                   application?.applicationType?.name ===
                     ApplicationTypeNames.ChangeHoursOfService_Outside_Service_Hours ||
                   application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Lounge_Area ||
                   application?.applicationType?.name === ApplicationTypeNames.ChangeHoursOfService_Special_Event_Area
                 ">
                 <br />
-                <app-field
-                  label="Are you requesting to extend liquor service hours outside of 9am - 4am?"
+                <app-field label="Are you requesting to extend liquor service hours outside of 9am - 4am?"
                   [valid]="true">
                   <mat-button-toggle-group formControlName="requestOutsideServiceHours" aria-label="Font Style">
                     <mat-button-toggle [value]="true">Yes</mat-button-toggle>
@@ -2972,17 +2425,10 @@
             <h3 class="blue-header">INFORMATION ABOUT THE LICENSED PRODUCER</h3>
             <section class="padded-section">
               <p>Which federally licensed producer(s) will the applicant represent in B.C.?</p>
-              <app-field
-                label="Name of Federal Producer "
-                [required]="true"
-                [valid]="true"
+              <app-field label="Name of Federal Producer " [required]="true" [valid]="true"
                 errorMessage="Please enter the name of federal producer">
-                <input
-                  class="form-control"
-                  formControlName="federalProducerNames"
-                  id="federalProducerNames"
-                  style="width: 350px"
-                  type="text" />
+                <input class="form-control" formControlName="federalProducerNames" id="federalProducerNames"
+                  style="width: 350px" type="text" />
               </app-field>
             </section>
           </div>
@@ -2991,36 +2437,25 @@
           <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
             <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
             <div class="content-bottom" *ngIf="application?.tiedHouse && account?.businessType">
-              <app-connection-to-non-medical-stores
-                *ngIf="application?.tiedHouse"
-                [tiedHouse]="application?.tiedHouse"
+              <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
                 licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
-                federalProducerText="licensee or applicant"
-                [businessType]="account?.businessType"
+                federalProducerText="licensee or applicant" [businessType]="account?.businessType"
                 (value)="tiedHouseFormData = $event">
               </app-connection-to-non-medical-stores>
             </div>
           </section>
 
-          <div
-            class="ngtest-ethyl-documents-upload"
+          <div class="ngtest-ethyl-documents-upload"
             *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
             <!-- <hr><br> -->
             <label for="">Ethyl Alcohol Permit Documents</label>
             <br />
             <p>Please upload documents below.</p>
             <section>
-              <app-file-uploader
-                *ngIf="applicationId"
-                documentType="Ethyl Alcohol Permit Documents"
-                [enableFileDeletion]="true"
-                [disableUploads]="false"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [multipleFiles]="true"
-                entityName="application"
-                [entityId]="applicationId"
-                [uploadHeader]="'TO UPLOAD DOCUMENTS, DRAG FILE HERE OR'"
-                #EthyAlcohoPermitDocuments>
+              <app-file-uploader *ngIf="applicationId" documentType="Ethyl Alcohol Permit Documents"
+                [enableFileDeletion]="true" [disableUploads]="false" fileTypes="FILE MUST BE IN PDF FORMAT."
+                [multipleFiles]="true" entityName="application" [entityId]="applicationId"
+                [uploadHeader]="'TO UPLOAD DOCUMENTS, DRAG FILE HERE OR'" #EthyAlcohoPermitDocuments>
               </app-file-uploader>
             </section>
           </div>
@@ -3033,17 +2468,11 @@
                 <p>Please provide the following details about your application:</p>
 
                 <!-- RAS Certificate Number -->
-                <app-field
-                  label="Rural Agency Store Certificate Number:"
+                <app-field label="Rural Agency Store Certificate Number:"
                   errorMessage="Please enter a certificate number"
                   *ngIf="this.application?.licenseType === 'Rural Agency Store'">
-                  <input
-                    type="text"
-                    class="form-control"
-                    style="width: 200px"
-                    id="certNumber"
-                    formControlName="description1"
-                    mask="0009" />
+                  <input type="text" class="form-control" style="width: 200px" id="certNumber"
+                    formControlName="description1" mask="0009" />
                 </app-field>
 
                 <section>
@@ -3094,8 +2523,7 @@
           </section>
 
           <!-- Tied House Exemption -->
-          <section
-            *ngIf="
+          <section *ngIf="
               application?.licenseType === 'Manufacturer' &&
               application?.applicationType?.name != ApplicationTypeNames.Dormancy &&
               application?.applicationType?.name != ApplicationTypeNames.ChangetoApprovedPicnicArea &&
@@ -3113,40 +2541,28 @@
             </div>
           </section>
 
-          <section
-            class="ngtest-valid-interest"
+          <section class="ngtest-valid-interest"
             *ngIf="showFormControl(application?.applicationType?.validInterest) || showValidInterestforTransfer()">
             <hr />
             <br />
-            <label
-              for=""
-              *ngIf="
+            <label for="" *ngIf="
                 application?.licenseType == 'Cannabis Retail Store' ||
                 application?.licenseType == 'S119 CRS Authorization'
               ">
               Offer or Proof of Ownership, Lease or Sub-Lease
             </label>
-            <label
-              for=""
-              *ngIf="
+            <label for="" *ngIf="
                 application?.licenseType != 'Cannabis Retail Store' &&
                 application?.licenseType != 'S119 CRS Authorization' &&
                 !isTemporaryRelocation()
-              "
-              >Proof of Valid Interest</label
-            >
-            <label
-              for=""
-              *ngIf="
+              ">Proof of Valid Interest</label>
+            <label for="" *ngIf="
                 application?.licenseType != 'Cannabis Retail Store' &&
                 application?.licenseType != 'S119 CRS Authorization' &&
                 isTemporaryRelocation()
-              "
-              >Temporary Location Proof of Valid Interest</label
-            >
+              ">Temporary Location Proof of Valid Interest</label>
             <section>
-              <div
-                *ngIf="
+              <div *ngIf="
                   application?.licenseType == 'Cannabis Retail Store' ||
                   application?.licenseType == 'S119 CRS Authorization' ||
                   application?.licenseType == 'Producer Retail Store'
@@ -3168,8 +2584,7 @@
                   location. Note,
                 </p>
               </div>
-              <div
-                *ngIf="
+              <div *ngIf="
                   application?.licenseType != 'Cannabis Retail Store' &&
                   application?.licenseType != 'S119 CRS Authorization' &&
                   application?.licenseType != 'Producer Retail Store'
@@ -3214,72 +2629,17 @@
                 The below offer or proof of ownership, lease or sub-lease is on file.
               </p>
               <section>
-                <app-file-uploader
-                  *ngIf="applicationId"
-                  documentType="Valid Interest"
-                  fileTypes="FILES MUST BE IN PDF FORMAT."
-                  [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()"
-                  [multipleFiles]="true"
-                  entityName="application"
-                  [useDocumentTypeForName]="true"
-                  (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event"
-                  [entityId]="applicationId"
+                <app-file-uploader *ngIf="applicationId" documentType="Valid Interest"
+                  fileTypes="FILES MUST BE IN PDF FORMAT." [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
+                  [enableFileDeletion]="!isOpenedByLGForApproval && !lGHasApproved()" [multipleFiles]="true"
+                  entityName="application" [useDocumentTypeForName]="true"
+                  (numberOfUploadedFiles)="uploadedValidInterestDocuments = $event" [entityId]="applicationId"
                   [uploadHeader]="'TO UPLOAD OWNERSHIP OR LEASE DOCUMENTS, DRAG FILES HERE OR'">
                 </app-file-uploader>
               </section>
             </section>
           </section>
-          <section *ngIf="application?.applicationType?.name === 'Manufacturer Location Change'">
-            <!-- Contact Details -->
-            <h3 class="blue-header">MANUFACTURER SUPPORTING INFORMATION</h3>
-            <div class="content-bottom">
-              <mat-checkbox formControlName="relocateWinaryLicence" (change)="relocateWinaryLicenceChanged()">
-                <section>
-                  <span>
-                    Is the purpose of this manufacturer location change application to relocate a winery licence?
-                  </span>
-                </section>
-              </mat-checkbox>
-              <mat-checkbox
-                *ngIf="application.relocateWinaryLicence == true"
-                formControlName="confirmRelocateWinaryLicence"
-                (change)="confirmRelocateWinaryLicenceChanged()">
-                <section>
-                  <span>
-                    By checking this box, I confirm my understanding of the following requirements for a winery licence:
-                  </span>
-                  <ul>
-                    <li>
-                      <span>
-                        Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery
-                        establishment) and they must meet this on-site production requirement in order to renew their
-                        annual licence;
-                      </span>
-                    </li>
-                    <li>
-                      <span>
-                        Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery
-                        establishment) and they must meet this on-site production requirement in order to renew their
-                        annual licence;
-                      </span>
-                    </li>
-                    <li>
-                      <span>
-                        Produce a minimum of 4500 litres of their own wine on-site each year (at the licensed winery
-                        establishment) and they must meet this on-site production requirement in order to renew their
-                        annual licence;
-                      </span>
-                    </li>
-                  </ul>
-                  Production for this purpose is defined as “fermentation and at least one other significant winemaking
-                  step from the following list: blending, crushing, filtering, aging the wine for at least three months,
-                  secondary fermentation or carbonation (sparkling), packaging.” Licensee must own or lease the
-                  equipment used to produce the wine on-site
-                </section>
-              </mat-checkbox>
-            </div>
-          </section>
+
           <!-- Contact Details -->
           <h3 class="blue-header" *ngIf="!isRAS()">APPLICATION CONTACT DETAILS</h3>
           <h3 class="blue-header" *ngIf="isRAS()">CONTACT DETAILS</h3>
@@ -3299,66 +2659,34 @@
               information submission.
             </p>
             <address class="padded-section">
-              <app-field
-                label="First Name"
-                [required]="true"
-                [valid]="isValidOrNotTouched('contactPersonFirstName')"
+              <app-field label="First Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonFirstName')"
                 errorMessage="Please enter the business contact's first name">
-                <input
-                  class="form-control"
-                  style="width: 350px"
-                  type="text"
-                  autocomplete="given-name"
-                  formControlName="contactPersonFirstName"
-                  id="contactPersonFirstName" />
+                <input class="form-control" style="width: 350px" type="text" autocomplete="given-name"
+                  formControlName="contactPersonFirstName" id="contactPersonFirstName" />
               </app-field>
 
-              <app-field
-                label="Last Name"
-                [required]="true"
-                [valid]="isValidOrNotTouched('contactPersonLastName')"
+              <app-field label="Last Name" [required]="true" [valid]="isValidOrNotTouched('contactPersonLastName')"
                 errorMessage="Please enter the business contact's last name">
-                <input
-                  class="form-control"
-                  style="width: 350px"
-                  type="text"
-                  autocomplete="family-name"
-                  formControlName="contactPersonLastName"
-                  id="contactPersonLastName" />
+                <input class="form-control" style="width: 350px" type="text" autocomplete="family-name"
+                  formControlName="contactPersonLastName" id="contactPersonLastName" />
               </app-field>
 
               <app-field label="Title/Position" [required]="false" [valid]="true">
                 <input class="form-control" style="width: 350px" type="text" formControlName="contactPersonRole" />
               </app-field>
 
-              <app-field
-                label="Phone Number (main)"
-                [required]="true"
+              <app-field label="Phone Number (main)" [required]="true"
                 [valid]="isValidOrNotTouched('contactPersonPhone')"
                 errorMessage="Please enter the business contact's 10-digit phone number">
-                <input
-                  class="form-control"
-                  style="width: 250px"
-                  maxlength="10"
-                  autocomplete="tel"
-                  (keydown)="rejectIfNotDigitOrBackSpace($event)"
-                  type="text"
-                  formControlName="contactPersonPhone" />
+                <input class="form-control" style="width: 250px" maxlength="10" autocomplete="tel"
+                  (keydown)="rejectIfNotDigitOrBackSpace($event)" type="text" formControlName="contactPersonPhone" />
               </app-field>
 
-              <app-field
-                label="Email"
-                [required]="true"
-                [valid]="isValidOrNotTouched('contactPersonEmail')"
+              <app-field label="Email" [required]="true" [valid]="isValidOrNotTouched('contactPersonEmail')"
                 errorMessage="Please enter the business contact's email address"
                 afterLabelText="By submitting the email address, you agree that the Liquor and Cannabis Regulation Branch can use it to communicate with you about this application.">
-                <input
-                  class="form-control"
-                  style="width: 350px"
-                  type="text"
-                  autocomplete="email"
-                  formControlName="contactPersonEmail"
-                  id="contactPersonEmail"
+                <input class="form-control" style="width: 350px" type="text" autocomplete="email"
+                  formControlName="contactPersonEmail" id="contactPersonEmail"
                   (blur)="trimValue(form.get('contactPersonEmail'))" />
               </app-field>
             </address>
@@ -3435,10 +2763,8 @@
                 </p>
               </section>
 
-              <app-field
-                [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                errorMessage="Please affirm that you are authorized to submit the application."
-                [showChevrons]="false">
+              <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
                 <mat-checkbox formControlName="authorizedToSubmit" id="authorizedToSubmit">
                   <span class="error-states">*</span>
                   <span class="ml-2" *ngIf="!isRAS()">
@@ -3449,8 +2775,7 @@
                   </span>
                 </mat-checkbox>
               </app-field>
-              <p
-                *ngIf="
+              <p *ngIf="
                   application?.licenseType == 'Cannabis Retail Store' ||
                   application?.licenseType == 'S119 CRS Authorization' ||
                   application?.licenseType == 'Marketer' ||
@@ -3460,8 +2785,7 @@
                 manager an application, or information or a record included as part of the application, that contains
                 false or misleading information, or fails to disclose a material fact”.
               </p>
-              <p
-                *ngIf="
+              <p *ngIf="
                   application?.licenseType != 'Cannabis Retail Store' &&
                   application?.licenseType != 'S119 CRS Authorization' &&
                   application?.licenseType != 'Marketer' &&
@@ -3472,8 +2796,7 @@
                 application or makes a false or misleading statement in the application."
               </p>
 
-              <app-field
-                [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+              <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                 errorMessage="Please affirm that all of the information provided for this application is true and complete."
                 [showChevrons]="false">
                 <mat-checkbox formControlName="signatureAgreement" id="signatureAgreement">
@@ -3498,18 +2821,15 @@
                   may NOT submit this application on behalf of the applicant.
                 </strong>
               </p>
-              <app-field
-                [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
-                errorMessage="Please affirm that you are authorized to submit the application."
-                [showChevrons]="false">
+              <app-field [valid]="!showValidationMessages || form.get('authorizedToSubmit').valid"
+                errorMessage="Please affirm that you are authorized to submit the application." [showChevrons]="false">
                 <mat-checkbox formControlName="authorizedToSubmit">
                   <span class="error-states">*</span>
                   <span class="ml-2"> I understand and affirm that I am authorized to submit the application </span>
                 </mat-checkbox>
               </app-field>
               <p>
-                <strong
-                  *ngIf="
+                <strong *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization' ||
                     application?.licenseType == 'Marketer'
@@ -3518,8 +2838,7 @@
                   general manager an application, or information or a record included as part of the application, that
                   contains false or misleading information, or fails to disclose a material fact”.
                 </strong>
-                <strong
-                  *ngIf="
+                <strong *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization' ||
                     application?.licenseType == 'Marketer'
@@ -3529,8 +2848,7 @@
                   by the application or makes a false or misleading statement in the application.”
                 </strong>
               </p>
-              <app-field
-                [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
+              <app-field [valid]="!showValidationMessages || form.get('signatureAgreement').valid"
                 errorMessage="Please affirm that all of the information provided for this application is true and complete."
                 [showChevrons]="false">
                 <mat-checkbox formControlName="signatureAgreement">
@@ -3562,10 +2880,7 @@
 
           <!--  Proceed to Pay -->
 
-          <section
-            class="d-flex"
-            style="margin-top: 15px"
-            *ngIf="
+          <section class="d-flex" style="margin-top: 15px" *ngIf="
               !isOpenedByLGForApproval &&
               !isRAS() &&
               !isFreeEndorsement() &&
@@ -3587,8 +2902,7 @@
               </p>
 
               <div>
-                <p
-                  *ngIf="
+                <p *ngIf="
                     application?.licenseType === 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization'
                   ">
@@ -3605,8 +2919,7 @@
 
                 <br />
 
-                <div
-                  *ngIf="
+                <div *ngIf="
                     application?.licenseType === 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization' ||
                     application?.licenseType === 'Producer Retail Store'
@@ -3614,8 +2927,7 @@
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);"> LCRBCannabis@gov.bc.ca </a>
                 </div>
-                <div
-                  *ngIf="
+                <div *ngIf="
                     application?.licenseType !== 'Cannabis Retail Store' &&
                     application?.licenseType != 'S119 CRS Authorization' &&
                     application?.licenseType !== 'Producer Retail Store'
@@ -3628,23 +2940,18 @@
           </section>
 
           <section appRemoveIfFeatureOff="LGApprovals" class="ngtest-opened-by-lg" *ngIf="isOpenedByLGForApproval">
-            <app-lg-in-confirmation-of-receipt
-              *ngIf="(application && isShowLGINApproval) || lgApprovalDecisionMade()"
-              [application]="application"
-              [isOpenedByLGForApproval]="isOpenedByLGForApproval"
-              [htmlContent]="htmlContent"
-              [disableForm]="lgApprovalDecisionMade()">
+            <app-lg-in-confirmation-of-receipt *ngIf="(application && isShowLGINApproval) || lgApprovalDecisionMade()"
+              [application]="application" [isOpenedByLGForApproval]="isOpenedByLGForApproval"
+              [htmlContent]="htmlContent" [disableForm]="lgApprovalDecisionMade()">
             </app-lg-in-confirmation-of-receipt>
             <app-lg-zoning-confirmation
               *ngIf="application?.applicationType?.isShowLGZoningConfirmation || lgHasReviewedZoning()"
-              [disableForm]="lgHasReviewedZoning()"
-              [application]="application"
+              [disableForm]="lgHasReviewedZoning()" [application]="application"
               [isOpenedByLGForApproval]="isOpenedByLGForApproval">
             </app-lg-zoning-confirmation>
           </section>
 
-          <section
-            *ngIf="
+          <section *ngIf="
               (application?.applicationType?.isShowLGINApproval ||
                 application?.applicationType?.isShowLGZoningConfirmation) &&
               (application?.applicationStatus === 'Intake' || application?.lGApprovalDecision === 'Rejected') &&
@@ -3665,8 +2972,7 @@
                 <span *ngIf="form.get('indigenousNation').value.websiteUrl">
                   (
                   <a [href]="form.get('indigenousNation').value.websiteUrl" target="_blank">
-                    {{ this.form.get('indigenousNation').value.websiteUrl }} </a
-                  >)
+                    {{ this.form.get('indigenousNation').value.websiteUrl }} </a>)
                 </span>
                 to ensure your successful submission.
               </section>
@@ -3687,14 +2993,12 @@
                 Your application has been reviewed by your local government/Indigenous Nation and they have
                 <span *ngIf="isShowLGINApproval">
                   <span *ngIf="this.application.lGApprovalDecision !== 'OptOut'">accepted it for submission.</span>
-                  <span *ngIf="this.application.lGApprovalDecision === 'OptOut'"
-                    >decided to Opt-Out of the community assessment process. In their place, LCRB will complete the site
-                    community assessment.</span
-                  >
+                  <span *ngIf="this.application.lGApprovalDecision === 'OptOut'">decided to Opt-Out of the community
+                    assessment process. In their place, LCRB will complete the site
+                    community assessment.</span>
                 </span>
-                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation"
-                  >provided confirmation of zoning as required.</span
-                >
+                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">provided confirmation of zoning as
+                  required.</span>
                 You may now submit your application.
               </section>
               <br />
@@ -3713,10 +3017,9 @@
                 <h3>LG/IN Review Complete</h3>
                 Your application has been reviewed by your local government/Indigenous Nation and they have
                 <span *ngIf="isShowLGINApproval"><strong>rejected</strong> it.</span>
-                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation"
-                  >specified that zoning <strong>does not</strong> permit a
-                  {{ application?.applicationType?.name }}.</span
-                >
+                <span *ngIf="application?.applicationType.isShowLGZoningConfirmation">specified that zoning <strong>does
+                    not</strong> permit a
+                  {{ application?.applicationType?.name }}.</span>
                 You may contact the individual listed above for more information. If you intend to revise your
                 application, you must submit a new one.
               </section>
@@ -3726,17 +3029,10 @@
 
           <!-- button section when  LGApprovals is enabled  when it's the applicant opening the application -->
 
-          <section
-            appRemoveIfFeatureOff="LGApprovals"
-            *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
+          <section appRemoveIfFeatureOff="LGApprovals" *ngIf="!isOpenedByLGForApproval && !lGHasRejected()"
             style="margin-top: 20px; position: relative">
-            <button
-              mat-raised-button
-              *ngIf="account?.businessType !== 'LocalGovernment '"
-              color="secondary"
-              style="margin-right: 10px"
-              (click)="saveForLater()"
-              [disabled]="saveForLaterInProgress">
+            <button mat-raised-button *ngIf="account?.businessType !== 'LocalGovernment '" color="secondary"
+              style="margin-right: 10px" (click)="saveForLater()" [disabled]="saveForLaterInProgress">
               <span>
                 <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER
@@ -3756,44 +3052,29 @@
 
     -->
             <!-- LG Approval Required -->
-            <button
-              mat-raised-button
-              class="ng-test-submit-for-lg-review"
-              color="primary"
-              *ngIf="showSubmitToLG()"
-              [disabled]="disableSubmitForLGINApproval"
-              (click)="submitForLGINApproval()">
+            <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary" *ngIf="showSubmitToLG()"
+              [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval()">
               <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
               <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
             </button>
 
             <!-- LG Approved OR NO LG Approvals Required -->
-            <ng-container
-              *ngIf="
+            <ng-container *ngIf="
                 lGHasApproved() ||
                 (!application?.applicationType?.isShowLGINApproval &&
                   !application?.applicationType?.isShowLGZoningConfirmation) ||
                   !showSubmitToLG()
               ">
-              <button
-                mat-raised-button
-                *ngIf="!application?.applicationType?.requiresSecurityScreening"
-                color="primary"
-                (click)="submit_application()"
-                [disabled]="submitApplicationInProgress">
+              <button mat-raised-button *ngIf="!application?.applicationType?.requiresSecurityScreening" color="primary"
+                (click)="submit_application()" [disabled]="submitApplicationInProgress">
                 SUBMIT&nbsp;<span
-                  *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment && !isRAS()"
-                  >&amp; PAY</span
-                >
+                  *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment && !isRAS()">&amp;
+                  PAY</span>
                 <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
 
-              <button
-                mat-raised-button
-                *ngIf="application?.applicationType?.requiresSecurityScreening"
-                color="primary"
-                (click)="proceedToSecurityScreening()"
-                [disabled]="proceedToSecurityScreeningInProgress">
+              <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
+                (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
                 <span> <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING </span>
                 <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
@@ -3821,9 +3102,7 @@
             <button mat-raised-button color="primary" (click)="submit_application()">
               <span>
                 <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span
-                  *ngIf="!skipPayment && !isRAS()"
-                  >&amp; PAY</span
-                >
+                  *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
               </span>
               <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
@@ -3855,85 +3134,55 @@
           <p *ngIf="application?.applicationType?.name === ApplicationTypeNames.CannabisRetailStore">
             Please download the
             <span *ngIf="application?.applicationType?.name !== ApplicationTypeNames.CRSTransferofOwnership">
-              <a
-                *ngIf="account?.businessType === 'SoleProprietorship'"
-                href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'SoleProprietorship'"
+                href="https://www2.gov.bc.ca/assets/download/EEC8AD886FA04CD48D78FD22A375A7D8" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="account?.businessType === 'Society'"
-                href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'Society'"
+                href="https://www2.gov.bc.ca/assets/download/8FFCF0DA701842F99D4A80F05174A71A" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="account?.businessType === 'IndigenousNation'"
-                href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'IndigenousNation'"
+                href="https://www2.gov.bc.ca/assets/download/87A1FB955AD64660BAC4BF2462226E67" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="businessTypeIsPartnership()"
-                href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D"
-                download
-                target="_blank"
+              <a *ngIf="businessTypeIsPartnership()"
+                href="https://www2.gov.bc.ca/assets/download/13ADA5B32E4242568DB2B72E3566A56D" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="businessTypeIsPrivateCorporation()"
-                href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829"
-                download
-                target="_blank"
+              <a *ngIf="businessTypeIsPrivateCorporation()"
+                href="https://www2.gov.bc.ca/assets/download/9D237C8721B1475FB95534037AE21829" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
             </span>
             <span *ngIf="application?.applicationType?.name === ApplicationTypeNames.CRSTransferofOwnership">
-              <a
-                *ngIf="account?.businessType === 'SoleProprietorship'"
-                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'SoleProprietorship'"
+                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="account?.businessType === 'Society'"
-                href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'Society'"
+                href="https://www2.gov.bc.ca/assets/download/9CC0BA56735E466AB09FEAEE3241F46C" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="account?.businessType === 'IndigenousNation'"
-                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894"
-                download
-                target="_blank"
+              <a *ngIf="account?.businessType === 'IndigenousNation'"
+                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="businessTypeIsPartnership()"
-                href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB"
-                download
-                target="_blank"
+              <a *ngIf="businessTypeIsPartnership()"
+                href="https://www2.gov.bc.ca/assets/download/9A8C9C2E49564C54A2232E60F5B266DB" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
-              <a
-                *ngIf="businessTypeIsPrivateCorporation()"
-                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894"
-                download
-                target="_blank"
+              <a *ngIf="businessTypeIsPrivateCorporation()"
+                href="https://www2.gov.bc.ca/assets/download/31016E1B36664641921A914DAD28D894" download target="_blank"
                 rel="noopener noreferrer">
                 Document Checklist
               </a>
@@ -3965,18 +3214,11 @@
             <p>Please add additional supporting documents as directed by LCRB.</p>
           </section>
           <section>
-            <app-file-uploader
-              *ngIf="applicationId"
-              documentType="Licence Application Supporting"
+            <app-file-uploader *ngIf="applicationId" documentType="Licence Application Supporting"
               [disableUploads]="isOpenedByLGForApproval || lGHasApproved()"
-              fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
-              entityName="application"
-              [entityId]="applicationId"
-              [maxNumberOfFiles]="200"
-              (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
-              [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
-              [enableFileDeletion]="false"
-              #supportingDocuments>
+              fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="applicationId"
+              [maxNumberOfFiles]="200" (numberOfUploadedFiles)="uploadedSupportingDocuments = $event"
+              [extensions]="['pdf', 'jpg', 'jpeg', 'png']" [enableFileDeletion]="false" #supportingDocuments>
             </app-file-uploader>
           </section>
           <br />
@@ -3995,22 +3237,15 @@
             attached letter that details the missing information.
           </p>
           <p>
-            <strong
-              >Note: Your application will not be processed while required information is still outstanding.</strong
-            >
+            <strong>Note: Your application will not be processed while required information is still
+              outstanding.</strong>
           </p>
 
           <section>
             <h3>
-              <app-file-uploader
-                *ngIf="application?.id"
-                documentType="Incomplete"
-                fileTypes="FILE MUST BE IN PDF FORMAT."
-                [disableUploads]="true"
-                [enableFileDeletion]="false"
-                [multipleFiles]="true"
-                entityName="application"
-                [useDocumentTypeForName]="true"
+              <app-file-uploader *ngIf="application?.id" documentType="Incomplete"
+                fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="true" [enableFileDeletion]="false"
+                [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
                 [entityId]="application?.id">
               </app-file-uploader>
             </h3>
@@ -4018,25 +3253,15 @@
           <section>
             <h3>Add Required Information:</h3>
             <p>Use the upload box to provide the information requested in the letter above.</p>
-            <app-file-uploader
-              *ngIf="application?.id"
-              documentType="Requested Info"
-              fileTypes="FILE MUST BE IN PDF FORMAT."
-              [disableUploads]="false"
-              [enableFileDeletion]="true"
-              [multipleFiles]="true"
-              entityName="application"
-              [useDocumentTypeForName]="true"
+            <app-file-uploader *ngIf="application?.id" documentType="Requested Info"
+              fileTypes="FILE MUST BE IN PDF FORMAT." [disableUploads]="false" [enableFileDeletion]="true"
+              [multipleFiles]="true" entityName="application" [useDocumentTypeForName]="true"
               [entityId]="application?.id">
             </app-file-uploader>
           </section>
           <hr />
           <section>
-            <button
-              mat-raised-button
-              color="secondary"
-              style="margin-right: 10px"
-              (click)="saveForLater()"
+            <button mat-raised-button color="secondary" style="margin-right: 10px" (click)="saveForLater()"
               [disabled]="saveForLaterInProgress">
               <span>
                 <fa-icon [icon]="faSave"></fa-icon>
@@ -4045,10 +3270,7 @@
               <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
-            <button
-              mat-raised-button
-              class="ng-test-submit-incomplete"
-              color="primary"
+            <button mat-raised-button class="ng-test-submit-incomplete" color="primary"
               (click)="resolveIncompleteness()">
               <span>SUBMIT</span>
             </button>
@@ -4062,9 +3284,7 @@
       <section class="large-screen-only" *ngIf="account?.businessType !== 'LocalGovernment'">
         <h3 class="blue-header" style="margin-bottom: 0; margin-top: 0">INDIGENOUS NATION</h3>
 
-        <div
-          [formGroup]="form"
-          class="submitted-content"
+        <div [formGroup]="form" class="submitted-content"
           style="background-color: #f1f4fa; border-bottom: 4px solid #e4e4e4">
           <app-field label="Is this application for an Indigenous Nation?" [valid]="true">
             <mat-button-toggle-group formControlName="applyAsIndigenousNation" aria-label="Font Style">
@@ -4078,11 +3298,8 @@
             supporting documents will be connected to the BCeID used at log-in.
           </div>
 
-          <app-field
-            label="Select the Indigenous nation"
-            [valid]="isValidOrNotTouched('indigenousNationId')"
-            *ngIf="form.get('applyAsIndigenousNation').value"
-            errorMessage="Please select the Indigenous nation">
+          <app-field label="Select the Indigenous nation" [valid]="isValidOrNotTouched('indigenousNationId')"
+            *ngIf="form.get('applyAsIndigenousNation').value" errorMessage="Please select the Indigenous nation">
             <select class="form-control" formControlName="indigenousNationId" style="width: 250px">
               <option value=""></option>
               <option [value]="item.id" *ngFor="let item of indigenousNations">{{ item.name }}</option>
@@ -4090,11 +3307,8 @@
           </app-field>
         </div>
       </section>
-      <app-associate-content
-        *ngIf="account?.businessType !== 'LocalGovernment'"
-        [account]="account"
-        [showBothContents]="false"
-        [isIndigenousNation]="form.get('applyAsIndigenousNation').value">
+      <app-associate-content *ngIf="account?.businessType !== 'LocalGovernment'" [account]="account"
+        [showBothContents]="false" [isIndigenousNation]="form.get('applyAsIndigenousNation').value">
       </app-associate-content>
     </ng-template>
 

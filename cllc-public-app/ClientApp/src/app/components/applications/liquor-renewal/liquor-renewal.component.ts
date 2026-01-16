@@ -1,29 +1,28 @@
-import { Component, OnInit } from "@angular/core";
 import { KeyValue } from "@angular/common";
-import { Application } from "@models/application.model";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { Observable, Subject, forkJoin, of } from "rxjs";
-import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
-import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
-import { Store } from "@ngrx/store";
-import { AppState } from "@app/app-state/models/app-state";
-import { PaymentDataService } from "@services/payment-data.service";
+import { Component, OnInit } from "@angular/core";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ApplicationDataService } from "@services/application-data.service";
-import { LicenseDataService } from "@services/license-data.service";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
-import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
-import { ApplicationCancellationDialogComponent } from
-  "@components/dashboard/applications-and-licences/applications-and-licences.component";
-import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
-import { Account } from "@models/account.model";
-import { License } from "@models/license.model";
-import { AnnualVolumeService } from "@services/annual-volume.service";
-import { faBolt, faExchangeAlt, faPencilAlt, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { ActivatedRoute, Router } from "@angular/router";
+import { AppState } from "@app/app-state/models/app-state";
+import { ApplicationCancellationDialogComponent } from "@components/dashboard/applications-and-licences/applications-and-licences.component";
+import { UPLOAD_FILES_MODE } from "@components/licences/licences.component";
 import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { faBolt, faExchangeAlt, faPencilAlt, faPlus, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { Account } from "@models/account.model";
+import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
+import { Application } from "@models/application.model";
+import { License } from "@models/license.model";
+import { Store } from "@ngrx/store";
+import { AnnualVolumeService } from "@services/annual-volume.service";
+import { ApplicationDataService } from "@services/application-data.service";
+import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
+import { FeatureFlagService } from "@services/feature-flag.service";
+import { LicenseDataService } from "@services/license-data.service";
+import { PaymentDataService } from "@services/payment-data.service";
+import { ApplicationHTMLContent, FormBase } from "@shared/form-base";
+import { Observable, Subject, forkJoin, of } from "rxjs";
+import { catchError, filter, mergeMap, takeWhile } from "rxjs/operators";
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: "Please answer question 1",
@@ -177,14 +176,19 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
               this.form.get('ldbOrderTotalsConfirm').setValue(this.application.ldbOrderTotals);
 
             }
-            if (data.licenseType === "Manufacturer" &&
-              (data.licenseSubCategory === "Winery" || data.licenseSubCategory === "Brewery")) {
-              this.form.addControl("volumeProduced", this.fb.control("", [Validators.required]));
-              this.form.get('volumeProduced').setValue(this.application.volumeProduced);
-            }
-            if (data.licenseType === "Manufacturer" && data.licenseSubCategory === "Winery") {
-              this.form.addControl("volumeDestroyed", this.fb.control("", [Validators.required]));
-              this.form.get('volumeDestroyed').setValue(this.application.volumeDestroyed);
+
+            if (data.licenseType === "Manufacturer") {
+              const isRequired =
+                data.licenseSubCategory === "Winery" ||
+                data.licenseSubCategory === "Brewery";
+
+              this.form.addControl(
+                "volumeProduced",
+                this.fb.control(
+                  this.application.volumeProduced || "",
+                  isRequired ? [Validators.required] : []
+                )
+              );
             }
             this.dataLoaded = true;
           },
@@ -193,7 +197,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
               this.dataLoaded = true;
               this.applicationNotLoaded = true;
             }
-            );
+          );
         if (data.establishmentParcelId) {
           data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
         }
@@ -240,7 +244,9 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     return `What was your ${this.licenseSubCategory}'s total volume produced (in ${label
       }) between January 1 and December 31?`;
   }
-
+  isVolumeRequired() {
+    return !this.isSubcategory("Distillery");
+  }
   isAgent() {
     return false;
     //return this.licenseType == 'Agent';
@@ -276,9 +282,8 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     if (this.form.get("ldbOrderTotals")) {
       this.application.ldbOrderTotals = Number(this.form.value.ldbOrderTotals != null && this.form.value.ldbOrderTotals != undefined ? this.form.value.ldbOrderTotals : 0);
     }
-    if (this.licenseSubCategory === "Winery" || this.licenseSubCategory === "Brewery") {
+    if (this.licenseSubCategory === "Winery" || this.licenseSubCategory === "Brewery" || this.licenseSubCategory === "Distillery") {
       this.application.volumeProduced = this.form.get("volumeProduced") ? this.form.get("volumeProduced").value : 0;
-      this.application.volumeDestroyed = this.form.get("volumeDestroyed") ? this.form.get("volumeDestroyed").value : 0;
     }
 
     return forkJoin([
@@ -334,7 +339,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
       this.save(true)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
-          if (result==true) {
+          if (result == true) {
             this.submitPayment();
           } else {
             this.submitReqInProgress = false;
@@ -369,7 +374,7 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
   isValid(): boolean {
     this.showValidationMessages = false;
 
-    if(this.isAgent()){
+    if (this.isAgent()) {
       this.form.get("renewalFloorPlan").setValidators([]);
       this.form.get("renewalFloorPlan").updateValueAndValidity();
       this.form.get("renewalTiedhouse").setValidators([]);
@@ -391,18 +396,18 @@ export class LiquorRenewalComponent extends FormBase implements OnInit {
     // Wineries only
     //  - enforce minimum production (4500L per year)
     //  - discretion letter is required when winery manufactured less than the minimum production.
-    if (this.isSubcategory("Winery")) {
-      const volumeProduced = parseInt(this.form.get("volumeProduced").value, 10);
-      const isMinimumChecked = !!this.form.get("isManufacturedMinimum").value;
-      if (!isNaN(volumeProduced) && volumeProduced < WINERY_MINIMUM_PRODUCTION && isMinimumChecked) {
-        this.validationMessages.push(
-          `You have not indicated that you have produced less than the required minimum production. The value of ${volumeProduced} is less than the required minimum production.`);
-      }
-      if (!isMinimumChecked && (this.uploadedDiscretionLetter || 0) < 1) {
-        this.validationMessages.push(
-          "You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.");
-      }
-    }
+    // if (this.isSubcategory("Winery")) {
+    //   const volumeProduced = parseInt(this.form.get("volumeProduced").value, 10);
+    //   const isMinimumChecked = !!this.form.get("isManufacturedMinimum").value;
+    //   if (!isNaN(volumeProduced) && volumeProduced < WINERY_MINIMUM_PRODUCTION && isMinimumChecked) {
+    //     this.validationMessages.push(
+    //       `You have not indicated that you have produced less than the required minimum production. The value of ${volumeProduced} is less than the required minimum production.`);
+    //   }
+    //   if (!isMinimumChecked && (this.uploadedDiscretionLetter || 0) < 1) {
+    //     this.validationMessages.push(
+    //       "You have indicated that you have produced less than the required minimum production. Please upload a discretion letter.");
+    //   }
+    // }
 
     if (this.applicationNotLoaded) {
       this.validationMessages.push("Failed to load the application, Please try again");
