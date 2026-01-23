@@ -1736,6 +1736,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private canVisitApplicationForm(): boolean {
     const isAllowed: boolean =
       this?.account.businessType === 'LocalGovernment' ||
+      this?.account.businessType === 'IndigenousNation' ||
       this?.application?.applicationStatus === ApplicationStatuses.Intake ||
       this?.application?.applicationStatus === ApplicationStatuses.InProgress ||
       // 2024-04-24 waynezen: added
