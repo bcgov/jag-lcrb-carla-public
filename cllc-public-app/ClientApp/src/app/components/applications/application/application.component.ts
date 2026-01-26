@@ -794,8 +794,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private prune<
     T extends {
-      sections?: Array<{ id: string; name?: string; [k: string]: any }>;
-      tabs?: Array<{ sections: Array<{ id: string; name?: string; [k: string]: any }> }>;
+      sections?: Array<{ id: string; name?: string;[k: string]: any }>;
+      tabs?: Array<{ sections: Array<{ id: string; name?: string;[k: string]: any }> }>;
     }
   >(formRef: T, type: string): T {
     const SPLITTER = '____';
@@ -1506,8 +1506,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       //LCSD-6495 if an application is not free, then it should not be a free endorsement.
       this.busy = this.save(
         this.application.applicationType != undefined &&
-          !this.application.applicationType.isFree &&
-          !this.isFreeEndorsement(),
+        !this.application.applicationType.isFree &&
+        !this.isFreeEndorsement(),
         <Application>{ invoiceTrigger: 1 }
       ) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
@@ -2031,7 +2031,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.get('licenceSubCategory').value === 'Winery' &&
         (this.form.get('mfrSupInfoReadUnderstand').value != true ||
           this.form.get('mfrSupInfoOwnRent').value != true ||
-          this.form.get('mfrSupInfoIntendProduce').value != true ||
           this.form.get('mfrSupInfoProductionEquipment').value != true)
       ) {
         valid = false;
