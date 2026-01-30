@@ -95,13 +95,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 catch (SharePointRestException ex)
                 {
                     result.ResultStatus = ResultStatus.Fail;
-                    result.ErrorDetail = $"ERROR in creating folder {logFolder}";
+                    result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
                     Log.Error(ex, result.ErrorDetail);
                 }
                 catch (Exception e)
                 {
                     result.ResultStatus = ResultStatus.Fail;
-                    result.ErrorDetail = $"ERROR in creating folder {logFolder}";
+                    result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
                     Log.Error(e, result.ErrorDetail);
                 }
             }
@@ -150,12 +150,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 Log.Error(spre, "Error determining if file exists");
                 result.ResultStatus = result.ResultStatus = FileExistStatus.Error;
-                result.ErrorDetail = "Error determining if file exists";
+                result.ErrorDetail = "FileExists - Error determining if file exists";
             }
             catch (Exception e)
             {
                 result.ResultStatus = FileExistStatus.Error;
-                result.ErrorDetail = "Error determining if file exists";
+                result.ErrorDetail = "FileExists - Error determining if file exists";
                 Log.Error(e, result.ErrorDetail);
             }
 
@@ -268,13 +268,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in deleting file {logUrl}";
+                result.ErrorDetail = $"DeleteFile - ERROR in deleting file {logUrl}";
                 Log.Error(ex, result.ErrorDetail);
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in deleting file {logUrl}";
+                result.ErrorDetail = $"DeleteFile - ERROR in deleting file {logUrl}";
                 Log.Error(e, result.ErrorDetail);
             }
 
@@ -312,13 +312,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in downloading file {logUrl}";
+                result.ErrorDetail = $"DownloadFile - ERROR in downloading file {logUrl}";
                 Log.Error(ex, result.ErrorDetail);
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in downloading file {logUrl}";
+                result.ErrorDetail = $"DownloadFile - ERROR in downloading file {logUrl}";
                 Log.Error(e, result.ErrorDetail);
             }
 
@@ -365,13 +365,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
+                result.ErrorDetail = $"UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
                 Log.Error(ex, result.ErrorDetail);
             }
             catch (Exception e)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in uploading file {logFileName} to folder {logFolderName}";
+                result.ErrorDetail = $"UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
                 Log.Error(e, result.ErrorDetail);
             }
 
@@ -455,7 +455,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 Log.Error(spre, "Error getting SharePoint File List");
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = "Error getting SharePoint File List";
+                result.ErrorDetail = "FolderFiles - Error getting SharePoint File List";
             }
 
             return Task.FromResult(result);
@@ -484,7 +484,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             else
             {
-                result.ErrorDetail = "Bad Request";
+                result.ErrorDetail = "GetToken - Invalid Secret";
             }
 
             return Task.FromResult(result);
@@ -524,7 +524,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             catch (SharePointRestException ex)
             {
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
+                result.ErrorDetail =
+                    $"GetTruncatedFilename - ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
                 Log.Error(ex, result.ErrorDetail);
             }
 

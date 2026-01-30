@@ -68,6 +68,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 options.MaxSendMessageSize = null; // disable limit
             });
 
+            services.AddControllers();
+
             // health checks.
             services.AddHealthChecks().AddCheck("file-manager-service", () => HealthCheckResult.Healthy("OK"));
         }
@@ -106,6 +108,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<FileManagerService>();
+
+                endpoints.MapControllers();
 
                 endpoints.MapGet(
                     "/",
