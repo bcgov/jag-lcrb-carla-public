@@ -428,7 +428,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var folderName = worker.GetDocumentFolderName();
             //var name = worker.AdoxioWorkerid + " Files";
 
-            _fileManagerClient.CreateFolderIfNotExist(_logger, SharePointConstants.WorkerFolderInternalName, folderName);
+            _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
 
             _dynamicsClient.CreateEntitySharePointDocumentLocation("worker", worker.AdoxioWorkerid, folderName, folderName);
         }

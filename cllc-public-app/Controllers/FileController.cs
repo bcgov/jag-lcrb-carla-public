@@ -122,11 +122,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (folderName != null && result && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
+                int slashPos = relativeUrl.IndexOf("/");
+                if (slashPos != -1 && slashPos < relativeUrl.Length)
+                {
+                    slashPos = relativeUrl.IndexOf("/", slashPos + 1);
+                }
                 if (entityName.ToLower() != "account")
                 {
-                    // Check if the relativeUrl contains the folder name after the library name
-                    // Expected format: /sites/sitename/libraryname/foldername/filename
-                    result = relativeUrl.ToUpper().Contains("/" + folderName.ToUpper() + "/");
+                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
                 }
             }
 
