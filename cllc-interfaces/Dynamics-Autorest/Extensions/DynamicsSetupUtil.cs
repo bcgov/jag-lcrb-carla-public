@@ -31,17 +31,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             string ssgUsername = configuration["SSG_USERNAME"];  // BASIC authentication username
             string ssgPassword = configuration["SSG_PASSWORD"];  // BASIC authentication password
 
-                var handler = new HttpClientHandler();
-                handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-                handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) => {
-                return true;
-                };
-
-                // fix for problems with TEST STS.
-                var stsClient = new HttpClient(handler);
-
-
             ServiceClientCredentials serviceClientCredentials = null;
             if (!string.IsNullOrEmpty(appRegistrationClientId) && !string.IsNullOrEmpty(appRegistrationClientKey) && !string.IsNullOrEmpty(serverAppIdUri) && !string.IsNullOrEmpty(aadTenantId))
             // Cloud authentication - using an App Registration's client ID, client key.  Add the App Registration to Dynamics as an Application User.
@@ -63,6 +52,8 @@ namespace Gov.Lclb.Cllb.Interfaces
                 !string.IsNullOrEmpty(serviceAccountPassword))
             // ADFS 2016 authentication - using an Application Group Client ID and Secret, plus service account credentials.
             {
+                // create a new HTTP client that is just used to get a token.
+                var stsClient = new HttpClient();
 
                 //stsClient.DefaultRequestHeaders.Add("x-client-SKU", "PCL.CoreCLR");
                 //stsClient.DefaultRequestHeaders.Add("x-client-Ver", "5.1.0.0");
