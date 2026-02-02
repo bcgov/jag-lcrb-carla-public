@@ -113,10 +113,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private void SetupSharePoint(IServiceCollection services)
         {
             // add SharePoint.
-            services.AddTransient(sp => new SharePointFileManager(
-                _configuration,
-                sp.GetRequiredService<ILoggerFactory>()
-            ));
+            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
