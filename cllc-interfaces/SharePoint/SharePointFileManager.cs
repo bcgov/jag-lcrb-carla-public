@@ -53,17 +53,50 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             // create the HttpClient that is used for our direct REST calls.
             _CookieContainer = new CookieContainer();
-            _HttpClientHandler = new HttpClientHandler() { UseCookies = true, AllowAutoRedirect = false, CookieContainer = _CookieContainer };
-            _Client = new HttpClient(_HttpClientHandler);
-
-            _Client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
-
+            
             // SharePoint configuration settings.
-
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
             string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
             string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
             string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
+
+            string bypassSharePointCertValidation = Configuration["BYPASS_STS_CERT_VALIDATION"]; // Bypass SharePoint certificate validation (true/false)
+
+            if (
+                !string.IsNullOrEmpty(bypassSharePointCertValidation)
+                && bypassSharePointCertValidation.ToLower() == "true"
+            )
+            {
+                _HttpClientHandler = new HttpClientHandler()
+                {
+                    UseCookies = true,
+                    AllowAutoRedirect = false,
+                    CookieContainer = _CookieContainer,
+                    ClientCertificateOptions = ClientCertificateOption.Manual,
+                    ServerCertificateCustomValidationCallback = (
+                        httpRequestMessage,
+                        cert,
+                        cetChain,
+                        policyErrors
+                    ) =>
+                    {
+                        // Ignore all certificate validation errors.
+                        return true;
+                    }
+                };
+            }
+            else
+            {
+                _HttpClientHandler = new HttpClientHandler()
+                {
+                    UseCookies = true,
+                    AllowAutoRedirect = false,
+                    CookieContainer = _CookieContainer
+                };
+            }
+
+            _Client = new HttpClient(_HttpClientHandler);
+            _Client.DefaultRequestHeaders.Add("Accept", "application/json;odata=verbose");
 
             // ADFS using fed auth
 
@@ -125,7 +158,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 )
             {
                 Authorization = null;
-                var samlST = Authentication.GetStsSamlToken(sharePointRelyingPartyIdentifier, sharePointUsername, sharePointPassword, sharePointStsTokenUri).GetAwaiter().GetResult();
+                var samlST = Authentication.GetStsSamlToken(sharePointRelyingPartyIdentifier, sharePointUsername, sharePointPassword, sharePointStsTokenUri, _Client).GetAwaiter().GetResult();
                 //FedAuthValue = 
                 Authentication.GetFedAuth(sharePointOdataUri, samlST, sharePointRelyingPartyIdentifier, _Client, _CookieContainer).GetAwaiter().GetResult();
             }
