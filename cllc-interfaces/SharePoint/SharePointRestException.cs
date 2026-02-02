@@ -1,36 +1,46 @@
-﻿using Microsoft.Rest;
-
-namespace Gov.Lclb.Cllb.Interfaces;
-
-public class SharePointRestException : RestException
+﻿namespace Gov.Lclb.Cllb.Interfaces
 {
-    /// <summary>
-    /// Gets information about the associated HTTP request.
-    /// </summary>
-    public HttpRequestMessageWrapper Request { get; set; }
+    using Microsoft.Rest;
 
-    /// <summary>
-    /// Gets information about the associated HTTP response.
-    /// </summary>
-    public HttpResponseMessageWrapper Response { get; set; }
+    public class SharePointRestException : RestException
+    {
 
-    /// <summary>
-    /// Initializes a new instance of the HttpOperationException class.
-    /// </summary>
-    public SharePointRestException() { }
+        /// <summary>
+        /// Gets information about the associated HTTP request.
+        /// </summary>
+        public HttpRequestMessageWrapper Request { get; set; }
 
-    /// <summary>
-    /// Initializes a new instance of the HttpOperationException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    public SharePointRestException(string message)
-        : this(message, null) { }
+        /// <summary>
+        /// Gets information about the associated HTTP response.
+        /// </summary>
+        public HttpResponseMessageWrapper Response { get; set; }
 
-    /// <summary>
-    /// Initializes a new instance of the HttpOperationException class.
-    /// </summary>
-    /// <param name="message">The exception message.</param>
-    /// <param name="innerException">Inner exception.</param>
-    public SharePointRestException(string message, System.Exception innerException)
-        : base(message, innerException) { }
+
+        /// <summary>
+        /// Initializes a new instance of the HttpOperationException class.
+        /// </summary>
+        public SharePointRestException()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the HttpOperationException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        public SharePointRestException(string message)
+            : this(message, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the HttpOperationException class.
+        /// </summary>
+        /// <param name="message">The exception message.</param>
+        /// <param name="innerException">Inner exception.</param>
+        public SharePointRestException(string message, System.Exception innerException)
+            : base(message, innerException)
+        {
+        }
+
+    }
 }

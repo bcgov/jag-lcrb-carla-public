@@ -411,12 +411,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var accountIdCleaned = accountId.ToUpper().Replace("-", "");
             var folderName = $"{accountName}_{accountIdCleaned}";
 
-            var fileDetailsList = _fileManagerClient.GetFileDetailsListInFolder(
-                _logger,
-                SharePointConstants.AccountFolderInternalName,
-                accountId,
-                folderName
-            );
+            var fileDetailsList = _fileManagerClient.GetFileDetailsListInFolder(_logger, AccountDocumentUrlTitle, accountId, folderName);
             if (fileDetailsList != null)
             {
                 exists = fileDetailsList.Count() > 0;
