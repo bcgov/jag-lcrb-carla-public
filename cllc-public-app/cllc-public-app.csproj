@@ -79,7 +79,6 @@
     <ProjectReference Include="..\cllc-interfaces\GeocoderClient\Geocoder.csproj" />
     <ProjectReference Include="..\cllc-interfaces\OrgBookClient\OrgBookClient.csproj" />
     <ProjectReference Include="..\cllc-interfaces\PDF\PDF.csproj" />
-    <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
   </ItemGroup>
 
   <ItemGroup>
