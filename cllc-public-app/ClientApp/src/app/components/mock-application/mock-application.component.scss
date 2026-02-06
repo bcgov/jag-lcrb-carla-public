@@ -1,0 +1,199 @@
+/* Wrapper sized for the side-panel area; stays nice on desktop too */
+.mock-wrap {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 8px 0 4px;
+}
+
+/* Small header to match your app’s look */
+.mock-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.mock-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+.muted {
+  color: #607d8b;
+}
+
+/* Section card (compact) */
+.sec {
+  background: #fff;
+  border: 1px solid #e6e9ec;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 10px 0;
+}
+.sec-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin: 6px 0 8px;
+}
+
+/* --- Rows & cols (no grid; compact gaps) --- */
+.rows {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 12px; /* row, column */
+}
+
+.col {
+  flex: 1 1 100%;
+  min-width: 220px;
+}
+.col-12 {
+  flex-basis: 100%;
+}
+.col-6 {
+  flex-basis: calc(50% - 12px);
+}
+.col-4 {
+  flex-basis: calc(33.333% - 12px);
+}
+.col-3 {
+  flex-basis: calc(25% - 12px);
+}
+
+@media (max-width: 1100px) {
+  .col-3 {
+    flex-basis: calc(33.333% - 12px);
+  }
+}
+@media (max-width: 900px) {
+  .col-4,
+  .col-3 {
+    flex-basis: calc(50% - 12px);
+  }
+}
+@media (max-width: 640px) {
+  .col,
+  .col-6,
+  .col-4,
+  .col-3 {
+    flex-basis: 100%;
+  }
+}
+
+/* Labels: always visible & left-aligned */
+.label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 2px 0 4px;
+  color: #000000;
+  white-space: normal;
+  line-height: 1.25;
+  text-align: left;
+}
+.req {
+  color: #c62828;
+}
+
+/* Angular Material density tweaks (compact) */
+.full {
+  width: 100%;
+}
+
+:host ::ng-deep .dense .mat-mdc-form-field-infix {
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+}
+:host ::ng-deep .dense .mdc-text-field--outlined {
+  height: 38px; /* small input height */
+}
+:host ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none; /* hide hints to save space */
+}
+
+/* --- Boolean block: label over radios --- */
+.field-boolean {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.radio-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+}
+:host ::ng-deep .mdc-radio {
+  transform: scale(0.92);
+}
+
+/* --- Upload pills --- */
+.uploads {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.upload-pill {
+  background: #fff;
+  border: 1px dashed #90a4ae;
+  border-radius: 8px;
+  padding: 10px 12px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+.upload-pill:hover {
+  background: #fafcff;
+}
+.ic {
+  font-size: 20px;
+  color: #455a64;
+}
+.pill-text {
+  flex: 1;
+  text-align: left;
+}
+.pill-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  background: #fdecea;
+  color: #b71c1c;
+}
+.pill-badge.ok {
+  background: #e6f4ea;
+  color: #1e7a34;
+}
+
+/* --- Hours of Sale (compact) --- */
+.hours {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.hours-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 4px 0;
+}
+.day {
+  width: 96px;
+  font-weight: 600;
+  font-size: 13px;
+}
+.time {
+  width: 120px;
+}
+.note {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #607d8b;
+}
+
+.ai-active-field {
+  outline: 2px solid #1a5a96;
+  background-color: #eef5ff;
+  border-radius: 4px;
+}
+

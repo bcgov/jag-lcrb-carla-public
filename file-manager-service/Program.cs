@@ -11,26 +11,29 @@ namespace Gov.Lclb.Cllb.Services.FileManager
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
-                .Build()
-                .Run();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args)
         {
-            return WebHost.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config.AddUserSecrets(Assembly.GetExecutingAssembly());
-                    config.AddEnvironmentVariables();
-                })
-                .ConfigureLogging((hostingContext, logging) =>
-                {
-                    logging.ClearProviders();
-                    logging.SetMinimumLevel(LogLevel.Debug);
-                    logging.AddDebug();
-                    logging.AddEventSourceLogger();
-                })
+            return WebHost
+                .CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration(
+                    (hostingContext, config) =>
+                    {
+                        config.AddUserSecrets(Assembly.GetExecutingAssembly());
+                        config.AddEnvironmentVariables();
+                    }
+                )
+                .ConfigureLogging(
+                    (hostingContext, logging) =>
+                    {
+                        logging.ClearProviders();
+                        logging.SetMinimumLevel(LogLevel.Debug);
+                        logging.AddDebug();
+                        logging.AddEventSourceLogger();
+                    }
+                )
                 .UseSerilog()
                 .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>()

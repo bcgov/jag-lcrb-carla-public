@@ -1,13 +1,17 @@
-# File Manager Service #
-------------
+# File Manager Service
 
-The purpose of the file manager service is to act as an interface to SharePoint.  
+The purpose of the file manager service is to act as an interface to SharePoint.
 
-## Development ##
+# gRPC
 
-File manager is a .NET 5.0 application.  As such you can use an IDE such as Visual Studio or VS Code to edit the files.  
+The file manager service exposes a gRPC API.
 
-## Installation ##
+See `Services/FileManagerService.cs`.
 
-Templates for OpenShift deployment are in the `openshift` directory 
+# HTTP
 
+The file manager service exposes an HTTP API.
+
+See `Controllers/FileManagerController.cs`.
+
+Important: The HTTP API only exists as a wrapper around the gRPC API, which is the source of truth. This was added to make it easier for external systems to talk to the file manager service, if they didn't or couldn't make native gRPC calls.
