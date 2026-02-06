@@ -172,7 +172,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             return samlRTString;
         }
 
-        public async static Task<string> GetStsSamlToken(string spSiteUrl, string username, string password, string stsUrl)
+        public async static Task<string> GetStsSamlToken(string spSiteUrl, string username, string password, string stsUrl, HttpClient client)
         {
             // Makes a request that conforms with the WS-Trust standard to 
             // the Security Token Service to get a SAML security token back 
@@ -189,7 +189,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (saml11RT != null)
             {
-                var client = new HttpClient();
                 var content = new StringContent(saml11RT, System.Text.Encoding.UTF8, "application/soap+xml");
                 var result = await client.PostAsync(stsUrl, content);
                 response = await result.Content.ReadAsStringAsync();
