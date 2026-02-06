@@ -3,7 +3,7 @@
 
   <p>Please select the type of application you are submitting:</p>
   <app-field [showChevrons]="false" [valid]="!licenceSubCatControl.touched || licenceSubCatControl.valid"
-             errorMessage="Please select a licence type" [isFullWidth]="true">
+    errorMessage="Please select a licence type" [isFullWidth]="true">
     <mat-radio-group formControlName="licenceSubCategory">
       <mat-radio-button class="mr-5" [value]="'Winery'" (change)="categoryChange()">Winery</mat-radio-button>
       <mat-radio-button class="mr-5" [value]="'Distillery'" (change)="categoryChange()">Distillery</mat-radio-button>
@@ -17,8 +17,10 @@
     <div *ngIf="isDistillery()">
       <hr>
       <p>
-        In order to maintain a distillery licence, and as a term and condition of the licence, you must maintain your production equipment and continue to manufacture on-site at your establishment each year.
-        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor Control and Licensing Regulation, and relevant Terms & Conditions handbook.
+        In order to maintain a distillery licence, and as a term and condition of the licence, you must maintain your
+        production equipment and continue to manufacture on-site at your establishment each year.
+        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor
+        Control and Licensing Regulation, and relevant Terms & Conditions handbook.
         As a part of this application, you are required to confirm:
       </p>
       <section>
@@ -26,10 +28,12 @@
           You have read and understand the above term and condition.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoOwnRent">
-          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product on-site.
+          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product
+          on-site.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoProductionEquipment">
-          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior to final licensing.
+          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior
+          to final licensing.
         </mat-checkbox>
       </section>
 
@@ -38,15 +42,20 @@
     <div *ngIf="isCopacker()">
       <hr>
       <p>
-        A co-packer is a liquor packaging facility that is contracted by a manufacturer to bottle or otherwise put liquor into containers intended for sale to the public or to other licensees.
-        The licence for co-packers authorizes manufacturing activities limited to the packaging, bottling, blending, and flavouring of liquor on behalf of a licensed winery, brewery, or distillery.
-        In a co-packing arrangement, the product is always owned by the manufacturer (not the co-packer) and must be immediately returned to the manufacturer once the packaging is complete.
+        A co-packer is a liquor packaging facility that is contracted by a manufacturer to bottle or otherwise put
+        liquor into containers intended for sale to the public or to other licensees.
+        The licence for co-packers authorizes manufacturing activities limited to the packaging, bottling, blending, and
+        flavouring of liquor on behalf of a licensed winery, brewery, or distillery.
+        In a co-packing arrangement, the product is always owned by the manufacturer (not the co-packer) and must be
+        immediately returned to the manufacturer once the packaging is complete.
         The licence for co-packers does not authorize the fermenting, distilling or direct sale of liquor.
-        It is the responsibility of both the manufacturer (winery, brewery or distillery) and the co-packer to ensure that the other party is licensed by the Liquor and Cannabis Regulation Branch.
+        It is the responsibility of both the manufacturer (winery, brewery or distillery) and the co-packer to ensure
+        that the other party is licensed by the Liquor and Cannabis Regulation Branch.
       </p>
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
-          As a part of this application, you are required to confirm you have read and understand the above co-packer license.
+          As a part of this application, you are required to confirm you have read and understand the above co-packer
+          license.
         </mat-checkbox>
       </section>
     </div>
@@ -54,33 +63,25 @@
     <div *ngIf="isWinery()">
       <hr>
       <p>
-        Winery applicants are required to show intent to produce at least 4,500 litres of their own wine on-site at their establishment each year. Production for this purpose is defined as ‘fermentation’, and at least one of the following winemaking steps, must take place at the establishment:
+        In order to maintain a winery licence, and as a term and condition of the licence, you must maintain your
+        production equipment and continue to manufacture on-site at your establishment each year. This and other
+        regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor Control and
+        Licensing Regulation, and relevant Terms & Conditions handbook. As a part of this application, you are required
+        to confirm:
       </p>
-      <ul>
-        <li>Blending of ingredients. </li>
-        <li>Crushing of ingredients.</li>
-        <li>Filtering of ingredients.</li>
-        <li>Aging wine for at least three months.</li>
-        <li>Secondary fermentation or carbonation (sparkling). </li>
-        <li>Packaging.</li>
-      </ul>
-      <p>
-        At a minimum, applicants must have the equipment to ferment 4,500 litres each year, as well as equipment sufficient to undertake at least one of other winemaking step listed above.
-        This and other regulatory requirements are established in the Liquor Control and Licensing Act, Liquor Control and Licensing Regulation, and relevant Terms & Conditions handbook.
-        As a part of this application, you are required to confirm:
-      </p>
+
+
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
           You have read and understand the above term and condition.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoOwnRent">
-          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product on-site.
-        </mat-checkbox>
-        <mat-checkbox formControlName="mfrSupInfoIntendProduce">
-          You intend to produce at least 4,500 litres of your own wine on-site each year, not including wine that has been produced elsewhere, and that will be used in the manufacturing process.
+          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product
+          on-site.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoProductionEquipment">
-          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior to final licensing.
+          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior
+          to final licensing.
         </mat-checkbox>
       </section>
     </div>
@@ -90,8 +91,10 @@
     <div *ngIf="isBrewery()">
       <hr>
       <p>
-        In order to maintain a brewery licence, and as a term and condition of the licence, you must maintain your production equipment and continue to manufacture on-site at your establishment each year.
-        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor Control and Licensing Regulation, and relevant Terms & Conditions handbook.
+        In order to maintain a brewery licence, and as a term and condition of the licence, you must maintain your
+        production equipment and continue to manufacture on-site at your establishment each year.
+        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor
+        Control and Licensing Regulation, and relevant Terms & Conditions handbook.
         As a part of this application, you are required to confirm:
       </p>
       <section>
@@ -99,16 +102,18 @@
           You have read and understand the above term and condition.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoOwnRent">
-          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product on-site.
+          You own and/or will rent, with at least a one-year lease, the equipment necessary to produce your product
+          on-site.
         </mat-checkbox>
         <mat-checkbox formControlName="mfrSupInfoProductionEquipment">
-          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior to final licensing.
+          The production equipment will be in the proposed manufacturing facility at the time of final inspection/prior
+          to final licensing.
         </mat-checkbox>
       </section>
       <hr>
       <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
-                 [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
-                 errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
+        [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
+        errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
         <mat-radio-group formControlName="mfgBrewPubOnSite">
           <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
           <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
@@ -118,8 +123,8 @@
       <section *ngIf="isBrewPub()">
 
         <app-field label="Will product be piped in from the brewery to serve on tap?"
-                   [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
-                   errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
+          [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
+          errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
           <mat-radio-group formControlName="mfgPipedInProduct">
             <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
             <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
@@ -130,12 +135,10 @@
 
     <div *ngIf="application?.applicationType.name == 'Manufacturer' && !isCopacker()">
       <hr><br>
-      <app-field label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
-        <textarea style="width: 800px;" class="form-control"
-                  formControlName="productsListAndDescription"></textarea>
+      <app-field
+        label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
+        <textarea style="width: 800px;" class="form-control" formControlName="productsListAndDescription"></textarea>
       </app-field>
     </div>
   </div>
 </div>
-
-
