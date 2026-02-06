@@ -14,24 +14,22 @@ set -e
 shopt -s dotglob
 
 if [ -n "${DOTNET_VERBOSITY}" ]; then
-  echo "---> Environment:"
+  echo "[assemble] ---> Environment:"
   env | sort
   VERBOSITY_OPTION="-v ${DOTNET_VERBOSITY}"
 else
   VERBOSITY_OPTION=""
 fi
 
-echo "---> Installing application source..."
+echo "[assemble] ---> Installing application source..."
 if [ -d /tmp/src ]; then
   mv /tmp/src/* ./
 fi
 
-
-if [ ! -z $NPM_MIRROR ]; then
-  echo "---> Setting npm mirror"
-  npm config set registry $NPM_MIRROR
+if [ -n "$NPM_MIRROR" ]; then
+  echo "[assemble] Setting npm mirror to $NPM_MIRROR"
+  npm config set registry "$NPM_MIRROR" || echo "[assemble] WARNING: npm mirror failed, continuing"
 fi
-
 
 # edit version info files.
 sed -i 's^<!-- UI_GIT_REF -->^'"$OPENSHIFT_BUILD_REFERENCE"'^g' src/app/components/version-info/version-info-dialog.component.html
@@ -39,21 +37,39 @@ sed -i 's^<!-- UI_GIT_COMMIT -->^'"$OPENSHIFT_BUILD_COMMIT"'^g' src/app/componen
 sed -i 's^<!-- UI_GIT_REPO -->^'"$OPENSHIFT_BUILD_SOURCE"'^g' src/app/components/version-info/version-info-dialog.component.html
 sed -i 's^<!-- UI_BUILD_DATE -->^'"$(date)"'^g' src/app/components/version-info/version-info-dialog.component.html
 
-
 if [ -n "${PHASE1}" ]; then
+  echo "[assemble] PHASE1: installing Node dependencies..."
 
-# build the application.
-npm install @angular/cli@13.3.1
-npm install
+  if [ -n "${USE_NPM_CI}" ] && [ -f package-lock.json ]; then
+    echo "[assemble] PHASE1: running npm ci (USE_NPM_CI is set and package-lock.json exists)."
+    npm ci
+  else
+    echo "[assemble] PHASE1: running npm install."
+    npm install
+  fi
+
+  echo "[assemble] PHASE1: completed."
 fi
 
 if [ -n "${PHASE2}" ]; then
-mkdir /opt/app-root/dist
-mkdir /opt/app-root/dist/lcrb
+  echo "[assemble] PHASE2: building Angular app..."
 
-npm run build -- --configuration production --base-href /lcrb/ --outputPath=/opt/app-root/src/dist/lcrb
-# fix permissions
-fix-permissions /opt/app-root/src/dist
+  mkdir /opt/app-root/dist
+
+  # Get the base href value from the environment variable or use a default
+  BASE_HREF_VALUE="${BASE_HREF:-/lcrb}"  # Fallback to '/lcrb' if not set
+  CLEAN_BASE_HREF_VALUE="${BASE_HREF_VALUE#/}"  # Remove leading slash for directory name
+
+  echo "[assemble] PHASE2: Creating output directory /opt/app-root/dist/$CLEAN_BASE_HREF_VALUE"
+  # Create output directory
+  mkdir -p "/opt/app-root/dist/$CLEAN_BASE_HREF_VALUE"
+
+  echo "[assemble] PHASE2: Building Angular app with base href: $BASE_HREF_VALUE"
+  # Run Angular build
+  npm run build -- --configuration production --base-href "$BASE_HREF_VALUE/" --outputPath="/opt/app-root/src/dist/$CLEAN_BASE_HREF_VALUE"
+
+  # fix permissions
+  fix-permissions /opt/app-root/src/dist
+
+  echo "[assemble] PHASE2: completed."
 fi
-
-

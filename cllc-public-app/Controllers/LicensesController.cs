@@ -1278,7 +1278,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// GET a licence as PDF.
         [AllowAnonymous]
         [HttpGet("{licenceId}/pdf/{filename}")]
-
         public async Task<IActionResult> GetLicencePDF(string licenceId, string filename)
         {
 
