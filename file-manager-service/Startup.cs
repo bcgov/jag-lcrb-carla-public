@@ -61,6 +61,17 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             services.AddAuthorization();
 
+            // Add CORS to allow js-based calls from Dynamics
+            services.AddCors(o =>
+                o.AddPolicy(
+                    "AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    }
+                )
+            );
+
             services.AddGrpc(options =>
             {
                 options.EnableDetailedErrors = true;
@@ -81,6 +92,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("AllowAll");
 
             app.UseRouting();
 
