@@ -361,21 +361,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return fileDetailsList;
         }
 
-        // public string RemoveInvalidCharacters(string filename)
-        // {
-        //     var osInvalidChars = new string(System.IO.Path.GetInvalidFileNameChars());
-        //     osInvalidChars += "~#%&*()[]{}:<>?/\\|\""; // add additional characters that do not work with SharePoint, including : which is valid on Linux but not in SharePoint
-
-        //     // Build character class by escaping each character individually for use inside []
-        //     var escapedChars = string.Join("", osInvalidChars.Select(c => Regex.Escape(c.ToString())));
-        //     string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", escapedChars);
-
-        //     // Get the validated file name string
-        //     string result = Regex.Replace(filename, invalidRegStr, "_");
-
-        //     return result;
-        // }
-
         public string RemoveInvalidCharacters(string filename)
         {
             if (string.IsNullOrEmpty(filename))
@@ -385,7 +370,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // Get OS invalid chars and add SharePoint-specific invalid characters
             var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
-            var additionalInvalidChars = new char[] { '~', '#', '%', '&', '*', '(', ')', '[', ']', '{', '}', ':', '<', '>', '?', '/', '\\', '|', '"' };
+            // Add additional characters that do not work with SharePoint
+            var additionalInvalidChars = new char[] { '~', '#', '%', '*', '[', ']', '{', '}', ':', '<', '>', '?', '/', '\\', '|', '"' };
 
             // Combine all invalid characters
             var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
