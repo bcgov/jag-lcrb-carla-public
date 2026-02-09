@@ -229,6 +229,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
 
   addresses: Observable<Address[]>;
 
+  // If true, enable preventative save call on component deactivate, if form has unsaved changes
+  saveOnDeactivate: boolean = true;
+
   get isOpenedByLGForApproval(): boolean {
     let openedByLG = false;
     if (
@@ -794,8 +797,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
    */
   private prune<
     T extends {
-      sections?: Array<{ id: string; name?: string; [k: string]: any }>;
-      tabs?: Array<{ sections: Array<{ id: string; name?: string; [k: string]: any }> }>;
+      sections?: Array<{ id: string; name?: string;[k: string]: any }>;
+      tabs?: Array<{ sections: Array<{ id: string; name?: string;[k: string]: any }> }>;
     }
   >(formRef: T, type: string): T {
     const SPLITTER = '____';
@@ -1251,19 +1254,30 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    const connectionsDidntChang = !(
-      this.connectionToNonMedicalStores && this.connectionToNonMedicalStores.formHasChanged()
-    );
-    const formDidntChange = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
-    if (connectionsDidntChang && formDidntChange) {
-      return of(true);
-    } else {
-      const subj = new Subject<boolean>();
-      this.busy = this.save(true).subscribe(([res, app]) => {
-        subj.next(res);
-      });
-      return subj;
+    if (this.saveOnDeactivate) {
+      // Check if connection form has changes
+      const connectionsUnchanged = !(
+        this.connectionToNonMedicalStores && this.connectionToNonMedicalStores.formHasChanged()
+      );
+
+      // Compare saved form data with current form data, to see if there are changes
+      const fromDataUnchanged = JSON.stringify(this.savedFormData) === JSON.stringify(this.form.value);
+
+      if (!connectionsUnchanged || !fromDataUnchanged) {
+        // If there are changes, save the form data
+        const subj = new Subject<boolean>();
+        this.busy = this.save(true).subscribe(([res, app]) => {
+          subj.next(res);
+        });
+        return subj;
+      }
     }
+
+    // Reset flag in case deactivation is cancelled
+    this.saveOnDeactivate = true;
+
+    // No changes, allow deactivation
+    return of(true);
   }
 
   checkPossibleProblematicWords() {
@@ -1454,6 +1468,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .toPromise()
       .then(([saveSucceeded, app]) => {
         if (saveSucceeded) {
+          this.saveOnDeactivate = false; // prevent needless double save on deactivate
           this.router.navigateByUrl('/dashboard');
         } else {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
@@ -1506,8 +1521,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       //LCSD-6495 if an application is not free, then it should not be a free endorsement.
       this.busy = this.save(
         this.application.applicationType != undefined &&
-          !this.application.applicationType.isFree &&
-          !this.isFreeEndorsement(),
+        !this.application.applicationType.isFree &&
+        !this.isFreeEndorsement(),
         <Application>{ invoiceTrigger: 1 }
       ) // trigger invoice generation when saving
         .pipe(takeWhile(() => this.componentActive))
@@ -1551,6 +1566,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
                     duration: 2500,
                     panelClass: ['green-snackbar']
                   });
+                  this.saveOnDeactivate = false; // prevent needless double save on deactivate
                   this.router.navigateByUrl('/dashboard');
                 }
               });
@@ -1604,10 +1620,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
         }),
         this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
       )
-        .pipe(takeWhile(() => this.componentActive))
         .pipe(
           catchError(() => {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+            this.disableSubmitForLGINApproval = false;
             return of(false);
           })
         )
@@ -1622,12 +1638,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
             return of(true);
           })
         )
-        .subscribe((res) => {
+        .pipe(takeWhile(() => this.componentActive))
+        .subscribe(() => {
           this.saveComplete.emit(true);
           this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', {
             duration: 2500,
             panelClass: ['green-snackbar']
           });
+          this.saveOnDeactivate = false; // prevent needless double save on deactivate
           this.router.navigateByUrl('/dashboard');
         });
     } else {
@@ -1649,10 +1667,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }),
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     )
-      .pipe(takeWhile(() => this.componentActive))
       .pipe(
         catchError(() => {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          this.disableIncomplete = false;
           return of(false);
         })
       )
@@ -1667,12 +1685,14 @@ export class ApplicationComponent extends FormBase implements OnInit {
           return of(true);
         })
       )
-      .subscribe((res) => {
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe(() => {
         this.saveComplete.emit(true);
         this.snackBar.open('Application Submitted to the Branch for Review', 'Success', {
           duration: 2500,
           panelClass: ['green-snackbar']
         });
+        this.saveOnDeactivate = false; // prevent needless double save on deactivate
         this.router.navigateByUrl('/dashboard');
       });
   }
@@ -1736,6 +1756,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
   private canVisitApplicationForm(): boolean {
     const isAllowed: boolean =
       this?.account.businessType === 'LocalGovernment' ||
+      this?.account.businessType === 'IndigenousNation' ||
       this?.application?.applicationStatus === ApplicationStatuses.Intake ||
       this?.application?.applicationStatus === ApplicationStatuses.InProgress ||
       // 2024-04-24 waynezen: added
@@ -1879,7 +1900,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
       valid = false;
       this.validationMessages.push('At least one letter of intent is required.');
     }
-
 
     if (
       this.application.applicationType.showPropertyDetails &&
@@ -2031,7 +2051,6 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.form.get('licenceSubCategory').value === 'Winery' &&
         (this.form.get('mfrSupInfoReadUnderstand').value != true ||
           this.form.get('mfrSupInfoOwnRent').value != true ||
-          this.form.get('mfrSupInfoIntendProduce').value != true ||
           this.form.get('mfrSupInfoProductionEquipment').value != true)
       ) {
         valid = false;
