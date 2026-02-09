@@ -361,24 +361,83 @@ namespace Gov.Lclb.Cllb.Interfaces
             return fileDetailsList;
         }
 
+        // public string RemoveInvalidCharacters(string filename)
+        // {
+        //     var osInvalidChars = new string(System.IO.Path.GetInvalidFileNameChars());
+        //     osInvalidChars += "~#%&*()[]{}:<>?/\\|\""; // add additional characters that do not work with SharePoint, including : which is valid on Linux but not in SharePoint
+
+        //     // Build character class by escaping each character individually for use inside []
+        //     var escapedChars = string.Join("", osInvalidChars.Select(c => Regex.Escape(c.ToString())));
+        //     string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", escapedChars);
+
+        //     // Get the validated file name string
+        //     string result = Regex.Replace(filename, invalidRegStr, "_");
+
+        //     return result;
+        // }
+
         public string RemoveInvalidCharacters(string filename)
         {
-            var osInvalidChars = new string(System.IO.Path.GetInvalidFileNameChars());
-            osInvalidChars += "~#%&*()[]{}"; // add additional characters that do not work with SharePoint
-            string invalidChars = System.Text.RegularExpressions.Regex.Escape(osInvalidChars);
-            string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
+            if (string.IsNullOrEmpty(filename))
+                return filename;
 
-            // Get the validated file name string
-            string result = Regex.Replace(filename, invalidRegStr, "_");
+            var original = filename;
 
-            return result;
+            // Get OS invalid chars and add SharePoint-specific invalid characters
+            var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
+            var additionalInvalidChars = new char[] { '~', '#', '%', '&', '*', '(', ')', '[', ']', '{', '}', ':', '<', '>', '?', '/', '\\', '|', '"' };
+
+            // Combine all invalid characters
+            var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
+
+            // Replace each invalid character with underscore
+            var result = new StringBuilder(filename.Length);
+            foreach (char c in filename)
+            {
+                if (allInvalidChars.Contains(c))
+                {
+                    result.Append('_');
+                }
+                else
+                {
+                    result.Append(c);
+                }
+            }
+
+            // Handle trailing dots (not allowed in SharePoint)
+            var resultString = result.ToString().TrimEnd('.');
+
+            // Log if any changes were made
+            if (original != resultString)
+            {
+                Console.WriteLine($"RemoveInvalidCharacters: '{original}' -> '{resultString}'");
+            }
+
+            return resultString;
         }
 
-        public string FixFoldername(string foldername)
+        /// <summary>
+        /// Fixes a folder name or folder path by removing invalid characters.
+        /// If the input contains "/" path separators, each segment is fixed individually
+        /// to preserve the path structure.
+        /// </summary>
+        /// <param name="folderNameOrPath">A single folder name or a path like "folder1/folder2"</param>
+        /// <returns>The sanitized folder name or path</returns>
+        public string FixFoldername(string folderNameOrPath)
         {
-            string result = RemoveInvalidCharacters(foldername);
+            if (string.IsNullOrEmpty(folderNameOrPath))
+                return folderNameOrPath;
 
-            return result;
+            // If it contains path separators, fix each segment individually
+            if (folderNameOrPath.Contains("/"))
+            {
+                var segments = folderNameOrPath.Split('/');
+                var fixedSegments = segments.Select(s => RemoveInvalidCharacters(s)).ToArray();
+                return string.Join("/", fixedSegments);
+            }
+            
+            // Single folder name
+            return RemoveInvalidCharacters(folderNameOrPath);
         }
 
         public string FixFilename(string filename, int maxLength = 128)
@@ -745,6 +804,144 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+
+        public class FolderItem
+        {
+            public string Name { get; set; }
+            public string ServerRelativeUrl { get; set; }
+        }
+
+        public async Task<List<FolderItem>> GetFoldersInDocumentLibrary(string listTitle)
+        {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
+            List<FolderItem> folderList = new List<FolderItem>();
+            string title = Uri.EscapeUriString(listTitle);
+            // Get folders from the rootFolder to exclude system folders
+            string query = $"web/lists/GetByTitle('{title}')/rootFolder/folders";
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + query),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
+
+            // make the request.
+            var response = await _Client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    JObject responseObject = JObject.Parse(jsonString);
+                    List<JToken> responseResults = responseObject["value"].Children().ToList();
+
+                    foreach (JToken responseResult in responseResults)
+                    {
+                        FolderItem folderItem = responseResult.ToObject<FolderItem>();
+                        
+                        // Filter out system folders (Forms, etc.)
+                        if (!folderItem.Name.Equals("Forms", StringComparison.OrdinalIgnoreCase))
+                        {
+                            folderList.Add(folderItem);
+                        }
+                    }
+                }
+                catch (JsonReaderException jre)
+                {
+                    throw jre;
+                }
+            }
+
+            return folderList;
+        }
+
+        /// <summary>
+        /// Search for folders in a document library by name (server-side filtering for performance)
+        /// </summary>
+        /// <param name="listTitle">The document library title</param>
+        /// <param name="searchString">The string to search for in folder names (case-sensitive)</param>
+        /// <param name="searchGuid">Optional GUID to search for (will be normalized: dashes removed, uppercase)</param>
+        /// <returns>List of matching folders</returns>
+        public async Task<List<FolderItem>> SearchFoldersInDocumentLibrary(string listTitle, string searchString = null, string searchGuid = null)
+        {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
+            // Normalize searchGuid if provided: remove dashes and convert to uppercase
+            if (!string.IsNullOrEmpty(searchGuid))
+            {
+                searchString = searchGuid.Replace("-", "").ToUpper();
+            }
+
+            if (string.IsNullOrEmpty(searchString))
+            {
+                // Return empty list if no search criteria provided
+                return new List<FolderItem>();
+            }
+
+            List<FolderItem> folderList = new List<FolderItem>();
+            string title = Uri.EscapeUriString(listTitle);
+            
+            // Use OData filter to search on server side for better performance with large folder counts
+            // substringof is used for SharePoint compatibility (older OData syntax)
+            // Case-sensitive search by default (GUIDs are uppercase in folder names)
+            string escapedSearch = searchString.Replace("'", "''"); // Escape single quotes for OData
+            string filter = $"$filter=substringof('{escapedSearch}',Name) and Name ne 'Forms'";
+            string query = $"web/lists/GetByTitle('{title}')/rootFolder/folders?{filter}";
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + query),
+                Headers = {
+                    { "Accept", "application/json" }
+                }
+            };
+
+            // make the request.
+            var response = await _Client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    JObject responseObject = JObject.Parse(jsonString);
+                    List<JToken> responseResults = responseObject["value"].Children().ToList();
+
+                    foreach (JToken responseResult in responseResults)
+                    {
+                        FolderItem folderItem = responseResult.ToObject<FolderItem>();
+                        folderList.Add(folderItem);
+                    }
+                }
+                catch (JsonReaderException jre)
+                {
+                    throw jre;
+                }
+            }
+            else
+            {
+                throw new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", response.StatusCode)
+                );
+            }
+
+            return folderList;
+        }
+
 
         public async Task<string> AddFile(String folderName, String fileName, Stream fileData, string contentType)
         {

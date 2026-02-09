@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Services.FileManager;
 using Microsoft.AspNetCore.Authorization;
@@ -142,6 +144,83 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     fileName = result.FileName,
+                    errorDetail = result.ErrorDetail
+                }
+            );
+        }
+
+        [HttpPost("ensure-folder-path")]
+        public async Task<IActionResult> EnsureFolderPath([FromBody] EnsureFolderPathDto dto)
+        {
+            var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+
+            var request = new EnsureFolderPathRequest { EntityName = dto.EntityName };
+
+            _logger.LogInformation(
+                $"EnsureFolderPath Controller: Received request for entity {dto.EntityName} with {dto.FolderPath?.Count ?? 0} segments"
+            );
+
+            // Add folder segments
+            if (dto.FolderPath != null)
+            {
+                foreach (var segment in dto.FolderPath)
+                {
+                    _logger.LogInformation(
+                        $"EnsureFolderPath Controller: Segment - FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}', FolderName: '{segment.FolderName}'"
+                    );
+
+                    request.FolderPath.Add(
+                        new FolderSegment
+                        {
+                            FolderNameSegment = segment.FolderNameSegment ?? "",
+                            FolderGuidSegment = segment.FolderGuidSegment ?? "",
+                            FolderName = segment.FolderName ?? ""
+                        }
+                    );
+                }
+            }
+
+            var result = await service.EnsureFolderPath(request, null);
+
+            return Ok(
+                new
+                {
+                    resultStatus = result.ResultStatus.ToString(),
+                    serverRelativeUrl = result.ServerRelativeUrl,
+                    errorDetail = result.ErrorDetail
+                }
+            );
+        }
+
+        // DTO for JSON deserialization
+        public class EnsureFolderPathDto
+        {
+            public string EntityName { get; set; }
+            public List<FolderSegmentDto> FolderPath { get; set; }
+        }
+
+        public class FolderSegmentDto
+        {
+            public string FolderNameSegment { get; set; }
+            public string FolderGuidSegment { get; set; }
+            public string FolderName { get; set; }
+        }
+
+        [HttpPost("find-folder")]
+        public async Task<IActionResult> FindFolder([FromBody] FindFolderRequest request)
+        {
+            var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+            var result = await service.FindFolder(request, null);
+
+            return Ok(
+                new
+                {
+                    resultStatus = result.ResultStatus.ToString(),
+                    folders = result.Folders.Select(f => new
+                    {
+                        name = f.Name,
+                        serverRelativeUrl = f.ServerRelativeUrl
+                    }),
                     errorDetail = result.ErrorDetail
                 }
             );

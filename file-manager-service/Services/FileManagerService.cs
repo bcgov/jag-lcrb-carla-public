@@ -171,21 +171,26 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     listTitle = SharePointFileManager.DefaultDocumentListTitle;
                     break;
                 case "application":
+                case "adoxio_application":
                     listTitle = SharePointFileManager.ApplicationDocumentListTitle;
                     break;
                 case "contact":
                     listTitle = SharePointFileManager.ContactDocumentListTitle;
                     break;
                 case "worker":
+                case "adoxio_worker":
                     listTitle = SharePointFileManager.WorkerDocumentListTitle;
                     break;
                 case "event":
+                case "adoxio_event":
                     listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
                 case "federal_report":
+                case "adoxio_federalreportexport":
                     listTitle = SharePointFileManager.FederalReportListTitle;
                     break;
                 case "licence":
+                case "adoxio_licences":
                     listTitle = SharePointFileManager.LicenceDocumentListTitle;
                     break;
                 default:
@@ -205,21 +210,26 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     listTitle = SharePointFileManager.DefaultDocumentUrlTitle;
                     break;
                 case "application":
+                case "adoxio_application":
                     listTitle = "adoxio_application";
                     break;
                 case "contact":
                     listTitle = SharePointFileManager.ContactDocumentListTitle;
                     break;
                 case "worker":
+                case "adoxio_worker":
                     listTitle = "adoxio_worker";
                     break;
                 case "event":
+                case "adoxio_event":
                     listTitle = SharePointFileManager.EventDocumentListTitle;
                     break;
                 case "federal_report":
+                case "adoxio_federalreportexport":
                     listTitle = SharePointFileManager.FederalReportListTitle;
                     break;
                 case "licence":
+                case "adoxio_licences":
                     listTitle = SharePointFileManager.LicenceDocumentUrlTitle;
                     break;
                 default:
@@ -341,13 +351,32 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             var _sharePointFileManager = new SharePointFileManager(_configuration);
 
-            CreateDocumentLibraryIfMissing(
-                GetDocumentListTitle(request.EntityName),
-                GetDocumentTemplateUrlPart(request.EntityName)
-            );
+            var listTitle = GetDocumentListTitle(request.EntityName);
+            CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
 
             try
             {
+                // Create intermediate folders by calling EnsureFolderPath if the path contains multiple segments
+                if (!string.IsNullOrEmpty(request.FolderName) && request.FolderName.Contains("/"))
+                {
+                    var ensureRequest = new EnsureFolderPathRequest { EntityName = request.EntityName };
+
+                    // Split the folder path and create segments
+                    var pathSegments = request.FolderName.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    foreach (var segment in pathSegments)
+                    {
+                        ensureRequest.FolderPath.Add(new FolderSegment { FolderName = segment });
+                    }
+
+                    // Call EnsureFolderPath to create all intermediate folders
+                    var ensureResult = EnsureFolderPath(ensureRequest, context).GetAwaiter().GetResult();
+                    if (ensureResult.ResultStatus != ResultStatus.Success)
+                    {
+                        throw new Exception($"Failed to ensure folder path: {ensureResult.ErrorDetail}");
+                    }
+                }
+
+                // Upload the file (AddFile will handle single-level folder creation if needed)
                 var fileName = _sharePointFileManager
                     .AddFile(
                         GetDocumentTemplateUrlPart(request.EntityName),
@@ -527,6 +556,270 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ErrorDetail =
                     $"GetTruncatedFilename - ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
                 Log.Error(ex, result.ErrorDetail);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<EnsureFolderPathReply> EnsureFolderPath(
+            EnsureFolderPathRequest request,
+            ServerCallContext context
+        )
+        {
+            var result = new EnsureFolderPathReply();
+
+            if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
+            {
+                result.ResultStatus = ResultStatus.Success;
+
+                // Build path from folderPath segments
+                if (request.FolderPath != null && request.FolderPath.Count > 0)
+                {
+                    var pathSegments = string.Join(
+                        "/",
+                        request.FolderPath.Select(s =>
+                        {
+                            if (!string.IsNullOrEmpty(s.FolderName))
+                            {
+                                return s.FolderName;
+                            }
+                            else
+                            {
+                                // Convert GUID to uppercase and remove dashes
+                                var guidSegment = s.FolderGuidSegment ?? "";
+                                if (!string.IsNullOrEmpty(guidSegment))
+                                {
+                                    guidSegment = guidSegment.Replace("-", "").ToUpper();
+                                }
+                                return $"{s.FolderNameSegment}_{guidSegment}";
+                            }
+                        })
+                    );
+                    result.ServerRelativeUrl = $"/{request.EntityName}/{pathSegments}";
+                }
+                else
+                {
+                    result.ServerRelativeUrl = $"/{request.EntityName}";
+                }
+
+                return Task.FromResult(result);
+            }
+
+            try
+            {
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+                var listTitle = GetDocumentListTitle(request.EntityName);
+                var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+
+                Log.Information(
+                    $"EnsureFolderPath: Building folder path with {request.FolderPath?.Count ?? 0} segments"
+                );
+
+                // Create document library if missing
+                CreateDocumentLibraryIfMissing(listTitle, documentTemplateUrlPart);
+
+                string currentPath = "";
+
+                // Build and create nested folder structure
+                if (request.FolderPath != null && request.FolderPath.Count > 0)
+                {
+                    for (int i = 0; i < request.FolderPath.Count; i++)
+                    {
+                        var segment = request.FolderPath[i];
+
+                        Log.Information(
+                            $"EnsureFolderPath: Segment {i} - FolderName: '{segment.FolderName}', FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}'"
+                        );
+
+                        // Build folder name - either use complete folderName or combine name and guid segments
+                        string folderName;
+                        if (!string.IsNullOrEmpty(segment.FolderName))
+                        {
+                            // Use the complete folder name provided and sanitize it
+                            folderName = segment.FolderName;
+                            Log.Information($"EnsureFolderPath: Using complete folderName: '{folderName}'");
+                        }
+                        else
+                        {
+                            // Sanitize individual segments before combining them
+                            var sanitizedNameSegment = segment.FolderNameSegment ?? "";
+                            var sanitizedGuidSegment = segment.FolderGuidSegment ?? "";
+
+                            // Convert GUID to uppercase and remove dashes (consistent with other file operations)
+                            if (!string.IsNullOrEmpty(sanitizedGuidSegment))
+                            {
+                                sanitizedGuidSegment = sanitizedGuidSegment.Replace("-", "").ToUpper();
+                            }
+
+                            // Build folder name by combining sanitized name segment and guid segment
+                            folderName = $"{sanitizedNameSegment}_{sanitizedGuidSegment}";
+                            Log.Information($"EnsureFolderPath: Built from segments: '{folderName}'");
+                        }
+
+                        // Apply SharePoint filename sanitization and truncation BEFORE building cumulative path
+                        var originalFolderName = folderName;
+                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
+                        Log.Information(
+                            $"EnsureFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
+                        );
+
+                        // Build the cumulative path with the sanitized folder name
+                        if (i == 0)
+                        {
+                            currentPath = folderName;
+                        }
+                        else
+                        {
+                            currentPath += "/" + folderName;
+                        }
+
+                        Log.Information($"EnsureFolderPath: Current cumulative path: '{currentPath}'");
+
+                        var logSegmentPath = WordSanitizer.Sanitize(currentPath);
+                        Log.Information($"EnsureFolderPath: Processing folder segment {i + 1}: {logSegmentPath}");
+
+                        // Check if this level exists, create if not
+                        var folderExists = false;
+                        try
+                        {
+                            var folder = _sharePointFileManager
+                                .GetFolder(documentTemplateUrlPart, currentPath)
+                                .GetAwaiter()
+                                .GetResult();
+                            if (folder != null)
+                            {
+                                folderExists = true;
+                                Log.Information($"EnsureFolderPath: Folder exists: {logSegmentPath}");
+                            }
+                        }
+                        catch (SharePointRestException)
+                        {
+                            folderExists = false;
+                        }
+                        catch (Exception)
+                        {
+                            folderExists = false;
+                        }
+
+                        if (!folderExists)
+                        {
+                            Log.Information($"EnsureFolderPath: Creating folder: {logSegmentPath}");
+                            _sharePointFileManager.CreateFolder(documentTemplateUrlPart, currentPath).GetAwaiter().GetResult();
+                        }
+                    }
+                }
+
+                Log.Information($"EnsureFolderPath: Final currentPath value: '{currentPath}'");
+
+                // Build full server relative URL
+                var serverRelativeUrl = string.IsNullOrEmpty(currentPath)
+                    ? _sharePointFileManager.GetServerRelativeURL(documentTemplateUrlPart, "")
+                    : _sharePointFileManager.GetServerRelativeURL(documentTemplateUrlPart, currentPath);
+
+                // Remove trailing slash if present and path is not empty
+                if (!string.IsNullOrEmpty(currentPath) && serverRelativeUrl.EndsWith("/"))
+                {
+                    serverRelativeUrl = serverRelativeUrl.TrimEnd('/');
+                }
+
+                // Add leading slash if not already present
+                if (!string.IsNullOrEmpty(serverRelativeUrl) && !serverRelativeUrl.StartsWith("/"))
+                {
+                    serverRelativeUrl = "/" + serverRelativeUrl;
+                }
+
+                result.ServerRelativeUrl = serverRelativeUrl;
+                result.ResultStatus = ResultStatus.Success;
+
+                Log.Information($"EnsureFolderPath: Final path: {WordSanitizer.Sanitize(serverRelativeUrl)}");
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = "EnsureFolderPath - ERROR in ensuring folder path";
+                Log.Error(ex, result.ErrorDetail);
+            }
+            catch (Exception e)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = "EnsureFolderPath - ERROR in ensuring folder path";
+                Log.Error(e, result.ErrorDetail);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<FindFolderReply> FindFolder(FindFolderRequest request, ServerCallContext context)
+        {
+            var result = new FindFolderReply();
+
+            if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
+            {
+                result.ResultStatus = ResultStatus.Success;
+                // Return a dummy folder for testing when SharePoint is disabled
+                result.Folders.Add(
+                    new FolderInfo
+                    {
+                        Name = $"TestFolder_{request.SearchString}",
+                        ServerRelativeUrl = $"/{request.EntityName}/TestFolder_{request.SearchString}"
+                    }
+                );
+                return Task.FromResult(result);
+            }
+
+            var logSearchString = request.SearchString;
+            if (!string.IsNullOrEmpty(request.SearchGuid))
+            {
+                logSearchString = request.SearchGuid.Replace("-", "").ToUpper();
+            }
+            logSearchString = WordSanitizer.Sanitize(logSearchString);
+
+            try
+            {
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+                var listTitle = GetDocumentListTitle(request.EntityName);
+
+                Log.Information(
+                    $"FindFolder: Searching for folders in document library '{listTitle}' containing '{logSearchString}'"
+                );
+
+                // Use server-side filtering for better performance with large folder counts
+                // Pass either searchString (case-sensitive) or searchGuid (normalized to uppercase, no dashes)
+                var folders = _sharePointFileManager
+                    .SearchFoldersInDocumentLibrary(listTitle, request.SearchString, request.SearchGuid)
+                    .GetAwaiter()
+                    .GetResult();
+
+                if (folders != null && folders.Count > 0)
+                {
+                    Log.Information($"FindFolder: Found {folders.Count} matching folders");
+
+                    foreach (var folder in folders)
+                    {
+                        result.Folders.Add(
+                            new FolderInfo { Name = folder.Name, ServerRelativeUrl = folder.ServerRelativeUrl }
+                        );
+                    }
+
+                    result.ResultStatus = ResultStatus.Success;
+                }
+                else
+                {
+                    Log.Information($"FindFolder: No folders found matching '{logSearchString}'");
+                    result.ResultStatus = ResultStatus.Success; // Not an error, just no matches
+                }
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"FindFolder - ERROR searching for folders containing {logSearchString}";
+                Log.Error(ex, result.ErrorDetail);
+            }
+            catch (Exception e)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"FindFolder - ERROR searching for folders containing {logSearchString}";
+                Log.Error(e, result.ErrorDetail);
             }
 
             return Task.FromResult(result);
