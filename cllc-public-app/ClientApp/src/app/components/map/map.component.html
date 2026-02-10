@@ -48,7 +48,8 @@
       <hr/>
 
       <div class="row">
-        <table *ngIf="mapData?.length > 0" class="eq-table">
+        <div class="col-12">
+        <table *ngIf="mapData?.length > 0" class="eq-table" style="width: 100%">
           <tr>
             <td colspan="7" align="right">
               Download As: <a href="api/establishments/map-csv">CSV</a> &nbsp; <a href="api/establishments/map-json">JSON</a>
@@ -90,13 +91,14 @@
             </td>
           </tr>
         </table>
-        <mat-paginator *ngIf="mapData?.length > 0"
+        <mat-paginator *ngIf="mapData?.length > 0" style="width: 100%"
           [length]="mapData?.length || 0"
           [pageSize]="pageSize"
           [pageSizeOptions]="[10, 25, 50, 100]"
           (page)="handlePageEvent($event)"
           showFirstLastButtons>
         </mat-paginator>
+        </div>
       </div>
     </div>
   </div>

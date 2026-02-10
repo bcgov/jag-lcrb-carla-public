@@ -39,35 +39,12 @@ var searchMapOptions = {
   // WMS layers associated with the map
   wmsLayers: [
     {
-      rootUrl: "https://openmaps.gov.bc.ca/geo/pub/WHSE_IMAGERY_AND_BASE_MAPS.AIMG_ORTHOPHOTO_TILES_POINT/ows?",
-  format: "image/png",
-    layers: "pub:WHSE_IMAGERY_AND_BASE_MAPS.AIMG_ORTHOPHOTO_TILES_POINT",
-    styles: "Airborne_Imagery_Orthophoto_Tile_Points",
-  transparent: false
-},
-    {
       rootUrl: "https://openmaps.gov.bc.ca/geo/pub/WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW/ows?",
       format: "image/png",
       layers: "pub:WHSE_CADASTRE.PMBC_PARCEL_FABRIC_POLY_SVW",
       styles: "PMBC_Parcel_Fabric_Cadastre_Outlined",
       transparent: true
     }
-/*          ,
-        {
-            rootUrl: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES/ows?',
-            format: 'image/png',
-            layers: 'pub:WHSE_ADMIN_BOUNDARIES.CLAB_INDIAN_RESERVES',
-            styles: '374_375',
-            transparent: true            
-        },
-          {
-              rootUrl: 'https://openmaps.gov.bc.ca/geo/pub/WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP/ows?',
-              format: 'image/png',
-              layers: 'pub:WHSE_LEGAL_ADMIN_BOUNDARIES.ABMS_MUNICIPALITIES_SP',
-              styles: '5381',
-              transparent: true
-          }
-  */
   ],
   identifyCrsStartCallback: identifyCrsStartCallback,
   identifyCrsEndCallback: identifyCrsEndCallback
@@ -806,6 +783,11 @@ function EstablishmentsMap(options) {
       _leafletMap.dragging.disable();
       _leafletMap.doubleClickZoom.disable();
     }
+
+    // OpenStreetMap base tile layer
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(_leafletMap);
 
     if (_exists(options.esriLayers)) {
       _loadEsriLayers(options.esriLayers);
