@@ -352,17 +352,27 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             var _sharePointFileManager = new SharePointFileManager(_configuration);
 
             var listTitle = GetDocumentListTitle(request.EntityName);
-            CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
+            var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+
+            Console.WriteLine(
+                $"UploadFile: Uploading file '{logFileName}' to entity {request.EntityName}, folder '{logFolderName}'"
+            );
+
+            CreateDocumentLibraryIfMissing(listTitle, documentTemplateUrlPart);
 
             try
             {
                 // Create intermediate folders by calling EnsureFolderPath if the path contains multiple segments
                 if (!string.IsNullOrEmpty(request.FolderName) && request.FolderName.Contains("/"))
                 {
+                    Console.WriteLine($"UploadFile: Multi-level folder path detected, ensuring folder structure");
+
                     var ensureRequest = new EnsureFolderPathRequest { EntityName = request.EntityName };
 
                     // Split the folder path and create segments
                     var pathSegments = request.FolderName.Split('/', StringSplitOptions.RemoveEmptyEntries);
+                    Console.WriteLine($"UploadFile: Split into {pathSegments.Length} segments");
+
                     foreach (var segment in pathSegments)
                     {
                         ensureRequest.FolderPath.Add(new FolderSegment { FolderName = segment });
@@ -374,12 +384,24 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     {
                         throw new Exception($"Failed to ensure folder path: {ensureResult.ErrorDetail}");
                     }
+
+                    Console.WriteLine($"UploadFile: Folder structure ensured successfully");
+                }
+                else if (!string.IsNullOrEmpty(request.FolderName))
+                {
+                    Console.WriteLine($"UploadFile: Single-level folder path, AddFile will handle creation if needed");
+                }
+                else
+                {
+                    Console.WriteLine($"UploadFile: No folder specified, uploading to root of document library");
                 }
 
                 // Upload the file (AddFile will handle single-level folder creation if needed)
+                Console.WriteLine($"UploadFile: Calling AddFile to upload file");
+
                 var fileName = _sharePointFileManager
                     .AddFile(
-                        GetDocumentTemplateUrlPart(request.EntityName),
+                        documentTemplateUrlPart,
                         request.FolderName,
                         request.FileName,
                         request.Data.ToByteArray(),
@@ -390,6 +412,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 result.FileName = fileName;
                 result.ResultStatus = ResultStatus.Success;
+
+                Console.WriteLine($"UploadFile: Successfully uploaded file '{fileName}'");
             }
             catch (SharePointRestException ex)
             {
@@ -611,7 +635,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 var listTitle = GetDocumentListTitle(request.EntityName);
                 var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
 
-                Log.Information(
+                Console.WriteLine(
                     $"EnsureFolderPath: Building folder path with {request.FolderPath?.Count ?? 0} segments"
                 );
 
@@ -653,7 +677,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     {
                         var segment = request.FolderPath[i];
 
-                        Log.Information(
+                        Console.WriteLine(
                             $"EnsureFolderPath: Segment {i} - FolderName: '{segment.FolderName}', FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}'"
                         );
 
@@ -663,7 +687,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         {
                             // Use the complete folder name provided and sanitize it
                             folderName = segment.FolderName;
-                            Log.Information($"EnsureFolderPath: Using complete folderName: '{folderName}'");
+                            Console.WriteLine($"EnsureFolderPath: Using complete folderName: '{folderName}'");
                         }
                         else
                         {
@@ -679,13 +703,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                             // Build folder name by combining sanitized name segment and guid segment
                             folderName = $"{sanitizedNameSegment}_{sanitizedGuidSegment}";
-                            Log.Information($"EnsureFolderPath: Built from segments: '{folderName}'");
+                            Console.WriteLine($"EnsureFolderPath: Built from segments: '{folderName}'");
                         }
 
                         // Apply SharePoint filename sanitization and truncation BEFORE building cumulative path
                         var originalFolderName = folderName;
                         folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
-                        Log.Information(
+                        Console.WriteLine(
                             $"EnsureFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
                         );
 
@@ -699,10 +723,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                             currentPath += "/" + folderName;
                         }
 
-                        Log.Information($"EnsureFolderPath: Current cumulative path: '{currentPath}'");
+                        Console.WriteLine($"EnsureFolderPath: Current cumulative path: '{currentPath}'");
 
                         var logSegmentPath = WordSanitizer.Sanitize(currentPath);
-                        Log.Information($"EnsureFolderPath: Processing folder segment {i + 1}: {logSegmentPath}");
+                        Console.WriteLine($"EnsureFolderPath: Processing folder segment {i + 1}: {logSegmentPath}");
 
                         // Check if this level exists, create if not
                         var folderExists = false;
@@ -715,7 +739,31 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                             if (folder != null)
                             {
                                 folderExists = true;
-                                Log.Information($"EnsureFolderPath: Folder exists: {logSegmentPath}");
+                                Console.WriteLine($"EnsureFolderPath: Folder exists: {logSegmentPath}");
+
+                                // Extract actual folder name from GetFolder response for first segment only
+                                // (GUID-based matching only works at the document library root level)
+                                if (i == 0)
+                                {
+                                    try
+                                    {
+                                        var folderJson = folder as Newtonsoft.Json.Linq.JObject;
+                                        if (folderJson != null && folderJson["Name"] != null)
+                                        {
+                                            var actualFolderName = folderJson["Name"].ToString();
+                                            if (!string.IsNullOrEmpty(actualFolderName) && actualFolderName != currentPath)
+                                            {
+                                                Console.WriteLine($"EnsureFolderPath: SharePoint returned actual folder name: '{actualFolderName}' (provided name: '{currentPath}')");
+                                                currentPath = actualFolderName;
+                                                logSegmentPath = WordSanitizer.Sanitize(currentPath);
+                                            }
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"EnsureFolderPath: Error extracting folder name from result: {ex.Message}. Continuing with provided name: '{currentPath}'");
+                                    }
+                                }
                             }
                         }
                         catch (SharePointRestException)
@@ -729,13 +777,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                         if (!folderExists)
                         {
-                            Log.Information($"EnsureFolderPath: Creating folder: {logSegmentPath}");
+                            Console.WriteLine($"EnsureFolderPath: Creating folder: {logSegmentPath}");
                             _sharePointFileManager.CreateFolder(documentTemplateUrlPart, currentPath).GetAwaiter().GetResult();
                         }
                     }
                 }
 
-                Log.Information($"EnsureFolderPath: Final currentPath value: '{currentPath}'");
+                Console.WriteLine($"EnsureFolderPath: Final currentPath value: '{currentPath}'");
 
                 // Build full server relative URL
                 var serverRelativeUrl = string.IsNullOrEmpty(currentPath)
@@ -757,7 +805,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ServerRelativeUrl = serverRelativeUrl;
                 result.ResultStatus = ResultStatus.Success;
 
-                Log.Information($"EnsureFolderPath: Final path: {WordSanitizer.Sanitize(serverRelativeUrl)}");
+                Console.WriteLine($"EnsureFolderPath: Final path: {WordSanitizer.Sanitize(serverRelativeUrl)}");
             }
             catch (SharePointRestException ex)
             {
@@ -805,7 +853,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
                 var listTitle = GetDocumentListTitle(request.EntityName);
 
-                Log.Information(
+                Console.WriteLine(
                     $"FindFolder: Searching for folders in document library '{listTitle}' containing '{logSearchString}'"
                 );
 
@@ -818,7 +866,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                 if (folders != null && folders.Count > 0)
                 {
-                    Log.Information($"FindFolder: Found {folders.Count} matching folders");
+                    Console.WriteLine($"FindFolder: Found {folders.Count} matching folders");
 
                     foreach (var folder in folders)
                     {
@@ -831,7 +879,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 }
                 else
                 {
-                    Log.Information($"FindFolder: No folders found matching '{logSearchString}'");
+                    Console.WriteLine($"FindFolder: No folders found matching '{logSearchString}'");
                     result.ResultStatus = ResultStatus.Success; // Not an error, just no matches
                 }
             }
@@ -873,7 +921,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 var listTitle = GetDocumentListTitle(request.EntityName);
                 var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
 
-                Log.Information(
+                Console.WriteLine(
                     $"UploadFileWithFolderPath: Uploading file '{logFileName}' with {request.FolderPath?.Count ?? 0} folder segments"
                 );
 
@@ -918,7 +966,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     {
                         var segment = request.FolderPath[i];
 
-                        Log.Information(
+                        Console.WriteLine(
                             $"UploadFileWithFolderPath: Segment {i} - FolderName: '{segment.FolderName}', FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}'"
                         );
 
@@ -927,7 +975,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         if (!string.IsNullOrEmpty(segment.FolderName))
                         {
                             folderName = segment.FolderName;
-                            Log.Information($"UploadFileWithFolderPath: Using complete folderName: '{folderName}'");
+                            Console.WriteLine($"UploadFileWithFolderPath: Using complete folderName: '{folderName}'");
                         }
                         else
                         {
@@ -941,13 +989,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                             }
 
                             folderName = $"{sanitizedNameSegment}_{sanitizedGuidSegment}";
-                            Log.Information($"UploadFileWithFolderPath: Built from segments: '{folderName}'");
+                            Console.WriteLine($"UploadFileWithFolderPath: Built from segments: '{folderName}'");
                         }
 
                         // Apply SharePoint filename sanitization
                         var originalFolderName = folderName;
                         folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
-                        Log.Information(
+                        Console.WriteLine(
                             $"UploadFileWithFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
                         );
 
@@ -961,7 +1009,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                             currentPath += "/" + folderName;
                         }
 
-                        Log.Information($"UploadFileWithFolderPath: Current cumulative path: '{currentPath}'");
+                        Console.WriteLine($"UploadFileWithFolderPath: Current cumulative path: '{currentPath}'");
 
                         var logSegmentPath = WordSanitizer.Sanitize(currentPath);
 
@@ -976,7 +1024,31 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                             if (folder != null)
                             {
                                 folderExists = true;
-                                Log.Information($"UploadFileWithFolderPath: Folder exists: {logSegmentPath}");
+                                Console.WriteLine($"UploadFileWithFolderPath: Folder exists: {logSegmentPath}");
+
+                                // Extract actual folder name from GetFolder response for first segment only
+                                // (GUID-based matching only works at the document library root level)
+                                if (i == 0)
+                                {
+                                    try
+                                    {
+                                        var folderJson = folder as Newtonsoft.Json.Linq.JObject;
+                                        if (folderJson != null && folderJson["Name"] != null)
+                                        {
+                                            var actualFolderName = folderJson["Name"].ToString();
+                                            if (!string.IsNullOrEmpty(actualFolderName) && actualFolderName != currentPath)
+                                            {
+                                                Console.WriteLine($"UploadFileWithFolderPath: SharePoint returned actual folder name: '{actualFolderName}' (was '{currentPath}')");
+                                                currentPath = actualFolderName;
+                                                logSegmentPath = WordSanitizer.Sanitize(currentPath);
+                                            }
+                                        }
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine($"UploadFileWithFolderPath: Error extracting folder name from result: {ex.Message}");
+                                    }
+                                }
                             }
                         }
                         catch (SharePointRestException)
@@ -990,7 +1062,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                         if (!folderExists)
                         {
-                            Log.Information($"UploadFileWithFolderPath: Creating folder: {logSegmentPath}");
+                            Console.WriteLine($"UploadFileWithFolderPath: Creating folder: {logSegmentPath}");
                             _sharePointFileManager
                                 .CreateFolder(documentTemplateUrlPart, currentPath)
                                 .GetAwaiter()
@@ -999,7 +1071,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     }
                 }
 
-                Log.Information($"UploadFileWithFolderPath: Final folder path: '{currentPath}'");
+                Console.WriteLine($"UploadFileWithFolderPath: Final folder path: '{currentPath}'");
 
                 // Upload the file to the final folder path
                 var fileName = _sharePointFileManager
@@ -1022,7 +1094,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ServerRelativeUrl = folderServerRelativeUrl;
                 result.ResultStatus = ResultStatus.Success;
 
-                Log.Information($"UploadFileWithFolderPath: Successfully uploaded file '{fileName}' to '{folderServerRelativeUrl}'");
+                Console.WriteLine($"UploadFileWithFolderPath: Successfully uploaded file '{fileName}' to '{folderServerRelativeUrl}'");
             }
             catch (SharePointRestException ex)
             {
