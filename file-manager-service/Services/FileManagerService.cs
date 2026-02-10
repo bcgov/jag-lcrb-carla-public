@@ -683,7 +683,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         try
                         {
                             var folder = _sharePointFileManager
-                                .GetFolder(documentTemplateUrlPart, currentPath)
+                                .GetFolder(documentTemplateUrlPart, currentPath, segment.FolderGuidSegment)
                                 .GetAwaiter()
                                 .GetResult();
                             if (folder != null)

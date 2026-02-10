@@ -715,6 +715,105 @@ namespace Gov.Lclb.Cllb.Interfaces
             return (folder != null);
         }
 
+        /// <summary>
+        /// Search for a folder by GUID and optionally validate against the folder name.
+        /// Returns the actual folder name from SharePoint if found, otherwise null.
+        /// </summary>
+        /// <param name="listTitle">The document library title</param>
+        /// <param name="folderName">The expected folder name (for validation when multiple matches)</param>
+        /// <param name="guid">The GUID to search for</param>
+        /// <returns>The actual folder name from SharePoint, or null if not found</returns>
+        public async Task<string> EnhancedFolderExists(string listTitle, string folderName, string guid)
+        {
+            Console.WriteLine($"EnhancedFolderExists - called with listTitle='{listTitle}', folderName='{folderName}', guid='{guid}'");
+            
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                Console.WriteLine("EnhancedFolderExists - SharePoint is not valid, returning null");
+                return null;
+            }
+
+            // Normalize the GUID: remove dashes and convert to uppercase
+            string normalizedGuid = guid?.Replace("-", "").ToUpper();
+            Console.WriteLine($"EnhancedFolderExists - normalizedGuid='{normalizedGuid}'");
+            
+            if (string.IsNullOrEmpty(normalizedGuid))
+            {
+                Console.WriteLine("EnhancedFolderExists - normalizedGuid is null or empty, returning null");
+                return null;
+            }
+
+            // Search for folders containing the normalized GUID
+            var folders = await SearchFoldersInDocumentLibrary(listTitle, searchString: null, searchGuid: normalizedGuid);
+            Console.WriteLine($"EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders");
+
+            if (folders == null || folders.Count == 0)
+            {
+                // No folders found
+                Console.WriteLine("EnhancedFolderExists - No folders found, returning null");
+                return null;
+            }
+            else if (folders.Count == 1)
+            {
+                // Exactly one folder found - return its name
+                Console.WriteLine($"EnhancedFolderExists - Found exactly one folder: '{folders[0].Name}'");
+                return folders[0].Name;
+            }
+            else
+            {
+                // Multiple folders found - need to disambiguate using folderName
+                Console.WriteLine($"EnhancedFolderExists - Multiple folders found ({folders.Count}), disambiguating...");
+                
+                // First try: case-insensitive comparison
+                var caseInsensitiveMatches = folders
+                    .Where(f => f.Name.Equals(folderName, StringComparison.OrdinalIgnoreCase))
+                    .ToList();
+                Console.WriteLine($"EnhancedFolderExists - Case-insensitive matches: {caseInsensitiveMatches.Count}");
+
+                if (caseInsensitiveMatches.Count == 1)
+                {
+                    // Found exactly one case-insensitive match
+                    Console.WriteLine($"EnhancedFolderExists - Found one case-insensitive match: '{caseInsensitiveMatches[0].Name}'");
+                    return caseInsensitiveMatches[0].Name;
+                }
+                else if (caseInsensitiveMatches.Count == 0)
+                {
+                    // No case-insensitive matches
+                    Console.WriteLine("EnhancedFolderExists - No case-insensitive matches, returning null");
+                    return null;
+                }
+                else
+                {
+                    // Multiple case-insensitive matches - try case-sensitive comparison
+                    Console.WriteLine($"EnhancedFolderExists - Multiple case-insensitive matches ({caseInsensitiveMatches.Count}), trying case-sensitive...");
+                    var caseSensitiveMatches = caseInsensitiveMatches
+                        .Where(f => f.Name.Equals(folderName, StringComparison.Ordinal))
+                        .ToList();
+                    Console.WriteLine($"EnhancedFolderExists - Case-sensitive matches: {caseSensitiveMatches.Count}");
+
+                    if (caseSensitiveMatches.Count == 1)
+                    {
+                        // Found exactly one case-sensitive match
+                        Console.WriteLine($"EnhancedFolderExists - Found one case-sensitive match: '{caseSensitiveMatches[0].Name}'");
+                        return caseSensitiveMatches[0].Name;
+                    }
+                    else if (caseSensitiveMatches.Count == 0)
+                    {
+                        // No exact match - return the first case-insensitive match
+                        Console.WriteLine($"EnhancedFolderExists - No exact match, returning first case-insensitive match: '{caseInsensitiveMatches[0].Name}'");
+                        return caseInsensitiveMatches[0].Name;
+                    }
+                    else
+                    {
+                        // Multiple exact matches (shouldn't happen, but handle gracefully)
+                        Console.WriteLine($"EnhancedFolderExists - Multiple exact matches (unexpected), returning first: '{caseSensitiveMatches[0].Name}'");
+                        return caseSensitiveMatches[0].Name;
+                    }
+                }
+            }
+        }
+
         public async Task<bool> DocumentLibraryExists(string listTitle)
         {
             Object lisbrary = await GetDocumentLibrary(listTitle);
@@ -722,14 +821,39 @@ namespace Gov.Lclb.Cllb.Interfaces
             return (lisbrary != null);
         }
 
-        public async Task<Object> GetFolder(string listTitle, string folderName)
+        public async Task<Object> GetFolder(string listTitle, string folderName, string guid = null)
         {
+            Console.WriteLine($"GetFolder - called with listTitle='{listTitle}', folderName='{folderName}', guid='{guid}'");
+            
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
+                Console.WriteLine("GetFolder - SharePoint is not valid, returning null");
                 return null;
             }
             folderName = FixFoldername(folderName);
+            Console.WriteLine($"GetFolder - After FixFoldername: '{folderName}'");
+
+            // If GUID is provided, use EnhancedFolderExists for case-insensitive matching
+            if (!string.IsNullOrEmpty(guid))
+            {
+                Console.WriteLine($"GetFolder - GUID provided, calling EnhancedFolderExists...");
+                string actualFolderName = await EnhancedFolderExists(listTitle, folderName, guid);
+                if (!string.IsNullOrEmpty(actualFolderName))
+                {
+                    // Found the folder with case-insensitive matching - use the actual name from SharePoint
+                    Console.WriteLine($"GetFolder - EnhancedFolderExists returned actual folder name: '{actualFolderName}' (was '{folderName}')");
+                    folderName = actualFolderName;
+                }
+                else
+                {
+                    Console.WriteLine($"GetFolder - EnhancedFolderExists returned null, continuing with original folderName");
+                }
+            }
+            else
+            {
+                Console.WriteLine($"GetFolder - No GUID provided, skipping EnhancedFolderExists");
+            }
 
             Object result = null;
             string serverRelativeUrl = "/";
@@ -739,6 +863,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             serverRelativeUrl += $"{listTitle}/{folderName}";
+            Console.WriteLine($"GetFolder - Constructed serverRelativeUrl: '{serverRelativeUrl}'");
 
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage()
@@ -754,11 +879,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"GetFolder - Response StatusCode: {response.StatusCode}");
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-
+                Console.WriteLine($"GetFolder - Folder found successfully");
                 result = JsonConvert.DeserializeObject(jsonString);
+            }
+            else
+            {
+                Console.WriteLine($"GetFolder - Folder not found or error occurred");
             }
 
             return result;
