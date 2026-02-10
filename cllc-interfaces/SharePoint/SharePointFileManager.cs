@@ -449,6 +449,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task CreateFolder(string listTitle, string folderName)
         {
+            Console.WriteLine($"SharePointFileManager - CreateFolder - called with listTitle='{listTitle}', folderName='{folderName}'");
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
@@ -486,6 +487,12 @@ namespace Gov.Lclb.Cllb.Interfaces
                 string _responseContent;
                 var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                
+                // Enhanced logging for debugging folder creation failures
+                string originalRelativeUrl = $"/{listTitle}/{folderName}";
+                Console.WriteLine($"SharePointFileManager - CreateFolder - failed - Status: {_statusCode}, FolderName: '{folderName}', EscapedRelativeUrl: '{relativeUrl}', OriginalRelativeUrl: '{originalRelativeUrl}'");
+                Console.WriteLine($"SharePointFileManager - CreateFolder - Response: {_responseContent}");
+                
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
 

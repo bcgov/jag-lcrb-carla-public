@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 Log.Error(
                     ex,
-                    $"SharePointRestException creating sharepoint folder (status code: {ex.Response.StatusCode})"
+                    $"SharePointRestException creating sharepoint folder - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
                 );
                 folderExists = false;
             }
@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 {
                     result.ResultStatus = ResultStatus.Fail;
                     result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
-                    Log.Error(ex, result.ErrorDetail);
+                    Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
                 }
                 catch (Exception e)
                 {
@@ -148,9 +148,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             catch (SharePointRestException spre)
             {
-                Log.Error(spre, "Error determining if file exists");
-                result.ResultStatus = result.ResultStatus = FileExistStatus.Error;
+                result.ResultStatus = FileExistStatus.Error;
                 result.ErrorDetail = "FileExists - Error determining if file exists";
+                Log.Error(spre, $"{result.ErrorDetail} - Status: {spre.Response?.StatusCode}, Request: {spre.Request?.RequestUri}, Response: {spre.Response?.Content}");
             }
             catch (Exception e)
             {
@@ -279,7 +279,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"DeleteFile - ERROR in deleting file {logUrl}";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
             catch (Exception e)
             {
@@ -323,7 +323,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"DownloadFile - ERROR in downloading file {logUrl}";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
             catch (Exception e)
             {
@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
             catch (Exception e)
             {
@@ -482,9 +482,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
             catch (SharePointRestException spre)
             {
-                Log.Error(spre, "Error getting SharePoint File List");
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = "FolderFiles - Error getting SharePoint File List";
+                Log.Error(spre, $"{result.ErrorDetail} - Status: {spre.Response?.StatusCode}, Request: {spre.Request?.RequestUri}, Response: {spre.Response?.Content}");
             }
 
             return Task.FromResult(result);
@@ -555,7 +555,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail =
                     $"GetTruncatedFilename - ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
 
             return Task.FromResult(result);
@@ -737,7 +737,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = "EnsureFolderPath - ERROR in ensuring folder path";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
             catch (Exception e)
             {
@@ -813,7 +813,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"FindFolder - ERROR searching for folders containing {logSearchString}";
-                Log.Error(ex, result.ErrorDetail);
+                Log.Error(ex, $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}");
             }
             catch (Exception e)
             {
