@@ -618,6 +618,32 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 // Create document library if missing
                 CreateDocumentLibraryIfMissing(listTitle, documentTemplateUrlPart);
 
+                // Validate folder path segments before processing
+                if (request.FolderPath != null && request.FolderPath.Count > 0)
+                {
+                    for (int i = 0; i < request.FolderPath.Count; i++)
+                    {
+                        var segment = request.FolderPath[i];
+                        
+                        // If FolderName is not provided, both FolderNameSegment and FolderGuidSegment are required
+                        if (string.IsNullOrEmpty(segment.FolderName))
+                        {
+                            if (string.IsNullOrEmpty(segment.FolderNameSegment) || string.IsNullOrEmpty(segment.FolderGuidSegment))
+                            {
+                                Log.Warning(
+                                    $"EnsureFolderPath: Invalid request - Segment {i} is missing FolderName and does not have both FolderNameSegment and FolderGuidSegment. " +
+                                    $"FolderNameSegment: '{segment.FolderNameSegment ?? "null"}', FolderGuidSegment: '{segment.FolderGuidSegment ?? "null"}'"
+                                );
+                                
+                                // Return empty response gracefully
+                                result.ResultStatus = ResultStatus.Fail;
+                                result.ErrorDetail = $"Invalid folder path: Segment {i + 1} must have either FolderName or both FolderNameSegment and FolderGuidSegment";
+                                return Task.FromResult(result);
+                            }
+                        }
+                    }
+                }
+
                 string currentPath = "";
 
                 // Build and create nested folder structure
@@ -819,6 +845,198 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"FindFolder - ERROR searching for folders containing {logSearchString}";
+                Log.Error(e, result.ErrorDetail);
+            }
+
+            return Task.FromResult(result);
+        }
+
+        public override Task<UploadFileReply> UploadFileWithFolderPath(
+            UploadFileWithFolderPathRequest request,
+            ServerCallContext context
+        )
+        {
+            var result = new UploadFileReply();
+
+            if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
+            {
+                result.ResultStatus = ResultStatus.Success;
+                result.FileName = request.FileName;
+                return Task.FromResult(result);
+            }
+
+            var logFileName = WordSanitizer.Sanitize(request.FileName);
+
+            try
+            {
+                var _sharePointFileManager = new SharePointFileManager(_configuration);
+                var listTitle = GetDocumentListTitle(request.EntityName);
+                var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+
+                Log.Information(
+                    $"UploadFileWithFolderPath: Uploading file '{logFileName}' with {request.FolderPath?.Count ?? 0} folder segments"
+                );
+
+                // Create document library if missing
+                CreateDocumentLibraryIfMissing(listTitle, documentTemplateUrlPart);
+
+                // Validate folder path segments before processing
+                if (request.FolderPath != null && request.FolderPath.Count > 0)
+                {
+                    for (int i = 0; i < request.FolderPath.Count; i++)
+                    {
+                        var segment = request.FolderPath[i];
+
+                        // If FolderName is not provided, both FolderNameSegment and FolderGuidSegment are required
+                        if (string.IsNullOrEmpty(segment.FolderName))
+                        {
+                            if (
+                                string.IsNullOrEmpty(segment.FolderNameSegment)
+                                || string.IsNullOrEmpty(segment.FolderGuidSegment)
+                            )
+                            {
+                                Log.Warning(
+                                    $"UploadFileWithFolderPath: Invalid request - Segment {i} is missing FolderName and does not have both FolderNameSegment and FolderGuidSegment. "
+                                        + $"FolderNameSegment: '{segment.FolderNameSegment ?? "null"}', FolderGuidSegment: '{segment.FolderGuidSegment ?? "null"}'"
+                                );
+
+                                result.ResultStatus = ResultStatus.Fail;
+                                result.ErrorDetail =
+                                    $"Invalid folder path: Segment {i + 1} must have either FolderName or both FolderNameSegment and FolderGuidSegment";
+                                return Task.FromResult(result);
+                            }
+                        }
+                    }
+                }
+
+                string currentPath = "";
+
+                // Build and create nested folder structure
+                if (request.FolderPath != null && request.FolderPath.Count > 0)
+                {
+                    for (int i = 0; i < request.FolderPath.Count; i++)
+                    {
+                        var segment = request.FolderPath[i];
+
+                        Log.Information(
+                            $"UploadFileWithFolderPath: Segment {i} - FolderName: '{segment.FolderName}', FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}'"
+                        );
+
+                        // Build folder name - either use complete folderName or combine name and guid segments
+                        string folderName;
+                        if (!string.IsNullOrEmpty(segment.FolderName))
+                        {
+                            folderName = segment.FolderName;
+                            Log.Information($"UploadFileWithFolderPath: Using complete folderName: '{folderName}'");
+                        }
+                        else
+                        {
+                            var sanitizedNameSegment = segment.FolderNameSegment ?? "";
+                            var sanitizedGuidSegment = segment.FolderGuidSegment ?? "";
+
+                            // Convert GUID to uppercase and remove dashes
+                            if (!string.IsNullOrEmpty(sanitizedGuidSegment))
+                            {
+                                sanitizedGuidSegment = sanitizedGuidSegment.Replace("-", "").ToUpper();
+                            }
+
+                            folderName = $"{sanitizedNameSegment}_{sanitizedGuidSegment}";
+                            Log.Information($"UploadFileWithFolderPath: Built from segments: '{folderName}'");
+                        }
+
+                        // Apply SharePoint filename sanitization
+                        var originalFolderName = folderName;
+                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
+                        Log.Information(
+                            $"UploadFileWithFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
+                        );
+
+                        // Build cumulative path
+                        if (i == 0)
+                        {
+                            currentPath = folderName;
+                        }
+                        else
+                        {
+                            currentPath += "/" + folderName;
+                        }
+
+                        Log.Information($"UploadFileWithFolderPath: Current cumulative path: '{currentPath}'");
+
+                        var logSegmentPath = WordSanitizer.Sanitize(currentPath);
+
+                        // Check if this level exists, create if not
+                        var folderExists = false;
+                        try
+                        {
+                            var folder = _sharePointFileManager
+                                .GetFolder(documentTemplateUrlPart, currentPath, segment.FolderGuidSegment)
+                                .GetAwaiter()
+                                .GetResult();
+                            if (folder != null)
+                            {
+                                folderExists = true;
+                                Log.Information($"UploadFileWithFolderPath: Folder exists: {logSegmentPath}");
+                            }
+                        }
+                        catch (SharePointRestException)
+                        {
+                            folderExists = false;
+                        }
+                        catch (Exception)
+                        {
+                            folderExists = false;
+                        }
+
+                        if (!folderExists)
+                        {
+                            Log.Information($"UploadFileWithFolderPath: Creating folder: {logSegmentPath}");
+                            _sharePointFileManager
+                                .CreateFolder(documentTemplateUrlPart, currentPath)
+                                .GetAwaiter()
+                                .GetResult();
+                        }
+                    }
+                }
+
+                Log.Information($"UploadFileWithFolderPath: Final folder path: '{currentPath}'");
+
+                // Upload the file to the final folder path
+                var fileName = _sharePointFileManager
+                    .AddFile(
+                        documentTemplateUrlPart,
+                        currentPath,
+                        request.FileName,
+                        request.Data.ToByteArray(),
+                        request.ContentType
+                    )
+                    .GetAwaiter()
+                    .GetResult();
+
+                // Get the server relative URL for the folder
+                var folderServerRelativeUrl = string.IsNullOrEmpty(currentPath)
+                    ? $"/{documentTemplateUrlPart}"
+                    : $"/{documentTemplateUrlPart}/{currentPath}";
+
+                result.FileName = fileName;
+                result.ServerRelativeUrl = folderServerRelativeUrl;
+                result.ResultStatus = ResultStatus.Success;
+
+                Log.Information($"UploadFileWithFolderPath: Successfully uploaded file '{fileName}' to '{folderServerRelativeUrl}'");
+            }
+            catch (SharePointRestException ex)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"UploadFileWithFolderPath - ERROR uploading file {logFileName}";
+                Log.Error(
+                    ex,
+                    $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                );
+            }
+            catch (Exception e)
+            {
+                result.ResultStatus = ResultStatus.Fail;
+                result.ErrorDetail = $"UploadFileWithFolderPath - ERROR uploading file {logFileName}";
                 Log.Error(e, result.ErrorDetail);
             }
 

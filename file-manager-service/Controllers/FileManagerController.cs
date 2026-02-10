@@ -225,5 +225,65 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 }
             );
         }
+
+        [HttpPost("upload-file-with-folder-path")]
+        public async Task<IActionResult> UploadFileWithFolderPath([FromBody] UploadFileWithFolderPathDto dto)
+        {
+            var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+
+            var request = new UploadFileWithFolderPathRequest
+            {
+                EntityName = dto.EntityName,
+                FileName = dto.FileName,
+                ContentType = dto.ContentType,
+                Data = Google.Protobuf.ByteString.CopyFrom(Convert.FromBase64String(dto.Data))
+            };
+
+            _logger.LogInformation(
+                $"UploadFileWithFolderPath Controller: Uploading file {dto.FileName} to entity {dto.EntityName} with {dto.FolderPath?.Count ?? 0} folder segments"
+            );
+
+            // Add folder segments
+            if (dto.FolderPath != null)
+            {
+                foreach (var segment in dto.FolderPath)
+                {
+                    _logger.LogInformation(
+                        $"UploadFileWithFolderPath Controller: Segment - FolderNameSegment: '{segment.FolderNameSegment}', FolderGuidSegment: '{segment.FolderGuidSegment}', FolderName: '{segment.FolderName}'"
+                    );
+
+                    request.FolderPath.Add(
+                        new FolderSegment
+                        {
+                            FolderNameSegment = segment.FolderNameSegment ?? "",
+                            FolderGuidSegment = segment.FolderGuidSegment ?? "",
+                            FolderName = segment.FolderName ?? ""
+                        }
+                    );
+                }
+            }
+
+            var result = await service.UploadFileWithFolderPath(request, null);
+
+            return Ok(
+                new
+                {
+                    resultStatus = result.ResultStatus.ToString(),
+                    fileName = result.FileName,
+                    serverRelativeUrl = result.ServerRelativeUrl,
+                    errorDetail = result.ErrorDetail
+                }
+            );
+        }
+
+        // DTO for JSON deserialization
+        public class UploadFileWithFolderPathDto
+        {
+            public string EntityName { get; set; }
+            public List<FolderSegmentDto> FolderPath { get; set; }
+            public string FileName { get; set; }
+            public string ContentType { get; set; }
+            public string Data { get; set; } // base64 string
+        }
     }
 }
