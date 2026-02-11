@@ -373,23 +373,37 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        // get establishments                                  
-                        string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses
+                        // get establishments
+                        string licenseFilter = $"statuscode eq 1 and (_adoxio_licencetype_value eq {licenceTypeId}";
 
                         if (alternateLicenceTypeId != null)
                         {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId} and statuscode eq 1";
+                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId}";
                         }
 
+                        licenseFilter += ")";
 
-                        string[] licenseExpand = {"adoxio_LicenceType"};
+                        string[] licenseExpand = {
+                            "adoxio_LicenceType($select=adoxio_name)",
+                            "adoxio_establishment($select=adoxio_establishmentid,adoxio_name,adoxio_phone,adoxio_addresscity,adoxio_addresspostalcode,adoxio_addressstreet,adoxio_latitude,adoxio_longitude,adoxio_isopen,_adoxio_lgin_value;$expand=adoxio_LGIN($select=adoxio_name))",
+                            "adoxio_Licencee($select=name)"
+                        };
+
+                        var licenseSelect = new List<string>
+                        {
+                            "adoxio_licencesid",
+                            "adoxio_licencenumber",
+                            "_adoxio_establishment_value",
+                            "_adoxio_licencetype_value",
+                            "statuscode"
+                        };
 
                         // get licenses
                         IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
                         try
                         {
-                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand)
+                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand, select: licenseSelect)
                                 .Value;
                         }
                         catch (HttpOperationException httpOperationException)
@@ -431,15 +445,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     }
                                 }
                                 */
-                                // do not add LDB stores at this time.
+                                // Use the establishment expanded inline with the license query (no separate API call).
                                 if (add && license._adoxioEstablishmentValue != null)
                                 {
-                                    var establishment =
-                                        _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
+                                    var establishment = license.AdoxioEstablishment;
 
+                                    // Do not add LDB stores here — they are added separately via GetLDBStores().
                                     if (establishment != null &&
-                                        (establishment.AdoxioLicencee == null ||
-                                         establishment.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
+                                        (license.AdoxioLicencee == null ||
+                                         license.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
                                         establishment.AdoxioLatitude != null &&
                                         establishment.AdoxioLongitude != null)
                                     {
@@ -452,22 +466,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                             if (!establishment.AdoxioName.ToUpper().StartsWith(search)
                                                 && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search))
                                             {
-                                                // candidate for rejection; check the lgin too.
-                                                if (establishment._adoxioLginValue != null)
-                                                {
-                                                    establishment.AdoxioLGIN =
-                                                        _dynamicsClient.GetLginById(establishment._adoxioLginValue);
-                                                    if (establishment.AdoxioLGIN == null
-                                                        || establishment.AdoxioLGIN.AdoxioName == null
-                                                        || !establishment.AdoxioLGIN.AdoxioName.ToUpper()
-                                                            .StartsWith(search))
-                                                        //|| !
-                                                    {
-                                                        add = false;
-                                                    }
-
-                                                }
-                                                else
+                                                // Check the LGIN (already expanded inline, no separate API call).
+                                                if (establishment.AdoxioLGIN == null
+                                                    || establishment.AdoxioLGIN.AdoxioName == null
+                                                    || !establishment.AdoxioLGIN.AdoxioName.ToUpper()
+                                                        .StartsWith(search))
                                                 {
                                                     add = false;
                                                 }
