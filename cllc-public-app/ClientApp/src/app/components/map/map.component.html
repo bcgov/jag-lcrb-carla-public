@@ -35,14 +35,11 @@
 
         </div>
 
-        <!-- <div class="map-container">
-          <div class="map-scroll-helper"></div>
-          <div aria-label="A map of Cannabis Retail Stores." id="search-map"></div>
-        </div>-->
-        <div>
-          <app-error-alert>
-            We are aware of the cannabis store map loading issue. Please visit the <a href="https://www2.gov.bc.ca/gov/content?id=3BA008CC60AE436FBD25309AB6C1C9F0" target="_blank">LCRB website</a> for an updated list of cannabis stores.
-        </app-error-alert>
+        <div class="col-md-8">
+          <div class="map-container">
+            <div class="map-scroll-helper"></div>
+            <div aria-label="A map of Cannabis Retail Stores." id="search-map"></div>
+          </div>
         </div>
 
       </div>
@@ -51,7 +48,8 @@
       <hr/>
 
       <div class="row">
-        <table *ngIf="mapData?.length > 0" class="eq-table">
+        <div class="col-12">
+        <table *ngIf="mapData?.length > 0" class="eq-table" style="width: 100%">
           <tr>
             <td colspan="7" align="right">
               Download As: <a href="api/establishments/map-csv">CSV</a> &nbsp; <a href="api/establishments/map-json">JSON</a>
@@ -66,7 +64,7 @@
             <th>Postal</th>
             <th>Status</th>
           </tr>
-          <tr *ngFor="let item of mapData; let i = index;">
+          <tr *ngFor="let item of pagedData; let i = index;">
             <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
               <span style="font-weight: 600">{{item.license}}</span>
             </td>
@@ -93,6 +91,14 @@
             </td>
           </tr>
         </table>
+        <mat-paginator *ngIf="mapData?.length > 0" style="width: 100%"
+          [length]="mapData?.length || 0"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[10, 25, 50, 100]"
+          (page)="handlePageEvent($event)"
+          showFirstLastButtons>
+        </mat-paginator>
+        </div>
       </div>
     </div>
   </div>
