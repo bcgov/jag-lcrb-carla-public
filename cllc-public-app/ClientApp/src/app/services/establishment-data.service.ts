@@ -17,13 +17,13 @@ export class EstablishmentDataService extends DataService {
     super();
   }
 
-  getEstablishmentsMap(): Observable<string> {
-    return this.http.get<string>(this.apiPath + "/map", { headers: this.headers })
+  getEstablishmentsMap(): Observable<any[]> {
+    return this.http.get<any[]>(this.apiPath + "/map", { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-  getEstablishmentsMapSearch(search: string): Observable<string> {
-    return this.http.get<string>(this.apiPath + "/map?search=" + encodeURIComponent(search), { headers: this.headers })
+  getEstablishmentsMapSearch(search: string): Observable<any[]> {
+    return this.http.get<any[]>(this.apiPath + "/map?search=" + encodeURIComponent(search), { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
