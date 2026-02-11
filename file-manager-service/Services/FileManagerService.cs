@@ -92,6 +92,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     if (folder != null)
                     {
                         result.ResultStatus = ResultStatus.Success;
+                        Console.WriteLine($"FileManagerService - CreateFolder - successfully created folder '{logFolder}' in '{listTitle}'");
                     }
                 }
                 catch (SharePointRestException ex)
@@ -141,10 +142,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     if (hasFile)
                     {
                         result.ResultStatus = FileExistStatus.Exist;
+                        Console.WriteLine($"FileManagerService - FileExists - file exists at '{WordSanitizer.Sanitize(request.ServerRelativeUrl)}'");
                     }
                     else
                     {
                         result.ResultStatus = FileExistStatus.NotExist;
+                        Console.WriteLine($"FileManagerService - FileExists - file does not exist at '{WordSanitizer.Sanitize(request.ServerRelativeUrl)}'");
                     }
                 }
             }
@@ -193,6 +196,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 if (success)
                 {
                     result.ResultStatus = ResultStatus.Success;
+                    Console.WriteLine($"FileManagerService - DeleteFile - successfully deleted file at '{logUrl}'");
                 }
                 else
                 {
@@ -237,6 +241,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 {
                     result.ResultStatus = ResultStatus.Success;
                     result.Data = ByteString.CopyFrom(data);
+                    Console.WriteLine($"FileManagerService - DownloadFile - successfully downloaded file from '{logUrl}', size: {data.Length} bytes");
                 }
                 else
                 {
@@ -337,7 +342,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.FileName = fileName;
                 result.ResultStatus = ResultStatus.Success;
 
-                Console.WriteLine($"UploadFile: Successfully uploaded file '{fileName}'");
+                Console.WriteLine($"FileManagerService - UploadFile - successfully uploaded file '{fileName}' to entity '{request.EntityName}', folder '{logFolderName}'");
             }
             catch (SharePointRestException ex)
             {
@@ -426,6 +431,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     }
 
                     result.ResultStatus = ResultStatus.Success;
+                    Console.WriteLine($"FileManagerService - FolderFiles - successfully retrieved {result.Files.Count} files from folder '{WordSanitizer.Sanitize(request.FolderName)}' in entity '{request.EntityName}'");
                 }
             }
             catch (SharePointRestException spre)
@@ -458,6 +464,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 );
                 result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
                 result.ResultStatus = ResultStatus.Success;
+                Console.WriteLine($"FileManagerService - GetToken - successfully generated authentication token");
             }
             else
             {
@@ -497,6 +504,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 );
                 result.FileName = maybeTruncated;
                 result.ResultStatus = ResultStatus.Success;
+                Console.WriteLine($"FileManagerService - GetTruncatedFilename - successfully computed filename '{maybeTruncated}' for '{logFileName}'");
             }
             catch (SharePointRestException ex)
             {
@@ -730,7 +738,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ServerRelativeUrl = serverRelativeUrl;
                 result.ResultStatus = ResultStatus.Success;
 
-                Console.WriteLine($"EnsureFolderPath: Final path: {WordSanitizer.Sanitize(serverRelativeUrl)}");
+                Console.WriteLine($"FileManagerService - EnsureFolderPath - successfully ensured folder path for entity '{request.EntityName}', final path: {WordSanitizer.Sanitize(serverRelativeUrl)}");
             }
             catch (SharePointRestException ex)
             {
@@ -801,11 +809,13 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     }
 
                     result.ResultStatus = ResultStatus.Success;
+                    Console.WriteLine($"FileManagerService - FindFolder - successfully found {folders.Count} folders matching '{logSearchString}' in entity '{request.EntityName}'");
                 }
                 else
                 {
                     Console.WriteLine($"FindFolder: No folders found matching '{logSearchString}'");
                     result.ResultStatus = ResultStatus.Success; // Not an error, just no matches
+                    Console.WriteLine($"FileManagerService - FindFolder - no folders found matching '{logSearchString}' in entity '{request.EntityName}'");
                 }
             }
             catch (SharePointRestException ex)
@@ -1019,7 +1029,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 result.ServerRelativeUrl = folderServerRelativeUrl;
                 result.ResultStatus = ResultStatus.Success;
 
-                Console.WriteLine($"UploadFileWithFolderPath: Successfully uploaded file '{fileName}' to '{folderServerRelativeUrl}'");
+                Console.WriteLine($"FileManagerService - UploadFileWithFolderPath - successfully uploaded file '{fileName}' to entity '{request.EntityName}', path: '{folderServerRelativeUrl}'");
             }
             catch (SharePointRestException ex)
             {

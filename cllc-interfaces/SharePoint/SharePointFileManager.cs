@@ -363,6 +363,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 fileDetailsList = fileDetailsList.Where(f => f.DocumentType == documentType).ToList();
             }
+            Console.WriteLine($"SharePointFileManager - GetFileDetailsListInFolder - returning {fileDetailsList.Count} files from folder '{folderName}' in '{listTitle}'");
             return fileDetailsList;
         }
 
@@ -511,6 +512,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 string jsonString = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"SharePointFileManager - CreateFolder - successfully created folder '{folderName}' in '{listTitle}'");
             }
 
 
@@ -589,6 +591,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     jsonString = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                 }
+                Console.WriteLine($"SharePointFileManager - CreateDocumentLibrary - successfully created document library '{listTitle}' (template: '{documentTemplateUrlTitle}')");
             }
 
             return library;
@@ -636,6 +639,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 jsonString = await response.Content.ReadAsStringAsync();
+                Console.WriteLine($"SharePointFileManager - UpdateDocumentLibrary - successfully updated document library '{listTitle}'");
             }
 
             return library;
@@ -693,6 +697,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 result = true;
+                Console.WriteLine($"SharePointFileManager - DeleteFolder - successfully deleted folder '{folderName}' from '{listTitle}'");
             }
             else
             {
@@ -1008,6 +1013,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Console.WriteLine($"GetFolder - Folder found successfully");
                 result = JsonConvert.DeserializeObject(jsonString);
+                Console.WriteLine($"GetFolder - completed successfully for folder '{folderName}' in '{urlTitle}'");
             }
             else
             {
@@ -1046,6 +1052,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
 
                 result = JsonConvert.DeserializeObject(jsonString);
+                Console.WriteLine($"SharePointFileManager - GetDocumentLibrary - successfully retrieved document library '{listTitle}'");
             }
 
             return result;
@@ -1107,6 +1114,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
             }
 
+            Console.WriteLine($"SharePointFileManager - GetFoldersInDocumentLibrary - returning {folderList.Count} folders from '{listTitle}'");
             return folderList;
         }
 
@@ -1222,6 +1230,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // now add the file to the folder.
 
             fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
+            Console.WriteLine($"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{documentLibrary}'");
 
             return fileName;
 
@@ -1244,6 +1253,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             // now add the file to the folder.
 
             fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
+            Console.WriteLine($"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{documentLibrary}'");
 
             return fileName;
 
@@ -1368,6 +1378,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     result = fileName;
+                    Console.WriteLine($"SharePointFileManager - UploadFile - successfully uploaded file '{fileName}' to '{listTitle}/{folderName}'");
                 }
                 else
                 {
@@ -1429,6 +1440,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = ms.ToArray();
             }
 
+            Console.WriteLine($"SharePointFileManager - DownloadFile - successfully downloaded file from '{url}', size: {result.Length} bytes");
             return result;
         }
 
@@ -1475,6 +1487,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             }
 
+            if (!string.IsNullOrEmpty(result))
+            {
+                Console.WriteLine($"SharePointFileManager - GetDigest - successfully retrieved digest token");
+            }
             return result;
         }
 
@@ -1526,6 +1542,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 result = true;
+                Console.WriteLine($"SharePointFileManager - DeleteFile - successfully deleted file at '{serverRelativeUrl}'");
             }
             else
             {
@@ -1564,6 +1581,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result = true;
+                Console.WriteLine($"SharePointFileManager - RenameFile - successfully renamed file from '{oldServerRelativeUrl}' to '{newServerRelativeUrl}'");
             }
             else
             {
