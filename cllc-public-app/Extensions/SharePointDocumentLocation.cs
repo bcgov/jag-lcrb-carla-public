@@ -208,7 +208,12 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                         break;
                     case "specialevent":
                         var entity = _dynamicsClient.GetSpecialEventById(entityId);
+                        Console.WriteLine("222222222222222222222222222222222222222222222222222222222222222222");
+                        Console.WriteLine($"GetFolderName - specialevent - entityId: {entityId}, eventName: '{entity?.AdoxioEventname}'");
+                        
                         folderName = entity.GetDocumentFolderName();
+                        Console.WriteLine($"GetFolderName - specialevent - generated folderName: '{folderName}'");
+                        Console.WriteLine("222222222222222222222222222222222222222222222222222222222222222222");
                         break;
                 }
 

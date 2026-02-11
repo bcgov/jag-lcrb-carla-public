@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Services.FileManager;
 using Microsoft.AspNetCore.Authorization;
@@ -32,6 +33,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("token")]
         public async Task<IActionResult> GetToken([FromBody] TokenRequest request)
         {
+            Console.WriteLine($"FileManagerController - GetToken - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.GetToken(request, null);
 
@@ -48,6 +50,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("create-folder")]
         public async Task<IActionResult> CreateFolder([FromBody] CreateFolderRequest request)
         {
+            Console.WriteLine($"FileManagerController - CreateFolder - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.CreateFolder(request, null);
 
@@ -57,6 +60,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("folder-files")]
         public async Task<IActionResult> FolderFiles([FromBody] FolderFilesRequest request)
         {
+            Console.WriteLine($"FileManagerController - FolderFiles - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.FolderFiles(request, null);
 
@@ -66,6 +70,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("delete-file")]
         public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
         {
+            Console.WriteLine($"FileManagerController - DeleteFile - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.DeleteFile(request, null);
 
@@ -75,6 +80,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("download-file")]
         public async Task<IActionResult> DownloadFile([FromBody] DownloadFileRequest request)
         {
+            Console.WriteLine($"FileManagerController - DownloadFile - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.DownloadFile(request, null);
 
@@ -91,6 +97,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("file-exists")]
         public async Task<IActionResult> FileExists([FromBody] FileExistsRequest request)
         {
+            Console.WriteLine($"FileManagerController - FileExists - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.FileExists(request, null);
 
@@ -100,6 +107,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("upload-file")]
         public async Task<IActionResult> UploadFile([FromBody] UploadFileDto dto)
         {
+            Console.WriteLine($"FileManagerController - UploadFile - Request: EntityName={dto.EntityName}, FolderName={dto.FolderName}, FileName={dto.FileName}, ContentType={dto.ContentType}, DataLength={dto.Data?.Length ?? 0}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
 
             var request = new UploadFileRequest
@@ -136,6 +144,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("truncated-filename")]
         public async Task<IActionResult> GetTruncatedFilename([FromBody] TruncatedFilenameRequest request)
         {
+            Console.WriteLine($"FileManagerController - GetTruncatedFilename - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.GetTruncatedFilename(request, null);
 
@@ -152,6 +161,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("ensure-folder-path")]
         public async Task<IActionResult> EnsureFolderPath([FromBody] EnsureFolderPathDto dto)
         {
+            Console.WriteLine($"FileManagerController - EnsureFolderPath - Request: {JsonSerializer.Serialize(dto)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
 
             var request = new EnsureFolderPathRequest { EntityName = dto.EntityName };
@@ -209,6 +219,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("find-folder")]
         public async Task<IActionResult> FindFolder([FromBody] FindFolderRequest request)
         {
+            Console.WriteLine($"FileManagerController - FindFolder - Request: {JsonSerializer.Serialize(request)}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.FindFolder(request, null);
 
@@ -229,6 +240,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("upload-file-with-folder-path")]
         public async Task<IActionResult> UploadFileWithFolderPath([FromBody] UploadFileWithFolderPathDto dto)
         {
+            Console.WriteLine($"FileManagerController - UploadFileWithFolderPath - Request: EntityName={dto.EntityName}, FileName={dto.FileName}, ContentType={dto.ContentType}, FolderPathSegments={dto.FolderPath?.Count ?? 0}, DataLength={dto.Data?.Length ?? 0}");
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
 
             var request = new UploadFileWithFolderPathRequest

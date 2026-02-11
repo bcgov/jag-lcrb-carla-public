@@ -103,6 +103,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
         public static void UploadPdfIfChanged(this FileManagerClient _fileManagerClient, ILogger _logger, string entityName, string entityId, string folderName, string documentType, byte[] data, string hash)
         {
+            Console.WriteLine("44444444444444444444444444444444444444444444444444444444444444444444444444");
+            Console.WriteLine($"UploadPdf params 1: entityName: {entityName}, entityId: {entityId}, folderName: {folderName}, documentType: {documentType}");
+            Console.WriteLine("4444444444444444444444444444444444444444444444444444444444444444444444444444");
+
             Contract.Requires(_fileManagerClient != null);
             Contract.Requires(documentType != null);
 
@@ -121,6 +125,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 // Abort early if PDF hasn't changed...
                 return;
             }
+            Console.WriteLine("3333333333333333333333333333333333333333333333333333333333333333333333333333333");
+            Console.WriteLine($"UploadPdf params 2: entityName: {entityName}, entityId: {entityId}, folderName: {folderName}, documentType: {documentType}, fileName: {fileName}");
+            Console.WriteLine("3333333333333333333333333333333333333333333333333333333333333333333333333333333");
             _fileManagerClient.UploadPdf(_logger, entityName, entityId, folderName, fileName, data);
         }
 

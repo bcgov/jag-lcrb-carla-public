@@ -73,6 +73,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             string idCleaned = CleanGuidForSharePoint(specialEvent.AdoxioSpecialeventid);
             string folderName = $"{specialEvent.AdoxioEventname}_{idCleaned}";
+            Console.WriteLine("1111111111111111111111111111111111111111111111111111111111111111111");
+            Console.WriteLine($"Generated folder name for special event: {folderName}");
+            Console.WriteLine("1111111111111111111111111111111111111111111111111111111111111111111");
             return folderName;
         }
     }
