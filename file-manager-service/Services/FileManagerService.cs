@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Google.Protobuf.WellKnownTypes;
@@ -42,16 +43,17 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             var logFolder = WordSanitizer.Sanitize(request.FolderName);
 
-            var listTitle = GetDocumentListTitle(request.EntityName);
-
             var _sharePointFileManager = new SharePointFileManager(_configuration);
 
-            CreateDocumentLibraryIfMissing(listTitle, GetDocumentTemplateUrlPart(request.EntityName));
+            var listTitle = _sharePointFileManager.GetDocumentListTitle(request.EntityName);
+            var urlTitle = _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName);
+
+            CreateDocumentLibraryIfMissing(listTitle, urlTitle);
 
             var folderExists = false;
             try
             {
-                var folder = _sharePointFileManager.GetFolder(listTitle, request.FolderName).GetAwaiter().GetResult();
+                var folder = _sharePointFileManager.GetFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
                 if (folder != null)
                 {
                     folderExists = true;
@@ -80,11 +82,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 try
                 {
                     _sharePointFileManager
-                        .CreateFolder(GetDocumentListTitle(request.EntityName), request.FolderName)
+                        .CreateFolder(urlTitle, request.FolderName)
                         .GetAwaiter()
                         .GetResult();
                     var folder = _sharePointFileManager
-                        .GetFolder(listTitle, request.FolderName)
+                        .GetFolder(urlTitle, request.FolderName)
                         .GetAwaiter()
                         .GetResult();
                     if (folder != null)
@@ -126,7 +128,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 fileDetailsList = _sharePointFileManager
                     .GetFileDetailsListInFolder(
-                        GetDocumentTemplateUrlPart(request.EntityName),
+                        _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName),
                         request.FolderName,
                         request.DocumentType
                     )
@@ -160,84 +162,6 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             }
 
             return Task.FromResult(result);
-        }
-
-        private string GetDocumentListTitle(string entityName)
-        {
-            string listTitle;
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentListTitle;
-                    break;
-                case "application":
-                case "adoxio_application":
-                    listTitle = SharePointFileManager.ApplicationDocumentListTitle;
-                    break;
-                case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
-                case "worker":
-                case "adoxio_worker":
-                    listTitle = SharePointFileManager.WorkerDocumentListTitle;
-                    break;
-                case "event":
-                case "adoxio_event":
-                    listTitle = SharePointFileManager.EventDocumentListTitle;
-                    break;
-                case "federal_report":
-                case "adoxio_federalreportexport":
-                    listTitle = SharePointFileManager.FederalReportListTitle;
-                    break;
-                case "licence":
-                case "adoxio_licences":
-                    listTitle = SharePointFileManager.LicenceDocumentListTitle;
-                    break;
-                default:
-                    listTitle = entityName;
-                    break;
-            }
-
-            return listTitle;
-        }
-
-        private string GetDocumentTemplateUrlPart(string entityName)
-        {
-            var listTitle = "";
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = SharePointFileManager.DefaultDocumentUrlTitle;
-                    break;
-                case "application":
-                case "adoxio_application":
-                    listTitle = "adoxio_application";
-                    break;
-                case "contact":
-                    listTitle = SharePointFileManager.ContactDocumentListTitle;
-                    break;
-                case "worker":
-                case "adoxio_worker":
-                    listTitle = "adoxio_worker";
-                    break;
-                case "event":
-                case "adoxio_event":
-                    listTitle = SharePointFileManager.EventDocumentListTitle;
-                    break;
-                case "federal_report":
-                case "adoxio_federalreportexport":
-                    listTitle = SharePointFileManager.FederalReportListTitle;
-                    break;
-                case "licence":
-                case "adoxio_licences":
-                    listTitle = SharePointFileManager.LicenceDocumentUrlTitle;
-                    break;
-                default:
-                    listTitle = entityName;
-                    break;
-            }
-
-            return listTitle;
         }
 
         private void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
@@ -351,8 +275,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             var _sharePointFileManager = new SharePointFileManager(_configuration);
 
-            var listTitle = GetDocumentListTitle(request.EntityName);
-            var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+            var listTitle = _sharePointFileManager.GetDocumentListTitle(request.EntityName);
+            var documentTemplateUrlPart = _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName);
 
             Console.WriteLine(
                 $"UploadFile: Uploading file '{logFileName}' to entity {request.EntityName}, folder '{logFolderName}'"
@@ -460,7 +384,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             {
                 fileDetailsList = _sharePointFileManager
                     .GetFileDetailsListInFolder(
-                        GetDocumentTemplateUrlPart(request.EntityName),
+                        _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName),
                         request.FolderName,
                         request.DocumentType
                     )
@@ -565,10 +489,10 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
 
                 // Ask SharePoint whether this filename would be truncated upon upload
-                var listTitle = GetDocumentListTitle(request.EntityName);
+                var urlTitle = _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName);
                 var maybeTruncated = _sharePointFileManager.GetTruncatedFileName(
                     request.FileName,
-                    listTitle,
+                    urlTitle,
                     request.FolderName
                 );
                 result.FileName = maybeTruncated;
@@ -632,8 +556,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
-                var listTitle = GetDocumentListTitle(request.EntityName);
-                var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+                var listTitle = _sharePointFileManager.GetDocumentListTitle(request.EntityName);
+                var documentTemplateUrlPart = _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName);
 
                 Console.WriteLine(
                     $"EnsureFolderPath: Building folder path with {request.FolderPath?.Count ?? 0} segments"
@@ -748,6 +672,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                                     try
                                     {
                                         var folderJson = folder as Newtonsoft.Json.Linq.JObject;
+                                        Console.WriteLine($"EnsureFolderPath: GetFolder response for segment {i}: {folderJson}");
                                         if (folderJson != null && folderJson["Name"] != null)
                                         {
                                             var actualFolderName = folderJson["Name"].ToString();
@@ -851,7 +776,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
-                var listTitle = GetDocumentListTitle(request.EntityName);
+                var listTitle = _sharePointFileManager.GetDocumentListTitle(request.EntityName);
 
                 Console.WriteLine(
                     $"FindFolder: Searching for folders in document library '{listTitle}' containing '{logSearchString}'"
@@ -918,8 +843,8 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             try
             {
                 var _sharePointFileManager = new SharePointFileManager(_configuration);
-                var listTitle = GetDocumentListTitle(request.EntityName);
-                var documentTemplateUrlPart = GetDocumentTemplateUrlPart(request.EntityName);
+                var listTitle = _sharePointFileManager.GetDocumentListTitle(request.EntityName);
+                var documentTemplateUrlPart = _sharePointFileManager.GetDocumentTemplateUrlPart(request.EntityName);
 
                 Console.WriteLine(
                     $"UploadFileWithFolderPath: Uploading file '{logFileName}' with {request.FolderPath?.Count ?? 0} folder segments"

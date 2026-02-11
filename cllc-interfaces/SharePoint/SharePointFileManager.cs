@@ -26,10 +26,15 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string ApplicationDocumentListTitle = "Application";
         public const string ApplicationDocumentUrlTitle = "adoxio_application";
         public const string ContactDocumentListTitle = "contact";
+        public const string ContactDocumentUrlTitle = "contact";
         public const string WorkerDocumentListTitle = "Worker Qualification";
         public const string WorkerDocumentUrlTitle = "adoxio_worker";
+        public const string SpecialEventDocumentListTitle = "Special Event";
+        public const string SpecialEventDocumentUrlTitle = "adoxio_specialevent";
         public const string EventDocumentListTitle = "adoxio_event";
+        public const string EventDocumentUrlTitle = "adoxio_event";
         public const string FederalReportListTitle = "adoxio_federalreportexport";
+        public const string FederalReportUrlTitle = "adoxio_federalreportexport";
         public const string LicenceDocumentUrlTitle = "adoxio_licences";
         public const string LicenceDocumentListTitle = "Licence";
 
@@ -797,13 +802,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// (case-sensitive first, then case-insensitive, then by checking folder contents).
         /// Returns the actual folder name from SharePoint if found, otherwise null.
         /// </summary>
-        /// <param name="listTitle">The document library title</param>
+        /// <param name="urlTitle">The document library url title (ex: "adoxio_specialevent")</param>
         /// <param name="folderName">The expected folder name (for disambiguation when multiple GUID matches)</param>
         /// <param name="guid">The GUID to search for (required)</param>
         /// <returns>The actual folder name from SharePoint, or null if not found or cannot be disambiguated</returns>
-        public async Task<string> EnhancedFolderExists(string listTitle, string folderName, string guid)
+        public async Task<string> EnhancedFolderExists(string urlTitle, string folderName, string guid)
         {
-            Console.WriteLine($"EnhancedFolderExists - called with listTitle='{listTitle}', folderName='{folderName}', guid='{guid}'");
+            Console.WriteLine($"EnhancedFolderExists - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'");
             
             // return early if SharePoint is disabled.
             if (!IsValid())
@@ -823,7 +828,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // Search for folders containing the normalized GUID
-            var folders = await SearchFoldersInDocumentLibrary(listTitle, searchString: null, searchGuid: normalizedGuid);
+            var folders = await SearchFoldersInDocumentLibrary(urlTitle, searchString: null, searchGuid: normalizedGuid);
             Console.WriteLine($"EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders");
 
             if (folders == null || folders.Count == 0)
@@ -884,7 +889,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         var foldersWithItems = new List<FolderItem>();
                         foreach (var folder in caseInsensitiveMatches)
                         {
-                            bool hasItems = await FolderHasItems(listTitle, folder.Name);
+                            bool hasItems = await FolderHasItems(urlTitle, folder.Name);
                             Console.WriteLine($"EnhancedFolderExists - Folder '{folder.Name}' hasItems: {hasItems}");
                             if (hasItems)
                             {
@@ -935,13 +940,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// If multiple folders match the GUID, disambiguate using the folderName (case-sensitive first, then 
         /// case-insensitive, then by checking folder contents).
         /// </summary>
-        /// <param name="listTitle"></param>
+        /// <param name="urlTitle">The internal url name (ex: "adoxio_specialevent")</param>
         /// <param name="folderName"></param>
         /// <param name="guid"></param>
         /// <returns></returns>
-        public async Task<Object> GetFolder(string listTitle, string folderName, string guid = null)
+        public async Task<Object> GetFolder(string urlTitle, string folderName, string guid = null)
         {
-            Console.WriteLine($"GetFolder - called with listTitle='{listTitle}', folderName='{folderName}', guid='{guid}'");
+            Console.WriteLine($"GetFolder - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'");
             
             // return early if SharePoint is disabled.
             if (!IsValid())
@@ -956,7 +961,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (!string.IsNullOrEmpty(guid))
             {
                 Console.WriteLine($"GetFolder - GUID provided, calling EnhancedFolderExists...");
-                string actualFolderName = await EnhancedFolderExists(listTitle, folderName, guid);
+                string actualFolderName = await EnhancedFolderExists(urlTitle, folderName, guid);
                 if (!string.IsNullOrEmpty(actualFolderName))
                 {
                     // Found the folder with enhanced matching - use the actual name from SharePoint
@@ -980,7 +985,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            serverRelativeUrl += $"{listTitle}/{folderName}";
+            serverRelativeUrl += $"{urlTitle}/{folderName}";
             Console.WriteLine($"GetFolder - Constructed serverRelativeUrl: '{serverRelativeUrl}'");
 
 
@@ -1114,9 +1119,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns>List of matching folders</returns>
         public async Task<List<FolderItem>> SearchFoldersInDocumentLibrary(string listTitle, string searchString = null, string searchGuid = null)
         {
+            string internalTitle = GetDocumentTemplateUrlPart(listTitle);
+
+            Console.WriteLine($"SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'");
+            
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
+                Console.WriteLine("SearchFoldersInDocumentLibrary - SharePoint is not valid, returning null");
                 return null;
             }
 
@@ -1124,23 +1134,27 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (!string.IsNullOrEmpty(searchGuid))
             {
                 searchString = searchGuid.Replace("-", "").ToUpper();
+                Console.WriteLine($"SearchFoldersInDocumentLibrary - Normalized searchGuid to searchString: '{searchString}'");
             }
 
             if (string.IsNullOrEmpty(searchString))
             {
                 // Return empty list if no search criteria provided
+                Console.WriteLine("SearchFoldersInDocumentLibrary - searchString is null or empty, returning empty list");
                 return new List<FolderItem>();
             }
 
             List<FolderItem> folderList = new List<FolderItem>();
-            string title = Uri.EscapeUriString(listTitle);
+            string title = Uri.EscapeUriString(internalTitle);
             
             // Use OData filter to search on server side for better performance with large folder counts
             // substringof is used for SharePoint compatibility (older OData syntax)
             // Case-sensitive search by default (GUIDs are uppercase in folder names)
             string escapedSearch = searchString.Replace("'", "''"); // Escape single quotes for OData
             string filter = $"$filter=substringof('{escapedSearch}',Name) and Name ne 'Forms'";
-            string query = $"web/lists/GetByTitle('{title}')/rootFolder/folders?{filter}";
+            // string query = $"web/lists/GetByTitle('{title}')/rootFolder/folders?{filter}";
+            string query = $"web/GetList('/{title}')/rootFolder/folders?{filter}";
+            Console.WriteLine($"SearchFoldersInDocumentLibrary - Constructed query: '{query}'");
 
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
@@ -1152,8 +1166,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             };
 
             // make the request.
+            Console.WriteLine($"SearchFoldersInDocumentLibrary - Making API request to: {endpointRequest.RequestUri}");
             var response = await _Client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"SearchFoldersInDocumentLibrary - Response StatusCode: {response.StatusCode}");
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -1161,25 +1177,30 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     JObject responseObject = JObject.Parse(jsonString);
                     List<JToken> responseResults = responseObject["value"].Children().ToList();
+                    Console.WriteLine($"SearchFoldersInDocumentLibrary - Found {responseResults.Count} folders matching search criteria");
 
                     foreach (JToken responseResult in responseResults)
                     {
                         FolderItem folderItem = responseResult.ToObject<FolderItem>();
+                        Console.WriteLine($"SearchFoldersInDocumentLibrary - Adding folder: '{folderItem.Name}'");
                         folderList.Add(folderItem);
                     }
                 }
                 catch (JsonReaderException jre)
                 {
+                    Console.WriteLine($"SearchFoldersInDocumentLibrary - JSON parsing error: {jre.Message}");
                     throw jre;
                 }
             }
             else
             {
+                Console.WriteLine($"SearchFoldersInDocumentLibrary - Error response: {jsonString}");
                 throw new SharePointRestException(
                     string.Format("Operation returned an invalid status code '{0}'", response.StatusCode)
                 );
             }
 
+            Console.WriteLine($"SearchFoldersInDocumentLibrary - Returning {folderList.Count} folders");
             return folderList;
         }
 
@@ -1385,10 +1406,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
+            HttpStatusCode statusCode = response.StatusCode;
 
+            if (statusCode != HttpStatusCode.OK)
+            {
+                string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, responseContent);
 
-            using (
-                MemoryStream ms = new MemoryStream())
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+
+            using (MemoryStream ms = new MemoryStream())
             {
                 await response.Content.CopyToAsync(ms);
                 result = ms.ToArray();
@@ -1547,6 +1582,103 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return result;
         }
+
+        /// <summary>
+        /// Get the document library Display Name (ex: "Special Event).
+        /// </summary>
+        /// <param name="entityName"></param>
+        /// <returns></returns>
+        public string GetDocumentListTitle(string entityName)
+        {
+            string listTitle;
+            switch (entityName.ToLower())
+            {
+                case "account":
+                    listTitle = DefaultDocumentListTitle;
+                    break;
+                case "application":
+                case "adoxio_application":
+                    listTitle = ApplicationDocumentListTitle;
+                    break;
+                case "contact":
+                    listTitle = ContactDocumentListTitle;
+                    break;
+                case "worker":
+                case "adoxio_worker":
+                    listTitle = WorkerDocumentListTitle;
+                    break;
+                case "special event":
+                case "adoxio_specialevent":
+                    listTitle = SpecialEventDocumentListTitle;
+                    break;
+                case "event":
+                case "adoxio_event":
+                    listTitle = EventDocumentListTitle;
+                    break;
+                case "federal_report":
+                case "adoxio_federalreportexport":
+                    listTitle = FederalReportListTitle;
+                    break;
+                case "licence":
+                case "adoxio_licences":
+                    listTitle = LicenceDocumentListTitle;
+                    break;
+                default:
+                    listTitle = entityName;
+                    break;
+            }
+
+            return listTitle;
+        }
+
+        /// <summary>
+        /// Get the document library URL part (ex: "adoxio_specialevent).
+        /// </summary>
+        /// <param name="entityName"></param>
+        /// <returns></returns>
+        public string GetDocumentTemplateUrlPart(string entityName)
+        {
+            var listTitle = "";
+            switch (entityName.ToLower())
+            {
+                case "account":
+                    listTitle = DefaultDocumentUrlTitle;
+                    break;
+                case "application":
+                case "adoxio_application":
+                    listTitle = ApplicationDocumentUrlTitle;
+                    break;
+                case "contact":
+                    listTitle = ContactDocumentUrlTitle;
+                    break;
+                case "worker":
+                case "adoxio_worker":
+                    listTitle = WorkerDocumentUrlTitle;
+                    break;
+                case "special event":
+                case "adoxio_specialevent":
+                    listTitle = SpecialEventDocumentUrlTitle;
+                    break;
+                case "event":
+                case "adoxio_event":
+                    listTitle = EventDocumentUrlTitle;
+                    break;
+                case "federal_report":
+                case "adoxio_federalreportexport":
+                    listTitle = FederalReportUrlTitle;
+                    break;
+                case "licence":
+                case "adoxio_licences":
+                    listTitle = LicenceDocumentUrlTitle;
+                    break;
+                default:
+                    listTitle = entityName;
+                    break;
+            }
+
+            return listTitle;
+        }
+
     }
 
     class DocumentLibraryResponse
