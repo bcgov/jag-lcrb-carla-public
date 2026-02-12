@@ -1,10 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Microsoft.Rest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -16,6 +10,12 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.Rest;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -37,7 +37,23 @@ namespace Gov.Lclb.Cllb.Interfaces
         public const string FederalReportUrlTitle = "adoxio_federalreportexport";
         public const string LicenceDocumentUrlTitle = "adoxio_licences";
         public const string LicenceDocumentListTitle = "Licence";
-
+        public const string EnforcementActionDocumentListTitle = "enforcement action";
+        public const string EnforcementActionDocumentUrlTitle = "adoxio_enforcementaction";
+        public const string ComplaintDocumentListTitle = "complaint";
+        public const string ComplaintDocumentUrlTitle = "adoxio_complaint";
+        public const string ContraventionDocumentListTitle = "contravention";
+        public const string ContraventionDocumentUrlTitle = "adoxio_contravention";
+        public const string InvestigationEnforcementDocumentListTitle = "investigation enforcement";
+        public const string InvestigationEnforcementDocumentUrlTitle =
+            "adoxio_complianceinvestigation";
+        public const string EndorsementDocumentListTitle = "endorsement";
+        public const string EndorsementDocumentUrlTitle = "adoxio_endorsement";
+        public const string LegalEntityDocumentListTitle = "legal entity";
+        public const string LegalEntityDocumentUrlTitle = "adoxio_legalentity";
+        public const string EstablishmentIncidentDocumentListTitle = "establishment incident";
+        public const string EstablishmentIncidentDocumentUrlTitle = "adoxio_establishmentincident";
+        public const string IncidentDocumentListTitle = "inspection";
+        public const string IncidentDocumentUrlTitle = "incident";
 
         private const int MaxUrlLength = 260; // default maximum URL length.
 
@@ -58,7 +74,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             // create the HttpClient that is used for our direct REST calls.
             _CookieContainer = new CookieContainer();
-            
+
             // SharePoint configuration settings.
             string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
             string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
@@ -106,7 +122,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             // ADFS using fed auth
 
             string sharePointStsTokenUri = Configuration["SHAREPOINT_STS_TOKEN_URI"]; // Full URI to the STS service we will use to get the initial token.
-            string sharePointRelyingPartyIdentifier = Configuration["SHAREPOINT_RELYING_PARTY_IDENTIFIER"]; // use Fiddler to grab this from an interactive session.  Will normally start with urn:
+            string sharePointRelyingPartyIdentifier = Configuration[
+                "SHAREPOINT_RELYING_PARTY_IDENTIFIER"
+            ]; // use Fiddler to grab this from an interactive session.  Will normally start with urn:
             string sharePointUsername = Configuration["SHAREPOINT_USERNAME"]; // Service account username.  Be sure to add this user to the SharePoint instance.
             string sharePointPassword = Configuration["SHAREPOINT_PASSWORD"]; // Service account password
 
@@ -117,8 +135,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             string sharePointCertPassword = Configuration["SHAREPOINT_CERTIFICATE_PASSWORD"];
 
             // Basic Auth (SSG API Gateway)
-            string ssgUsername = Configuration["SSG_USERNAME"];  // BASIC authentication username
-            string ssgPassword = Configuration["SSG_PASSWORD"];  // BASIC authentication password
+            string ssgUsername = Configuration["SSG_USERNAME"]; // BASIC authentication username
+            string ssgPassword = Configuration["SSG_PASSWORD"]; // BASIC authentication password
 
             // sometimes SharePoint could be using a different username / password.
             string sharePointSsgUsername = Configuration["SHAREPOINT_SSG_USERNAME"];
@@ -145,7 +163,6 @@ namespace Gov.Lclb.Cllb.Interfaces
                 WebName = "/" + WebName;
             }
 
-
             ApiEndpoint = sharePointOdataUri;
             // ensure there is a trailing slash.
             if (!ApiEndpoint.EndsWith("/"))
@@ -154,36 +171,63 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             ApiEndpoint += "_api/";
 
-
             // Scenario #1 - ADFS (2016) using FedAuth
-            if (!string.IsNullOrEmpty(sharePointRelyingPartyIdentifier)
+            if (
+                !string.IsNullOrEmpty(sharePointRelyingPartyIdentifier)
                 && !string.IsNullOrEmpty(sharePointUsername)
                 && !string.IsNullOrEmpty(sharePointPassword)
                 && !string.IsNullOrEmpty(sharePointStsTokenUri)
-                )
+            )
             {
                 Authorization = null;
-                var samlST = Authentication.GetStsSamlToken(sharePointRelyingPartyIdentifier, sharePointUsername, sharePointPassword, sharePointStsTokenUri, _Client).GetAwaiter().GetResult();
-                //FedAuthValue = 
-                Authentication.GetFedAuth(sharePointOdataUri, samlST, sharePointRelyingPartyIdentifier, _Client, _CookieContainer).GetAwaiter().GetResult();
+                var samlST = Authentication
+                    .GetStsSamlToken(
+                        sharePointRelyingPartyIdentifier,
+                        sharePointUsername,
+                        sharePointPassword,
+                        sharePointStsTokenUri,
+                        _Client
+                    )
+                    .GetAwaiter()
+                    .GetResult();
+                //FedAuthValue =
+                Authentication
+                    .GetFedAuth(
+                        sharePointOdataUri,
+                        samlST,
+                        sharePointRelyingPartyIdentifier,
+                        _Client,
+                        _CookieContainer
+                    )
+                    .GetAwaiter()
+                    .GetResult();
             }
             // Scenario #2 - SharePoint Online (Cloud) using a Client Certificate
-            else if (!string.IsNullOrEmpty(sharePointAadTenantId)
+            else if (
+                !string.IsNullOrEmpty(sharePointAadTenantId)
                 && !string.IsNullOrEmpty(sharePointCertFileName)
                 && !string.IsNullOrEmpty(sharePointCertPassword)
                 && !string.IsNullOrEmpty(sharePointClientId)
-                )
+            )
             {
                 // add authentication.
                 var authenticationContext = new AuthenticationContext(
-                   "https://login.windows.net/" + sharePointAadTenantId);
+                    "https://login.windows.net/" + sharePointAadTenantId
+                );
 
                 // Create the Client cert.
-                X509Certificate2 cert = new X509Certificate2(sharePointCertFileName, sharePointCertPassword);
-                ClientAssertionCertificate clientAssertionCertificate = new ClientAssertionCertificate(sharePointClientId, cert);
+                X509Certificate2 cert = new X509Certificate2(
+                    sharePointCertFileName,
+                    sharePointCertPassword
+                );
+                ClientAssertionCertificate clientAssertionCertificate =
+                    new ClientAssertionCertificate(sharePointClientId, cert);
 
                 //ClientCredential clientCredential = new ClientCredential(clientId, clientKey);
-                var task = authenticationContext.AcquireTokenAsync(sharePointServerAppIdUri, clientAssertionCertificate);
+                var task = authenticationContext.AcquireTokenAsync(
+                    sharePointServerAppIdUri,
+                    clientAssertionCertificate
+                );
                 task.Wait();
                 authenticationResult = task.Result;
                 Authorization = authenticationResult.CreateAuthorizationHeader();
@@ -192,7 +236,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Scenario #3 - Using an API Gateway with Basic Authentication.  The API Gateway will handle other authentication and have different credentials, which may be NTLM
             {
                 // authenticate using the SSG.
-                string credentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(sharePointSsgUsername + ":" + sharePointSsgPassword));
+                string credentials = Convert.ToBase64String(
+                    ASCIIEncoding.ASCII.GetBytes(
+                        sharePointSsgUsername + ":" + sharePointSsgPassword
+                    )
+                );
                 Authorization = "Basic " + credentials;
             }
 
@@ -212,7 +260,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Standard headers for API access
             _Client.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
             _Client.DefaultRequestHeaders.Add("OData-Version", "4.0");
-
         }
 
         public bool IsValid()
@@ -251,7 +298,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             public DateTime Timelastmodified { get; set; }
         }
 
-
         public class FileDetailsList
         {
             public string Name { get; set; }
@@ -269,7 +315,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="folderName"></param>
         /// <param name="documentType"></param>
         /// <returns></returns>
-        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(string listTitle, string folderName, string documentType)
+        public async Task<List<FileDetailsList>> GetFileDetailsListInFolder(
+            string listTitle,
+            string folderName,
+            string documentType
+        )
         {
             // return early if SharePoint is disabled.
             if (!IsValid())
@@ -277,7 +327,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
 
             string serverRelativeUrl = "";
             // ensure the webname has a slash.
@@ -296,10 +346,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage _httpRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/files"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/getFolderByServerRelativeUrl('"
+                        + EscapeApostrophe(serverRelativeUrl)
+                        + "')/files"
+                ),
+                Headers = { { "Accept", "application/json" } }
             };
 
             // make the request.
@@ -308,8 +361,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if ((int)_statusCode != 200)
             {
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                var ex = new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", _statusCode)
+                );
+                _responseContent = await _httpResponse
+                    .Content.ReadAsStringAsync()
+                    .ConfigureAwait(false);
 
                 ex.Request = new HttpRequestMessageWrapper(_httpRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
@@ -361,34 +418,88 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (documentType != null)
             {
-                fileDetailsList = fileDetailsList.Where(f => f.DocumentType == documentType).ToList();
+                fileDetailsList = fileDetailsList
+                    .Where(f => f.DocumentType == documentType)
+                    .ToList();
             }
-            Console.WriteLine($"SharePointFileManager - GetFileDetailsListInFolder - returning {fileDetailsList.Count} files from folder '{folderName}' in '{listTitle}'");
+            Console.WriteLine(
+                $"SharePointFileManager - GetFileDetailsListInFolder - returning {fileDetailsList.Count} files from folder '{folderName}' in '{listTitle}'"
+            );
             return fileDetailsList;
         }
 
-        public string RemoveInvalidCharacters(string filename)
+        private char[] GetInvalidCharactersForEntity(string entityName)
+        {
+            var defaultInvalidChars = new char[]
+            {
+                '~',
+                '#',
+                '%',
+                '*',
+                '[',
+                ']',
+                '{',
+                '}',
+                ':',
+                '<',
+                '>',
+                '?',
+                '/',
+                '\\',
+                '|',
+                '"'
+            };
+
+            if (string.IsNullOrEmpty(entityName))
+            {
+                return defaultInvalidChars;
+            }
+
+            // Entity-specific invalid character rules
+            switch (entityName)
+            {
+                case EnforcementActionDocumentListTitle:
+                case EnforcementActionDocumentUrlTitle:
+                case ContraventionDocumentListTitle:
+                case ContraventionDocumentUrlTitle:
+                    // Enforcement and contravention entities - include period to match legacy conventions
+                    return defaultInvalidChars.Append('.').ToArray();
+                default:
+                    return defaultInvalidChars;
+            }
+        }
+
+        /// <summary>
+        /// Remove invalid characters from a filename, with optional entity-specific behavior
+        /// </summary>
+        /// <param name="filename">The filename to sanitize</param>
+        /// <param name="entityName">Optional entity name to customize invalid character handling</param>
+        /// <returns>Sanitized filename</returns>
+        public string RemoveInvalidCharacters(string filename, string entityName = null)
         {
             if (string.IsNullOrEmpty(filename))
+            {
                 return filename;
+            }
 
             var original = filename;
 
             // Get OS invalid chars and add SharePoint-specific invalid characters
             var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
-            // Add additional characters that do not work with SharePoint
-            var additionalInvalidChars = new char[] { '~', '#', '%', '*', '[', ']', '{', '}', ':', '<', '>', '?', '/', '\\', '|', '"' };
+
+            // Get entity-specific invalid characters
+            var additionalInvalidChars = GetInvalidCharactersForEntity(entityName);
 
             // Combine all invalid characters
             var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
 
-            // Replace each invalid character with underscore
+            // Replace each invalid character based on entity-specific rules
             var result = new StringBuilder(filename.Length);
             foreach (char c in filename)
             {
                 if (allInvalidChars.Contains(c))
                 {
-                    result.Append('_');
+                    result.Append('-'); // dash
                 }
                 else
                 {
@@ -402,7 +513,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Log if any changes were made
             if (original != resultString)
             {
-                Console.WriteLine($"RemoveInvalidCharacters: '{original}' -> '{resultString}'");
+                Console.WriteLine(
+                    $"RemoveInvalidCharacters (entity: '{entityName ?? "default"}'): '{original}' -> '{resultString}'"
+                );
             }
 
             return resultString;
@@ -414,8 +527,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// to preserve the path structure.
         /// </summary>
         /// <param name="folderNameOrPath">A single folder name or a path like "folder1/folder2"</param>
+        /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
         /// <returns>The sanitized folder name or path</returns>
-        public string FixFoldername(string folderNameOrPath)
+        public string FixFoldername(string folderNameOrPath, string entityName = null)
         {
             if (string.IsNullOrEmpty(folderNameOrPath))
                 return folderNameOrPath;
@@ -424,25 +538,49 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (folderNameOrPath.Contains("/"))
             {
                 var segments = folderNameOrPath.Split('/');
-                var fixedSegments = segments.Select(s => RemoveInvalidCharacters(s)).ToArray();
+                var fixedSegments = segments
+                    .Select(s => RemoveInvalidCharacters(s, entityName))
+                    .ToArray();
                 return string.Join("/", fixedSegments);
             }
-            
+
             // Single folder name
-            return RemoveInvalidCharacters(folderNameOrPath);
+            return RemoveInvalidCharacters(folderNameOrPath, entityName);
         }
 
-        public string FixFilename(string filename, int maxLength = 128)
+        /// <summary>
+        /// Fix a filename by removing invalid characters and truncating if necessary
+        /// </summary>
+        /// <param name="filename">The filename to fix</param>
+        /// <param name="maxLength">Maximum length for the filename (default 128)</param>
+        /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
+        /// <returns>Fixed filename</returns>
+        public string FixFilename(string filename, int maxLength = 128, string entityName = null)
         {
-            string result = RemoveInvalidCharacters(filename);
+            string result = RemoveInvalidCharacters(filename, entityName);
 
             // SharePoint requires that the filename is less than 128 characters.
 
             if (result.Length >= maxLength)
             {
                 string extension = Path.GetExtension(result);
-                result = Path.GetFileNameWithoutExtension(result).Substring(0, maxLength - extension.Length);
-                result += extension;
+                int extensionLength = extension.Length;
+
+                // Calculate the length available for the filename without extension
+                int nameLength = maxLength - extensionLength;
+
+                // Ensure we don't try to create a substring with negative length
+                if (nameLength <= 0)
+                {
+                    // If there's no room for the filename, truncate to just the maxLength
+                    // This handles edge cases where the path is extremely long
+                    result = result.Substring(0, Math.Max(1, maxLength));
+                }
+                else
+                {
+                    result = Path.GetFileNameWithoutExtension(result).Substring(0, nameLength);
+                    result += extension;
+                }
             }
 
             return result;
@@ -455,14 +593,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task CreateFolder(string listTitle, string folderName)
         {
-            Console.WriteLine($"SharePointFileManager - CreateFolder - called with listTitle='{listTitle}', folderName='{folderName}'");
+            Console.WriteLine(
+                $"SharePointFileManager - CreateFolder - called with listTitle='{listTitle}', folderName='{folderName}'"
+            );
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
                 return;
             }
 
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
 
             string relativeUrl = EscapeApostrophe($"/{listTitle}/{folderName}");
 
@@ -470,15 +610,15 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(ApiEndpoint + $"web/folders/add('{relativeUrl}')"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                Headers = { { "Accept", "application/json" } }
             };
 
             //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
 
             StringContent strContent = new StringContent("", Encoding.UTF8);
-            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(
+                "application/json;odata=verbose"
+            );
 
             endpointRequest.Content = strContent;
 
@@ -491,14 +631,20 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (!(_statusCode == HttpStatusCode.OK || _statusCode == HttpStatusCode.Created))
             {
                 string _responseContent;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", _statusCode)
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                
+
                 // Enhanced logging for debugging folder creation failures
                 string originalRelativeUrl = $"/{listTitle}/{folderName}";
-                Console.WriteLine($"SharePointFileManager - CreateFolder - failed - Status: {_statusCode}, FolderName: '{folderName}', EscapedRelativeUrl: '{relativeUrl}', OriginalRelativeUrl: '{originalRelativeUrl}'");
-                Console.WriteLine($"SharePointFileManager - CreateFolder - Response: {_responseContent}");
-                
+                Console.WriteLine(
+                    $"SharePointFileManager - CreateFolder - failed - Status: {_statusCode}, FolderName: '{folderName}', EscapedRelativeUrl: '{relativeUrl}', OriginalRelativeUrl: '{originalRelativeUrl}'"
+                );
+                Console.WriteLine(
+                    $"SharePointFileManager - CreateFolder - Response: {_responseContent}"
+                );
+
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
 
@@ -512,17 +658,21 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 string jsonString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"SharePointFileManager - CreateFolder - successfully created folder '{folderName}' in '{listTitle}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - CreateFolder - successfully created folder '{folderName}' in '{listTitle}'"
+                );
             }
-
-
         }
+
         /// <summary>
         /// Create Folder
         /// </summary>
         /// <param name="name"></param>
         /// <returns></returns>
-        public async Task<Object> CreateDocumentLibrary(string listTitle, string documentTemplateUrlTitle = null)
+        public async Task<Object> CreateDocumentLibrary(
+            string listTitle,
+            string documentTemplateUrlTitle = null
+        )
         {
             // return early if SharePoint is disabled.
             if (!IsValid())
@@ -530,8 +680,10 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Post, ApiEndpoint + "web/Lists");
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(
+                HttpMethod.Post,
+                ApiEndpoint + "web/Lists"
+            );
 
             if (string.IsNullOrEmpty(documentTemplateUrlTitle))
             {
@@ -539,10 +691,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             var library = CreateNewDocumentLibraryRequest(documentTemplateUrlTitle);
 
-
             string jsonString = JsonConvert.SerializeObject(library);
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
-            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(
+                "application/json;odata=verbose"
+            );
             endpointRequest.Content = strContent;
             // fix for bad request
             endpointRequest.Headers.Add("odata-version", "3.0");
@@ -554,7 +707,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (_statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", _statusCode)
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
@@ -569,21 +724,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 jsonString = await response.Content.ReadAsStringAsync();
-                var ob = Newtonsoft.Json.JsonConvert.DeserializeObject<DocumentLibraryResponse>(jsonString);
+                var ob = Newtonsoft.Json.JsonConvert.DeserializeObject<DocumentLibraryResponse>(
+                    jsonString
+                );
 
                 if (listTitle != documentTemplateUrlTitle)
                 {
                     // update list title
-                    endpointRequest = new HttpRequestMessage(HttpMethod.Post, $"{ApiEndpoint}web/lists(guid'{ob.d.Id}')");
+                    endpointRequest = new HttpRequestMessage(
+                        HttpMethod.Post,
+                        $"{ApiEndpoint}web/lists(guid'{ob.d.Id}')"
+                    );
                     var type = new { type = "SP.List" };
-                    var request = new
-                    {
-                        __metadata = type,
-                        Title = listTitle
-                    };
+                    var request = new { __metadata = type, Title = listTitle };
                     jsonString = JsonConvert.SerializeObject(request);
                     strContent = new StringContent(jsonString, Encoding.UTF8);
-                    strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+                    strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(
+                        "application/json;odata=verbose"
+                    );
                     endpointRequest.Headers.Add("IF-MATCH", "*");
                     endpointRequest.Headers.Add("X-HTTP-Method", "MERGE");
                     endpointRequest.Content = strContent;
@@ -591,7 +749,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     jsonString = await response.Content.ReadAsStringAsync();
                     response.EnsureSuccessStatusCode();
                 }
-                Console.WriteLine($"SharePointFileManager - CreateDocumentLibrary - successfully created document library '{listTitle}' (template: '{documentTemplateUrlTitle}')");
+                Console.WriteLine(
+                    $"SharePointFileManager - CreateDocumentLibrary - successfully created document library '{listTitle}' (template: '{documentTemplateUrlTitle}')"
+                );
             }
 
             return library;
@@ -605,16 +765,18 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return null;
             }
 
-            HttpRequestMessage endpointRequest =
-                new HttpRequestMessage(HttpMethod.Put, $"{ApiEndpoint}web/Lists");
-
+            HttpRequestMessage endpointRequest = new HttpRequestMessage(
+                HttpMethod.Put,
+                $"{ApiEndpoint}web/Lists"
+            );
 
             var library = CreateNewDocumentLibraryRequest(listTitle);
 
-
             string jsonString = JsonConvert.SerializeObject(library);
             StringContent strContent = new StringContent(jsonString, Encoding.UTF8);
-            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json;odata=verbose");
+            strContent.Headers.ContentType = MediaTypeHeaderValue.Parse(
+                "application/json;odata=verbose"
+            );
             endpointRequest.Content = strContent;
 
             // make the request.
@@ -624,7 +786,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (_statusCode != HttpStatusCode.Created)
             {
                 string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                var ex = new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", _statusCode)
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
@@ -639,7 +803,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             else
             {
                 jsonString = await response.Content.ReadAsStringAsync();
-                Console.WriteLine($"SharePointFileManager - UpdateDocumentLibrary - successfully updated document library '{listTitle}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - UpdateDocumentLibrary - successfully updated document library '{listTitle}'"
+                );
             }
 
             return library;
@@ -657,7 +823,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return request;
         }
 
-
         public async Task<bool> DeleteFolder(string listTitle, string folderName)
         {
             // return early if SharePoint is disabled.
@@ -666,7 +831,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 return false;
             }
 
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
 
             bool result = false;
             // Delete is very similar to a GET.
@@ -681,10 +846,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Delete,
-                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/getFolderByServerRelativeUrl('"
+                        + EscapeApostrophe(serverRelativeUrl)
+                        + "')"
+                ),
+                Headers = { { "Accept", "application/json" } }
             };
 
             // We want to delete this folder.
@@ -697,12 +865,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 result = true;
-                Console.WriteLine($"SharePointFileManager - DeleteFolder - successfully deleted folder '{folderName}' from '{listTitle}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - DeleteFolder - successfully deleted folder '{folderName}' from '{listTitle}'"
+                );
             }
             else
             {
                 string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                var ex = new SharePointRestException(
+                    string.Format(
+                        "Operation returned an invalid status code '{0}'",
+                        response.StatusCode
+                    )
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
@@ -753,10 +928,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                 HttpRequestMessage filesRequest = new HttpRequestMessage
                 {
                     Method = HttpMethod.Get,
-                    RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/files?$top=1"),
-                    Headers = {
-                        { "Accept", "application/json" }
-                    }
+                    RequestUri = new Uri(
+                        ApiEndpoint
+                            + "web/getFolderByServerRelativeUrl('"
+                            + EscapeApostrophe(serverRelativeUrl)
+                            + "')/files?$top=1"
+                    ),
+                    Headers = { { "Accept", "application/json" } }
                 };
 
                 var filesResponse = await _Client.SendAsync(filesRequest);
@@ -775,10 +953,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                 HttpRequestMessage foldersRequest = new HttpRequestMessage
                 {
                     Method = HttpMethod.Get,
-                    RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')/folders?$top=1"),
-                    Headers = {
-                        { "Accept", "application/json" }
-                    }
+                    RequestUri = new Uri(
+                        ApiEndpoint
+                            + "web/getFolderByServerRelativeUrl('"
+                            + EscapeApostrophe(serverRelativeUrl)
+                            + "')/folders?$top=1"
+                    ),
+                    Headers = { { "Accept", "application/json" } }
                 };
 
                 var foldersResponse = await _Client.SendAsync(foldersRequest);
@@ -811,10 +992,16 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="folderName">The expected folder name (for disambiguation when multiple GUID matches)</param>
         /// <param name="guid">The GUID to search for (required)</param>
         /// <returns>The actual folder name from SharePoint, or null if not found or cannot be disambiguated</returns>
-        public async Task<string> EnhancedFolderExists(string urlTitle, string folderName, string guid)
+        public async Task<string> EnhancedFolderExists(
+            string urlTitle,
+            string folderName,
+            string guid
+        )
         {
-            Console.WriteLine($"EnhancedFolderExists - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'");
-            
+            Console.WriteLine(
+                $"EnhancedFolderExists - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
+            );
+
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
@@ -825,16 +1012,24 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Normalize the GUID: remove dashes and convert to uppercase
             string normalizedGuid = guid?.Replace("-", "").ToUpper();
             Console.WriteLine($"EnhancedFolderExists - normalizedGuid='{normalizedGuid}'");
-            
+
             if (string.IsNullOrEmpty(normalizedGuid))
             {
-                Console.WriteLine("EnhancedFolderExists - normalizedGuid is null or empty, returning null");
+                Console.WriteLine(
+                    "EnhancedFolderExists - normalizedGuid is null or empty, returning null"
+                );
                 return null;
             }
 
             // Search for folders containing the normalized GUID
-            var folders = await SearchFoldersInDocumentLibrary(urlTitle, searchString: null, searchGuid: normalizedGuid);
-            Console.WriteLine($"EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders");
+            var folders = await SearchFoldersInDocumentLibrary(
+                urlTitle,
+                searchString: null,
+                searchGuid: normalizedGuid
+            );
+            Console.WriteLine(
+                $"EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders"
+            );
 
             if (folders == null || folders.Count == 0)
             {
@@ -845,57 +1040,77 @@ namespace Gov.Lclb.Cllb.Interfaces
             else if (folders.Count == 1)
             {
                 // Exactly one folder found - return its name
-                Console.WriteLine($"EnhancedFolderExists - Found exactly one folder: '{folders[0].Name}'");
+                Console.WriteLine(
+                    $"EnhancedFolderExists - Found exactly one folder: '{folders[0].Name}'"
+                );
                 return folders[0].Name;
             }
             else
             {
                 // Multiple folders found - need to disambiguate using folderName
-                Console.WriteLine($"EnhancedFolderExists - Multiple folders found ({folders.Count}), disambiguating...");
-                
+                Console.WriteLine(
+                    $"EnhancedFolderExists - Multiple folders found ({folders.Count}), disambiguating..."
+                );
+
                 // First try: case-sensitive comparison
                 var caseSensitiveMatches = folders
                     .Where(f => f.Name.Contains(folderName, StringComparison.Ordinal))
                     .ToList();
-                Console.WriteLine($"EnhancedFolderExists - Case-sensitive matches: {caseSensitiveMatches.Count}");
+                Console.WriteLine(
+                    $"EnhancedFolderExists - Case-sensitive matches: {caseSensitiveMatches.Count}"
+                );
 
                 if (caseSensitiveMatches.Count == 1)
                 {
                     // Found exactly one case-sensitive match
-                    Console.WriteLine($"EnhancedFolderExists - Found one case-sensitive match: '{caseSensitiveMatches[0].Name}'");
+                    Console.WriteLine(
+                        $"EnhancedFolderExists - Found one case-sensitive match: '{caseSensitiveMatches[0].Name}'"
+                    );
                     return caseSensitiveMatches[0].Name;
                 }
                 else if (caseSensitiveMatches.Count == 0)
                 {
                     // No case-sensitive matches - try case-insensitive comparison
-                    Console.WriteLine($"EnhancedFolderExists - No case-sensitive matches, trying case-insensitive...");
+                    Console.WriteLine(
+                        $"EnhancedFolderExists - No case-sensitive matches, trying case-insensitive..."
+                    );
                     var caseInsensitiveMatches = folders
                         .Where(f => f.Name.Contains(folderName, StringComparison.OrdinalIgnoreCase))
                         .ToList();
-                    Console.WriteLine($"EnhancedFolderExists - Case-insensitive matches: {caseInsensitiveMatches.Count}");
+                    Console.WriteLine(
+                        $"EnhancedFolderExists - Case-insensitive matches: {caseInsensitiveMatches.Count}"
+                    );
 
                     if (caseInsensitiveMatches.Count == 1)
                     {
                         // Found exactly one case-insensitive match
-                        Console.WriteLine($"EnhancedFolderExists - Found one case-insensitive match: '{caseInsensitiveMatches[0].Name}'");
+                        Console.WriteLine(
+                            $"EnhancedFolderExists - Found one case-insensitive match: '{caseInsensitiveMatches[0].Name}'"
+                        );
                         return caseInsensitiveMatches[0].Name;
                     }
                     else if (caseInsensitiveMatches.Count == 0)
                     {
                         // No matches at all
-                        Console.WriteLine("EnhancedFolderExists - No case-insensitive matches, returning null");
+                        Console.WriteLine(
+                            "EnhancedFolderExists - No case-insensitive matches, returning null"
+                        );
                         return null;
                     }
                     else
                     {
                         // Multiple case-insensitive matches - check which folder has items
-                        Console.WriteLine($"EnhancedFolderExists - Multiple case-insensitive matches ({caseInsensitiveMatches.Count}), checking for folder contents...");
-                        
+                        Console.WriteLine(
+                            $"EnhancedFolderExists - Multiple case-insensitive matches ({caseInsensitiveMatches.Count}), checking for folder contents..."
+                        );
+
                         var foldersWithItems = new List<FolderItem>();
                         foreach (var folder in caseInsensitiveMatches)
                         {
                             bool hasItems = await FolderHasItems(urlTitle, folder.Name);
-                            Console.WriteLine($"EnhancedFolderExists - Folder '{folder.Name}' hasItems: {hasItems}");
+                            Console.WriteLine(
+                                $"EnhancedFolderExists - Folder '{folder.Name}' hasItems: {hasItems}"
+                            );
                             if (hasItems)
                             {
                                 foldersWithItems.Add(folder);
@@ -905,19 +1120,25 @@ namespace Gov.Lclb.Cllb.Interfaces
                         if (foldersWithItems.Count == 1)
                         {
                             // Exactly one folder has items - return it
-                            Console.WriteLine($"EnhancedFolderExists - Found exactly one folder with items: '{foldersWithItems[0].Name}'");
+                            Console.WriteLine(
+                                $"EnhancedFolderExists - Found exactly one folder with items: '{foldersWithItems[0].Name}'"
+                            );
                             return foldersWithItems[0].Name;
                         }
                         else if (foldersWithItems.Count == 0)
                         {
                             // No folders have items - cannot determine which one to use
-                            Console.WriteLine("EnhancedFolderExists - No folders contain items, returning null");
+                            Console.WriteLine(
+                                "EnhancedFolderExists - No folders contain items, returning null"
+                            );
                             return null;
                         }
                         else
                         {
                             // Multiple folders have items - cannot determine which one to use
-                            Console.WriteLine($"EnhancedFolderExists - Multiple folders ({foldersWithItems.Count}) contain items, returning null");
+                            Console.WriteLine(
+                                $"EnhancedFolderExists - Multiple folders ({foldersWithItems.Count}) contain items, returning null"
+                            );
                             return null;
                         }
                     }
@@ -925,10 +1146,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                 else
                 {
                     // Multiple case-sensitive matches (shouldn't be possible in SharePoint, but handle gracefully)
-                    Console.WriteLine($"EnhancedFolderExists - Multiple case-sensitive matches ({caseSensitiveMatches.Count}) - unexpected, returning first: '{caseSensitiveMatches[0].Name}'");
+                    Console.WriteLine(
+                        $"EnhancedFolderExists - Multiple case-sensitive matches ({caseSensitiveMatches.Count}) - unexpected, returning first: '{caseSensitiveMatches[0].Name}'"
+                    );
                     return caseSensitiveMatches[0].Name;
                 }
-                
             }
         }
 
@@ -942,7 +1164,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <summary>
         /// Attempt to fetch an existing folder by name.
         /// If a GUID is provided, use it to enhance the search by matching on GUID (more reliable).
-        /// If multiple folders match the GUID, disambiguate using the folderName (case-sensitive first, then 
+        /// If multiple folders match the GUID, disambiguate using the folderName (case-sensitive first, then
         /// case-insensitive, then by checking folder contents).
         /// </summary>
         /// <param name="urlTitle">The internal url name (ex: "adoxio_specialevent")</param>
@@ -951,15 +1173,17 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <returns></returns>
         public async Task<Object> GetFolder(string urlTitle, string folderName, string guid = null)
         {
-            Console.WriteLine($"GetFolder - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'");
-            
+            Console.WriteLine(
+                $"GetFolder - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
+            );
+
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
                 Console.WriteLine("GetFolder - SharePoint is not valid, returning null");
                 return null;
             }
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, urlTitle);
             Console.WriteLine($"GetFolder - After FixFoldername: '{folderName}'");
 
             // If GUID is provided, use EnhancedFolderExists to find the folder by GUID and resolve the actual folder name
@@ -970,12 +1194,16 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (!string.IsNullOrEmpty(actualFolderName))
                 {
                     // Found the folder with enhanced matching - use the actual name from SharePoint
-                    Console.WriteLine($"GetFolder - EnhancedFolderExists returned actual folder name: '{actualFolderName}' (was '{folderName}')");
+                    Console.WriteLine(
+                        $"GetFolder - EnhancedFolderExists returned actual folder name: '{actualFolderName}' (was '{folderName}')"
+                    );
                     folderName = actualFolderName;
                 }
                 else
                 {
-                    Console.WriteLine($"GetFolder - EnhancedFolderExists returned null, continuing with original folderName");
+                    Console.WriteLine(
+                        $"GetFolder - EnhancedFolderExists returned null, continuing with original folderName"
+                    );
                 }
             }
             else
@@ -993,16 +1221,17 @@ namespace Gov.Lclb.Cllb.Interfaces
             serverRelativeUrl += $"{urlTitle}/{folderName}";
             Console.WriteLine($"GetFolder - Constructed serverRelativeUrl: '{serverRelativeUrl}'");
 
-
             HttpRequestMessage endpointRequest = new HttpRequestMessage()
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/getFolderByServerRelativeUrl('"
+                        + EscapeApostrophe(serverRelativeUrl)
+                        + "')?$select=Name,ServerRelativeUrl,UniqueId,ItemCount"
+                ),
+                Headers = { { "Accept", "application/json" } }
             };
-
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
@@ -1013,7 +1242,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Console.WriteLine($"GetFolder - Folder found successfully");
                 result = JsonConvert.DeserializeObject(jsonString);
-                Console.WriteLine($"GetFolder - completed successfully for folder '{folderName}' in '{urlTitle}'");
+                Console.WriteLine(
+                    $"GetFolder - completed successfully for folder '{folderName}' in '{urlTitle}'"
+                );
             }
             else
             {
@@ -1039,9 +1270,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                Headers = { { "Accept", "application/json" } }
             };
 
             // make the request.
@@ -1050,9 +1279,10 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
-
                 result = JsonConvert.DeserializeObject(jsonString);
-                Console.WriteLine($"SharePointFileManager - GetDocumentLibrary - successfully retrieved document library '{listTitle}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - GetDocumentLibrary - successfully retrieved document library '{listTitle}'"
+                );
             }
 
             return result;
@@ -1081,9 +1311,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                Headers = { { "Accept", "application/json" } }
             };
 
             // make the request.
@@ -1100,7 +1328,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     foreach (JToken responseResult in responseResults)
                     {
                         FolderItem folderItem = responseResult.ToObject<FolderItem>();
-                        
+
                         // Filter out system folders (Forms, etc.)
                         if (!folderItem.Name.Equals("Forms", StringComparison.OrdinalIgnoreCase))
                         {
@@ -1114,7 +1342,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 }
             }
 
-            Console.WriteLine($"SharePointFileManager - GetFoldersInDocumentLibrary - returning {folderList.Count} folders from '{listTitle}'");
+            Console.WriteLine(
+                $"SharePointFileManager - GetFoldersInDocumentLibrary - returning {folderList.Count} folders from '{listTitle}'"
+            );
             return folderList;
         }
 
@@ -1125,16 +1355,24 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="searchString">The string to search for in folder names (case-sensitive)</param>
         /// <param name="searchGuid">Optional GUID to search for (will be normalized: dashes removed, uppercase)</param>
         /// <returns>List of matching folders</returns>
-        public async Task<List<FolderItem>> SearchFoldersInDocumentLibrary(string listTitle, string searchString = null, string searchGuid = null)
+        public async Task<List<FolderItem>> SearchFoldersInDocumentLibrary(
+            string listTitle,
+            string searchString = null,
+            string searchGuid = null
+        )
         {
             string internalTitle = GetDocumentTemplateUrlPart(listTitle);
 
-            Console.WriteLine($"SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'");
-            
+            Console.WriteLine(
+                $"SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'"
+            );
+
             // return early if SharePoint is disabled.
             if (!IsValid())
             {
-                Console.WriteLine("SearchFoldersInDocumentLibrary - SharePoint is not valid, returning null");
+                Console.WriteLine(
+                    "SearchFoldersInDocumentLibrary - SharePoint is not valid, returning null"
+                );
                 return null;
             }
 
@@ -1142,19 +1380,23 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (!string.IsNullOrEmpty(searchGuid))
             {
                 searchString = searchGuid.Replace("-", "").ToUpper();
-                Console.WriteLine($"SearchFoldersInDocumentLibrary - Normalized searchGuid to searchString: '{searchString}'");
+                Console.WriteLine(
+                    $"SearchFoldersInDocumentLibrary - Normalized searchGuid to searchString: '{searchString}'"
+                );
             }
 
             if (string.IsNullOrEmpty(searchString))
             {
                 // Return empty list if no search criteria provided
-                Console.WriteLine("SearchFoldersInDocumentLibrary - searchString is null or empty, returning empty list");
+                Console.WriteLine(
+                    "SearchFoldersInDocumentLibrary - searchString is null or empty, returning empty list"
+                );
                 return new List<FolderItem>();
             }
 
             List<FolderItem> folderList = new List<FolderItem>();
             string title = Uri.EscapeUriString(internalTitle);
-            
+
             // Use OData filter to search on server side for better performance with large folder counts
             // substringof is used for SharePoint compatibility (older OData syntax)
             // Case-sensitive search by default (GUIDs are uppercase in folder names)
@@ -1168,16 +1410,18 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                Headers = { { "Accept", "application/json" } }
             };
 
             // make the request.
-            Console.WriteLine($"SearchFoldersInDocumentLibrary - Making API request to: {endpointRequest.RequestUri}");
+            Console.WriteLine(
+                $"SearchFoldersInDocumentLibrary - Making API request to: {endpointRequest.RequestUri}"
+            );
             var response = await _Client.SendAsync(endpointRequest);
             string jsonString = await response.Content.ReadAsStringAsync();
-            Console.WriteLine($"SearchFoldersInDocumentLibrary - Response StatusCode: {response.StatusCode}");
+            Console.WriteLine(
+                $"SearchFoldersInDocumentLibrary - Response StatusCode: {response.StatusCode}"
+            );
 
             if (response.StatusCode == HttpStatusCode.OK)
             {
@@ -1185,18 +1429,24 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     JObject responseObject = JObject.Parse(jsonString);
                     List<JToken> responseResults = responseObject["value"].Children().ToList();
-                    Console.WriteLine($"SearchFoldersInDocumentLibrary - Found {responseResults.Count} folders matching search criteria");
+                    Console.WriteLine(
+                        $"SearchFoldersInDocumentLibrary - Found {responseResults.Count} folders matching search criteria"
+                    );
 
                     foreach (JToken responseResult in responseResults)
                     {
                         FolderItem folderItem = responseResult.ToObject<FolderItem>();
-                        Console.WriteLine($"SearchFoldersInDocumentLibrary - Adding folder: '{folderItem.Name}'");
+                        Console.WriteLine(
+                            $"SearchFoldersInDocumentLibrary - Adding folder: '{folderItem.Name}'"
+                        );
                         folderList.Add(folderItem);
                     }
                 }
                 catch (JsonReaderException jre)
                 {
-                    Console.WriteLine($"SearchFoldersInDocumentLibrary - JSON parsing error: {jre.Message}");
+                    Console.WriteLine(
+                        $"SearchFoldersInDocumentLibrary - JSON parsing error: {jre.Message}"
+                    );
                     throw jre;
                 }
             }
@@ -1204,80 +1454,140 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Console.WriteLine($"SearchFoldersInDocumentLibrary - Error response: {jsonString}");
                 throw new SharePointRestException(
-                    string.Format("Operation returned an invalid status code '{0}'", response.StatusCode)
+                    string.Format(
+                        "Operation returned an invalid status code '{0}'",
+                        response.StatusCode
+                    )
                 );
             }
 
-            Console.WriteLine($"SearchFoldersInDocumentLibrary - Returning {folderList.Count} folders");
+            Console.WriteLine(
+                $"SearchFoldersInDocumentLibrary - Returning {folderList.Count} folders"
+            );
             return folderList;
         }
 
-
-        public async Task<string> AddFile(String folderName, String fileName, Stream fileData, string contentType)
+        public async Task<string> AddFile(
+            String folderName,
+            String fileName,
+            Stream fileData,
+            string contentType
+        )
         {
-            return await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+            return await this.AddFile(
+                DefaultDocumentListTitle,
+                folderName,
+                fileName,
+                fileData,
+                contentType
+            );
         }
 
-        public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, Stream fileData, string contentType)
+        public async Task<string> AddFile(
+            String listTitle,
+            String folderName,
+            String fileName,
+            Stream fileData,
+            string contentType
+        )
         {
-            folderName = FixFoldername(folderName);
-            bool folderExists = await this.FolderExists(documentLibrary, folderName);
+            folderName = FixFoldername(folderName, listTitle);
+            bool folderExists = await this.FolderExists(listTitle, folderName);
             if (!folderExists)
             {
-                await this.CreateFolder(documentLibrary, folderName);
+                await this.CreateFolder(listTitle, folderName);
             }
 
             // now add the file to the folder.
 
-            fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
-            Console.WriteLine($"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{documentLibrary}'");
+            fileName = await this.UploadFile(
+                fileName,
+                listTitle,
+                folderName,
+                fileData,
+                contentType
+            );
+            Console.WriteLine(
+                $"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
+            );
 
             return fileName;
-
         }
 
-        public async Task<string> AddFile(String folderName, String fileName, byte[] fileData, string contentType)
+        public async Task<string> AddFile(
+            String folderName,
+            String fileName,
+            byte[] fileData,
+            string contentType
+        )
         {
-            return await this.AddFile(DefaultDocumentListTitle, folderName, fileName, fileData, contentType);
+            return await this.AddFile(
+                DefaultDocumentListTitle,
+                folderName,
+                fileName,
+                fileData,
+                contentType
+            );
         }
 
-        public async Task<string> AddFile(String documentLibrary, String folderName, String fileName, byte[] fileData, string contentType)
+        public async Task<string> AddFile(
+            String listTitle,
+            String folderName,
+            String fileName,
+            byte[] fileData,
+            string contentType
+        )
         {
-            folderName = FixFoldername(folderName);
-            bool folderExists = await this.FolderExists(documentLibrary, folderName);
+            folderName = FixFoldername(folderName, listTitle);
+            bool folderExists = await this.FolderExists(listTitle, folderName);
             if (!folderExists)
             {
-                await this.CreateFolder(documentLibrary, folderName);
+                await this.CreateFolder(listTitle, folderName);
             }
 
             // now add the file to the folder.
 
-            fileName = await this.UploadFile(fileName, documentLibrary, folderName, fileData, contentType);
-            Console.WriteLine($"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{documentLibrary}'");
+            fileName = await this.UploadFile(
+                fileName,
+                listTitle,
+                folderName,
+                fileData,
+                contentType
+            );
+            Console.WriteLine(
+                $"SharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
+            );
 
             return fileName;
-
         }
 
         public string GetServerRelativeURL(string listTitle, string folderName)
         {
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
             string serverRelativeUrl = "";
             if (!string.IsNullOrEmpty(WebName))
             {
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            serverRelativeUrl += Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
+            serverRelativeUrl +=
+                Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
 
             return serverRelativeUrl;
         }
 
-
-        private string GenerateUploadRequestUriString(string folderServerRelativeUrl, string fileName)
+        private string GenerateUploadRequestUriString(
+            string folderServerRelativeUrl,
+            string fileName
+        )
         {
-            string requestUriString = ApiEndpoint + "web/getFolderByServerRelativeUrl('" + EscapeApostrophe(folderServerRelativeUrl) + "')/Files/add(url='"
-                + EscapeApostrophe(fileName) + "',overwrite=true)";
+            string requestUriString =
+                ApiEndpoint
+                + "web/getFolderByServerRelativeUrl('"
+                + EscapeApostrophe(folderServerRelativeUrl)
+                + "')/Files/add(url='"
+                + EscapeApostrophe(fileName)
+                + "',overwrite=true)";
             return requestUriString;
         }
 
@@ -1290,7 +1600,13 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="fileData"></param>
         /// <param name="contentType"></param>
         /// <returns>Uploaded Filename, or Null if not successful.</returns>
-        public async Task<string> UploadFile(string fileName, string listTitle, string folderName, Stream fileData, string contentType)
+        public async Task<string> UploadFile(
+            string fileName,
+            string listTitle,
+            string folderName,
+            Stream fileData,
+            string contentType
+        )
         {
             string result = null;
             if (IsValid())
@@ -1324,7 +1640,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             int maxLength = 128;
             fileName = FixFilename(fileName, maxLength);
 
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
 
             // SharePoint also imposes a limit on the whole URL
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
@@ -1333,10 +1649,105 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 int delta = requestUriString.Length - MaxUrlLength;
                 maxLength -= delta;
+
+                // Ensure maxLength doesn't become too small (minimum 10 characters to allow for some filename + extension)
+                if (maxLength < 10)
+                {
+                    maxLength = 10;
+                }
+
                 fileName = FixFilename(fileName, maxLength);
             }
 
             return fileName;
+        }
+
+        /// <summary>
+        /// Extract the UniqueId (GUID) from a folder object returned by SharePoint API
+        /// </summary>
+        private string GetFolderUniqueId(object folderObject)
+        {
+            try
+            {
+                var folderJson = folderObject as JObject;
+                if (folderJson != null && folderJson["UniqueId"] != null)
+                {
+                    return folderJson["UniqueId"].ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"GetFolderUniqueId - Error extracting UniqueId: {ex.Message}");
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Upload a file using folder ID instead of path (avoids URL length issues)
+        /// </summary>
+        private async Task<string> UploadFileByFolderId(
+            string fileName,
+            string folderId,
+            byte[] data,
+            string contentType
+        )
+        {
+            string result = null;
+
+            string requestUriString =
+                ApiEndpoint
+                + "web/GetFolderById('"
+                + folderId
+                + "')/Files/add(url='"
+                + EscapeApostrophe(fileName)
+                + "',overwrite=true)";
+
+            Console.WriteLine(
+                $"UploadFileByFolderId - Using folder ID '{folderId}', URL length: {requestUriString.Length}"
+            );
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Post,
+                RequestUri = new Uri(requestUriString),
+                Headers = { { "Accept", "application/json" } }
+            };
+
+            ByteArrayContent byteArrayContent = new ByteArrayContent(data);
+            byteArrayContent.Headers.Add(@"content-length", data.Length.ToString());
+            endpointRequest.Content = byteArrayContent;
+
+            var response = await _Client.SendAsync(endpointRequest);
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                result = fileName;
+                Console.WriteLine(
+                    $"SharePointFileManager - UploadFileByFolderId - successfully uploaded file '{fileName}' using folder ID"
+                );
+            }
+            else
+            {
+                string _responseContent = null;
+                var ex = new SharePointRestException(
+                    string.Format(
+                        "Operation returned an invalid status code '{0}'",
+                        response.StatusCode
+                    )
+                );
+                _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
+
+                endpointRequest.Dispose();
+                if (response != null)
+                {
+                    response.Dispose();
+                }
+                throw ex;
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -1348,24 +1759,74 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="fileData"></param>
         /// <param name="contentType"></param>
         /// <returns>Uploaded Filename, or Null if not successful.</returns>
-        public async Task<string> UploadFile(string fileName, string listTitle, string folderName, byte[] data, string contentType)
+        public async Task<string> UploadFile(
+            string fileName,
+            string listTitle,
+            string folderName,
+            byte[] data,
+            string contentType
+        )
         {
             string result = null;
             if (IsValid())
             {
-                folderName = FixFoldername(folderName);
+                folderName = FixFoldername(folderName, listTitle);
                 fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
                 string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
-                string requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
+                string requestUriString = GenerateUploadRequestUriString(
+                    serverRelativeUrl,
+                    fileName
+                );
 
+                // If URL is too long, try using folder ID instead
+                if (requestUriString.Length > MaxUrlLength)
+                {
+                    Console.WriteLine(
+                        $"UploadFile - URL too long ({requestUriString.Length} chars), attempting upload by folder ID"
+                    );
+
+                    try
+                    {
+                        // Get the folder object which contains the UniqueId
+                        var folder = await GetFolder(listTitle, folderName);
+                        if (folder != null)
+                        {
+                            string folderId = GetFolderUniqueId(folder);
+                            if (!string.IsNullOrEmpty(folderId))
+                            {
+                                Console.WriteLine(
+                                    $"UploadFile - Found folder ID: {folderId}, using ID-based upload"
+                                );
+                                return await UploadFileByFolderId(
+                                    fileName,
+                                    folderId,
+                                    data,
+                                    contentType
+                                );
+                            }
+                            else
+                            {
+                                Console.WriteLine(
+                                    "UploadFile - Could not extract folder ID, falling back to path-based upload"
+                                );
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(
+                            $"UploadFile - Error getting folder ID: {ex.Message}, falling back to path-based upload"
+                        );
+                    }
+                }
+
+                // Standard path-based upload
                 HttpRequestMessage endpointRequest = new HttpRequestMessage
                 {
                     Method = HttpMethod.Post,
                     RequestUri = new Uri(requestUriString),
-                    Headers = {
-                        { "Accept", "application/json" }
-                    }
+                    Headers = { { "Accept", "application/json" } }
                 };
 
                 ByteArrayContent byteArrayContent = new ByteArrayContent(data);
@@ -1378,13 +1839,22 @@ namespace Gov.Lclb.Cllb.Interfaces
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
                     result = fileName;
-                    Console.WriteLine($"SharePointFileManager - UploadFile - successfully uploaded file '{fileName}' to '{listTitle}/{folderName}'");
+                    Console.WriteLine(
+                        $"SharePointFileManager - UploadFile - successfully uploaded file '{fileName}' to '{listTitle}/{folderName}'"
+                    );
                 }
                 else
                 {
                     string _responseContent = null;
-                    var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
-                    _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    var ex = new SharePointRestException(
+                        string.Format(
+                            "Operation returned an invalid status code '{0}'",
+                            response.StatusCode
+                        )
+                    );
+                    _responseContent = await response
+                        .Content.ReadAsStringAsync()
+                        .ConfigureAwait(false);
                     ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                     ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
 
@@ -1399,7 +1869,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-
         /// <summary>
         /// Download a file
         /// </summary>
@@ -1412,7 +1881,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(url) + "')/$value"),
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/GetFileByServerRelativeUrl('"
+                        + EscapeApostrophe(url)
+                        + "')/$value"
+                ),
             };
 
             // make the request.
@@ -1421,8 +1895,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             if (statusCode != HttpStatusCode.OK)
             {
-                string responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                string responseContent = await response
+                    .Content.ReadAsStringAsync()
+                    .ConfigureAwait(false);
+                var ex = new SharePointRestException(
+                    string.Format("Operation returned an invalid status code '{0}'", statusCode)
+                );
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, responseContent);
 
@@ -1440,7 +1918,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                 result = ms.ToArray();
             }
 
-            Console.WriteLine($"SharePointFileManager - DownloadFile - successfully downloaded file from '{url}', size: {result.Length} bytes");
+            Console.WriteLine(
+                $"SharePointFileManager - DownloadFile - successfully downloaded file from '{url}', size: {result.Length} bytes"
+            );
             return result;
         }
 
@@ -1458,9 +1938,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(ApiEndpoint + "contextinfo"),
-                Headers = {
-                    { "Accept", "application/json;odata=verbose" }
-                }
+                Headers = { { "Accept", "application/json;odata=verbose" } }
             };
 
             // make the request.
@@ -1484,12 +1962,13 @@ namespace Gov.Lclb.Cllb.Interfaces
                         result = digests[0].InnerText;
                     }
                 }
-
             }
 
             if (!string.IsNullOrEmpty(result))
             {
-                Console.WriteLine($"SharePointFileManager - GetDigest - successfully retrieved digest token");
+                Console.WriteLine(
+                    $"SharePointFileManager - GetDigest - successfully retrieved digest token"
+                );
             }
             return result;
         }
@@ -1509,7 +1988,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 serverRelativeUrl += $"{WebName}/";
             }
 
-            folderName = FixFoldername(folderName);
+            folderName = FixFoldername(folderName, listTitle);
 
             serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 
@@ -1526,10 +2005,13 @@ namespace Gov.Lclb.Cllb.Interfaces
             HttpRequestMessage endpointRequest = new HttpRequestMessage
             {
                 Method = HttpMethod.Delete,
-                RequestUri = new Uri(ApiEndpoint + "web/GetFileByServerRelativeUrl('" + EscapeApostrophe(serverRelativeUrl) + "')"),
-                Headers = {
-                    { "Accept", "application/json" }
-                }
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/GetFileByServerRelativeUrl('"
+                        + EscapeApostrophe(serverRelativeUrl)
+                        + "')"
+                ),
+                Headers = { { "Accept", "application/json" } }
             };
 
             // We want to delete this file.
@@ -1542,12 +2024,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.NoContent)
             {
                 result = true;
-                Console.WriteLine($"SharePointFileManager - DeleteFile - successfully deleted file at '{serverRelativeUrl}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - DeleteFile - successfully deleted file at '{serverRelativeUrl}'"
+                );
             }
             else
             {
                 string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                var ex = new SharePointRestException(
+                    string.Format(
+                        "Operation returned an invalid status code '{0}'",
+                        response.StatusCode
+                    )
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
@@ -1571,9 +2060,9 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
         {
             bool result = false;
-            string url = $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{EscapeApostrophe(newServerRelativeUrl)}', flags=1)";
+            string url =
+                $"{ApiEndpoint}web/GetFileByServerRelativeUrl('{EscapeApostrophe(oldServerRelativeUrl)}')/moveto(newurl='{EscapeApostrophe(newServerRelativeUrl)}', flags=1)";
             HttpRequestMessage endpointRequest = new HttpRequestMessage(HttpMethod.Post, url);
-
 
             // make the request.
             var response = await _Client.SendAsync(endpointRequest);
@@ -1581,12 +2070,19 @@ namespace Gov.Lclb.Cllb.Interfaces
             if (response.StatusCode == HttpStatusCode.OK)
             {
                 result = true;
-                Console.WriteLine($"SharePointFileManager - RenameFile - successfully renamed file from '{oldServerRelativeUrl}' to '{newServerRelativeUrl}'");
+                Console.WriteLine(
+                    $"SharePointFileManager - RenameFile - successfully renamed file from '{oldServerRelativeUrl}' to '{newServerRelativeUrl}'"
+                );
             }
             else
             {
                 string _responseContent = null;
-                var ex = new SharePointRestException(string.Format("Operation returned an invalid status code '{0}'", response.StatusCode));
+                var ex = new SharePointRestException(
+                    string.Format(
+                        "Operation returned an invalid status code '{0}'",
+                        response.StatusCode
+                    )
+                );
                 _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
                 ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
                 ex.Response = new HttpResponseMessageWrapper(response, _responseContent);
@@ -1641,6 +2137,38 @@ namespace Gov.Lclb.Cllb.Interfaces
                 case "adoxio_licences":
                     listTitle = LicenceDocumentListTitle;
                     break;
+                case "enforcement action":
+                case "adoxio_enforcementaction":
+                    listTitle = EnforcementActionDocumentListTitle;
+                    break;
+                case "complaint":
+                case "adoxio_complaint":
+                    listTitle = ComplaintDocumentListTitle;
+                    break;
+                case "contravention":
+                case "adoxio_contravention":
+                    listTitle = ContraventionDocumentListTitle;
+                    break;
+                case "investigation enforcement":
+                case "adoxio_complianceinvestigation":
+                    listTitle = InvestigationEnforcementDocumentListTitle;
+                    break;
+                case "endorsement":
+                case "adoxio_endorsement":
+                    listTitle = EndorsementDocumentListTitle;
+                    break;
+                case "legal entity":
+                case "adoxio_legalentity":
+                    listTitle = LegalEntityDocumentListTitle;
+                    break;
+                case "establishment incident":
+                case "adoxio_establishmentincident":
+                    listTitle = EstablishmentIncidentDocumentListTitle;
+                    break;
+                case "incident":
+                case "adoxio_incident":
+                    listTitle = IncidentDocumentListTitle;
+                    break;
                 default:
                     listTitle = entityName;
                     break;
@@ -1689,6 +2217,38 @@ namespace Gov.Lclb.Cllb.Interfaces
                 case "adoxio_licences":
                     listTitle = LicenceDocumentUrlTitle;
                     break;
+                case "enforcement action":
+                case "adoxio_enforcementaction":
+                    listTitle = EnforcementActionDocumentUrlTitle;
+                    break;
+                case "complaint":
+                case "adoxio_complaint":
+                    listTitle = ComplaintDocumentUrlTitle;
+                    break;
+                case "contravention":
+                case "adoxio_contravention":
+                    listTitle = ContraventionDocumentUrlTitle;
+                    break;
+                case "investigation enforcement":
+                case "adoxio_complianceinvestigation":
+                    listTitle = InvestigationEnforcementDocumentUrlTitle;
+                    break;
+                case "endorsement":
+                case "adoxio_endorsement":
+                    listTitle = EndorsementDocumentUrlTitle;
+                    break;
+                case "legal entity":
+                case "adoxio_legalentity":
+                    listTitle = LegalEntityDocumentUrlTitle;
+                    break;
+                case "establishment incident":
+                case "adoxio_establishmentincident":
+                    listTitle = EstablishmentIncidentDocumentUrlTitle;
+                    break;
+                case "incident":
+                case "adoxio_incident":
+                    listTitle = IncidentDocumentUrlTitle;
+                    break;
                 default:
                     listTitle = entityName;
                     break;
@@ -1696,7 +2256,6 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             return listTitle;
         }
-
     }
 
     class DocumentLibraryResponse

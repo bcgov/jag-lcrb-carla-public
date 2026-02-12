@@ -640,7 +640,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                         // Apply SharePoint filename sanitization and truncation BEFORE building cumulative path
                         var originalFolderName = folderName;
-                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
+                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName, request.EntityName);
                         Console.WriteLine(
                             $"EnsureFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
                         );
@@ -929,7 +929,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
                         // Apply SharePoint filename sanitization
                         var originalFolderName = folderName;
-                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName);
+                        folderName = _sharePointFileManager.RemoveInvalidCharacters(folderName, request.EntityName);
                         Console.WriteLine(
                             $"UploadFileWithFolderPath: After RemoveInvalidCharacters: '{originalFolderName}' -> '{folderName}'"
                         );
