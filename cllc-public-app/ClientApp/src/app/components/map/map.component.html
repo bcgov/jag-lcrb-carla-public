@@ -29,7 +29,8 @@
             </button>
           </app-field>
 
-          <p>Grey markers indicate stores which are not yet open to the public. Clicking on markers will show store details.</p>
+          <!-- <p>Grey markers indicate stores which are not yet open to the public. Clicking on markers will show store details.</p> -->
+          <p>Clicking on markers will show store details.</p>
           <p>If you have any questions, please contact <a href="mailto:cannabisregs@gov.bc.ca">cannabisregs@gov.bc.ca</a></p>
 
 
@@ -51,7 +52,7 @@
         <div class="col-12">
         <table *ngIf="mapData?.length > 0" class="eq-table" style="width: 100%">
           <tr>
-            <td colspan="7" align="right">
+            <td colspan="6" align="right">
               Download As: <a href="api/establishments/map-csv">CSV</a> &nbsp; <a href="api/establishments/map-json">JSON</a>
             </td>
           </tr>
@@ -62,7 +63,7 @@
             <th>Address</th>
             <th>City</th>
             <th>Postal</th>
-            <th>Status</th>
+            <!-- <th>Status</th> -->
           </tr>
           <tr *ngFor="let item of pagedData; let i = index;">
             <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
@@ -85,10 +86,11 @@
             <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
               <span style="font-weight: 600">{{item.addressPostal}}</span>
             </td>
-            <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
+            <!-- Uncomment below to show "Coming Soon" status for non-open establishments -->
+            <!-- <td style="background-color: #F1F4FA; padding: 10px; padding-bottom: 15px;">
               <span style="font-weight: 600" *ngIf="item.isOpen === true">Open</span>
               <span style="font-weight: 600" *ngIf="item.isOpen !== true">Coming Soon</span>
-            </td>
+            </td> -->
           </tr>
         </table>
         <mat-paginator *ngIf="mapData?.length > 0" style="width: 100%"

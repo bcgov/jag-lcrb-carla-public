@@ -451,7 +451,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     var establishment = license.AdoxioEstablishment;
 
                                     // Do not add LDB stores here — they are added separately via GetLDBStores().
+                                    // Only include establishments that are open.
+                                    bool isOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
                                     if (establishment != null &&
+                                        isOpen &&
+                                        // Uncomment the line below to include "Coming Soon" establishments:
+                                        // if (establishment != null &&
                                         (license.AdoxioLicencee == null ||
                                          license.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
                                         establishment.AdoxioLatitude != null &&
@@ -490,8 +495,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                 AddressStreet = establishment.AdoxioAddressstreet,
                                                 Latitude = (decimal) establishment.AdoxioLatitude,
                                                 Longitude = (decimal) establishment.AdoxioLongitude,
-                                                IsOpen = establishment.AdoxioIsopen.HasValue &&
-                                                         establishment.AdoxioIsopen.Value
+                                                IsOpen = isOpen
                                             });
                                         }
                                     }
@@ -698,18 +702,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
                 {
-                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
+                    // Only include establishments that are open.
+                    bool isLdbOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
+                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000
+                     && isLdbOpen
+                     // Uncomment the line below (and remove isLdbOpen check) to include "Coming Soon" LDB stores:
+                     // && true
+                     && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
                      &&   (
                             search == null || (establishment.AdoxioAddresscity != null &&
                                                establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
                         )
-                    ) // Licensed
+                    ) // Licensed and Open
                     {
                         result.Add(new EstablishmentMapData
                             {
                                 id = establishment.AdoxioEstablishmentid,
                                 Name = "BC Cannabis Store",
-                                IsOpen = establishment.AdoxioIsopen.Value,
+                                IsOpen = isLdbOpen,
                                 License = "Public Store",
                                 AddressStreet = establishment.AdoxioAddressstreet,
                                 AddressCity = establishment.AdoxioAddresscity,
