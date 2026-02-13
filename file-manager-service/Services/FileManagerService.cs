@@ -618,6 +618,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         {
                             if (
                                 string.IsNullOrEmpty(segment.FolderNameSegment?.Trim())
+                                || segment.FolderNameSegment?.Trim() == "-" // Legacy edge case where a records "name" may be initialized to a "-".
                                 || string.IsNullOrEmpty(segment.FolderGuidSegment?.Trim())
                             )
                             {
@@ -935,6 +936,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         {
                             if (
                                 string.IsNullOrEmpty(segment.FolderNameSegment?.Trim())
+                                || segment.FolderNameSegment?.Trim() == "-" // Legacy edge case where a records "name" may be initialized to a "-".
                                 || string.IsNullOrEmpty(segment.FolderGuidSegment?.Trim())
                             )
                             {
