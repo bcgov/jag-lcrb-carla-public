@@ -383,27 +383,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                         licenseFilter += ")";
 
-                        string[] licenseExpand = {
-                            "adoxio_LicenceType($select=adoxio_name)",
-                            "adoxio_establishment($select=adoxio_establishmentid,adoxio_name,adoxio_phone,adoxio_addresscity,adoxio_addresspostalcode,adoxio_addressstreet,adoxio_latitude,adoxio_longitude,adoxio_isopen,_adoxio_lgin_value;$expand=adoxio_LGIN($select=adoxio_name))",
-                            "adoxio_Licencee($select=name)"
-                        };
+                        string[] licenseExpand = { "adoxio_LicenceType", "adoxio_establishment" };
 
-                        var licenseSelect = new List<string>
-                        {
-                            "adoxio_licencesid",
-                            "adoxio_licencenumber",
-                            "_adoxio_establishment_value",
-                            "_adoxio_licencetype_value",
-                            "statuscode"
-                        };
+                        // Look up LDB account ID once for exclusion check (no need to expand Licencee on every license).
+                        var ldbAccount = _dynamicsClient.GetAccountByNameWithEstablishments(LDB_ACCOUNT_NAME);
+                        string ldbAccountId = ldbAccount?.Accountid;
 
                         // get licenses
                         IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
 
                         try
                         {
-                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand, select: licenseSelect)
+                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand)
                                 .Value;
                         }
                         catch (HttpOperationException httpOperationException)
@@ -457,28 +448,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                         isOpen &&
                                         // Uncomment the line below to include "Coming Soon" establishments:
                                         // if (establishment != null &&
-                                        (license.AdoxioLicencee == null ||
-                                         license.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
+                                        (ldbAccountId == null ||
+                                         license._adoxioLicenceeValue != ldbAccountId) &&
                                         establishment.AdoxioLatitude != null &&
                                         establishment.AdoxioLongitude != null)
                                     {
 
-                                        if (add && !string.IsNullOrEmpty(search) &&
-                                            establishment.AdoxioName != null &&
-                                            establishment.AdoxioAddresscity != null)
+                                        if (add && !string.IsNullOrEmpty(search))
                                         {
-                                            search = search.ToUpper();
-                                            if (!establishment.AdoxioName.ToUpper().StartsWith(search)
-                                                && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search))
+                                            var upperSearch = search.ToUpper();
+                                            bool matchesName = establishment.AdoxioName != null &&
+                                                establishment.AdoxioName.ToUpper().StartsWith(upperSearch);
+                                            bool matchesCity = establishment.AdoxioAddresscity != null &&
+                                                establishment.AdoxioAddresscity.ToUpper().StartsWith(upperSearch);
+
+                                            if (!matchesName && !matchesCity)
                                             {
-                                                // Check the LGIN (already expanded inline, no separate API call).
-                                                if (establishment.AdoxioLGIN == null
-                                                    || establishment.AdoxioLGIN.AdoxioName == null
-                                                    || !establishment.AdoxioLGIN.AdoxioName.ToUpper()
-                                                        .StartsWith(search))
-                                                {
-                                                    add = false;
-                                                }
+                                                add = false;
                                             }
                                         }
 
