@@ -94,6 +94,49 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         );
                     }
                 }
+                catch (SharePointRestException ex) when (ex.Response?.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                {
+                    // Forbidden could mean folder already exists (race condition)
+                    // Verify if folder actually exists
+                    Log.Warning(
+                        ex,
+                        $"CreateFolder - Received Forbidden when creating folder {logFolder}, verifying existence - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}"
+                    );
+                    try
+                    {
+                        var folder = _sharePointFileManager
+                            .GetFolder(urlTitle, request.FolderName)
+                            .GetAwaiter()
+                            .GetResult();
+                        if (folder != null)
+                        {
+                            result.ResultStatus = ResultStatus.Success;
+                            Console.WriteLine(
+                                $"FileManagerService - CreateFolder - folder '{logFolder}' verified to exist after Forbidden error in '{listTitle}'"
+                            );
+                        }
+                        else
+                        {
+                            // Folder doesn't exist and we can't create it
+                            result.ResultStatus = ResultStatus.Fail;
+                            result.ErrorDetail = $"CreateFolder - ERROR: Access denied creating folder {logFolder}";
+                            Log.Error(
+                                ex,
+                                $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                            );
+                        }
+                    }
+                    catch (Exception verifyEx)
+                    {
+                        // Verification failed - log original error
+                        result.ResultStatus = ResultStatus.Fail;
+                        result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
+                        Log.Error(
+                            ex,
+                            $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                        );
+                    }
+                }
                 catch (SharePointRestException ex)
                 {
                     result.ResultStatus = ResultStatus.Fail;
@@ -757,10 +800,42 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                         if (!folderExists)
                         {
                             Console.WriteLine($"EnsureFolderPath: Creating folder: {logSegmentPath}");
-                            _sharePointFileManager
-                                .CreateFolder(documentTemplateUrlPart, currentPath)
-                                .GetAwaiter()
-                                .GetResult();
+                            try
+                            {
+                                _sharePointFileManager
+                                    .CreateFolder(documentTemplateUrlPart, currentPath)
+                                    .GetAwaiter()
+                                    .GetResult();
+                            }
+                            catch (SharePointRestException createEx) when (createEx.Response?.StatusCode == System.Net.HttpStatusCode.Forbidden)
+                            {
+                                // Forbidden could mean folder already exists (race condition)
+                                // Verify if folder actually exists now
+                                Console.WriteLine($"EnsureFolderPath: CreateFolder returned Forbidden, verifying folder existence for: {logSegmentPath}");
+                                try
+                                {
+                                    var verifyFolder = _sharePointFileManager
+                                        .GetFolder(documentTemplateUrlPart, currentPath)
+                                        .GetAwaiter()
+                                        .GetResult();
+                                    if (verifyFolder != null)
+                                    {
+                                        Console.WriteLine($"EnsureFolderPath: Folder verified to exist after Forbidden error: {logSegmentPath}");
+                                        // Folder exists, continue normally
+                                    }
+                                    else
+                                    {
+                                        // Folder doesn't exist and we can't create it - rethrow
+                                        Console.WriteLine($"EnsureFolderPath: Folder does not exist and cannot be created: {logSegmentPath}");
+                                        throw;
+                                    }
+                                }
+                                catch (SharePointRestException)
+                                {
+                                    // Verification failed - rethrow original error
+                                    throw createEx;
+                                }
+                            }
                         }
                     }
                 }
