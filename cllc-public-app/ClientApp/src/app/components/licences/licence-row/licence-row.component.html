@@ -76,7 +76,7 @@
         Return to Dashboard
       </a>
     </span>
-    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && !isExpiredOverOneYear(item)">
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && !isExpiredOverOneYear(item) && !isLicenceRenewalDisabled(item)">
       <div *ngIf="hasOutstandingPriorBalance" style="color: #f44336;"><fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>Warning: you have an outstanding balance invoice(s) that can be accessed from the Dashboard page.</div>
       <button mat-raised-button *ngIf="item.autoRenewal" color="secondary" style="margin-right: 10px;"
               (click)="startRenewal(item)" [disabled]="renewalStarted">
@@ -88,7 +88,7 @@
         <mat-progress-bar *ngIf="renewalStarted" mode="indeterminate"></mat-progress-bar>
       </button>
     </span>
-    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item)" class="missing">
+    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue  && isExpiredOverOneYear(item) && !isLicenceRenewalDisabled(item)" class="missing">
       <fa-icon [icon]="faExclamationTriangle" style="margin-right: 10px;"></fa-icon>
       Unable to Reinstate.
     </span>
@@ -375,7 +375,7 @@
                                         Return to Dashboard
                                       </a>
                                     </span>
-                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item) && !isLicenceRenewalDisabled(item)">
                                       <strong>Attention</strong>: This Licence has Expired<br>
                                       <button mat-raised-button color="secondary" style="margin-right: 10px;"
                                               (click)="startRenewal(item)" [disabled]="renewalStarted">
@@ -401,7 +401,7 @@
                                         </span>
                                       </button>
                                     </span>
-                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item)">
+                                    <span *ngIf="!isOutstandingPriorBalanceInvoiceDue && !isExpiredOverOneYear(item) && !isLicenceRenewalDisabled(item)">
                                       <strong>Attention</strong>: This licence has Expired<br>
                                       <button mat-raised-button color="secondary" style="margin-right: 10px;"
                                               (click)="startRenewal(item)" [disabled]="renewalStarted">
