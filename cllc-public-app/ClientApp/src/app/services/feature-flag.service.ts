@@ -8,8 +8,9 @@ import { FeatureFlagDataService } from './feature-flag-data.service';
   providedIn: 'root'
 })
 export class FeatureFlagService {
+  public initialized = false;
+
   private _featureFlags: FeatureFlag[] = []; // A list of all features turned ON
-  private initialized = false;
   private initializationObservable: Observable<FeatureFlag[]> | null = null;
 
   constructor(private featureFlagDataService: FeatureFlagDataService) {}
