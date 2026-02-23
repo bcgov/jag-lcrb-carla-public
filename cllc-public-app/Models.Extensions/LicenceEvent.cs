@@ -66,7 +66,12 @@ namespace Gov.Lclb.Cllb.Public.Models
             return EventClass.Notice;
         }
 
-        // Converts a dynamics entity into a view model
+        /// <summary>
+        /// Converts a MicrosoftDynamicsCRMadoxioEvent entity into a LicenceEvent view model.
+        /// </summary>
+        /// <param name="item">The dynamics entity to convert.</param>
+        /// <param name="dynamicsClient">The dynamics client.</param>
+        /// <returns>The converted LicenceEvent view model.</returns>
         public static LicenceEvent ToViewModel(this MicrosoftDynamicsCRMadoxioEvent item, IDynamicsClient dynamicsClient)
         {
             LicenceEvent result = null;
@@ -213,7 +218,11 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
 
-        // Converts a view model into a dynamics entity
+        /// <summary>
+        /// Copies values from a LicenceEvent view model to a MicrosoftDynamicsCRMadoxioEvent entity.
+        /// </summary>
+        /// <param name="to">The dynamics entity to copy values to.</param>
+        /// <param name="from">The view model to copy values from.</param>
         public static void CopyValues(this MicrosoftDynamicsCRMadoxioEvent to, LicenceEvent from)
         {
             to.AdoxioEventid = from.Id;
@@ -319,7 +328,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.AdoxioMktorganizercontactname = from.MKTOrganizerContactName;
             to.AdoxioMktorganizercontactphone = from.MKTOrganizerContactPhone;
             to.AdoxioRegistrationnumber = from.RegistrationNumber;
-            to.AdoxioBusinessnumber = from.BusinessNumber;
             to.AdoxioMarketname = from.MarketName;
             to.AdoxioMarketwebsite = from.MarketWebsite;
             to.AdoxioMarketduration = (int?)from.MarketDuration;
