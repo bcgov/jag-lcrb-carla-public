@@ -19,43 +19,10 @@ using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
-    public class SharePointFileManager
+    public partial class SharePointFileManager
     {
-        public const string DefaultDocumentListTitle = "Account";
-        public const string DefaultDocumentUrlTitle = "account";
-        public const string ApplicationDocumentListTitle = "Application";
-        public const string ApplicationDocumentUrlTitle = "adoxio_application";
-        public const string ContactDocumentListTitle = "contact";
-        public const string ContactDocumentUrlTitle = "contact";
-        public const string WorkerDocumentListTitle = "Worker Qualification";
-        public const string WorkerDocumentUrlTitle = "adoxio_worker";
-        public const string SpecialEventDocumentListTitle = "Special Event";
-        public const string SpecialEventDocumentUrlTitle = "adoxio_specialevent";
-        public const string EventDocumentListTitle = "adoxio_event";
-        public const string EventDocumentUrlTitle = "adoxio_event";
-        public const string FederalReportListTitle = "adoxio_federalreportexport";
-        public const string FederalReportUrlTitle = "adoxio_federalreportexport";
-        public const string LicenceDocumentUrlTitle = "adoxio_licences";
-        public const string LicenceDocumentListTitle = "Licence";
-        public const string EnforcementActionDocumentListTitle = "enforcement action";
-        public const string EnforcementActionDocumentUrlTitle = "adoxio_enforcementaction";
-        public const string ComplaintDocumentListTitle = "complaint";
-        public const string ComplaintDocumentUrlTitle = "adoxio_complaint";
-        public const string ContraventionDocumentListTitle = "contravention";
-        public const string ContraventionDocumentUrlTitle = "adoxio_contravention";
-        public const string InvestigationEnforcementDocumentListTitle = "investigation enforcement";
-        public const string InvestigationEnforcementDocumentUrlTitle =
-            "adoxio_complianceinvestigation";
-        public const string EndorsementDocumentListTitle = "endorsement";
-        public const string EndorsementDocumentUrlTitle = "adoxio_endorsement";
-        public const string LegalEntityDocumentListTitle = "legal entity";
-        public const string LegalEntityDocumentUrlTitle = "adoxio_legalentity";
-        public const string EstablishmentIncidentDocumentListTitle = "establishment incident";
-        public const string EstablishmentIncidentDocumentUrlTitle = "adoxio_establishmentincident";
-        public const string IncidentDocumentListTitle = "inspection";
-        public const string IncidentDocumentUrlTitle = "incident";
-
-        private const int MaxUrlLength = 260; // default maximum URL length.
+        private const int MAX_TOTAL_LENGTH = 260; // default maximum URL length.
+        private const int MAX_SEGMENT_LENGTH = 128; // default maximum segment length.
 
         private AuthenticationResult authenticationResult;
 
@@ -103,7 +70,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     {
                         // Ignore all certificate validation errors.
                         return true;
-                    }
+                    },
                 };
             }
             else
@@ -112,7 +79,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     UseCookies = true,
                     AllowAutoRedirect = false,
-                    CookieContainer = _CookieContainer
+                    CookieContainer = _CookieContainer,
                 };
             }
 
@@ -277,7 +244,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// </summary>
         /// <param name="filename"></param>
         /// <returns>Filename, with apropstophes escaped.</returns>
-        private string EscapeApostrophe(string filename)
+        public string EscapeApostrophe(string filename)
         {
             string result = null;
             if (!string.IsNullOrEmpty(filename))
@@ -352,7 +319,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         + EscapeApostrophe(serverRelativeUrl)
                         + "')/files"
                 ),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // make the request.
@@ -447,7 +414,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 '/',
                 '\\',
                 '|',
-                '"'
+                '"',
             };
 
             if (string.IsNullOrEmpty(entityName))
@@ -458,10 +425,10 @@ namespace Gov.Lclb.Cllb.Interfaces
             // Entity-specific invalid character rules
             switch (entityName)
             {
-                case EnforcementActionDocumentListTitle:
-                case EnforcementActionDocumentUrlTitle:
-                case ContraventionDocumentListTitle:
-                case ContraventionDocumentUrlTitle:
+                case SharePointHelpers.EnforcementActionDocumentListTitle:
+                case SharePointHelpers.EnforcementActionDocumentUrlTitle:
+                case SharePointHelpers.ContraventionDocumentListTitle:
+                case SharePointHelpers.ContraventionDocumentUrlTitle:
                     // Enforcement and contravention entities - include period to match legacy conventions
                     return defaultInvalidChars.Append('.').ToArray();
                 default:
@@ -555,7 +522,11 @@ namespace Gov.Lclb.Cllb.Interfaces
         /// <param name="maxLength">Maximum length for the filename (default 128)</param>
         /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
         /// <returns>Fixed filename</returns>
-        public string FixFilename(string filename, int maxLength = 128, string entityName = null)
+        public string FixFilename(
+            string filename,
+            int maxLength = MAX_SEGMENT_LENGTH,
+            string entityName = null
+        )
         {
             string result = RemoveInvalidCharacters(filename, entityName);
 
@@ -610,7 +581,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(ApiEndpoint + $"web/folders/add('{relativeUrl}')"),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             //string jsonString = "{ '__metadata': { 'type': 'SP.Folder' }, 'ServerRelativeUrl': '" + relativeUrl + "'}";
@@ -818,7 +789,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 __metadata = type,
                 BaseTemplate = 101,
-                Title = listName
+                Title = listName,
             };
             return request;
         }
@@ -852,7 +823,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         + EscapeApostrophe(serverRelativeUrl)
                         + "')"
                 ),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // We want to delete this folder.
@@ -934,7 +905,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                             + EscapeApostrophe(serverRelativeUrl)
                             + "')/files?$top=1"
                     ),
-                    Headers = { { "Accept", "application/json" } }
+                    Headers = { { "Accept", "application/json" } },
                 };
 
                 var filesResponse = await _Client.SendAsync(filesRequest);
@@ -959,7 +930,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                             + EscapeApostrophe(serverRelativeUrl)
                             + "')/folders?$top=1"
                     ),
-                    Headers = { { "Accept", "application/json" } }
+                    Headers = { { "Accept", "application/json" } },
                 };
 
                 var foldersResponse = await _Client.SendAsync(foldersRequest);
@@ -1230,7 +1201,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         + EscapeApostrophe(serverRelativeUrl)
                         + "')?$select=Name,ServerRelativeUrl,UniqueId,ItemCount"
                 ),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // make the request.
@@ -1270,7 +1241,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // make the request.
@@ -1288,10 +1259,283 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public class FolderItem
+        // /// <summary>
+        // /// Get a folder by traversing a path of folder segments
+        // /// </summary>
+        // /// <param name="request">Request containing entity name and folder path segments</param>
+        // /// <returns>The folder object if found, null otherwise</returns>
+        // public async Task<Object> GetFolder2(EnsureFolderPathRequest request)
+        // {
+        //     Console.WriteLine(
+        //         $"GetFolder2 - called with entityName='{request.entityName}', folderPath segments={request.folderPath?.Count ?? 0}"
+        //     );
+
+        //     // return early if SharePoint is disabled.
+        //     if (!IsValid())
+        //     {
+        //         Console.WriteLine("GetFolder2 - SharePoint is not valid, returning null");
+        //         return null;
+        //     }
+
+        //     if (request.folderPath == null || request.folderPath.Count == 0)
+        //     {
+        //         Console.WriteLine("GetFolder2 - folderPath is null or empty, returning null");
+        //         return null;
+        //     }
+
+        //     // Start with the first segment - search at the root level
+        //     var firstSegment = request.folderPath[0];
+        //     Console.WriteLine(
+        //         $"GetFolder2 - Processing first segment: folderName='{firstSegment.folderName}', nameSegment='{firstSegment.folderNameSegment}', guidSegment='{firstSegment.folderGuidSegment}'"
+        //     );
+
+        //     var matchingFolders = await SearchFoldersInDocumentLibrary(
+        //         request.entityName,
+        //         searchString: firstSegment.folderNameSegment,
+        //         searchGuid: firstSegment.folderGuidSegment
+        //     );
+
+        //     if (matchingFolders == null || matchingFolders.Count == 0)
+        //     {
+        //         Console.WriteLine($"GetFolder2 - No folders found matching");
+        //         return null;
+        //     }
+
+        //     // Find the best match for the first segment
+        //     FolderItem currentFolder = FindBestMatch(matchingFolders, firstSegment);
+
+        //     if (currentFolder == null)
+        //     {
+        //         Console.WriteLine($"GetFolder2 - Could not find best match for first segment");
+        //         return null;
+        //     }
+
+        //     Console.WriteLine($"GetFolder2 - Found first folder: '{currentFolder.Name}'");
+
+        //     // Now descend through remaining segments
+        //     for (int i = 1; i < request.folderPath.Count; i++)
+        //     {
+        //         var segment = request.folderPath[i];
+        //         Console.WriteLine(
+        //             $"GetFolder2 - Processing segment {i}: folderName='{segment.folderName}', nameSegment='{segment.folderNameSegment}', guidSegment='{segment.folderGuidSegment}'"
+        //         );
+
+        //         // Get subfolders of current folder
+        //         var subfolders = await GetSubfoldersOfFolder(
+        //             request.entityName,
+        //             currentFolder.ServerRelativeUrl
+        //         );
+
+        //         if (subfolders == null || subfolders.Count == 0)
+        //         {
+        //             Console.WriteLine(
+        //                 $"GetFolder2 - No subfolders found in '{currentFolder.Name}'"
+        //             );
+        //             return null;
+        //         }
+
+        //         // Find best match among subfolders
+        //         currentFolder = FindBestMatch(subfolders, segment);
+
+        //         if (currentFolder == null)
+        //         {
+        //             Console.WriteLine(
+        //                 $"GetFolder2 - Could not find matching subfolder for segment {i}"
+        //             );
+        //             return null;
+        //         }
+
+        //         Console.WriteLine($"GetFolder2 - Found subfolder: '{currentFolder.Name}'");
+        //     }
+
+        //     // Get the final folder object
+        //     Console.WriteLine(
+        //         $"GetFolder2 - Successfully traversed path, final folder: '{currentFolder.Name}'"
+        //     );
+        //     return await GetFolderByServerRelativeUrl(currentFolder.ServerRelativeUrl);
+        // }
+
+        /// <summary>
+        /// Find the best matching folder from a list based on a folder segment
+        /// </summary>
+        private FolderItem FindBestMatch(List<FolderItem> folders, FolderSegment segment)
         {
-            public string Name { get; set; }
-            public string ServerRelativeUrl { get; set; }
+            // First try: exact match on folderName
+            if (!string.IsNullOrEmpty(segment.FolderName))
+            {
+                var exactMatch = folders.FirstOrDefault(f =>
+                    f.Name.Equals(segment.FolderName, StringComparison.Ordinal)
+                );
+                if (exactMatch != null)
+                {
+                    Console.WriteLine($"FindBestMatch - Found exact match: '{exactMatch.Name}'");
+                    return exactMatch;
+                }
+            }
+
+            // Second try: match on GUID segment (case-insensitive contains)
+            if (!string.IsNullOrEmpty(segment.FolderGuidSegment))
+            {
+                var guidMatches = folders
+                    .Where(f =>
+                        f.Name.Contains(
+                            segment.FolderGuidSegment,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    .ToList();
+                if (guidMatches.Count == 1)
+                {
+                    Console.WriteLine(
+                        $"FindBestMatch - Found unique GUID match: '{guidMatches[0].Name}'"
+                    );
+                    return guidMatches[0];
+                }
+                else if (guidMatches.Count > 1)
+                {
+                    // Multiple GUID matches, try to disambiguate with name segment
+                    if (!string.IsNullOrEmpty(segment.FolderNameSegment))
+                    {
+                        var nameMatch = guidMatches.FirstOrDefault(f =>
+                            f.Name.Contains(
+                                segment.FolderNameSegment,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        );
+                        if (nameMatch != null)
+                        {
+                            Console.WriteLine(
+                                $"FindBestMatch - Found GUID+name match: '{nameMatch.Name}'"
+                            );
+                            return nameMatch;
+                        }
+                    }
+                    // Return first if can't disambiguate
+                    Console.WriteLine(
+                        $"FindBestMatch - Multiple GUID matches, returning first: '{guidMatches[0].Name}'"
+                    );
+                    return guidMatches[0];
+                }
+            }
+
+            // Third try: match on name segment
+            if (!string.IsNullOrEmpty(segment.FolderNameSegment))
+            {
+                var nameMatches = folders
+                    .Where(f =>
+                        f.Name.Contains(
+                            segment.FolderNameSegment,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                    .ToList();
+                if (nameMatches.Count > 0)
+                {
+                    Console.WriteLine(
+                        $"FindBestMatch - Found name segment match: '{nameMatches[0].Name}'"
+                    );
+                    return nameMatches[0];
+                }
+            }
+
+            Console.WriteLine($"FindBestMatch - No match found");
+            return null;
+        }
+
+        /// <summary>
+        /// Get subfolders of a folder by its server relative URL
+        /// </summary>
+        private async Task<List<FolderItem>> GetSubfoldersOfFolder(
+            string listTitle,
+            string folderServerRelativeUrl
+        )
+        {
+            // return early if SharePoint is disabled.
+            if (!IsValid())
+            {
+                return null;
+            }
+
+            List<FolderItem> folderList = new List<FolderItem>();
+
+            string query =
+                $"web/getFolderByServerRelativeUrl('{EscapeApostrophe(folderServerRelativeUrl)}')/folders";
+            Console.WriteLine($"GetSubfoldersOfFolder - Query: '{query}'");
+
+            HttpRequestMessage endpointRequest = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(ApiEndpoint + query),
+                Headers = { { "Accept", "application/json" } },
+            };
+
+            var response = await _Client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                try
+                {
+                    JObject responseObject = JObject.Parse(jsonString);
+                    List<JToken> responseResults = responseObject["value"].Children().ToList();
+
+                    foreach (JToken responseResult in responseResults)
+                    {
+                        FolderItem folderItem = responseResult.ToObject<FolderItem>();
+
+                        // Filter out system folders
+                        if (!folderItem.Name.Equals("Forms", StringComparison.OrdinalIgnoreCase))
+                        {
+                            folderList.Add(folderItem);
+                        }
+                    }
+
+                    Console.WriteLine(
+                        $"GetSubfoldersOfFolder - Found {folderList.Count} subfolders"
+                    );
+                }
+                catch (JsonReaderException jre)
+                {
+                    Console.WriteLine($"GetSubfoldersOfFolder - JSON parsing error: {jre.Message}");
+                    throw jre;
+                }
+            }
+            else
+            {
+                Console.WriteLine(
+                    $"GetSubfoldersOfFolder - Error: StatusCode={response.StatusCode}, Response={jsonString}"
+                );
+            }
+
+            return folderList;
+        }
+
+        /// <summary>
+        /// Get a folder object by its server relative URL
+        /// </summary>
+        private async Task<Object> GetFolderByServerRelativeUrl(string serverRelativeUrl)
+        {
+            HttpRequestMessage endpointRequest = new HttpRequestMessage()
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri(
+                    ApiEndpoint
+                        + "web/getFolderByServerRelativeUrl('"
+                        + EscapeApostrophe(serverRelativeUrl)
+                        + "')?$select=Name,ServerRelativeUrl,UniqueId,ItemCount"
+                ),
+                Headers = { { "Accept", "application/json" } },
+            };
+
+            var response = await _Client.SendAsync(endpointRequest);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                return JsonConvert.DeserializeObject(jsonString);
+            }
+
+            return null;
         }
 
         public async Task<List<FolderItem>> GetFoldersInDocumentLibrary(string listTitle)
@@ -1311,7 +1555,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // make the request.
@@ -1361,7 +1605,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             string searchGuid = null
         )
         {
-            string internalTitle = GetDocumentTemplateUrlPart(listTitle);
+            string internalTitle = SharePointHelpers.GetDocumentTemplateUrlPart(listTitle);
 
             Console.WriteLine(
                 $"SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'"
@@ -1410,7 +1654,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Get,
                 RequestUri = new Uri(ApiEndpoint + query),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // make the request.
@@ -1475,7 +1719,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         )
         {
             return await this.AddFile(
-                DefaultDocumentListTitle,
+                SharePointHelpers.DefaultDocumentListTitle,
                 folderName,
                 fileName,
                 fileData,
@@ -1522,7 +1766,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         )
         {
             return await this.AddFile(
-                DefaultDocumentListTitle,
+                SharePointHelpers.DefaultDocumentListTitle,
                 folderName,
                 fileName,
                 fileData,
@@ -1637,7 +1881,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             // SharePoint requires that filenames are less than 128 characters.
-            int maxLength = 128;
+            int maxLength = MAX_SEGMENT_LENGTH;
             fileName = FixFilename(fileName, maxLength);
 
             folderName = FixFoldername(folderName, listTitle);
@@ -1645,9 +1889,9 @@ namespace Gov.Lclb.Cllb.Interfaces
             // SharePoint also imposes a limit on the whole URL
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
             string requestUriString = GenerateUploadRequestUriString(serverRelativeUrl, fileName);
-            if (requestUriString.Length > MaxUrlLength)
+            if (requestUriString.Length > MAX_TOTAL_LENGTH)
             {
-                int delta = requestUriString.Length - MaxUrlLength;
+                int delta = requestUriString.Length - MAX_TOTAL_LENGTH;
                 maxLength -= delta;
 
                 // Ensure maxLength doesn't become too small (minimum 10 characters to allow for some filename + extension)
@@ -1710,7 +1954,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(requestUriString),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             ByteArrayContent byteArrayContent = new ByteArrayContent(data);
@@ -1780,7 +2024,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 );
 
                 // If URL is too long, try using folder ID instead
-                if (requestUriString.Length > MaxUrlLength)
+                if (requestUriString.Length > MAX_TOTAL_LENGTH)
                 {
                     Console.WriteLine(
                         $"UploadFile - URL too long ({requestUriString.Length} chars), attempting upload by folder ID"
@@ -1826,7 +2070,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 {
                     Method = HttpMethod.Post,
                     RequestUri = new Uri(requestUriString),
-                    Headers = { { "Accept", "application/json" } }
+                    Headers = { { "Accept", "application/json" } },
                 };
 
                 ByteArrayContent byteArrayContent = new ByteArrayContent(data);
@@ -1938,7 +2182,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             {
                 Method = HttpMethod.Post,
                 RequestUri = new Uri(ApiEndpoint + "contextinfo"),
-                Headers = { { "Accept", "application/json;odata=verbose" } }
+                Headers = { { "Accept", "application/json;odata=verbose" } },
             };
 
             // make the request.
@@ -2011,7 +2255,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                         + EscapeApostrophe(serverRelativeUrl)
                         + "')"
                 ),
-                Headers = { { "Accept", "application/json" } }
+                Headers = { { "Accept", "application/json" } },
             };
 
             // We want to delete this file.
@@ -2095,166 +2339,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
 
             return result;
-        }
-
-        /// <summary>
-        /// Get the document library Display Name (ex: "Special Event).
-        /// </summary>
-        /// <param name="entityName"></param>
-        /// <returns></returns>
-        public string GetDocumentListTitle(string entityName)
-        {
-            string listTitle;
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = DefaultDocumentListTitle;
-                    break;
-                case "application":
-                case "adoxio_application":
-                    listTitle = ApplicationDocumentListTitle;
-                    break;
-                case "contact":
-                    listTitle = ContactDocumentListTitle;
-                    break;
-                case "worker":
-                case "adoxio_worker":
-                    listTitle = WorkerDocumentListTitle;
-                    break;
-                case "special event":
-                case "adoxio_specialevent":
-                    listTitle = SpecialEventDocumentListTitle;
-                    break;
-                case "event":
-                case "adoxio_event":
-                    listTitle = EventDocumentListTitle;
-                    break;
-                case "federal_report":
-                case "adoxio_federalreportexport":
-                    listTitle = FederalReportListTitle;
-                    break;
-                case "licence":
-                case "adoxio_licences":
-                    listTitle = LicenceDocumentListTitle;
-                    break;
-                case "enforcement action":
-                case "adoxio_enforcementaction":
-                    listTitle = EnforcementActionDocumentListTitle;
-                    break;
-                case "complaint":
-                case "adoxio_complaint":
-                    listTitle = ComplaintDocumentListTitle;
-                    break;
-                case "contravention":
-                case "adoxio_contravention":
-                    listTitle = ContraventionDocumentListTitle;
-                    break;
-                case "investigation enforcement":
-                case "adoxio_complianceinvestigation":
-                    listTitle = InvestigationEnforcementDocumentListTitle;
-                    break;
-                case "endorsement":
-                case "adoxio_endorsement":
-                    listTitle = EndorsementDocumentListTitle;
-                    break;
-                case "legal entity":
-                case "adoxio_legalentity":
-                    listTitle = LegalEntityDocumentListTitle;
-                    break;
-                case "establishment incident":
-                case "adoxio_establishmentincident":
-                    listTitle = EstablishmentIncidentDocumentListTitle;
-                    break;
-                case "incident":
-                case "adoxio_incident":
-                    listTitle = IncidentDocumentListTitle;
-                    break;
-                default:
-                    listTitle = entityName;
-                    break;
-            }
-
-            return listTitle;
-        }
-
-        /// <summary>
-        /// Get the document library URL part (ex: "adoxio_specialevent).
-        /// </summary>
-        /// <param name="entityName"></param>
-        /// <returns></returns>
-        public string GetDocumentTemplateUrlPart(string entityName)
-        {
-            var listTitle = "";
-            switch (entityName.ToLower())
-            {
-                case "account":
-                    listTitle = DefaultDocumentUrlTitle;
-                    break;
-                case "application":
-                case "adoxio_application":
-                    listTitle = ApplicationDocumentUrlTitle;
-                    break;
-                case "contact":
-                    listTitle = ContactDocumentUrlTitle;
-                    break;
-                case "worker":
-                case "adoxio_worker":
-                    listTitle = WorkerDocumentUrlTitle;
-                    break;
-                case "special event":
-                case "adoxio_specialevent":
-                    listTitle = SpecialEventDocumentUrlTitle;
-                    break;
-                case "event":
-                case "adoxio_event":
-                    listTitle = EventDocumentUrlTitle;
-                    break;
-                case "federal_report":
-                case "adoxio_federalreportexport":
-                    listTitle = FederalReportUrlTitle;
-                    break;
-                case "licence":
-                case "adoxio_licences":
-                    listTitle = LicenceDocumentUrlTitle;
-                    break;
-                case "enforcement action":
-                case "adoxio_enforcementaction":
-                    listTitle = EnforcementActionDocumentUrlTitle;
-                    break;
-                case "complaint":
-                case "adoxio_complaint":
-                    listTitle = ComplaintDocumentUrlTitle;
-                    break;
-                case "contravention":
-                case "adoxio_contravention":
-                    listTitle = ContraventionDocumentUrlTitle;
-                    break;
-                case "investigation enforcement":
-                case "adoxio_complianceinvestigation":
-                    listTitle = InvestigationEnforcementDocumentUrlTitle;
-                    break;
-                case "endorsement":
-                case "adoxio_endorsement":
-                    listTitle = EndorsementDocumentUrlTitle;
-                    break;
-                case "legal entity":
-                case "adoxio_legalentity":
-                    listTitle = LegalEntityDocumentUrlTitle;
-                    break;
-                case "establishment incident":
-                case "adoxio_establishmentincident":
-                    listTitle = EstablishmentIncidentDocumentUrlTitle;
-                    break;
-                case "incident":
-                case "adoxio_incident":
-                    listTitle = IncidentDocumentUrlTitle;
-                    break;
-                default:
-                    listTitle = entityName;
-                    break;
-            }
-
-            return listTitle;
         }
     }
 

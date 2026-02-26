@@ -42,7 +42,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     token = result.Token,
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -89,7 +89,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     data = result.Data.ToBase64(),
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -107,7 +107,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("upload-file")]
         public async Task<IActionResult> UploadFile([FromBody] UploadFileDto dto)
         {
-            Console.WriteLine($"FileManagerController - UploadFile - Request: EntityName={dto.EntityName}, FolderName={dto.FolderName}, FileName={dto.FileName}, ContentType={dto.ContentType}, DataLength={dto.Data?.Length ?? 0}");
+            Console.WriteLine(
+                $"FileManagerController - UploadFile - Request: EntityName={dto.EntityName}, FolderName={dto.FolderName}, FileName={dto.FileName}, ContentType={dto.ContentType}, DataLength={dto.Data?.Length ?? 0}"
+            );
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
 
             var request = new UploadFileRequest
@@ -116,7 +118,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 FolderName = dto.FolderName,
                 FileName = dto.FileName,
                 ContentType = dto.ContentType,
-                Data = Google.Protobuf.ByteString.CopyFrom(Convert.FromBase64String(dto.Data))
+                Data = Google.Protobuf.ByteString.CopyFrom(Convert.FromBase64String(dto.Data)),
             };
 
             var result = await service.UploadFile(request, null);
@@ -126,7 +128,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     fileName = result.FileName,
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -144,7 +146,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("truncated-filename")]
         public async Task<IActionResult> GetTruncatedFilename([FromBody] TruncatedFilenameRequest request)
         {
-            Console.WriteLine($"FileManagerController - GetTruncatedFilename - Request: {JsonSerializer.Serialize(request)}");
+            Console.WriteLine(
+                $"FileManagerController - GetTruncatedFilename - Request: {JsonSerializer.Serialize(request)}"
+            );
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
             var result = await service.GetTruncatedFilename(request, null);
 
@@ -153,7 +157,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     fileName = result.FileName,
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -184,7 +188,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                         {
                             FolderNameSegment = segment.FolderNameSegment ?? "",
                             FolderGuidSegment = segment.FolderGuidSegment ?? "",
-                            FolderName = segment.FolderName ?? ""
+                            FolderName = segment.FolderName ?? "",
                         }
                     );
                 }
@@ -197,7 +201,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 {
                     resultStatus = result.ResultStatus.ToString(),
                     serverRelativeUrl = result.ServerRelativeUrl,
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -230,9 +234,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                     folders = result.Folders.Select(f => new
                     {
                         name = f.Name,
-                        serverRelativeUrl = f.ServerRelativeUrl
+                        serverRelativeUrl = f.ServerRelativeUrl,
                     }),
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
@@ -240,7 +244,9 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
         [HttpPost("upload-file-with-folder-path")]
         public async Task<IActionResult> UploadFileWithFolderPath([FromBody] UploadFileWithFolderPathDto dto)
         {
-            Console.WriteLine($"FileManagerController - UploadFileWithFolderPath - Request: EntityName={dto.EntityName}, FileName={dto.FileName}, ContentType={dto.ContentType}, FolderPathSegments={dto.FolderPath?.Count ?? 0}, DataLength={dto.Data?.Length ?? 0}");
+            Console.WriteLine(
+                $"FileManagerController - UploadFileWithFolderPath - Request: EntityName={dto.EntityName}, FileName={dto.FileName}, ContentType={dto.ContentType}, FolderPathSegments={dto.FolderPath?.Count ?? 0}, DataLength={dto.Data?.Length ?? 0}"
+            );
             var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
 
             var request = new UploadFileWithFolderPathRequest
@@ -248,7 +254,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                 EntityName = dto.EntityName,
                 FileName = dto.FileName,
                 ContentType = dto.ContentType,
-                Data = Google.Protobuf.ByteString.CopyFrom(Convert.FromBase64String(dto.Data))
+                Data = Google.Protobuf.ByteString.CopyFrom(Convert.FromBase64String(dto.Data)),
             };
 
             _logger.LogInformation(
@@ -269,7 +275,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                         {
                             FolderNameSegment = segment.FolderNameSegment ?? "",
                             FolderGuidSegment = segment.FolderGuidSegment ?? "",
-                            FolderName = segment.FolderName ?? ""
+                            FolderName = segment.FolderName ?? "",
                         }
                     );
                 }
@@ -283,7 +289,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers
                     resultStatus = result.ResultStatus.ToString(),
                     fileName = result.FileName,
                     serverRelativeUrl = result.ServerRelativeUrl,
-                    errorDetail = result.ErrorDetail
+                    errorDetail = result.ErrorDetail,
                 }
             );
         }
