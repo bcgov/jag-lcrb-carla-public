@@ -30,9 +30,13 @@ public partial class FileManagerService : FileManager.FileManagerBase
         ServerCallContext context
     )
     {
-        Console.WriteLine($"EnsureFolderPath - START - EntityName: '{request.EntityName}', FolderPath segments: {request.FolderPath?.Count ?? 0}");
+        Console.WriteLine(
+            $"EnsureFolderPath - START - EntityName: '{request.EntityName}', FolderPath segments: {request.FolderPath?.Count ?? 0}"
+        );
         var result = await _ensureFolderPath(request);
-        Console.WriteLine($"EnsureFolderPath - END - ResultStatus: {result.ResultStatus}, ServerRelativeUrl: '{result.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"EnsureFolderPath - END - ResultStatus: {result.ResultStatus}, ServerRelativeUrl: '{result.ServerRelativeUrl}'"
+        );
         return result;
     }
 
@@ -41,7 +45,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         ServerCallContext context
     )
     {
-        Console.WriteLine($"UploadFileWithFolderPath - START - EntityName: '{request.EntityName}', FileName: '{request.FileName}', FolderPath segments: {request.FolderPath?.Count ?? 0}");
+        Console.WriteLine(
+            $"UploadFileWithFolderPath - START - EntityName: '{request.EntityName}', FileName: '{request.FileName}', FolderPath segments: {request.FolderPath?.Count ?? 0}"
+        );
         var ensureFolderPathRequest = new EnsureFolderPathRequest
         {
             EntityName = request.EntityName,
@@ -54,7 +60,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         Console.WriteLine($"UploadFileWithFolderPath - Folder path ensured at: '{result.ServerRelativeUrl}'");
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
-        Console.WriteLine($"UploadFileWithFolderPath - Uploading file '{request.FileName}' to '{result.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"UploadFileWithFolderPath - Uploading file '{request.FileName}' to '{result.ServerRelativeUrl}'"
+        );
         var fileName = _sharePointFileManager
             .UploadFile2(result.ServerRelativeUrl, request.FileName, request.Data.ToByteArray(), request.ContentType)
             .GetAwaiter()
@@ -66,13 +74,17 @@ public partial class FileManagerService : FileManager.FileManagerBase
         response.ServerRelativeUrl = result.ServerRelativeUrl;
         response.ResultStatus = ResultStatus.Success;
 
-        Console.WriteLine($"UploadFileWithFolderPath - END - Successfully uploaded file '{fileName}' to '{result.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"UploadFileWithFolderPath - END - Successfully uploaded file '{fileName}' to '{result.ServerRelativeUrl}'"
+        );
         return response;
     }
 
     public async Task<EnsureFolderPathReply> _ensureFolderPath(EnsureFolderPathRequest request)
     {
-        Console.WriteLine($"_ensureFolderPath - START - EntityName: '{request.EntityName}', FolderPath segments: {request.FolderPath?.Count ?? 0}");
+        Console.WriteLine(
+            $"_ensureFolderPath - START - EntityName: '{request.EntityName}', FolderPath segments: {request.FolderPath?.Count ?? 0}"
+        );
         var result = new EnsureFolderPathReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -110,7 +122,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 result.ServerRelativeUrl = $"/{request.EntityName}";
             }
 
-            Console.WriteLine($"_ensureFolderPath - END (SharePoint disabled) - ServerRelativeUrl: '{result.ServerRelativeUrl}'");
+            Console.WriteLine(
+                $"_ensureFolderPath - END (SharePoint disabled) - ServerRelativeUrl: '{result.ServerRelativeUrl}'"
+            );
             return result;
         }
 
@@ -160,7 +174,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             result.ServerRelativeUrl = resultTwo.ServerRelativeUrl;
             result.ErrorDetail = "";
 
-            Console.WriteLine($"_ensureFolderPath - END (2 segments) - ServerRelativeUrl: '{result.ServerRelativeUrl}'");
+            Console.WriteLine(
+                $"_ensureFolderPath - END (2 segments) - ServerRelativeUrl: '{result.ServerRelativeUrl}'"
+            );
             return result;
         }
 
@@ -217,7 +233,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             var segmentValidationResult = _validateFolderSegment(segment, i);
             if (segmentValidationResult.ResultStatus == ResultStatus.Fail)
             {
-                Console.WriteLine($"_validateEnsureFolderPathRequest - Segment {i + 1} validation failed: {segmentValidationResult.ErrorDetail}");
+                Console.WriteLine(
+                    $"_validateEnsureFolderPathRequest - Segment {i + 1} validation failed: {segmentValidationResult.ErrorDetail}"
+                );
                 return segmentValidationResult;
             }
         }
@@ -235,7 +253,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var folderName = segment.FolderName?.Trim();
         var folderNameSegment = segment.FolderNameSegment?.Trim();
         var folderGuidSegment = segment.FolderGuidSegment?.Trim();
-        Console.WriteLine($"_validateFolderSegment - FolderName: '{folderName}', FolderNameSegment: '{folderNameSegment}', FolderGuidSegment: '{folderGuidSegment}'");
+        Console.WriteLine(
+            $"_validateFolderSegment - FolderName: '{folderName}', FolderNameSegment: '{folderNameSegment}', FolderGuidSegment: '{folderGuidSegment}'"
+        );
 
         if (
             string.IsNullOrEmpty(folderName)
@@ -246,19 +266,17 @@ public partial class FileManagerService : FileManager.FileManagerBase
             Console.WriteLine($"_validateFolderSegment - Segment {segmentIndex + 1} has no valid folder identifier");
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail =
-                $"Invalid folder path: Segment {segmentIndex + 1} must have at least one of FolderName, FolderNameSegment, or FolderGuidSegment";
+                $"Invalid folder path: Segment {segmentIndex + 1} must have at least one of FolderName or FolderGuidSegment";
             return result;
         }
 
         if (string.IsNullOrEmpty(folderName))
         {
-            if (
-                string.IsNullOrEmpty(folderNameSegment)
-                || folderNameSegment == "-" // Legacy edge case where a records "name" may be initialized to a "-".
-                || string.IsNullOrEmpty(folderGuidSegment)
-            )
-            {                Console.WriteLine($"_validateFolderSegment - Segment {segmentIndex + 1} missing required data");                Log.Warning(
-                    $"EnsureFolderPath: Invalid request - Segment {segmentIndex} is missing FolderName and does not have both FolderNameSegment and FolderGuidSegment. "
+            if (string.IsNullOrEmpty(folderGuidSegment))
+            {
+                Console.WriteLine($"_validateFolderSegment - Segment {segmentIndex + 1} missing required data");
+                Log.Warning(
+                    $"EnsureFolderPath: Invalid request - Segment {segmentIndex} has no FolderName and also no FolderGuidSegment. "
                         + $"FolderNameSegment: '{folderNameSegment ?? "null"}', FolderGuidSegment: '{folderGuidSegment ?? "null"}'"
                 );
                 result.ResultStatus = ResultStatus.Fail;
@@ -354,7 +372,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return createdFolder;
         }
 
-        Console.WriteLine($"_ensureFolderOne - Found existing folder: '{findFolderOneResults.FirstOrDefault()?.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"_ensureFolderOne - Found existing folder: '{findFolderOneResults.FirstOrDefault()?.ServerRelativeUrl}'"
+        );
         return findFolderOneResults.FirstOrDefault();
     }
 
@@ -398,7 +418,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return createdFolder;
         }
 
-        Console.WriteLine($"_ensureFolderTwo - Found existing folder: '{findFolderTwoResults.FirstOrDefault()?.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"_ensureFolderTwo - Found existing folder: '{findFolderTwoResults.FirstOrDefault()?.ServerRelativeUrl}'"
+        );
         return findFolderTwoResults.FirstOrDefault();
     }
 
@@ -478,7 +500,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return createdFolder;
         }
 
-        Console.WriteLine($"_ensureFolderThree - Found existing folder: '{findFolderThreeResults.FirstOrDefault()?.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"_ensureFolderThree - Found existing folder: '{findFolderThreeResults.FirstOrDefault()?.ServerRelativeUrl}'"
+        );
         return findFolderThreeResults.FirstOrDefault();
     }
 
@@ -532,7 +556,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         string folderGuidSegment
     )
     {
-        Console.WriteLine($"CreateFolder (with segments) - Creating folder with NameSegment: '{folderNameSegment}', GuidSegment: '{folderGuidSegment}' at '{parentRelativePath}'");
+        Console.WriteLine(
+            $"CreateFolder (with segments) - Creating folder with NameSegment: '{folderNameSegment}', GuidSegment: '{folderGuidSegment}' at '{parentRelativePath}'"
+        );
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var folderName = _buildFolderNameFromSegment(folderNameSegment, folderGuidSegment);
