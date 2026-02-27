@@ -153,6 +153,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
 
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
@@ -180,6 +181,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             else
             {
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
