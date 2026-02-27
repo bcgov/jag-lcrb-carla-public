@@ -52,7 +52,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var result = await _ensureFolderPath(ensureFolderPathRequest);
 
         Console.WriteLine($"UploadFileWithFolderPath - Folder path ensured at: '{result.ServerRelativeUrl}'");
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         Console.WriteLine($"UploadFileWithFolderPath - Uploading file '{request.FileName}' to '{result.ServerRelativeUrl}'");
         var fileName = _sharePointFileManager
@@ -115,7 +115,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         }
 
         Console.WriteLine($"_ensureFolderPath - Creating SharePointFileManager");
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var documentListTitle = SharePointConstants.GetDocumentListTitle(request.EntityName);
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
@@ -325,7 +325,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
     /// <returns></returns>
     public async Task<FolderItem> _ensureFolderOne(EnsureFolderPathRequest request)
     {
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
         var segment = request.FolderPath[0];
@@ -372,7 +372,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return null;
         }
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var segment = request.FolderPath[1];
         var folderName = segment.FolderName;
@@ -416,7 +416,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return null;
         }
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var segment = request.FolderPath[2];
         var folderName = segment.FolderName;
@@ -512,7 +512,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
     public async Task<FolderItem> CreateFolder(string entityName, string parentRelativePath, string folderName)
     {
         Console.WriteLine($"CreateFolder - Creating folder '{folderName}' at '{parentRelativePath}'");
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters2(folderName, entityName);
         Console.WriteLine($"CreateFolder - Sanitized folder name: '{sanitizedFolderName}'");
@@ -533,7 +533,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
     )
     {
         Console.WriteLine($"CreateFolder (with segments) - Creating folder with NameSegment: '{folderNameSegment}', GuidSegment: '{folderGuidSegment}' at '{parentRelativePath}'");
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var folderName = _buildFolderNameFromSegment(folderNameSegment, folderGuidSegment);
         Console.WriteLine($"CreateFolder (with segments) - Built folder name: '{folderName}'");

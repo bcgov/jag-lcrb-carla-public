@@ -20,11 +20,13 @@ public class FileManagerController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger<FileManagerController> _logger;
+    private readonly ILoggerFactory _loggerFactory;
 
-    public FileManagerController(IConfiguration configuration, ILogger<FileManagerController> logger)
+    public FileManagerController(IConfiguration configuration, ILogger<FileManagerController> logger, ILoggerFactory loggerFactory)
     {
         _configuration = configuration;
         _logger = logger;
+        _loggerFactory = loggerFactory;
     }
 
     [AllowAnonymous]
@@ -32,7 +34,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> GetToken([FromBody] TokenRequest request)
     {
         Console.WriteLine($"FileManagerController - GetToken - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.GetToken(request, null);
 
         return Ok(
@@ -49,7 +51,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> CreateFolder([FromBody] CreateFolderRequest request)
     {
         Console.WriteLine($"FileManagerController - CreateFolder - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.CreateFolder(request, null);
 
         return Ok(new { resultStatus = result.ResultStatus.ToString(), errorDetail = result.ErrorDetail });
@@ -59,7 +61,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> FolderFiles([FromBody] FolderFilesRequest request)
     {
         Console.WriteLine($"FileManagerController - FolderFiles - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.FolderFiles(request, null);
 
         return Ok(result);
@@ -69,7 +71,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> DeleteFile([FromBody] DeleteFileRequest request)
     {
         Console.WriteLine($"FileManagerController - DeleteFile - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.DeleteFile(request, null);
 
         return Ok(new { resultStatus = result.ResultStatus.ToString(), errorDetail = result.ErrorDetail });
@@ -79,7 +81,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> DownloadFile([FromBody] DownloadFileRequest request)
     {
         Console.WriteLine($"FileManagerController - DownloadFile - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.DownloadFile(request, null);
 
         return Ok(
@@ -96,7 +98,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> FileExists([FromBody] FileExistsRequest request)
     {
         Console.WriteLine($"FileManagerController - FileExists - Request: {JsonSerializer.Serialize(request)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.FileExists(request, null);
 
         return Ok(new { resultStatus = result.ResultStatus.ToString(), errorDetail = result.ErrorDetail });
@@ -108,7 +110,7 @@ public class FileManagerController : ControllerBase
         Console.WriteLine(
             $"FileManagerController - UploadFile - Request: EntityName={dto.EntityName}, FolderName={dto.FolderName}, FileName={dto.FileName}, ContentType={dto.ContentType}, DataLength={dto.Data?.Length ?? 0}"
         );
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
 
         var request = new UploadFileRequest
         {
@@ -147,7 +149,7 @@ public class FileManagerController : ControllerBase
         Console.WriteLine(
             $"FileManagerController - GetTruncatedFilename - Request: {JsonSerializer.Serialize(request)}"
         );
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
         var result = await service.GetTruncatedFilename(request, null);
 
         return Ok(
@@ -164,7 +166,7 @@ public class FileManagerController : ControllerBase
     public async Task<IActionResult> EnsureFolderPath([FromBody] EnsureFolderPathDto dto)
     {
         Console.WriteLine($"FileManagerController - EnsureFolderPath - Request: {JsonSerializer.Serialize(dto)}");
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
 
         var request = new EnsureFolderPathRequest { EntityName = dto.EntityName };
 
@@ -224,7 +226,7 @@ public class FileManagerController : ControllerBase
         Console.WriteLine(
             $"FileManagerController - UploadFileWithFolderPath - Request: EntityName={dto.EntityName}, FileName={dto.FileName}, ContentType={dto.ContentType}, FolderPathSegments={dto.FolderPath?.Count ?? 0}, DataLength={dto.Data?.Length ?? 0}"
         );
-        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration);
+        var service = new FileManagerService(_logger as ILogger<FileManagerService>, _configuration, _loggerFactory);
 
         var request = new UploadFileWithFolderPathRequest
         {

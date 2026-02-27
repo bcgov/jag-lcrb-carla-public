@@ -24,16 +24,21 @@ public partial class FileManagerService : FileManager.FileManagerBase
 {
     private readonly IConfiguration _configuration;
     private readonly ILogger<FileManagerService> _logger;
+    private readonly ILoggerFactory _loggerFactory;
 
-    public FileManagerService(ILogger<FileManagerService> logger, IConfiguration configuration)
+    public FileManagerService(ILogger<FileManagerService> logger, IConfiguration configuration, ILoggerFactory loggerFactory)
     {
         _configuration = configuration;
         _logger = logger;
+        _loggerFactory = loggerFactory;
+        Console.WriteLine($"FileManagerService - Constructor - ILoggerFactory is {(loggerFactory == null ? "NULL" : "available")}");
     }
 
     public override Task<CreateFolderReply> CreateFolder(CreateFolderRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - CreateFolder - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}'");
+        Console.WriteLine(
+            $"FileManagerService - CreateFolder - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}'"
+        );
         var result = new CreateFolderReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -45,7 +50,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var logFolder = request.FolderName;
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var listTitle = SharePointConstants.GetDocumentListTitle(request.EntityName);
         var urlTitle = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
@@ -66,7 +71,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         }
         catch (SharePointRestException ex)
         {
-            Console.WriteLine($"FileManagerService - CreateFolder - SharePointRestException during folder existence check: {ex.Message}");
+            Console.WriteLine(
+                $"FileManagerService - CreateFolder - SharePointRestException during folder existence check: {ex.Message}"
+            );
             Log.Error(
                 ex,
                 $"SharePointRestException creating sharepoint folder - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
@@ -75,7 +82,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         }
         catch (Exception e)
         {
-            Console.WriteLine($"FileManagerService - CreateFolder - Exception during folder existence check: {e.Message}");
+            Console.WriteLine(
+                $"FileManagerService - CreateFolder - Exception during folder existence check: {e.Message}"
+            );
             Log.Error(e, "Generic Exception creating sharepoint folder");
             folderExists = false;
         }
@@ -145,7 +154,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
             }
             catch (SharePointRestException ex)
             {
-                Console.WriteLine($"FileManagerService - CreateFolder - SharePointRestException during folder creation: {ex.Message}");
+                Console.WriteLine(
+                    $"FileManagerService - CreateFolder - SharePointRestException during folder creation: {ex.Message}"
+                );
                 result.ResultStatus = ResultStatus.Fail;
                 result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
                 Log.Error(
@@ -168,7 +179,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
     public override Task<FileExistsReply> FileExists(FileExistsRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - FileExists - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', ServerRelativeUrl: '{request.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"FileManagerService - FileExists - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        );
         var result = new FileExistsReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -178,7 +191,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
             return Task.FromResult(result);
         }
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         Console.WriteLine($"FileManagerService - FileExists - Getting file details list");
         List<SharePointFileDetailsList> fileDetailsList = null;
@@ -237,7 +250,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
     private void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
     {
         Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - START - ListTitle: '{listTitle}'");
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
         var exists = _sharePointFileManager.DocumentLibraryExists(listTitle).GetAwaiter().GetResult();
         Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - Library exists: {exists}");
         if (!exists)
@@ -251,7 +264,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
     public override Task<DeleteFileReply> DeleteFile(DeleteFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - DeleteFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"FileManagerService - DeleteFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        );
         var result = new DeleteFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -263,7 +278,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var logUrl = request.ServerRelativeUrl;
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         Console.WriteLine($"FileManagerService - DeleteFile - Calling SharePoint delete");
         try
@@ -303,7 +318,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
     public override Task<DownloadFileReply> DownloadFile(DownloadFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - DownloadFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'");
+        Console.WriteLine(
+            $"FileManagerService - DownloadFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        );
         var result = new DownloadFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -315,7 +332,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         }
 
         var logUrl = request.ServerRelativeUrl;
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         Console.WriteLine($"FileManagerService - DownloadFile - Calling SharePoint download");
         try
@@ -358,7 +375,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
     public override Task<UploadFileReply> UploadFile(UploadFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - UploadFile - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', FileName: '{request.FileName}'");
+        Console.WriteLine(
+            $"FileManagerService - UploadFile - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', FileName: '{request.FileName}'"
+        );
         var result = new UploadFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -372,7 +391,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var logFileName = request.FileName;
         var logFolderName = request.FolderName;
 
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
         var listTitle = SharePointConstants.GetDocumentListTitle(request.EntityName);
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
@@ -464,7 +483,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
     public override Task<FolderFilesReply> FolderFiles(FolderFilesRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - FolderFiles - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', DocumentType: '{request.DocumentType}'");
+        Console.WriteLine(
+            $"FileManagerService - FolderFiles - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', DocumentType: '{request.DocumentType}'"
+        );
         var result = new FolderFilesReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -491,20 +512,18 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
         Console.WriteLine($"FileManagerService - FolderFiles - DocumentTemplateUrlPart: '{documentTemplateUrlPart}'");
         List<SharePointFileDetailsList> fileDetailsList = null;
-        var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+        var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
         Console.WriteLine($"FileManagerService - FolderFiles - SharePointFileManager created");
         try
         {
             Console.WriteLine($"FileManagerService - FolderFiles - Calling GetFileDetailsListInFolder");
             fileDetailsList = _sharePointFileManager
-                .GetFileDetailsListInFolder(
-                    documentTemplateUrlPart,
-                    request.FolderName,
-                    request.DocumentType
-                )
+                .GetFileDetailsListInFolder(documentTemplateUrlPart, request.FolderName, request.DocumentType)
                 .GetAwaiter()
                 .GetResult();
-            Console.WriteLine($"FileManagerService - FolderFiles - GetFileDetailsListInFolder returned {fileDetailsList?.Count ?? 0} items");
+            Console.WriteLine(
+                $"FileManagerService - FolderFiles - GetFileDetailsListInFolder returned {fileDetailsList?.Count ?? 0} items"
+            );
             if (fileDetailsList != null)
             {
                 Console.WriteLine($"FileManagerService - FolderFiles - Processing {fileDetailsList.Count} file(s)");
@@ -513,19 +532,28 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 int processedCount = 0;
                 foreach (var item in fileDetailsList)
                 {
-                    Console.WriteLine($"FileManagerService - FolderFiles - Processing file #{processedCount + 1}: Name='{item.Name}', DocumentType='{item.DocumentType}', ServerRelativeUrl='{item.ServerRelativeUrl}'");
+                    Console.WriteLine(
+                        $"FileManagerService - FolderFiles - Processing file #{processedCount + 1}: Name='{item.Name}', DocumentType='{item.DocumentType}', ServerRelativeUrl='{item.ServerRelativeUrl}'"
+                    );
                     // Sharepoint API responds with dates in UTC format
                     var utcFormat = DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal;
                     DateTime parsedCreateDate,
                         parsedLastModified;
-                    bool createDateParsed = DateTime.TryParse(item.TimeCreated, CultureInfo.InvariantCulture, utcFormat, out parsedCreateDate);
+                    bool createDateParsed = DateTime.TryParse(
+                        item.TimeCreated,
+                        CultureInfo.InvariantCulture,
+                        utcFormat,
+                        out parsedCreateDate
+                    );
                     bool modifiedDateParsed = DateTime.TryParse(
                         item.TimeLastModified,
                         CultureInfo.InvariantCulture,
                         utcFormat,
                         out parsedLastModified
                     );
-                    Console.WriteLine($"FileManagerService - FolderFiles - Date parsing: TimeCreated='{item.TimeCreated}' (parsed: {createDateParsed}), TimeLastModified='{item.TimeLastModified}' (parsed: {modifiedDateParsed})");
+                    Console.WriteLine(
+                        $"FileManagerService - FolderFiles - Date parsing: TimeCreated='{item.TimeCreated}' (parsed: {createDateParsed}), TimeLastModified='{item.TimeLastModified}' (parsed: {modifiedDateParsed})"
+                    );
 
                     var newItem = new FileSystemItem
                     {
@@ -537,7 +565,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
                         TimeLastModified = Timestamp.FromDateTime(parsedLastModified),
                     };
 
-                    Console.WriteLine($"FileManagerService - FolderFiles - Created FileSystemItem: Size={newItem.Size} bytes");
+                    Console.WriteLine(
+                        $"FileManagerService - FolderFiles - Created FileSystemItem: Size={newItem.Size} bytes"
+                    );
                     result.Files.Add(newItem);
                     processedCount++;
                 }
@@ -556,7 +586,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         catch (SharePointRestException spre)
         {
             Console.WriteLine($"FileManagerService - FolderFiles - SharePointRestException: {spre.Message}");
-            Console.WriteLine($"FileManagerService - FolderFiles - SharePointRestException Details - StatusCode: {spre.Response?.StatusCode}, RequestUri: {spre.Request?.RequestUri}");
+            Console.WriteLine(
+                $"FileManagerService - FolderFiles - SharePointRestException Details - StatusCode: {spre.Response?.StatusCode}, RequestUri: {spre.Request?.RequestUri}"
+            );
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail = "FolderFiles - Error getting SharePoint File List";
             Log.Error(
@@ -615,7 +647,9 @@ public partial class FileManagerService : FileManager.FileManagerBase
         ServerCallContext context
     )
     {
-        Console.WriteLine($"FileManagerService - GetTruncatedFilename - START - EntityName: '{request.EntityName}', FileName: '{request.FileName}', FolderName: '{request.FolderName}'");
+        Console.WriteLine(
+            $"FileManagerService - GetTruncatedFilename - START - EntityName: '{request.EntityName}', FileName: '{request.FileName}', FolderName: '{request.FolderName}'"
+        );
         var result = new TruncatedFilenameReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
@@ -631,7 +665,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         try
         {
-            var _sharePointFileManager = SharePointFileManager.Create(_configuration);
+            var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
             // Ask SharePoint whether this filename would be truncated upon upload
             var urlTitle = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
