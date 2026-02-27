@@ -1321,36 +1321,13 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     }
 
     /// <summary>
-    /// Removes invalid characters from the filename string, for SharePoint compatibility.
-    /// </summary>
-    /// <param name="filename"></param>
-    /// <returns></returns>
-    public string RemoveInvalidCharacters(string filename)
-    {
-        if (string.IsNullOrEmpty(filename))
-        {
-            return filename;
-        }
-
-        var osInvalidChars = new string(Path.GetInvalidFileNameChars());
-        osInvalidChars += "~#%&*()[]{}"; // Additional characters that don't work with SharePoint
-
-        string invalidChars = System.Text.RegularExpressions.Regex.Escape(osInvalidChars);
-        string invalidRegStr = string.Format(@"([{0}]*\.+$)|([{0}]+)", invalidChars);
-
-        string result = System.Text.RegularExpressions.Regex.Replace(filename, invalidRegStr, "_");
-
-        return result;
-    }
-
-    /// <summary>
     /// Fixes folder name by removing invalid characters, for SharePoint compatibility.
     /// </summary>
     /// <param name="foldername"></param>
     /// <returns></returns>
     public string FixFoldername(string foldername)
     {
-        return RemoveInvalidCharacters(foldername);
+        return SharePointUtils.RemoveInvalidCharacters(foldername);
     }
 
     /// <summary>
@@ -1361,7 +1338,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public string FixFilename(string filename, int maxLength = MAX_SEGMENT_LENGTH)
     {
-        string result = RemoveInvalidCharacters(filename);
+        string result = SharePointUtils.RemoveInvalidCharacters(filename);
 
         if (result.Length >= maxLength)
         {

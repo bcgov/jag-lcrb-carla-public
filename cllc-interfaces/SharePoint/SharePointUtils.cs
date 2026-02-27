@@ -54,13 +54,13 @@ public static class SharePointUtils
         {
             var segments = folderNameOrPath.Split('/');
             var fixedSegments = segments
-                .Select(s => RemoveInvalidCharacters2(s, entityName))
+                .Select(s => RemoveInvalidCharacters(s, entityName))
                 .ToArray();
             return string.Join("/", fixedSegments);
         }
 
         // Single folder name
-        return RemoveInvalidCharacters2(folderNameOrPath, entityName);
+        return RemoveInvalidCharacters(folderNameOrPath, entityName);
     }
 
     /// <summary>
@@ -72,7 +72,7 @@ public static class SharePointUtils
     /// <returns>Fixed filename</returns>
     public static string FixFilename(string filename, int maxLength, string entityName = null)
     {
-        string result = RemoveInvalidCharacters2(filename, entityName);
+        string result = RemoveInvalidCharacters(filename, entityName);
 
         // SharePoint requires that the filename is less than 128 characters.
 
@@ -101,7 +101,59 @@ public static class SharePointUtils
         return result;
     }
 
-    public static char[] GetInvalidCharactersForEntity2(string entityName)
+    /// <summary>
+    /// Remove invalid characters from a filename, with optional entity-specific behavior
+    /// </summary>
+    /// <param name="filename">The filename to sanitize</param>
+    /// <param name="entityName">Optional entity name to customize invalid character handling</param>
+    /// <returns>Sanitized filename</returns>
+    public static string RemoveInvalidCharacters(string filename, string entityName = null)
+    {
+        if (string.IsNullOrEmpty(filename))
+        {
+            return filename;
+        }
+
+        var original = filename;
+
+        // Get OS invalid chars and add SharePoint-specific invalid characters
+        var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
+
+        // Get entity-specific invalid characters
+        var additionalInvalidChars = GetInvalidCharactersForEntity(entityName);
+
+        // Combine all invalid characters
+        var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
+
+        // Replace each invalid character based on entity-specific rules
+        var result = new StringBuilder(filename.Length);
+        foreach (char c in filename)
+        {
+            if (allInvalidChars.Contains(c))
+            {
+                result.Append('-'); // dash
+            }
+            else
+            {
+                result.Append(c);
+            }
+        }
+
+        // Handle trailing dots (not allowed in SharePoint)
+        var resultString = result.ToString().TrimEnd('.');
+
+        // Log if any changes were made
+        if (original != resultString)
+        {
+            Console.WriteLine(
+                $"RemoveInvalidCharacters (entity: '{entityName ?? "default"}'): '{original}' -> '{resultString}'"
+            );
+        }
+
+        return resultString;
+    }
+
+    public static char[] GetInvalidCharactersForEntity(string entityName)
     {
         var defaultInvalidChars = new char[]
         {
@@ -140,57 +192,5 @@ public static class SharePointUtils
             default:
                 return defaultInvalidChars;
         }
-    }
-
-    /// <summary>
-    /// Remove invalid characters from a filename, with optional entity-specific behavior
-    /// </summary>
-    /// <param name="filename">The filename to sanitize</param>
-    /// <param name="entityName">Optional entity name to customize invalid character handling</param>
-    /// <returns>Sanitized filename</returns>
-    public static string RemoveInvalidCharacters2(string filename, string entityName = null)
-    {
-        if (string.IsNullOrEmpty(filename))
-        {
-            return filename;
-        }
-
-        var original = filename;
-
-        // Get OS invalid chars and add SharePoint-specific invalid characters
-        var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
-
-        // Get entity-specific invalid characters
-        var additionalInvalidChars = GetInvalidCharactersForEntity2(entityName);
-
-        // Combine all invalid characters
-        var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
-
-        // Replace each invalid character based on entity-specific rules
-        var result = new StringBuilder(filename.Length);
-        foreach (char c in filename)
-        {
-            if (allInvalidChars.Contains(c))
-            {
-                result.Append('-'); // dash
-            }
-            else
-            {
-                result.Append(c);
-            }
-        }
-
-        // Handle trailing dots (not allowed in SharePoint)
-        var resultString = result.ToString().TrimEnd('.');
-
-        // Log if any changes were made
-        if (original != resultString)
-        {
-            Console.WriteLine(
-                $"RemoveInvalidCharacters2 (entity: '{entityName ?? "default"}'): '{original}' -> '{resultString}'"
-            );
-        }
-
-        return resultString;
     }
 }

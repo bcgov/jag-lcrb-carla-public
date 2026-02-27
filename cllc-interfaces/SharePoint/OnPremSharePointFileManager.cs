@@ -273,7 +273,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return null;
         }
 
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
 
         string serverRelativeUrl = "";
         // ensure the webname has a slash.
@@ -373,168 +373,6 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         return fileDetailsList;
     }
 
-    private char[] GetInvalidCharactersForEntity(string entityName)
-    {
-        var defaultInvalidChars = new char[]
-        {
-            '~',
-            '#',
-            '%',
-            '*',
-            '[',
-            ']',
-            '{',
-            '}',
-            ':',
-            '<',
-            '>',
-            '?',
-            '/',
-            '\\',
-            '|',
-            '"',
-        };
-
-        if (string.IsNullOrEmpty(entityName))
-        {
-            return defaultInvalidChars;
-        }
-
-        // Entity-specific invalid character rules
-        switch (entityName)
-        {
-            case SharePointConstants.EnforcementActionFolderDisplayName:
-            case SharePointConstants.EnforcementActionFolderInternalName:
-            case SharePointConstants.ContraventionFolderDisplayName:
-            case SharePointConstants.ContraventionFolderInternalName:
-                // Enforcement and contravention entities - include period to match legacy conventions
-                return defaultInvalidChars.Append('.').ToArray();
-            default:
-                return defaultInvalidChars;
-        }
-    }
-
-    /// <summary>
-    /// Remove invalid characters from a filename, with optional entity-specific behavior
-    /// </summary>
-    /// <param name="filename">The filename to sanitize</param>
-    /// <param name="entityName">Optional entity name to customize invalid character handling</param>
-    /// <returns>Sanitized filename</returns>
-    public string RemoveInvalidCharacters(string filename, string entityName = null)
-    {
-        if (string.IsNullOrEmpty(filename))
-        {
-            return filename;
-        }
-
-        var original = filename;
-
-        // Get OS invalid chars and add SharePoint-specific invalid characters
-        var osInvalidChars = System.IO.Path.GetInvalidFileNameChars();
-
-        // Get entity-specific invalid characters
-        var additionalInvalidChars = GetInvalidCharactersForEntity(entityName);
-
-        // Combine all invalid characters
-        var allInvalidChars = new HashSet<char>(osInvalidChars.Concat(additionalInvalidChars));
-
-        // Replace each invalid character based on entity-specific rules
-        var result = new StringBuilder(filename.Length);
-        foreach (char c in filename)
-        {
-            if (allInvalidChars.Contains(c))
-            {
-                result.Append('-'); // dash
-            }
-            else
-            {
-                result.Append(c);
-            }
-        }
-
-        // Handle trailing dots (not allowed in SharePoint)
-        var resultString = result.ToString().TrimEnd('.');
-
-        // Log if any changes were made
-        if (original != resultString)
-        {
-            Console.WriteLine(
-                $"RemoveInvalidCharacters (entity: '{entityName ?? "default"}'): '{original}' -> '{resultString}'"
-            );
-        }
-
-        return resultString;
-    }
-
-    /// <summary>
-    /// Fixes a folder name or folder path by removing invalid characters.
-    /// If the input contains "/" path separators, each segment is fixed individually
-    /// to preserve the path structure.
-    /// </summary>
-    /// <param name="folderNameOrPath">A single folder name or a path like "folder1/folder2"</param>
-    /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
-    /// <returns>The sanitized folder name or path</returns>
-    public string FixFoldername(string folderNameOrPath, string entityName = null)
-    {
-        if (string.IsNullOrEmpty(folderNameOrPath))
-            return folderNameOrPath;
-
-        // If it contains path separators, fix each segment individually
-        if (folderNameOrPath.Contains("/"))
-        {
-            var segments = folderNameOrPath.Split('/');
-            var fixedSegments = segments
-                .Select(s => RemoveInvalidCharacters(s, entityName))
-                .ToArray();
-            return string.Join("/", fixedSegments);
-        }
-
-        // Single folder name
-        return RemoveInvalidCharacters(folderNameOrPath, entityName);
-    }
-
-    /// <summary>
-    /// Fix a filename by removing invalid characters and truncating if necessary
-    /// </summary>
-    /// <param name="filename">The filename to fix</param>
-    /// <param name="maxLength">Maximum length for the filename (default 128)</param>
-    /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
-    /// <returns>Fixed filename</returns>
-    public string FixFilename(
-        string filename,
-        int maxLength = MAX_SEGMENT_LENGTH,
-        string entityName = null
-    )
-    {
-        string result = RemoveInvalidCharacters(filename, entityName);
-
-        // SharePoint requires that the filename is less than 128 characters.
-
-        if (result.Length >= maxLength)
-        {
-            string extension = Path.GetExtension(result);
-            int extensionLength = extension.Length;
-
-            // Calculate the length available for the filename without extension
-            int nameLength = maxLength - extensionLength;
-
-            // Ensure we don't try to create a substring with negative length
-            if (nameLength <= 0)
-            {
-                // If there's no room for the filename, truncate to just the maxLength
-                // This handles edge cases where the path is extremely long
-                result = result.Substring(0, Math.Max(1, maxLength));
-            }
-            else
-            {
-                result = Path.GetFileNameWithoutExtension(result).Substring(0, nameLength);
-                result += extension;
-            }
-        }
-
-        return result;
-    }
-
     /// <summary>
     /// Create Folder
     /// </summary>
@@ -551,9 +389,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return;
         }
 
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
 
-        string relativeUrl = EscapeApostrophe($"/{listTitle}/{folderName}");
+        string relativeUrl = SharePointUtils.EscapeApostrophe($"/{listTitle}/{folderName}");
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
         {
@@ -780,7 +618,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return false;
         }
 
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
 
         bool result = false;
         // Delete is very similar to a GET.
@@ -1128,7 +966,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             Console.WriteLine("GetFolder - SharePoint is not valid, returning null");
             return null;
         }
-        var fixedFolderName = FixFoldername(folderName, urlTitle);
+        var fixedFolderName = SharePointUtils.FixFoldername(folderName, urlTitle);
         Console.WriteLine($"GetFolder - After FixFoldername: '{fixedFolderName}'");
 
         // If GUID is provided, use EnhancedFolderExists to find the folder by GUID and resolve the actual folder name
@@ -1422,7 +1260,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
         bool folderExists = await this.FolderExists(listTitle, folderName);
         if (!folderExists)
         {
@@ -1463,7 +1301,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
         bool folderExists = await this.FolderExists(listTitle, folderName);
         if (!folderExists)
         {
@@ -1482,7 +1320,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
     public string GetServerRelativeURL(string listTitle, string folderName)
     {
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
         string serverRelativeUrl = "";
         if (!string.IsNullOrEmpty(WebName))
         {
@@ -1553,9 +1391,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         // SharePoint requires that filenames are less than 128 characters.
         int maxLength = MAX_SEGMENT_LENGTH;
-        fileName = FixFilename(fileName, maxLength);
+        fileName = SharePointUtils.FixFilename(fileName, maxLength);
 
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
 
         // SharePoint also imposes a limit on the whole URL
         string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
@@ -1571,7 +1409,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 maxLength = 10;
             }
 
-            fileName = FixFilename(fileName, maxLength);
+            fileName = SharePointUtils.FixFilename(fileName, maxLength);
         }
 
         return fileName;
@@ -1685,7 +1523,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string result = null;
         if (IsValid())
         {
-            folderName = FixFoldername(folderName, listTitle);
+            folderName = SharePointUtils.FixFoldername(folderName, listTitle);
             fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
@@ -1898,7 +1736,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             serverRelativeUrl += $"{WebName}/";
         }
 
-        folderName = FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
 
         serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 

@@ -153,7 +153,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         );
 
         // Sanitize the raw folder name
-        string sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters2(rawFolderName);
+        string sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters(rawFolderName);
         Console.WriteLine($"FindFolderTwo - Sanitized folder name: '{sanitizedFolderName}'");
 
         // Construct the full path

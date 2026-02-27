@@ -538,7 +538,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         Console.WriteLine($"CreateFolder - Creating folder '{folderName}' at '{parentRelativePath}'");
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
-        var sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters2(folderName, entityName);
+        var sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters(folderName, entityName);
         Console.WriteLine($"CreateFolder - Sanitized folder name: '{sanitizedFolderName}'");
 
         string relativeUrl = SharePointUtils.EscapeApostrophe($"{parentRelativePath}/{sanitizedFolderName}");
@@ -564,7 +564,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var folderName = _buildFolderNameFromSegment(folderNameSegment, folderGuidSegment);
         Console.WriteLine($"CreateFolder (with segments) - Built folder name: '{folderName}'");
 
-        var sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters2(folderName, entityName);
+        var sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters(folderName, entityName);
         Console.WriteLine($"CreateFolder (with segments) - Sanitized folder name: '{sanitizedFolderName}'");
 
         string relativeUrl = SharePointUtils.EscapeApostrophe($"{parentRelativePath}/{sanitizedFolderName}");
