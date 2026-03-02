@@ -429,7 +429,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPost, "Account parameters: " + JsonConvert.SerializeObject(item));
 
             ViewModels.Account result = null;
-            bool updateIfNull = true;
             Guid tryParseOutGuid;
 
             bool createContact = true;
@@ -541,7 +540,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Do a deep create of 3 objects at once.");
                 // create a new account
                 account = new MicrosoftDynamicsCRMaccount();
-                account.CopyValues(item, updateIfNull);
+                Boolean copyIfNull = true;
+                account.CopyValues(item, copyIfNull);
                 // business type must be set only during creation, not in update (removed from copyValues() )
                 account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
                 // ensure that we create an account for the current user.
@@ -892,7 +892,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             adoxioAccount = new MicrosoftDynamicsCRMaccount();
 
             // copy values over from the data provided
-            adoxioAccount.CopyValues(item);
+            Boolean copyIfNull = true;
+            adoxioAccount.CopyValues(item, copyIfNull);
 
             try
             {

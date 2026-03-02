@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
 import { EstablishmentDataService } from "@app/services/establishment-data.service";
 import { FormBuilder } from "@angular/forms";
 import { Subscription } from "rxjs";
@@ -6,6 +6,7 @@ import { takeWhile } from "rxjs/operators";
 import { FormBase } from "@shared/form-base";
 import { Meta, Title } from "@angular/platform-browser";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { MatPaginator, PageEvent } from "@angular/material/paginator";
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
@@ -15,7 +16,7 @@ declare var searchMapOptions: any;
   templateUrl: "./map.component.html",
   styleUrls: ["./map.component.scss"]
 })
-export class MapComponent extends FormBase implements OnInit {
+export class MapComponent extends FormBase implements OnInit, AfterViewInit {
   faSearch = faSearch;
   busy: Subscription;
 
@@ -28,11 +29,28 @@ export class MapComponent extends FormBase implements OnInit {
     super();
   }
 
-  mapData: string;
+  mapData: any[];
   search: string;
   hasData: boolean;
   establishmentMap: any;
   rows: any;
+  private mapInitialized = false;
+
+  // Pagination
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
+  pageSize = 25;
+  pageIndex = 0;
+
+  get pagedData(): any[] {
+    if (!this.mapData) { return []; }
+    const start = this.pageIndex * this.pageSize;
+    return this.mapData.slice(start, start + this.pageSize);
+  }
+
+  handlePageEvent(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
 
   ngOnInit() {
     this.meta.addTag({
@@ -43,18 +61,16 @@ export class MapComponent extends FormBase implements OnInit {
     this.form = this.fb.group({
       name: [""]
     });
-    // get the json from the map service.
+  }
+
+  ngAfterViewInit() {
+    // Load data after the view (and #search-map div) is rendered.
     this.busy =
       this.establishmentDataService.getEstablishmentsMap()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
         this.mapData = value;
-
-        //$('[data-toggle="popover"]').popover({ 'trigger': 'hover' });
-        this.establishmentMap = new EstablishmentsMap(searchMapOptions);
-        //var mapData = $("#Crs-json").attr("data-Crs-search-json") || null;
-        //var Crs = JSON.parse(mapData);
-        this.establishmentMap.drawAndFitBounds(this.mapData);
+        this.initMap();
         this.hasData = true;
       });
   }
@@ -65,7 +81,8 @@ export class MapComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
         this.mapData = value;
-        this.establishmentMap.drawAndFitBounds(this.mapData);
+        this.pageIndex = 0;
+        this.initMap();
         this.hasData = true;
       });
   }
@@ -76,8 +93,21 @@ export class MapComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe(value => {
         this.mapData = value;
-        this.establishmentMap.drawAndFitBounds(this.mapData);
+        this.pageIndex = 0;
+        this.initMap();
         this.hasData = true;
       });
+  }
+
+  private initMap() {
+    try {
+      if (!this.mapInitialized) {
+        this.establishmentMap = new EstablishmentsMap(searchMapOptions);
+        this.mapInitialized = true;
+      }
+      this.establishmentMap.drawAndFitBounds(this.mapData);
+    } catch (e) {
+      console.error("Failed to initialize map:", e);
+    }
   }
 }

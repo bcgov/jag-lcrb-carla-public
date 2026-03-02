@@ -373,16 +373,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        // get establishments                                  
-                        string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses
+                        // get establishments
+                        string licenseFilter = $"statuscode eq 1 and (_adoxio_licencetype_value eq {licenceTypeId}";
 
                         if (alternateLicenceTypeId != null)
                         {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId} and statuscode eq 1";
+                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId}";
                         }
 
+                        licenseFilter += ")";
 
-                        string[] licenseExpand = {"adoxio_LicenceType"};
+                        string[] licenseExpand = { "adoxio_LicenceType", "adoxio_establishment" };
+
+                        // Look up LDB account ID once for exclusion check (no need to expand Licencee on every license).
+                        var ldbAccount = _dynamicsClient.GetAccountByNameWithEstablishments(LDB_ACCOUNT_NAME);
+                        string ldbAccountId = ldbAccount?.Accountid;
 
                         // get licenses
                         IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
@@ -431,46 +436,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                     }
                                 }
                                 */
-                                // do not add LDB stores at this time.
+                                // Use the establishment expanded inline with the license query (no separate API call).
                                 if (add && license._adoxioEstablishmentValue != null)
                                 {
-                                    var establishment =
-                                        _dynamicsClient.GetEstablishmentById(license._adoxioEstablishmentValue);
+                                    var establishment = license.AdoxioEstablishment;
 
+                                    // Do not add LDB stores here — they are added separately via GetLDBStores().
+                                    // Only include establishments that are open.
+                                    bool isOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
                                     if (establishment != null &&
-                                        (establishment.AdoxioLicencee == null ||
-                                         establishment.AdoxioLicencee.Name != LDB_ACCOUNT_NAME) &&
+                                        isOpen &&
+                                        // Uncomment the line below to include "Coming Soon" establishments:
+                                        // if (establishment != null &&
+                                        (ldbAccountId == null ||
+                                         license._adoxioLicenceeValue != ldbAccountId) &&
                                         establishment.AdoxioLatitude != null &&
                                         establishment.AdoxioLongitude != null)
                                     {
 
-                                        if (add && !string.IsNullOrEmpty(search) &&
-                                            establishment.AdoxioName != null &&
-                                            establishment.AdoxioAddresscity != null)
+                                        if (add && !string.IsNullOrEmpty(search))
                                         {
-                                            search = search.ToUpper();
-                                            if (!establishment.AdoxioName.ToUpper().StartsWith(search)
-                                                && !establishment.AdoxioAddresscity.ToUpper().StartsWith(search))
-                                            {
-                                                // candidate for rejection; check the lgin too.
-                                                if (establishment._adoxioLginValue != null)
-                                                {
-                                                    establishment.AdoxioLGIN =
-                                                        _dynamicsClient.GetLginById(establishment._adoxioLginValue);
-                                                    if (establishment.AdoxioLGIN == null
-                                                        || establishment.AdoxioLGIN.AdoxioName == null
-                                                        || !establishment.AdoxioLGIN.AdoxioName.ToUpper()
-                                                            .StartsWith(search))
-                                                        //|| !
-                                                    {
-                                                        add = false;
-                                                    }
+                                            var upperSearch = search.ToUpper();
+                                            bool matchesName = establishment.AdoxioName != null &&
+                                                establishment.AdoxioName.ToUpper().StartsWith(upperSearch);
+                                            bool matchesCity = establishment.AdoxioAddresscity != null &&
+                                                establishment.AdoxioAddresscity.ToUpper().StartsWith(upperSearch);
 
-                                                }
-                                                else
-                                                {
-                                                    add = false;
-                                                }
+                                            if (!matchesName && !matchesCity)
+                                            {
+                                                add = false;
                                             }
                                         }
 
@@ -487,8 +481,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                                 AddressStreet = establishment.AdoxioAddressstreet,
                                                 Latitude = (decimal) establishment.AdoxioLatitude,
                                                 Longitude = (decimal) establishment.AdoxioLongitude,
-                                                IsOpen = establishment.AdoxioIsopen.HasValue &&
-                                                         establishment.AdoxioIsopen.Value
+                                                IsOpen = isOpen
                                             });
                                         }
                                     }
@@ -695,18 +688,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
                 {
-                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000 && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
+                    // Only include establishments that are open.
+                    bool isLdbOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
+                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000
+                     && isLdbOpen
+                     // Uncomment the line below (and remove isLdbOpen check) to include "Coming Soon" LDB stores:
+                     // && true
+                     && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
                      &&   (
                             search == null || (establishment.AdoxioAddresscity != null &&
                                                establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
                         )
-                    ) // Licensed
+                    ) // Licensed and Open
                     {
                         result.Add(new EstablishmentMapData
                             {
                                 id = establishment.AdoxioEstablishmentid,
                                 Name = "BC Cannabis Store",
-                                IsOpen = establishment.AdoxioIsopen.Value,
+                                IsOpen = isLdbOpen,
                                 License = "Public Store",
                                 AddressStreet = establishment.AdoxioAddressstreet,
                                 AddressCity = establishment.AdoxioAddresscity,
