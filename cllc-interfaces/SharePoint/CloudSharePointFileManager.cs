@@ -48,6 +48,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
 
     public CloudSharePointFileManager(IConfiguration Configuration, ILoggerFactory loggerFactory)
     {
+        Console.WriteLine("[CloudSharePointFileManager] Constructor called");
         _logger = loggerFactory.CreateLogger<CloudSharePointFileManager>();
 
         // Create the HttpClient for Graph API calls
@@ -105,6 +106,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     private async Task EnsureValidAccessTokenAsync()
     {
+        Console.WriteLine("[CloudSharePointFileManager] EnsureValidAccessTokenAsync called");
         int retryDelayMs = InitialRetryDelayMs;
 
         Exception lastException = null;
@@ -190,6 +192,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     private async Task EnsureSiteIdResolvedAsync()
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] EnsureSiteIdResolvedAsync - SiteId={SiteId}"
+        );
         if (!string.IsNullOrEmpty(SiteId))
         {
             // SiteId already resolved
@@ -267,6 +272,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// </example>
     private async Task<string> GetDocumentLibraryIdByNameAsync(string listTitle)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] GetDocumentLibraryIdByNameAsync - listTitle={listTitle}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -349,6 +357,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string documentTemplateUrlTitle = null
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] CreateDocumentLibrary - listTitle={listTitle}, documentTemplateUrlTitle={documentTemplateUrlTitle}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -387,6 +398,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns>`true` if the document library exists; otherwise, `false`.</returns>
     public async Task<bool> DocumentLibraryExists(string listTitle)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] DocumentLibraryExists - listTitle={listTitle}"
+        );
         var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
 
         if (string.IsNullOrEmpty(listId))
@@ -405,6 +419,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task CreateFolder(string listTitle, string folderName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] CreateFolder - listTitle={listTitle}, folderName={folderName}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -446,6 +463,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns>`true` if the folder exists; otherwise, `false`.</returns>
     public async Task<bool> FolderExists(string listTitle, string folderName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] FolderExists - listTitle={listTitle}, folderName={folderName}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -490,6 +510,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] UploadFile - fileName={fileName}, listTitle={listTitle}, folderName={folderName}, dataSize={data.Length}, contentType={contentType}"
+        );
         _logger.LogDebug(
             "UploadFile - Uploading file: {FileName} to {ListTitle}/{FolderName}, size: {Size} bytes",
             fileName,
@@ -554,6 +577,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] SimpleUpload - listId={listId}, folderName={folderName}, fileName={fileName}, dataSize={data.Length}"
+        );
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string encodedFileName = Uri.EscapeDataString(fileName);
 
@@ -601,6 +627,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] LargeFileUpload - listId={listId}, folderName={folderName}, fileName={fileName}, dataSize={data.Length}"
+        );
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string encodedFileName = Uri.EscapeDataString(fileName);
 
@@ -699,6 +728,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task<byte[]> DownloadFile(string serverRelativeUrl)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] DownloadFile - serverRelativeUrl={serverRelativeUrl}"
+        );
         _logger.LogDebug("DownloadFile - Downloading file: {ServerRelativeUrl}", serverRelativeUrl);
 
         await EnsureValidAccessTokenAsync();
@@ -773,6 +805,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns>The file path relative to the site. Ex: "documentlibrary/folder/file.pdf"</returns>
     private string ParseServerRelativeUrl(string serverRelativeUrl)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] ParseServerRelativeUrl - serverRelativeUrl={serverRelativeUrl}"
+        );
         if (string.IsNullOrEmpty(serverRelativeUrl))
         {
             throw new ArgumentException("Server relative URL cannot be null or empty");
@@ -800,6 +835,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task<bool> DeleteFile(string serverRelativeUrl)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] DeleteFile - serverRelativeUrl={serverRelativeUrl}"
+        );
         _logger.LogDebug("DeleteFile - Deleting file: {ServerRelativeUrl}", serverRelativeUrl);
 
         await EnsureValidAccessTokenAsync();
@@ -880,6 +918,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task<bool> DeleteFile(string listTitle, string folderName, string fileName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] DeleteFile - listTitle={listTitle}, folderName={folderName}, fileName={fileName}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -925,6 +966,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task<bool> RenameFile(string oldServerRelativeUrl, string newServerRelativeUrl)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] RenameFile - oldServerRelativeUrl={oldServerRelativeUrl}, newServerRelativeUrl={newServerRelativeUrl}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -1013,6 +1057,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string documentType // DocumentYype
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] GetFileDetailsListInFolder - listTitle={listTitle}, folderName={folderName}, documentType={documentType}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -1171,6 +1218,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public async Task<bool> DeleteFolder(string listTitle, string folderName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] DeleteFolder - listTitle={listTitle}, folderName={folderName}"
+        );
         await EnsureValidAccessTokenAsync();
         await EnsureSiteIdResolvedAsync();
 
@@ -1206,6 +1256,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] AddFile (Stream, default library) - folderName={folderName}, fileName={fileName}, contentType={contentType}"
+        );
         return await AddFile(
             SharePointConstants.AccountFolderDisplayName,
             folderName,
@@ -1232,6 +1285,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] AddFile (Stream) - documentLibrary={documentLibrary}, folderName={folderName}, fileName={fileName}, contentType={contentType}"
+        );
         folderName = SharePointUtils.FixFoldername(folderName);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
@@ -1258,6 +1314,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] AddFile (byte[], default library) - folderName={folderName}, fileName={fileName}, dataSize={fileData.Length}, contentType={contentType}"
+        );
         return await AddFile(
             SharePointConstants.AccountFolderDisplayName,
             folderName,
@@ -1284,6 +1343,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] AddFile (byte[]) - documentLibrary={documentLibrary}, folderName={folderName}, fileName={fileName}, dataSize={fileData.Length}, contentType={contentType}"
+        );
         folderName = SharePointUtils.FixFoldername(folderName);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
@@ -1312,6 +1374,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] UploadFile (Stream) - fileName={fileName}, listTitle={listTitle}, folderName={folderName}, contentType={contentType}"
+        );
         using (var ms = new MemoryStream())
         {
             await fileData.CopyToAsync(ms);
@@ -1327,12 +1392,15 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// SharePoint has limits on filename length and total URL length.
     /// This method returns the input filename or a truncated version if needed.
     /// </remarks>
-    /// <param name="fileName"></param>
+    /// /// <param name="fileName"></param>
     /// <param name="listTitle"></param>
     /// <param name="folderName"></param>
     /// <returns></returns>
     public string GetTruncatedFileName(string fileName, string listTitle, string folderName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] GetTruncatedFileName - fileName={fileName}, listTitle={listTitle}, folderName={folderName}"
+        );
         int maxLength = MAX_SEGMENT_LENGTH;
         fileName = SharePointUtils.FixFilename(fileName, maxLength);
         folderName = SharePointUtils.FixFoldername(folderName);
@@ -1358,6 +1426,9 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public string GetServerRelativeURL(string listTitle, string folderName)
     {
+        Console.WriteLine(
+            $"[CloudSharePointFileManager] GetServerRelativeURL - listTitle={listTitle}, folderName={folderName}"
+        );
         folderName = SharePointUtils.FixFoldername(folderName);
 
         Uri siteUri = new Uri(SiteUrl);
@@ -1384,6 +1455,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// </summary>
     public void Dispose()
     {
+        Console.WriteLine("[CloudSharePointFileManager] Dispose called");
         _Client?.Dispose();
     }
 }

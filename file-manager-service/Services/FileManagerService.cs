@@ -37,21 +37,24 @@ public partial class FileManagerService : FileManager.FileManagerBase
         _configuration = configuration;
         _logger = logger;
         _loggerFactory = loggerFactory;
-        Console.WriteLine(
-            $"FileManagerService - Constructor - ILoggerFactory is {(loggerFactory == null ? "NULL" : "available")}"
+        _logger.LogDebug(
+            "[FileManagerService] Constructor - ILoggerFactory is {LoggerFactoryStatus}",
+            loggerFactory == null ? "NULL" : "available"
         );
     }
 
     public override Task<CreateFolderReply> CreateFolder(CreateFolderRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - CreateFolder - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}'"
+        _logger.LogDebug(
+            "[FileManagerService] CreateFolder - START - EntityName: {EntityName}, FolderName: {FolderName}",
+            request.EntityName,
+            request.FolderName
         );
         var result = new CreateFolderReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - CreateFolder - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] CreateFolder - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             return Task.FromResult(result);
         }
@@ -62,49 +65,50 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var listTitle = SharePointConstants.GetDocumentListTitle(request.EntityName);
         var urlTitle = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
-        Console.WriteLine($"FileManagerService - CreateFolder - ListTitle: '{listTitle}', UrlTitle: '{urlTitle}'");
+        _logger.LogDebug(
+            "[FileManagerService] CreateFolder - ListTitle: {ListTitle}, UrlTitle: {UrlTitle}",
+            listTitle,
+            urlTitle
+        );
 
         CreateDocumentLibraryIfMissing(listTitle, urlTitle);
 
-        Console.WriteLine($"FileManagerService - CreateFolder - Checking if folder exists");
+        _logger.LogDebug("[FileManagerService] CreateFolder - Checking if folder exists");
         var folderExists = false;
         try
         {
             var folder = _sharePointFileManager.GetFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
             if (folder != null)
             {
-                Console.WriteLine($"FileManagerService - CreateFolder - Folder already exists");
+                _logger.LogDebug("[FileManagerService] CreateFolder - Folder already exists");
                 folderExists = true;
             }
         }
         catch (SharePointRestException ex)
         {
-            Console.WriteLine(
-                $"FileManagerService - CreateFolder - SharePointRestException during folder existence check: {ex.Message}"
-            );
-            Log.Error(
+            _logger.LogError(
                 ex,
-                $"SharePointRestException creating sharepoint folder - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                "[FileManagerService] CreateFolder - SharePointRestException creating sharepoint folder - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                ex.Response?.StatusCode,
+                ex.Request?.RequestUri,
+                ex.Response?.Content
             );
             folderExists = false;
         }
         catch (Exception e)
         {
-            Console.WriteLine(
-                $"FileManagerService - CreateFolder - Exception during folder existence check: {e.Message}"
-            );
-            Log.Error(e, "Generic Exception creating sharepoint folder");
+            _logger.LogError(e, "[FileManagerService] CreateFolder - Generic Exception creating sharepoint folder");
             folderExists = false;
         }
 
         if (folderExists)
         {
-            Console.WriteLine($"FileManagerService - CreateFolder - Folder exists, returning success");
+            _logger.LogDebug("[FileManagerService] CreateFolder - Folder exists, returning success");
             result.ResultStatus = ResultStatus.Success;
         }
         else
         {
-            Console.WriteLine($"FileManagerService - CreateFolder - Folder does not exist, attempting to create");
+            _logger.LogDebug("[FileManagerService] CreateFolder - Folder does not exist, attempting to create");
             try
             {
                 _sharePointFileManager.CreateFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
@@ -112,8 +116,10 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 if (folder != null)
                 {
                     result.ResultStatus = ResultStatus.Success;
-                    Console.WriteLine(
-                        $"FileManagerService - CreateFolder - successfully created folder '{logFolder}' in '{listTitle}'"
+                    _logger.LogInformation(
+                        "[FileManagerService] CreateFolder - successfully created folder {FolderName} in {ListTitle}",
+                        logFolder,
+                        listTitle
                     );
                 }
             }
@@ -123,7 +129,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 // Verify if folder actually exists
                 Log.Warning(
                     ex,
-                    $"CreateFolder - Received Forbidden when creating folder {logFolder}, verifying existence - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}"
+                    $"[FileManagerService] CreateFolder - Received Forbidden when creating folder {logFolder}, verifying existence - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}"
                 );
                 try
                 {
@@ -134,18 +140,25 @@ public partial class FileManagerService : FileManager.FileManagerBase
                     if (folder != null)
                     {
                         result.ResultStatus = ResultStatus.Success;
-                        Console.WriteLine(
-                            $"FileManagerService - CreateFolder - folder '{logFolder}' verified to exist after Forbidden error in '{listTitle}'"
+                        _logger.LogInformation(
+                            "[FileManagerService] CreateFolder - folder {FolderName} verified to exist after Forbidden error in {ListTitle}",
+                            logFolder,
+                            listTitle
                         );
                     }
                     else
                     {
                         // Folder doesn't exist and we can't create it
                         result.ResultStatus = ResultStatus.Fail;
-                        result.ErrorDetail = $"CreateFolder - ERROR: Access denied creating folder {logFolder}";
-                        Log.Error(
+                        result.ErrorDetail =
+                            $"[FileManagerService] CreateFolder - ERROR: Access denied creating folder {logFolder}";
+                        _logger.LogError(
                             ex,
-                            $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                            "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                            result.ErrorDetail,
+                            ex.Response?.StatusCode,
+                            ex.Request?.RequestUri,
+                            ex.Response?.Content
                         );
                     }
                 }
@@ -153,55 +166,62 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 {
                     // Verification failed - log original error
                     result.ResultStatus = ResultStatus.Fail;
-                    result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
-                    Log.Error(
+                    result.ErrorDetail = $"[FileManagerService] CreateFolder - ERROR in creating folder {logFolder}";
+                    _logger.LogError(
                         ex,
-                        $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                        "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                        result.ErrorDetail,
+                        ex.Response?.StatusCode,
+                        ex.Request?.RequestUri,
+                        ex.Response?.Content
                     );
                 }
             }
             catch (SharePointRestException ex)
             {
-                Console.WriteLine(
-                    $"FileManagerService - CreateFolder - SharePointRestException during folder creation: {ex.Message}"
-                );
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
-                Log.Error(
+                result.ErrorDetail = $"[FileManagerService] CreateFolder - ERROR in creating folder {logFolder}";
+                _logger.LogError(
                     ex,
-                    $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                    "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                    result.ErrorDetail,
+                    ex.Response?.StatusCode,
+                    ex.Request?.RequestUri,
+                    ex.Response?.Content
                 );
             }
             catch (Exception e)
             {
-                Console.WriteLine($"FileManagerService - CreateFolder - Exception during folder creation: {e.Message}");
                 result.ResultStatus = ResultStatus.Fail;
-                result.ErrorDetail = $"CreateFolder - ERROR in creating folder {logFolder}";
-                Log.Error(e, result.ErrorDetail);
+                result.ErrorDetail = $"[FileManagerService] CreateFolder - ERROR in creating folder {logFolder}";
+                _logger.LogError(e, "{ErrorDetail}", result.ErrorDetail);
             }
         }
 
-        Console.WriteLine($"FileManagerService - CreateFolder - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] CreateFolder - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     public override Task<FileExistsReply> FileExists(FileExistsRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - FileExists - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        _logger.LogDebug(
+            "[FileManagerService] FileExists - START - EntityName: {EntityName}, FolderName: {FolderName}, ServerRelativeUrl: {ServerRelativeUrl}",
+            request.EntityName,
+            request.FolderName,
+            request.ServerRelativeUrl
         );
         var result = new FileExistsReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - FileExists - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] FileExists - SharePoint integration disabled");
             result.ResultStatus = FileExistStatus.Exist;
             return Task.FromResult(result);
         }
 
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
-        Console.WriteLine($"FileManagerService - FileExists - Getting file details list");
+        _logger.LogDebug("[FileManagerService] FileExists - Getting file details list");
         List<SharePointFileDetailsList> fileDetailsList = null;
         try
         {
@@ -220,66 +240,77 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 if (hasFile)
                 {
                     result.ResultStatus = FileExistStatus.Exist;
-                    Console.WriteLine(
-                        $"FileManagerService - FileExists - file exists at '{request.ServerRelativeUrl}'"
+                    _logger.LogDebug(
+                        "[FileManagerService] FileExists - file exists at {ServerRelativeUrl}",
+                        request.ServerRelativeUrl
                     );
                 }
                 else
                 {
                     result.ResultStatus = FileExistStatus.NotExist;
-                    Console.WriteLine(
-                        $"FileManagerService - FileExists - file does not exist at '{request.ServerRelativeUrl}'"
+                    _logger.LogDebug(
+                        "[FileManagerService] FileExists - file does not exist at {ServerRelativeUrl}",
+                        request.ServerRelativeUrl
                     );
                 }
             }
         }
         catch (SharePointRestException spre)
         {
-            Console.WriteLine($"FileManagerService - FileExists - SharePointRestException: {spre.Message}");
             result.ResultStatus = FileExistStatus.Error;
             result.ErrorDetail = "FileExists - Error determining if file exists";
-            Log.Error(
+            _logger.LogError(
                 spre,
-                $"{result.ErrorDetail} - Status: {spre.Response?.StatusCode}, Request: {spre.Request?.RequestUri}, Response: {spre.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                spre.Response?.StatusCode,
+                spre.Request?.RequestUri,
+                spre.Response?.Content
             );
         }
         catch (Exception e)
         {
-            Console.WriteLine($"FileManagerService - FileExists - Exception: {e.Message}");
             result.ResultStatus = FileExistStatus.Error;
-            result.ErrorDetail = "FileExists - Error determining if file exists";
-            Log.Error(e, result.ErrorDetail);
+            result.ErrorDetail = "[FileManagerService] FileExists - Error determining if file exists";
+            _logger.LogError(e, "{ErrorDetail}", result.ErrorDetail);
         }
 
-        Console.WriteLine($"FileManagerService - FileExists - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] FileExists - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     private void CreateDocumentLibraryIfMissing(string listTitle, string documentTemplateUrl = null)
     {
-        Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - START - ListTitle: '{listTitle}'");
+        _logger.LogDebug(
+            "[FileManagerService] CreateDocumentLibraryIfMissing - START - ListTitle: {ListTitle}",
+            listTitle
+        );
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
         var exists = _sharePointFileManager.DocumentLibraryExists(listTitle).GetAwaiter().GetResult();
-        Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - Library exists: {exists}");
+        _logger.LogDebug("[FileManagerService] CreateDocumentLibraryIfMissing - Library exists: {Exists}", exists);
         if (!exists)
         {
-            Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - Creating document library");
+            _logger.LogDebug("[FileManagerService] CreateDocumentLibraryIfMissing - Creating document library");
             _sharePointFileManager.CreateDocumentLibrary(listTitle, documentTemplateUrl).GetAwaiter().GetResult();
-            Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - Document library created");
+            _logger.LogInformation(
+                "[FileManagerService] CreateDocumentLibraryIfMissing - Document library {ListTitle} created",
+                listTitle
+            );
         }
-        Console.WriteLine($"FileManagerService - CreateDocumentLibraryIfMissing - END");
+        _logger.LogDebug("[FileManagerService] CreateDocumentLibraryIfMissing - END");
     }
 
     public override Task<DeleteFileReply> DeleteFile(DeleteFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - DeleteFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        _logger.LogDebug(
+            "[FileManagerService] DeleteFile - START - ServerRelativeUrl: {ServerRelativeUrl}",
+            request.ServerRelativeUrl
         );
         var result = new DeleteFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - DeleteFile - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] DeleteFile - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             return Task.FromResult(result);
         }
@@ -288,7 +319,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
-        Console.WriteLine($"FileManagerService - DeleteFile - Calling SharePoint delete");
+        _logger.LogDebug("[FileManagerService] DeleteFile - Calling SharePoint delete");
         try
         {
             var success = _sharePointFileManager.DeleteFile(request.ServerRelativeUrl).GetAwaiter().GetResult();
@@ -296,7 +327,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
             if (success)
             {
                 result.ResultStatus = ResultStatus.Success;
-                Console.WriteLine($"FileManagerService - DeleteFile - successfully deleted file at '{logUrl}'");
+                _logger.LogInformation("[FileManagerService] DeleteFile - successfully deleted file at {Url}", logUrl);
             }
             else
             {
@@ -307,33 +338,37 @@ public partial class FileManagerService : FileManager.FileManagerBase
         {
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail = $"DeleteFile - ERROR in deleting file {logUrl}";
-            Log.Error(
+            _logger.LogError(
                 ex,
-                $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                ex.Response?.StatusCode,
+                ex.Request?.RequestUri,
+                ex.Response?.Content
             );
         }
         catch (Exception e)
         {
-            Console.WriteLine($"FileManagerService - DeleteFile - Exception: {e.Message}");
             result.ResultStatus = ResultStatus.Fail;
-            result.ErrorDetail = $"DeleteFile - ERROR in deleting file {logUrl}";
-            Log.Error(e, result.ErrorDetail);
+            result.ErrorDetail = $"[FileManagerService] DeleteFile - ERROR in deleting file {logUrl}";
+            _logger.LogError(e, "{ErrorDetail}", result.ErrorDetail);
         }
 
-        Console.WriteLine($"FileManagerService - DeleteFile - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] DeleteFile - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     public override Task<DownloadFileReply> DownloadFile(DownloadFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - DownloadFile - START - ServerRelativeUrl: '{request.ServerRelativeUrl}'"
+        _logger.LogDebug(
+            "[FileManagerService] DownloadFile - START - ServerRelativeUrl: {ServerRelativeUrl}",
+            request.ServerRelativeUrl
         );
         var result = new DownloadFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - DownloadFile - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] DownloadFile - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             result.Data = ByteString.CopyFrom(new byte[0]);
             return Task.FromResult(result);
@@ -342,7 +377,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var logUrl = request.ServerRelativeUrl;
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
 
-        Console.WriteLine($"FileManagerService - DownloadFile - Calling SharePoint download");
+        _logger.LogDebug("[FileManagerService] DownloadFile - Calling SharePoint download");
         try
         {
             var data = _sharePointFileManager.DownloadFile(request.ServerRelativeUrl).GetAwaiter().GetResult();
@@ -351,8 +386,10 @@ public partial class FileManagerService : FileManager.FileManagerBase
             {
                 result.ResultStatus = ResultStatus.Success;
                 result.Data = ByteString.CopyFrom(data);
-                Console.WriteLine(
-                    $"FileManagerService - DownloadFile - successfully downloaded file from '{logUrl}', size: {data.Length} bytes"
+                _logger.LogInformation(
+                    "[FileManagerService] DownloadFile - successfully downloaded file from {Url}, size: {Size} bytes",
+                    logUrl,
+                    data.Length
                 );
             }
             else
@@ -364,33 +401,39 @@ public partial class FileManagerService : FileManager.FileManagerBase
         {
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail = $"DownloadFile - ERROR in downloading file {logUrl}";
-            Log.Error(
+            _logger.LogError(
                 ex,
-                $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                ex.Response?.StatusCode,
+                ex.Request?.RequestUri,
+                ex.Response?.Content
             );
         }
         catch (Exception e)
         {
-            Console.WriteLine($"FileManagerService - DownloadFile - Exception: {e.Message}");
             result.ResultStatus = ResultStatus.Fail;
-            result.ErrorDetail = $"DownloadFile - ERROR in downloading file {logUrl}";
-            Log.Error(e, result.ErrorDetail);
+            result.ErrorDetail = $"[FileManagerService] DownloadFile - ERROR in downloading file {logUrl}";
+            _logger.LogError(e, "{ErrorDetail}", result.ErrorDetail);
         }
 
-        Console.WriteLine($"FileManagerService - DownloadFile - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] DownloadFile - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     public override Task<UploadFileReply> UploadFile(UploadFileRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - UploadFile - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', FileName: '{request.FileName}'"
+        _logger.LogDebug(
+            "[FileManagerService] UploadFile - START - EntityName: {EntityName}, FolderName: {FolderName}, FileName: {FileName}",
+            request.EntityName,
+            request.FolderName,
+            request.FileName
         );
         var result = new UploadFileReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - UploadFile - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] UploadFile - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             result.FileName = request.FileName;
             return Task.FromResult(result);
@@ -404,8 +447,11 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var listTitle = SharePointConstants.GetDocumentListTitle(request.EntityName);
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
 
-        Console.WriteLine(
-            $"UploadFile: Uploading file '{logFileName}' to entity {request.EntityName}, folder '{logFolderName}'"
+        _logger.LogInformation(
+            "[FileManagerService] UploadFile - Uploading file {FileName} to entity {EntityName}, folder {FolderName}",
+            logFileName,
+            request.EntityName,
+            logFolderName
         );
 
         CreateDocumentLibraryIfMissing(listTitle, documentTemplateUrlPart);
@@ -415,13 +461,15 @@ public partial class FileManagerService : FileManager.FileManagerBase
             // Create intermediate folders by calling EnsureFolderPath if the path contains multiple segments
             if (!string.IsNullOrEmpty(request.FolderName) && request.FolderName.Contains("/"))
             {
-                Console.WriteLine($"UploadFile: Multi-level folder path detected, ensuring folder structure");
+                _logger.LogDebug(
+                    "[FileManagerService] UploadFile - Multi-level folder path detected, ensuring folder structure"
+                );
 
                 var ensureRequest = new EnsureFolderPathRequest { EntityName = request.EntityName };
 
                 // Split the folder path and create segments
                 var pathSegments = request.FolderName.Split('/', StringSplitOptions.RemoveEmptyEntries);
-                Console.WriteLine($"UploadFile: Split into {pathSegments.Length} segments");
+                _logger.LogDebug("[FileManagerService] UploadFile - Split into {Count} segments", pathSegments.Length);
 
                 foreach (var segment in pathSegments)
                 {
@@ -435,19 +483,23 @@ public partial class FileManagerService : FileManager.FileManagerBase
                     throw new Exception($"Failed to ensure folder path: {ensureResult.ErrorDetail}");
                 }
 
-                Console.WriteLine($"UploadFile: Folder structure ensured successfully");
+                _logger.LogDebug("[FileManagerService] UploadFile - Folder structure ensured successfully");
             }
             else if (!string.IsNullOrEmpty(request.FolderName))
             {
-                Console.WriteLine($"UploadFile: Single-level folder path, AddFile will handle creation if needed");
+                _logger.LogDebug(
+                    "[FileManagerService] UploadFile - Single-level folder path, AddFile will handle creation if needed"
+                );
             }
             else
             {
-                Console.WriteLine($"UploadFile: No folder specified, uploading to root of document library");
+                _logger.LogDebug(
+                    "[FileManagerService] UploadFile - No folder specified, uploading to root of document library"
+                );
             }
 
             // Upload the file (AddFile will handle single-level folder creation if needed)
-            Console.WriteLine($"UploadFile: Calling AddFile to upload file");
+            _logger.LogDebug("[FileManagerService] UploadFile - Calling AddFile to upload file");
 
             var fileName = _sharePointFileManager
                 .AddFile(
@@ -463,42 +515,51 @@ public partial class FileManagerService : FileManager.FileManagerBase
             result.FileName = fileName;
             result.ResultStatus = ResultStatus.Success;
 
-            Console.WriteLine(
-                $"FileManagerService - UploadFile - successfully uploaded file '{fileName}' to entity '{request.EntityName}', folder '{logFolderName}'"
+            _logger.LogInformation(
+                "[FileManagerService] UploadFile - successfully uploaded file {FileName} to entity {EntityName}, folder {FolderName}",
+                fileName,
+                request.EntityName,
+                logFolderName
             );
         }
         catch (SharePointRestException ex)
         {
-            Console.WriteLine($"FileManagerService - UploadFile - SharePointRestException: {ex.Message}");
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail = $"UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
-            Log.Error(
+            _logger.LogError(
                 ex,
-                $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                ex.Response?.StatusCode,
+                ex.Request?.RequestUri,
+                ex.Response?.Content
             );
         }
         catch (Exception e)
         {
-            Console.WriteLine($"FileManagerService - UploadFile - Exception: {e.Message}");
             result.ResultStatus = ResultStatus.Fail;
-            result.ErrorDetail = $"UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
-            Log.Error(e, result.ErrorDetail);
+            result.ErrorDetail =
+                $"[FileManagerService] UploadFile - ERROR in uploading file {logFileName} to folder {logFolderName}";
+            _logger.LogError(e, "{ErrorDetail}", result.ErrorDetail);
         }
 
-        Console.WriteLine($"FileManagerService - UploadFile - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] UploadFile - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     public override Task<FolderFilesReply> FolderFiles(FolderFilesRequest request, ServerCallContext context)
     {
-        Console.WriteLine(
-            $"FileManagerService - FolderFiles - START - EntityName: '{request.EntityName}', FolderName: '{request.FolderName}', DocumentType: '{request.DocumentType}'"
+        _logger.LogDebug(
+            "[FileManagerService] FolderFiles - START - EntityName: {EntityName}, FolderName: {FolderName}, DocumentType: {DocumentType}",
+            request.EntityName,
+            request.FolderName,
+            request.DocumentType
         );
         var result = new FolderFilesReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - FolderFiles - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] FolderFiles - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             result.Files.Add(
                 new FileSystemItem
@@ -516,32 +577,42 @@ public partial class FileManagerService : FileManager.FileManagerBase
         }
 
         // Get the file details list in folder
-        Console.WriteLine($"FileManagerService - FolderFiles - Getting file details list from SharePoint");
+        _logger.LogDebug("[FileManagerService] FolderFiles - Getting file details list from SharePoint");
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
-        Console.WriteLine($"FileManagerService - FolderFiles - DocumentTemplateUrlPart: '{documentTemplateUrlPart}'");
+        _logger.LogDebug(
+            "[FileManagerService] FolderFiles - DocumentTemplateUrlPart: {DocumentTemplateUrlPart}",
+            documentTemplateUrlPart
+        );
         List<SharePointFileDetailsList> fileDetailsList = null;
         var _sharePointFileManager = SharePointFileManager.Create(_configuration, _loggerFactory);
-        Console.WriteLine($"FileManagerService - FolderFiles - SharePointFileManager created");
+        _logger.LogDebug("[FileManagerService] FolderFiles - SharePointFileManager created");
         try
         {
-            Console.WriteLine($"FileManagerService - FolderFiles - Calling GetFileDetailsListInFolder");
+            _logger.LogDebug("[FileManagerService] FolderFiles - Calling GetFileDetailsListInFolder");
             fileDetailsList = _sharePointFileManager
                 .GetFileDetailsListInFolder(documentTemplateUrlPart, request.FolderName, request.DocumentType)
                 .GetAwaiter()
                 .GetResult();
-            Console.WriteLine(
-                $"FileManagerService - FolderFiles - GetFileDetailsListInFolder returned {fileDetailsList?.Count ?? 0} items"
+            _logger.LogDebug(
+                "[FileManagerService] FolderFiles - GetFileDetailsListInFolder returned {Count} items",
+                fileDetailsList?.Count ?? 0
             );
             if (fileDetailsList != null)
             {
-                Console.WriteLine($"FileManagerService - FolderFiles - Processing {fileDetailsList.Count} file(s)");
-                Console.WriteLine($"FileManagerService - FolderFiles - Processing {fileDetailsList.Count} file(s)");
+                _logger.LogDebug(
+                    "[FileManagerService] FolderFiles - Processing {Count} file(s)",
+                    fileDetailsList.Count
+                );
                 // gRPC ensures that the collection has space to accept new data; no need to call a constructor
                 int processedCount = 0;
                 foreach (var item in fileDetailsList)
                 {
-                    Console.WriteLine(
-                        $"FileManagerService - FolderFiles - Processing file #{processedCount + 1}: Name='{item.Name}', DocumentType='{item.DocumentType}', ServerRelativeUrl='{item.ServerRelativeUrl}'"
+                    _logger.LogDebug(
+                        "[FileManagerService] FolderFiles - Processing file #{Index}: Name={Name}, DocumentType={DocumentType}, ServerRelativeUrl={ServerRelativeUrl}",
+                        processedCount + 1,
+                        item.Name,
+                        item.DocumentType,
+                        item.ServerRelativeUrl
                     );
                     // Sharepoint API responds with dates in UTC format
                     var utcFormat = DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal;
@@ -559,8 +630,12 @@ public partial class FileManagerService : FileManager.FileManagerBase
                         utcFormat,
                         out parsedLastModified
                     );
-                    Console.WriteLine(
-                        $"FileManagerService - FolderFiles - Date parsing: TimeCreated='{item.TimeCreated}' (parsed: {createDateParsed}), TimeLastModified='{item.TimeLastModified}' (parsed: {modifiedDateParsed})"
+                    _logger.LogDebug(
+                        "[FileManagerService] FolderFiles - Date parsing: TimeCreated={TimeCreated} (parsed: {CreateDateParsed}), TimeLastModified={TimeLastModified} (parsed: {ModifiedDateParsed})",
+                        item.TimeCreated,
+                        createDateParsed,
+                        item.TimeLastModified,
+                        modifiedDateParsed
                     );
 
                     var newItem = new FileSystemItem
@@ -573,54 +648,56 @@ public partial class FileManagerService : FileManager.FileManagerBase
                         TimeLastModified = Timestamp.FromDateTime(parsedLastModified),
                     };
 
-                    Console.WriteLine(
-                        $"FileManagerService - FolderFiles - Created FileSystemItem: Size={newItem.Size} bytes"
+                    _logger.LogDebug(
+                        "[FileManagerService] FolderFiles - Created FileSystemItem: Size={Size} bytes",
+                        newItem.Size
                     );
                     result.Files.Add(newItem);
                     processedCount++;
                 }
 
                 result.ResultStatus = ResultStatus.Success;
-                Console.WriteLine(
-                    $"FileManagerService - FolderFiles - successfully retrieved {result.Files.Count} files from folder '{request.FolderName}' in entity '{request.EntityName}'"
+                _logger.LogInformation(
+                    "[FileManagerService] FolderFiles - successfully retrieved {Count} files from folder {FolderName} in entity {EntityName}",
+                    result.Files.Count,
+                    request.FolderName,
+                    request.EntityName
                 );
             }
             else
             {
-                Console.WriteLine($"FileManagerService - FolderFiles - fileDetailsList is null, no files found");
+                _logger.LogDebug("[FileManagerService] FolderFiles - fileDetailsList is null, no files found");
                 result.ResultStatus = ResultStatus.Success;
             }
         }
         catch (SharePointRestException spre)
         {
-            Console.WriteLine($"FileManagerService - FolderFiles - SharePointRestException: {spre.Message}");
-            Console.WriteLine(
-                $"FileManagerService - FolderFiles - SharePointRestException Details - StatusCode: {spre.Response?.StatusCode}, RequestUri: {spre.Request?.RequestUri}"
-            );
             result.ResultStatus = ResultStatus.Fail;
-            result.ErrorDetail = "FolderFiles - Error getting SharePoint File List";
-            Log.Error(
+            result.ErrorDetail = "[FileManagerService] FolderFiles - Error getting SharePoint File List";
+            _logger.LogError(
                 spre,
-                $"{result.ErrorDetail} - Status: {spre.Response?.StatusCode}, Request: {spre.Request?.RequestUri}, Response: {spre.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                spre.Response?.StatusCode,
+                spre.Request?.RequestUri,
+                spre.Response?.Content
             );
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"FileManagerService - FolderFiles - Exception: {ex.Message}");
-            Console.WriteLine($"FileManagerService - FolderFiles - Exception StackTrace: {ex.StackTrace}");
             result.ResultStatus = ResultStatus.Fail;
-            result.ErrorDetail = "FolderFiles - Unexpected error getting SharePoint File List";
-            Log.Error(ex, result.ErrorDetail);
+            result.ErrorDetail = "[FileManagerService] FolderFiles - Unexpected error getting SharePoint File List";
+            _logger.LogError(ex, "{ErrorDetail}", result.ErrorDetail);
         }
 
-        Console.WriteLine($"FileManagerService - FolderFiles - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] FolderFiles - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
     [AllowAnonymous]
     public override Task<TokenReply> GetToken(TokenRequest request, ServerCallContext context)
     {
-        Console.WriteLine($"FileManagerService - GetToken - START");
+        _logger.LogDebug("[FileManagerService] GetToken - START");
         var result = new TokenReply();
         result.ResultStatus = ResultStatus.Fail;
 
@@ -638,15 +715,15 @@ public partial class FileManagerService : FileManager.FileManagerBase
             );
             result.Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken);
             result.ResultStatus = ResultStatus.Success;
-            Console.WriteLine($"FileManagerService - GetToken - successfully generated authentication token");
+            _logger.LogInformation("[FileManagerService] GetToken - successfully generated authentication token");
         }
         else
         {
-            Console.WriteLine($"FileManagerService - GetToken - Invalid secret provided");
-            result.ErrorDetail = "GetToken - Invalid Secret";
+            _logger.LogWarning("[FileManagerService] GetToken - Invalid secret provided");
+            result.ErrorDetail = "[FileManagerService] GetToken - Invalid Secret";
         }
 
-        Console.WriteLine($"FileManagerService - GetToken - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug("[FileManagerService] GetToken - END - ResultStatus: {ResultStatus}", result.ResultStatus);
         return Task.FromResult(result);
     }
 
@@ -655,14 +732,17 @@ public partial class FileManagerService : FileManager.FileManagerBase
         ServerCallContext context
     )
     {
-        Console.WriteLine(
-            $"FileManagerService - GetTruncatedFilename - START - EntityName: '{request.EntityName}', FileName: '{request.FileName}', FolderName: '{request.FolderName}'"
+        _logger.LogDebug(
+            "[FileManagerService] GetTruncatedFilename - START - EntityName: {EntityName}, FileName: {FileName}, FolderName: {FolderName}",
+            request.EntityName,
+            request.FileName,
+            request.FolderName
         );
         var result = new TruncatedFilenameReply();
 
         if (_configuration["DISABLE_SHAREPOINT_INTEGRATION"] == "true")
         {
-            Console.WriteLine($"FileManagerService - GetTruncatedFilename - SharePoint integration disabled");
+            _logger.LogDebug("[FileManagerService] GetTruncatedFilename - SharePoint integration disabled");
             result.ResultStatus = ResultStatus.Success;
             result.FileName = request.FileName;
             return Task.FromResult(result);
@@ -684,23 +764,31 @@ public partial class FileManagerService : FileManager.FileManagerBase
             );
             result.FileName = maybeTruncated;
             result.ResultStatus = ResultStatus.Success;
-            Console.WriteLine(
-                $"FileManagerService - GetTruncatedFilename - successfully computed filename '{maybeTruncated}' for '{logFileName}'"
+            _logger.LogInformation(
+                "[FileManagerService] GetTruncatedFilename - successfully computed filename {TruncatedFileName} for {FileName}",
+                maybeTruncated,
+                logFileName
             );
         }
         catch (SharePointRestException ex)
         {
-            Console.WriteLine($"FileManagerService - GetTruncatedFilename - SharePointRestException: {ex.Message}");
             result.ResultStatus = ResultStatus.Fail;
             result.ErrorDetail =
-                $"GetTruncatedFilename - ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
-            Log.Error(
+                $"[FileManagerService] GetTruncatedFilename - ERROR in getting truncated filename {logFileName} for folder {logFolderName}";
+            _logger.LogError(
                 ex,
-                $"{result.ErrorDetail} - Status: {ex.Response?.StatusCode}, Request: {ex.Request?.RequestUri}, Response: {ex.Response?.Content}"
+                "{ErrorDetail} - Status: {StatusCode}, Request: {RequestUri}, Response: {Response}",
+                result.ErrorDetail,
+                ex.Response?.StatusCode,
+                ex.Request?.RequestUri,
+                ex.Response?.Content
             );
         }
 
-        Console.WriteLine($"FileManagerService - GetTruncatedFilename - END - ResultStatus: {result.ResultStatus}");
+        _logger.LogDebug(
+            "[FileManagerService] GetTruncatedFilename - END - ResultStatus: {ResultStatus}",
+            result.ResultStatus
+        );
         return Task.FromResult(result);
     }
 }

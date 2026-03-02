@@ -371,7 +371,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             fileDetailsList = fileDetailsList.Where(f => f.DocumentType == documentType).ToList();
         }
         Console.WriteLine(
-            $"OnPremSharePointFileManager - GetFileDetailsListInFolder - returning {fileDetailsList.Count} files from folder '{folderName}' in '{listTitle}'"
+            $"[OnPremSharePointFileManager] GetFileDetailsListInFolder - returning {fileDetailsList.Count} files from folder '{folderName}' in '{listTitle}'"
         );
         return fileDetailsList;
     }
@@ -384,7 +384,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     public async Task CreateFolder(string listTitle, string folderName)
     {
         Console.WriteLine(
-            $"OnPremSharePointFileManager - CreateFolder - called with listTitle='{listTitle}', folderName='{folderName}'"
+            $"[OnPremSharePointFileManager] CreateFolder - called with listTitle='{listTitle}', folderName='{folderName}'"
         );
         // return early if SharePoint is disabled.
         if (!IsValid())
@@ -429,10 +429,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             // Enhanced logging for debugging folder creation failures
             string originalRelativeUrl = $"/{listTitle}/{folderName}";
             Console.WriteLine(
-                $"OnPremSharePointFileManager - CreateFolder - failed - Status: {_statusCode}, FolderName: '{folderName}', EscapedRelativeUrl: '{relativeUrl}', OriginalRelativeUrl: '{originalRelativeUrl}'"
+                $"[OnPremSharePointFileManager] CreateFolder - failed - Status: {_statusCode}, FolderName: '{folderName}', EscapedRelativeUrl: '{relativeUrl}', OriginalRelativeUrl: '{originalRelativeUrl}'"
             );
             Console.WriteLine(
-                $"OnPremSharePointFileManager - CreateFolder - Response: {_responseContent}"
+                $"[OnPremSharePointFileManager] CreateFolder - Response: {_responseContent}"
             );
 
             ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
@@ -449,7 +449,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             string jsonString = await response.Content.ReadAsStringAsync();
             Console.WriteLine(
-                $"OnPremSharePointFileManager - CreateFolder - successfully created folder '{folderName}' in '{listTitle}'"
+                $"[OnPremSharePointFileManager] CreateFolder - successfully created folder '{folderName}' in '{listTitle}'"
             );
         }
     }
@@ -540,7 +540,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 response.EnsureSuccessStatusCode();
             }
             Console.WriteLine(
-                $"OnPremSharePointFileManager - CreateDocumentLibrary - successfully created document library '{listTitle}' (template: '{documentTemplateUrlTitle}')"
+                $"[OnPremSharePointFileManager] CreateDocumentLibrary - successfully created document library '{listTitle}' (template: '{documentTemplateUrlTitle}')"
             );
         }
 
@@ -594,7 +594,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             jsonString = await response.Content.ReadAsStringAsync();
             Console.WriteLine(
-                $"OnPremSharePointFileManager - UpdateDocumentLibrary - successfully updated document library '{listTitle}'"
+                $"[OnPremSharePointFileManager] UpdateDocumentLibrary - successfully updated document library '{listTitle}'"
             );
         }
 
@@ -656,7 +656,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             result = true;
             Console.WriteLine(
-                $"OnPremSharePointFileManager - DeleteFolder - successfully deleted folder '{folderName}' from '{listTitle}'"
+                $"[OnPremSharePointFileManager] DeleteFolder - successfully deleted folder '{folderName}' from '{listTitle}'"
             );
         }
         else
@@ -785,24 +785,28 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     public async Task<string> EnhancedFolderExists(string urlTitle, string folderName, string guid)
     {
         Console.WriteLine(
-            $"EnhancedFolderExists - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
+            $"[OnPremSharePointFileManager] EnhancedFolderExists - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
         );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
-            Console.WriteLine("EnhancedFolderExists - SharePoint is not valid, returning null");
+            Console.WriteLine(
+                "[OnPremSharePointFileManager] EnhancedFolderExists - SharePoint is not valid, returning null"
+            );
             return null;
         }
 
         // Normalize the GUID: remove dashes and convert to uppercase
         string normalizedGuid = guid?.Replace("-", "").ToUpper();
-        Console.WriteLine($"EnhancedFolderExists - normalizedGuid='{normalizedGuid}'");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] EnhancedFolderExists - normalizedGuid='{normalizedGuid}'"
+        );
 
         if (string.IsNullOrEmpty(normalizedGuid))
         {
             Console.WriteLine(
-                "EnhancedFolderExists - normalizedGuid is null or empty, returning null"
+                "[OnPremSharePointFileManager] EnhancedFolderExists - normalizedGuid is null or empty, returning null"
             );
             return null;
         }
@@ -814,20 +818,22 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             searchGuid: normalizedGuid
         );
         Console.WriteLine(
-            $"EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders"
+            $"[OnPremSharePointFileManager] EnhancedFolderExists - SearchFoldersInDocumentLibrary returned {folders?.Count ?? 0} folders"
         );
 
         if (folders == null || folders.Count == 0)
         {
             // No folders found
-            Console.WriteLine("EnhancedFolderExists - No folders found, returning null");
+            Console.WriteLine(
+                "[OnPremSharePointFileManager] EnhancedFolderExists - No folders found, returning null"
+            );
             return null;
         }
         else if (folders.Count == 1)
         {
             // Exactly one folder found - return its name
             Console.WriteLine(
-                $"EnhancedFolderExists - Found exactly one folder: '{folders[0].Name}'"
+                $"[OnPremSharePointFileManager] EnhancedFolderExists - Found exactly one folder: '{folders[0].Name}'"
             );
             return folders[0].Name;
         }
@@ -835,7 +841,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             // Multiple folders found - need to disambiguate using folderName
             Console.WriteLine(
-                $"EnhancedFolderExists - Multiple folders found ({folders.Count}), disambiguating..."
+                $"[OnPremSharePointFileManager] EnhancedFolderExists - Multiple folders found ({folders.Count}), disambiguating..."
             );
 
             // First try: case-sensitive comparison
@@ -843,14 +849,14 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 .Where(f => f.Name.Contains(folderName, StringComparison.Ordinal))
                 .ToList();
             Console.WriteLine(
-                $"EnhancedFolderExists - Case-sensitive matches: {caseSensitiveMatches.Count}"
+                $"[OnPremSharePointFileManager] EnhancedFolderExists - Case-sensitive matches: {caseSensitiveMatches.Count}"
             );
 
             if (caseSensitiveMatches.Count == 1)
             {
                 // Found exactly one case-sensitive match
                 Console.WriteLine(
-                    $"EnhancedFolderExists - Found one case-sensitive match: '{caseSensitiveMatches[0].Name}'"
+                    $"[OnPremSharePointFileManager] EnhancedFolderExists - Found one case-sensitive match: '{caseSensitiveMatches[0].Name}'"
                 );
                 return caseSensitiveMatches[0].Name;
             }
@@ -858,20 +864,20 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             {
                 // No case-sensitive matches - try case-insensitive comparison
                 Console.WriteLine(
-                    $"EnhancedFolderExists - No case-sensitive matches, trying case-insensitive..."
+                    $"[OnPremSharePointFileManager] EnhancedFolderExists - No case-sensitive matches, trying case-insensitive..."
                 );
                 var caseInsensitiveMatches = folders
                     .Where(f => f.Name.Contains(folderName, StringComparison.OrdinalIgnoreCase))
                     .ToList();
                 Console.WriteLine(
-                    $"EnhancedFolderExists - Case-insensitive matches: {caseInsensitiveMatches.Count}"
+                    $"[OnPremSharePointFileManager] EnhancedFolderExists - Case-insensitive matches: {caseInsensitiveMatches.Count}"
                 );
 
                 if (caseInsensitiveMatches.Count == 1)
                 {
                     // Found exactly one case-insensitive match
                     Console.WriteLine(
-                        $"EnhancedFolderExists - Found one case-insensitive match: '{caseInsensitiveMatches[0].Name}'"
+                        $"[OnPremSharePointFileManager] EnhancedFolderExists - Found one case-insensitive match: '{caseInsensitiveMatches[0].Name}'"
                     );
                     return caseInsensitiveMatches[0].Name;
                 }
@@ -879,7 +885,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 {
                     // No matches at all
                     Console.WriteLine(
-                        "EnhancedFolderExists - No case-insensitive matches, returning null"
+                        "[OnPremSharePointFileManager] EnhancedFolderExists - No case-insensitive matches, returning null"
                     );
                     return null;
                 }
@@ -887,7 +893,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 {
                     // Multiple case-insensitive matches - check which folder has items
                     Console.WriteLine(
-                        $"EnhancedFolderExists - Multiple case-insensitive matches ({caseInsensitiveMatches.Count}), checking for folder contents..."
+                        $"[OnPremSharePointFileManager] EnhancedFolderExists - Multiple case-insensitive matches ({caseInsensitiveMatches.Count}), checking for folder contents..."
                     );
 
                     var foldersWithItems = new List<FolderItem>();
@@ -907,7 +913,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     {
                         // Exactly one folder has items - return it
                         Console.WriteLine(
-                            $"EnhancedFolderExists - Found exactly one folder with items: '{foldersWithItems[0].Name}'"
+                            $"[OnPremSharePointFileManager] EnhancedFolderExists - Found exactly one folder with items: '{foldersWithItems[0].Name}'"
                         );
                         return foldersWithItems[0].Name;
                     }
@@ -915,7 +921,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     {
                         // No folders have items - cannot determine which one to use
                         Console.WriteLine(
-                            "EnhancedFolderExists - No folders contain items, returning null"
+                            "[OnPremSharePointFileManager] EnhancedFolderExists - No folders contain items, returning null"
                         );
                         return null;
                     }
@@ -923,7 +929,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     {
                         // Multiple folders have items - cannot determine which one to use
                         Console.WriteLine(
-                            $"EnhancedFolderExists - Multiple folders ({foldersWithItems.Count}) contain items, returning null"
+                            $"[OnPremSharePointFileManager] EnhancedFolderExists - Multiple folders ({foldersWithItems.Count}) contain items, returning null"
                         );
                         return null;
                     }
@@ -933,7 +939,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             {
                 // Multiple case-sensitive matches (shouldn't be possible in SharePoint, but handle gracefully)
                 Console.WriteLine(
-                    $"EnhancedFolderExists - Multiple case-sensitive matches ({caseSensitiveMatches.Count}) - unexpected, returning first: '{caseSensitiveMatches[0].Name}'"
+                    $"[OnPremSharePointFileManager] EnhancedFolderExists - Multiple case-sensitive matches ({caseSensitiveMatches.Count}) - unexpected, returning first: '{caseSensitiveMatches[0].Name}'"
                 );
                 return caseSensitiveMatches[0].Name;
             }
@@ -960,23 +966,27 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     public async Task<Object> GetFolder(string urlTitle, string folderName, string guid = null)
     {
         Console.WriteLine(
-            $"GetFolder - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
+            $"[OnPremSharePointFileManager] GetFolder - called with urlTitle='{urlTitle}', folderName='{folderName}', guid='{guid}'"
         );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
-            Console.WriteLine("GetFolder - SharePoint is not valid, returning null");
+            Console.WriteLine(
+                "[OnPremSharePointFileManager] GetFolder - SharePoint is not valid, returning null"
+            );
             return null;
         }
         var fixedFolderName = SharePointUtils.FixFoldername(folderName, urlTitle);
-        Console.WriteLine($"GetFolder - After FixFoldername: '{fixedFolderName}'");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] GetFolder - After FixFoldername: '{fixedFolderName}'"
+        );
 
         // If GUID is provided, use EnhancedFolderExists to find the folder by GUID and resolve the actual folder name
         if (!string.IsNullOrEmpty(guid))
         {
             Console.WriteLine(
-                $"GetFolder - GUID provided, calling FindFolderOne to search by GUID"
+                $"[OnPremSharePointFileManager] GetFolder - GUID provided, calling FindFolderOne to search by GUID"
             );
 
             List<FolderItem> matchingFolders = await FindFolderOne(urlTitle, guid);
@@ -985,7 +995,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             {
                 // Found the folder with enhanced matching - use the actual name from SharePoint
                 Console.WriteLine(
-                    $"GetFolder - FindFolderOne returned actual folder name: '{matchingFolders[0].Name}' (was '{fixedFolderName}')"
+                    $"[OnPremSharePointFileManager] GetFolder - FindFolderOne returned actual folder name: '{matchingFolders[0].Name}' (was '{fixedFolderName}')"
                 );
                 fixedFolderName = matchingFolders[0].Name;
             }
@@ -999,7 +1009,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         }
 
         serverRelativeUrl += $"{urlTitle}/{fixedFolderName}";
-        Console.WriteLine($"GetFolder - Constructed serverRelativeUrl: '{serverRelativeUrl}'");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] GetFolder - Constructed serverRelativeUrl: '{serverRelativeUrl}'"
+        );
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage()
         {
@@ -1016,19 +1028,25 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         // make the request.
         var response = await _Client.SendAsync(endpointRequest);
         string jsonString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine($"GetFolder - Response StatusCode: {response.StatusCode}");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] GetFolder - Response StatusCode: {response.StatusCode}"
+        );
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
-            Console.WriteLine($"GetFolder - Folder found successfully");
+            Console.WriteLine(
+                $"[OnPremSharePointFileManager] GetFolder - Folder found successfully"
+            );
             result = JsonConvert.DeserializeObject(jsonString);
             Console.WriteLine(
-                $"GetFolder - completed successfully for folder '{fixedFolderName}' in '{urlTitle}'"
+                $"[OnPremSharePointFileManager] GetFolder - completed successfully for folder '{fixedFolderName}' in '{urlTitle}'"
             );
         }
         else
         {
-            Console.WriteLine($"GetFolder - Folder not found or error occurred");
+            Console.WriteLine(
+                $"[OnPremSharePointFileManager] GetFolder - Folder not found or error occurred"
+            );
         }
 
         return result;
@@ -1061,7 +1079,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             result = JsonConvert.DeserializeObject(jsonString);
             Console.WriteLine(
-                $"OnPremSharePointFileManager - GetDocumentLibrary - successfully retrieved document library '{listTitle}'"
+                $"[OnPremSharePointFileManager] GetDocumentLibrary - successfully retrieved document library '{listTitle}'"
             );
         }
 
@@ -1117,7 +1135,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         }
 
         Console.WriteLine(
-            $"OnPremSharePointFileManager - GetFoldersInDocumentLibrary - returning {folderList.Count} folders from '{listTitle}'"
+            $"[OnPremSharePointFileManager] GetFoldersInDocumentLibrary - returning {folderList.Count} folders from '{listTitle}'"
         );
         return folderList;
     }
@@ -1138,14 +1156,14 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string internalTitle = SharePointConstants.GetDocumentTemplateUrlPart(listTitle);
 
         Console.WriteLine(
-            $"SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'"
+            $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - called with listTitle='{listTitle}', internalTitle='{internalTitle}' searchString='{searchString}', searchGuid='{searchGuid}'"
         );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
             Console.WriteLine(
-                "SearchFoldersInDocumentLibrary - SharePoint is not valid, returning null"
+                "[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - SharePoint is not valid, returning null"
             );
             return null;
         }
@@ -1155,7 +1173,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             searchString = searchGuid.Replace("-", "").ToUpper();
             Console.WriteLine(
-                $"SearchFoldersInDocumentLibrary - Normalized searchGuid to searchString: '{searchString}'"
+                $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Normalized searchGuid to searchString: '{searchString}'"
             );
         }
 
@@ -1163,7 +1181,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             // Return empty list if no search criteria provided
             Console.WriteLine(
-                "SearchFoldersInDocumentLibrary - searchString is null or empty, returning empty list"
+                "[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - searchString is null or empty, returning empty list"
             );
             return new List<FolderItem>();
         }
@@ -1178,7 +1196,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string filter = $"$filter=substringof('{escapedSearch}',Name) and Name ne 'Forms'";
         // string query = $"web/lists/GetByTitle('{title}')/rootFolder/folders?{filter}";
         string query = $"web/GetList('/{title}')/rootFolder/folders?{filter}";
-        Console.WriteLine($"SearchFoldersInDocumentLibrary - Constructed query: '{query}'");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Constructed query: '{query}'"
+        );
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
         {
@@ -1189,12 +1209,12 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         // make the request.
         Console.WriteLine(
-            $"SearchFoldersInDocumentLibrary - Making API request to: {endpointRequest.RequestUri}"
+            $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Making API request to: {endpointRequest.RequestUri}"
         );
         var response = await _Client.SendAsync(endpointRequest);
         string jsonString = await response.Content.ReadAsStringAsync();
         Console.WriteLine(
-            $"SearchFoldersInDocumentLibrary - Response StatusCode: {response.StatusCode}"
+            $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Response StatusCode: {response.StatusCode}"
         );
 
         if (response.StatusCode == HttpStatusCode.OK)
@@ -1226,7 +1246,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         }
         else
         {
-            Console.WriteLine($"SearchFoldersInDocumentLibrary - Error response: {jsonString}");
+            Console.WriteLine(
+                $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Error response: {jsonString}"
+            );
             throw new SharePointRestException(
                 string.Format(
                     "Operation returned an invalid status code '{0}'",
@@ -1235,7 +1257,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             );
         }
 
-        Console.WriteLine($"SearchFoldersInDocumentLibrary - Returning {folderList.Count} folders");
+        Console.WriteLine(
+            $"[OnPremSharePointFileManager] SearchFoldersInDocumentLibrary - Returning {folderList.Count} folders"
+        );
         return folderList;
     }
 
@@ -1274,7 +1298,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         fileName = await this.UploadFile(fileName, listTitle, folderName, fileData, contentType);
         Console.WriteLine(
-            $"OnPremSharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
+            $"[OnPremSharePointFileManager] AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
         );
 
         return fileName;
@@ -1315,7 +1339,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         fileName = await this.UploadFile(fileName, listTitle, folderName, fileData, contentType);
         Console.WriteLine(
-            $"OnPremSharePointFileManager - AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
+            $"[OnPremSharePointFileManager] AddFile - successfully added file '{fileName}' to folder '{folderName}' in '{listTitle}'"
         );
 
         return fileName;
@@ -1459,7 +1483,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             + "',overwrite=true)";
 
         Console.WriteLine(
-            $"UploadFileByFolderId - Using folder ID '{folderId}', URL length: {requestUriString.Length}"
+            $"[OnPremSharePointFileManager] UploadFileByFolderId - Using folder ID '{folderId}', URL length: {requestUriString.Length}"
         );
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
@@ -1479,7 +1503,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             result = fileName;
             Console.WriteLine(
-                $"OnPremSharePointFileManager - UploadFileByFolderId - successfully uploaded file '{fileName}' using folder ID"
+                $"[OnPremSharePointFileManager] UploadFileByFolderId - successfully uploaded file '{fileName}' using folder ID"
             );
         }
         else
@@ -1536,7 +1560,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             if (requestUriString.Length > MAX_TOTAL_LENGTH)
             {
                 Console.WriteLine(
-                    $"UploadFile - URL too long ({requestUriString.Length} chars), attempting upload by folder ID"
+                    $"[OnPremSharePointFileManager] UploadFile - URL too long ({requestUriString.Length} chars), attempting upload by folder ID"
                 );
 
                 try
@@ -1593,7 +1617,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             {
                 result = fileName;
                 Console.WriteLine(
-                    $"OnPremSharePointFileManager - UploadFile - successfully uploaded file '{fileName}' to '{listTitle}/{folderName}'"
+                    $"[OnPremSharePointFileManager] UploadFile - successfully uploaded file '{fileName}' to '{listTitle}/{folderName}'"
                 );
             }
             else
@@ -1670,7 +1694,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         }
 
         Console.WriteLine(
-            $"OnPremSharePointFileManager - DownloadFile - successfully downloaded file from '{url}', size: {result.Length} bytes"
+            $"[OnPremSharePointFileManager] DownloadFile - successfully downloaded file from '{url}', size: {result.Length} bytes"
         );
         return result;
     }
@@ -1718,7 +1742,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         if (!string.IsNullOrEmpty(result))
         {
             Console.WriteLine(
-                $"OnPremSharePointFileManager - GetDigest - successfully retrieved digest token"
+                $"[OnPremSharePointFileManager] GetDigest - successfully retrieved digest token"
             );
         }
         return result;
@@ -1776,7 +1800,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             result = true;
             Console.WriteLine(
-                $"OnPremSharePointFileManager - DeleteFile - successfully deleted file at '{serverRelativeUrl}'"
+                $"[OnPremSharePointFileManager] DeleteFile - successfully deleted file at '{serverRelativeUrl}'"
             );
         }
         else
@@ -1822,7 +1846,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             result = true;
             Console.WriteLine(
-                $"OnPremSharePointFileManager - RenameFile - successfully renamed file from '{oldServerRelativeUrl}' to '{newServerRelativeUrl}'"
+                $"[OnPremSharePointFileManager] RenameFile - successfully renamed file from '{oldServerRelativeUrl}' to '{newServerRelativeUrl}'"
             );
         }
         else

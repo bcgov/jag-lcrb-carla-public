@@ -49,7 +49,7 @@ public static class SharePointFileManager
             {
                 throw new ArgumentNullException(
                     nameof(loggerFactory),
-                    "ILoggerFactory is required when using cloud SharePoint implementation."
+                    "SharePointFileManager - ILoggerFactory is required when using cloud SharePoint implementation."
                 );
             }
 
