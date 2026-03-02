@@ -1,7 +1,7 @@
-using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
@@ -20,63 +20,114 @@ namespace Gov.Lclb.Cllb.Interfaces
             return result;
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMaccount account)
+        public static FolderSegment GetDocumentFolderName(this MicrosoftDynamicsCRMaccount account)
         {
             string accountIdCleaned = CleanGuidForSharePoint(account.Accountid);
-            string folderName = $"{account.Name}_{accountIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{account.Name}_{accountIdCleaned}",
+                FolderNameSegment = account.Name,
+                FolderGuidSegment = accountIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioApplication application)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioApplication application
+        )
         {
             string applicationIdCleaned = CleanGuidForSharePoint(application.AdoxioApplicationid);
-            string folderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{application.AdoxioJobnumber}_{applicationIdCleaned}",
+                FolderNameSegment = application.AdoxioJobnumber,
+                FolderGuidSegment = applicationIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMcontact contact)
+        public static FolderSegment GetDocumentFolderName(this MicrosoftDynamicsCRMcontact contact)
         {
             string contactIdCleaned = CleanGuidForSharePoint(contact.Contactid);
-            string folderName = $"contact_{contactIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"contact_{contactIdCleaned}",
+                FolderNameSegment = "contact",
+                FolderGuidSegment = contactIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioWorker worker)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioWorker worker
+        )
         {
             string applicationIdCleaned = CleanGuidForSharePoint(worker.AdoxioWorkerid);
-            string folderName = $"{worker.AdoxioName}_{applicationIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{worker.AdoxioName}_{applicationIdCleaned}",
+                FolderNameSegment = worker.AdoxioName,
+                FolderGuidSegment = applicationIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioEvent eventEntity)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioEvent eventEntity
+        )
         {
             string entityIdCleaned = CleanGuidForSharePoint(eventEntity.AdoxioEventid);
-            string folderName = $"{eventEntity.AdoxioName}_{entityIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{eventEntity.AdoxioName}_{entityIdCleaned}",
+                FolderNameSegment = eventEntity.AdoxioName,
+                FolderGuidSegment = entityIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioFederalreportexport exportEntity)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioFederalreportexport exportEntity
+        )
         {
-            string entityIdCleaned = CleanGuidForSharePoint(exportEntity.AdoxioFederalreportexportid);
-            string folderName = $"{exportEntity.AdoxioName}_{entityIdCleaned}";
-            return folderName;
+            string entityIdCleaned = CleanGuidForSharePoint(
+                exportEntity.AdoxioFederalreportexportid
+            );
+
+            return new FolderSegment
+            {
+                FolderName = $"{exportEntity.AdoxioName}_{entityIdCleaned}",
+                FolderNameSegment = exportEntity.AdoxioName,
+                FolderGuidSegment = entityIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioLicences licence)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioLicences licence
+        )
         {
             string licenceIdCleaned = CleanGuidForSharePoint(licence.AdoxioLicencesid);
-            string folderName = $"{licence.AdoxioName}_{licenceIdCleaned}";
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{licence.AdoxioName}_{licenceIdCleaned}",
+                FolderNameSegment = licence.AdoxioName,
+                FolderGuidSegment = licenceIdCleaned,
+            };
         }
 
-        public static string GetDocumentFolderName(this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent)
+        public static FolderSegment GetDocumentFolderName(
+            this MicrosoftDynamicsCRMadoxioSpecialevent specialEvent
+        )
         {
             string idCleaned = CleanGuidForSharePoint(specialEvent.AdoxioSpecialeventid);
-            string folderName = $"{specialEvent.AdoxioEventname}_{idCleaned}";
-            Console.WriteLine("1111111111111111111111111111111111111111111111111111111111111111111");
-            Console.WriteLine($"Generated folder name for special event: {folderName}");
-            Console.WriteLine("1111111111111111111111111111111111111111111111111111111111111111111");
-            return folderName;
+
+            return new FolderSegment
+            {
+                FolderName = $"{specialEvent.AdoxioEventname}_{idCleaned}",
+                FolderNameSegment = specialEvent.AdoxioEventname,
+                FolderGuidSegment = idCleaned,
+            };
         }
     }
 }

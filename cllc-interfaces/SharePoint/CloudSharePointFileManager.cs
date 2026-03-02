@@ -16,7 +16,7 @@ using Newtonsoft.Json.Linq;
 namespace Gov.Lclb.Cllb.Interfaces;
 
 /// <summary>
-/// SharePoint file manager using Microsoft Graph API.
+/// Methods for calling Cloud SharePoint using Microsoft Graph API.
 /// </summary>
 public partial class CloudSharePointFileManager : ISharePointFileManager
 {
@@ -509,7 +509,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         }
 
         // Fix folder and file names to match SharePoint requirements
-        folderName = FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName);
         fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
         // Ensure folder exists
@@ -889,7 +889,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             throw new Exception($"Document library '{listTitle}' not found");
         }
 
-        folderName = FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName);
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string encodedFileName = Uri.EscapeDataString(fileName);
 
@@ -1232,7 +1232,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
         {
@@ -1284,7 +1284,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
         {
@@ -1321,37 +1321,6 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     }
 
     /// <summary>
-    /// Fixes folder name by removing invalid characters, for SharePoint compatibility.
-    /// </summary>
-    /// <param name="foldername"></param>
-    /// <returns></returns>
-    public string FixFoldername(string foldername)
-    {
-        return SharePointUtils.RemoveInvalidCharacters(foldername);
-    }
-
-    /// <summary>
-    /// Removes invalid characters and truncates filename to max length, for SharePoint compatibility.
-    /// </summary>
-    /// <param name="filename"></param>
-    /// <param name="maxLength"></param>
-    /// <returns></returns>
-    public string FixFilename(string filename, int maxLength = MAX_SEGMENT_LENGTH)
-    {
-        string result = SharePointUtils.RemoveInvalidCharacters(filename);
-
-        if (result.Length >= maxLength)
-        {
-            string extension = Path.GetExtension(result);
-            result = Path.GetFileNameWithoutExtension(result)
-                .Substring(0, maxLength - extension.Length);
-            result += extension;
-        }
-
-        return result;
-    }
-
-    /// <summary>
     /// Truncates filename if needed to comply with SharePoint limits.
     /// </summary>
     /// <remarks>
@@ -1365,8 +1334,8 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     public string GetTruncatedFileName(string fileName, string listTitle, string folderName)
     {
         int maxLength = MAX_SEGMENT_LENGTH;
-        fileName = FixFilename(fileName, maxLength);
-        folderName = FixFoldername(folderName);
+        fileName = SharePointUtils.FixFilename(fileName, maxLength);
+        folderName = SharePointUtils.FixFoldername(folderName);
 
         string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
         string fullPath = $"{serverRelativeUrl}/{fileName}";
@@ -1375,25 +1344,10 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         {
             int delta = fullPath.Length - MAX_TOTAL_LENGTH;
             maxLength -= delta;
-            fileName = FixFilename(fileName, maxLength);
+            fileName = SharePointUtils.FixFilename(fileName, maxLength);
         }
 
         return fileName;
-    }
-
-    /// <summary>
-    /// Escape single quotes in a string for OData queries.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    public string EscapeApostrophe(string value)
-    {
-        if (string.IsNullOrEmpty(value))
-        {
-            return value;
-        }
-
-        return value.Replace("'", "''");
     }
 
     /// <summary>
@@ -1404,7 +1358,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     /// <returns></returns>
     public string GetServerRelativeURL(string listTitle, string folderName)
     {
-        folderName = FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName);
 
         Uri siteUri = new Uri(SiteUrl);
         string sitePath = siteUri.AbsolutePath.TrimStart('/').TrimEnd('/');

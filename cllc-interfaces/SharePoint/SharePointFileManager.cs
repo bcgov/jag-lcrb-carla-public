@@ -45,18 +45,16 @@ public static class SharePointFileManager
 
         if (useCloud)
         {
-            Console.WriteLine("SharePointFileManager - Cloud - 1");
             if (loggerFactory == null)
             {
-                Console.WriteLine("SharePointFileManager - Cloud - 2");
                 throw new ArgumentNullException(
                     nameof(loggerFactory),
                     "ILoggerFactory is required when using cloud SharePoint implementation."
                 );
             }
 
-            Console.WriteLine("SharePointFileManager - Cloud - 3");
             var logger = loggerFactory.CreateLogger("SharePointFileManager");
+
             logger.LogInformation(
                 "SharePointFileManager - initialized with Cloud (Graph API) implementation"
             );
@@ -65,16 +63,13 @@ public static class SharePointFileManager
         }
         else
         {
-            Console.WriteLine("SharePointFileManager - OnPrem - 1");
             if (loggerFactory != null)
             {
-                Console.WriteLine("SharePointFileManager - OnPrem - 2");
                 var logger = loggerFactory.CreateLogger("SharePointFileManager");
                 logger.LogInformation(
                     "SharePointFileManager - initialized with OnPrem (REST API) implementation"
                 );
             }
-            Console.WriteLine("SharePointFileManager - OnPrem - 3");
 
             return new OnPremSharePointFileManager(configuration);
         }

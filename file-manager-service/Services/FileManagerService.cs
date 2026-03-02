@@ -18,7 +18,9 @@ using Serilog;
 
 namespace Gov.Lclb.Cllb.Services.FileManager;
 
-// Default to require authorization
+/// <summary>
+/// Methods and business logic for managing files in SharePoint.
+/// </summary>
 [Authorize]
 public partial class FileManagerService : FileManager.FileManagerBase
 {
@@ -26,12 +28,18 @@ public partial class FileManagerService : FileManager.FileManagerBase
     private readonly ILogger<FileManagerService> _logger;
     private readonly ILoggerFactory _loggerFactory;
 
-    public FileManagerService(ILogger<FileManagerService> logger, IConfiguration configuration, ILoggerFactory loggerFactory)
+    public FileManagerService(
+        ILogger<FileManagerService> logger,
+        IConfiguration configuration,
+        ILoggerFactory loggerFactory
+    )
     {
         _configuration = configuration;
         _logger = logger;
         _loggerFactory = loggerFactory;
-        Console.WriteLine($"FileManagerService - Constructor - ILoggerFactory is {(loggerFactory == null ? "NULL" : "available")}");
+        Console.WriteLine(
+            $"FileManagerService - Constructor - ILoggerFactory is {(loggerFactory == null ? "NULL" : "available")}"
+        );
     }
 
     public override Task<CreateFolderReply> CreateFolder(CreateFolderRequest request, ServerCallContext context)

@@ -14,6 +14,11 @@ namespace Gov.Lclb.Cllb.Services.FileManager.Controllers;
 /// This controller is not the source of truth, and should only ever reflect the methods
 /// available on the actual gRPC service (See FileManagerService.cs and file-manager.proto).
 /// </summary>
+/// <remarks>
+/// This was added to support the temporary period when Cloud Dynamics had to interface with On-Prem SharePoint, by
+/// routing through the File Manager Service. Dynamics was unable to make gRPC calls, so this controller was added to
+/// provide a RESTful API that Dynamics can call.
+/// </remarks>
 [ApiController]
 [Route("api")]
 public class FileManagerController : ControllerBase
@@ -22,7 +27,11 @@ public class FileManagerController : ControllerBase
     private readonly ILogger<FileManagerController> _logger;
     private readonly ILoggerFactory _loggerFactory;
 
-    public FileManagerController(IConfiguration configuration, ILogger<FileManagerController> logger, ILoggerFactory loggerFactory)
+    public FileManagerController(
+        IConfiguration configuration,
+        ILogger<FileManagerController> logger,
+        ILoggerFactory loggerFactory
+    )
     {
         _configuration = configuration;
         _logger = logger;

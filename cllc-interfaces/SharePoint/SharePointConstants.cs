@@ -1,5 +1,12 @@
 namespace Gov.Lclb.Cllb.Interfaces;
 
+/// <summary>
+/// Constants, and related utility methods, for SharePoint library names and internal names.
+/// </summary>
+/// <remarks>
+/// The folder name represents the human readable name of the library ("ex: Application"). The internal name represents
+/// the URL part used in the SharePoint REST API to identify the library ("ex: adoxio_application").
+/// </remarks>
 public static class SharePointConstants
 {
     public const string AccountFolderDisplayName = "Account";
@@ -134,77 +141,57 @@ public static class SharePointConstants
     /// <returns></returns>
     public static string GetDocumentListTitle(string entityName)
     {
-        string listTitle;
         switch (entityName.ToLower())
         {
             case "account":
-                listTitle = AccountFolderDisplayName;
-                break;
+                return AccountFolderDisplayName;
             case "application":
             case "adoxio_application":
-                listTitle = ApplicationFolderDisplayName;
-                break;
+                return ApplicationFolderDisplayName;
             case "contact":
-                listTitle = ContactFolderDisplayName;
-                break;
+                return ContactFolderDisplayName;
             case "worker":
             case "adoxio_worker":
-                listTitle = WorkerFolderDisplayName;
-                break;
+                return WorkerFolderDisplayName;
             case "special event":
             case "adoxio_specialevent":
-                listTitle = SpecialEventFolderDisplayName;
-                break;
+                return SpecialEventFolderDisplayName;
             case "event":
             case "adoxio_event":
-                listTitle = EventFolderDisplayName;
-                break;
+                return EventFolderDisplayName;
             case "federal_report":
             case "adoxio_federalreportexport":
-                listTitle = FederalReportFolderDisplayName;
-                break;
+                return FederalReportFolderDisplayName;
             case "licence":
             case "adoxio_licences":
-                listTitle = LicenceFolderDisplayName;
-                break;
+                return LicenceFolderDisplayName;
             case "enforcement action":
             case "adoxio_enforcementaction":
-                listTitle = EnforcementActionFolderDisplayName;
-                break;
+                return EnforcementActionFolderDisplayName;
             case "complaint":
             case "adoxio_complaint":
-                listTitle = ComplaintFolderDisplayName;
-                break;
+                return ComplaintFolderDisplayName;
             case "contravention":
             case "adoxio_contravention":
-                listTitle = ContraventionFolderDisplayName;
-                break;
+                return ContraventionFolderDisplayName;
             case "investigation enforcement":
             case "adoxio_complianceinvestigation":
-                listTitle = InvestigationEnforcementFolderDisplayName;
-                break;
+                return InvestigationEnforcementFolderDisplayName;
             case "endorsement":
             case "adoxio_endorsement":
-                listTitle = EndorsementFolderDisplayName;
-                break;
+                return EndorsementFolderDisplayName;
             case "legal entity":
             case "adoxio_legalentity":
-                listTitle = AssociationFolderDisplayName;
-                break;
+                return AssociationFolderDisplayName;
             case "establishment incident":
             case "adoxio_establishmentincident":
-                listTitle = EstablishmentIncidentFolderDisplayName;
-                break;
+                return EstablishmentIncidentFolderDisplayName;
             case "incident":
             case "adoxio_incident":
-                listTitle = InspectionFolderDisplayName;
-                break;
+                return InspectionFolderDisplayName;
             default:
-                listTitle = entityName;
-                break;
+                return entityName;
         }
-
-        return listTitle;
     }
 
     /// <summary>
@@ -214,76 +201,56 @@ public static class SharePointConstants
     /// <returns></returns>
     public static string GetDocumentTemplateUrlPart(string entityName)
     {
-        var listTitle = "";
         switch (entityName.ToLower())
         {
             case "account":
-                listTitle = AccountFolderInternalName;
-                break;
+                return AccountFolderInternalName;
             case "application":
             case "adoxio_application":
-                listTitle = ApplicationFolderInternalName;
-                break;
+                return ApplicationFolderInternalName;
             case "contact":
-                listTitle = ContactFolderInternalName;
-                break;
+                return ContactFolderInternalName;
             case "worker":
             case "adoxio_worker":
-                listTitle = WorkerFolderInternalName;
-                break;
+                return WorkerFolderInternalName;
             case "special event":
             case "adoxio_specialevent":
-                listTitle = SpecialEventFolderInternalName;
-                break;
+                return SpecialEventFolderInternalName;
             case "event":
             case "adoxio_event":
-                listTitle = EventFolderInternalName;
-                break;
+                return EventFolderInternalName;
             case "federal_report":
             case "adoxio_federalreportexport":
-                listTitle = FederalReportFolderInternalName;
-                break;
+                return FederalReportFolderInternalName;
             case "licence":
             case "adoxio_licences":
-                listTitle = LicenceFolderInternalName;
-                break;
+                return LicenceFolderInternalName;
             case "enforcement action":
             case "adoxio_enforcementaction":
-                listTitle = EnforcementActionFolderInternalName;
-                break;
+                return EnforcementActionFolderInternalName;
             case "complaint":
             case "adoxio_complaint":
-                listTitle = ComplaintFolderInternalName;
-                break;
+                return ComplaintFolderInternalName;
             case "contravention":
             case "adoxio_contravention":
-                listTitle = ContraventionFolderInternalName;
-                break;
+                return ContraventionFolderInternalName;
             case "investigation enforcement":
             case "adoxio_complianceinvestigation":
-                listTitle = InvestigationEnforcementFolderInternalName;
-                break;
+                return InvestigationEnforcementFolderInternalName;
             case "endorsement":
             case "adoxio_endorsement":
-                listTitle = EndorsementFolderInternalName;
-                break;
+                return EndorsementFolderInternalName;
             case "legal entity":
             case "adoxio_legalentity":
-                listTitle = AssociationFolderInternalName;
-                break;
+                return AssociationFolderInternalName;
             case "establishment incident":
             case "adoxio_establishmentincident":
-                listTitle = EstablishmentIncidentFolderInternalName;
-                break;
+                return EstablishmentIncidentFolderInternalName;
             case "incident":
             case "adoxio_incident":
-                listTitle = InspectionFolderInternalName;
-                break;
+                return InspectionFolderInternalName;
             default:
-                listTitle = entityName;
-                break;
+                return entityName;
         }
-
-        return listTitle;
     }
 }

@@ -8,14 +8,12 @@ using System.Xml;
 
 namespace Gov.Lclb.Cllb.Interfaces;
 
-/*
- *  SharePoint Authentication functions.
- *
- *  The following references were used for these functions:
- *
- *  https://github.com/SharePoint/PnP/tree/master/Solutions/AspNetCore.Authentication/src
- *  https://github.com/jwillmer/SharePointAuthentication/blob/master/SharePointAuthenticationSkeleton/SharePointAuthenticationSkeleton/Helpers/SharePointAuthentication.cs
- */
+/// <summary>
+///  SharePoint Authentication functions.
+///  The following references were used for these functions:
+///  https://github.com/SharePoint/PnP/tree/master/Solutions/AspNetCore.Authentication/src
+///  https://github.com/jwillmer/SharePointAuthentication/blob/master/SharePointAuthenticationSkeleton/SharePointAuthenticationSkeleton/Helpers/SharePointAuthentication.cs
+/// </summary>
 static class Authentication
 {
     private static string GetXMLInnerText(XmlDocument doc, string tagName)

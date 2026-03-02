@@ -2,6 +2,9 @@
 
 using Microsoft.Rest;
 
+/// <summary>
+/// Generic exception class for errors that occur during SharePoint operations.
+/// </summary>
 public class SharePointRestException : RestException
 {
     /// <summary>

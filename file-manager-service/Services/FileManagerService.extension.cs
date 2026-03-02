@@ -19,6 +19,11 @@ using Serilog;
 
 namespace Gov.Lclb.Cllb.Services.FileManager;
 
+/// <summary>
+/// New methods added for enhanced folder searching and creation capabilities. These were added to support the
+/// temporary period when Cloud Dynamics had to interface with On-Prem SharePoint, by routing through the File
+/// Manager Service.
+/// </summary>
 [Authorize]
 public partial class FileManagerService : FileManager.FileManagerBase
 {

@@ -22,6 +22,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -167,9 +168,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private void InitializeSharepoint(MicrosoftDynamicsCRMadoxioLicences licence)
         {
             // create a SharePointDocumentLocation link
-            var folderName = licence.GetDocumentFolderName();
-            _fileManagerClient.CreateFolderIfNotExist(_logger, LicenceFolderInternalName, folderName);
-            _dynamicsClient.CreateLicenceDocumentLocation(licence, folderName, folderName);
+            FolderSegment folderSegment = licence.GetDocumentFolderName();
+            _fileManagerClient.CreateFolderIfNotExist(_logger, SharePointConstants.LicenceFolderInternalName, folderSegment.FolderName);
+            _dynamicsClient.CreateLicenceDocumentLocation(licence, folderSegment.FolderName, folderSegment.FolderName);
         }
 
         [HttpPut("{licenceId}/representative")]

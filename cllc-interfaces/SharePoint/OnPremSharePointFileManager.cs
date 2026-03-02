@@ -19,6 +19,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces;
 
+/// <summary>
+/// Methods for calling On-Premise SharePoint REST APIs.
+/// </summary>
 public partial class OnPremSharePointFileManager : ISharePointFileManager
 {
     private const int MAX_TOTAL_LENGTH = 260; // default maximum URL length.

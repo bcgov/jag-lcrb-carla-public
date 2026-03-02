@@ -19,6 +19,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces;
 
+/// <summary>
+/// Generic utility methods for SharePoint file management.
+/// </summary>
 public static class SharePointUtils
 {
     /// <summary>
@@ -47,7 +50,9 @@ public static class SharePointUtils
     public static string FixFoldername(string folderNameOrPath, string entityName = null)
     {
         if (string.IsNullOrEmpty(folderNameOrPath))
+        {
             return folderNameOrPath;
+        }
 
         // If it contains path separators, fix each segment individually
         if (folderNameOrPath.Contains("/"))

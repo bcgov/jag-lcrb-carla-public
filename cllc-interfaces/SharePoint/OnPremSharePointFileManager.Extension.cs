@@ -19,6 +19,13 @@ using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Interfaces;
 
+/// <summary>
+/// Extension methods for OnPremSharePointFileManager to support new folder finding and file uploading logic.
+/// </summary>
+/// <remarks>
+/// These were added to support the temporary period when Cloud Dynamics had to interface with On-Prem SharePoint, by
+/// routing through the File Manager Service.
+/// </remarks>
 public partial class OnPremSharePointFileManager : ISharePointFileManager
 {
     public async Task<List<FolderItem>> FindFolderOne(string entityName, string folderGuidSegment)
