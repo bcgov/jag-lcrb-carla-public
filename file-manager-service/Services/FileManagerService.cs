@@ -28,15 +28,11 @@ public partial class FileManagerService : FileManager.FileManagerBase
     private readonly ILogger<FileManagerService> _logger;
     private readonly ILoggerFactory _loggerFactory;
 
-    public FileManagerService(
-        ILogger<FileManagerService> logger,
-        IConfiguration configuration,
-        ILoggerFactory loggerFactory
-    )
+    public FileManagerService(IConfiguration configuration, ILoggerFactory loggerFactory)
     {
         _configuration = configuration;
-        _logger = logger;
         _loggerFactory = loggerFactory;
+        _logger = _loggerFactory.CreateLogger<FileManagerService>();
         _logger.LogDebug(
             "[FileManagerService] Constructor - ILoggerFactory is {LoggerFactoryStatus}",
             loggerFactory == null ? "NULL" : "available"

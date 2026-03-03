@@ -100,29 +100,29 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseHealthChecks(
-                "/hc/ready",
-                new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                }
-            );
-
-            app.UseHealthChecks(
-                "/hc/live",
-                new HealthCheckOptions
-                {
-                    // Exclude all checks and return a 200-Ok.
-                    Predicate = _ => false
-                }
-            );
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<FileManagerService>();
 
                 endpoints.MapControllers();
+
+                endpoints.MapHealthChecks(
+                    "/hc/ready",
+                    new HealthCheckOptions
+                    {
+                        Predicate = _ => true,
+                        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                    }
+                );
+
+                endpoints.MapHealthChecks(
+                    "/hc/live",
+                    new HealthCheckOptions
+                    {
+                        // Exclude all checks and return a 200-Ok.
+                        Predicate = _ => false
+                    }
+                );
 
                 endpoints.MapGet(
                     "/",
