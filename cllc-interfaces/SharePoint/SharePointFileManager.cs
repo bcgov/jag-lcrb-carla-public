@@ -24,11 +24,11 @@ public static class SharePointFileManager
     /// Creates a SharePoint file manager instance based on configuration.
     /// </summary>
     /// <param name="configuration">Application configuration</param>
-    /// <param name="loggerFactory">Logger factory (required for cloud implementation)</param>
+    /// <param name="loggerFactory">Logger factory for logging</param>
     /// <returns>ISharePointFileManager implementation</returns>
     public static ISharePointFileManager Create(
         IConfiguration configuration,
-        ILoggerFactory loggerFactory = null
+        ILoggerFactory loggerFactory
     )
     {
         // Check if all cloud configuration variables are present
@@ -43,35 +43,23 @@ public static class SharePointFileManager
             && !string.IsNullOrEmpty(sharePointClientId)
             && !string.IsNullOrEmpty(sharePointClientSecret);
 
+        var logger = loggerFactory.CreateLogger("SharePointFileManager");
+
         if (useCloud)
         {
-            if (loggerFactory == null)
-            {
-                throw new ArgumentNullException(
-                    nameof(loggerFactory),
-                    "SharePointFileManager - ILoggerFactory is required when using cloud SharePoint implementation."
-                );
-            }
-
-            var logger = loggerFactory.CreateLogger("SharePointFileManager");
-
             logger.LogInformation(
-                "SharePointFileManager - initialized with Cloud (Graph API) implementation"
+                "[SharePointFileManager] Create - initialized with Cloud (Graph API) implementation"
             );
 
             return new CloudSharePointFileManager(configuration, loggerFactory);
         }
         else
         {
-            if (loggerFactory != null)
-            {
-                var logger = loggerFactory.CreateLogger("SharePointFileManager");
-                logger.LogInformation(
-                    "SharePointFileManager - initialized with OnPrem (REST API) implementation"
-                );
-            }
+            logger.LogInformation(
+                "[SharePointFileManager] Create - initialized with OnPrem (REST API) implementation"
+            );
 
-            return new OnPremSharePointFileManager(configuration);
+            return new OnPremSharePointFileManager(configuration, loggerFactory);
         }
     }
 }

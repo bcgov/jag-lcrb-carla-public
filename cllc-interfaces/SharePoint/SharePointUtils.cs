@@ -147,14 +147,6 @@ public static class SharePointUtils
         // Handle trailing dots (not allowed in SharePoint)
         var resultString = result.ToString().TrimEnd('.');
 
-        // Log if any changes were made
-        if (original != resultString)
-        {
-            Console.WriteLine(
-                $"RemoveInvalidCharacters (entity: '{entityName ?? "default"}'): '{original}' -> '{resultString}'"
-            );
-        }
-
         return resultString;
     }
 

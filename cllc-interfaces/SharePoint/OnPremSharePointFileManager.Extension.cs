@@ -30,8 +30,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 {
     public async Task<List<FolderItem>> FindFolderOne(string entityName, string folderGuidSegment)
     {
-        Console.WriteLine(
-            $"findFolderOne - called with entityName='{entityName}', folderGuidSegment='{folderGuidSegment}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderOne - called with entityName={EntityName}, folderGuidSegment={FolderGuidSegment}",
+            entityName,
+            folderGuidSegment
         );
 
         List<FolderItem> allResults = new List<FolderItem>();
@@ -42,8 +44,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         if (uppercaseResults != null && uppercaseResults.Count > 0)
         {
             allResults.AddRange(uppercaseResults);
-            Console.WriteLine(
-                $"findFolderOne - Found {uppercaseResults.Count} folders with uppercase GUID"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Found {Count} folders with uppercase GUID",
+                uppercaseResults.Count
             );
         }
 
@@ -66,23 +69,31 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     allResults.Add(folder);
                 }
             }
-            Console.WriteLine(
-                $"findFolderOne - Found {lowercaseResults.Count} folders with lowercase GUID (added unique ones)"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Found {Count} folders with lowercase GUID (added unique ones)",
+                lowercaseResults.Count
             );
         }
 
-        Console.WriteLine($"findFolderOne - Found {allResults.Count} total folders");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderOne - Found {TotalCount} total folders",
+            allResults.Count
+        );
 
         // If 0 or 1 results, return as-is
         if (allResults.Count <= 1)
         {
-            Console.WriteLine($"findFolderOne - Returning {allResults.Count} folders");
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Returning {Count} folders",
+                allResults.Count
+            );
             return allResults;
         }
 
         // Multiple matches - disambiguate by checking child file counts first
-        Console.WriteLine(
-            $"findFolderOne - Multiple matches ({allResults.Count}), checking child file counts..."
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderOne - Multiple matches ({Count}), checking child file counts...",
+            allResults.Count
         );
 
         var fileCounts = new Dictionary<FolderItem, int>();
@@ -93,8 +104,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             var childFiles = await GetChildFiles(folder.ServerRelativeUrl);
             int fileCount = childFiles?.Count ?? 0;
             fileCounts[folder] = fileCount;
-            Console.WriteLine(
-                $"findFolderOne - Folder '{folder.Name}' has {fileCount} child files"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Folder {FolderName} has {FileCount} child files",
+                folder.Name,
+                fileCount
             );
 
             if (fileCount > maxFileCount)
@@ -109,15 +122,19 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         // If only one has the max file count, return it
         if (foldersWithMaxFileCount.Count == 1)
         {
-            Console.WriteLine(
-                $"findFolderOne - Returning folder with most child files ({maxFileCount}): '{foldersWithMaxFileCount[0].Name}'"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Returning folder with most child files ({MaxFileCount}): {FolderName}",
+                maxFileCount,
+                foldersWithMaxFileCount[0].Name
             );
             return new List<FolderItem> { foldersWithMaxFileCount[0] };
         }
 
         // Multiple folders tied on file count - check folder counts
-        Console.WriteLine(
-            $"findFolderOne - {foldersWithMaxFileCount.Count} folders tied with {maxFileCount} child files, checking folder counts..."
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderOne - {Count} folders tied with {MaxFileCount} child files, checking folder counts...",
+            foldersWithMaxFileCount.Count,
+            maxFileCount
         );
 
         var folderCounts = new Dictionary<FolderItem, int>();
@@ -128,8 +145,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             var subFolders = await GetChildFolders(folder.ServerRelativeUrl);
             int folderCount = subFolders?.Count ?? 0;
             folderCounts[folder] = folderCount;
-            Console.WriteLine(
-                $"findFolderOne - Folder '{folder.Name}' has {folderCount} child folders"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderOne - Folder {FolderName} has {FolderCount} child folders",
+                folder.Name,
+                folderCount
             );
 
             if (folderCount > maxFolderCount)
@@ -144,8 +163,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             .ToList();
 
         // Return the one with the most folders (or the first one if tied)
-        Console.WriteLine(
-            $"findFolderOne - Returning folder with most child folders ({maxFolderCount}): '{foldersWithMaxFolderCount[0].Name}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderOne - Returning folder with most child folders ({MaxFolderCount}): {FolderName}",
+            maxFolderCount,
+            foldersWithMaxFolderCount[0].Name
         );
         return new List<FolderItem> { foldersWithMaxFolderCount[0] };
     }
@@ -155,17 +176,25 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string rawFolderName
     )
     {
-        Console.WriteLine(
-            $"FindFolderTwo - called with parentRelativePath='{parentRelativePath}', rawFolderName='{rawFolderName}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderTwo - called with parentRelativePath={ParentRelativePath}, rawFolderName={RawFolderName}",
+            parentRelativePath,
+            rawFolderName
         );
 
         // Sanitize the raw folder name
         string sanitizedFolderName = SharePointUtils.RemoveInvalidCharacters(rawFolderName);
-        Console.WriteLine($"FindFolderTwo - Sanitized folder name: '{sanitizedFolderName}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderTwo - Sanitized folder name: {SanitizedFolderName}",
+            sanitizedFolderName
+        );
 
         // Construct the full path
         string fullPath = parentRelativePath.TrimEnd('/') + "/" + sanitizedFolderName;
-        Console.WriteLine($"FindFolderTwo - Full path to check: '{fullPath}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderTwo - Full path to check: {FullPath}",
+            fullPath
+        );
 
         // Query SharePoint to see if the folder exists
         HttpRequestMessage request = new HttpRequestMessage
@@ -195,26 +224,36 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     ServerRelativeUrl = folderJson["ServerRelativeUrl"]?.ToString(),
                 };
 
-                Console.WriteLine(
-                    $"FindFolderTwo - Found folder: '{folderItem.Name}' at '{folderItem.ServerRelativeUrl}'"
+                _logger.LogDebug(
+                    "[OnPremSharePointFileManager] FindFolderTwo - Found folder: {FolderName} at {ServerRelativeUrl}",
+                    folderItem.Name,
+                    folderItem.ServerRelativeUrl
                 );
                 return new List<FolderItem> { folderItem };
             }
             catch (JsonReaderException ex)
             {
-                Console.WriteLine($"FindFolderTwo - JSON parsing error: {ex.Message}");
+                _logger.LogError(
+                    ex,
+                    "[OnPremSharePointFileManager] FindFolderTwo - JSON parsing error"
+                );
                 return new List<FolderItem>();
             }
         }
         else if (response.StatusCode == HttpStatusCode.NotFound)
         {
-            Console.WriteLine($"FindFolderTwo - Folder not found at path: '{fullPath}'");
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] FindFolderTwo - Folder not found at path: {FullPath}",
+                fullPath
+            );
             return new List<FolderItem>();
         }
         else
         {
-            Console.WriteLine(
-                $"FindFolderTwo - Error StatusCode: {response.StatusCode}, Response: {jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] FindFolderTwo - Error StatusCode: {StatusCode}, Response: {Response}",
+                response.StatusCode,
+                jsonString
             );
             return new List<FolderItem>();
         }
@@ -226,25 +265,34 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string rawFolderGuidSegment
     )
     {
-        Console.WriteLine(
-            $"FindFolderThree - called with parentRelativePath='{parentRelativePath}', rawFolderNameSegment='{rawFolderNameSegment}', rawFolderGuidSegment='{rawFolderGuidSegment}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderThree - called with parentRelativePath={ParentRelativePath}, rawFolderNameSegment={RawFolderNameSegment}, rawFolderGuidSegment={RawFolderGuidSegment}",
+            parentRelativePath,
+            rawFolderNameSegment,
+            rawFolderGuidSegment
         );
 
         // Get all child folders under the parent
         var childFolders = await GetChildFolders(parentRelativePath);
-        Console.WriteLine(
-            $"FindFolderThree - Found {childFolders.Count} child folders under parent"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderThree - Found {Count} child folders under parent",
+            childFolders.Count
         );
 
         if (childFolders == null || childFolders.Count == 0)
         {
-            Console.WriteLine("FindFolderThree - No child folders found, returning empty list");
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] FindFolderThree - No child folders found, returning empty list"
+            );
             return new List<FolderItem>();
         }
 
         // Normalize the GUID for comparison (remove dashes, uppercase)
         string normalizedGuid = rawFolderGuidSegment?.Replace("-", "").ToUpper();
-        Console.WriteLine($"FindFolderThree - Normalized GUID: '{normalizedGuid}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderThree - Normalized GUID: {NormalizedGuid}",
+            normalizedGuid
+        );
 
         // Filter folders that contain the GUID
         var matchingFolders = childFolders
@@ -253,25 +301,32 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 && f.Name.Contains(normalizedGuid, StringComparison.OrdinalIgnoreCase)
             )
             .ToList();
-        Console.WriteLine($"FindFolderThree - Found {matchingFolders.Count} folders matching GUID");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] FindFolderThree - Found {Count} folders matching GUID",
+            matchingFolders.Count
+        );
 
         if (matchingFolders.Count == 0)
         {
-            Console.WriteLine("FindFolderThree - No folders match the GUID, returning empty list");
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] FindFolderThree - No folders match the GUID, returning empty list"
+            );
             return new List<FolderItem>();
         }
         else if (matchingFolders.Count == 1)
         {
-            Console.WriteLine(
-                $"FindFolderThree - Found exactly one match: '{matchingFolders[0].Name}'"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderThree - Found exactly one match: {FolderName}",
+                matchingFolders[0].Name
             );
             return new List<FolderItem> { matchingFolders[0] };
         }
         else
         {
             // Multiple matches - disambiguate by checking which has the most child files
-            Console.WriteLine(
-                $"FindFolderThree - Multiple matches ({matchingFolders.Count}), checking child file counts..."
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderThree - Multiple matches ({Count}), checking child file counts...",
+                matchingFolders.Count
             );
 
             var fileCounts = new Dictionary<FolderItem, int>();
@@ -282,8 +337,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 var childFiles = await GetChildFiles(folder.ServerRelativeUrl);
                 int fileCount = childFiles?.Count ?? 0;
                 fileCounts[folder] = fileCount;
-                Console.WriteLine(
-                    $"FindFolderThree - Folder '{folder.Name}' has {fileCount} child files"
+                _logger.LogDebug(
+                    "[OnPremSharePointFileManager] FindFolderThree - Folder {FolderName} has {FileCount} child files",
+                    folder.Name,
+                    fileCount
                 );
 
                 if (fileCount > maxFileCount)
@@ -298,8 +355,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 .ToList();
 
             // Return the one with the most files (or the first one if tied)
-            Console.WriteLine(
-                $"FindFolderThree - Returning folder with most child files ({maxFileCount}): '{foldersWithMaxFileCount[0].Name}'"
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] FindFolderThree - Returning folder with most child files ({MaxFileCount}): {FolderName}",
+                maxFileCount,
+                foldersWithMaxFileCount[0].Name
             );
             return new List<FolderItem> { foldersWithMaxFileCount[0] };
         }
@@ -336,8 +395,11 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
             _responseContent = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
-            Console.WriteLine(
-                $"OnPremSharePointFileManager - CreateFolderOne - failed - Status: {_statusCode}, relativeUrl: '{relativeUrl}', EscapedRelativeUrl: '{relativeUrl}'"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] CreateFolder2 - failed - Status: {StatusCode}, relativeUrl: {RelativeUrl}, EscapedRelativeUrl: {EscapedRelativeUrl}",
+                _statusCode,
+                relativeUrl,
+                relativeUrl
             );
 
             ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
@@ -354,11 +416,13 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         }
 
         string jsonString = await response.Content.ReadAsStringAsync();
-        Console.WriteLine(
-            $"OnPremSharePointFileManager - CreateRootFolder - successfully created folder '{relativeUrl}'"
+        _logger.LogInformation(
+            "[OnPremSharePointFileManager] CreateFolder2 - successfully created folder {RelativeUrl}",
+            relativeUrl
         );
-        Console.WriteLine(
-            $"OnPremSharePointFileManager - CreateRootFolder - jsonString: {jsonString}"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] CreateFolder2 - jsonString: {JsonString}",
+            jsonString
         );
         FolderItem folderItem = JsonConvert.DeserializeObject<FolderItem>(jsonString);
         return folderItem;
@@ -379,32 +443,43 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        Console.WriteLine(
-            $"UploadFile2 - called with serverRelativeUrl='{serverRelativeUrl}', fileName='{fileName}', contentType='{contentType}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] UploadFile2 - called with serverRelativeUrl={ServerRelativeUrl}, fileName={FileName}, contentType={ContentType}",
+            serverRelativeUrl,
+            fileName,
+            contentType
         );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
-            Console.WriteLine("UploadFile2 - SharePoint is not valid, returning null");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] UploadFile2 - SharePoint is not valid, returning null"
+            );
             return null;
         }
 
         if (string.IsNullOrEmpty(serverRelativeUrl))
         {
-            Console.WriteLine("UploadFile2 - serverRelativeUrl is null or empty, returning null");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] UploadFile2 - serverRelativeUrl is null or empty, returning null"
+            );
             return null;
         }
 
         if (string.IsNullOrEmpty(fileName))
         {
-            Console.WriteLine("UploadFile2 - fileName is null or empty, returning null");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] UploadFile2 - fileName is null or empty, returning null"
+            );
             return null;
         }
 
         if (fileData == null || fileData.Length == 0)
         {
-            Console.WriteLine("UploadFile2 - fileData is null or empty, returning null");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] UploadFile2 - fileData is null or empty, returning null"
+            );
             return null;
         }
 
@@ -415,14 +490,18 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             ApiEndpoint
             + $"web/getFolderByServerRelativeUrl('{escapedServerRelativeUrl}')/files/add(url='{escapedFileName}',overwrite=true)";
 
-        Console.WriteLine($"UploadFile2 - Request URI length: {requestUriString.Length}");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] UploadFile2 - Request URI length: {UriLength}",
+            requestUriString.Length
+        );
 
         // If URL is too long, try using folder ID instead
         int maxUrlLength = 400; // Conservative limit for SharePoint request URLs
         if (requestUriString.Length > maxUrlLength)
         {
-            Console.WriteLine(
-                $"UploadFile2 - URL too long ({requestUriString.Length} chars), attempting upload by folder ID"
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] UploadFile2 - URL too long ({UriLength} chars), attempting upload by folder ID",
+                requestUriString.Length
             );
 
             try
@@ -430,28 +509,30 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 string folderId = await GetFolderUniqueId(serverRelativeUrl);
                 if (!string.IsNullOrEmpty(folderId))
                 {
-                    Console.WriteLine(
-                        $"UploadFile2 - Found folder ID: {folderId}, using ID-based upload"
+                    _logger.LogDebug(
+                        "[OnPremSharePointFileManager] UploadFile2 - Found folder ID: {FolderId}, using ID-based upload",
+                        folderId
                     );
                     return await UploadFileByFolderId2(fileName, folderId, fileData, contentType);
                 }
                 else
                 {
-                    Console.WriteLine(
-                        "UploadFile2 - Could not get folder ID, falling back to path-based upload"
+                    _logger.LogWarning(
+                        "[OnPremSharePointFileManager] UploadFile2 - Could not get folder ID, falling back to path-based upload"
                     );
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine(
-                    $"UploadFile2 - Error getting folder ID: {ex.Message}, falling back to path-based upload"
+                _logger.LogError(
+                    ex,
+                    "[OnPremSharePointFileManager] UploadFile2 - Error getting folder ID, falling back to path-based upload"
                 );
             }
         }
 
         // Standard path-based upload
-        Console.WriteLine($"UploadFile2 - Using path-based upload");
+        _logger.LogDebug("[OnPremSharePointFileManager] UploadFile2 - Using path-based upload");
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
         {
@@ -470,8 +551,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
-            Console.WriteLine(
-                $"UploadFile2 - Successfully uploaded file '{fileName}' to '{serverRelativeUrl}'"
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] UploadFile2 - Successfully uploaded file {FileName} to {ServerRelativeUrl}",
+                fileName,
+                serverRelativeUrl
             );
             return fileName;
         }
@@ -484,8 +567,12 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 )
             );
 
-            Console.WriteLine(
-                $"UploadFile2 - Failed to upload file '{fileName}' to '{serverRelativeUrl}'. Status: {response.StatusCode}, Response: {jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] UploadFile2 - Failed to upload file {FileName} to {ServerRelativeUrl}. Status: {StatusCode}, Response: {Response}",
+                fileName,
+                serverRelativeUrl,
+                response.StatusCode,
+                jsonString
             );
 
             ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
@@ -516,7 +603,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string query =
             $"web/GetList('/{SharePointConstants.GetDocumentTemplateUrlPart(entityName)}')/rootFolder/folders?{filter}";
 
-        Console.WriteLine($"SearchForGuidVariant - Query: '{query}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] SearchForGuidVariant - Query: {Query}",
+            query
+        );
 
         HttpRequestMessage request = new HttpRequestMessage
         {
@@ -542,19 +632,27 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 {
                     FolderItem folderItem = responseResult.ToObject<FolderItem>();
                     folderList.Add(folderItem);
-                    Console.WriteLine($"SearchForGuidVariant - Found folder: '{folderItem.Name}'");
+                    _logger.LogDebug(
+                        "[OnPremSharePointFileManager] SearchForGuidVariant - Found folder: {FolderName}",
+                        folderItem.Name
+                    );
                 }
             }
             catch (JsonReaderException ex)
             {
-                Console.WriteLine($"SearchForGuidVariant - JSON parsing error: {ex.Message}");
+                _logger.LogError(
+                    ex,
+                    "[OnPremSharePointFileManager] SearchForGuidVariant - JSON parsing error"
+                );
                 throw;
             }
         }
         else
         {
-            Console.WriteLine(
-                $"SearchForGuidVariant - Error StatusCode: {response.StatusCode}, Response: {jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] SearchForGuidVariant - Error StatusCode: {StatusCode}, Response: {Response}",
+                response.StatusCode,
+                jsonString
             );
         }
 
@@ -568,19 +666,24 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     /// <returns>List of child folders</returns>
     private async Task<List<FolderItem>> GetChildFolders(string serverRelativeUrl)
     {
-        Console.WriteLine($"GetChildFolders - called with serverRelativeUrl='{serverRelativeUrl}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] GetChildFolders - called with serverRelativeUrl={ServerRelativeUrl}",
+            serverRelativeUrl
+        );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
-            Console.WriteLine("GetChildFolders - SharePoint is not valid, returning empty list");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetChildFolders - SharePoint is not valid, returning empty list"
+            );
             return new List<FolderItem>();
         }
 
         if (string.IsNullOrEmpty(serverRelativeUrl))
         {
-            Console.WriteLine(
-                "GetChildFolders - serverRelativeUrl is null or empty, returning empty list"
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetChildFolders - serverRelativeUrl is null or empty, returning empty list"
             );
             return new List<FolderItem>();
         }
@@ -589,7 +692,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         string query =
             $"web/getFolderByServerRelativeUrl('{EscapeApostrophe(serverRelativeUrl)}')/folders";
-        Console.WriteLine($"GetChildFolders - Query: '{query}'");
+        _logger.LogDebug("[OnPremSharePointFileManager] GetChildFolders - Query: {Query}", query);
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
         {
@@ -619,23 +722,34 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     }
                 }
 
-                Console.WriteLine($"GetChildFolders - Found {folderList.Count} child folders");
+                _logger.LogDebug(
+                    "[OnPremSharePointFileManager] GetChildFolders - Found {Count} child folders",
+                    folderList.Count
+                );
             }
             catch (JsonReaderException jre)
             {
-                Console.WriteLine($"GetChildFolders - JSON parsing error: {jre.Message}");
+                _logger.LogError(
+                    jre,
+                    "[OnPremSharePointFileManager] GetChildFolders - JSON parsing error"
+                );
                 throw;
             }
         }
         else if (response.StatusCode == HttpStatusCode.NotFound)
         {
-            Console.WriteLine($"GetChildFolders - Folder not found at: '{serverRelativeUrl}'");
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] GetChildFolders - Folder not found at: {ServerRelativeUrl}",
+                serverRelativeUrl
+            );
             return new List<FolderItem>();
         }
         else
         {
-            Console.WriteLine(
-                $"GetChildFolders - Error: StatusCode={response.StatusCode}, Response={jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] GetChildFolders - Error: StatusCode={StatusCode}, Response={Response}",
+                response.StatusCode,
+                jsonString
             );
         }
 
@@ -649,19 +763,24 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     /// <returns>List of child files</returns>
     private async Task<List<FileItem>> GetChildFiles(string serverRelativeUrl)
     {
-        Console.WriteLine($"GetChildFiles - called with serverRelativeUrl='{serverRelativeUrl}'");
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] GetChildFiles - called with serverRelativeUrl={ServerRelativeUrl}",
+            serverRelativeUrl
+        );
 
         // return early if SharePoint is disabled.
         if (!IsValid())
         {
-            Console.WriteLine("GetChildFiles - SharePoint is not valid, returning empty list");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetChildFiles - SharePoint is not valid, returning empty list"
+            );
             return new List<FileItem>();
         }
 
         if (string.IsNullOrEmpty(serverRelativeUrl))
         {
-            Console.WriteLine(
-                "GetChildFiles - serverRelativeUrl is null or empty, returning empty list"
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetChildFiles - serverRelativeUrl is null or empty, returning empty list"
             );
             return new List<FileItem>();
         }
@@ -670,7 +789,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         string query =
             $"web/getFolderByServerRelativeUrl('{EscapeApostrophe(serverRelativeUrl)}')/files";
-        Console.WriteLine($"GetChildFiles - Query: '{query}'");
+        _logger.LogDebug("[OnPremSharePointFileManager] GetChildFiles - Query: {Query}", query);
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
         {
@@ -695,23 +814,34 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                     fileList.Add(fileItem);
                 }
 
-                Console.WriteLine($"GetChildFiles - Found {fileList.Count} child files");
+                _logger.LogDebug(
+                    "[OnPremSharePointFileManager] GetChildFiles - Found {Count} child files",
+                    fileList.Count
+                );
             }
             catch (JsonReaderException jre)
             {
-                Console.WriteLine($"GetChildFiles - JSON parsing error: {jre.Message}");
+                _logger.LogError(
+                    jre,
+                    "[OnPremSharePointFileManager] GetChildFiles - JSON parsing error"
+                );
                 throw;
             }
         }
         else if (response.StatusCode == HttpStatusCode.NotFound)
         {
-            Console.WriteLine($"GetChildFiles - Folder not found at: '{serverRelativeUrl}'");
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] GetChildFiles - Folder not found at: {ServerRelativeUrl}",
+                serverRelativeUrl
+            );
             return new List<FileItem>();
         }
         else
         {
-            Console.WriteLine(
-                $"GetChildFiles - Error: StatusCode={response.StatusCode}, Response={jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] GetChildFiles - Error: StatusCode={StatusCode}, Response={Response}",
+                response.StatusCode,
+                jsonString
             );
         }
 
@@ -725,20 +855,23 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     /// <returns>The folder's UniqueId as a string, or null if not found</returns>
     private async Task<string> GetFolderUniqueId(string serverRelativeUrl)
     {
-        Console.WriteLine(
-            $"GetFolderUniqueId - called with serverRelativeUrl='{serverRelativeUrl}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] GetFolderUniqueId - called with serverRelativeUrl={ServerRelativeUrl}",
+            serverRelativeUrl
         );
 
         if (!IsValid())
         {
-            Console.WriteLine("GetFolderUniqueId - SharePoint is not valid, returning null");
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetFolderUniqueId - SharePoint is not valid, returning null"
+            );
             return null;
         }
 
         if (string.IsNullOrEmpty(serverRelativeUrl))
         {
-            Console.WriteLine(
-                "GetFolderUniqueId - serverRelativeUrl is null or empty, returning null"
+            _logger.LogWarning(
+                "[OnPremSharePointFileManager] GetFolderUniqueId - serverRelativeUrl is null or empty, returning null"
             );
             return null;
         }
@@ -747,7 +880,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         {
             string query =
                 $"web/getFolderByServerRelativeUrl('{EscapeApostrophe(serverRelativeUrl)}')?$select=UniqueId";
-            Console.WriteLine($"GetFolderUniqueId - Query: '{query}'");
+            _logger.LogDebug(
+                "[OnPremSharePointFileManager] GetFolderUniqueId - Query: {Query}",
+                query
+            );
 
             HttpRequestMessage request = new HttpRequestMessage
             {
@@ -765,20 +901,25 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 if (folderJson["UniqueId"] != null)
                 {
                     string uniqueId = folderJson["UniqueId"].ToString();
-                    Console.WriteLine($"GetFolderUniqueId - Found UniqueId: '{uniqueId}'");
+                    _logger.LogDebug(
+                        "[OnPremSharePointFileManager] GetFolderUniqueId - Found UniqueId: {UniqueId}",
+                        uniqueId
+                    );
                     return uniqueId;
                 }
             }
             else
             {
-                Console.WriteLine(
-                    $"GetFolderUniqueId - Error StatusCode: {response.StatusCode}, Response: {jsonString}"
+                _logger.LogError(
+                    "[OnPremSharePointFileManager] GetFolderUniqueId - Error StatusCode: {StatusCode}, Response: {Response}",
+                    response.StatusCode,
+                    jsonString
                 );
             }
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"GetFolderUniqueId - Exception: {ex.Message}");
+            _logger.LogError(ex, "[OnPremSharePointFileManager] GetFolderUniqueId - Exception");
         }
 
         return null;
@@ -794,8 +935,10 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        Console.WriteLine(
-            $"UploadFileByFolderId2 - called with folderId='{folderId}', fileName='{fileName}'"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] UploadFileByFolderId2 - called with folderId={FolderId}, fileName={FileName}",
+            folderId,
+            fileName
         );
 
         string requestUriString =
@@ -806,8 +949,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             + EscapeApostrophe(fileName)
             + "',overwrite=true)";
 
-        Console.WriteLine(
-            $"UploadFileByFolderId2 - Using folder ID, URL length: {requestUriString.Length}"
+        _logger.LogDebug(
+            "[OnPremSharePointFileManager] UploadFileByFolderId2 - Using folder ID, URL length: {UriLength}",
+            requestUriString.Length
         );
 
         HttpRequestMessage endpointRequest = new HttpRequestMessage
@@ -826,8 +970,9 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
         if (response.StatusCode == HttpStatusCode.OK)
         {
-            Console.WriteLine(
-                $"UploadFileByFolderId2 - Successfully uploaded file '{fileName}' using folder ID"
+            _logger.LogInformation(
+                "[OnPremSharePointFileManager] UploadFileByFolderId2 - Successfully uploaded file {FileName} using folder ID",
+                fileName
             );
             return fileName;
         }
@@ -840,8 +985,11 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
                 )
             );
 
-            Console.WriteLine(
-                $"UploadFileByFolderId2 - Failed to upload file '{fileName}'. Status: {response.StatusCode}, Response: {jsonString}"
+            _logger.LogError(
+                "[OnPremSharePointFileManager] UploadFileByFolderId2 - Failed to upload file {FileName}. Status: {StatusCode}, Response: {Response}",
+                fileName,
+                response.StatusCode,
+                jsonString
             );
 
             ex.Request = new HttpRequestMessageWrapper(endpointRequest, null);
