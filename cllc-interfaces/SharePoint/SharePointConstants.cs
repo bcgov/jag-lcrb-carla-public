@@ -21,7 +21,7 @@ public static class SharePointConstants
     public const string WorkerFolderDisplayName = "Worker Qualification";
     public const string WorkerFolderInternalName = "adoxio_worker";
 
-    public const string EventFolderDisplayName = "Licensee Event";
+    public const string EventFolderDisplayName = "Event";
     public const string EventFolderInternalName = "adoxio_event";
 
     public const string FederalReportFolderDisplayName = "Federal Report Export";
