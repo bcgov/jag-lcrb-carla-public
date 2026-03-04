@@ -664,7 +664,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     /// </summary>
     /// <param name="serverRelativeUrl">The server relative URL of the parent folder</param>
     /// <returns>List of child folders</returns>
-    private async Task<List<FolderItem>> GetChildFolders(string serverRelativeUrl)
+    public async Task<List<FolderItem>> GetChildFolders(string serverRelativeUrl)
     {
         _logger.LogDebug(
             "[OnPremSharePointFileManager] GetChildFolders - called with serverRelativeUrl={ServerRelativeUrl}",

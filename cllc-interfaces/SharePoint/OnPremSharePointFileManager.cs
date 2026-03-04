@@ -1189,6 +1189,66 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         return folderList;
     }
 
+    public async Task<List<FolderItem>> GetFoldersInDocumentLibraryAfterDate(
+        string listTitle,
+        DateTime afterDate
+    )
+    {
+        // return early if SharePoint is disabled.
+        if (!IsValid())
+        {
+            return null;
+        }
+
+        List<FolderItem> folderList = new List<FolderItem>();
+        string title = Uri.EscapeUriString(listTitle);
+        // Get folders from the rootFolder to exclude system folders
+        string query =
+            $"web/lists/GetByTitle('{title}')/rootFolder/folders?$select=Name,ServerRelativeUrl,TimeCreated,TimeLastModified&$filter=TimeLastModified gt datetime'{afterDate:yyyy-MM-ddTHH:mm:ssZ}'";
+
+        HttpRequestMessage endpointRequest = new HttpRequestMessage
+        {
+            Method = HttpMethod.Get,
+            RequestUri = new Uri(ApiEndpoint + query),
+            Headers = { { "Accept", "application/json" } },
+        };
+
+        // make the request.
+        var response = await _Client.SendAsync(endpointRequest);
+        string jsonString = await response.Content.ReadAsStringAsync();
+
+        if (response.StatusCode == HttpStatusCode.OK)
+        {
+            try
+            {
+                JObject responseObject = JObject.Parse(jsonString);
+                List<JToken> responseResults = responseObject["value"].Children().ToList();
+
+                foreach (JToken responseResult in responseResults)
+                {
+                    FolderItem folderItem = responseResult.ToObject<FolderItem>();
+
+                    // Filter out system folders (Forms, etc.)
+                    if (!folderItem.Name.Equals("Forms", StringComparison.OrdinalIgnoreCase))
+                    {
+                        folderList.Add(folderItem);
+                    }
+                }
+            }
+            catch (JsonReaderException jre)
+            {
+                throw jre;
+            }
+        }
+
+        _logger.LogInformation(
+            "[OnPremSharePointFileManager] GetFoldersInDocumentLibrary - returning {FolderCount} folders from '{ListTitle}'",
+            folderList.Count,
+            listTitle
+        );
+        return folderList;
+    }
+
     /// <summary>
     /// Search for folders in a document library by name (server-side filtering for performance)
     /// </summary>

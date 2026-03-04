@@ -23,6 +23,8 @@ public class FolderItem
 {
     public string Name { get; set; }
     public string ServerRelativeUrl { get; set; }
+    public DateTime TimeCreated { get; set; }
+    public DateTime TimeLastModified { get; set; }
 }
 
 public class FileItem
