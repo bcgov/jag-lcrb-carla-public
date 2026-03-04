@@ -23,3 +23,6 @@ Thumbs.db
 # Logs
 *.log
 logs/
+
+# Generated Csv files
+*.csv

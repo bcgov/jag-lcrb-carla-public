@@ -69,18 +69,24 @@ namespace SharePointSyncTool
         ModifiedAfterDate = configuration["SYNC_MODIFIED_AFTER_DATE"],
         BatchSize = int.TryParse(configuration["SYNC_BATCH_SIZE"], out var batchSize) ? batchSize : 100,
         DryRun = bool.TryParse(configuration["SYNC_DRY_RUN"], out var dryRun) && dryRun,
+        StartIndex = int.TryParse(configuration["SYNC_START_INDEX"], out var startIndex) ? startIndex : 0,
+        EndIndex = int.TryParse(configuration["SYNC_END_INDEX"], out var endIndex) ? endIndex : 0,
       };
 
       var errors = new List<string>();
 
       if (string.IsNullOrWhiteSpace(config.EntityName))
       {
-        errors.Add("SYNC_ENTITY_NAME is required (e.g., 'account', 'application', 'worker', 'event', 'licence', 'contravention', 'enforcement action')");
+        errors.Add(
+          "SYNC_ENTITY_NAME is required (e.g., 'account', 'application', 'worker', 'event', 'licence', 'contravention', 'enforcement action')"
+        );
       }
 
       if (string.IsNullOrWhiteSpace(config.DocumentLibrary))
       {
-        errors.Add("SYNC_DOCUMENT_LIBRARY is required (e.g., 'account', 'adoxio_application', etc.)");
+        errors.Add(
+          "SYNC_DOCUMENT_LIBRARY is required - must be SharePoint internal name (e.g., 'account', 'adoxio_application', 'adoxio_worker'). Note: for nested entities (contravention/enforcement action), this should still be set but will be overridden to 'account'."
+        );
       }
 
       if (!string.IsNullOrWhiteSpace(config.ModifiedAfterDate))
@@ -159,6 +165,8 @@ namespace SharePointSyncTool
       logger.LogInformation("Modified After: {ModifiedAfter}", config.ModifiedAfterDate ?? "Not specified");
       logger.LogInformation("Batch Size: {BatchSize}", config.BatchSize);
       logger.LogInformation("Dry Run: {DryRun}", config.DryRun);
+      logger.LogInformation("Start Index: {StartIndex}", config.StartIndex);
+      logger.LogInformation("End Index: {EndIndex}", config.EndIndex);
 
       return config;
     }
@@ -172,5 +180,7 @@ namespace SharePointSyncTool
     public DateTime? ModifiedAfterDateParsed { get; set; }
     public int BatchSize { get; set; } = 100;
     public bool DryRun { get; set; } = false;
+    public int StartIndex { get; set; } = 0;
+    public int EndIndex { get; set; } = 0;
   }
 }

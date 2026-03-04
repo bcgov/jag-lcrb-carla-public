@@ -79,6 +79,10 @@ SYNC_MODIFIED_AFTER_DATE=2024-01-01
 # Optional: Number of folders to process in each batch (default: 100)
 SYNC_BATCH_SIZE=50
 
+# Optional: Index range for processing records (0-based, set both to 0 to process all)
+SYNC_START_INDEX=0
+SYNC_END_INDEX=1
+
 # Optional: Dry run mode - log what would happen without making changes (default: false)
 SYNC_DRY_RUN=true
 ```
@@ -144,6 +148,8 @@ SYNC_ENTITY_NAME=application
 SYNC_DOCUMENT_LIBRARY=adoxio_application
 SYNC_MODIFIED_AFTER_DATE=2024-01-01
 SYNC_BATCH_SIZE=100
+SYNC_START_INDEX=0
+SYNC_END_INDEX=1
 SYNC_DRY_RUN=false
 ```
 

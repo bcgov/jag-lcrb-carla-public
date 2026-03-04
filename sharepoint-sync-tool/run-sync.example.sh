@@ -13,8 +13,8 @@ export SHAREPOINT_STS_TOKEN_URI="https://ststest.gov.bc.ca/adfs/services/trust/2
 export SHAREPOINT_RELYING_PARTY_IDENTIFIER="urn:spcrm:lcrb:cllce"
 
 # Dynamics Configuration (Cloud Dataverse AAD only)
-export DYNAMICS_ODATA_URI="https://wsgw.dev.jag.gov.bc.ca/clb/crmclouddev-v9/api/data/v9.2/"
-export DYNAMICS_NATIVE_ODATA_URI="https://wsgw.dev.jag.gov.bc.ca/clb/crmclouddev-v9/api/data/v9.2/"
+export DYNAMICS_ODATA_URI="https://lcrb-carla-dev-jag.api.crm3.dynamics.com/api/data/v9.2/"
+export DYNAMICS_NATIVE_ODATA_URI="https://lcrb-carla-dev-jag.api.crm3.dynamics.com/api/data/v9.2/"
 export DYNAMICS_AAD_TENANT_ID="6fdb5200-3d0d-4a8a-b036-d3685e359adc"
 export DYNAMICS_SERVER_APP_ID_URI="https://lcrb-carla-dev-jag.crm3.dynamics.com/"
 export DYNAMICS_APP_REG_CLIENT_ID="c3bbda2a-3453-4b72-b9de-42b99df03816"
@@ -22,10 +22,12 @@ export DYNAMICS_APP_REG_CLIENT_KEY=""
 
 # Sync Configuration
 export SYNC_ENTITY_NAME="contravention"            # account, application, contact, worker, event, licence, contravention, enforcement action
-export SYNC_DOCUMENT_LIBRARY="account"             # document library name in SharePoint (not used for contravention/enforcement action)
+export SYNC_DOCUMENT_LIBRARY="account"             # Parent document library (for nested entities like contravention/enforcement action, this is always 'account')
 export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
 export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
-export SYNC_DRY_RUN="true"                         # Set to false to actually make changes
+export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
 
 # Run the tool
 dotnet run --project sharepoint-sync-tool.csproj
