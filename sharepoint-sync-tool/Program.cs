@@ -65,7 +65,6 @@ namespace SharePointSyncTool
       var config = new SyncConfiguration
       {
         EntityName = configuration["SYNC_ENTITY_NAME"] ?? "",
-        DocumentLibrary = configuration["SYNC_DOCUMENT_LIBRARY"] ?? "",
         ModifiedAfterDate = configuration["SYNC_MODIFIED_AFTER_DATE"],
         BatchSize = int.TryParse(configuration["SYNC_BATCH_SIZE"], out var batchSize) ? batchSize : 100,
         DryRun = bool.TryParse(configuration["SYNC_DRY_RUN"], out var dryRun) && dryRun,
@@ -78,14 +77,7 @@ namespace SharePointSyncTool
       if (string.IsNullOrWhiteSpace(config.EntityName))
       {
         errors.Add(
-          "SYNC_ENTITY_NAME is required (e.g., 'account', 'application', 'worker', 'event', 'licence', 'contravention', 'enforcement action')"
-        );
-      }
-
-      if (string.IsNullOrWhiteSpace(config.DocumentLibrary))
-      {
-        errors.Add(
-          "SYNC_DOCUMENT_LIBRARY is required - must be SharePoint internal name (e.g., 'account', 'adoxio_application', 'adoxio_worker'). Note: for nested entities (contravention/enforcement action), this should still be set but will be overridden to 'account'."
+          "SYNC_ENTITY_NAME is required (e.g., 'account', 'contact', 'application', 'worker', 'event', 'licence', 'contravention', 'enforcement action', 'special event', 'incident', 'complaint')"
         );
       }
 
@@ -175,7 +167,6 @@ namespace SharePointSyncTool
   public class SyncConfiguration
   {
     public string EntityName { get; set; } = "";
-    public string DocumentLibrary { get; set; } = "";
     public string? ModifiedAfterDate { get; set; }
     public DateTime? ModifiedAfterDateParsed { get; set; }
     public int BatchSize { get; set; } = 100;

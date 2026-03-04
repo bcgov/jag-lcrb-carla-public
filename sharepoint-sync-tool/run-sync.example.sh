@@ -20,14 +20,93 @@ export DYNAMICS_SERVER_APP_ID_URI="https://lcrb-carla-dev-jag.crm3.dynamics.com/
 export DYNAMICS_APP_REG_CLIENT_ID="c3bbda2a-3453-4b72-b9de-42b99df03816"
 export DYNAMICS_APP_REG_CLIENT_KEY=""
 
-# Sync Configuration
-export SYNC_ENTITY_NAME="contravention"            # account, application, contact, worker, event, licence, contravention, enforcement action
-export SYNC_DOCUMENT_LIBRARY="account"             # Parent document library (for nested entities like contravention/enforcement action, this is always 'account')
-export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
-export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
-export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
-export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
-export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# Sync Configuration - Account
+# export SYNC_ENTITY_NAME="account"                  # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Application
+# export SYNC_ENTITY_NAME="application"              # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Licence
+# export SYNC_ENTITY_NAME="licence"                  # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Special Event
+# export SYNC_ENTITY_NAME="special event"            # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Contact
+# export SYNC_ENTITY_NAME="contact"                  # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Worker
+# export SYNC_ENTITY_NAME="worker"                   # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Event
+# export SYNC_ENTITY_NAME="event"                    # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Complaint
+# export SYNC_ENTITY_NAME="complaint"                # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Incident (nested under Account)
+# export SYNC_ENTITY_NAME="incident"                 # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Contravention  (nested under Account)
+# export SYNC_ENTITY_NAME="contravention"            # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
+
+# Sync Configuration - Enforcement Action  (nested under Account)
+# export SYNC_ENTITY_NAME="enforcement action"       # account, contact, application, worker, event, licence, contravention, enforcement action, special event, incident, complaint
+# export SYNC_MODIFIED_AFTER_DATE="2026-02-06"       # Optional: filter by creation date
+# export SYNC_DRY_RUN="false"                        # Set to false to actually make changes
+# export SYNC_BATCH_SIZE="100"                       # Optional: number of folders per batch
+# export SYNC_START_INDEX="0"                        # Optional: starting index for processing (0-based, default: 0)
+# export SYNC_END_INDEX="0"                          # Optional: ending index for processing (exclusive, set both to 0 to process all)
 
 # Run the tool
 dotnet run --project sharepoint-sync-tool.csproj

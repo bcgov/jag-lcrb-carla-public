@@ -43,12 +43,12 @@
 ### Sync Settings
 
 - `SYNC_ENTITY_NAME` - Entity type: `account`, `application`, `contact`, `worker`, `event`, `licence`, `contravention`, or `enforcement action`
-  - **Note**: `contravention` and `enforcement action` are nested under Account folders in SharePoint
-- `SYNC_DOCUMENT_LIBRARY` - SharePoint library name (e.g., `adoxio_application`)
-  - **Note**: Not used for `contravention` or `enforcement action` (automatically uses Account folders)
 - `SYNC_MODIFIED_AFTER_DATE` - Optional: Filter by date (e.g., `2024-01-01`)
 - `SYNC_BATCH_SIZE` - Optional: Folders per batch (default: 100)
 - `SYNC_DRY_RUN` - Test mode: `true` or `false`
+- `SYNC_BATCH_SIZE` - Optional: number of folders per batch
+- `SYNC_START_INDEX` - Optional: starting index for processing (0-based, default: 0)
+- `SYNC_END_INDEX` - Optional: ending index for processing (exclusive, set both to 0 to process all)
 
 ## Example Command
 

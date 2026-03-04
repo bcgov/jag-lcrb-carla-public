@@ -246,19 +246,30 @@ namespace SharePointSyncTool
       // Convert internal names to friendly names
       return entityName.ToLower() switch
       {
+        "account" => "account",
+        "contact" => "contact",
         "adoxio_application" => "application",
         "adoxio_worker" => "worker",
         "adoxio_event" => "event",
         "adoxio_licences" => "licence",
         "adoxio_contravention" => "contravention",
         "adoxio_enforcementaction" => "enforcement action",
+        "adoxio_specialevent" => "special event",
+        "adoxio_complaint" => "complaint",
         _ => entityName.ToLower(),
       };
     }
 
     private bool IsNestedEntityType(string entityName)
     {
-      return entityName.ToLower() == "contravention" || entityName.ToLower() == "enforcement action";
+      return entityName.ToLower() == "contravention" || entityName.ToLower() == "enforcement action" || entityName.ToLower() == "incident";
+    }
+
+    private string GetNestedFolderInternalName(string entityName)
+    {
+      // Use SharePointConstants to get the internal SharePoint folder name for this entity
+      // This returns the folder name used in SharePoint URLs (e.g., "adoxio_contravention", "adoxio_enforcementaction")
+      return SharePointConstants.GetDocumentTemplateUrlPart(entityName);
     }
 
     private async Task<List<FolderItem>> GetNestedFoldersAsync(string entityName, DateTime? modifiedAfter)
@@ -269,10 +280,7 @@ namespace SharePointSyncTool
         var nestedFolders = new List<FolderItem>();
 
         // Determine the nested folder name based on entity type
-        string nestedFolderName =
-          entityName.ToLower() == "contravention"
-            ? SharePointConstants.ContraventionFolderInternalName
-            : SharePointConstants.EnforcementActionFolderInternalName;
+        string nestedFolderName = GetNestedFolderInternalName(entityName);
 
         _logger.LogInformation(
           "Fetching {EntityName} folders nested under Account folders (looking for '{NestedFolderName}' subfolders)",
@@ -1243,6 +1251,15 @@ namespace SharePointSyncTool
         case "enforcement action":
           documentLocation.RegardingobjectidAdoxioEnforcementactionODataBind = entityUri;
           break;
+        case "special event":
+          documentLocation.RegardingobjectidAdoxioSpecialeventODataBind = entityUri;
+          break;
+        case "incident":
+          documentLocation.RegardingobjectIdIncidentODataBind = entityUri;
+          break;
+        case "complaint":
+          documentLocation.RegardingobjectidAdoxioComplaintODataBind = entityUri;
+          break;
         default:
           _logger.LogWarning("Unknown entity type: {EntityName}. Document location may not be properly linked.", entityName);
           break;
@@ -1275,6 +1292,9 @@ namespace SharePointSyncTool
         "licence" => "Licence Files",
         "contravention" => "Contravention Files",
         "enforcement action" => "Enforcement Action Files",
+        "special event" => "Special Event Files",
+        "incident" => "Incident Files",
+        "complaint" => "Complaint Files",
         _ => $"{entityName} Files",
       };
     }
@@ -1288,9 +1308,12 @@ namespace SharePointSyncTool
         "contact" => "contacts",
         "worker" => "adoxio_workers",
         "event" => "adoxio_events",
-        "licence" => "adoxio_licenceses",
+        "licence" => "adoxio_licences",
         "contravention" => "adoxio_contraventions",
         "enforcement action" => "adoxio_enforcementactions",
+        "special event" => "adoxio_specialevents",
+        "incident" => "incidents",
+        "complaint" => "adoxio_complaints",
         _ => entityName + "s",
       };
     }

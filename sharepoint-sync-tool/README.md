@@ -70,11 +70,8 @@ DYNAMICS_APP_REG_CLIENT_KEY=your-app-registration-client-secret
 # Required: Entity type to sync (account, application, contact, worker, event, licence)
 SYNC_ENTITY_NAME=application
 
-# Required: SharePoint document library name (e.g., 'account', 'adoxio_application', 'adoxio_worker')
-SYNC_DOCUMENT_LIBRARY=adoxio_application
-
 # Optional: Only process folders created after this date (format: YYYY-MM-DD)
-SYNC_MODIFIED_AFTER_DATE=2024-01-01
+SYNC_MODIFIED_AFTER_DATE=2026-02-06
 
 # Optional: Number of folders to process in each batch (default: 100)
 SYNC_BATCH_SIZE=50
@@ -107,9 +104,11 @@ export DYNAMICS_APP_REG_CLIENT_ID="87654321-4321-4321-4321-cba987654321"
 export DYNAMICS_APP_REG_CLIENT_KEY="your-secret"
 
 export SYNC_ENTITY_NAME="application"
-export SYNC_DOCUMENT_LIBRARY="adoxio_application"
-export SYNC_MODIFIED_AFTER_DATE="2024-01-01"
+export SYNC_MODIFIED_AFTER_DATE="2026-02-06"
 export SYNC_DRY_RUN="true"
+export SYNC_BATCH_SIZE="100"
+export SYNC_START_INDEX="0"
+export SYNC_END_INDEX="0"
 
 dotnet run --project sharepoint-sync-tool.csproj
 ```
@@ -120,7 +119,6 @@ Once you've verified the dry run output, remove the dry run flag:
 
 ```bash
 $env:SYNC_ENTITY_NAME="worker"
-$env:SYNC_DOCUMENT_LIBRARY="adoxio_worker"
 $env:SYNC_DRY_RUN="false"  # or just remove this line
 
 dotnet run --project sharepoint-sync-tool.csproj
@@ -145,12 +143,11 @@ DYNAMICS_CLIENT_SECRET=your-secret
 
 # Sync Configuration
 SYNC_ENTITY_NAME=application
-SYNC_DOCUMENT_LIBRARY=adoxio_application
-SYNC_MODIFIED_AFTER_DATE=2024-01-01
+SYNC_MODIFIED_AFTER_DATE=2026-02-06
+SYNC_DRY_RUN=false
 SYNC_BATCH_SIZE=100
 SYNC_START_INDEX=0
 SYNC_END_INDEX=1
-SYNC_DRY_RUN=false
 ```
 
 Then load the environment variables:
@@ -233,7 +230,6 @@ This means the folder name doesn't match the expected pattern. Check that:
 
 The tool couldn't find the parent document library location in Dynamics. Ensure:
 
-- The `SYNC_DOCUMENT_LIBRARY` value matches the `relativeurl` of an existing document library location
 - The document library exists in SharePoint
 
 ### "Folder listing for Cloud SharePoint not yet implemented"
