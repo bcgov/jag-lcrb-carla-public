@@ -73,8 +73,11 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var folderExists = false;
         try
         {
-            var folder = _sharePointFileManager.GetFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
-            if (folder != null)
+            var folderExistsResult1 = _sharePointFileManager
+                .FolderExists(urlTitle, request.FolderName)
+                .GetAwaiter()
+                .GetResult();
+            if (folderExistsResult1)
             {
                 _logger.LogDebug("[FileManagerService] CreateFolder - Folder already exists");
                 folderExists = true;
@@ -108,8 +111,11 @@ public partial class FileManagerService : FileManager.FileManagerBase
             try
             {
                 _sharePointFileManager.CreateFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
-                var folder = _sharePointFileManager.GetFolder(urlTitle, request.FolderName).GetAwaiter().GetResult();
-                if (folder != null)
+                var folderExistsResult2 = _sharePointFileManager
+                    .FolderExists(urlTitle, request.FolderName)
+                    .GetAwaiter()
+                    .GetResult();
+                if (folderExistsResult2)
                 {
                     result.ResultStatus = ResultStatus.Success;
                     _logger.LogInformation(
@@ -129,11 +135,11 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 );
                 try
                 {
-                    var folder = _sharePointFileManager
-                        .GetFolder(urlTitle, request.FolderName)
+                    var folderExistsResult3 = _sharePointFileManager
+                        .FolderExists(urlTitle, request.FolderName)
                         .GetAwaiter()
                         .GetResult();
-                    if (folder != null)
+                    if (folderExistsResult3)
                     {
                         result.ResultStatus = ResultStatus.Success;
                         _logger.LogInformation(

@@ -1001,7 +1001,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
     /// <param name="folderName"></param>
     /// <param name="guid"></param>
     /// <returns></returns>
-    public async Task<Object> GetFolder(string urlTitle, string folderName, string guid = null)
+    private async Task<Object> GetFolder(string urlTitle, string folderName, string guid = null)
     {
         _logger.LogDebug(
             "[OnPremSharePointFileManager] GetFolder - called with urlTitle='{UrlTitle}', folderName='{FolderName}', guid='{Guid}'",

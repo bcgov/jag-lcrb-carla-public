@@ -22,8 +22,6 @@ namespace Gov.Lclb.Cllb.Interfaces
             string documentTemplateUrlTitle = null
         );
 
-        Task<Object> GetFolder(string urlTitle, string folderName, string guid = null);
-
         Task CreateFolder(string listTitle, string folderName);
 
         Task<string> UploadFile(
@@ -123,5 +121,12 @@ namespace Gov.Lclb.Cllb.Interfaces
             string listTitle,
             DateTime afterDate
         );
+
+        /// <summary>
+        /// Get all child folders in a folder by its server relative URL
+        /// </summary>
+        /// <param name="serverRelativeUrl">The server relative URL of the parent folder</param>
+        /// <returns>List of child folders</returns>
+        Task<List<FolderItem>> GetChildFolders(string serverRelativeUrl);
     }
 }

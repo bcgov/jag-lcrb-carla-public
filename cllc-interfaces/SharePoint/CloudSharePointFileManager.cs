@@ -1604,13 +1604,152 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
 
         try
         {
-            // Use Graph API to get children of the root folder, filtering by folders only
-            // Note: Graph API uses lastModifiedDateTime for filtering
+            // Use SharePoint list items endpoint with indexed field filtering only
+            // Filter by Modified date only (likely indexed), then filter for folders client-side
+            string filter = $"fields/Modified ge '{afterDate:yyyy-MM-ddTHH:mm:ss}Z'";
             string requestUrl =
-                $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root/children?$filter=folder ne null and lastModifiedDateTime gt {afterDate:yyyy-MM-ddTHH:mm:ssZ}";
+                $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/items?$expand=fields&$filter={Uri.EscapeDataString(filter)}&$top=5000";
 
             _logger.LogDebug(
                 "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Request URL: {RequestUrl}",
+                requestUrl
+            );
+
+            string nextLink = requestUrl;
+            int pageCount = 0;
+            int totalItems = 0;
+
+            // Paginate through all results
+            while (!string.IsNullOrEmpty(nextLink))
+            {
+                pageCount++;
+                _logger.LogDebug(
+                    "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Fetching page {PageCount}",
+                    pageCount
+                );
+
+                var request = new HttpRequestMessage(HttpMethod.Get, nextLink);
+
+                var response = await _Client.SendAsync(request);
+                string jsonString = await response.Content.ReadAsStringAsync();
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    _logger.LogError(
+                        "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Error: {StatusCode}, Response: {Response}",
+                        response.StatusCode,
+                        jsonString
+                    );
+                    return folderList;
+                }
+
+                var responseObject = JObject.Parse(jsonString);
+                var items = responseObject["value"]?.ToObject<List<JObject>>();
+
+                if (items != null)
+                {
+                    totalItems += items.Count;
+
+                    foreach (var item in items)
+                    {
+                        var fields = item["fields"];
+                        if (fields != null)
+                        {
+                            // Client-side filter: only process folders (FSObjType = 1)
+                            var fsObjType = fields["FSObjType"]?.ToObject<int?>();
+                            if (fsObjType == 1)
+                            {
+                                var folderName = fields["FileLeafRef"]?.ToString();
+                                var serverRelativeUrl = fields["FileRef"]?.ToString();
+                                var modified = fields["Modified"]?.ToObject<DateTime?>();
+                                var created = fields["Created"]?.ToObject<DateTime?>();
+
+                                // Filter out system folders (Forms, etc.)
+                                if (
+                                    !string.IsNullOrEmpty(folderName)
+                                    && !folderName.Equals(
+                                        "Forms",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
+                                {
+                                    var folderItem = new FolderItem
+                                    {
+                                        Name = folderName,
+                                        ServerRelativeUrl = serverRelativeUrl,
+                                        TimeCreated = created ?? DateTime.MinValue,
+                                        TimeLastModified = modified ?? DateTime.MinValue,
+                                    };
+
+                                    folderList.Add(folderItem);
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Check for next page
+                nextLink = responseObject["@odata.nextLink"]?.ToString();
+            }
+
+            _logger.LogInformation(
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - returning {FolderCount} folders from '{ListTitle}' (processed {TotalItems} items across {PageCount} pages)",
+                folderList.Count,
+                listTitle,
+                totalItems,
+                pageCount
+            );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Exception occurred"
+            );
+            throw;
+        }
+
+        return folderList;
+    }
+
+    /// <summary>
+    /// Get all child folders in a folder by its server relative URL.
+    /// Uses Microsoft Graph API to retrieve child folders.
+    /// </summary>
+    /// <param name="serverRelativeUrl">The server relative URL or web URL of the parent folder</param>
+    /// <returns>List of child folders</returns>
+    public async Task<List<FolderItem>> GetChildFolders(string serverRelativeUrl)
+    {
+        _logger.LogDebug(
+            "[CloudSharePointFileManager] GetChildFolders - serverRelativeUrl={ServerRelativeUrl}",
+            serverRelativeUrl
+        );
+
+        if (string.IsNullOrEmpty(serverRelativeUrl))
+        {
+            _logger.LogWarning(
+                "[CloudSharePointFileManager] GetChildFolders - serverRelativeUrl is null or empty, returning empty list"
+            );
+            return new List<FolderItem>();
+        }
+
+        await EnsureValidAccessTokenAsync();
+        await EnsureSiteIdResolvedAsync();
+
+        List<FolderItem> folderList = new List<FolderItem>();
+
+        try
+        {
+            // For Graph API, we need to use the folder's drive item path or ID
+            // The serverRelativeUrl might be a web URL, so we need to extract the path
+            string folderPath = ExtractFolderPathFromUrl(serverRelativeUrl);
+
+            // Use Graph API to get children of the folder, filtering by folders only
+            string requestUrl =
+                $"{GraphApiEndpoint}sites/{SiteId}/drive/root:/{Uri.EscapeDataString(folderPath)}:/children?$filter=folder ne null";
+
+            _logger.LogDebug(
+                "[CloudSharePointFileManager] GetChildFolders - Request URL: {RequestUrl}",
                 requestUrl
             );
 
@@ -1619,8 +1758,17 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
 
             if (!response.IsSuccessStatusCode)
             {
+                if (response.StatusCode == HttpStatusCode.NotFound)
+                {
+                    _logger.LogInformation(
+                        "[CloudSharePointFileManager] GetChildFolders - Folder not found at: {ServerRelativeUrl}",
+                        serverRelativeUrl
+                    );
+                    return folderList;
+                }
+
                 _logger.LogError(
-                    "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Error: {StatusCode}, Response: {Response}",
+                    "[CloudSharePointFileManager] GetChildFolders - Error: {StatusCode}, Response: {Response}",
                     response.StatusCode,
                     jsonString
                 );
@@ -1641,8 +1789,11 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
                         {
                             Name = item["name"]?.ToString(),
                             ServerRelativeUrl = item["webUrl"]?.ToString(),
-                            TimeCreated = item["createdDateTime"]?.ToObject<DateTime?>(),
-                            TimeLastModified = item["lastModifiedDateTime"]?.ToObject<DateTime?>()
+                            TimeCreated =
+                                item["createdDateTime"]?.ToObject<DateTime?>() ?? DateTime.MinValue,
+                            TimeLastModified =
+                                item["lastModifiedDateTime"]?.ToObject<DateTime?>()
+                                ?? DateTime.MinValue,
                         };
 
                         // Filter out system folders (Forms, etc.)
@@ -1657,22 +1808,48 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
                 }
             }
 
-            _logger.LogInformation(
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - returning {FolderCount} folders from '{ListTitle}'",
-                folderList.Count,
-                listTitle
+            _logger.LogDebug(
+                "[CloudSharePointFileManager] GetChildFolders - Found {Count} child folders",
+                folderList.Count
             );
         }
         catch (Exception ex)
         {
             _logger.LogError(
                 ex,
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Exception occurred"
+                "[CloudSharePointFileManager] GetChildFolders - Exception occurred"
             );
             throw;
         }
 
         return folderList;
+    }
+
+    /// <summary>
+    /// Extract the folder path from a server relative URL or web URL
+    /// </summary>
+    private string ExtractFolderPathFromUrl(string url)
+    {
+        // If it's a full web URL, extract the path after the site URL
+        if (url.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        {
+            Uri uri = new Uri(url);
+            string path = uri.AbsolutePath;
+
+            // Remove the site path from the beginning
+            Uri siteUri = new Uri(SiteUrl);
+            string sitePath = siteUri.AbsolutePath.TrimEnd('/');
+
+            if (path.StartsWith(sitePath, StringComparison.OrdinalIgnoreCase))
+            {
+                path = path.Substring(sitePath.Length).TrimStart('/');
+            }
+
+            return path;
+        }
+
+        // Otherwise, it's already a relative path, just trim leading slash
+        return url.TrimStart('/');
     }
 
     /// <summary>
