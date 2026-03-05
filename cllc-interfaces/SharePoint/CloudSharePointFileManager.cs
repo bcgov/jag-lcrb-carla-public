@@ -565,7 +565,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         }
 
         // Fix folder and file names to match SharePoint requirements
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
         fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
         // Ensure folder exists
@@ -1007,7 +1007,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             throw new Exception($"Document library '{listTitle}' not found");
         }
 
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
         string encodedFolderName = Uri.EscapeDataString(folderName);
         string encodedFileName = Uri.EscapeDataString(fileName);
 
@@ -1388,7 +1388,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             fileName,
             contentType
         );
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
         {
@@ -1455,7 +1455,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             fileData.Length,
             contentType
         );
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
         bool folderExists = await FolderExists(documentLibrary, folderName);
         if (!folderExists)
         {
@@ -1519,7 +1519,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         );
         int maxLength = MAX_SEGMENT_LENGTH;
         fileName = SharePointUtils.FixFilename(fileName, maxLength);
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
 
         string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
         string fullPath = $"{serverRelativeUrl}/{fileName}";
@@ -1547,7 +1547,7 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             listTitle,
             folderName
         );
-        folderName = SharePointUtils.FixFoldername(folderName);
+        folderName = SharePointUtils.FixFoldername(folderName, null, false);
 
         Uri siteUri = new Uri(SiteUrl);
         string sitePath = siteUri.AbsolutePath.TrimStart('/').TrimEnd('/');

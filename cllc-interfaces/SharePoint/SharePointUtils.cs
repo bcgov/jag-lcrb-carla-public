@@ -40,14 +40,38 @@ public static class SharePointUtils
     }
 
     /// <summary>
+    /// Replaces forward slashes in the input string with dashes to prevent SharePoint from treating them as path
+    /// separators.
+    /// </summary>
+    /// <param name="input"></param>
+    /// <returns></returns>
+    public static string SanitizeSlashes(string input)
+    {
+        if (string.IsNullOrEmpty(input))
+        {
+            return input;
+        }
+
+        // Replace "/" with "-" to avoid issues with SharePoint treating it as a path separator
+        string result = Regex.Replace(input, @"[/]+", "-");
+
+        return result;
+    }
+
+    /// <summary>
     /// Fixes a folder name or folder path by removing invalid characters.
     /// If the input contains "/" path separators, each segment is fixed individually
     /// to preserve the path structure.
     /// </summary>
     /// <param name="folderNameOrPath">A single folder name or a path like "folder1/folder2"</param>
     /// <param name="entityName">Optional entity name (listTitle or urlTitle) to customize invalid character handling</param>
+    /// <param name="preservePathSeparators">Whether to preserve path separators ("/") in the input (default: false)</param>
     /// <returns>The sanitized folder name or path</returns>
-    public static string FixFoldername(string folderNameOrPath, string entityName = null)
+    public static string FixFoldername(
+        string folderNameOrPath,
+        string entityName = null,
+        bool preservePathSeparators = false
+    )
     {
         if (string.IsNullOrEmpty(folderNameOrPath))
         {
@@ -55,7 +79,7 @@ public static class SharePointUtils
         }
 
         // If it contains path separators, fix each segment individually
-        if (folderNameOrPath.Contains("/"))
+        if (preservePathSeparators && folderNameOrPath.Contains("/"))
         {
             var segments = folderNameOrPath.Split('/');
             var fixedSegments = segments

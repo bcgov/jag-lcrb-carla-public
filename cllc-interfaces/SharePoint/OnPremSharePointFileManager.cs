@@ -279,7 +279,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return null;
         }
 
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
 
         string serverRelativeUrl = "";
         // ensure the webname has a slash.
@@ -400,7 +400,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return;
         }
 
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
 
         string relativeUrl = SharePointUtils.EscapeApostrophe($"/{listTitle}/{folderName}");
 
@@ -639,7 +639,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             return false;
         }
 
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
 
         bool result = false;
         // Delete is very similar to a GET.
@@ -1018,7 +1018,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             );
             return null;
         }
-        var fixedFolderName = SharePointUtils.FixFoldername(folderName, urlTitle);
+        var fixedFolderName = SharePointUtils.FixFoldername(folderName, urlTitle, true);
         _logger.LogDebug(
             "[OnPremSharePointFileManager] GetFolder - After FixFoldername: '{FixedFolderName}'",
             fixedFolderName
@@ -1409,7 +1409,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
         bool folderExists = await this.FolderExists(listTitle, folderName);
         if (!folderExists)
         {
@@ -1453,7 +1453,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string contentType
     )
     {
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
         bool folderExists = await this.FolderExists(listTitle, folderName);
         if (!folderExists)
         {
@@ -1475,7 +1475,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
 
     public string GetServerRelativeURL(string listTitle, string folderName)
     {
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
         string serverRelativeUrl = "";
         if (!string.IsNullOrEmpty(WebName))
         {
@@ -1548,7 +1548,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         int maxLength = MAX_SEGMENT_LENGTH;
         fileName = SharePointUtils.FixFilename(fileName, maxLength);
 
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
 
         // SharePoint also imposes a limit on the whole URL
         string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
@@ -1684,7 +1684,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         string result = null;
         if (IsValid())
         {
-            folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+            folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
             fileName = GetTruncatedFileName(fileName, listTitle, folderName);
 
             string serverRelativeUrl = GetServerRelativeURL(listTitle, folderName);
@@ -1905,7 +1905,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
             serverRelativeUrl += $"{WebName}/";
         }
 
-        folderName = SharePointUtils.FixFoldername(folderName, listTitle);
+        folderName = SharePointUtils.FixFoldername(folderName, listTitle, true);
 
         serverRelativeUrl += $"/{listTitle}/{folderName}/{fileName}";
 

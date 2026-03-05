@@ -392,24 +392,25 @@ public partial class FileManagerService : FileManager.FileManagerBase
         var documentTemplateUrlPart = SharePointConstants.GetDocumentTemplateUrlPart(request.EntityName);
         var segment = request.FolderPath[0];
 
+        var folderName = segment.FolderName;
+        var folderNameSegment = SharePointUtils.SanitizeSlashes(segment.FolderNameSegment);
+        var folderGuidSegment = segment.FolderGuidSegment;
+
         _logger.LogDebug(
-            "_ensureFolderOne - called with documentTemplateUrlPart={DocumentTemplateUrlPart}, segment.FolderName={FolderName}, segment.FolderNameSegment={FolderNameSegment}, segment.FolderGuidSegment={FolderGuidSegment}",
+            "_ensureFolderOne - called with documentTemplateUrlPart={DocumentTemplateUrlPart}, FolderName={FolderName}, FolderNameSegment={FolderNameSegment}, FolderGuidSegment={FolderGuidSegment}",
             documentTemplateUrlPart,
-            segment.FolderName,
-            segment.FolderNameSegment,
-            segment.FolderGuidSegment
+            folderName,
+            folderNameSegment,
+            folderGuidSegment
         );
 
-        string rawFolderName = _buildFolderNameFromSegment(segment.FolderNameSegment, segment.FolderGuidSegment);
+        string rawFolderName = _buildFolderNameFromSegment(folderNameSegment, folderGuidSegment);
 
         _logger.LogDebug("_ensureFolderOne - raw folder name from segment: {RawFolderName}", rawFolderName);
 
         // Attempt to find a matching existing folder
         _logger.LogDebug("_ensureFolderOne - Searching for existing folder");
-        var findFolderOneResults = await _sharePointFileManager.FindFolderOne(
-            request.EntityName,
-            segment.FolderGuidSegment
-        );
+        var findFolderOneResults = await _sharePointFileManager.FindFolderOne(request.EntityName, folderGuidSegment);
 
         // No existing folder found, create it
         if (findFolderOneResults == null || findFolderOneResults.Count == 0)
@@ -445,7 +446,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var segment = request.FolderPath[1];
         var folderName = segment.FolderName;
-        var folderNameSegment = segment.FolderNameSegment;
+        var folderNameSegment = SharePointUtils.SanitizeSlashes(segment.FolderNameSegment);
         var folderGuidSegment = segment.FolderGuidSegment;
 
         _logger.LogDebug(
@@ -496,7 +497,7 @@ public partial class FileManagerService : FileManager.FileManagerBase
 
         var segment = request.FolderPath[2];
         var folderName = segment.FolderName;
-        var folderNameSegment = segment.FolderNameSegment;
+        var folderNameSegment = SharePointUtils.SanitizeSlashes(segment.FolderNameSegment);
         var folderGuidSegment = segment.FolderGuidSegment;
 
         _logger.LogDebug(
