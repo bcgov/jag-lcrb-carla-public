@@ -1569,6 +1569,113 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
     }
 
     /// <summary>
+    /// Get all folders in a document library that were modified after a specific date.
+    /// Uses Microsoft Graph API to retrieve folders from the library's root.
+    /// </summary>
+    /// <param name="listTitle">The document library title</param>
+    /// <param name="afterDate">Only return folders modified after this date</param>
+    /// <returns>List of folder items</returns>
+    public async Task<List<FolderItem>> GetFoldersInDocumentLibraryAfterDate(
+        string listTitle,
+        DateTime afterDate
+    )
+    {
+        _logger.LogDebug(
+            "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - listTitle={ListTitle}, afterDate={AfterDate}",
+            listTitle,
+            afterDate
+        );
+
+        await EnsureValidAccessTokenAsync();
+        await EnsureSiteIdResolvedAsync();
+
+        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
+
+        if (string.IsNullOrEmpty(listId))
+        {
+            _logger.LogWarning(
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Document library not found: {ListTitle}",
+                listTitle
+            );
+            return new List<FolderItem>();
+        }
+
+        List<FolderItem> folderList = new List<FolderItem>();
+
+        try
+        {
+            // Use Graph API to get children of the root folder, filtering by folders only
+            // Note: Graph API uses lastModifiedDateTime for filtering
+            string requestUrl =
+                $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/drive/root/children?$filter=folder ne null and lastModifiedDateTime gt {afterDate:yyyy-MM-ddTHH:mm:ssZ}";
+
+            _logger.LogDebug(
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Request URL: {RequestUrl}",
+                requestUrl
+            );
+
+            var response = await _Client.GetAsync(requestUrl);
+            string jsonString = await response.Content.ReadAsStringAsync();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                _logger.LogError(
+                    "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Error: {StatusCode}, Response: {Response}",
+                    response.StatusCode,
+                    jsonString
+                );
+                return folderList;
+            }
+
+            var responseObject = JObject.Parse(jsonString);
+            var items = responseObject["value"]?.ToObject<List<JObject>>();
+
+            if (items != null)
+            {
+                foreach (var item in items)
+                {
+                    // Only process items that have a folder facet
+                    if (item["folder"] != null)
+                    {
+                        var folderItem = new FolderItem
+                        {
+                            Name = item["name"]?.ToString(),
+                            ServerRelativeUrl = item["webUrl"]?.ToString(),
+                            TimeCreated = item["createdDateTime"]?.ToObject<DateTime?>(),
+                            TimeLastModified = item["lastModifiedDateTime"]?.ToObject<DateTime?>()
+                        };
+
+                        // Filter out system folders (Forms, etc.)
+                        if (
+                            !string.IsNullOrEmpty(folderItem.Name)
+                            && !folderItem.Name.Equals("Forms", StringComparison.OrdinalIgnoreCase)
+                        )
+                        {
+                            folderList.Add(folderItem);
+                        }
+                    }
+                }
+            }
+
+            _logger.LogInformation(
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - returning {FolderCount} folders from '{ListTitle}'",
+                folderList.Count,
+                listTitle
+            );
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(
+                ex,
+                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Exception occurred"
+            );
+            throw;
+        }
+
+        return folderList;
+    }
+
+    /// <summary>
     /// Dispose of resources.
     /// </summary>
     public void Dispose()

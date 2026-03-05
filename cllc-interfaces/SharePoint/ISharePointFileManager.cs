@@ -112,5 +112,16 @@ namespace Gov.Lclb.Cllb.Interfaces
             byte[] fileData,
             string contentType
         );
+
+        /// <summary>
+        /// Get all folders in a document library that were modified after a specific date
+        /// </summary>
+        /// <param name="listTitle">The document library title</param>
+        /// <param name="afterDate">Only return folders modified after this date</param>
+        /// <returns>List of folder items</returns>
+        Task<List<FolderItem>> GetFoldersInDocumentLibraryAfterDate(
+            string listTitle,
+            DateTime afterDate
+        );
     }
 }

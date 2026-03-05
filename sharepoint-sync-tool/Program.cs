@@ -19,12 +19,20 @@ namespace SharePointSyncTool
       // Setup configuration
       var configuration = new ConfigurationBuilder().AddEnvironmentVariables().Build();
 
+      // Parse log level from configuration (default to Information)
+      var logLevelString = configuration["LOG_LEVEL"] ?? "Information";
+      var logLevel = Enum.TryParse<LogLevel>(logLevelString, ignoreCase: true, out var parsedLevel) ? parsedLevel : LogLevel.Information;
+
       // Setup logging
       var serviceProvider = new ServiceCollection()
         .AddLogging(builder =>
         {
-          builder.AddConsole();
-          builder.SetMinimumLevel(LogLevel.Information);
+          builder.AddSimpleConsole(options =>
+          {
+            options.SingleLine = true;
+            options.TimestampFormat = "yyyy-MM-dd HH:mm:ss ";
+          });
+          builder.SetMinimumLevel(logLevel);
         })
         .BuildServiceProvider();
 
@@ -153,7 +161,6 @@ namespace SharePointSyncTool
 
       logger.LogInformation("Configuration validated successfully");
       logger.LogInformation("Entity Name: {EntityName}", config.EntityName);
-      logger.LogInformation("Document Library: {DocumentLibrary}", config.DocumentLibrary);
       logger.LogInformation("Modified After: {ModifiedAfter}", config.ModifiedAfterDate ?? "Not specified");
       logger.LogInformation("Batch Size: {BatchSize}", config.BatchSize);
       logger.LogInformation("Dry Run: {DryRun}", config.DryRun);

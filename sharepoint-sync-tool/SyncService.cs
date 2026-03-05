@@ -44,6 +44,11 @@ namespace SharePointSyncTool
         documentLibraryInternalName
       );
 
+      if (config.DryRun)
+      {
+        _logger.LogWarning("DRY RUN MODE: No changes will be made to Dynamics");
+      }
+
       // Initialize CSV export files
       string csvFilePath = InitializeCsvExport(normalizedEntityName);
       string errorCsvFilePath = InitializeErrorCsvExport(normalizedEntityName);
@@ -221,14 +226,16 @@ namespace SharePointSyncTool
       _logger.LogInformation("Sync Summary:");
       _logger.LogInformation("  Total Folders Processed: {TotalProcessed}", totalProcessed);
       _logger.LogInformation("  Unique Entities: {UniqueEntities}", foldersByGuid.Count);
-      _logger.LogInformation("  Document Locations Created: {TotalCreated}", totalCreated);
+      _logger.LogInformation("  Document Locations {Action}: {TotalCreated}", config.DryRun ? "Simulated" : "Created", totalCreated);
       _logger.LogInformation("  Already Exists (Skipped): {TotalSkipped}", totalSkipped);
       _logger.LogInformation("  Errors: {TotalErrors}", totalErrors);
 
       if (totalCreated > 0)
       {
         _logger.LogInformation(
-          "Successfully created {TotalCreated} document location(s) for {UniqueEntities} entity/entities",
+          "{DryRunPrefix}Successfully {Action} {TotalCreated} document location(s) for {UniqueEntities} entity/entities",
+          config.DryRun ? "[DRY RUN] " : "",
+          config.DryRun ? "simulated" : "created",
           totalCreated,
           foldersByGuid.Count
         );
@@ -365,9 +372,8 @@ namespace SharePointSyncTool
     {
       try
       {
-        // Use OnPrem SharePoint implementation
-        var onPremManager = (OnPremSharePointFileManager)_sharePointManager;
-        return await onPremManager.GetFoldersInDocumentLibraryAfterDate(documentLibrary, modifiedAfter.Value);
+        // Use the interface method - works with both OnPrem and Cloud implementations
+        return await _sharePointManager.GetFoldersInDocumentLibraryAfterDate(documentLibrary, modifiedAfter.Value);
       }
       catch (Exception ex)
       {
