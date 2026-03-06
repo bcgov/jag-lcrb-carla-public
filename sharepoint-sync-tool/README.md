@@ -6,10 +6,11 @@ This tool synchronizes SharePoint folders with Dynamics CRM document location ta
 
 The tool:
 
-1. Fetches all folders from a specified SharePoint document library (with optional filtering by last modified date)
+1. Fetches folders from a specified SharePoint document library
 2. For each folder, extracts the GUID from the folder name
 3. Checks if a document location record already exists in Dynamics
-4. Creates missing document location records and links them to the appropriate entities
+4. Writes all document location records to a csv file for review, and future reference.
+5. Creates missing document location records and links them to the appropriate entities
 
 ## Building the Tool
 
@@ -26,7 +27,7 @@ The tool is configured entirely through environment variables. All configuration
 
 #### SharePoint Configuration
 
-**On-Premises SharePoint:**
+**On-Premise:**
 
 ```bash
 SHAREPOINT_ODATA_URI=https://your-sharepoint-server.gov.bc.ca/
@@ -37,19 +38,9 @@ SHAREPOINT_STS_TOKEN_URI=https://sts-server.gov.bc.ca/adfs/services/trust/2005/U
 SHAREPOINT_RELYING_PARTY_IDENTIFIER=urn:sharepoint:yourapplication
 ```
 
-**Cloud SharePoint:**
-
-```bash
-SHAREPOINT_ODATA_URI=https://bcgov.sharepoint.com/sites/your-site-name
-SHAREPOINT_AAD_TENANTID=tenant-id
-SHAREPOINT_CLIENT_ID=client-id
-SHAREPOINT_CLIENT_SECRET=client-secret
-SHAREPOINT_WEBNAME=your-site-name
-```
-
 #### Dynamics CRM Configuration
 
-**Cloud Dataverse:**
+**Cloud:**
 
 ```bash
 DYNAMICS_ODATA_URI=https://your-dynamics-instance.crm3.dynamics.com/api/data/v9.2/
@@ -67,58 +58,70 @@ DYNAMICS_APP_REG_CLIENT_KEY=your-app-registration-client-secret
 SYNC_ENTITY_NAME=application
 
 # Optional: Only process folders created after this date (format: YYYY-MM-DD)
-SYNC_MODIFIED_AFTER_DATE=2026-02-06
+SYNC_MODIFIED_AFTER_DATE=2026-02-07
 
 # Optional: Number of folders to process in each batch (default: 100)
-SYNC_BATCH_SIZE=50
+SYNC_BATCH_SIZE=100
 
 # Optional: Index range for processing records (0-based, set both to 0 to process all)
+# SYNC_END_INDEX is exclusive (so a range of Start: 10, End: 15, will include records 10, 11, 12, 13, 14)
 SYNC_START_INDEX=0
-SYNC_END_INDEX=1
+SYNC_END_INDEX=0
 
 # Optional: Dry run mode - log what would happen without making changes (default: false)
+# This effectively stops the script at step 4 (skipping step 5). See Overview section.
 SYNC_DRY_RUN=true
 
 # Optional: Set the logging level of the script (default: Information)
 LOG_LEVEL=Information
 ```
 
-## Usage
+## Running the Tool
 
-First, test with dry run mode to see what would happen:
+See `run-sync.example.sh` for a pre-built template.
 
-```bash
-export SHAREPOINT_ODATA_URI="https://your-sharepoint-server.gov.bc.ca/"
-export SHAREPOINT_NATIVE_BASE_URI="https://your-sharepoint-server.gov.bc.ca/"
-export SHAREPOINT_USERNAME="username@idir"
-export SHAREPOINT_PASSWORD="your-password"
-export SHAREPOINT_STS_TOKEN_URI="https://sts-server.gov.bc.ca/adfs/services/trust/2005/UsernameMixed"
-export SHAREPOINT_RELYING_PARTY_IDENTIFIER="urn:sharepoint:yourapplication"
+1. Copy this template to `run-sync.sh`, which is git-ignored, and can be safely modified to include passwords/keys.
 
-export DYNAMICS_ODATA_URI="https://lcrb.crm3.dynamics.com/"
-export DYNAMICS_AAD_TENANT_ID="12345678-1234-1234-1234-123456789abc"
-export DYNAMICS_SERVER_APP_ID_URI="https://lcrb.crm3.dynamics.com"
-export DYNAMICS_APP_REG_CLIENT_ID="87654321-4321-4321-4321-cba987654321"
-export DYNAMICS_APP_REG_CLIENT_KEY="your-secret"
+2. Update `run-sync.sh` with the relevant environment variables, secrets, and configuration settings.
 
-export SYNC_ENTITY_NAME="application"
-export SYNC_MODIFIED_AFTER_DATE="2026-02-06"
-export SYNC_DRY_RUN="true"
-export SYNC_BATCH_SIZE="100"
-export SYNC_START_INDEX="0"
-export SYNC_END_INDEX="0"
+3. First, test with the dry run flag enabled.
 
-dotnet run --project sharepoint-sync-tool.csproj
-```
+   3a. Update `run-sync.sh`
 
-Once you've verified the dry run output, remove the dry run flag:
+   ```shell
+   export SYNC_DRY_RUN="true"
+   ```
 
-```bash
-export SYNC_DRY_RUN="false"
+   3b. Execute `run-sync.sh` in terminal
 
-dotnet run --project sharepoint-sync-tool.csproj
-```
+   ```bash
+   $ sh run-sync.sh
+   ```
 
-## Example
+   3c. Review the generated csv files and ensure the content looks correct.
 
-See `run-sync.example.sh` for a pre-built
+4. Once you've verified the dry run output, remove the dry run flag and run for real.
+
+   4a. Update `run-sync.sh`
+
+   ```shell
+   export SYNC_DRY_RUN="true"
+   ```
+
+   4b. Execute `run-sync.sh` in terminal
+
+   ```bash
+   $ sh run-sync.sh
+   ```
+
+## Nested Folders
+
+There are some entity types in Dynamics, for which the matching SharePoint folder is not created under a top-level library, but instead is nested under the Account library.
+
+These include:
+
+- Contraventions
+- Enforcement Actions
+- Incidents
+
+This script specifically takes this into account, and will check and generate all Document Location records for these types, including any parent records.

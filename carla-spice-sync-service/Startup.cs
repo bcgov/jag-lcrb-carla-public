@@ -92,7 +92,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
 
             // determine if we wire up SharePoint.
-            if (!string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI"]))
+            if (
+                !string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI"])
+                || !string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI_CLOUD"])
+            )
             {
                 SetupSharePoint(services);
             }

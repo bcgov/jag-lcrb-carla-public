@@ -283,7 +283,6 @@ namespace SharePointSyncTool
     {
       try
       {
-        var onPremManager = (OnPremSharePointFileManager)_sharePointManager;
         var nestedFolders = new List<FolderItem>();
 
         // Determine the nested folder name based on entity type
@@ -296,7 +295,7 @@ namespace SharePointSyncTool
         );
 
         // Get all Account folders
-        var accountFolders = await onPremManager.GetFoldersInDocumentLibraryAfterDate(
+        var accountFolders = await _sharePointManager.GetFoldersInDocumentLibraryAfterDate(
           SharePointConstants.AccountFolderInternalName,
           modifiedAfter.Value
         );
@@ -315,7 +314,7 @@ namespace SharePointSyncTool
           try
           {
             // Get child folders of this account folder
-            var childFolders = await onPremManager.GetChildFolders(accountFolder.ServerRelativeUrl);
+            var childFolders = await _sharePointManager.GetChildFolders(accountFolder.ServerRelativeUrl);
 
             // Find the specific nested folder (adoxio_contravention or adoxio_enforcementaction)
             var nestedFolder = childFolders?.FirstOrDefault(f => f.Name.Equals(nestedFolderName, StringComparison.OrdinalIgnoreCase));
@@ -325,7 +324,7 @@ namespace SharePointSyncTool
               accountsWithNestedFolders++;
 
               // Get the entity folders within the nested folder
-              var entityFolders = await onPremManager.GetChildFolders(nestedFolder.ServerRelativeUrl);
+              var entityFolders = await _sharePointManager.GetChildFolders(nestedFolder.ServerRelativeUrl);
 
               if (entityFolders != null && entityFolders.Any())
               {
@@ -372,7 +371,6 @@ namespace SharePointSyncTool
     {
       try
       {
-        // Use the interface method - works with both OnPrem and Cloud implementations
         return await _sharePointManager.GetFoldersInDocumentLibraryAfterDate(documentLibrary, modifiedAfter.Value);
       }
       catch (Exception ex)

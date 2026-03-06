@@ -10,6 +10,14 @@ namespace Gov.Lclb.Cllb.Interfaces;
 /// </summary>
 public partial class CloudSharePointFileManager : ISharePointFileManager
 {
+    public async Task<List<FolderItem>> GetFoldersInDocumentLibraryAfterDate(
+        string listTitle,
+        DateTime afterDate
+    )
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<List<FolderItem>> FindFolderOne(string entityName, string folderGuidSegment)
     {
         throw new NotImplementedException();

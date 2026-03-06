@@ -56,14 +56,14 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
         _Client.Timeout = TimeSpan.FromSeconds(HttpClientTimeoutSeconds);
 
         // SharePoint Online configuration
-        string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
+        string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI_CLOUD"];
         string sharePointAadTenantId = Configuration["SHAREPOINT_AAD_TENANTID"];
         string sharePointClientId = Configuration["SHAREPOINT_CLIENT_ID"];
         string sharePointClientSecret = Configuration["SHAREPOINT_CLIENT_SECRET"];
 
         if (string.IsNullOrEmpty(sharePointOdataUri))
         {
-            throw new ArgumentException("SHAREPOINT_ODATA_URI configuration is required");
+            throw new ArgumentException("SHAREPOINT_ODATA_URI_CLOUD configuration is required");
         }
 
         if (string.IsNullOrEmpty(sharePointAadTenantId))
@@ -1566,150 +1566,6 @@ public partial class CloudSharePointFileManager : ISharePointFileManager
             Uri.EscapeDataString(listTitle) + "/" + Uri.EscapeDataString(folderName);
 
         return serverRelativeUrl;
-    }
-
-    /// <summary>
-    /// Get all folders in a document library that were modified after a specific date.
-    /// Uses Microsoft Graph API to retrieve folders from the library's root.
-    /// </summary>
-    /// <param name="listTitle">The document library title</param>
-    /// <param name="afterDate">Only return folders modified after this date</param>
-    /// <returns>List of folder items</returns>
-    public async Task<List<FolderItem>> GetFoldersInDocumentLibraryAfterDate(
-        string listTitle,
-        DateTime afterDate
-    )
-    {
-        _logger.LogDebug(
-            "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - listTitle={ListTitle}, afterDate={AfterDate}",
-            listTitle,
-            afterDate
-        );
-
-        await EnsureValidAccessTokenAsync();
-        await EnsureSiteIdResolvedAsync();
-
-        var listId = await GetDocumentLibraryIdByNameAsync(listTitle);
-
-        if (string.IsNullOrEmpty(listId))
-        {
-            _logger.LogWarning(
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Document library not found: {ListTitle}",
-                listTitle
-            );
-            return new List<FolderItem>();
-        }
-
-        List<FolderItem> folderList = new List<FolderItem>();
-
-        try
-        {
-            // Use SharePoint list items endpoint with indexed field filtering only
-            // Filter by Modified date only (likely indexed), then filter for folders client-side
-            string filter = $"fields/Modified ge '{afterDate:yyyy-MM-ddTHH:mm:ss}Z'";
-            string requestUrl =
-                $"{GraphApiEndpoint}sites/{SiteId}/lists/{listId}/items?$expand=fields&$filter={Uri.EscapeDataString(filter)}&$top=5000";
-
-            _logger.LogDebug(
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Request URL: {RequestUrl}",
-                requestUrl
-            );
-
-            string nextLink = requestUrl;
-            int pageCount = 0;
-            int totalItems = 0;
-
-            // Paginate through all results
-            while (!string.IsNullOrEmpty(nextLink))
-            {
-                pageCount++;
-                _logger.LogDebug(
-                    "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Fetching page {PageCount}",
-                    pageCount
-                );
-
-                var request = new HttpRequestMessage(HttpMethod.Get, nextLink);
-
-                var response = await _Client.SendAsync(request);
-                string jsonString = await response.Content.ReadAsStringAsync();
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    _logger.LogError(
-                        "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Error: {StatusCode}, Response: {Response}",
-                        response.StatusCode,
-                        jsonString
-                    );
-                    return folderList;
-                }
-
-                var responseObject = JObject.Parse(jsonString);
-                var items = responseObject["value"]?.ToObject<List<JObject>>();
-
-                if (items != null)
-                {
-                    totalItems += items.Count;
-
-                    foreach (var item in items)
-                    {
-                        var fields = item["fields"];
-                        if (fields != null)
-                        {
-                            // Client-side filter: only process folders (FSObjType = 1)
-                            var fsObjType = fields["FSObjType"]?.ToObject<int?>();
-                            if (fsObjType == 1)
-                            {
-                                var folderName = fields["FileLeafRef"]?.ToString();
-                                var serverRelativeUrl = fields["FileRef"]?.ToString();
-                                var modified = fields["Modified"]?.ToObject<DateTime?>();
-                                var created = fields["Created"]?.ToObject<DateTime?>();
-
-                                // Filter out system folders (Forms, etc.)
-                                if (
-                                    !string.IsNullOrEmpty(folderName)
-                                    && !folderName.Equals(
-                                        "Forms",
-                                        StringComparison.OrdinalIgnoreCase
-                                    )
-                                )
-                                {
-                                    var folderItem = new FolderItem
-                                    {
-                                        Name = folderName,
-                                        ServerRelativeUrl = serverRelativeUrl,
-                                        TimeCreated = created ?? DateTime.MinValue,
-                                        TimeLastModified = modified ?? DateTime.MinValue,
-                                    };
-
-                                    folderList.Add(folderItem);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                // Check for next page
-                nextLink = responseObject["@odata.nextLink"]?.ToString();
-            }
-
-            _logger.LogInformation(
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - returning {FolderCount} folders from '{ListTitle}' (processed {TotalItems} items across {PageCount} pages)",
-                folderList.Count,
-                listTitle,
-                totalItems,
-                pageCount
-            );
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(
-                ex,
-                "[CloudSharePointFileManager] GetFoldersInDocumentLibraryAfterDate - Exception occurred"
-            );
-            throw;
-        }
-
-        return folderList;
     }
 
     /// <summary>

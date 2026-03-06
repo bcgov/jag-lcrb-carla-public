@@ -101,7 +101,7 @@ namespace SharePointSyncTool
         }
       }
 
-      // Validate SharePoint configuration (OnPrem only)
+      // Validate SharePoint configuration (On-Premise)
       if (string.IsNullOrEmpty(configuration["SHAREPOINT_ODATA_URI"]))
       {
         errors.Add("SHAREPOINT_ODATA_URI is required");
@@ -127,7 +127,7 @@ namespace SharePointSyncTool
         errors.Add("SHAREPOINT_RELYING_PARTY_IDENTIFIER is required");
       }
 
-      // Validate Dynamics configuration (Cloud Dataverse AAD only)
+      // Validate Dynamics configuration (Cloud)
       if (string.IsNullOrEmpty(configuration["DYNAMICS_ODATA_URI"]))
       {
         errors.Add("DYNAMICS_ODATA_URI is required");

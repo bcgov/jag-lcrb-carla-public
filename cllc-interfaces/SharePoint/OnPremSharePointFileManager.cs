@@ -51,7 +51,7 @@ public partial class OnPremSharePointFileManager : ISharePointFileManager
         // SharePoint configuration settings.
         string sharePointServerAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
         string sharePointOdataUri = Configuration["SHAREPOINT_ODATA_URI"];
-        string sharePointWebname = Configuration["SHAREPOINT_WEBNAME"];
+        string sharePointWebname = "";
         string sharePointNativeBaseURI = Configuration["SHAREPOINT_NATIVE_BASE_URI"];
 
         string bypassSharePointCertValidation = Configuration["BYPASS_STS_CERT_VALIDATION"]; // Bypass SharePoint certificate validation (true/false)

@@ -9,14 +9,9 @@ namespace Gov.Lclb.Cllb.Interfaces;
 /// Factory for creating SharePoint file manager instances.
 /// </summary>
 /// <remarks>
-/// Automatically selects Cloud (Graph API) implementation if all cloud configuration variables are present:
-/// <list type="bullet">
-/// <item>SHAREPOINT_ODATA_URI</item>
-/// <item>SHAREPOINT_AAD_TENANTID</item>
-/// <item>SHAREPOINT_CLIENT_ID</item>
-/// <item>SHAREPOINT_CLIENT_SECRET</item>
-/// </list>
-/// Otherwise, uses on-premises (REST API) implementation.
+/// Toggle between cloud and on-prem using the "SHAREPOINT_TYPE" configuration setting ("Cloud" or "OnPrem").
+/// This allows the application to use the same ISharePointFileManager interface for both implementations without
+/// modification. The factory will log which implementation is being used for easier debugging and verification.
 /// </remarks>
 public static class SharePointFileManager
 {
@@ -31,17 +26,9 @@ public static class SharePointFileManager
         ILoggerFactory loggerFactory
     )
     {
-        // Check if all cloud configuration variables are present
-        string sharePointOdataUri = configuration["SHAREPOINT_ODATA_URI"];
-        string sharePointAadTenantId = configuration["SHAREPOINT_AAD_TENANTID"];
-        string sharePointClientId = configuration["SHAREPOINT_CLIENT_ID"];
-        string sharePointClientSecret = configuration["SHAREPOINT_CLIENT_SECRET"];
+        string sharePointType = configuration["SHAREPOINT_TYPE"]; // "Cloud" or "OnPrem"
 
-        bool useCloud =
-            !string.IsNullOrEmpty(sharePointOdataUri)
-            && !string.IsNullOrEmpty(sharePointAadTenantId)
-            && !string.IsNullOrEmpty(sharePointClientId)
-            && !string.IsNullOrEmpty(sharePointClientSecret);
+        bool useCloud = sharePointType == "Cloud";
 
         var logger = loggerFactory.CreateLogger("SharePointFileManager");
 
