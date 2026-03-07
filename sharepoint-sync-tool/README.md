@@ -80,39 +80,51 @@ LOG_LEVEL=Information
 
 See `run-sync.example.sh` for a pre-built template.
 
-1. Copy this template to `run-sync.sh`, which is git-ignored, and can be safely modified to include passwords/keys.
+### 1. Copy this template to `run-sync.sh`, which is git-ignored, and can be safely modified to include passwords/keys.
 
-2. Update `run-sync.sh` with the relevant environment variables, secrets, and configuration settings.
+### 2. Update `run-sync.sh` with the relevant environment variables, secrets, and configuration settings.
 
-3. First, test with the dry run flag enabled.
+### 3. First, test with the dry run flag enabled.
 
-   3a. Update `run-sync.sh`
+#### 3a. Update `run-sync.sh`
 
-   ```shell
-   export SYNC_DRY_RUN="true"
-   ```
+```shell
+export SYNC_DRY_RUN="true"
+```
 
-   3b. Execute `run-sync.sh` in terminal
+#### 3b. Execute `run-sync.sh` in terminal
 
-   ```bash
-   $ sh run-sync.sh
-   ```
+```bash
+$ sh run-sync.sh
+```
 
-   3c. Review the generated csv files and ensure the content looks correct.
+#### 3c. Review the generated csv files and ensure the content looks correct.
 
-4. Once you've verified the dry run output, remove the dry run flag and run for real.
+CSV Files will be generated each time you run the script.
+These include all of the records that the script either would have added (if dry run is true) or did add (if dry run is false).
 
-   4a. Update `run-sync.sh`
+```
+sharepoint-sync-account-20260306-122510.csv
+sharepoint-sync-account-errors-20260306-122510.csv
+```
 
-   ```shell
-   export SYNC_DRY_RUN="true"
-   ```
+### 4. Once you've verified the dry run output, remove the dry run flag and run for real.
 
-   4b. Execute `run-sync.sh` in terminal
+#### 4a. Update `run-sync.sh`
 
-   ```bash
-   $ sh run-sync.sh
-   ```
+```shell
+export SYNC_DRY_RUN="true"
+```
+
+#### 4b. Execute `run-sync.sh` in terminal
+
+```bash
+$ sh run-sync.sh
+```
+
+### 5. Run for each entity type.
+
+There are 
 
 ## Nested Folders
 

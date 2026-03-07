@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# See the included README.md for instructions on how to run this script.
+
 # SharePoint to Dynamics Sync Tool - Example Script
 # Copy this file to run-sync.sh and update with your values
 # DO NOT commit run-sync.sh with real credentials to source control!
@@ -7,7 +9,7 @@
 # ============================================================================================================
 
 # SharePoint (On-Premise)
-export SHAREPOINT_ODATA_URI=""
+export SHAREPOINT_ODATA_URI="" # No need to use the wsgw (gateway) url. Use the same value as SHAREPOINT_NATIVE_BASE_URI.
 export SHAREPOINT_NATIVE_BASE_URI=""
 export SHAREPOINT_USERNAME=""
 export SHAREPOINT_PASSWORD='' # Use single quotes to avoid issues with special characters in passwords
@@ -15,7 +17,7 @@ export SHAREPOINT_STS_TOKEN_URI=""
 export SHAREPOINT_RELYING_PARTY_IDENTIFIER=""
 
 # Dynamics (Cloud)
-export DYNAMICS_ODATA_URI=""
+export DYNAMICS_ODATA_URI="" # No need to use the wsgw (gateway) url. Use the same value as DYNAMICS_NATIVE_ODATA_URI.
 export DYNAMICS_NATIVE_ODATA_URI=""
 export DYNAMICS_AAD_TENANT_ID=""
 export DYNAMICS_SERVER_APP_ID_URI=""
@@ -29,7 +31,9 @@ export LOG_LEVEL="Debug"  # Options: Trace, Debug, Information, Warning, Error, 
 
 # ============================================================================================================
 
-# Uncomment the relevant sync configuration for the entity you want to sync, and set the parameters as needed
+# Uncomment the relevant sync configuration for the entity you want to sync, and update the parameters as needed
+# I've already configured these to what I believe is correct.
+# The only thing you should need to change is the SYNC_DRY_RUN flag.
 
 # Sync Configuration - Account
 # export SYNC_ENTITY_NAME="account"
