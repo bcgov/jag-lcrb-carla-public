@@ -24,6 +24,7 @@ using Gov.Lclb.Cllb.Public.Utility;
 using Microsoft.Rest;
 using System.Collections.Specialized;
 using Serilog;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -712,18 +713,16 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task CreateSharePointAccountDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
         {
-            string folderName;
-            string logFolderName = ""; 
+            string logFolderName = "";
             try
             {
-
-                folderName = account.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderName);
+                FolderSegment folderSegment = account.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
 
                 var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "account",
-                    FolderName = folderName
+                    FolderName = folderSegment.FolderName
                 };
 
                 var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
@@ -737,23 +736,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 _logger.Error(e, $"Error creating folder for account {logFolderName}");
             }
-        
         }
 
         private async Task CreateSharePointContactDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
         {
-            string folderName;
             string logFolderName = "";
             try
-            { 
-
-                folderName = contact.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderName);
+            {
+                FolderSegment folderSegment = contact.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
 
                 var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "contact",
-                    FolderName = folderName
+                    FolderName = folderSegment.FolderName
                 };
 
                 var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
@@ -771,18 +767,16 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task CreateSharePointWorkerDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
         {
-            string folderName = "";
             string logFolderName = "";
             try
             {
-
-                folderName = worker.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderName);
+                FolderSegment folderSegment = worker.GetDocumentFolderName();
+                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
 
                 var createFolderRequest = new CreateFolderRequest
                 {
                     EntityName = "worker",
-                    FolderName = folderName
+                    FolderName = folderSegment.FolderName
                 };
 
                 var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
