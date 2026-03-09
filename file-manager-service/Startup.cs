@@ -61,6 +61,17 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 
             services.AddAuthorization();
 
+            // Add CORS to allow js-based calls from Dynamics
+            services.AddCors(o =>
+                o.AddPolicy(
+                    "AllowAll",
+                    builder =>
+                    {
+                        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                    }
+                )
+            );
+
             services.AddGrpc(options =>
             {
                 options.EnableDetailedErrors = true;
@@ -82,34 +93,36 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("AllowAll");
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
-            app.UseHealthChecks(
-                "/hc/ready",
-                new HealthCheckOptions
-                {
-                    Predicate = _ => true,
-                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-                }
-            );
-
-            app.UseHealthChecks(
-                "/hc/live",
-                new HealthCheckOptions
-                {
-                    // Exclude all checks and return a 200-Ok.
-                    Predicate = _ => false
-                }
-            );
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<FileManagerService>();
 
                 endpoints.MapControllers();
+
+                endpoints.MapHealthChecks(
+                    "/hc/ready",
+                    new HealthCheckOptions
+                    {
+                        Predicate = _ => true,
+                        ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                    }
+                );
+
+                endpoints.MapHealthChecks(
+                    "/hc/live",
+                    new HealthCheckOptions
+                    {
+                        // Exclude all checks and return a 200-Ok.
+                        Predicate = _ => false
+                    }
+                );
 
                 endpoints.MapGet(
                     "/",
@@ -167,6 +180,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             else
             {
                 Log.Logger = new LoggerConfiguration()
+                    .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
