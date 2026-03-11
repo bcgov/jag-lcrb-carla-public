@@ -218,9 +218,9 @@
       <!-- Chat With Us and AI sidebar buttons -->
       <div tabindex="3">
         <div class="chat-button-container app-widgets">
-          <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
+          <!-- <button class="chat-button btn btn-primary btn-sm" (click)="openChat('en-CA', 'main')">
             <strong>Chat with us</strong>
-          </button>
+          </button> -->
           <button *ngIf="currentUser && aiAssistantFeatureOn" class="ai-sidebar-button btn btn-primary btn-sm" (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
           </button>
@@ -277,3 +277,4 @@
   <span style="height: 1px; width: 1px;" id="testAPIResult">{{ testAPIResult }}</span>
 
 </section>
+
