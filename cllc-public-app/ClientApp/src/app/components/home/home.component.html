@@ -70,18 +70,14 @@
         </div>
       </div>
       <div style="padding-left: 0px;" class="col-md-4 col-sm-12">
-        <div class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
+        <div *ngIf="showNoticeBox" class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
           <section class="side-box">
             <section style="display: flex">
               <table>
                 <tr>
                   <td>
-                    <h2 style="margin: 0px; margin-bottom: 10px;">Temporary early opening hours for the Olympic Games</h2>
-                    <p>To apply to open earlier than your current licensed hours for the Olympic Games, ensure your application includes support from your Local Government or Indigenous Nation. Apply using the correct application type to avoid processing delays:</p>
-                    <ul>                      
-                      <li><strong>Food Primary (FP):</strong> Select "Temporary Change to Hours of Sale (After Midnight)".</li>
-                      <li><strong>Liquor Primary (LP) and Manufacturer (MFR):</strong> Select "Temporary Change to Hours of Sale (LP & MFR)".</li>
-                    </ul>
+                    <h2 style="margin: 0px; margin-bottom: 10px;">{{noticeBox.noticeBoxTitle}}</h2>
+                    <div [innerHTML]="noticeBox.noticeBoxText"></div>
                   </td>
                 </tr>
               </table>
