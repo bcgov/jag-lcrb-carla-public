@@ -1,57 +1,94 @@
-import { Injectable } from "@angular/core";
-import { FeatureFlagDataService } from "./feature-flag-data.service";
-import { mergeMap } from "rxjs/operators";
-import { of, Observable } from "rxjs";
+import { Injectable } from '@angular/core';
+import { FeatureFlag } from '@models/feature-flag.model';
+import { Observable, of } from 'rxjs';
+import { mergeMap, shareReplay } from 'rxjs/operators';
+import { FeatureFlagDataService } from './feature-flag-data.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class FeatureFlagService {
+  public initialized = false;
 
-  private _featureFlags: Array<string> = []; // A list of all features turned ON
-  initialized = false;
+  private _featureFlags: FeatureFlag[] = []; // A list of all features turned ON
+  private initializationObservable: Observable<FeatureFlag[]> | null = null;
 
-  constructor(private featureFlagDataService: FeatureFlagDataService) {
-  }
+  constructor(private featureFlagDataService: FeatureFlagDataService) {}
 
   init() {
-    // need to get features here to make sure initialized will be set to true at some point
-    this.featureFlagDataService.getFeatureFlags()
-      .subscribe(featureFlags => {
-        this._featureFlags = featureFlags;
-        this.initialized = true;
-        return featureFlags;
-      });
+    // Trigger initialization if not already started
+    this.ensureInitialized();
   }
 
-  getFeature(featureName: string): Observable<boolean> {
-    if (!featureName) {
-      return of(false);
-    }
-    // Find the feature flag that is turned on
-    if (this._featureFlags &&
-      !!this._featureFlags.find(feature => {
-        return feature === featureName;
-      })) {
-      return of(true);
-    } else {
-      return of(false);
-    }
-  }
-
-  featureOn(featureName: string): Observable<boolean> {
+  /**
+   * Ensures feature flags are loaded.
+   *
+   * Returns an observable that completes when loaded.
+   * Uses shareReplay to ensure the HTTP call is only made once even if multiple
+   * subscribers are waiting.
+   */
+  private ensureInitialized(): Observable<FeatureFlag[]> {
     if (this.initialized) {
-      return this.getFeature(featureName);
-    } else {
-      return this.featureFlagDataService.getFeatureFlags()
-        .pipe(mergeMap(featureFlags => {
+      return of(this._featureFlags);
+    }
+
+    if (!this.initializationObservable) {
+      this.initializationObservable = this.featureFlagDataService.getFeatureFlags().pipe(
+        mergeMap((featureFlags) => {
           this._featureFlags = featureFlags;
           this.initialized = true;
-          return this.getFeature(featureName);
-        }));
+          this.initializationObservable = null; // Clear the pending observable
+
+          return of(featureFlags);
+        }),
+        shareReplay(1) // Share the result with all subscribers
+      );
     }
 
-
+    return this.initializationObservable;
   }
 
+  private getFeature(featureName: string): Observable<FeatureFlag | null> {
+    if (!featureName) {
+      return of(null);
+    }
+
+    return this.ensureInitialized().pipe(
+      mergeMap(() => {
+        if (!this._featureFlags) {
+          return of(null);
+        }
+
+        const feature = this._featureFlags.find((feature) => {
+          return feature.name === featureName;
+        });
+
+        return of(feature);
+      })
+    );
+  }
+
+  /**
+   * Return the value of the feature flag.
+   * Returns `null` if the feature flag is not found, or has a null or empty value.
+   *
+   * @param {string} featureName
+   * @return {*}  {(Observable<string | null>)}
+   */
+  featureValue(featureName: string): Observable<string | null> {
+    const feature = this.getFeature(featureName);
+    return feature.pipe(mergeMap((feature) => of(feature ? feature.value : null)));
+  }
+
+  /**
+   * Return `true` if the feature is enabled and has a non-null/non-empty value.
+   * Return `false` otherwise.
+   *
+   * @param {string} featureName
+   * @return {*}  {Observable<boolean>}
+   */
+  featureOn(featureName: string): Observable<boolean> {
+    const feature = this.getFeature(featureName);
+    return feature.pipe(mergeMap((feature) => of(feature ? feature.enabled : false)));
+  }
 }

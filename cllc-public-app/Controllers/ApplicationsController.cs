@@ -30,6 +30,7 @@ using Newtonsoft.Json;
 using static System.Net.Mime.MediaTypeNames;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Application = Gov.Lclb.Cllb.Public.ViewModels.Application;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -1842,12 +1843,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task InitializeSharepoint(MicrosoftDynamicsCRMadoxioApplication application)
         {
             // create a SharePointDocumentLocation link
-            var folderName = application.GetDocumentFolderName();
+            FolderSegment folderSegment = application.GetDocumentFolderName();
             //var name = application.AdoxioApplicationid + " Files";
 
-            _fileManagerClient.CreateFolderIfNotExist(_logger, ApplicationDocumentUrlTitle, folderName);
+            _fileManagerClient.CreateFolderIfNotExist(_logger, SharePointConstants.ApplicationFolderInternalName, folderSegment.FolderName);
 
-            _dynamicsClient.CreateEntitySharePointDocumentLocation("application", application.AdoxioApplicationid, folderName, folderName);
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("application", application.AdoxioApplicationid, folderSegment.FolderName, folderSegment.FolderName);
         }
 
         /// <summary>

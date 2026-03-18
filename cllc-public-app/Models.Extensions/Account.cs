@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿using Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
 using System.Linq;
 
@@ -9,8 +10,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class AccountExtensions
     {
-        const string AccountDocumentListTitle = "account";
-
         private static string GetServerRelativeURL(string listTitle, string folderName)
         {
             string serverRelativeUrl = Uri.EscapeUriString(listTitle) + "/" + Uri.EscapeUriString(folderName);
@@ -37,7 +36,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     {
                         string serverRelativeUrl = "";
 
-                        serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, location.Relativeurl);
+                        serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, location.Relativeurl);
 
                         result = serverRelativeUrl;
                     }
@@ -49,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 string accountIdCleaned = account.Accountid.ToUpper().Replace("-", "");
                 string folderName = $"_{accountIdCleaned}";
 
-                serverRelativeUrl += "/" + GetServerRelativeURL(AccountDocumentListTitle, folderName);
+                serverRelativeUrl += "/" + GetServerRelativeURL(SharePointConstants.AccountFolderInternalName, folderName);
 
                 result = serverRelativeUrl;
 
@@ -60,13 +59,12 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
         /// <summary>
-        /// Copy values from a ViewModel to a Dynamics Account.
+        /// Copy values from a ViewModel to a new Dynamics Account entity.
         /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
-        /// updateIfNull defaults to true
         /// </summary>
         /// <param name="toDynamics"></param>
         /// <param name="fromVM"></param>
-        /// <param name="copyIfNull"></param>
+        /// <param name="copyIfNull">`true` if null values should be copied, `false` otherwise.</param>
         public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM, Boolean copyIfNull)
         {
             if (copyIfNull || (!copyIfNull && fromVM.name != null))
@@ -88,10 +86,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (copyIfNull || (!copyIfNull && fromVM.dateOfIncorporationInBC != null))
             {
                 toDynamics.AdoxioDateofincorporationinbc = fromVM.dateOfIncorporationInBC;
-            }
-            if (copyIfNull || (!copyIfNull && fromVM.businessNumber != null))
-            {
-                toDynamics.Accountnumber = fromVM.businessNumber;
             }
             if (copyIfNull || (!copyIfNull && fromVM.pstNumber != null))
             {
@@ -217,21 +211,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         }
 
         /// <summary>
-        /// Copy values from a ViewModel to a Dynamics Account.
-        /// If parameter copyIfNull is false then do not copy a null value. Mainly applies to updates to the account.
-        /// updateIfNull defaults to true
-        /// </summary>
-        /// <param name="toDynamics"></param>
-        /// <param name="fromVM"></param>
-        /// <param name="copyIfNull"></param>
-        public static void CopyValues(this MicrosoftDynamicsCRMaccount toDynamics, ViewModels.Account fromVM)
-        {
-            bool copyIfNull = true;
-            toDynamics.CopyValues(fromVM, copyIfNull);
-        }
-
-        /// <summary>
-        /// Create a new ViewModel from a Dynamics Account
+        /// Copy values from a Dynamics Account entity to a new ViewModel.
         /// </summary>
         /// <param name="account"></param>
         public static ViewModels.Account ToViewModel(this MicrosoftDynamicsCRMaccount account)
