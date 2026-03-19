@@ -33,7 +33,7 @@ namespace SharePoint.Tests
 
             serverAppIdUri = Configuration["SHAREPOINT_SERVER_APPID_URI"];
 
-            sharePointFileManager = new SharePointFileManager(Configuration);
+            sharePointFileManager = SharePointFileManager.Create(Configuration);
 
         }
 
@@ -106,7 +106,7 @@ namespace SharePoint.Tests
             {
                 path += $"{sharePointFileManager.WebName}/";
             }
-            path += SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+            path += SharePointFileManager.AccountFolderDisplayName + "/" + folderName + "/" + fileName;
             string contentType = "text/plain";
             string testData = "This is just a test.";
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
@@ -117,7 +117,7 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.SharePointFileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.AccountFolderDisplayName, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
@@ -136,11 +136,11 @@ namespace SharePoint.Tests
 
             // delete file from SP
 
-            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentUrlTitle, folderName, fileName);
+            await sharePointFileManager.DeleteFile(SharePointFileManager.AccountFolderInternalName, folderName, fileName);
 
             // delete folder from SP
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderInternalName, folderName);
         }
 
 
@@ -179,11 +179,11 @@ namespace SharePoint.Tests
 
             fileName = await sharePointFileManager.AddFile(folderName, fileName, fileData, contentType);
 
-            path += SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+            path += SharePointFileManager.AccountFolderDisplayName + "/" + folderName + "/" + fileName;
 
             // get file details list in SP folder
 
-            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.SharePointFileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.AccountFolderDisplayName, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
@@ -202,11 +202,11 @@ namespace SharePoint.Tests
 
             // delete file from SP
 
-            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentUrlTitle, folderName, fileName);
+            await sharePointFileManager.DeleteFile(SharePointFileManager.AccountFolderInternalName, folderName, fileName);
 
             // delete folder from SP
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderInternalName, folderName);
         }
 
 
@@ -219,8 +219,8 @@ namespace SharePoint.Tests
             string documentType = "Document Type";
             string fileName = documentType + "__" + "test-'-name" + rnd.Next() + ".txt";
             string folderName = "test-folder-name" + rnd.Next();
-            string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
-            string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.DefaultDocumentListTitle + "/" + folderName + "/" + fileName;
+            string path = "/" + sharePointFileManager.WebName + "/" + SharePointFileManager.AccountFolderDisplayName + "/" + folderName + "/" + fileName;
+            string url = serverAppIdUri + sharePointFileManager.WebName + "/" + SharePointFileManager.AccountFolderDisplayName + "/" + folderName + "/" + fileName;
             string contentType = "text/plain";
             string testData = "This is just a test.";
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
@@ -231,11 +231,11 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.SharePointFileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.AccountFolderDisplayName, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
-            foreach (Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList fileDetails in fileDetailsList)
+            foreach (Gov.Lclb.Cllb.Interfaces.SharePointFileManager.SharePointFileDetailsList fileDetails in fileDetailsList)
             {
                 Assert.Equal(fileName, fileDetails.Name);
             }
@@ -248,11 +248,11 @@ namespace SharePoint.Tests
 
             // delete file from SP
 
-            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+            await sharePointFileManager.DeleteFile(SharePointFileManager.AccountFolderDisplayName, folderName, fileName);
 
             // delete folder from SP
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderDisplayName, folderName);
         }
 
 
@@ -282,17 +282,17 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test-Folder-" + rnd.Next();
 
-            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.AccountFolderInternalName, folderName);
 
 
-            bool exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            bool exists = await sharePointFileManager.FolderExists(SharePointFileManager.AccountFolderInternalName, folderName);
 
             Assert.True(exists);
 
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderInternalName, folderName);
 
-            exists = await sharePointFileManager.FolderExists(SharePointFileManager.DefaultDocumentUrlTitle, folderName);
+            exists = await sharePointFileManager.FolderExists(SharePointFileManager.AccountFolderInternalName, folderName);
 
             Assert.False(exists);
         }
@@ -303,12 +303,12 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.AccountFolderDisplayName, folderName);
             
-            var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.AccountFolderDisplayName, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);            
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderDisplayName, folderName);            
         }
 
         [Fact]
@@ -317,7 +317,7 @@ namespace SharePoint.Tests
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
-            await sharePointFileManager.CreateFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.CreateFolder(SharePointFileManager.AccountFolderDisplayName, folderName);
 
             string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
             string contentType = "text/plain";
@@ -331,7 +331,7 @@ namespace SharePoint.Tests
 
             // get file details list in SP folder
 
-            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.FileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.DefaultDocumentListTitle, folderName, documentType);
+            List<Gov.Lclb.Cllb.Interfaces.SharePointFileManager.SharePointFileDetailsList> fileDetailsList = await sharePointFileManager.GetFileDetailsListInFolder(SharePointFileManager.AccountFolderDisplayName, folderName, documentType);
             //only one file should be returned
             Assert.Single(fileDetailsList);
             // validate that file name uploaded and listed are the same
@@ -342,10 +342,10 @@ namespace SharePoint.Tests
 
             // delete file from SP
 
-            await sharePointFileManager.DeleteFile(SharePointFileManager.DefaultDocumentListTitle, folderName, fileName);
+            await sharePointFileManager.DeleteFile(SharePointFileManager.AccountFolderDisplayName, folderName, fileName);
 
 
-            await sharePointFileManager.DeleteFolder(SharePointFileManager.DefaultDocumentListTitle, folderName);
+            await sharePointFileManager.DeleteFolder(SharePointFileManager.AccountFolderDisplayName, folderName);
         }
 
     }

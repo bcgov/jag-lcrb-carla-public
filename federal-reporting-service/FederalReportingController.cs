@@ -17,6 +17,7 @@ using Hangfire.Server;
 using System.Linq;
 using System.Text.RegularExpressions;
 using grpc = global::Grpc.Core;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.FederalReportingService
 {
@@ -124,7 +125,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
                             if (folderName == null)
                             {
-                                folderName = export.GetDocumentFolderName();
+                                FolderSegment folderSegment = export.GetDocumentFolderName();
+                                folderName = folderSegment.FolderName;
 
                                 await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
                             }

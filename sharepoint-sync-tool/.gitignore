@@ -1,0 +1,28 @@
+# Build artifacts
+bin/
+obj/
+*.user
+*.suo
+*.cache
+
+# Environment and configuration files with credentials
+.env.local
+.env
+run-sync.sh
+*.config
+
+# IDE files
+.vs/
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Generated Csv files
+*.csv

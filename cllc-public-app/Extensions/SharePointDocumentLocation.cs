@@ -172,7 +172,6 @@ namespace Gov.Lclb.Cllb.Public.Extensions
         /// <returns></returns>
         public static async Task<string> GetFolderName(this IDynamicsClient _dynamicsClient, string entityName, string entityId, bool getFromDocumentLocation = true)
         {
-
             string folderName = null;
             if (getFromDocumentLocation)
             {
@@ -180,37 +179,42 @@ namespace Gov.Lclb.Cllb.Public.Extensions
             }
 
             if (folderName == null)
+            {
+                FolderSegment folderSegment = null;
+
                 switch (entityName.ToLower())
                 {
                     case "account":
                         var account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(entityId)).ConfigureAwait(true);
-                        folderName = account.GetDocumentFolderName();
+                        folderSegment = account.GetDocumentFolderName();
                         break;
                     case "application":
                         var application = await _dynamicsClient.GetApplicationById(Guid.Parse(entityId)).ConfigureAwait(true);
-                        folderName = application.GetDocumentFolderName();
+                        folderSegment = application.GetDocumentFolderName();
                         break;
                     case "contact":
                         var contact = await _dynamicsClient.GetContactById(Guid.Parse(entityId)).ConfigureAwait(true);
-                        folderName = contact.GetDocumentFolderName();
+                        folderSegment = contact.GetDocumentFolderName();
                         break;
                     case "worker":
                         var worker = await _dynamicsClient.GetWorkerById(Guid.Parse(entityId)).ConfigureAwait(true);
-                        folderName = worker.GetDocumentFolderName();
+                        folderSegment = worker.GetDocumentFolderName();
                         break;
                     case "event":
                         var eventEntity = _dynamicsClient.GetEventById(Guid.Parse(entityId));
-                        folderName = eventEntity.GetDocumentFolderName();
+                        folderSegment = eventEntity.GetDocumentFolderName();
                         break;
                     case "licence":
                         var licenceEntity = _dynamicsClient.GetLicenceById(Guid.Parse(entityId));
-                        folderName = licenceEntity.GetDocumentFolderName();
+                        folderSegment = licenceEntity.GetDocumentFolderName();
                         break;
                     case "specialevent":
                         var entity = _dynamicsClient.GetSpecialEventById(entityId);
-                        folderName = entity.GetDocumentFolderName();
+                        folderSegment = entity.GetDocumentFolderName();
                         break;
                 }
+                folderName = folderSegment?.FolderName;
+            }
 
             return folderName;
         }

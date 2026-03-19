@@ -33,6 +33,15 @@ service FileManager {
   // Get the truncated filename (due to SharePoint limitations).
   rpc GetTruncatedFilename (TruncatedFilenameRequest) returns (TruncatedFilenameReply);
 
+  // Ensure folder path exists, creating nested folders if needed and returning the server-relative folder path.
+  rpc EnsureFolderPath (EnsureFolderPathRequest) returns (EnsureFolderPathReply);
+
+  // Find a folder in an entity's document library by partial name match (e.g., searching by GUID).
+  rpc FindFolder (FindFolderRequest) returns (FindFolderReply);
+
+  // Upload a file after ensuring the folder path exists (combines EnsureFolderPath + UploadFile).
+  rpc UploadFileWithFolderPath (UploadFileWithFolderPathRequest) returns (UploadFileReply);
+
 }
 
 message CreateFolderRequest {
@@ -137,6 +146,7 @@ message UploadFileReply {
     ResultStatus resultStatus = 1;
     string errorDetail = 2;
     string fileName = 3;
+    string serverRelativeUrl = 4;
 }
 
 message TruncatedFilenameRequest {
@@ -149,4 +159,46 @@ message TruncatedFilenameReply {
     ResultStatus resultStatus = 1;
     string fileName = 2;
     string errorDetail = 3;
+}
+
+message FolderSegment {
+    string folderNameSegment = 1;
+    string folderGuidSegment = 2;
+    string folderName = 3;
+}
+
+message EnsureFolderPathRequest {
+    string entityName = 1;
+    repeated FolderSegment folderPath = 2;
+}
+
+message EnsureFolderPathReply {
+    ResultStatus resultStatus = 1;
+    string serverRelativeUrl = 2;
+    string errorDetail = 3;
+}
+
+message FindFolderRequest {
+    string entityName = 1;
+    string searchString = 2;  // Case-sensitive search
+    string searchGuid = 3;    // GUID search (dashes removed, converted to uppercase)
+}
+
+message FolderInfo {
+    string name = 1;
+    string serverRelativeUrl = 2;
+}
+
+message FindFolderReply {
+    ResultStatus resultStatus = 1;
+    repeated FolderInfo folders = 2;
+    string errorDetail = 3;
+}
+
+message UploadFileWithFolderPathRequest {
+    string entityName = 1;
+    repeated FolderSegment folderPath = 2;
+    string fileName = 3;
+    string contentType = 4;
+    bytes data = 5;
 }

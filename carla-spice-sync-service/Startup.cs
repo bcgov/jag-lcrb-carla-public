@@ -92,7 +92,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
 
             // determine if we wire up SharePoint.
-            if (!string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI"]))
+            if (
+                !string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI"])
+                || !string.IsNullOrEmpty(_configuration["SHAREPOINT_ODATA_URI_CLOUD"])
+            )
             {
                 SetupSharePoint(services);
             }
@@ -113,7 +116,11 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private void SetupSharePoint(IServiceCollection services)
         {
             // add SharePoint.
-            services.AddTransient<SharePointFileManager>(_ => new SharePointFileManager(_configuration));
+            services.AddTransient<ISharePointFileManager>(sp => 
+            {
+                var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
+                return SharePointFileManager.Create(_configuration, loggerFactory);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
