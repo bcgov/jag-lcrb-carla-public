@@ -24,6 +24,7 @@ using Newtonsoft.Json;
 using Winista.Mime;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using FileSystemItem = Gov.Lclb.Cllb.Public.ViewModels.FileSystemItem;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -70,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             var result = false;
             var id = Guid.Parse(entityId);
-            string folderName = null;
+            FolderSegment folderSegment = null;
             switch (entityName.ToLower())
             {
                 case "account":
@@ -78,7 +79,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (account != null)
                     {
                         result = CurrentUserHasAccessToAccount(account.Accountid);
-                        folderName = account.GetDocumentFolderName();
+                        folderSegment = account.GetDocumentFolderName();
                     }
                     break;
                 case "application":
@@ -88,7 +89,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         result = CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
                         var allowLGAccess = await CurrentUserIsLGForApplication(application);
                         result = result || allowLGAccess && !isDelete;
-                        folderName = application.GetDocumentFolderName();
+                        folderSegment = application.GetDocumentFolderName();
                     }
 
                     break;
@@ -97,7 +98,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (contact != null)
                     {
                         result = CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
-                        folderName = contact.GetDocumentFolderName();
+                        folderSegment = contact.GetDocumentFolderName();
                     }
 
                     break;
@@ -106,7 +107,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (worker != null)
                     {
                         result = CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
-                        folderName = worker.GetDocumentFolderName();
+                        folderSegment = worker.GetDocumentFolderName();
                     }
                     break;
                 case "event":
@@ -114,13 +115,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (eventEntity != null)
                     {
                         result = CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
-                        folderName = eventEntity.GetDocumentFolderName();
+                        folderSegment = eventEntity.GetDocumentFolderName();
                     }
 
                     break;
             }
 
-            if (folderName != null && result && relativeUrl != null) // do a case insensitive comparison of the first part.
+            if (folderSegment != null && folderSegment.FolderName != null && result && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
                 int slashPos = relativeUrl.IndexOf("/");
                 if (slashPos != -1 && slashPos < relativeUrl.Length)
@@ -129,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (entityName.ToLower() != "account")
                 {
-                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderSegment.FolderName.ToUpper());
                 }
             }
 
@@ -296,7 +297,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // currently this service only supports contacts
             var authorized = true;
-            string folderName = null;
+            FolderSegment folderSegment = null;
             if (string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(entityId) || entityName != "contact")
             {
                 authorized = false;
@@ -313,19 +314,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     // treat empty value as incomplete.
                     if (contact.AdoxioPhscomplete == null && contact.AdoxioPhscomplete == 845280001) authorized = false;
-                    folderName = contact.GetDocumentFolderName();
+                    folderSegment = contact.GetDocumentFolderName();
                 }
 
             }
 
-            if (folderName != null && authorized && relativeUrl != null) // do a case insensitive comparison of the first part.
+            if (folderSegment != null && folderSegment.FolderName != null && authorized && relativeUrl != null) // do a case insensitive comparison of the first part.
             {
                 int slashPos = relativeUrl.IndexOf("/");
                 if (slashPos != -1 && slashPos < relativeUrl.Length)
                 {
                     slashPos = relativeUrl.IndexOf("/", slashPos + 1);
                 }
-                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
+                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderSegment.FolderName.ToUpper());
             }
 
             return authorized;

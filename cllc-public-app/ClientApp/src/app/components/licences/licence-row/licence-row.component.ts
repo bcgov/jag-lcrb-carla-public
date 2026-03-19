@@ -36,6 +36,7 @@ import {
 import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
 import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 import { LicenceTypeNames } from "../../../models/license-type.model";
+import { FeatureFlagService } from "@services/feature-flag.service";
 
 export const UPLOAD_FILES_MODE = "UploadFilesMode";
 export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
@@ -74,6 +75,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   requestStarted = false;
   requestID: number = -1;
 
+  disableLicenceRenewalDate: Date | null = null;
+
   @Input()
   available: boolean;
   @Input()
@@ -90,6 +93,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     private establishmentService: EstablishmentDataService,
     private licenceEventsService: LicenceEventsService,
     private termsAndConditionsService: TermsAndConditionsDataService,
+    private featureFlagService: FeatureFlagService,
     public fb: FormBuilder) {
     super();
     this.mainForm = new FormGroup({});
@@ -128,6 +132,44 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           }
         });
       });
+
+    // Set the disableLicenceRenewalDate based on the "DisableLicenceRenewalDate" feature flag.
+    this.featureFlagService.featureValue("DisableLicenceRenewalDate").subscribe(feature => {
+      const renewalDateString = feature;
+
+      if (!renewalDateString) {
+        this.disableLicenceRenewalDate = null;
+        return;
+      }
+
+      const renewalDate = new Date(renewalDateString);
+      if (isNaN(renewalDate.getDate())) {
+        this.disableLicenceRenewalDate = null;
+        return;
+      }
+
+      this.disableLicenceRenewalDate = startOfDay(renewalDate);
+    });
+  }
+
+  /**
+   * Check if licence renewal should be disabled based on the expiry date of the licence and the
+   * disableLicenceRenewalDate.
+   *
+   * Licence renewal should be disabled if the `disableLicenceRenewalDate` is set to a valid date and the licence
+   * expiry date is on or after the `disableLicenceRenewalDate`.
+   *
+   * @param {ApplicationLicenseSummary} licence
+   * @return {*}  {boolean} `true` if the licence renewal should be disabled, `false` otherwise
+   */
+  isLicenceRenewalDisabled(licence: ApplicationLicenseSummary): boolean {
+    if (!this.disableLicenceRenewalDate) {
+      return false;
+    }
+
+    const expiryDate = startOfDay(new Date(licence.expiryDate));
+    const disableDate = this.disableLicenceRenewalDate;
+    return expiryDate >= disableDate;
   }
 
   updateEmail(licenceId: string, establishmentId: string, event: any) {

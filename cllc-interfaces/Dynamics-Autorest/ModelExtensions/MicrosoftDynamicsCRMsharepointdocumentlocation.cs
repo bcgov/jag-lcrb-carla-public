@@ -4,7 +4,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
 
     public partial class MicrosoftDynamicsCRMsharepointdocumentlocation
     {
-
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_application@odata.bind")]
         public string RegardingobjectidAdoxioApplicationODataBind { get; set; }
 
@@ -29,9 +28,22 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "regardingobjectid_adoxio_federalreportexport@odata.bind")]
         public string RegardingobjectIdFederalReportExportODataBind { get; set; }
 
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_contravention@odata.bind")]
+        public string RegardingobjectidAdoxioContraventionODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_enforcementaction@odata.bind")]
+        public string RegardingobjectidAdoxioEnforcementactionODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_specialevent@odata.bind")]
+        public string RegardingobjectidAdoxioSpecialeventODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_incident@odata.bind")]
+        public string RegardingobjectIdIncidentODataBind { get; set; }
+
+        [JsonProperty(PropertyName = "regardingobjectid_adoxio_complaint@odata.bind")]
+        public string RegardingobjectidAdoxioComplaintODataBind { get; set; }
 
         [JsonProperty(PropertyName = "parentsiteorlocation_sharepointdocumentlocation@odata.bind")]
         public string ParentsiteorlocationSharepointdocumentlocationODataBind { get; set; }
-
     }
 }

@@ -22,6 +22,7 @@ using Serilog;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using ILogger = Microsoft.Extensions.Logging.ILogger;
 using User = Gov.Lclb.Cllb.Public.Models.User;
+using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -425,12 +426,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task CreateSharepointDynamicsLink(MicrosoftDynamicsCRMadoxioWorker worker)
         {
             // create a SharePointDocumentLocation link
-            var folderName = worker.GetDocumentFolderName();
+            FolderSegment folderSegment = worker.GetDocumentFolderName();
             //var name = worker.AdoxioWorkerid + " Files";
 
-            _fileManagerClient.CreateFolderIfNotExist(_logger, WorkerDocumentUrlTitle, folderName);
+            _fileManagerClient.CreateFolderIfNotExist(_logger, SharePointConstants.WorkerFolderInternalName, folderSegment.FolderName);
 
-            _dynamicsClient.CreateEntitySharePointDocumentLocation("worker", worker.AdoxioWorkerid, folderName, folderName);
+            _dynamicsClient.CreateEntitySharePointDocumentLocation("worker", worker.AdoxioWorkerid, folderSegment.FolderName, folderSegment.FolderName);
         }
 
 
