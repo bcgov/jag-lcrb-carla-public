@@ -60,12 +60,8 @@ p {
     padding: 45px;
     background-color: rgba(56, 89, 138, 1);
     border-bottom: 3px solid #fcba19 !important;
-    color: white;
     h2,
-    p, li, a {
-        color: white;
-    }
-    ::ng-deep a {
+    p,li {
         color: white;
     }
 

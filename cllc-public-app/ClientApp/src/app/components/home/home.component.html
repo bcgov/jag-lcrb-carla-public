@@ -70,21 +70,7 @@
         </div>
       </div>
       <div style="padding-left: 0px;" class="col-md-4 col-sm-12">
-        <div *ngIf="showNoticeBox" class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
-          <section class="side-box">
-            <section style="display: flex">
-              <table>
-                <tr>
-                  <td>
-                    <h2 style="margin: 0px; margin-bottom: 10px;">{{noticeBox.noticeBoxTitle}}</h2>
-                    <div [innerHTML]="noticeBox.noticeBoxText"></div>
-                  </td>
-                </tr>
-              </table>
-            </section>
-          </section>
-        </div>
-        <!--div class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
+        <div class="side-box-wrapper" appRemoveIfFeatureOn="DisableLogin">
           <section class="side-box">
             <section style="display: flex">
               <table>
