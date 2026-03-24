@@ -65,6 +65,9 @@ p {
     p, li, a {
         color: white;
     }
+    ::ng-deep a {
+        color: white;
+    }
 
     h2 {
         font-size: 22px;
