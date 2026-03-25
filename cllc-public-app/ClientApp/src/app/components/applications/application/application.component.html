@@ -327,9 +327,7 @@
               <p>
                 <strong>
                   <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or
-                  greater voting shares in the applicant corporation must submit completed
-                  <span *ngIf="this.isLiquor()">Personal History Summary</span>
-                  <span *ngIf="!this.isLiquor()"> Cannabis Associate Security Screening </span>
+                  greater voting shares in the applicant corporation must submit completed 
                   <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     forms
                   </a>
@@ -354,8 +352,7 @@
                   <ul>
                     <li>Current list of directors and senior managers</li>
                     <li>
-                      All directors and senior managers must submit a completed Personal History Summary or Cannabis
-                      Associate Screening (see below)
+                      All directors and senior managers must submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (form below) 
                     </li>
                   </ul>
                 </li>
@@ -367,8 +364,7 @@
                       beside each name
                     </li>
                     <li>
-                      Each partner must supply a completed Personal History Summary or Cannabis Associate Screening (see
-                      below)
+                      Each partner must supply a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
                     </li>
                   </ul>
                 </li>
@@ -398,7 +394,7 @@
                     </li>
                     <li>
                       all shareholders (individuals) holding 10% or greater interest in the applicant corporation must
-                      submit a completed Personal History Summary or Cannabis Associate Screening (see below)
+                      submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
                     </li>
                   </ul>
                 </li>
@@ -608,6 +604,18 @@
                   as outlined on the website.
                 </p>
 
+                <span *ngIf="showPoliceInformationCheckUpload()">
+                  <h4>Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia)</h4>
+                  <p>
+                    Each associate must provide a complete Police Information Check.
+                    <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
+                                       [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                                       (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
+                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true">
+                    </app-file-uploader>
+
+                  </p>
+                </span>
                 <h4>Cannabis Associate Security Screening</h4>
                 <p>
                   Each associate must provide a complete Cannabis Associate Security Screening form.
@@ -622,15 +630,15 @@
                   <h4>Financial Integrity Documents</h4>
                   <p>
                     Each associate must provide a complete a
-                    <a
-                      href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
-                      Financial Integrity Form </a>.
+                    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
+                      Financial Integrity Form
+                    </a>.
                   </p>
                   <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-                    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                    [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
-                    [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
+                                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
+                                     [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
+                                     [entityId]="application.id"
+                                     [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
                   </app-file-uploader>
                 </div>
               </div>
@@ -642,7 +650,7 @@
               <p>
                 Shareholders (individuals) holding less than 10% interest, or shareholders with only non-voting shares,
                 in the applicant corporation must provide their full legal name and date of birth. They do not need to
-                provide a Personal History Summary or Cannabis Associate Security Screening form.
+                provide a Police Information Check or Cannabis Associate Security Screening form.
               </p>
               <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
