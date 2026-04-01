@@ -2660,4 +2660,8 @@ export class ApplicationComponent extends FormBase implements OnInit {
       );
     }
   }
+
+  showPoliceInformationCheckUpload(): boolean {
+    return this?.application?.applicationType?.showPoliceInformationCheckUpload;
+  }
 }
