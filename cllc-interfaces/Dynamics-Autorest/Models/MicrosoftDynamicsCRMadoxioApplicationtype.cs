@@ -302,11 +302,6 @@ namespace Gov.Lclb.Cllb.Interfaces.Models
         [JsonProperty(PropertyName = "adoxio_isshowfinancialintegrityformupload")]
         public bool? AdoxioIsshowfinancialintegrityformupload { get; set; }
 
-
-        /// <summary>
-        /// </summary>
-        [JsonProperty(PropertyName = "adoxio_isshowpoliceinformationcheckuploaded")]
-        public bool? AdoxioIsshowpoliceinformationcheckuploaded { get; set; }
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "adoxio_bypasspaymentforunapprovedparenta")]

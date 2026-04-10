@@ -40,8 +40,4 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
   onUploadedFinancialIntegrity(event: number) {
     this.uploadedFinancialIntegrity.emit(event);
   }
-
-  showPoliceInformationCheckUpload(): boolean {
-    return this?.application?.applicationType?.showPoliceInformationCheckUpload;
-  }  
 }
