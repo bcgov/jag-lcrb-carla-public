@@ -27,7 +27,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? ShowHoursOfSale { get; set; }
         public bool? ShowAssociatesFormUpload { get; set; }
         public bool? ShowFinancialIntegrityFormUpload { get; set; }
-        public bool? ShowPoliceInformationCheckUpload { get; set; }
         public bool? ShowSupportingDocuments { get; set; }
         public bool? ShowDeclarations { get; set; }
         public bool? EstablishmetNameIsReadOnly { get; set; }
