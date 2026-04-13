@@ -40,4 +40,8 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
   onUploadedFinancialIntegrity(event: number) {
     this.uploadedFinancialIntegrity.emit(event);
   }
+
+    showPoliceInformationCheckUpload(): boolean {
+    return this.application?.csChangeOfDirectorsOrOfficers == true || this.application?.csNameChangeLicenseeCorporation == true || this.application?.csNameChangeLicenseePerson == true || this.application?.csAdditionalReceiverOrExecutor == true;
+  }
 }
