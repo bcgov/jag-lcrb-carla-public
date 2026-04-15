@@ -58,7 +58,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     patchExport.AdoxioExporttriggered = DateTime.UtcNow;
                     _dynamicsClient.Federalreportexports.Update(exportId, patchExport);
                     // Gather submitted reports
-                    //filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
                     filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
 
                     var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
@@ -167,7 +166,6 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 hangfireContext.WriteLine("Error creating federal tracking CSV");
                 _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
             }
-
         }
 
         private async Task CreateFederalReportDocumentLocation(MicrosoftDynamicsCRMadoxioFederalreportexport federalReport, string folderName, string name)
@@ -180,7 +178,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             {
                 Relativeurl = folderName,
                 Description = "Federal Report Files",
-                Name = name,
+                Name = name
             };
 
 
