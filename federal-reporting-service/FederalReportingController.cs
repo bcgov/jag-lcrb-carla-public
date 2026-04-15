@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         private readonly FileManagerClient _fileManagerClient;
 
         private readonly ILogger _logger;
-        
+
 
         public FederalReportingController(IConfiguration configuration, ILoggerFactory loggerFactory, FileManagerClient fileClient)
         {
@@ -44,20 +44,23 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
         public async Task ExportFederalReports(PerformContext hangfireContext)
         {
-            // Get any new exports that have been created
-            string filter = "adoxio_exportcompleted eq null";
-            MicrosoftDynamicsCRMadoxioFederalreportexportCollection exports = _dynamicsClient.Federalreportexports.Get(filter: filter);
-            if (exports.Value.Count > 0)
+            try
             {
-                MicrosoftDynamicsCRMadoxioFederalreportexport export = exports.Value.FirstOrDefault();
-                string exportId = export.AdoxioFederalreportexportid;
-                MicrosoftDynamicsCRMadoxioFederalreportexport patchExport = new MicrosoftDynamicsCRMadoxioFederalreportexport();
-                patchExport.AdoxioExporttriggered = DateTime.UtcNow;
-                _dynamicsClient.Federalreportexports.Update(exportId, patchExport);
-                try
+                // Get any new exports that have been created
+                string filter = "adoxio_exportcompleted eq null";
+
+                MicrosoftDynamicsCRMadoxioFederalreportexportCollection exports = _dynamicsClient.Federalreportexports.Get(filter: filter);
+                if (exports.Value.Count > 0)
                 {
+                    MicrosoftDynamicsCRMadoxioFederalreportexport export = exports.Value.FirstOrDefault();
+                    string exportId = export.AdoxioFederalreportexportid;
+                    MicrosoftDynamicsCRMadoxioFederalreportexport patchExport = new MicrosoftDynamicsCRMadoxioFederalreportexport();
+                    patchExport.AdoxioExporttriggered = DateTime.UtcNow;
+                    _dynamicsClient.Federalreportexports.Update(exportId, patchExport);
                     // Gather submitted reports
+                    //filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
                     filter = $"statuscode eq {(int)MonthlyReportStatus.Submitted}";
+
                     var dynamicsMonthlyReports = _dynamicsClient.Cannabismonthlyreports.Get(filter: filter);
                     List<FederalReportingMonthlyExport> monthlyReports = new List<FederalReportingMonthlyExport>();
                     hangfireContext.WriteLine($"Found {dynamicsMonthlyReports.Value.Count} monthly reports to export.");
@@ -126,10 +129,11 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                             if (folderName == null)
                             {
                                 FolderSegment folderSegment = export.GetDocumentFolderName();
-                                folderName = folderSegment.FolderName;
+                                folderName = SanatiseRelativeUrl(folderSegment.FolderName);
 
                                 await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
                             }
+
                             byte[] data = mem.ToArray();
                             //call the web service
                             var uploadRequest = new Services.FileManager.UploadFileRequest()
@@ -138,7 +142,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                                 Data = ByteString.CopyFrom(data),
                                 EntityName = "federal_report",
                                 FileName = filename,
-                                FolderName = folderName
+                                FolderName = SanatiseRelativeUrl(folderName)
                             };
                             bool folderResult = CreateFolder(folderName);
                             if (folderResult)
@@ -157,12 +161,13 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     patchExport.AdoxioExportcompleted = DateTime.UtcNow;
                     _dynamicsClient.Federalreportexports.Update(exportId, patchExport);
                 }
-                catch (HttpOperationException httpOperationException)
-                {
-                    hangfireContext.WriteLine("Error creating federal tracking CSV");
-                    _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
-                }
             }
+            catch (HttpOperationException httpOperationException)
+            {
+                hangfireContext.WriteLine("Error creating federal tracking CSV");
+                _logger.LogError(httpOperationException, "Error creating federal tracking CSV");
+            }
+
         }
 
         private async Task CreateFederalReportDocumentLocation(MicrosoftDynamicsCRMadoxioFederalreportexport federalReport, string folderName, string name)
@@ -175,7 +180,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             {
                 Relativeurl = folderName,
                 Description = "Federal Report Files",
-                Name = name
+                Name = name,
             };
 
 
@@ -270,7 +275,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         {
             try
             {
-                
+
                 var createFolderRequest = new CreateFolderRequest()
                 {
                     EntityName = "federal_report",
@@ -291,5 +296,15 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
             return false;
         }
+
+        private string SanatiseRelativeUrl(string s){
+            var illegalInFileName = new Regex(@"[&:/\\|.]");
+
+            s = illegalInFileName.Replace(s, "-");
+
+            s = Regex.Replace(s, @"\s+", " ");
+            return s;
+        }
+
     }
 }
