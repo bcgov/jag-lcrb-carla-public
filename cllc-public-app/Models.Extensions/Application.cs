@@ -789,26 +789,54 @@ namespace Gov.Lclb.Cllb.Public.Models
                 // service hours
                 try
                 {
-                    var appFilter = $"_adoxio_application_value eq {dynamicsApplication.AdoxioApplicationid}";
-                    IList<MicrosoftDynamicsCRMadoxioHoursofservice> hours = dynamicsClient.Hoursofservices.Get(filter: appFilter).Value;
-                    if (hours.Count > 0)
+                    if (dynamicsApplication.AdoxioApplicationTypeId?.AdoxioName == "Application to Transition to Liquor Primary Licence"
+                        && dynamicsApplication.AdoxioAssignedLicence != null)
                     {
-                        MicrosoftDynamicsCRMadoxioHoursofservice hourEntity = hours[0];
-                        applicationVM.ServiceHoursSundayOpen = (ServiceHours?)hourEntity.AdoxioSundayopen;
-                        applicationVM.ServiceHoursSundayClose = (ServiceHours?)hourEntity.AdoxioSundayclose;
-                        applicationVM.ServiceHoursMondayOpen = (ServiceHours?)hourEntity.AdoxioMondayopen;
-                        applicationVM.ServiceHoursMondayClose = (ServiceHours?)hourEntity.AdoxioMondayclose;
-                        applicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)hourEntity.AdoxioTuesdayopen;
-                        applicationVM.ServiceHoursTuesdayClose = (ServiceHours?)hourEntity.AdoxioTuesdayclose;
-                        applicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)hourEntity.AdoxioWednesdayopen;
-                        applicationVM.ServiceHoursWednesdayClose = (ServiceHours?)hourEntity.AdoxioWednesdayclose;
-                        applicationVM.ServiceHoursThursdayOpen = (ServiceHours?)hourEntity.AdoxioThursdayopen;
-                        applicationVM.ServiceHoursThursdayClose = (ServiceHours?)hourEntity.AdoxioThursdayclose;
-                        applicationVM.ServiceHoursFridayOpen = (ServiceHours?)hourEntity.AdoxioFridayopen;
-                        applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
-                        applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
-                        applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
-                        applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestoutsideservicehours;
+                        // LPC-to-LP transition: hours are always sourced from the current LPC licence and are read-only on this application.
+                        var licenceId = dynamicsApplication.AdoxioAssignedLicence.AdoxioLicencesid;
+                        var licenceHours = dynamicsClient.Hoursofservices.Get(filter: $"_adoxio_licence_value eq {licenceId} and _adoxio_endorsement_value eq null and statecode eq 0").Value;
+                        if (licenceHours.Count > 0)
+                        {
+                            MicrosoftDynamicsCRMadoxioHoursofservice hourEntity = licenceHours[0];
+                            applicationVM.ServiceHoursSundayOpen = (ServiceHours?)hourEntity.AdoxioSundayopen;
+                            applicationVM.ServiceHoursSundayClose = (ServiceHours?)hourEntity.AdoxioSundayclose;
+                            applicationVM.ServiceHoursMondayOpen = (ServiceHours?)hourEntity.AdoxioMondayopen;
+                            applicationVM.ServiceHoursMondayClose = (ServiceHours?)hourEntity.AdoxioMondayclose;
+                            applicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)hourEntity.AdoxioTuesdayopen;
+                            applicationVM.ServiceHoursTuesdayClose = (ServiceHours?)hourEntity.AdoxioTuesdayclose;
+                            applicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)hourEntity.AdoxioWednesdayopen;
+                            applicationVM.ServiceHoursWednesdayClose = (ServiceHours?)hourEntity.AdoxioWednesdayclose;
+                            applicationVM.ServiceHoursThursdayOpen = (ServiceHours?)hourEntity.AdoxioThursdayopen;
+                            applicationVM.ServiceHoursThursdayClose = (ServiceHours?)hourEntity.AdoxioThursdayclose;
+                            applicationVM.ServiceHoursFridayOpen = (ServiceHours?)hourEntity.AdoxioFridayopen;
+                            applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
+                            applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
+                            applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
+                        }
+                    }
+                    else
+                    {
+                        var appFilter = $"_adoxio_application_value eq {dynamicsApplication.AdoxioApplicationid}";
+                        IList<MicrosoftDynamicsCRMadoxioHoursofservice> hours = dynamicsClient.Hoursofservices.Get(filter: appFilter).Value;
+                        if (hours.Count > 0)
+                        {
+                            MicrosoftDynamicsCRMadoxioHoursofservice hourEntity = hours[0];
+                            applicationVM.ServiceHoursSundayOpen = (ServiceHours?)hourEntity.AdoxioSundayopen;
+                            applicationVM.ServiceHoursSundayClose = (ServiceHours?)hourEntity.AdoxioSundayclose;
+                            applicationVM.ServiceHoursMondayOpen = (ServiceHours?)hourEntity.AdoxioMondayopen;
+                            applicationVM.ServiceHoursMondayClose = (ServiceHours?)hourEntity.AdoxioMondayclose;
+                            applicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)hourEntity.AdoxioTuesdayopen;
+                            applicationVM.ServiceHoursTuesdayClose = (ServiceHours?)hourEntity.AdoxioTuesdayclose;
+                            applicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)hourEntity.AdoxioWednesdayopen;
+                            applicationVM.ServiceHoursWednesdayClose = (ServiceHours?)hourEntity.AdoxioWednesdayclose;
+                            applicationVM.ServiceHoursThursdayOpen = (ServiceHours?)hourEntity.AdoxioThursdayopen;
+                            applicationVM.ServiceHoursThursdayClose = (ServiceHours?)hourEntity.AdoxioThursdayclose;
+                            applicationVM.ServiceHoursFridayOpen = (ServiceHours?)hourEntity.AdoxioFridayopen;
+                            applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
+                            applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
+                            applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
+                            applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestoutsideservicehours;
+                        }
                     }
                 }
                 catch (HttpOperationException httpOperationException)
