@@ -2300,6 +2300,7 @@
                 ">
                 Indicate the proposed hours of sales below.
               </p>
+              <fieldset [attr.disabled]="isLPCTransition() ? true : null" style="border: none; padding: 0; margin: 0;">
               <table class="store-hours">
                 <tr>
                   <th class="lead"></th>
@@ -2402,6 +2403,7 @@
                   </td>
                 </tr>
               </table>
+              </fieldset>
               <p class="error-states" *ngIf="showValidationMessages && !isHoursOfSaleValid()">
                 Hours of Sale are required
               </p>
