@@ -286,8 +286,8 @@ namespace Gov.Lclb.Cllb.Public
                                         "https://test.justice.gov.bc.ca",
                                         "https://justice.gov.bc.ca",
                                         "https://test.pcir.gov.bc.ca",
-                                        "https://pcir.gov.bc.ca");
-                });
+                                        "https://pcir.gov.bc.ca"
+                                      );
                 });
             });
 
