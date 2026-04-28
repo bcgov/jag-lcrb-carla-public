@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E \"\\\\.\\(ts|html\\)$\")",
+      "Bash(xargs grep *)",
+      "Bash(git fetch *)"
+    ]
+  }
+}
