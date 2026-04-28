@@ -19,7 +19,7 @@ export class DataService {
         `Backend returned code ${error.status}, ` +
         `body was: ${error.error}`);
     }
-    if (error.status === 503 || error.status === 502 || error.status === 500) {
+    if (error.status === 503 || error.status === 502 || error.status === 500 || error.status === 504) {
       return throwError(String(error.status));
     }
     // return an observable with a user-facing error message

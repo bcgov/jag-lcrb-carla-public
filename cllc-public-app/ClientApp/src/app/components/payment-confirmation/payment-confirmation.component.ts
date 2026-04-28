@@ -239,7 +239,7 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
         this.loaded = true;
       },
       err => {
-        if (err === "503" || err === "502" || err === "500") {
+        if (err === "503" || err === "502" || err === "500" || err === "504") {
           if (this.retryCount < 30) {
             this.snackBar.open(`Attempt ${this.retryCount} at payment verification, please wait...`,
               "Verifying Payment",
