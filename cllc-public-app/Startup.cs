@@ -301,8 +301,7 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
             // add BC Express Pay (Bambora) service
-            services.AddHttpClient<IBCEPService, BCEPService>()
-                .AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<IBCEPService, BCEPService>();
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
