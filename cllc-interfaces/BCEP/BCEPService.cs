@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
     public class BCEPService: IBCEPService
     {
-        
+
 
         private readonly bool pcir_enabled;
         private readonly string bcep_pay_url;
@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 bcep_sep_verify_url = bcep_sep_pay_url;
             }
 
-            bcep_merchid = configuration["BCEP_MERCHANT_ID"]; 
+            bcep_merchid = configuration["BCEP_MERCHANT_ID"];
             bcep_alt_merchid = configuration["BCEP_ALTERNATE_MERCHANT_ID"];
             bcep_sep_merchid = configuration["BCEP_SEP_MERCHANT_ID"];
             bcep_hashkey = configuration["BCEP_HASH_KEY"];
@@ -107,7 +107,7 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         /// <summary>
         /// This is used for unit testing
-        /// Set the Hash Key to APPROVED or DECLINED to bypass the payment verification process (in Verify) 
+        /// Set the Hash Key to APPROVED or DECLINED to bypass the payment verification process (in Verify)
         /// and return an APPROVEd or DECLINEd transaction
         /// </summary>
         public void setHashKeyForUnitTesting(string ut_hash_key)
@@ -204,12 +204,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:
-            // Place the hash key after the last parameter. 
-            // Perform an MD5 hash on the text up to the end of the key, then  
-            // Replace the hash key with hashValue=[hash result]. 
-            // Add the result to the hosted service url. 
+            // Place the hash key after the last parameter.
+            // Perform an MD5 hash on the text up to the end of the key, then
+            // Replace the hash key with hashValue=[hash result].
+            // Add the result to the hosted service url.
             // Note: Hash is calculated on the params ONLY.. Does NOT include the hosted payment page url.
-            // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info. 
+            // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info.
             string hashed = getHash(paramStringWithHash, hashType);
 
             // Add hash and expiry to the redirect
@@ -275,11 +275,11 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var request = new HttpRequestMessage(HttpMethod.Get, query_url);
 
                 // PCIR service requires a POST request
-                if (pcir_enabled) 
+                if (pcir_enabled)
                 {
                     request = new HttpRequestMessage(HttpMethod.Post, query_url);
-                } 
-                
+                }
+
                 var response = await client.SendAsync(request);
                 if (response.IsSuccessStatusCode)
                 {
@@ -329,12 +329,12 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             // Calculate the MD5 value using the Hash Key set on the Order Settings page (Within Beanstream account).
             // How:
-            // Place the hash key after the last parameter. 
-            // Perform an MD5 hash on the text up to the end of the key, then  
-            // Replace the hash key with hashValue=[hash result]. 
-            // Add the result to the hosted service url. 
+            // Place the hash key after the last parameter.
+            // Perform an MD5 hash on the text up to the end of the key, then
+            // Replace the hash key with hashValue=[hash result].
+            // Add the result to the hosted service url.
             // Note: Hash is calculated on the params ONLY.. Does NOT include the hosted payment page url.
-            // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info. 
+            // See http://support.beanstream.com/#docs/about-hash-validation.htm?Highlight=hash for more info.
             string hashed = getHash(paramStringWithHash);
 
             // Add hash and expiry to the redirect
@@ -364,8 +364,8 @@ namespace Gov.Lclb.Cllb.Interfaces
             return query_url;
         }
 
-        // getHash - Calculates an MD5 hash on a message with a given key. 
-        // 
+        // getHash - Calculates an MD5 hash on a message with a given key.
+        //
         // @param message
         // @param keyString
         // @return
@@ -390,7 +390,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     }
                     break;
             }
-                
+
             string digest = BitConverter.ToString(byteHashedMessage).Replace("-", "");
 
             return digest.ToUpper();
