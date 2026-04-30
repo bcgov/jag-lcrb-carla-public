@@ -239,7 +239,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             string result = null;
             string sanitized = relativeUrl.Replace("'", "''");
             // first see if one exists.
-            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "' && name eq 'Federal Report Export'");
+            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "' and name eq 'Federal Report Export'");
 
             var location = locations.Value.FirstOrDefault();
 
