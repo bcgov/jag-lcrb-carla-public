@@ -21,7 +21,6 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
   @Input() disabled: boolean = false;
 
   @Output() uploadedCAS = new EventEmitter<number>();
-  @Output() uploadedFinancialIntegrity = new EventEmitter<number>();
 
   faIdCard = faIdCard;
 
@@ -35,10 +34,6 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
 
   onUploadedCAS(event: number) {
     this.uploadedCAS.emit(event);
-  }
-
-  onUploadedFinancialIntegrity(event: number) {
-    this.uploadedFinancialIntegrity.emit(event);
   }
 
   showPoliceInformationCheckUpload(): boolean {
