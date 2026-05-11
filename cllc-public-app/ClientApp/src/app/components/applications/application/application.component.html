@@ -327,7 +327,7 @@
               <p>
                 <strong>
                   <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or
-                  greater voting shares in the applicant corporation must submit completed 
+                  greater voting shares in the applicant corporation must submit completed
                   <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     forms
                   </a>
@@ -352,7 +352,9 @@
                   <ul>
                     <li>Current list of directors and senior managers</li>
                     <li>
-                      All directors and senior managers must submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below) 
+                      All directors and senior managers must submit a completed Police Information Check (may be
+                      referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate
+                      Security Screening (see below)
                     </li>
                   </ul>
                 </li>
@@ -364,7 +366,8 @@
                       beside each name
                     </li>
                     <li>
-                      Each partner must supply a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
+                      Each partner must supply a completed Police Information Check (may be referred to as a Criminal
+                      Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
                     </li>
                   </ul>
                 </li>
@@ -394,7 +397,8 @@
                     </li>
                     <li>
                       all shareholders (individuals) holding 10% or greater interest in the applicant corporation must
-                      submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
+                      submit a completed Police Information Check (may be referred to as a Criminal Record Check outside
+                      of British Columbia) and Cannabis Associate Security Screening (see below)
                     </li>
                   </ul>
                 </li>
@@ -449,7 +453,9 @@
                 [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
               </app-file-uploader>
               <p *ngIf="!this.isLiquor()">
-                <strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis
+                <strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Police
+                  Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and
+                  Cannabis
                   Associate Security Screening form below.</strong>
               </p>
             </section>
@@ -597,50 +603,46 @@
 
                 <p>
                   Please provide the
-                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
-                    target="_blank">
+                  <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     documents
                   </a>
                   as outlined on the website.
                 </p>
 
                 <span *ngIf="showPoliceInformationCheckUpload()">
-                  <h4>Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia)</h4>
+                  <h4>Police Information Check (may be referred to as Criminal Record and Judicial Matters Check outside
+                    of British Columbia)</h4>
                   <p>
                     Each associate must provide a complete Police Information Check.
-                    <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
-                                       [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                                       (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
-                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true">
-                    </app-file-uploader>
-
+                  </p>
+                  <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
+                    [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                    (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'"
+                    [useDocumentTypeForName]="true" [maxNumberOfFiles]="20">
+                  </app-file-uploader>
+                  <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+                    A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+                    <span style="white-space: nowrap;">contact <a
+                        href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
                   </p>
                 </span>
                 <h4>Cannabis Associate Security Screening</h4>
                 <p>
                   Each associate must provide a complete Cannabis Associate Security Screening form.
-                  <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
-                    [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-                    (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
-                  </app-file-uploader>
+                </p>
+                <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                  (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'"
+                  [useDocumentTypeForName]="true" [maxNumberOfFiles]="20">
+                </app-file-uploader>
+                <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+                  A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+                  <span style="white-space: nowrap;">contact <a
+                      href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
                 </p>
 
-                <div *ngIf="application?.applicationType?.name != ApplicationTypeNames.Marketer">
-                  <h4>Financial Integrity Documents</h4>
-                  <p>
-                    Each associate must provide a complete a
-                    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
-                      Financial Integrity Form
-                    </a>.
-                  </p>
-                  <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-                                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                                     [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
-                                     [entityId]="application.id"
-                                     [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
-                  </app-file-uploader>
-                </div>
               </div>
             </section>
 

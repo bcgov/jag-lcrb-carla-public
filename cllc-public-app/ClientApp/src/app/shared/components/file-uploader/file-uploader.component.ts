@@ -43,6 +43,8 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
   useDocumentTypeForName = false;
   @Input()
   publicAccess = false;
+  @Input()
+  uploadCaption = '';
   @Output()
   numberOfUploadedFiles = new EventEmitter<number>();
   busy: Subscription;
