@@ -19,7 +19,10 @@ const APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
   'CRS Renewal',
   'Marketing Renewal',
   'CRS Transfer of Ownership',
-  'PRS Transfer of Ownership'
+  'PRS Transfer of Ownership',
+  'Cannabis Retail Store',
+  'Producer Retail Store',
+  'Cannabis Marketing'
 ];
 
 /**
@@ -103,7 +106,7 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
     private tiedHouseService: TiedHouseConnectionsDataService,
     public snackBar: MatSnackBar,
     public matDialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.initForm();
