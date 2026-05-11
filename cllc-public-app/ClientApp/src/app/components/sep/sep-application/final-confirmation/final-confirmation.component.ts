@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { PaymentDataService } from '@services/payment-data.service';
-import { map, mergeMap, takeWhile } from "rxjs/operators";
+import { filter, finalize, map, mergeMap, switchMap, take, takeWhile } from "rxjs/operators";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { ActivatedRoute, Params } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
@@ -42,12 +42,15 @@ export class FinalConfirmationComponent implements OnInit {
 
     {
 
-      this.store.select(state => state.currentUserState.currentUser)
-      .subscribe(user => {
-        this.contactDataService.getContact(user.contactid)
-          .subscribe(contact => {
+    this.busy = this.store
+      .select((state) => state.currentUserState.currentUser)
+      .pipe(
+        filter((user) => !!user?.contactid),
+        take(1),
+        switchMap((user) => this.contactDataService.getContact(user.contactid)),
+      )
+      .subscribe((contact) => {
             this.contact = contact;
-          });
       });
 
       if (data) {
