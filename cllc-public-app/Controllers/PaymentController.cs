@@ -115,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Error($"No application {id} invoice found, retry = " + retries);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
             }
@@ -261,7 +261,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Warning($"No application {id} invoice found, retry = " + retries);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
                 if (invoiceType == secondary)
@@ -624,7 +624,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Error($"No application {id} invoice found, retry = " + retries);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
                 invoiceId = application._adoxioInvoiceValue;
             }
@@ -2443,7 +2443,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug("No invoice found, retry = " + retries);
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(2000);
                 application = GetSpecialEventData(id);
                 invoiceId = application._adoxioInvoiceValue;
             }
@@ -2467,6 +2467,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always special event
 
                 var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/application-summary/{id}";
+
+                //var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/payment-confirmation";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
                 _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
@@ -2499,6 +2501,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // load the invoice for this application
             string invoiceId = application._adoxioInvoiceValue;
+
+            int retries = 0;
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
+            {
+                // should happen immediately, but ...
+                // pause and try again - in case Dynamics is slow ...
+                retries++;
+                _logger.Debug("No invoice found, retry = " + retries);
+                System.Threading.Thread.Sleep(2000);
+                application = GetSpecialEventData(id);
+                invoiceId = application._adoxioInvoiceValue;
+            }
+            if (invoiceId == null)
+            {
+                _logger.Error($"No application {id} invoice found after 10 times retries. ");
+                return NotFound();
+            }
+
+
             _logger.Debug("Found invoice for application = " + invoiceId);
             MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
             var ordernum = invoice.AdoxioTransactionid;
