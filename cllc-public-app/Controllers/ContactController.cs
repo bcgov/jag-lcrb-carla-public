@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileManagerClient;
         }
 
-        
+
 
         /// <summary>
         ///     Get a specific legal entity
@@ -445,7 +445,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogError("Error getting cannabis associate screening link");
+                _logger.LogError("Error getting cannabis screening link");
                 _logger.LogError("Details:");
                 _logger.LogError(ex.Message);
             }
