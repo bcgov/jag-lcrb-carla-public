@@ -375,7 +375,7 @@
                   <ul>
                     <li>List of Directors and Officers</li>
                     <li>
-                      All directors must submit a completed Personal History Summary or Cannabis Associate Screening
+                      All directors must submit a completed Personal History Summary or Cannabis Screening Form
                       (see below)
                     </li>
                   </ul>
@@ -461,7 +461,8 @@
             <section *ngIf="this.businessTypeIsSoleProp()">
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Sole proprietors must complete a
-                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis Screening Form</span>
+                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
+                  Screening Form</span>
                 <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
                 </a>
@@ -475,7 +476,8 @@
               <p>Provide a copy of your partnership agreement.</p>
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Each partner must submit a completed
-                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis Screening Form</span> form below.
+                <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
+                  Screening Form</span> form below.
               </p>
               <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipAgreement"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -564,7 +566,7 @@
               </div>
             </section>
 
-            <!-- Cannabis Associate Security Screening Forms -->
+            <!-- Cannabis  Screening Forms -->
             <section *ngIf="!this.isLiquor()">
               <h3 class="blue-header">
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Screening Forms
@@ -575,14 +577,15 @@
                   <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     forms.
                   </a>
-                  Retail store licence or authorization applications cannot be processed until all required materials have been received.
+                  Retail store licence or authorization applications cannot be processed until all required materials
+                  have been received.
                 </p>
 
                 <p *ngIf="this.isLiquor()">
                   Cannabis Screening Form Screening forms are not required if you submit liquor related
                   applications. Missing forms or documents will be requested once your application is received.
                   <!--If you do not provide
-          Cannabis Associate Security Screening documents prior to your application submission, they will be
+          Cannabis Screening documents prior to your application submission, they will be
           requested via secure channels
           once your application has been received. Please note that the time to collect these documents
           directly
@@ -622,8 +625,8 @@
                 <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
                   [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
                   (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
-                  [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'"
-                  [useDocumentTypeForName]="true" [maxNumberOfFiles]="20">
+                  [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+                  [maxNumberOfFiles]="20">
                 </app-file-uploader>
                 <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
                   A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
@@ -2920,10 +2923,10 @@
 
                 <div *ngIf="
                     application?.licenseType === 'Cannabis Retail Store' ||
-                    application?.licenseType == 'S119 CRS Authorization' ||
+                    application?.licenseType === 'S119 CRS Authorization' ||
                     application?.licenseType === 'Producer Retail Store'||
-                    application?.applicationType?.name === 'Cannabis Marketing' ||
-                    application?.applicationType?.name === 'Marketing'
+                    application?.licenseType === 'Cannabis Marketing' ||
+                    application?.licenseType === 'Marketing'
                   ">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);"> LCRBCannabis@gov.bc.ca </a>
@@ -2931,9 +2934,9 @@
                 <div *ngIf="
                     application?.licenseType !== 'Cannabis Retail Store' &&
                     application?.licenseType !== 'S119 CRS Authorization' &&
-                    application?.licenseType !== 'Producer Retail Store'||
-                    application?.applicationType?.name !== 'Cannabis Marketing' ||
-                    application?.applicationType?.name !== 'Marketing'
+                    application?.licenseType !== 'Producer Retail Store' &&
+                    application?.licenseType !== 'Cannabis Marketing' &&
+                    application?.licenseType !== 'Marketing'
                   ">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);"> LCRBLiquor@gov.bc.ca </a>

@@ -31,7 +31,8 @@
     <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
       [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
       (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
-      [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true">
+      [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+      [maxNumberOfFiles]="20">
     </app-file-uploader>
     <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
       A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
@@ -40,11 +41,11 @@
     </p>
   </span>
 
-  <h4>Cannabis Associate Security Screening Forms</h4>
+  <h4>Cannabis Screening Forms</h4>
   <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
     [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
     (numberOfUploadedFiles)="onUploadedCAS($event)" [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+    [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
     [maxNumberOfFiles]="20" [disableUploads]="disabled" [enableFileDeletion]="!disabled">
   </app-file-uploader>
   <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
