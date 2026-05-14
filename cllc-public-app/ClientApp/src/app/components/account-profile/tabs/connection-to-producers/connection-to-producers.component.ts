@@ -22,7 +22,8 @@ const APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
   'PRS Transfer of Ownership',
   'Cannabis Retail Store',
   'Producer Retail Store',
-  'Cannabis Marketing'
+  'Cannabis Marketing',
+  'Marketing'
 ];
 
 /**

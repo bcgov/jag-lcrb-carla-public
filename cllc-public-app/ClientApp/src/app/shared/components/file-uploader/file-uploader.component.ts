@@ -109,16 +109,10 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     let lastCount = 0;
     if (this.files.length) {
       const counts = this.files.map(file => {
-          const match = file.name.match(/_(\d+)\.([^\.]+)$/);
-          if (match) {
-            return parseInt(match[1], 10);
-          } else {
-            return 0;
-          }
-
-        }).sort()
-        .reverse();
-      lastCount = counts[0];
+        const match = file.name.match(/_(\d+)\.([^\.]+)$/);
+        return match ? parseInt(match[1], 10) : 0;
+      });
+      lastCount = Math.max(...counts);
     }
     return lastCount;
   }
