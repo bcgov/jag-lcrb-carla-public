@@ -4,7 +4,7 @@ import { faIdCard } from '@fortawesome/free-regular-svg-icons';
 import { Application } from '@models/application.model';
 
 /**
- * The cannabis associate security screening forms section of a permanent change application.
+ * The cannabis screening forms section of a permanent change application.
  *
  * @export
  * @class PermanentChangeCannabisSecurityScreeningFormsComponent
@@ -26,7 +26,7 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
 
   form: FormGroup;
 
-  constructor(public controlContainer: ControlContainer) {}
+  constructor(public controlContainer: ControlContainer) { }
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;
@@ -38,5 +38,5 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
 
   showPoliceInformationCheckUpload(): boolean {
     return this?.application?.applicationType?.showPoliceInformationCheckUpload;
-  }  
+  }
 }
