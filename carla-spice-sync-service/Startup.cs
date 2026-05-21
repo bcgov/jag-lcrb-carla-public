@@ -27,6 +27,7 @@ using System.Net.Http;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using System.Text.Json.Serialization;
+using Microsoft.AspNetCore.Http;
 
 [assembly: ApiController]
 namespace Gov.Lclb.Cllb.CarlaSpiceSync
@@ -126,11 +127,39 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
+            var logger = loggerFactory.CreateLogger<Startup>();
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            // Add request logging middleware
+            app.Use(async (context, next) =>
+            {
+                try
+                {
+                    Console.WriteLine($"[Request] {context.Request.Method} {context.Request.Path} from {context.Connection.RemoteIpAddress}");
+                    logger.LogInformation("[Request] {Method} {Path} from {RemoteIp}", 
+                        context.Request.Method, 
+                        context.Request.Path, 
+                        context.Connection.RemoteIpAddress);
+                    await next();
+                    Console.WriteLine($"[Response] {context.Request.Method} {context.Request.Path} returned {context.Response.StatusCode}");
+                    logger.LogInformation("[Response] {Method} {Path} returned {StatusCode}", 
+                        context.Request.Method, 
+                        context.Request.Path, 
+                        context.Response.StatusCode);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[MIDDLEWARE EXCEPTION] {ex.GetType().Name}: {ex.Message}");
+                    Console.WriteLine($"[MIDDLEWARE EXCEPTION] Stack: {ex.StackTrace}");
+                    logger.LogError(ex, "[MIDDLEWARE EXCEPTION] Unhandled exception in request pipeline");
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync(ex.Message);
+                }
+            });
 
             bool startHangfire = true;
 #if DEBUG
@@ -229,10 +258,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
                     
                     
-                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration).SendFoundWorkers(null), Cron.MinuteInterval(15));
+                    RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
                 }
             }
