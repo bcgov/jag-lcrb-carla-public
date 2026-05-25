@@ -15,14 +15,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
     public class WorkerScreeningsController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly ILogger _logger;
+        private readonly ILogger<WorkerScreeningsController> _logger;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
         public WorkerScreeningsController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
-            _logger = loggerFactory.CreateLogger(typeof(WorkerScreeningsController));
-            _spiceUtils = new SpiceUtils(Configuration);
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger<WorkerScreeningsController>();
+            _spiceUtils = new SpiceUtils(Configuration, loggerFactory);
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> completedScreenings)
         {
             // Process the updates received from the SPICE system.
-            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveWorkerImportJob(null, completedScreenings));
+            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, completedScreenings));
             _logger.LogInformation("Started receive completed worker screening job");
             return Ok();
         }
