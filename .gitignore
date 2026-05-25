@@ -1,5 +1,6 @@
 .env
 .DS_Store
+/tasks/
 
 secrets.json
 /cllc-interfaces-test/SharePoint/Properties/launchSettings.json
