@@ -44,6 +44,9 @@
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
     <ProjectReference Include="..\cllc-interfaces\SharePoint\SharePoint.csproj" />
     <ProjectReference Include="..\cllc-interfaces\SPICE\SpiceClient.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\Dynamics-Dataverse\Dynamics-Dataverse.csproj">
+      <Aliases>DV</Aliases>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

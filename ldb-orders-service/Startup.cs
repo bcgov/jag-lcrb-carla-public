@@ -1,3 +1,7 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -56,6 +60,7 @@ namespace LdbOrdersService
             // health checks. 
             services.AddHealthChecks()
                 .AddCheck("one-stop-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

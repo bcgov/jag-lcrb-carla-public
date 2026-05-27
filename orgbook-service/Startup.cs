@@ -1,3 +1,7 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
 using System;
 using Hangfire;
 using Hangfire.Console;
@@ -89,6 +93,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
             services.AddHealthChecks()
                  .AddCheck("orgbook-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,3 +1,6 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,6 +37,8 @@ namespace SharePointSyncTool
           });
           builder.SetMinimumLevel(logLevel);
         })
+        .AddSingleton<IConfiguration>(configuration)
+        .AddSingleton<IDataverseClient, DataverseClient>()
         .BuildServiceProvider();
 
       var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();

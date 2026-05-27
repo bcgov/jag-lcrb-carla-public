@@ -34,7 +34,7 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.7" />
     <PackageReference Include="Microsoft.AspNetCore.TestHost" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.7" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.7" />
+    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.1.8" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="3.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc" Version="3.0.0" />
     <PackageReference Include="NWebsec.AspNetCore.Mvc.TagHelpers" Version="3.0.0" />
@@ -79,6 +79,9 @@
     <ProjectReference Include="..\cllc-interfaces\GeocoderClient\Geocoder.csproj" />
     <ProjectReference Include="..\cllc-interfaces\OrgBookClient\OrgBookClient.csproj" />
     <ProjectReference Include="..\cllc-interfaces\PDF\PDF.csproj" />
+    <ProjectReference Include="..\cllc-interfaces\Dynamics-Dataverse\Dynamics-Dataverse.csproj">
+      <Aliases>DV</Aliases>
+    </ProjectReference>
   </ItemGroup>
 
   <ItemGroup>

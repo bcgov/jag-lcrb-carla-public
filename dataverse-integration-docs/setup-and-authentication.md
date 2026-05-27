@@ -129,6 +129,82 @@ Expected: zero `NU1605` downgrade warnings.
 
 ---
 
+## Dependency injection registration
+
+`IDataverseClient` / `DataverseClient` are registered as singletons alongside the existing `IDynamicsClient` in all 9 consuming services. This is pure plumbing — no functional changes.
+
+### Services updated
+
+| Service | File |
+|---|---|
+| `cllc-public-app` | `Startup.cs` |
+| `carla-spice-sync-service` | `Startup.cs` |
+| `federal-reporting-service` | `Startup.cs` |
+| `ldb-orders-service` | `Startup.cs` |
+| `geocoder-service` | `Startup.cs` |
+| `one-stop-service` | `Startup.cs` |
+| `orgbook-service` | `Startup.cs` |
+| `watchdog` | `Startup.cs` |
+| `sharepoint-sync-tool` | `Program.cs` |
+
+### Registration pattern
+
+```csharp
+services.AddSingleton<IDataverseClient, DataverseClient>();
+```
+
+### Namespace collision resolution
+
+Both `DynamicsAutorest` and `Dynamics-Dataverse` export types in `Gov.Lclb.Cllb.Interfaces`. To isolate them, `Dynamics-Dataverse` is referenced with an MSBuild alias in each consuming `.csproj`:
+
+```xml
+<ProjectReference Include="..\cllc-interfaces\Dynamics-Dataverse\Dynamics-Dataverse.csproj">
+  <Aliases>DV</Aliases>
+</ProjectReference>
+```
+
+Each `Startup.cs` / `Program.cs` then declares the alias and maps the two types:
+
+```csharp
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+```
+
+This keeps DynamicsAutorest types available in the global namespace unchanged.
+
+### Additional fixes applied
+
+| Project | Fix |
+|---|---|
+| `cllc-public-app` | Bumped `Microsoft.Extensions.Caching.Memory` from `3.1.7` → `3.1.8` (NU1605) |
+| `watchdog` | Upgraded `TargetFramework` from `netcoreapp5` → `net6.0`; bumped HealthChecks.UI and MVC packages to `6.x` |
+
+### Verification
+
+```powershell
+@(
+  "cllc-public-app/cllc-public-app.csproj",
+  "carla-spice-sync-service/CarlaSpiceSync.csproj",
+  "federal-reporting-service/federal-reporting-service.csproj",
+  "ldb-orders-service/ldb-orders-service.csproj",
+  "geocoder-service/geocoder-service.csproj",
+  "one-stop-service/one-stop-service.csproj",
+  "orgbook-service/orgbook-service.csproj",
+  "watchdog/Watchdog.csproj",
+  "sharepoint-sync-tool/sharepoint-sync-tool.csproj"
+) | ForEach-Object {
+  $result = dotnet build $_ --no-incremental 2>&1
+  $status = if ($result -match "Build succeeded") { "OK" } else { "FAILED" }
+  "$status  $_"
+  if ($status -eq "FAILED") { $result | Select-String "error" }
+}
+```
+
+Expected: all 9 lines show `OK`.
+
+---
+
 ## Async pattern guidance
 
 `ServiceClient` exposes native async methods. Always prefer these over `Task.Run` wrappers:

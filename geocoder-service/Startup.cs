@@ -1,4 +1,8 @@
-﻿using Hangfire;
+﻿extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
@@ -101,6 +105,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             // health checks. 
             services.AddHealthChecks()
                  .AddCheck("geocoder-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

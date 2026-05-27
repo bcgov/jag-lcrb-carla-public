@@ -2,6 +2,9 @@
 #undef USE_MSSQL
 #undef USE_GEOCODER_CHECK
 
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
@@ -290,6 +293,7 @@ namespace Gov.Lclb.Cllb.Public
             });
 
             services.AddHttpClient<IDynamicsClient, DynamicsClient>();
+            services.AddSingleton<IDataverseClient, DataverseClient>();
 
             // add BCeID Web Services
 
