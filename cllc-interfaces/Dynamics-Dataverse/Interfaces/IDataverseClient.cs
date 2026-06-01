@@ -86,6 +86,21 @@ public interface IDataverseClient
     Task UpdateWorkerAsync(adoxio_worker worker, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
+    // Personal History Summary (adoxio_personalhistorysummary)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_personalhistorysummary>> GetPersonalHistorySummariesByWorkerIdAsync(string workerId, CancellationToken ct = default);
+    Task<Guid> CreatePersonalHistorySummaryAsync(adoxio_personalhistorysummary summary, CancellationToken ct = default);
+    Task UpdatePersonalHistorySummaryAsync(adoxio_personalhistorysummary summary, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Previous Address (adoxio_previousaddress)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_previousaddress>> GetPreviousAddressesByWorkerIdAsync(string workerId, CancellationToken ct = default);
+    Task<Guid> CreatePreviousAddressAsync(adoxio_previousaddress address, CancellationToken ct = default);
+    Task UpdatePreviousAddressAsync(adoxio_previousaddress address, CancellationToken ct = default);
+    Task DeletePreviousAddressAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
     // Establishment (adoxio_establishment)
     // -------------------------------------------------------------------------
     Task<adoxio_establishment?> GetEstablishmentByIdAsync(string id, CancellationToken ct = default);

@@ -346,19 +346,98 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         => await Task.Run(() => _serviceClient.Update(terms), ct);
 
     // -------------------------------------------------------------------------
-    // Worker
+    // Worker (adoxio_worker)
     // -------------------------------------------------------------------------
-    public Task<adoxio_worker?> GetWorkerByIdAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_worker?> GetWorkerByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await Task.Run(() =>
+                _serviceClient.Retrieve(adoxio_worker.EntityLogicalName, guid, new ColumnSet(true)), ct);
+            return entity?.ToEntity<adoxio_worker>();
+        }
+        catch (Exception ex) when (ex.Message.Contains("Does Not Exist"))
+        {
+            return null;
+        }
+    }
 
-    public Task<adoxio_worker?> GetWorkerByIdWithChildrenAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_worker?> GetWorkerByIdWithChildrenAsync(string id, CancellationToken ct = default)
+    {
+        var worker = await GetWorkerByIdAsync(id, ct);
+        if (worker == null) return null;
 
-    public Task<Guid> CreateWorkerAsync(adoxio_worker worker, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var phsQuery = new QueryExpression(adoxio_personalhistorysummary.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        phsQuery.Criteria.AddCondition("adoxio_workerid", ConditionOperator.Equal, worker.Id);
+        var phsTask = Task.Run(() => _serviceClient.RetrieveMultiple(phsQuery), ct);
 
-    public Task UpdateWorkerAsync(adoxio_worker worker, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var prevAddrQuery = new QueryExpression(adoxio_previousaddress.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        prevAddrQuery.Criteria.AddCondition("adoxio_workerid", ConditionOperator.Equal, worker.Id);
+        var prevAddrTask = Task.Run(() => _serviceClient.RetrieveMultiple(prevAddrQuery), ct);
+
+        await Task.WhenAll(phsTask, prevAddrTask);
+
+        var phs = (await phsTask).Entities;
+        var prevAddresses = (await prevAddrTask).Entities;
+
+        if (phs.Count > 0)
+            worker.RelatedEntities[new Relationship("adoxio_worker_adoxio_personalhistorysummary")] =
+                new EntityCollection(phs.ToList());
+        if (prevAddresses.Count > 0)
+            worker.RelatedEntities[new Relationship("adoxio_previousaddress_worker")] =
+                new EntityCollection(prevAddresses.ToList());
+
+        return worker;
+    }
+
+    public async Task<Guid> CreateWorkerAsync(adoxio_worker worker, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(worker), ct);
+
+    public async Task UpdateWorkerAsync(adoxio_worker worker, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(worker), ct);
+
+    // -------------------------------------------------------------------------
+    // Personal History Summary (adoxio_personalhistorysummary)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_personalhistorysummary>> GetPersonalHistorySummariesByWorkerIdAsync(string workerId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(workerId, out var guid)) return new List<adoxio_personalhistorysummary>();
+        var query = new QueryExpression(adoxio_personalhistorysummary.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_workerid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_personalhistorysummary>()).ToList();
+    }
+
+    public async Task<Guid> CreatePersonalHistorySummaryAsync(adoxio_personalhistorysummary summary, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(summary), ct);
+
+    public async Task UpdatePersonalHistorySummaryAsync(adoxio_personalhistorysummary summary, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(summary), ct);
+
+    // -------------------------------------------------------------------------
+    // Previous Address (adoxio_previousaddress)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_previousaddress>> GetPreviousAddressesByWorkerIdAsync(string workerId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(workerId, out var guid)) return new List<adoxio_previousaddress>();
+        var query = new QueryExpression(adoxio_previousaddress.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_workerid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_previousaddress>()).ToList();
+    }
+
+    public async Task<Guid> CreatePreviousAddressAsync(adoxio_previousaddress address, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(address), ct);
+
+    public async Task UpdatePreviousAddressAsync(adoxio_previousaddress address, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(address), ct);
+
+    public async Task DeletePreviousAddressAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_previousaddress.EntityLogicalName, guid), ct);
+    }
 
     // -------------------------------------------------------------------------
     // Establishment
