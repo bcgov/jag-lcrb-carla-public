@@ -173,20 +173,177 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // -------------------------------------------------------------------------
     // Licence
     // -------------------------------------------------------------------------
-    public Task<adoxio_licences?> GetLicenceByIdAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_licences?> GetLicenceByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await Task.Run(() =>
+                _serviceClient.Retrieve(adoxio_licences.EntityLogicalName, guid, new ColumnSet(true)), ct);
+            return entity?.ToEntity<adoxio_licences>();
+        }
+        catch (Exception ex) when (ex.Message.Contains("Does Not Exist"))
+        {
+            return null;
+        }
+    }
 
-    public Task<adoxio_licences?> GetLicenceByIdWithChildrenAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_licences?> GetLicenceByIdWithChildrenAsync(string id, CancellationToken ct = default)
+    {
+        var licence = await GetLicenceByIdAsync(id, ct);
+        if (licence == null) return null;
 
-    public Task<adoxio_licences?> GetLicenceByNumberAsync(string licenceNumber, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var licenceId = licence.Id;
 
-    public Task<IList<adoxio_licences>> GetLicencesByAccountIdAsync(string accountId, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var saQuery = new QueryExpression(adoxio_servicearea.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        saQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        var saTask = Task.Run(() => _serviceClient.RetrieveMultiple(saQuery), ct);
 
-    public Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var hosQuery = new QueryExpression(adoxio_hoursofservice.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        hosQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        var hosTask = Task.Run(() => _serviceClient.RetrieveMultiple(hosQuery), ct);
+
+        var ossQuery = new QueryExpression(adoxio_offsitestorage.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        ossQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        var ossTask = Task.Run(() => _serviceClient.RetrieveMultiple(ossQuery), ct);
+
+        var tclQuery = new QueryExpression(adoxio_applicationtermsconditionslimitation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        tclQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        var tclTask = Task.Run(() => _serviceClient.RetrieveMultiple(tclQuery), ct);
+
+        await Task.WhenAll(saTask, hosTask, ossTask, tclTask);
+
+        var serviceAreas = (await saTask).Entities;
+        var hoursOfSale = (await hosTask).Entities;
+        var offSiteStorages = (await ossTask).Entities;
+        var termsConditions = (await tclTask).Entities;
+
+        if (serviceAreas.Count > 0)
+            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_servicearea")] =
+                new EntityCollection(serviceAreas.ToList());
+        if (hoursOfSale.Count > 0)
+            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_hoursofservice")] =
+                new EntityCollection(hoursOfSale.ToList());
+        if (offSiteStorages.Count > 0)
+            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_offsitestorage")] =
+                new EntityCollection(offSiteStorages.ToList());
+        if (termsConditions.Count > 0)
+            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_applicationtermsconditionslimitation")] =
+                new EntityCollection(termsConditions.ToList());
+
+        return licence;
+    }
+
+    public async Task<adoxio_licences?> GetLicenceByNumberAsync(string licenceNumber, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_licences.EntityLogicalName)
+        {
+            ColumnSet = new ColumnSet(true),
+            TopCount = 1
+        };
+        query.Criteria.AddCondition("adoxio_licencenumber", ConditionOperator.Equal, licenceNumber);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.FirstOrDefault()?.ToEntity<adoxio_licences>();
+    }
+
+    public async Task<IList<adoxio_licences>> GetLicencesByAccountIdAsync(string accountId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(accountId, out var guid)) return new List<adoxio_licences>();
+        var query = new QueryExpression(adoxio_licences.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licencee", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_licences>()).ToList();
+    }
+
+    public async Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(licence), ct);
+
+    // -------------------------------------------------------------------------
+    // Service Area (adoxio_servicearea)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdAsync(string licenceId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_servicearea>();
+        var query = new QueryExpression(adoxio_servicearea.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_servicearea>()).ToList();
+    }
+
+    public async Task<Guid> CreateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(serviceArea), ct);
+
+    public async Task UpdateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(serviceArea), ct);
+
+    public async Task DeleteServiceAreaAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_servicearea.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Hour of Sale (adoxio_hoursofservice)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByLicenceIdAsync(string licenceId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_hoursofservice>();
+        var query = new QueryExpression(adoxio_hoursofservice.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_hoursofservice>()).ToList();
+    }
+
+    public async Task<Guid> CreateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(hourOfSale), ct);
+
+    public async Task UpdateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(hourOfSale), ct);
+
+    public async Task DeleteHourOfSaleAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_hoursofservice.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Off-Site Storage (adoxio_offsitestorage)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_offsitestorage>> GetOffSiteStorageByLicenceIdAsync(string licenceId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_offsitestorage>();
+        var query = new QueryExpression(adoxio_offsitestorage.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_offsitestorage>()).ToList();
+    }
+
+    public async Task<Guid> CreateOffSiteStorageAsync(adoxio_offsitestorage storage, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(storage), ct);
+
+    public async Task DeleteOffSiteStorageAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_offsitestorage.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Application Terms Conditions Limitation (adoxio_applicationtermsconditionslimitation)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdAsync(string licenceId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_applicationtermsconditionslimitation>();
+        var query = new QueryExpression(adoxio_applicationtermsconditionslimitation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtermsconditionslimitation>()).ToList();
+    }
+
+    public async Task<Guid> CreateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(terms), ct);
+
+    public async Task UpdateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(terms), ct);
 
     // -------------------------------------------------------------------------
     // Worker

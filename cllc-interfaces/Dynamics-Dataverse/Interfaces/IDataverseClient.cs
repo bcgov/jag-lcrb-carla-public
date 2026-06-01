@@ -48,6 +48,36 @@ public interface IDataverseClient
     Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
+    // Service Area (adoxio_servicearea)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<Guid> CreateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
+    Task UpdateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
+    Task DeleteServiceAreaAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Hour of Sale (adoxio_hoursofservice)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<Guid> CreateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default);
+    Task UpdateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default);
+    Task DeleteHourOfSaleAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Off-Site Storage (adoxio_offsitestorage)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_offsitestorage>> GetOffSiteStorageByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<Guid> CreateOffSiteStorageAsync(adoxio_offsitestorage storage, CancellationToken ct = default);
+    Task DeleteOffSiteStorageAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Application Terms Conditions Limitation (adoxio_applicationtermsconditionslimitation)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<Guid> CreateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
+    Task UpdateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
     // Worker (adoxio_worker)
     // -------------------------------------------------------------------------
     Task<adoxio_worker?> GetWorkerByIdAsync(string id, CancellationToken ct = default);

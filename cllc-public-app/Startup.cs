@@ -274,8 +274,6 @@ namespace Gov.Lclb.Cllb.Public
         private void SetupServices(IServiceCollection services)
         {
 
-            AuthenticationResult authenticationResult = null;
-
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -294,6 +292,7 @@ namespace Gov.Lclb.Cllb.Public
 
             services.AddHttpClient<IDynamicsClient, DynamicsClient>();
             services.AddSingleton<IDataverseClient, DataverseClient>();
+            services.AddSingleton(sp => (DataverseClient)sp.GetRequiredService<IDataverseClient>());
 
             // add BCeID Web Services
 
