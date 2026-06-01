@@ -87,23 +87,88 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // -------------------------------------------------------------------------
     // Application
     // -------------------------------------------------------------------------
-    public Task<adoxio_application?> GetApplicationByIdAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_application?> GetApplicationByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await Task.Run(() =>
+                _serviceClient.Retrieve(adoxio_application.EntityLogicalName, guid, new ColumnSet(true)), ct);
+            return entity?.ToEntity<adoxio_application>();
+        }
+        catch (Exception ex) when (ex.Message.Contains("Does Not Exist"))
+        {
+            return null;
+        }
+    }
 
-    public Task<adoxio_application?> GetApplicationByIdWithChildrenAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+    public async Task<adoxio_application?> GetApplicationByIdWithChildrenAsync(string id, CancellationToken ct = default)
+    {
+        var application = await GetApplicationByIdAsync(id, ct);
+        if (application == null) return null;
 
-    public Task<IList<adoxio_application>> GetApplicationsByAccountIdAsync(string accountId, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var appId = application.Id;
 
-    public Task<Guid> CreateApplicationAsync(adoxio_application application, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var licenceTask = application.adoxio_AssignedLicence?.Id is Guid licenceId
+            ? Task.Run<Entity?>(() => _serviceClient.Retrieve(adoxio_licences.EntityLogicalName, licenceId, new ColumnSet(true)), ct)
+            : Task.FromResult<Entity?>(null);
 
-    public Task UpdateApplicationAsync(adoxio_application application, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var establishmentTask = application.adoxio_LicenceEstablishment?.Id is Guid estId
+            ? Task.Run<Entity?>(() => _serviceClient.Retrieve(adoxio_establishment.EntityLogicalName, estId, new ColumnSet(true)), ct)
+            : Task.FromResult<Entity?>(null);
 
-    public Task DeleteApplicationAsync(string id, CancellationToken ct = default)
-        => throw new NotImplementedException();
+        var leQuery = new QueryExpression(adoxio_legalentity.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        leQuery.Criteria.AddCondition("adoxio_relatedapplication", ConditionOperator.Equal, appId);
+        var leTask = Task.Run(() => _serviceClient.RetrieveMultiple(leQuery), ct);
+
+        await Task.WhenAll(licenceTask, establishmentTask, leTask);
+
+        var licence = (await licenceTask)?.ToEntity<adoxio_licences>();
+        var establishment = (await establishmentTask)?.ToEntity<adoxio_establishment>();
+        var legalEntities = (await leTask).Entities.Select(e => e.ToEntity<adoxio_legalentity>()).ToList();
+
+        if (licence != null)
+            application.RelatedEntities[new Relationship("adoxio_adoxio_licences_adoxio_application_AssignedLicence")] =
+                new EntityCollection(new List<Entity> { licence });
+        if (establishment != null)
+            application.RelatedEntities[new Relationship("adoxio_adoxio_establishment_adoxio_application_Establishment")] =
+                new EntityCollection(new List<Entity> { establishment });
+        if (legalEntities.Count > 0)
+            application.RelatedEntities[new Relationship("adoxio_adoxio_application_adoxio_legalentity_RelatedApplication")] =
+                new EntityCollection(legalEntities.Cast<Entity>().ToList());
+
+        return application;
+    }
+
+    public async Task<IList<adoxio_application>> GetApplicationsByAccountIdAsync(string accountId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(accountId, out var guid)) return new List<adoxio_application>();
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicant", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
+    public async Task<Guid> CreateApplicationAsync(adoxio_application application, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(application), ct);
+
+    public async Task UpdateApplicationAsync(adoxio_application application, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(application), ct);
+
+    public async Task DeleteApplicationAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_application.EntityLogicalName, guid), ct);
+    }
+
+    public async Task<Guid> CreateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(extension), ct);
+
+    public async Task UpdateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(extension), ct);
+
+    public async Task<Guid> CreateAnnualVolumeAsync(adoxio_annualvolume annualVolume, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(annualVolume), ct);
 
     // -------------------------------------------------------------------------
     // Licence

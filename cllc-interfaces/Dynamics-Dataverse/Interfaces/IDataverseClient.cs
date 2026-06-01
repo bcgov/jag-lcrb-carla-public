@@ -34,6 +34,9 @@ public interface IDataverseClient
     Task<Guid> CreateApplicationAsync(adoxio_application application, CancellationToken ct = default);
     Task UpdateApplicationAsync(adoxio_application application, CancellationToken ct = default);
     Task DeleteApplicationAsync(string id, CancellationToken ct = default);
+    Task<Guid> CreateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default);
+    Task UpdateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default);
+    Task<Guid> CreateAnnualVolumeAsync(adoxio_annualvolume annualVolume, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Licence (adoxio_licences)
