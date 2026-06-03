@@ -327,7 +327,7 @@
               <p>
                 <strong>
                   <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All shareholders (individuals) holding 10% or
-                  greater voting shares in the applicant corporation must submit completed 
+                  greater voting shares in the applicant corporation must submit completed
                   <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     forms
                   </a>
@@ -338,11 +338,11 @@
               <hr />
               <p>
                 If one of the new shareholders is a private corporation, a public corporation, a society or a
-                partnership,
+                partnership,they must submit
                 <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
                 </a>
-                to support the applicable business type must be submitted, even if the shareholder holds less than 10%
+                and supporting documentation, even if the shareholder holds less than 10%
                 interest in the applicant corporation:
               </p>
 
@@ -352,7 +352,8 @@
                   <ul>
                     <li>Current list of directors and senior managers</li>
                     <li>
-                      All directors and senior managers must submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below) 
+                      All directors and senior managers must submit a completed <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> and Cannabis
+                      Screening Form (see below)
                     </li>
                   </ul>
                 </li>
@@ -364,7 +365,8 @@
                       beside each name
                     </li>
                     <li>
-                      Each partner must supply a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
+                      Each partner must supply a completed <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> and Cannabis Screening Form (see
+                      below)
                     </li>
                   </ul>
                 </li>
@@ -373,7 +375,7 @@
                   <ul>
                     <li>List of Directors and Officers</li>
                     <li>
-                      All directors must submit a completed Personal History Summary or Cannabis Associate Screening
+                      All directors must submit a completed Personal History Summary or Cannabis Screening Form
                       (see below)
                     </li>
                   </ul>
@@ -393,8 +395,8 @@
                       partnership, submit all the documents listed under that business type
                     </li>
                     <li>
-                      all shareholders (individuals) holding 10% or greater interest in the applicant corporation must
-                      submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Security Screening (see below)
+                      All shareholders (individuals) holding 10% or greater interest in the applicant corporation must
+                      submit a completed <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> and Cannabis Screening Form (see below)
                     </li>
                   </ul>
                 </li>
@@ -449,8 +451,8 @@
                 [uploadHeader]="'TO UPLOAD NOTICE OF ARTICLES, DRAG FILES HERE OR'">
               </app-file-uploader>
               <p *ngIf="!this.isLiquor()">
-                <strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis
-                  Associate Security Screening form below.</strong>
+                <strong><fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>All directors must submit a completed <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> and
+                  Cannabis Screening Form below.</strong>
               </p>
             </section>
 
@@ -459,7 +461,7 @@
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Sole proprietors must complete a
                 <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
-                  Associate Security Screening</span>
+                  Screening Form</span>
                 <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                   forms
                 </a>
@@ -474,7 +476,7 @@
               <p>
                 <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Each partner must submit a completed
                 <span *ngIf="this.isLiquor()"> Personal History Summary </span><span *ngIf="!this.isLiquor()">Cannabis
-                  Associate Security Screening</span> form below.
+                  Screening Form</span> form below.
               </p>
               <app-file-uploader *ngIf="true || applicationId" documentType="PartnershipAgreement"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -563,32 +565,26 @@
               </div>
             </section>
 
-            <!-- Cannabis Associate Security Screening Forms -->
+            <!-- Cannabis  Screening Forms -->
             <section *ngIf="!this.isLiquor()">
               <h3 class="blue-header">
-                <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Associate Security Screening Forms
+                <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>Cannabis Screening Forms
               </h3>
               <div class="content-bottom">
                 <p>
-                  Sole proprietors and associates of applicants for a retail licence or authorization are required to
-                  submit
+                  Associates of applicants for a retail licence or authorization are required to submit
                   <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
-                    forms
+                    forms.
                   </a>
-                  for security screenings and financial integrity checks.
-                  {{
-                  application?.applicationType?.name === ApplicationTypeNames.Marketer
-                  ? 'Cannabis Marketing'
-                  : 'Retail store licence or authorization'
-                  }}
-                  applications cannot be processed until all required materials have been received.
+                  Retail store licence or authorization applications cannot be processed until all required materials
+                  have been received.
                 </p>
 
                 <p *ngIf="this.isLiquor()">
-                  Cannabis Associate Security Screening forms are not required if you submit liquor related
+                  Cannabis Screening Form Screening forms are not required if you submit liquor related
                   applications. Missing forms or documents will be requested once your application is received.
                   <!--If you do not provide
-          Cannabis Associate Security Screening documents prior to your application submission, they will be
+          Cannabis Screening documents prior to your application submission, they will be
           requested via secure channels
           once your application has been received. Please note that the time to collect these documents
           directly
@@ -597,50 +593,46 @@
 
                 <p>
                   Please provide the
-                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/non-medical-cannabis-licenses/cannabis-resources-information/associate-forms"
-                    target="_blank">
+                  <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
                     documents
                   </a>
                   as outlined on the website.
                 </p>
 
                 <span *ngIf="showPoliceInformationCheckUpload()">
-                  <h4>Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia)</h4>
+                  <h4>Police Information Check (may be referred to as Criminal Record and Judicial Matters Check outside
+                    of British Columbia)</h4>
                   <p>
-                    Each associate must provide a complete Police Information Check.
-                    <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
-                                       [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
-                                       (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
-                                       [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true">
-                    </app-file-uploader>
-
+                    Each associate must provide a complete <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a>.
+                  </p>
+                  <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
+                    [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                    (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
+                    [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'"
+                    [useDocumentTypeForName]="true" [maxNumberOfFiles]="20">
+                  </app-file-uploader>
+                  <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+                    A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+                    <span style="white-space: nowrap;">contact <a
+                        href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
                   </p>
                 </span>
-                <h4>Cannabis Associate Security Screening</h4>
+                <h4>Cannabis Security Screening</h4>
                 <p>
-                  Each associate must provide a complete Cannabis Associate Security Screening form.
-                  <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
-                    [multipleFiles]="false" entityName="application" [extensions]="['pdf']"
-                    (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
-                    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'">
-                  </app-file-uploader>
+                  Each associate must provide a complete Cannabis Screening form.
+                </p>
+                <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
+                  [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+                  (numberOfUploadedFiles)="uploadedCAS = $event" [entityId]="application.id"
+                  [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+                  [maxNumberOfFiles]="20">
+                </app-file-uploader>
+                <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+                  A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+                  <span style="white-space: nowrap;">contact <a
+                      href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
                 </p>
 
-                <div *ngIf="application?.applicationType?.name != ApplicationTypeNames.Marketer">
-                  <h4>Financial Integrity Documents</h4>
-                  <p>
-                    Each associate must provide a complete a
-                    <a href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
-                      Financial Integrity Form
-                    </a>.
-                  </p>
-                  <app-file-uploader *ngIf="application?.id" documentType="FinancialIntegrity"
-                                     fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
-                                     [extensions]="['pdf']" (numberOfUploadedFiles)="uploadedFinancialIntegrity = $event"
-                                     [entityId]="application.id"
-                                     [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'">
-                  </app-file-uploader>
-                </div>
               </div>
             </section>
 
@@ -650,7 +642,7 @@
               <p>
                 Shareholders (individuals) holding less than 10% interest, or shareholders with only non-voting shares,
                 in the applicant corporation must provide their full legal name and date of birth. They do not need to
-                provide a Police Information Check or Cannabis Associate Security Screening form.
+                provide a <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> or Cannabis Screening form.
               </p>
               <app-file-uploader *ngIf="true || applicationId" documentType="IndividualsWithLessThan10"
                 fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="false" entityName="application"
@@ -2444,12 +2436,13 @@
           </div>
 
           <!-- Connections to non-medical -->
-          <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer">
+          <section *ngIf="application?.applicationType?.name === ApplicationTypeNames.Marketer
+                          && account?.businessType">
             <h3 class="blue-header">CONNECTIONS TO NON-MEDICAL CANNABIS RETAIL STORE LICENSEES OR APPLICANTS</h3>
-            <div class="content-bottom" *ngIf="application?.tiedHouse && account?.businessType">
-              <app-connection-to-non-medical-stores *ngIf="application?.tiedHouse" [tiedHouse]="application?.tiedHouse"
+            <div class="content-bottom">
+              <app-connection-to-non-medical-stores [tiedHouse]="application?.tiedHouse"
                 licensedProducerText="B.C. non-medical cannabis retail store licensee or applicant"
-                federalProducerText="licensee or applicant" [businessType]="account?.businessType"
+                federalProducerText="licensee or applicant" [businessType]="account.businessType"
                 (value)="tiedHouseFormData = $event">
               </app-connection-to-non-medical-stores>
             </div>
@@ -2789,7 +2782,9 @@
                   application?.licenseType == 'Cannabis Retail Store' ||
                   application?.licenseType == 'S119 CRS Authorization' ||
                   application?.licenseType == 'Marketer' ||
-                  application?.licenseType == 'Producer Retail Store'
+                  application?.licenseType == 'Producer Retail Store' ||
+                  application?.licenseType == 'Cannabis Marketing' ||
+                  application?.licenseType == 'Marketing'
                 ">
                 Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the general
                 manager an application, or information or a record included as part of the application, that contains
@@ -2799,7 +2794,9 @@
                   application?.licenseType != 'Cannabis Retail Store' &&
                   application?.licenseType != 'S119 CRS Authorization' &&
                   application?.licenseType != 'Marketer' &&
-                  application?.licenseType != 'Producer Retail Store'
+                  application?.licenseType != 'Producer Retail Store' &&
+                  application?.licenseType != 'Cannabis Marketing' &&
+                  application?.licenseType != 'Marketing'
                 ">
                 Section 20 (1) of the Liquor Control and Licensing Act states: "The general manager may refuse to issue,
                 renew, transfer or amend a licence if the applicant fails to disclose a material fact required by the
@@ -2842,16 +2839,22 @@
                 <strong *ngIf="
                     application?.licenseType == 'Cannabis Retail Store' ||
                     application?.licenseType == 'S119 CRS Authorization' ||
-                    application?.licenseType == 'Marketer'
+                    application?.licenseType == 'Marketer' ||
+                    application?.licenseType == 'Producer Retail Store' ||
+                    application?.licenseType == 'Cannabis Marketing' ||
+                    application?.licenseType == 'Marketing'
                   ">
                   Section 22(2) of the Cannabis Control and Licensing Act states: “A person must not submit to the
                   general manager an application, or information or a record included as part of the application, that
                   contains false or misleading information, or fails to disclose a material fact”.
                 </strong>
                 <strong *ngIf="
-                    application?.licenseType == 'Cannabis Retail Store' ||
-                    application?.licenseType == 'S119 CRS Authorization' ||
-                    application?.licenseType == 'Marketer'
+                    application?.licenseType != 'Cannabis Retail Store' &&
+                    application?.licenseType != 'S119 CRS Authorization' &&
+                    application?.licenseType != 'Marketer' &&
+                    application?.licenseType != 'Producer Retail Store' &&
+                    application?.licenseType != 'Cannabis Marketing' &&
+                    application?.licenseType != 'Marketing'
                   ">
                   Section 20(1) of the Liquor Control and Licensing Act states: “The general manager may refuse to
                   issue, renew, transfer or amend a licence if the applicant fails to disclose a material fact required
@@ -2931,16 +2934,20 @@
 
                 <div *ngIf="
                     application?.licenseType === 'Cannabis Retail Store' ||
-                    application?.licenseType == 'S119 CRS Authorization' ||
-                    application?.licenseType === 'Producer Retail Store'
+                    application?.licenseType === 'S119 CRS Authorization' ||
+                    application?.licenseType === 'Producer Retail Store' ||
+                    application?.licenseType === 'Cannabis Marketing' ||
+                    application?.licenseType === 'Marketing'
                   ">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);"> LCRBCannabis@gov.bc.ca </a>
                 </div>
                 <div *ngIf="
                     application?.licenseType !== 'Cannabis Retail Store' &&
-                    application?.licenseType != 'S119 CRS Authorization' &&
-                    application?.licenseType !== 'Producer Retail Store'
+                    application?.licenseType !== 'S119 CRS Authorization' &&
+                    application?.licenseType !== 'Producer Retail Store' &&
+                    application?.licenseType !== 'Cannabis Marketing' &&
+                    application?.licenseType !== 'Marketing'
                   ">
                   For questions on the LCRB application process, please contact:
                   <a href="javascript: void(0);"> LCRBLiquor@gov.bc.ca </a>

@@ -17,16 +17,25 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
     public class ApplicationScreeningsController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly ILogger _logger;
+        private readonly ILogger<ApplicationScreeningsController> _logger;
         private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
         public ApplicationScreeningsController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
-            Configuration = configuration;
-            _loggerFactory = loggerFactory;
-            _logger = loggerFactory.CreateLogger(typeof(ApplicationScreeningsController));
-            _spiceUtils = new SpiceUtils(Configuration);
+            try
+            {
+                Configuration = configuration;
+                _loggerFactory = loggerFactory;
+                _logger = loggerFactory.CreateLogger<ApplicationScreeningsController>();
+                _spiceUtils = new SpiceUtils(Configuration, loggerFactory);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ApplicationScreeningsController - Constructor Exception: {ex.GetType().Name} - {ex.Message}");
+                Console.WriteLine($"ApplicationScreeningsController - Stack: {ex.StackTrace}");
+                throw;
+            }
         }
 
         /// <summary>
@@ -37,17 +46,29 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         [HttpPost("receive")]
         public ActionResult ReceiveApplicationScreeningResult([FromBody] List<CompletedApplicationScreening> results)
         {
-            // Process the updates received from the SPICE system.
-            if (!string.IsNullOrEmpty(Configuration["FEATURE_LE_CONNECTIONS"]))
+            try
             {
-                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveApplicationImportJobV2(null, results));
+                _logger.LogInformation($"ReceiveApplicationScreeningResult - Received {results?.Count ?? 0} application screenings from CARLA for import.");
+
+                // Process the updates received from the SPICE system.
+                if (!string.IsNullOrEmpty(Configuration["FEATURE_LE_CONNECTIONS"]))
+                {
+                    BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJobV2(null, results));
+                }
+                else
+                {
+                    BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveApplicationImportJob(null, results));
+                }
+
+                _logger.LogInformation("ReceiveApplicationScreeningResult - Enqueued receive completed Application Screening job");
+
+                return Ok();
             }
-            else
+            catch (Exception ex)
             {
-                BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveApplicationImportJob(null, results));
+                _logger.LogError(ex, "ReceiveApplicationScreeningResult - Error in ReceiveApplicationScreeningResult");
+                return StatusCode(500, ex.Message);
             }
-            _logger.LogInformation("Started receive completed Application Screening job");
-            return Ok();
         }
 
         /// <summary>

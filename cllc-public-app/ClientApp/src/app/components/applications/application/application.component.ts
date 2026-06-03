@@ -1478,13 +1478,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
   }
 
   prepareTiedHouseSaveRequest(_tiedHouseData) {
-    if (!this.application.tiedHouse) {
+    if (!_tiedHouseData) {
       return of(null);
     }
-    let data = (<any>Object).assign(this.application.tiedHouse, _tiedHouseData);
-    data = { ...data };
+    // LCSD-8519: tiedHouse may be null on a fresh Marketing application
+    // (no record exists yet); fall back to an empty object so the upsert
+    // branch below can create one keyed on the account.
+    const existing = this.application.tiedHouse ?? ({} as TiedHouseConnection);
+    const data = { ...(<any>Object).assign(existing, _tiedHouseData) };
 
-    if (this.application.tiedHouse.id) {
+    if (data.id) {
       // If we have a primary id, update the existing connection
       return this.tiedHouseService.updateCannabisTiedHouseConnection(data, data.id);
     } else {

@@ -78,9 +78,10 @@ namespace Gov.Lclb.Cllb.Public.Extensions
         private static string GetDocumentLocationReferenceByRelativeURL(this IDynamicsClient _dynamicsClient, string relativeUrl)
         {
             string result = null;
-            var sanitized = relativeUrl.Replace("'", "''");
+            var locationQuery = GetParentDefaultSiteLocation(_dynamicsClient, relativeUrl);
+
             // first see if one exists.
-            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "relativeurl eq '" + sanitized + "'");
+            var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: locationQuery);
 
             var location = locations.Value.FirstOrDefault();
 
@@ -567,5 +568,34 @@ namespace Gov.Lclb.Cllb.Public.Extensions
                 }
             }
         }
+
+        private static string GetParentDefaultSiteLocation(IDynamicsClient _dynamicsClient, string relativeUrl)
+        {
+            var sanitizedRelativeUrl = relativeUrl.Replace("'", "''");
+            var locationQuery = "";
+            var siteResult = _dynamicsClient.Sharepointsites.Get(
+                filter: $"name eq 'Default Site'"
+            );
+
+            var siteIds = siteResult?.Value?
+                .Select(s => s.Sharepointsiteid)
+                .Where(id => id != null)
+                .ToList();
+
+            if (siteIds != null && siteIds.Any())
+            {
+                // Step 2: build OR filter for document locations
+                var siteFilter = string.Join(" or ",
+                    siteIds.Select(id =>
+                        $"_parentsiteorlocation_value eq {id}"
+                    )
+                );
+
+                locationQuery =
+                    $"relativeurl eq '{sanitizedRelativeUrl}' and ({siteFilter})";
+            }
+            return locationQuery;
+        }
+
     }
 }

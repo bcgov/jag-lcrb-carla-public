@@ -3,20 +3,12 @@
   <p>Complete this section when you have issued shares to a new individual or shareholder business.</p>
   <h4>Updated Central Securities Register (shareholders) for the licensee corporation or holding company</h4>
   <p>Provide an updated central securities register.</p>
-  <img
-    src="assets/central-securities-register-example.png"
+  <img src="assets/central-securities-register-example.png"
     style="width: 500px; margin: 10px; border: solid #e0e0e0 1px" />
-  <app-file-uploader
-    *ngIf="application?.id"
-    documentType="CentralSecuritiesRegister"
-    fileTypes="FILE MUST BE IN PDF FORMAT."
-    [multipleFiles]="true"
-    entityName="application"
-    [extensions]="['pdf']"
-    (numberOfUploadedFiles)="onUploadedCentralSecuritiesRegister($event)"
-    [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'"
-    [disableUploads]="disabled"
+  <app-file-uploader *ngIf="application?.id" documentType="CentralSecuritiesRegister"
+    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedCentralSecuritiesRegister($event)" [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD CENTRAL SECURITIES REGISTER, DRAG FILES HERE OR'" [disableUploads]="disabled"
     [enableFileDeletion]="!disabled"></app-file-uploader>
   <hr />
   <p>
@@ -31,7 +23,8 @@
       <ul>
         <li>Current list of officers and directors</li>
         <li>
-          All directors must submit a completed Personal History Summary (liquor) and/or a Police Information Check (may be referred to as Criminal Record Check outside of British Columbia) and Cannabis Associate Screening (see below)
+          All directors must submit a completed Personal History Summary (liquor) and/or a <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> (may
+          be referred to as Criminal Record Check outside of British Columbia) and Cannabis Screening Form (see below)
         </li>
       </ul>
     </li>
@@ -43,7 +36,8 @@
           name
         </li>
         <li>
-          Each partner must supply a completed Personal History Summary (liquor) and/or a Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Screening (see below)
+          Each partner must supply a completed Personal History Summary (liquor) and/or a <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> and
+          Cannabis Screening Form (see below)
         </li>
       </ul>
     </li>
@@ -52,7 +46,7 @@
       <ul>
         <li>List of Directors and Officers</li>
         <li>
-          All directors must submit a completed Personal History Summary or Cannabis Associate Screening (see below)
+          All directors must submit a completed Personal History Summary or Cannabis Screening Form (see below)
         </li>
       </ul>
     </li>
@@ -72,7 +66,8 @@
         </li>
         <li>
           all shareholders (individuals) holding 10% or greater interest in the applicant corporation must submit a
-          completed Personal History Summary (liquor) and/or a Police Information Check (may be referred to as a Criminal Record Check outside of British Columbia) and Cannabis Associate Screening (see below)
+          completed Personal History Summary (liquor) and/or a <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> (may be referred to as a
+          Criminal Record Check outside of British Columbia) and Cannabis Screening Form (see below)
         </li>
       </ul>
     </li>
@@ -90,17 +85,10 @@
     </li>
   </ul>
   <h4>Supporting Business Documentation</h4>
-  <app-file-uploader
-    *ngIf="application?.id"
-    documentType="RegisterOfDirectorsAndOfficers"
-    fileTypes="FILE MUST BE IN PDF FORMAT."
-    [multipleFiles]="true"
-    entityName="application"
-    [extensions]="['pdf']"
-    (numberOfUploadedFiles)="onUploadedRegisterOfDirectorsAndOfficers($event)"
-    [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'"
-    [disableUploads]="disabled"
+  <app-file-uploader *ngIf="application?.id" documentType="RegisterOfDirectorsAndOfficers"
+    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedRegisterOfDirectorsAndOfficers($event)" [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD REGISTER OF DIRECTORS AND OFFICERS, DRAG FILES HERE OR'" [disableUploads]="disabled"
     [enableFileDeletion]="!disabled"></app-file-uploader>
 
   <hr />
@@ -110,24 +98,21 @@
     Security Screening Information Required
   </h4>
   <p>
-    All newly added individuals with 10% or more interest must complete a Personal History Summary (liquor) and/or a Police Information Check (may be referred to as Criminal Record Check outside of British Columbia) and required documents as described below
+    All newly added individuals with 10% or more interest must complete a Personal History Summary (liquor) and/or a
+    <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> (may be referred to as Criminal Record Check outside of British Columbia) and required
+    documents as described below
   </p>
 
   <h4>Shareholders (individuals) Holding Less Than 10% Interest</h4>
   <p>
     Shareholders (individuals) holding less than 10% interest in the applicant corporation must provide their full legal
-    name and date of birth. They do not need to provide a Personal History Summary, Police Information Check or Cannabis Associate Security
+    name and date of birth. They do not need to provide a Personal History Summary, <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> or Cannabis
+    Associate Security
     Screening form.
   </p>
-  <app-file-uploader
-    *ngIf="application?.id"
-    documentType="IndividualsWithLessThan10"
-    fileTypes="FILE MUST BE IN PDF FORMAT."
-    [multipleFiles]="true"
-    entityName="application"
-    [extensions]="['pdf']"
-    (numberOfUploadedFiles)="onUploadedIndividualsWithLessThan10($event)"
-    [entityId]="application.id"
+  <app-file-uploader *ngIf="application?.id" documentType="IndividualsWithLessThan10"
+    fileTypes="FILE MUST BE IN PDF FORMAT." [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedIndividualsWithLessThan10($event)" [entityId]="application.id"
     [uploadHeader]="'TO UPLOAD LIST OF INDIVIDUALS WITH 10% OR LESS INTEREST, DRAG FILE HERE OR'"></app-file-uploader>
   [disableUploads]="disabled" [enableFileDeletion]="!disabled"
 </div>

@@ -35,7 +35,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Test
             var handler = new Mock<HttpMessageHandler>();
 
             // subject under test (SUT)
-            var spiceUtils = new SpiceUtils(Configuration, LoggerFactory, new TestHttpHandler(handler.Object));
+            var spiceUtils = new SpiceUtils(Configuration, LoggerFactory);
 
         }
     }
