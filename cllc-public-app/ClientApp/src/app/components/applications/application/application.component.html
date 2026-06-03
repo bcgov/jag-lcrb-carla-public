@@ -965,9 +965,10 @@
                 <address class="row">
                   <app-field class="col-md-12 col-xs-12" label="Address" [required]="true" [isFullWidth]="true"
                     [valid]="isValidOrNotTouched('establishmentAddressStreet')"
+                    afterLabelText="Maximum 35 characters"
                     errorMessage="Please enter the street address">
                     <input class="form-control" type="text" formControlName="establishmentAddressStreet"
-                      id="establishmentAddressStreet" [matAutocomplete]="auto" />
+                      id="establishmentAddressStreet" maxlength="35" [matAutocomplete]="auto" />
                     <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onAddressOptionSelect($event)">
                       <mat-option *ngFor="let address of addresses | async" [value]="address">
                         "{{ address.fullAddress }}"
