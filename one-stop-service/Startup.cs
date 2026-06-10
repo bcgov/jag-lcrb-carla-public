@@ -81,7 +81,8 @@ namespace Gov.Jag.Lcrb.OneStopService
             services.AddMemoryCache();
 
             services.AddSoapCore();
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(Configuration, Env));
+            services.AddSingleton<IReceiveFromHubService>(sp =>
+                new ReceiveFromHubService(Configuration, Env, sp.GetRequiredService<IDataverseClient>()));
 
 
             services.AddSingleton(_loggerFactory.CreateLogger("OneStopUtils"));
@@ -172,6 +173,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             services.AddHealthChecks()
                 .AddCheck("one-stop-service", () => HealthCheckResult.Healthy("OK"));
             services.AddSingleton<IDataverseClient, DataverseClient>();
+            services.AddTransient<OneStopUtils>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -347,7 +349,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         interval = (Configuration["QUEUE_CHECK_INTERVAL"]);
                     }
 
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, cache).CheckForNewLicences(null), interval);
+                    RecurringJob.AddOrUpdate<OneStopUtils>(utils => utils.CheckForNewLicences(null), interval);
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }

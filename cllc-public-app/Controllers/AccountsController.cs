@@ -1,5 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utils;
@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -24,6 +23,13 @@ using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Services.FileManager;
 using Contact = Gov.Lclb.Cllb.Public.ViewModels.Contact;
 using Gov.Lclb.Cllb.Public.Repositories;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DvAccount = DV::Gov.Lclb.Cllb.Interfaces.Account;
+using DvContact = DV::Gov.Lclb.Cllb.Interfaces.Contact;
+using DvLegalEntity = DV::Gov.Lclb.Cllb.Interfaces.adoxio_legalentity;
+using DvAdoxioApplicantTypeCodes = DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicanttypecodes;
+using DvAdoxioAccountType = DV::Gov.Lclb.Cllb.Interfaces.adoxio_accounttype;
+using DvAdoxioGeneralYesNo = DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,7 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IOrgBookClient _orgBookclient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -46,7 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IOrgBookClient orgBookClient,
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
-            IDynamicsClient dynamicsClient,
+            IDataverseClient dataverse,
             FileManagerClient fileManagerClient,
             IWebHostEnvironment env,
             TiedHouseConnectionsRepository tiedHouseConnectionsRepository
@@ -54,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _configuration = configuration;
             _bceid = bceid;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _env = env;
             _tiedHouseConnectionsRepository = tiedHouseConnectionsRepository;
             _orgBookclient = orgBookClient;
@@ -78,13 +84,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
+                DvAccount account = await _dataverse.GetAccountByIdAsync(accountId);
                 _logger.LogDebug(LoggingEvents.HttpGet, "Dynamics Account: " + JsonConvert.SerializeObject(account));
 
                 if (account == null)
                 {
-                    // Sometimes we receive the siteminderbusienssguid instead of the account id. 
-                    account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountId);
+                    // Sometimes we receive the siteminderbusienssguid instead of the account id.
+                    account = await _dataverse.GetAccountByExternalIdAsync(accountId);
                     if (account == null)
                     {
                         _logger.LogWarning(LoggingEvents.NotFound, "No Account Found.");
@@ -117,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
-                List<MicrosoftDynamicsCRMcontact> contacts = _dynamicsClient.GetActiveContactsByAccountId(userSettings.AccountId);
+                var contacts = await _dataverse.GetContactsByAccountIdAsync(userSettings.AccountId);
                 if (contacts != null)
                 {
                     foreach (var contact in contacts)
@@ -174,41 +180,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
         [HttpGet("autocomplete")]
         [Authorize(Policy = "Business-User")]
-        public IActionResult GetAutocomplete(string name)
+        public async Task<IActionResult> GetAutocomplete(string name)
         {
             var results = new List<TransferAccount>();
             try
             {
                 string filter = null;
-                // escape any apostophes.
                 if (name != null)
                 {
                     name = name.Replace("'", "''");
-                    // select active accounts that match the given name
-                    filter = $"statecode eq 0 and contains(name,'{name}')";
+                    filter = $"%{name}%";
                 }
-                var expand = new List<string> { "primarycontactid" };
-                var accounts = _dynamicsClient.Accounts.Get(filter: filter, expand: expand, top: 10).Value;
+                var accounts = (await _dataverse.GetAccountsAsync(filter))
+                    .Where(a => a.StateCode == DV::Gov.Lclb.Cllb.Interfaces.account_statecode.Active)
+                    .Take(10);
                 foreach (var account in accounts)
                 {
                     var transferAccount = new TransferAccount
                     {
-                        AccountId = account.Accountid,
+                        AccountId = account.AccountId?.ToString() ?? account.Id.ToString(),
                         AccountName = account.Name,
-                        BusinessType = (AdoxioApplicantTypeCodes?)account.AdoxioBusinesstype
-
+                        BusinessType = (AdoxioApplicantTypeCodes?)((int?)account.adoxio_BusinessType)
                     };
-                    if (account.Primarycontactid != null)
+                    if (account.PrimaryContactId != null)
                     {
-
-                        transferAccount.ContactName = $"{account.Primarycontactid.Firstname} {account.Primarycontactid.Lastname}";
+                        var contact = await _dataverse.GetContactByIdAsync(account.PrimaryContactId.Id.ToString());
+                        if (contact != null)
+                            transferAccount.ContactName = $"{contact.FirstName} {contact.LastName}";
                     }
                     results.Add(transferAccount);
                 }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while getting autocomplete data.");
             }
             catch (Exception e)
             {
@@ -241,11 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    userAccessToAccount = DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error while checking if current user has access to account.");
+                    userAccessToAccount = await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(accountId, _httpContextAccessor, _dataverse);
                 }
                 catch (Exception e)
                 {
@@ -258,7 +255,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
 
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(accountId);
+                DvAccount account = await _dataverse.GetAccountByIdAsync(id);
                 if (account == null)
                 {
                     _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
@@ -279,54 +276,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet("business-profile/{accountId}")]
         [Authorize(Policy = "Business-User")]
-        public IActionResult GetBusinessProfile(string accountId)
+        public async Task<IActionResult> GetBusinessProfile(string accountId)
         {
             _logger.LogDebug(LoggingEvents.HttpGet, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
             _logger.LogDebug(LoggingEvents.HttpGet, "accountId: {accountId}");
 
             List<BusinessProfileLegalEntity> legalEntities;
 
-            var expand = new List<string> { "primarycontactid" };
-            var account = (_dynamicsClient.Accounts.Get(filter: "", expand: expand).Value.FirstOrDefault()).ToViewModel();
+            var accountEntity = await _dataverse.GetAccountByIdAsync(accountId);
+            var account = accountEntity?.ToViewModel();
             _logger.LogDebug(LoggingEvents.HttpGet, "Account details: " + JsonConvert.SerializeObject(account));
 
-            // get legal entities
-            var entityFilter = $"_adoxio_account_value eq {accountId}";
-            var expandList = new List<string> { "adoxio_ShareholderAccountID" };
             try
             {
-                legalEntities = _dynamicsClient.Legalentities.Get(filter: entityFilter, expand: expandList).Value
-                        .Select(le =>
-                        {
-                            var legalEntity = le.ToViewModel();
-                            var entity = new BusinessProfileLegalEntity
-                            {
-                                AdoxioLegalEntity = legalEntity,
-                                Account = le.AdoxioShareholderAccountID == null ? account : le.AdoxioShareholderAccountID.ToViewModel(),
-                            };
-                            entity.corporateDetailsFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information").Result;
-                            entity.organizationStructureFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure").Result;
-                            entity.keyPersonnelFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel").Result;
-                            entity.financialInformationFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information").Result;
-                            entity.shareholderFilesExists = FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register").Result;
-                            var cannabisTiedHouseConnection = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account.id);
-                            if (cannabisTiedHouseConnection != null)
-                            {
-                                entity.TiedHouse = cannabisTiedHouseConnection;
-                            }
-                            entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                            return entity;
-                        })
-                        .ToList();
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting legal entities for the account {accountId}. ");
-                return null;
+                var legalEntityList = await _dataverse.GetLegalEntitiesByAccountIdAsync(accountId);
+                var leTasks = legalEntityList.Select(async le =>
+                {
+                    var legalEntity = le.ToViewModel();
+                    ViewModels.Account leAccount;
+                    if (le.adoxio_ShareholderAccountID != null)
+                    {
+                        var shareholderAccount = await _dataverse.GetAccountByIdAsync(le.adoxio_ShareholderAccountID.Id.ToString());
+                        leAccount = shareholderAccount?.ToViewModel() ?? account;
+                    }
+                    else
+                    {
+                        leAccount = account;
+                    }
+                    var entity = new BusinessProfileLegalEntity
+                    {
+                        AdoxioLegalEntity = legalEntity,
+                        Account = leAccount
+                    };
+                    entity.corporateDetailsFilesExists = await FileUploadExists(entity.Account.id, entity.Account.name, "Corporate Information");
+                    entity.organizationStructureFilesExists = await FileUploadExists(entity.Account.id, entity.Account.name, "Organization Structure");
+                    entity.keyPersonnelFilesExists = await FileUploadExists(entity.Account.id, entity.Account.name, "Key Personnel");
+                    entity.financialInformationFilesExists = await FileUploadExists(entity.Account.id, entity.Account.name, "Financial Information");
+                    entity.shareholderFilesExists = await FileUploadExists(entity.Account.id, entity.Account.name, "Central Securities Register");
+                    var cannabisTiedHouseConnection = await _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account.id);
+                    if (cannabisTiedHouseConnection != null)
+                    {
+                        entity.TiedHouse = cannabisTiedHouseConnection;
+                    }
+                    entity.ChildEntities = await GetLegalEntityChildrenAsync(entity.AdoxioLegalEntity.id);
+                    return entity;
+                });
+                legalEntities = (await Task.WhenAll(leTasks)).ToList();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error getting legal entities for the account");
+                _logger.LogError(e, "Error getting legal entities for the account {accountId}. ");
                 return null;
             }
 
@@ -351,53 +350,59 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(isComplete);
         }
 
-        private List<BusinessProfileLegalEntity> GetLegalEntityChildren(string parentLegalEntityId)
+        private async Task<List<BusinessProfileLegalEntity>> GetLegalEntityChildrenAsync(string parentLegalEntityId)
         {
             _logger.LogDebug(LoggingEvents.Get, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
-            _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {accouparentLegalEntityIdntId}");
+            _logger.LogDebug(LoggingEvents.Get, "parentLegalEntityId: {parentLegalEntityId}");
 
             List<BusinessProfileLegalEntity> children = null;
-            var childEntitiesFilter = $"_adoxio_legalentityowned_value eq {parentLegalEntityId}";
-            var expandList = new List<string> { "adoxio_ShareholderAccountID", "adoxio_Account" };
 
             try
             {
-                children = _dynamicsClient.Legalentities
-                        .Get(filter: childEntitiesFilter, expand: expandList).Value
-                        .Select(le =>
-                        {
-                            var legalEntity = le.ToViewModel();
-                            var entity = new BusinessProfileLegalEntity
-                            {
-                                AdoxioLegalEntity = legalEntity,
-                                Account = le.AdoxioShareholderAccountID == null ? le.AdoxioAccount.ToViewModel() : le.AdoxioShareholderAccountID.ToViewModel()
-                            };
-                            var cannabisTiedHouseConnection = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account.id);
-                            if (cannabisTiedHouseConnection != null)
-                            {
-                                entity.TiedHouse = cannabisTiedHouseConnection;
-                            }
-                            if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
-                            {
-                                entity.ChildEntities = GetLegalEntityChildren(entity.AdoxioLegalEntity.id);
-                            }
-                            return entity;
-                        })
-                        .ToList();
+                var childEntities = await _dataverse.GetLegalEntitiesByParentEntityIdAsync(parentLegalEntityId);
+                var leTasks = childEntities.Select(async le =>
+                {
+                    var legalEntity = le.ToViewModel();
+                    ViewModels.Account leAccount;
+                    if (le.adoxio_ShareholderAccountID != null)
+                    {
+                        var shareholderAccount = await _dataverse.GetAccountByIdAsync(le.adoxio_ShareholderAccountID.Id.ToString());
+                        leAccount = shareholderAccount?.ToViewModel();
+                    }
+                    else if (le.adoxio_Account != null)
+                    {
+                        var parentAccount = await _dataverse.GetAccountByIdAsync(le.adoxio_Account.Id.ToString());
+                        leAccount = parentAccount?.ToViewModel();
+                    }
+                    else
+                    {
+                        leAccount = null;
+                    }
+                    var entity = new BusinessProfileLegalEntity
+                    {
+                        AdoxioLegalEntity = legalEntity,
+                        Account = leAccount
+                    };
+                    var cannabisTiedHouseConnection = await _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(entity.Account?.id);
+                    if (cannabisTiedHouseConnection != null)
+                    {
+                        entity.TiedHouse = cannabisTiedHouseConnection;
+                    }
+                    if (entity.AdoxioLegalEntity.isShareholder == true && entity.AdoxioLegalEntity.isindividual == false)
+                    {
+                        entity.ChildEntities = await GetLegalEntityChildrenAsync(entity.AdoxioLegalEntity.id);
+                    }
+                    return entity;
+                });
+                children = (await Task.WhenAll(leTasks)).ToList();
                 _logger.LogDebug(LoggingEvents.Get, "LegalEntityChildren: " +
-                JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error getting legal entity children for parentLegalEntityId {parentLegalEntityId}. ");
-                children = null;
+                    JsonConvert.SerializeObject(children, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error getting legal entity children for parentLegalEntityId");
                 return null;
             }
-
 
             return children;
         }
@@ -432,7 +437,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Guid tryParseOutGuid;
 
             bool createContact = true;
-            bool mustCreateContactToAccountLink = false;
 
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -458,7 +462,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
             _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {JsonConvert.SerializeObject(bceidBusiness)}");
 
-
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
             {
@@ -468,22 +471,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpGet, "BCeId business: " + JsonConvert.SerializeObject(bceidBusiness));
 
             // get the contact record.
-            MicrosoftDynamicsCRMcontact userContact = null;
+            DvContact userContact = null;
 
             // see if the contact exists.
             try
             {
-                userContact = _dynamicsClient.GetActiveContactByExternalId(contactSiteminderGuid);
+                userContact = await _dataverse.GetContactByExternalIdAsync(contactSiteminderGuid);
                 if (userContact != null)
                 {
                     createContact = false;
                 }
-
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting contact by Siteminder Guid. ");
-                throw new Exception("Error getting contact by Siteminder Guid");
             }
             catch (Exception e)
             {
@@ -494,116 +491,96 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (userContact == null)
             {
                 // create the user contact record.
-                userContact = new MicrosoftDynamicsCRMcontact();
-                // Adoxio_externalid is where we will store the guid from siteminder.
+                userContact = new DvContact();
                 string sanitizedContactSiteminderId = GuidUtility.SanitizeGuidString(contactSiteminderGuid);
-                userContact.AdoxioExternalid = sanitizedContactSiteminderId;
-                userContact.Fullname = userSettings.UserDisplayName;
-                userContact.Nickname = userSettings.UserDisplayName;
+                userContact.adoxio_ExternalID = sanitizedContactSiteminderId;
+                userContact.NickName = userSettings.UserDisplayName;
                 if (Guid.TryParse(userSettings.UserId, out tryParseOutGuid)) // BCeid id goes here
                 {
-                    userContact.Employeeid = userSettings.UserId;
+                    userContact.EmployeeId = userSettings.UserId;
                 }
                 else // Store the BC service card id here
                 {
-                    userContact.Externaluseridentifier = userSettings.UserId;
+                    userContact.ExternalUserIdentifier = userSettings.UserId;
                 }
 
                 if (bceidBusiness != null)
                 {
-                    // set contact according to item
-                    userContact.Firstname = bceidBusiness.individualFirstname;
-                    userContact.Middlename = bceidBusiness.individualMiddlename;
-                    userContact.Lastname = bceidBusiness.individualSurname;
-                    userContact.Emailaddress1 = bceidBusiness.contactEmail;
+                    userContact.FirstName = bceidBusiness.individualFirstname;
+                    userContact.MiddleName = bceidBusiness.individualMiddlename;
+                    userContact.LastName = bceidBusiness.individualSurname;
+                    userContact.EMailAddress1 = bceidBusiness.contactEmail;
                     userContact.Telephone1 = bceidBusiness.contactPhone;
                 }
                 else
                 {
-                    //LCSD-6488: Change to BCEID Web Query
                     Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
                     _logger.LogDebug(LoggingEvents.Get, $"basic Info from bceid: {JsonConvert.SerializeObject(bceidBasic)}");
                     if (bceidBasic != null)
                     {
-                        userContact.Firstname = bceidBasic.individualFirstname;
-                        userContact.Lastname = bceidBasic.individualSurname;
+                        userContact.FirstName = bceidBasic.individualFirstname;
+                        userContact.LastName = bceidBasic.individualSurname;
                     }
                 }
-                userContact.Statuscode = 1;
+                userContact.StatusCode = DV::Gov.Lclb.Cllb.Interfaces.contact_statuscode.Active;
             }
+
             // this may be an existing account, as this service is used during the account confirmation process.
-            MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(accountSiteminderGuid);
+            DvAccount account = await _dataverse.GetAccountByExternalIdAsync(accountSiteminderGuid);
             _logger.LogDebug(LoggingEvents.HttpGet, "Account by siteminder business guid: " + JsonConvert.SerializeObject(account));
 
-            if (account == null) // do a deep create.  create 2 objects at once.
+            string accountId;
+            string contactId;
+
+            if (account == null) // create new account, legal entity, and contact
             {
-                _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Do a deep create of 3 objects at once.");
-                // create a new account
-                account = new MicrosoftDynamicsCRMaccount();
-                Boolean copyIfNull = true;
-                account.CopyValues(item, copyIfNull);
-                // business type must be set only during creation, not in update (removed from copyValues() )
-                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
-                // ensure that we create an account for the current user.
+                _logger.LogDebug(LoggingEvents.HttpGet, "Account is null. Creating account, legal entity, and contact.");
 
-                // by convention we strip out any dashes present in the guid, and force it to uppercase.
+                // create the account
+                account = new DvAccount();
+                account.CopyValues(item, copyIfNull: true);
+                account.adoxio_BusinessType = (DvAdoxioApplicantTypeCodes)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
                 string sanitizedAccountSiteminderId = GuidUtility.SanitizeGuidString(accountSiteminderGuid);
-
-                account.AdoxioExternalid = sanitizedAccountSiteminderId;
-                // 12/8/2020 - GW - Remove the primary contact element as that will cause the create to fail.
-
-                mustCreateContactToAccountLink = true;
-
-                account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Applicant;
+                account.adoxio_ExternalID = sanitizedAccountSiteminderId;
+                account.adoxio_AccountType = DvAdoxioAccountType.Applicant;
 
                 if (bceidBusiness != null)
                 {
-                    account.Emailaddress1 = bceidBusiness.contactEmail;
+                    account.EMailAddress1 = bceidBusiness.contactEmail;
                     account.Telephone1 = bceidBusiness.contactPhone;
-                    account.Address1City = bceidBusiness.addressCity;
-                    account.Address1Postalcode = bceidBusiness.addressPostal;
-                    account.Address1Line1 = bceidBusiness.addressLine1;
-                    account.Address1Line2 = bceidBusiness.addressLine2;
-                    account.Address1Postalcode = bceidBusiness.addressPostal;
-
-                    // 7-29-19 - Enable BN9 collection.
-                    account.Accountnumber = bceidBusiness.businessNumber;
-                    // 7-29-19 - We are not currently collecting the incorporation number
-                    account.AdoxioBcincorporationnumber = bceidBusiness.incorporationNumber;
+                    account.Address1_City = bceidBusiness.addressCity;
+                    account.Address1_PostalCode = bceidBusiness.addressPostal;
+                    account.Address1_Line1 = bceidBusiness.addressLine1;
+                    account.Address1_Line2 = bceidBusiness.addressLine2;
+                    account.AccountNumber = bceidBusiness.businessNumber;
+                    account.adoxio_BCIncorporationNumber = bceidBusiness.incorporationNumber;
                 }
-
-                // sets Business type with numerical value found in Adoxio_applicanttypecodes
-                // using account.businessType which is set in bceid-confirmation.component.ts
-                account.AdoxioBusinesstype = (int)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true);
-
-                var legalEntity = new MicrosoftDynamicsCRMadoxioLegalentity
-                {
-                    AdoxioAccount = account,
-                    AdoxioName = item.name,
-                    AdoxioIsindividual = 0,
-                    AdoxioIsapplicant = true,
-                    AdoxioLegalentitytype = account.AdoxioBusinesstype
-                };
-
-                string legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogDebug("Legal Entity before creation in dynamics --> " + legalEntityString);
 
                 try
                 {
-                    legalEntity = await _dynamicsClient.Legalentities.CreateAsync(legalEntity);
+                    var newAccountId = await _dataverse.CreateAccountAsync(account);
+                    accountId = newAccountId.ToString();
+                    account.Id = newAccountId;
                 }
-                catch (HttpOperationException httpOperationException)
+                catch (Exception e)
                 {
-                    string legalEntityId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                    if (!string.IsNullOrEmpty(legalEntityId) && Guid.TryParse(legalEntityId, out Guid legalEntityGuid))
-                    {
-                        legalEntity = await _dynamicsClient.GetLegalEntityById(legalEntityGuid);
-                    }
-                    else
-                    {
-                        _logger.LogError(httpOperationException, "Error creating legal entity. ");
-                        throw new HttpOperationException("Error creating legal entitiy");
-                    }
+                    _logger.LogError(e, "Error creating account.");
+                    throw new Exception("Error creating account.");
+                }
+
+                // create legal entity linked to the new account
+                var legalEntity = new DvLegalEntity
+                {
+                    adoxio_Account = new Microsoft.Xrm.Sdk.EntityReference(DvAccount.EntityLogicalName, account.Id),
+                    adoxio_name = item.name,
+                    adoxio_IsIndividual = DvAdoxioGeneralYesNo.No,
+                    adoxio_IsApplicant = true,
+                    adoxio_LegalEntityType = (DvAdoxioApplicantTypeCodes)Enum.Parse(typeof(AdoxioApplicantTypeCodes), item.businessType, true)
+                };
+
+                try
+                {
+                    await _dataverse.CreateLegalEntityAsync(legalEntity);
                 }
                 catch (Exception e)
                 {
@@ -611,141 +588,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw new Exception("Error creating legal entity.");
                 }
 
-                account.Accountid = legalEntity._adoxioAccountValue;
-
-                if (string.IsNullOrEmpty(userContact.Contactid))
+                // create or get the contact
+                if (userContact.Id == Guid.Empty)
                 {
-                    // create the contact.
                     try
                     {
-                        var createdContact = _dynamicsClient.Contacts.Create(userContact);
-                        userContact.Contactid = createdContact.Contactid;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error creating contact for account");
-                        throw new HttpOperationException("Error creating contact for account");
-                    }
-
-                }
-
-                // create the account primary contact relationship.
-                if (mustCreateContactToAccountLink)
-                {
-                    var patchContact = new MicrosoftDynamicsCRMcontact()
-                    {
-                        ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid),
-
-                    };
-                    try
-                    {
-                        _dynamicsClient.Contacts.Update(userContact.Contactid, patchContact);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error setting primary contact link for contact");
-                        throw new HttpOperationException("Error setting primary contact link for contact");
-
+                        var newContactId = await _dataverse.CreateContactAsync(userContact);
+                        contactId = newContactId.ToString();
+                        userContact.Id = newContactId;
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, "Error binding account to contact");
-                        throw new Exception("Error binding account to contact");
+                        _logger.LogError(e, "Error creating contact for account.");
+                        throw new Exception("Error creating contact for account");
                     }
-
-                    Odataid contactId = new Odataid()
-                    {
-                        OdataidProperty = _dynamicsClient.GetEntityURI("contacts", userContact.Contactid)
-                    };
-                    try
-                    {
-                        _dynamicsClient.Accounts.AddReferenceWithHttpMessagesAsync(account.Accountid, "contact_customer_accounts", contactId);
-                        _dynamicsClient.Accounts.AddReferenceWithHttpMessagesAsync(account.Accountid, "primarycontactid", contactId);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error setting primary contact link for account");
-                        throw new HttpOperationException("Error setting primary contact link for account");
-
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error binding account to contact");
-                        throw new Exception("Error binding account to contact");
-                    }
-
                 }
-
-                // create the sharepoint document location for the account
-
-                var accountFolderName = await _dynamicsClient.GetFolderName("account", account.Accountid).ConfigureAwait(true);
-
-                // create the folder for the account
-
-                _dynamicsClient.CreateEntitySharePointDocumentLocation("account", account.Accountid, accountFolderName, accountFolderName);
-
-                // fetch the account and get the created contact.
-                if (legalEntity.AdoxioAccount == null)
+                else
                 {
-                    legalEntity.AdoxioAccount = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(account.Accountid));
+                    contactId = userContact.Id.ToString();
                 }
 
-
-
-                legalEntityString = JsonConvert.SerializeObject(legalEntity);
-                _logger.LogDebug("Legal Entity after creation in dynamics --> " + legalEntityString);
-
+                // link contact to account
                 try
                 {
-                    // Create the singletone cannabis tied house connection record for the user account
-                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(account.Accountid, null);
+                    await _dataverse.SetContactParentAccountAsync(contactId, accountId);
+                    await _dataverse.SetAccountPrimaryContactAsync(accountId, contactId);
                 }
-                catch (HttpOperationException httpOperationException)
+                catch (Exception e)
                 {
-                    string tiedHouseId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                    if (string.IsNullOrEmpty(tiedHouseId))
-                    {
-                        _logger.LogError(httpOperationException, $"Error creating Cannabis Tied house connection for account {account.Accountid}.");
-                        throw new HttpOperationException("Error creating Cannabis Tied house connection.");
-                    }
-                }
-                catch (Exception exception)
-                {
-                    _logger.LogError(exception, $"Error creating Cannabis Tied house connection for account {account.Accountid}.");
-                    throw new Exception("Error creating Cannabis Tied house connection.");
+                    _logger.LogError(e, "Error binding contact to account.");
+                    throw new Exception("Error binding contact to account");
                 }
 
-                // call the web service
-                var createFolderRequest = new CreateFolderRequest
+                // create the SharePoint document location for the account
+                var accountIdCleaned = accountId.ToUpper().Replace("-", "");
+                var accountFolderName = $"{account.Name}_{accountIdCleaned}";
+
+                await _dataverse.CreateAccountSharePointDocLocAsync(accountId, accountFolderName, accountFolderName);
+
+                // create the folder in SharePoint
+                _fileManagerClient.CreateFolder(new CreateFolderRequest
                 {
                     EntityName = "account",
                     FolderName = accountFolderName
-                };
+                });
 
-                _fileManagerClient.CreateFolder(createFolderRequest);
-
+                // create the singleton cannabis tied house connection record for the user account
+                try
+                {
+                    await _tiedHouseConnectionsRepository.UpsertCannabisTiedHouseConnection(accountId, null);
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(exception, $"Error creating Cannabis Tied house connection for account {accountId}.");
+                    throw new Exception("Error creating Cannabis Tied house connection.");
+                }
             }
-            else // it is a new user only.
+            else // existing account, new user only
             {
+                accountId = account.Id.ToString();
+
                 if (createContact)
                 {
                     _logger.LogDebug(LoggingEvents.HttpGet, "Account is NOT null. Only a new user.");
                     try
                     {
-                        userContact = await _dynamicsClient.Contacts.CreateAsync(userContact);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        string contactId = _dynamicsClient.GetCreatedRecord(httpOperationException, null);
-                        if (!string.IsNullOrEmpty(contactId) && Guid.TryParse(contactId, out Guid contactGuid))
-                        {
-                            userContact = await _dynamicsClient.GetContactById(contactGuid);
-                        }
-                        else
-                        {
-                            _logger.LogError(httpOperationException, "Error creating contact. ");
-                            throw new Exception("Error creating contact");
-                        }
+                        var newContactId = await _dataverse.CreateContactAsync(userContact);
+                        contactId = newContactId.ToString();
+                        userContact.Id = newContactId;
                     }
                     catch (Exception e)
                     {
@@ -753,41 +663,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         throw new Exception("Error creating contact");
                     }
                 }
+                else
+                {
+                    contactId = userContact.Id.ToString();
+                }
             }
-
 
             _logger.LogDebug(LoggingEvents.Save, "Patching the userContact so it relates to the account.");
-            // parent customer id relationship will be created using the method here:
-            //https://msdn.microsoft.com/en-us/library/mt607875.aspx
-            MicrosoftDynamicsCRMcontact patchUserContact = new MicrosoftDynamicsCRMcontact();
-            patchUserContact.ParentCustomerIdAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
             try
             {
-                await _dynamicsClient.Contacts.UpdateAsync(userContact.Contactid, patchUserContact);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error binding contact to account. ");
-                throw new Exception("Error binding contact to account");
+                await _dataverse.SetContactParentAccountAsync(contactId, accountId);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Error binding contact to account");
+                _logger.LogError(e, "Error binding contact to account.");
                 throw new Exception("Error binding contact to account");
             }
 
             // create the bridge entity for login.
-
             if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
             {
-                _dynamicsClient.UpdateContactBridgeLogin(userContact.Contactid, contactSiteminderGuid, account.Accountid, accountSiteminderGuid);
+                await _dataverse.UpdateContactBridgeLoginAsync(contactId, contactSiteminderGuid, accountId, accountSiteminderGuid);
             }
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
             {
-                userSettings.AccountId = account.Accountid;
-                userSettings.ContactId = userContact.Contactid;
+                userSettings.AccountId = accountId;
+                userSettings.ContactId = contactId;
 
                 // we can now authenticate.
                 if (userSettings.AuthenticatedUser == null)
@@ -806,22 +709,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 // Delete the newUserClaim and add the ExistingUser claim to allow logged in user access to authorized services
                 var identity = HttpContext.User.Identity as ClaimsIdentity;
 
-                //
                 var newUserClaim = identity.FindFirst(Permission.NewUserRegistration);
                 if (newUserClaim != null)
                 {
-                    identity.RemoveClaim(newUserClaim); // User has complete registration, remove new user permission
+                    identity.RemoveClaim(newUserClaim);
                 }
 
-                //Add existing user claim
                 identity.AddClaim(new Claim("permission_claim", Permission.ExistingUser));
-                //Add the updated identity to the HttpContext
                 HttpContext.User.AddIdentity(identity);
 
                 string userSettingsString = JsonConvert.SerializeObject(userSettings);
                 _logger.LogDebug("userSettingsString --> " + userSettingsString);
 
-                // add the user to the session.
                 _httpContextAccessor.HttpContext.Session.SetString("UserSettings", userSettingsString);
                 _logger.LogDebug("user added to session. ");
             }
@@ -831,7 +730,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Invalid user registration.");
             }
 
-            //account.accountId = id;
             result = account.ToViewModel();
 
             _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
@@ -872,37 +770,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            // get the legal entity.
             Guid accountId = new Guid(id);
 
-            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            if (!await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(accountId, _httpContextAccessor, _dataverse))
             {
                 _logger.LogError(LoggingEvents.BadRequest, "Current user has NO access to the account.");
                 return NotFound();
             }
 
-            MicrosoftDynamicsCRMaccount adoxioAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
+            DvAccount adoxioAccount = await _dataverse.GetAccountByIdAsync(id);
             if (adoxioAccount == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
 
-            // we are doing a patch, so wipe out the record.
-            adoxioAccount = new MicrosoftDynamicsCRMaccount();
-
-            // copy values over from the data provided
-            Boolean copyIfNull = true;
-            adoxioAccount.CopyValues(item, copyIfNull);
+            // patch - create a new entity with only the changed values
+            adoxioAccount = new DvAccount();
+            adoxioAccount.CopyValues(item, copyIfNull: true);
+            adoxioAccount.Id = accountId;
 
             try
             {
-                await _dynamicsClient.Accounts.UpdateAsync(accountId.ToString(), adoxioAccount);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error updating the account. ");
-                throw new Exception("Error updating the account.");
+                await _dataverse.UpdateAccountAsync(adoxioAccount);
             }
             catch (Exception e)
             {
@@ -930,293 +820,154 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // verify the currently logged in user has access to this account
             Guid accountId = new Guid(id);
-            if (!DynamicsExtensions.CurrentUserHasAccessToAccount(accountId, _httpContextAccessor, _dynamicsClient))
+            if (!await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(accountId, _httpContextAccessor, _dataverse))
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Current user has NO access to the account.");
                 return new NotFoundResult();
             }
 
-            // get the account
-            MicrosoftDynamicsCRMaccount account = _dynamicsClient.GetAccountByIdWithChildren(id);
+            // verify the account exists
+            DvAccount account = await _dataverse.GetAccountByIdAsync(id);
             if (account == null)
             {
                 _logger.LogWarning(LoggingEvents.NotFound, "Account NOT found.");
                 return new NotFoundResult();
             }
 
-            if (account.AdoxioAccountAdoxioLegalentityAccount != null)
+            // delete legal entities
+            var legalEntities = await _dataverse.GetLegalEntitiesByAccountIdAsync(id);
+            foreach (var le in legalEntities)
             {
-                foreach (var le in account.AdoxioAccountAdoxioLegalentityAccount)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Legalentities.Delete(le.AdoxioLegalentityid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.AdoxioLegalentityid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Legal Entity: ");
-                        throw new Exception("Error deleting the Legal Entity");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Legal Entity");
-                        throw new Exception("Error deleting the Legal Entity");
-                    }
+                    await _dataverse.DeleteLegalEntityAsync(le.Id.ToString());
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Legal Entity deleted: " + le.Id);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Legal Entity");
+                    throw new Exception("Error deleting the Legal Entity");
                 }
             }
 
-            if (account.AdoxioAccountAdoxioEstablishmentLicencee != null)
+            // delete establishments
+            var establishments = await _dataverse.GetEstablishmentsByAccountIdAsync(id);
+            foreach (var establishment in establishments)
             {
-                // adoxio_account_adoxio_establishment_Licencee
-                foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Establishments.Delete(establishment.AdoxioEstablishmentid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Establishment deleted: " + establishment.AdoxioEstablishmentid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Establishment: ");
-                        throw new Exception("Error deleting the Establishment");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Establishment");
-                        throw new Exception("Error deleting the Establishment");
-                    }
+                    await _dataverse.DeleteEstablishmentAsync(establishment.Id.ToString());
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Establishment deleted: " + establishment.Id);
                 }
-
-            }
-
-            if (account.AdoxioAccountAdoxioApplicationApplicant != null)
-            {
-                // adoxio_account_adoxio_establishment_Licencee
-                foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
+                catch (Exception e)
                 {
-                    try
-                    {
-                        _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + application.AdoxioApplicationid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
-                        throw new Exception("Error deleting the Application");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Application");
-                        throw new Exception("Error deleting the Application");
-                    }
+                    _logger.LogError(e, "Error deleting the Establishment");
+                    throw new Exception("Error deleting the Establishment");
                 }
             }
 
-            if (account.AdoxioLicenseechangelogParentBusinessAccount != null)
+            // delete changelogs
+            var changelogIds = await _dataverse.GetLicenseeChangelogIdsByAccountIdAsync(id);
+            foreach (var changelogId in changelogIds)
             {
-                // change logs
-                foreach (var changelog in account.AdoxioLicenseechangelogParentBusinessAccount)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Changelog: ");
-                        throw new Exception("Error deleting the Changelog");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Changelog");
-                        throw new Exception("Error deleting the Changelog");
-                    }
+                    await _dataverse.DeleteByLogicalNameAsync("adoxio_licenseechangelog", changelogId);
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Changelog deleted: " + changelogId);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Changelog");
+                    throw new Exception("Error deleting the Changelog");
                 }
             }
 
-            if (account.AdoxioLicenseechangelogBusinessAccount != null)
+            // delete licences
+            var licences = await _dataverse.GetLicencesByAccountIdAsync(id);
+            foreach (var licence in licences)
             {
-                // change logs
-                foreach (var changelog in account.AdoxioLicenseechangelogBusinessAccount)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
-                        throw new Exception("Error deleting the Changelog");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Changelog");
-                        throw new Exception("Error deleting the Changelog");
-                    }
+                    await _dataverse.DeleteLicenceAsync(licence.Id.ToString());
+                    _logger.LogDebug(LoggingEvents.HttpDelete, "Licence deleted: " + licence.Id);
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Licence");
+                    throw new Exception("Error deleting the Licence");
                 }
             }
 
-            if (account.AdoxioLicenseechangelogShareholderBusinessAccount != null)
+            // delete contacts
+            var contacts = await _dataverse.GetContactsByAccountIdAsync(id);
+            foreach (var contact in contacts)
             {
-                // change logs
-                foreach (var changelog in account.AdoxioLicenseechangelogShareholderBusinessAccount)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Licenseechangelogs.Delete(changelog.AdoxioLicenseechangelogid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "Application deleted: " + changelog.AdoxioLicenseechangelogid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Application: ");
-                        throw new Exception("Error deleting the Application");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Changelog");
-                        throw new Exception("Error deleting the Changelog");
-                    }
+                    await _dataverse.DeleteContactAsync(contact.Id.ToString());
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Contact");
+                    throw new Exception("Error deleting the Contact");
                 }
             }
 
-
-            if (account.AdoxioAccountAdoxioLicencesLicencee != null)
+            // delete applications and their invoices
+            var applications = await _dataverse.GetApplicationsByAccountIdAsync(id);
+            foreach (var application in applications)
             {
-                // delete related licences
-                foreach (var license in account.AdoxioAccountAdoxioLicencesLicencee)
+                try
                 {
-                    try
+                    var fullApplication = await _dataverse.GetApplicationByIdWithChildrenAsync(application.Id.ToString());
+                    if (fullApplication?.adoxio_Invoice != null)
                     {
-                        _dynamicsClient.Licenseechangelogs.Delete(license.AdoxioLicencesid);
-                        _logger.LogDebug(LoggingEvents.HttpDelete, "License deleted: " + license.AdoxioLicencesid);
+                        await _dataverse.DeleteInvoiceAsync(fullApplication.adoxio_Invoice.Id.ToString());
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the License: ");
-                        throw new Exception("Error deleting the License");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the License");
-                        throw new Exception("Error deleting the License");
-                    }
+                    await _dataverse.DeleteApplicationAsync(application.Id.ToString());
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the application");
+                    throw new Exception("Error deleting the application");
                 }
             }
 
-            if (account.ContactCustomerAccounts != null)
+            // delete tied house connections
+            var tiedHouseConnections = await _dataverse.GetTiedHouseConnectionsByAccountIdAsync(id);
+            foreach (var connection in tiedHouseConnections)
             {
-                foreach (var contact in account.ContactCustomerAccounts)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Contacts.Delete(contact.Contactid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Contact: ");
-                        throw new Exception("Error deleting the Contact");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Contact");
-                        throw new Exception("Error deleting the Contact");
-                    }
+                    await _tiedHouseConnectionsRepository.DeleteTiedHouseConnectionById(connection.Id.ToString());
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the Tied house connection");
+                    throw new Exception("Error deleting the Tied house connection");
                 }
             }
-
-            // applications
-            if (account.AdoxioAccountAdoxioApplicationApplicant != null)
-            {
-                foreach (var application in account.AdoxioAccountAdoxioApplicationApplicant)
-                {
-                    try
-                    {
-                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication = await _dynamicsClient.GetApplicationByIdWithChildren(application.AdoxioApplicationid);
-
-                        if (adoxioApplication?.AdoxioInvoice != null)
-                        {
-                            _dynamicsClient.Invoices.Delete(adoxioApplication.AdoxioInvoice.Invoiceid);
-                        }
-
-                        // TODO - add any other entities that might block a delete.
-
-                        _dynamicsClient.Applications.Delete(application.AdoxioApplicationid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the application");
-                        throw new Exception("Error deleting the application");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the application");
-                        throw new Exception("Error deleting the application");
-                    }
-                }
-            }
-
-
-            if (account.AdoxioAccountTiedhouseconnections != null)
-            {
-                foreach (var tiedHouseConnection in account.AdoxioAccountTiedhouseconnections)
-                {
-                    try
-                    {
-                        await _tiedHouseConnectionsRepository.DeleteTiedHouseConnectionById(
-                            tiedHouseConnection.AdoxioTiedhouseconnectionid
-                        );
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the Tied house connection");
-                        throw new Exception("Error deleting the Tied house connection");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the Tied house connection");
-                        throw new Exception("Error deleting the Tied house connection");
-                    }
-                }
-            }
-
 
             // delete SharePoint document locations
-
-            if (account.AccountSharepointDocumentLocation != null)
+            var docLocations = await _dataverse.GetSharePointDocLocsByObjectIdAsync(id);
+            foreach (var docLoc in docLocations)
             {
-                foreach (var sharePointDocumentLocations in account.AccountSharepointDocumentLocation)
+                try
                 {
-                    try
-                    {
-                        _dynamicsClient.Sharepointdocumentlocations.Delete(sharePointDocumentLocations.Sharepointdocumentlocationid);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error deleting the SharePoint Document Locations");
-                        throw new Exception("Error deleting the SharePoint Document Locations");
-                    }
-                    catch (Exception e)
-                    {
-                        _logger.LogError(e, "Error deleting the SharePoint Document Locations");
-                        throw new Exception("Error deleting the SharePoint Document Locations");
-                    }
+                    await _dataverse.DeleteSharePointDocLocAsync(docLoc.Id.ToString());
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Error deleting the SharePoint Document Locations");
+                    throw new Exception("Error deleting the SharePoint Document Locations");
                 }
             }
-
 
             // delete the account
             try
             {
-                await _dynamicsClient.Accounts.DeleteAsync(accountId.ToString());
+                await _dataverse.DeleteAccountAsync(id);
                 _logger.LogDebug(LoggingEvents.HttpDelete, "Account deleted: " + accountId);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error deleting the account: ");
-                throw new Exception("Error deleting the account");
             }
             catch (Exception e)
             {
@@ -1224,7 +975,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Error deleting the account");
             }
 
-            return Ok("OK"); // OK 
+            return Ok("OK");
         }
 
 
@@ -1243,24 +994,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // query the Dynamics system to get the account record.
             if (userSettings.AccountId != null)
             {
-
-                // call the bpf.
                 try
                 {
-                    // this needs to be the guid for the published workflow.
-                    await _dynamicsClient.Workflows.ExecuteWorkflowWithHttpMessagesAsync("df4e4623-a2f5-4e9f-a305-d8a578d1c49f", userSettings.AccountId);
+                    await _dataverse.ExecuteWorkflowAsync("df4e4623-a2f5-4e9f-a305-d8a578d1c49f", userSettings.AccountId);
                     return Ok("OK");
                 }
                 catch (Exception e)
                 {
-                    return StatusCode(500, $"ERROR executing workflow. {e.Message}");
                     _logger.LogError(e, "Error executing delete account workflow.");
+                    return StatusCode(500, $"ERROR executing workflow. {e.Message}");
                 }
-
             }
 
             return Ok("OK");
-
         }
 
         /// <summary>
@@ -1286,27 +1032,43 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound("No account found for the user.");
             }
 
-            var userType = userSettings.UserType;
+            var allLicences = await _dataverse.GetLicencesByAccountIdAsync(userSettings.AccountId);
+            var activeLicences = allLicences.Where(l => l.statecode == DV::Gov.Lclb.Cllb.Interfaces.adoxio_licences_statecode.Active).ToList();
 
-            var filter = $"_adoxio_licencee_value eq {userSettings.AccountId} and statecode eq 0";
-            var select = new List<string> { "adoxio_licencesid,adoxio_LicenceType,adoxio_expirydate,statuscode" };
-            var expand = new List<string> { "adoxio_LicenceType($select=adoxio_name,adoxio_category)" };
+            // fetch unique licence types
+            var licenceTypeIds = activeLicences
+                .Where(l => l.adoxio_LicenceType != null)
+                .Select(l => l.adoxio_LicenceType.Id.ToString())
+                .Distinct()
+                .ToList();
 
-            var licences = await _dynamicsClient.Licenceses.GetAsync(filter: filter, select: select, expand: expand);
+            var licenceTypeCache = new Dictionary<string, DV::Gov.Lclb.Cllb.Interfaces.adoxio_licencetype>();
+            foreach (var typeId in licenceTypeIds)
+            {
+                var lt = await _dataverse.GetLicenceTypeByIdAsync(typeId);
+                if (lt != null)
+                    licenceTypeCache[typeId] = lt;
+            }
 
             var accountSummary = new AccountSummary
             {
                 accountId = userSettings.AccountId,
-                licences = licences
-                    .Value.Select(item => new AccountSummaryLicence
+                licences = activeLicences.Select(item =>
+                {
+                    DV::Gov.Lclb.Cllb.Interfaces.adoxio_licencetype licenceType = null;
+                    if (item.adoxio_LicenceType != null)
+                        licenceTypeCache.TryGetValue(item.adoxio_LicenceType.Id.ToString(), out licenceType);
+                    return new AccountSummaryLicence
                     {
-                        licenceId = item.AdoxioLicencesid,
-                        licenceType = item.AdoxioLicenceType?.AdoxioName,
-                        licenceTypeCategory = (LicenceTypeCategory)item.AdoxioLicenceType?.AdoxioCategory,
-                        expiryDate = item.AdoxioExpirydate,
-                        statusCode = item.Statuscode
-                    })
-                    .ToList(),
+                        licenceId = item.adoxio_licencesId?.ToString(),
+                        licenceType = licenceType?.adoxio_name,
+                        licenceTypeCategory = licenceType?.adoxio_Category != null
+                            ? (LicenceTypeCategory)(int)licenceType.adoxio_Category
+                            : (LicenceTypeCategory?)null,
+                        expiryDate = item.adoxio_ExpiryDate.HasValue ? (DateTimeOffset?)item.adoxio_ExpiryDate.Value : null,
+                        statusCode = (int?)item.statuscode
+                    };
+                }).ToList(),
                 applications = new List<AccountSummaryApplications>()
             };
 

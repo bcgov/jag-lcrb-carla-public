@@ -1,7 +1,6 @@
 extern alias DV;
 using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
-using Gov.Lclb.Cllb.Interfaces;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
@@ -219,7 +218,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
                     // Run every 10 minutes
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient).ExportFederalReports(null), "*/10 * * * *");
+                    var dataverseClient = serviceScope.ServiceProvider.GetRequiredService<IDataverseClient>();
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient, dataverseClient).ExportFederalReports(null), "*/10 * * * *");
 
                     log.LogInformation("Hangfire jobs setup.");
                 }

@@ -1,7 +1,6 @@
 extern alias DV;
 using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
-using Gov.Lclb.Cllb.Interfaces;
 using System;
 using Hangfire;
 using Hangfire.Console;

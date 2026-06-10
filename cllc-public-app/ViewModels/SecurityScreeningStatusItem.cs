@@ -24,5 +24,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public MicrosoftDynamicsCRMcontact Contact { get; set; }
         [JsonIgnore] //Exclude from json serialization
         public bool IsComplete { get; set; }
+        [JsonIgnore] //Exclude from json serialization
+        public bool PhsIsCompleted { get; set; }
+        [JsonIgnore] //Exclude from json serialization
+        public bool CasIsCompleted { get; set; }
     }
 }

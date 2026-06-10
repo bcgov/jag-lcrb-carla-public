@@ -1,4 +1,3 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Jag.Lcrb.OneStopService;
 using System;
 using System.IO;
@@ -9,23 +8,14 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
 {
     public class ProgramAccountDetailsBroadcast
     {
-
-        /**
-         * Create Program Details Broadcast.
-         * XML Message sent to the Hub broadcasting the details of the new cannabis licence issued.
-         * The purpose is to broadcast licence details to partners subscribed to the Hub
-         */
-        public string CreateXML(MicrosoftDynamicsCRMadoxioLicences licence)
+        public string CreateXML(OneStopLicenceData licence)
         {
             if (licence == null)
-            {
                 throw new Exception("The licence can not be null");
-            }
 
-            if (licence.AdoxioLicencee == null)
-            {
-                throw new Exception("The licence must have an AdoxioLicencee");
-            }
+            if (licence.Licencee == null)
+                throw new Exception("The licence must have a Licencee");
+
             var programAccountDetailsBroadcast = new SBNProgramAccountDetailsBroadcast1();
             programAccountDetailsBroadcast.header = GetProgramAccountDetailsBroadcastHeader(licence);
             programAccountDetailsBroadcast.body = GetProgramAccountDetailsBroadcastBody(licence);
@@ -38,262 +28,158 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             }
         }
 
-        private SBNProgramAccountDetailsBroadcastHeader GetProgramAccountDetailsBroadcastHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastHeader GetProgramAccountDetailsBroadcastHeader(OneStopLicenceData licence)
         {
             var header = new SBNProgramAccountDetailsBroadcastHeader();
-
             header.requestMode = OneStopUtils.ASYNCHRONOUS;
             header.documentSubType = OneStopUtils.DOCUMENT_SUBTYPE;
             header.senderID = OneStopUtils.SENDER_ID;
             header.receiverID = OneStopUtils.RECEIVER_ID;
-            //any note wanted by LCRB. Currently in liquor is: licence Id, licence number - sequence number
-            header.partnerNote = licence.AdoxioLicencenumber;
-
+            header.partnerNote = licence.LicenceNumber;
             header.CCRAHeader = GetCCRAHeader(licence);
-
             return header;
         }
 
-        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeader GetCCRAHeader(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeader GetCCRAHeader(OneStopLicenceData licence)
         {
             var ccraHeader = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeader();
-
             ccraHeader.userApplication = OneStopUtils.USER_APPLICATION;
             ccraHeader.userRole = OneStopUtils.USER_ROLE;
             ccraHeader.userCredentials = GetUserCredentials(licence);
-
             return ccraHeader;
         }
 
-        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials GetUserCredentials(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials GetUserCredentials(OneStopLicenceData licence)
         {
             var userCredentials = new SBNProgramAccountDetailsBroadcastHeaderCCRAHeaderUserCredentials();
+            userCredentials.businessRegistrationNumber = licence.Licencee.AccountNumber;
+            userCredentials.legalName = licence.Licencee.Name;
+            if (licence.Establishment != null)
+                userCredentials.postalCode = Utils.FormatPostalCode(licence.Establishment.AddressPostalCode);
 
-            //BN9 of licensee (Owner company)
-            userCredentials.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
-            //the name of the applicant (licensee)- last name, first name middle initial or company name
-            userCredentials.legalName = licence.AdoxioLicencee.Name;
-            //establishment (physical location of store)
-            if (licence.AdoxioEstablishment != null)
-            {
-                userCredentials.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
-            }
-            
-            //last name of sole proprietor (if not sole prop then null)
-            if (licence.AdoxioLicencee != null && licence.AdoxioLicencee.Primarycontactid != null && !string.IsNullOrEmpty(licence.AdoxioLicencee.Primarycontactid.Lastname))
-            {
-                userCredentials.lastName = licence.AdoxioLicencee.Primarycontactid.Lastname;
-            }
+            if (!string.IsNullOrEmpty(licence.Licencee.PrimaryContactLastName))
+                userCredentials.lastName = licence.Licencee.PrimaryContactLastName;
             else
-            {
                 userCredentials.lastName = "N/A";
-            }
-
 
             return userCredentials;
         }
 
-        string GetPrimaryContact(MicrosoftDynamicsCRMadoxioLicences licence)
+        private string GetPrimaryContact(OneStopLicenceData licence)
         {
-            // first create an XML object.
             var primaryContactDetails = new PrimaryContactDetails();
-
-            if (licence.AdoxioLicencee != null)
+            if (licence.Licencee != null)
             {
-                primaryContactDetails.name = licence.AdoxioLicencee.Name;
-                primaryContactDetails.email = licence.AdoxioLicencee.Emailaddress1;
-
-                // 2019-07-11 - LDB has requested that the phone number only contain digits.
-
-                string phoneDigitsOnly = "";
-
-                if (licence.AdoxioLicencee.Telephone1 != null)
-                {
-                    phoneDigitsOnly = Regex.Replace(licence.AdoxioLicencee.Telephone1, "[^0-9]", "");
-                }
-
-
+                primaryContactDetails.name = licence.Licencee.Name;
+                primaryContactDetails.email = licence.Licencee.Email;
+                string phoneDigitsOnly = string.Empty;
+                if (licence.Licencee.Phone != null)
+                    phoneDigitsOnly = Regex.Replace(licence.Licencee.Phone, "[^0-9]", "");
                 primaryContactDetails.phone = phoneDigitsOnly;
             }
 
-            // convert the XML to a string.
             using (var stringwriter = new StringWriter())
             {
-
                 XmlSerializer serializer = new XmlSerializer(primaryContactDetails.GetType());
                 serializer.Serialize(stringwriter, primaryContactDetails);
                 return stringwriter.ToString();
             }
         }
 
-        private SBNProgramAccountDetailsBroadcastBody GetProgramAccountDetailsBroadcastBody(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBody GetProgramAccountDetailsBroadcastBody(OneStopLicenceData licence)
         {
-            var programAccountDetailsBroadcastBody = new SBNProgramAccountDetailsBroadcastBody();
+            var body = new SBNProgramAccountDetailsBroadcastBody();
+            body.businessRegistrationNumber = licence.Licencee.AccountNumber;
+            body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
+            body.businessProgramAccountReferenceNumber = licence.BusinessProgramAccountReferenceNumber;
 
-            // BN9
-            programAccountDetailsBroadcastBody.businessRegistrationNumber = licence.AdoxioLicencee.Accountnumber;
+            if (licence.LicenceType?.OneStopProgramAccountType != null)
+                body.SBNProgramTypeCode = licence.LicenceType.OneStopProgramAccountType.ToString();
+            else if ("Cannabis Retail Store" == licence.LicenceType?.Name)
+                body.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
 
-            // this code identifies that the message is from LCRB.  It's the same in every message from LCRB
-            programAccountDetailsBroadcastBody.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
+            body.businessCore = GetBusinessCore(licence);
+            body.programAccountStatus = GetProgramAccountStatus(licence);
+            body.legalName = licence.Licencee.Name;
+            body.operatingName = GetOperatingName(licence);
+            body.businessAddress = GetBusinessAddress(licence);
+            body.mailingAddress = GetMailingAddress(licence);
+            body.partnerInfo1 = licence.LicenceNumber;
+            body.partnerInfo3 = GetPrimaryContact(licence);
 
-            // reference number received on SBNCreateProgramAccountResponseBody.businessProgramAccountReferenceNumber
-            programAccountDetailsBroadcastBody.businessProgramAccountReferenceNumber = licence.AdoxioBusinessprogramaccountreferencenumber;
+            if (licence.ExpiryDate != null)
+                body.expiryDate = licence.ExpiryDate.Value.ToString("yyyy-MM-dd");
 
-            // Set the SBNProgramTypeCode to the value specified in the licence -> licenceType record.
-
-            if (licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype != null)
-            {
-                programAccountDetailsBroadcastBody.SBNProgramTypeCode = licence?.AdoxioLicenceType?.AdoxioOnestopprogramaccounttype.ToString();
-            }
-            else
-            {
-                if ("Cannabis Retail Store" == licence?.AdoxioLicenceType?.AdoxioName)
-                {
-                    programAccountDetailsBroadcastBody.SBNProgramTypeCode = OneStopUtils.PROGRAM_TYPE_CODE_CANNABIS_RETAIL_STORE;
-                }
-
-            }
-
-
-            programAccountDetailsBroadcastBody.businessCore = GetBusinessCore(licence);
-
-            programAccountDetailsBroadcastBody.programAccountStatus = GetProgramAccountStatus(licence);
-
-            // the legal name of the establishment
-            programAccountDetailsBroadcastBody.legalName = licence.AdoxioLicencee.Name;
-
-            programAccountDetailsBroadcastBody.operatingName = GetOperatingName(licence);
-
-            programAccountDetailsBroadcastBody.businessAddress = GetBusinessAddress(licence);
-
-            programAccountDetailsBroadcastBody.mailingAddress = GetMailingAddress(licence);
-
-            // licence number
-            programAccountDetailsBroadcastBody.partnerInfo1 = licence.AdoxioLicencenumber;
-
-            programAccountDetailsBroadcastBody.partnerInfo3 = GetPrimaryContact(licence);
-
-            // licence subtype code – not applicable to cannabis
-            //programAccountDetailsBroadcastBody.partnerInfo2 = "ToGetFromDynamics";
-
-            // licence expiry date
-            if (licence.AdoxioExpirydate != null)
-            {
-                programAccountDetailsBroadcastBody.expiryDate = licence.AdoxioExpirydate.Value.ToString("yyyy-MM-dd");
-            }
-
-            return programAccountDetailsBroadcastBody;
+            return body;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyBusinessCore GetBusinessCore(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyBusinessCore GetBusinessCore(OneStopLicenceData licence)
         {
             var businessCore = new SBNProgramAccountDetailsBroadcastBodyBusinessCore();
-
-            //always 01 for our requests
             businessCore.programAccountTypeCode = OneStopUtils.PROGRAM_ACCOUNT_TYPE_CODE;
-            //licence number - dash sequence number. Sequence is always 1
-            businessCore.crossReferenceProgramNumber = licence.AdoxioLicencenumber;
-
+            businessCore.crossReferenceProgramNumber = licence.LicenceNumber;
             return businessCore;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyProgramAccountStatus GetProgramAccountStatus(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyProgramAccountStatus GetProgramAccountStatus(OneStopLicenceData licence)
         {
             var programAccountStatus = new SBNProgramAccountDetailsBroadcastBodyProgramAccountStatus();
-
             programAccountStatus.programAccountStatusCode = OneStopUtils.PROGRAM_ACCOUNT_STATUS_CODE_ACTIVE;
-            //effective date of the licence (the date licence is issued or a future date if the licensee specifies a date they want the licence to start
-            programAccountStatus.effectiveDate = DateTime.Now; //ToGetFromDynamics. Current date time for test purpose
-
+            programAccountStatus.effectiveDate = DateTime.Now;
             return programAccountStatus;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyOperatingName GetOperatingName(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyOperatingName GetOperatingName(OneStopLicenceData licence)
         {
             var operatingName = new SBNProgramAccountDetailsBroadcastBodyOperatingName();
-
-
-            //store name
-
-            if (licence.AdoxioEstablishment != null)
-            {
-                operatingName.operatingName = licence.AdoxioEstablishment.AdoxioName;
-            }
-
-            
-            //only ever have 1 operating name
+            if (licence.Establishment != null)
+                operatingName.operatingName = licence.Establishment.Name;
             operatingName.operatingNamesequenceNumber = OneStopUtils.OPERATING_NAME_SEQUENCE_NUMBER;
-
             return operatingName;
         }
 
-        /**
-         * Business Address (physical location of the store)
-         */
-        private SBNProgramAccountDetailsBroadcastBodyBusinessAddress GetBusinessAddress(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyBusinessAddress GetBusinessAddress(OneStopLicenceData licence)
         {
-            //physical location of the store
             var businessAddress = new SBNProgramAccountDetailsBroadcastBodyBusinessAddress();
-
             businessAddress.foreignLegacy = GetForeignLegacyBusiness(licence);
-
-            if (licence.AdoxioEstablishment != null)
+            if (licence.Establishment != null)
             {
-                businessAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
-                businessAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+                businessAddress.municipality = licence.Establishment.AddressCity;
+                businessAddress.postalCode = Utils.FormatPostalCode(licence.Establishment.AddressPostalCode);
             }
-
-            
             businessAddress.provinceStateCode = "BC";
-
             businessAddress.countryCode = "CA";
-
             return businessAddress;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyBusinessAddressForeignLegacy GetForeignLegacyBusiness(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyBusinessAddressForeignLegacy GetForeignLegacyBusiness(OneStopLicenceData licence)
         {
             var foreignLegacy = new SBNProgramAccountDetailsBroadcastBodyBusinessAddressForeignLegacy();
-            if (licence.AdoxioEstablishment != null)
-            {
-                foreignLegacy.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
-            }
-            //foreignLegacy.addressDetailLine2 = "ToGetFromDynamics";
-
+            if (licence.Establishment != null)
+                foreignLegacy.addressDetailLine1 = licence.Establishment.AddressStreet;
             return foreignLegacy;
         }
 
-        /**
-         * Mailing Address (for the licence)
-         */
-        private SBNProgramAccountDetailsBroadcastBodyMailingAddress GetMailingAddress(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyMailingAddress GetMailingAddress(OneStopLicenceData licence)
         {
-            //mailing address for the licence
             var mailingAddress = new SBNProgramAccountDetailsBroadcastBodyMailingAddress();
-
             mailingAddress.foreignLegacy = GetForeignLegacyMailing(licence);
-
-            if (licence.AdoxioEstablishment != null)
+            if (licence.Establishment != null)
             {
-                mailingAddress.municipality = licence.AdoxioEstablishment.AdoxioAddresscity;
-                mailingAddress.postalCode = Utils.FormatPostalCode(licence.AdoxioEstablishment.AdoxioAddresspostalcode);
+                mailingAddress.municipality = licence.Establishment.AddressCity;
+                mailingAddress.postalCode = Utils.FormatPostalCode(licence.Establishment.AddressPostalCode);
             }
-
             mailingAddress.provinceStateCode = "BC";
             mailingAddress.countryCode = "CA";
-
             return mailingAddress;
         }
 
-        private SBNProgramAccountDetailsBroadcastBodyMailingAddressForeignLegacy GetForeignLegacyMailing(MicrosoftDynamicsCRMadoxioLicences licence)
+        private SBNProgramAccountDetailsBroadcastBodyMailingAddressForeignLegacy GetForeignLegacyMailing(OneStopLicenceData licence)
         {
             var foreignLegacyMailing = new SBNProgramAccountDetailsBroadcastBodyMailingAddressForeignLegacy();
-            if (licence.AdoxioEstablishment != null)
-            {
-                foreignLegacyMailing.addressDetailLine1 = licence.AdoxioEstablishment.AdoxioAddressstreet;
-            }
+            if (licence.Establishment != null)
+                foreignLegacyMailing.addressDetailLine1 = licence.Establishment.AddressStreet;
             return foreignLegacyMailing;
         }
-
     }
 }

@@ -1,12 +1,11 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-// TODO implement this with autorest
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -15,57 +14,38 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class ApplicationTypesController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
 
-        public ApplicationTypesController(IDynamicsClient dynamicsClient)
+        public ApplicationTypesController(IDataverseClient dataverse)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
         }
 
-        /// GET all licence types in Dynamics
         [HttpGet]
         public async Task<JsonResult> GetApplicationTypes()
         {
-            List<ApplicationType> applicationTypeVMList = new List<ApplicationType>();
-            // get all licence types in Dynamics
-            var adoxioApplicationTypes = await _dynamicsClient.Applicationtypes.GetAsync();
-
-            foreach (var applicationType in adoxioApplicationTypes.Value)
-            {
+            var applicationTypeVMList = new List<ApplicationType>();
+            var applicationTypes = await _dataverse.GetApplicationTypesAsync();
+            foreach (var applicationType in applicationTypes)
                 applicationTypeVMList.Add(applicationType.ToViewModel());
-            }
-
             return new JsonResult(applicationTypeVMList);
         }
 
-        /// GET a specific application type
         [HttpGet("{id}")]
         public async Task<ActionResult> GetApplicationType([FromRoute] string id)
         {
-            var applicationType = await _dynamicsClient.GetApplicationTypeById(id);
-            if (applicationType == null)
-            {
-                return new NotFoundResult();
-            }
-
+            var applicationType = await _dataverse.GetApplicationTypeByIdAsync(id);
+            if (applicationType == null) return new NotFoundResult();
             return new JsonResult(applicationType.ToViewModel());
-
         }
 
-        /// GET an application by name
         [HttpGet("GetByName/{name}")]
         [AllowAnonymous]
-        public ActionResult GetApplicationTypeByName([FromRoute] string name)
+        public async Task<ActionResult> GetApplicationTypeByName([FromRoute] string name)
         {
-            var applicationType = _dynamicsClient.GetApplicationTypeByName(name);
-            if (applicationType == null)
-            {
-                return new NotFoundResult();
-            }
-
+            var applicationType = await _dataverse.GetApplicationTypeByNameAsync(name);
+            if (applicationType == null) return new NotFoundResult();
             return new JsonResult(applicationType.ToViewModel());
-
         }
-
     }
 }

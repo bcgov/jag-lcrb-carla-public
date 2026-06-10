@@ -1,6 +1,8 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Collections.Generic;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -106,6 +108,27 @@ namespace Gov.Lclb.Cllb.Public.Models
 
 
             return result;
+        }
+
+        public static ApplicationType ToViewModel(this adoxio_applicationtype applicationType)
+        {
+            if (applicationType == null) return null;
+            return new ApplicationType
+            {
+                Id = applicationType.adoxio_applicationtypeId?.ToString(),
+                Name = applicationType.adoxio_name,
+                ActionText = applicationType.adoxio_ActionText,
+                Category = (ApplicationTypeCategory?)(int?)applicationType.adoxio_Category,
+                IsEndorsement = applicationType.adoxio_IsEndorsement,
+                IsRelocation = applicationType.adoxio_IsRelocation,
+                IsDefault = applicationType.adoxio_IsDefault,
+                IsStructural = applicationType.adoxio_IsStructuralChange,
+                ServiceAreas = applicationType.adoxio_ServiceAreas ?? false,
+                OutsideAreas = applicationType.adoxio_OutsideAreas ?? false,
+                CapacityArea = applicationType.adoxio_CapacityArea ?? false,
+                HasALRQuestion = applicationType.adoxio_HasALRQuestion ?? false,
+                ShowZoningDeclarations = applicationType.adoxio_ShowZoningDeclarations ?? false
+            };
         }
     }
 }

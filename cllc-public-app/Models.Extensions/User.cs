@@ -1,4 +1,6 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using System;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -8,12 +10,20 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class UserExtensions
     {
+        public static void FromContact(this User to, Contact from)
+        {
+            to.ContactId = from.Id;
+            to.AccountId = from.ParentCustomerId?.Id ?? Guid.Empty;
+            to.GivenName = from.FirstName;
+            to.Surname = from.LastName;
+            to.SmUserId = from.EmployeeId;
+            to.Email = from.EMailAddress1;
+            to.Active = true;
+        }
 
         /// <summary>
         /// Copy values from a Dynamics legal entity to another one
         /// </summary>
-        /// <param name="to"></param>
-        /// <param name="from"></param>
         public static void FromContact(this User to, MicrosoftDynamicsCRMcontact from)
         {
             if (from.Contactid != null)

@@ -1,8 +1,9 @@
-﻿
+﻿extern alias DV;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
 using System.Collections.Generic;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Utils
 {
@@ -262,6 +263,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
         public static string GetLicenceStatus(MicrosoftDynamicsCRMadoxioLicences licence, IList<MicrosoftDynamicsCRMadoxioApplication> applications)
         {
             LicenceStatusCodes status = (LicenceStatusCodes)licence.Statuscode;
+            return Enum.GetName(status.GetType(), status);
+        }
+
+        public static string GetLicenceStatus(adoxio_licences licence, IList<adoxio_application> applications)
+        {
+            if (licence.statuscode == null) return null;
+            var status = (LicenceStatusCodes)(int)licence.statuscode;
             return Enum.GetName(status.GetType(), status);
         }
     }

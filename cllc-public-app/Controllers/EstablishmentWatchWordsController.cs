@@ -1,7 +1,9 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -10,35 +12,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [AllowAnonymous]
     public class EstablishmentWatchWordsController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
 
-        public EstablishmentWatchWordsController(IDynamicsClient dynamicsClient)
+        public EstablishmentWatchWordsController(IDataverseClient dataverse)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
         }
 
         [HttpGet]
-        public IActionResult GetEstablishmentWatchWords()
+        public async Task<IActionResult> GetEstablishmentWatchWords()
         {
-            Dictionary<string, List<string>> returnVal = new Dictionary<string, List<string>>
+            var returnVal = new Dictionary<string, List<string>>
             {
-                {"forbidden", new List<string>()},
-                {"problematic", new List<string>()},
+                { "forbidden", new List<string>() },
+                { "problematic", new List<string>() },
             };
 
-            var watchWordsList = _dynamicsClient.Establishmentwatchwords.Get().Value;
+            var watchWordsList = await _dataverse.GetEstablishmentWatchWordsAsync();
 
             foreach (var word in watchWordsList)
             {
-                if ((bool)word.AdoxioForbidden)
+                if (word.adoxio_Forbidden == true)
                 {
-                    returnVal["forbidden"].Add(word.AdoxioName.ToLower());
+                    returnVal["forbidden"].Add(word.adoxio_name?.ToLower());
                 }
                 else
                 {
-                    returnVal["problematic"].Add(word.AdoxioName.ToLower());
+                    returnVal["problematic"].Add(word.adoxio_name?.ToLower());
                 }
-
             }
             return new JsonResult(returnVal);
         }

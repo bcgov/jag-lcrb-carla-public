@@ -1,56 +1,53 @@
-﻿
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using adoxio_ldborder = DV::Gov.Lclb.Cllb.Interfaces.adoxio_ldborder;
+using adoxio_licences = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licences;
+
+using CsvHelper;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
-using Microsoft.Extensions.Caching.Memory;
+using LdbOrdersService.Models;
 using Microsoft.Extensions.Configuration;
-
+using Microsoft.Xrm.Sdk;
+using Renci.SshNet;
 using Serilog;
 using System;
 using System.Collections.Generic;
-using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Renci.SshNet;
 using System.IO;
-using LdbOrdersService .Models;
 using System.Linq;
-using CsvHelper;
+using System.Threading.Tasks;
 
-namespace LdbOrdersService 
+namespace LdbOrdersService
 {
     public class LdbOrdersUtils
     {
-
         private IConfiguration Configuration { get; }
+        private readonly IDataverseClient _dataverse;
         private bool _debugMode = false;
-        public LdbOrdersUtils(IConfiguration configuration)
+
+        public LdbOrdersUtils(IConfiguration configuration, IDataverseClient dataverse)
         {
             Configuration = configuration;
-            if (!String.IsNullOrEmpty(Configuration["DEBUG_MODE"]))
+            _dataverse = dataverse;
+            if (!string.IsNullOrEmpty(Configuration["DEBUG_MODE"]))
             {
-                _debugMode = true; // enable debugging info.
+                _debugMode = true;
             }
         }
-
 
         byte[] ScpGetData(PerformContext hangfireContext)
         {
             string ldbUrl = Configuration["LDB_URL"];
             string lbUsername = Configuration["LDB_USERNAME"];
             string ldbPassword = Configuration["LDB_PASSWORD"];
-            // check that configuration is valid.
             if (string.IsNullOrEmpty(ldbUrl) ||
                 string.IsNullOrEmpty(lbUsername) ||
                 string.IsNullOrEmpty(ldbPassword))
             {
                 return null;
             }
-            byte[]  result;
 
-            // login to the scp service.
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine($"Connecting to SCP server {ldbUrl}");
@@ -74,23 +71,18 @@ namespace LdbOrdersService
                         {
                             hangfireContext.WriteLine($"Found file {file.FullName}");
                         }
-                        
                     }
-                    
                 }
                 sftp.Disconnect();
             }
 
-            result = null;
-            return result;
+            return null;
         }
 
-        // For test purposes read a file into a byte array.
         private byte[] TestGetFile()
         {
             string testFileName = Configuration["TEST_FILE_NAME"];
-            byte[] result = File.ReadAllBytes(testFileName);
-            return result;
+            return File.ReadAllBytes(testFileName);
         }
 
         private List<LdbOrderCsv> GetOrderCsvs(byte[] data)
@@ -101,8 +93,6 @@ namespace LdbOrdersService
             config.HasHeaderRecord = false;
             config.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
             config.ShouldSkipRecord = record => { return record.All(string.IsNullOrEmpty); };
-
-            // fix for unexpected spaces in header
             config.PrepareHeaderForMatch =
                 (string header, int index) => header = header.Trim();
 
@@ -111,24 +101,19 @@ namespace LdbOrdersService
                 using (var reader = new StreamReader(ms, true))
                 {
                     var csv = new CsvReader(reader, config);
-
                     try
                     {
                         ms.Seek(0, SeekOrigin.Begin);
-                        List<LdbOrderCsv> result = csv.GetRecords<LdbOrderCsv>().ToList();
-                        return result;
+                        return csv.GetRecords<LdbOrderCsv>().ToList();
                     }
                     catch (Exception e)
                     {
                         Log.Error(e, "Error parsing LDB Orders");
-
                         return null;
                     }
                 }
             }
         }
-
-    
 
         /// <summary>
         /// Hangfire job to check for and send recent items in the queue
@@ -136,21 +121,12 @@ namespace LdbOrdersService
         [AutomaticRetry(Attempts = 0)]
         public async Task CheckForLdbSales(PerformContext hangfireContext)
         {
-            IDynamicsClient dynamicsClient = null;
-            if (!string.IsNullOrEmpty(Configuration["DYNAMICS_ODATA_URI"]))
-            {
-                dynamicsClient = DynamicsSetupUtil.SetupDynamics(Configuration);
-            }
-            
             if (hangfireContext != null)
             {
                 hangfireContext.WriteLine("Starting check for LDB sales");
             }
 
             byte[] data = TestGetFile(); //ScpGetData(hangfireContext);
-
-            // parse the data.
-
             List<LdbOrderCsv> rows = GetOrderCsvs(data);
 
             foreach (var row in rows)
@@ -159,48 +135,40 @@ namespace LdbOrdersService
                 {
                     hangfireContext.WriteLine($"Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd} OrderTotal {row.OrderAmount}");
                 }
-                // lookup the licence.
-                if (dynamicsClient != null)
-                {
-                    var licence = dynamicsClient.GetLicenceByNumber(row.Licence.ToString());
-                    if (licence != null)
-                    {
-                        // create a row for the ldb orders.
-                        MicrosoftDynamicsCRMadoxioLdborder ldbOrder = new MicrosoftDynamicsCRMadoxioLdborder()
-                        {
-                            LicenceIdODataBind = dynamicsClient.GetEntityURI("adoxio_licenceses",licence.AdoxioLicencesid),
-                            AdoxioMonthstart = row.DateStart,
-                            AdoxioMonthend = row.DateEnd,
-                            AdoxioMonth = row.DateStart.Month,
-                            AdoxioYeartext = row.DateStart.Year.ToString(),
-                            AdoxioTotalsales = row.OrderAmount
-                        };
-                        try
-                        {
-                            dynamicsClient.Ldborders.Create(ldbOrder);
-                            if (hangfireContext != null)
-                            {
-                                hangfireContext.WriteLine($"Added Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            if (hangfireContext != null)
-                            {
-                                hangfireContext.WriteLine($"Error adding Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
-                            }
 
-                            Log.Error(e,
-                                $"Error adding Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
+                var licence = await _dataverse.GetLicenceByNumberAsync(row.Licence.ToString());
+                if (licence != null)
+                {
+                    var ldbOrder = new adoxio_ldborder()
+                    {
+                        adoxio_LicenceId = new EntityReference(adoxio_licences.EntityLogicalName, licence.Id),
+                        adoxio_MonthStart = row.DateStart,
+                        adoxio_MonthEnd = row.DateEnd,
+                        adoxio_Month = row.DateStart.Month,
+                        adoxio_YearText = row.DateStart.Year.ToString(),
+                        adoxio_TotalSales = row.OrderAmount
+                    };
+                    try
+                    {
+                        await _dataverse.CreateLdbOrderAsync(ldbOrder);
+                        if (hangfireContext != null)
+                        {
+                            hangfireContext.WriteLine($"Added Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
                         }
-                        
+                    }
+                    catch (Exception e)
+                    {
+                        if (hangfireContext != null)
+                        {
+                            hangfireContext.WriteLine($"Error adding Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
+                        }
+                        Log.Error(e,
+                            $"Error adding Order data for Licence {row.Licence} DateStart {row.DateStart} DateEnd {row.DateEnd}");
                     }
                 }
             }
 
             hangfireContext.WriteLine("End of check for new OneStop queue items");
         }
-
-
     }
 }

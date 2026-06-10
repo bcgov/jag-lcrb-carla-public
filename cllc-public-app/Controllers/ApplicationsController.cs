@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias DV;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -11,6 +12,9 @@ using System.Web;
 using Google.Protobuf.WellKnownTypes;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using adoxio_application_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application;
+using adoxio_application_statuscode = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_statuscode;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
@@ -43,6 +47,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -52,7 +57,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
+            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IDataverseClient dataverse,
+            FileManagerClient fileClient, IBCEPService bcep,
             IWebHostEnvironment env, IMemoryCache memoryCache,
             TiedHouseConnectionsRepository tiedHouseConnectionsRepository)
         {
@@ -60,6 +66,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
             _fileManagerClient = fileClient;
             _env = env;
@@ -1528,7 +1535,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (result?.ApplicationType?.Name == "Marketing"
                 && !string.IsNullOrEmpty(dynamicsApplication._adoxioApplicantValue))
             {
-                var tiedHouse = _tiedHouseConnectionsRepository
+                var tiedHouse = await _tiedHouseConnectionsRepository
                     .GetCannabisTiedHouseConnectionForUser(dynamicsApplication._adoxioApplicantValue);
                 if (tiedHouse != null)
                 {
@@ -2110,33 +2117,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/cancel")]
         public async Task<IActionResult> CancelApplication(string id)
         {
-            // get the application.
-            var applicationId = new Guid(id);
-
-            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
-            if (adoxioApplication == null) return new NotFoundResult();
-
-            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            var app = await _dataverse.GetApplicationByIdAsync(id);
+            if (app == null) return new NotFoundResult();
+            if (!CurrentUserHasAccessToApplicationOwnedBy(app.adoxio_Applicant?.Id.ToString()))
                 return new NotFoundResult();
 
-            // set the status to Terminated.
-            var patchRecord = new MicrosoftDynamicsCRMadoxioApplication
+            var patch = new adoxio_application_dv
             {
-                //StatusCodeODataBind = ((int)AdoxioApplicationStatusCodes.Terminated).ToString()
-                Statuscode = (int)AdoxioApplicationStatusCodes.Terminated
+                Id = new Guid(id),
+                statuscode = adoxio_application_statuscode.Terminated
             };
-
             try
             {
-                _dynamicsClient.Applications.Update(id, patchRecord);
+                await _dataverse.UpdateApplicationAsync(patch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error cancelling application");
-                // fail if we can't create.
-                throw httpOperationException;
+                _logger.LogError(ex, "Error cancelling application");
+                throw;
             }
-
 
             return NoContent(); // 204
         }
@@ -2221,18 +2220,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteApplication(string id)
         {
-            // get the application.
-            var applicationId = new Guid(id);
-
-            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
-            if (adoxioApplication == null) return new NotFoundResult();
-
-            if (!CurrentUserHasAccessToApplicationOwnedBy(adoxioApplication._adoxioApplicantValue))
+            var app = await _dataverse.GetApplicationByIdAsync(id);
+            if (app == null) return new NotFoundResult();
+            if (!CurrentUserHasAccessToApplicationOwnedBy(app.adoxio_Applicant?.Id.ToString()))
                 return new NotFoundResult();
-
-
-            await _dynamicsClient.Applications.DeleteAsync(applicationId.ToString());
-
+            await _dataverse.DeleteApplicationAsync(id);
             return NoContent(); // 204
         }
 
@@ -2313,16 +2305,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> DeleteCovidApplication(string id)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
-
-            // get the application.
-            var applicationId = new Guid(id);
-
-            var adoxioApplication = await _dynamicsClient.GetApplicationById(applicationId);
-            if (adoxioApplication == null) return new NotFoundResult();
-
-
-            await _dynamicsClient.Applications.DeleteAsync(applicationId.ToString());
-
+            var app = await _dataverse.GetApplicationByIdAsync(id);
+            if (app == null) return new NotFoundResult();
+            await _dataverse.DeleteApplicationAsync(id);
             return NoContent(); // 204
         }
 

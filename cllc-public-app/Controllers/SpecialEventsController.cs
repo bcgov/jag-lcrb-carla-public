@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias DV;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
@@ -23,6 +24,11 @@ using Gov.Lclb.Cllb.Public.Utils;
 using System.Text;
 using System.Threading.Tasks;
 using System.Net;
+using Microsoft.Xrm.Sdk;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DvSpecialEvent = DV::Gov.Lclb.Cllb.Interfaces.adoxio_specialevent;
+using adoxio_specialevent_statuscode = DV::Gov.Lclb.Cllb.Interfaces.adoxio_specialevent_statuscode;
+using adoxio_specialevent_adoxio_policeapproval = DV::Gov.Lclb.Cllb.Interfaces.adoxio_specialevent_adoxio_policeapproval;
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/special-events")]
@@ -32,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
         private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IWebHostEnvironment _env;
         private readonly FileManagerClient _fileManagerClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
@@ -40,13 +47,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IPdfService _pdfClient;
 
         public SpecialEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
+            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IDataverseClient dataverse,
+            FileManagerClient fileClient, IBCEPService bcep,
             IWebHostEnvironment env, IMemoryCache memoryCache, IPdfService pdfClient)
         {
             _cache = memoryCache;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
             _fileManagerClient = fileClient;
             _env = env;
@@ -958,7 +967,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateSpecialEvent([FromBody] ViewModels.SpecialEvent specialEvent)
+        public async Task<IActionResult> CreateSpecialEvent([FromBody] ViewModels.SpecialEvent specialEvent)
         {
             if (specialEvent == null)
             {
@@ -968,36 +977,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
+            var newSE = new DvSpecialEvent();
+            newSE.CopyValues(specialEvent);
+            newSE.adoxio_InvoiceTrigger = null;
+            newSE.statuscode = adoxio_specialevent_statuscode.Draft;
 
-            var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
-            newSpecialEvent.CopyValues(specialEvent);
-            // do not set the invoice trigger on create
-            newSpecialEvent.AdoxioInvoicetrigger = null;
-            newSpecialEvent.Statuscode = (int?)EventStatus.Draft;
+            if (Guid.TryParse(userSettings.AccountId, out var accountGuid) && accountGuid != Guid.Empty)
+                newSE.adoxio_AccountId = new EntityReference("account", accountGuid);
+            if (Guid.TryParse(userSettings.ContactId, out var contactGuid) && contactGuid != Guid.Empty)
+                newSE.adoxio_ContactId = new EntityReference("contact", contactGuid);
+            if (Guid.TryParse(specialEvent?.SepCity?.Id, out var cityGuid))
+                newSE.adoxio_SpecialEventCityDistrictId = new EntityReference("adoxio_sepcity", cityGuid);
 
-            if (!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
-            {
-                newSpecialEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
-            }
-            if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
-            {
-                newSpecialEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
-            }
-
-            if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
-            {
-                newSpecialEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
-            }
+            Guid createdId;
             try
             {
-                newSpecialEvent = _dynamicsClient.Specialevents.Create(newSpecialEvent);
-                specialEvent.Id = newSpecialEvent.AdoxioSpecialeventid;
+                createdId = await _dataverse.CreateSpecialEventAsync(newSE);
+                specialEvent.Id = createdId.ToString();
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error creating special event");
-                throw httpOperationException;
+                _logger.LogError(ex, "Error creating special event");
+                throw;
             }
+
+            // sub-entity operations still use _dynamicsClient (TODO: migrate when generated types are available)
+            var createdIdStr = createdId.ToString();
+            var newSpecialEvent = new MicrosoftDynamicsCRMadoxioSpecialevent { AdoxioSpecialeventid = createdIdStr };
 
             SaveTotalServings(specialEvent, newSpecialEvent);
 
@@ -1073,19 +1079,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // Set the invoice trigger after creating child entities
             try
             {
-                var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
-                {
-                    AdoxioInvoicetrigger = true
-                };
-                _dynamicsClient.Specialevents.Update(newSpecialEvent.AdoxioSpecialeventid, patchEvent);
+                var triggerPatch = new DvSpecialEvent { Id = createdId, adoxio_InvoiceTrigger = true };
+                await _dataverse.UpdateSpecialEventAsync(triggerPatch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error setting invoice trigger after creating special event with child entities");
-                throw httpOperationException;
+                _logger.LogError(ex, "Error setting invoice trigger after creating special event with child entities");
+                throw;
             }
 
-            var result = this.GetSpecialEventData(newSpecialEvent.AdoxioSpecialeventid).ToViewModel(_dynamicsClient);
+            var result = this.GetSpecialEventData(createdIdStr).ToViewModel(_dynamicsClient);
             result.LocalId = specialEvent.LocalId;
             return new JsonResult(specialEvent);
         }
@@ -1154,7 +1157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("generate-invoice/{eventId}")]
-        public IActionResult GenerateInvoice(string eventId)
+        public async Task<IActionResult> GenerateInvoice(string eventId)
         {
             if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
             {
@@ -1169,20 +1172,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            // just enable the invoice trigger.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
-            {
-                AdoxioInvoicetrigger = true
-            };
+            if (!Guid.TryParse(eventId, out var invoiceEventGuid))
+                return BadRequest();
+
+            var dvPatch = new DvSpecialEvent { Id = invoiceEventGuid, adoxio_InvoiceTrigger = true };
 
             try
             {
-                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error creating/updating special event");
-                throw httpOperationException;
+                _logger.LogError(ex, "Error generating invoice for special event");
+                throw;
             }
 
             return Ok();
@@ -1194,7 +1196,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="eventId"></param>
         /// <returns></returns>
         [HttpPost("submit/{eventId}")]
-        public IActionResult Submit(string eventId)
+        public async Task<IActionResult> Submit(string eventId)
         {
             if (!ModelState.IsValid || String.IsNullOrEmpty(eventId))
             {
@@ -1209,27 +1211,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
-            // just set the status to submitted.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            if (!Guid.TryParse(eventId, out var submitEventGuid))
+                return BadRequest();
+
+            var dvPatch = new DvSpecialEvent
             {
-                Statuscode = (int?)EventStatus.Submitted
+                Id = submitEventGuid,
+                statuscode = adoxio_specialevent_statuscode.Submitted
             };
 
             try
             {
-                _dynamicsClient.Specialevents.Update(eventId, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error creating/updating special event");
-                throw httpOperationException;
+                _logger.LogError(ex, "Error submitting special event");
+                throw;
             }
 
             return Ok();
         }
 
         [HttpPut("{eventId}")]
-        public IActionResult UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
+        public async Task<IActionResult> UpdateSpecialEvent(string eventId, [FromBody] ViewModels.SpecialEvent specialEvent)
         {
             if (!ModelState.IsValid || String.IsNullOrEmpty(eventId) || eventId != specialEvent?.Id)
             {
@@ -1269,8 +1274,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 specialEvent.DrinksSalesForecasts = null;
             }
 
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
-            patchEvent.CopyValues(specialEvent);
+            var dvPatch = new DvSpecialEvent();
+            if (Guid.TryParse(specialEvent.Id, out var seUpdateGuid))
+                dvPatch.Id = seUpdateGuid;
+            dvPatch.CopyValues(specialEvent);
 
             // Only allow these status to be set by the portal. Any other status change is ignored
             if (
@@ -1279,23 +1286,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 || specialEvent.EventStatus == EventStatus.Submitted
             )
             {
-                patchEvent.Statuscode = (int?)specialEvent.EventStatus;
+                dvPatch.statuscode = (adoxio_specialevent_statuscode)(int)specialEvent.EventStatus;
             }
 
-            if (!string.IsNullOrEmpty(specialEvent?.SepCity?.Id))
+            if (Guid.TryParse(specialEvent?.SepCity?.Id, out var sepCityUpdateGuid))
             {
-                patchEvent.SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", specialEvent.SepCity.Id);
+                dvPatch.adoxio_SpecialEventCityDistrictId = new EntityReference("adoxio_sepcity", sepCityUpdateGuid);
             }
 
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.Id, patchEvent);
-                specialEvent.Id = patchEvent.AdoxioSpecialeventid;
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error creating/updating special event");
-                throw httpOperationException;
+                _logger.LogError(ex, "Error updating special event");
+                throw;
             }
 
             if (specialEvent.EventLocations?.Count > 0)
@@ -1876,7 +1882,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/assign")]
-        public IActionResult PoliceAssign([FromBody] string assignee, string id)
+        public async Task<IActionResult> PoliceAssign([FromBody] string assignee, string id)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1896,20 +1902,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get the assignee.
 
 
-            var contact = _dynamicsClient.GetContactById(assignee).GetAwaiter().GetResult();
+            var contact = await _dynamicsClient.GetContactById(assignee);
             if (contact == null || contact.ParentcustomeridAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)
             {
                 return Unauthorized();
             }
 
             // update the given special event.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var assignEventGuid))
+                return BadRequest();
+            if (!Guid.TryParse(assignee, out var assigneeGuid))
+                return BadRequest();
+            var dvPatch = new DvSpecialEvent
             {
-                PoliceRepresentativeIdODataBind = _dynamicsClient.GetEntityURI("contacts", assignee)
+                Id = assignEventGuid,
+                adoxio_PoliceRepresentativeId = new EntityReference("contact", assigneeGuid)
             };
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
             catch (Exception e)
             {
@@ -1922,7 +1933,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/approve")]
-        public IActionResult PoliceApprove(string id)
+        public async Task<IActionResult> PoliceApprove(string id)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -1939,15 +1950,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var approveEventGuid))
+                return BadRequest();
 
             // update the given special event.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            var dvPatch = new DvSpecialEvent
             {
-                AdoxioPoliceapproval = 845280000 // Approved
+                Id = approveEventGuid,
+                adoxio_PoliceApproval = adoxio_specialevent_adoxio_policeapproval.Reviewed
             };
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
             catch (Exception e)
             {
@@ -1960,7 +1974,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/deny")]
-        public IActionResult PoliceDeny(string id, SepPoliceReviewReason reasonText)
+        public async Task<IActionResult> PoliceDeny(string id, SepPoliceReviewReason reasonText)
         {
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -1978,17 +1992,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var denyEventGuid))
+                return BadRequest();
 
             // update the given special event.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            var dvPatch = new DvSpecialEvent
             {
-                AdoxioPoliceapproval = 845280001, // Denied
-                AdoxioDenialreason = reasonText.Reason,
-                AdoxioDatepoliceapproved = DateTime.Now
+                Id = denyEventGuid,
+                adoxio_PoliceApproval = adoxio_specialevent_adoxio_policeapproval.Denied,
+                adoxio_DenialReason = reasonText.Reason,
+                adoxio_DatePoliceApproved = DateTime.Now
             };
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
             catch (Exception e)
             {
@@ -2001,7 +2018,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/cancel")]
-        public IActionResult PoliceCancel(string id, SepPoliceReviewReason reasonText)
+        public async Task<IActionResult> PoliceCancel(string id, SepPoliceReviewReason reasonText)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -2018,16 +2035,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var cancelEventGuid))
+                return BadRequest();
+
             // update the given special event.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            var dvPatch = new DvSpecialEvent
             {
-                AdoxioPoliceapproval = 845280002, // Cancelled
-                AdoxioCancellationreason = reasonText.Reason,
-                AdoxioDatepoliceapproved = DateTime.Now
+                Id = cancelEventGuid,
+                adoxio_PoliceApproval = adoxio_specialevent_adoxio_policeapproval.Cancelled,
+                adoxio_CancellationReason = reasonText.Reason,
+                adoxio_DatePoliceApproved = DateTime.Now
             };
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
             catch (Exception e)
             {
@@ -2040,7 +2061,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("police/{id}/setMunicipality/{cityId}")]
-        public IActionResult PoliceSetMunicipality(string id, string cityId)
+        public async Task<IActionResult> PoliceSetMunicipality(string id, string cityId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
             // get the account details.
@@ -2057,14 +2078,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Unauthorized();
             }
 
+            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var municipalEventGuid))
+                return BadRequest();
+            if (!Guid.TryParse(cityId, out var cityGuid))
+                return BadRequest();
+
             // update the given special event.
-            var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
+            var dvPatch = new DvSpecialEvent
             {
-                SepCityODataBind = _dynamicsClient.GetEntityURI("adoxio_sepcities", cityId)
+                Id = municipalEventGuid,
+                adoxio_SpecialEventCityDistrictId = new EntityReference("adoxio_sepcity", cityGuid)
             };
             try
             {
-                _dynamicsClient.Specialevents.Update(specialEvent.AdoxioSpecialeventid, patchEvent);
+                await _dataverse.UpdateSpecialEventAsync(dvPatch);
             }
             catch (Exception e)
             {
@@ -2180,7 +2207,7 @@ public IActionResult GetAutocomplete(string name, bool defaults = false)
         }
 
         [HttpGet("link-claim-to-contact/{jobNumber}")]
-        public IActionResult linkClaimToContact(string jobNumber)
+        public async Task<IActionResult> linkClaimToContact(string jobNumber)
         {
 
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
@@ -2190,24 +2217,30 @@ public IActionResult GetAutocomplete(string name, bool defaults = false)
             {
                 var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
                 var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
-                var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent();
 
-                patchEvent.ContactODataBind = _dynamicsClient.GetEntityURI("contacts", userSettings.ContactId);
+                if (!Guid.TryParse(claim?.AdoxioSpecialeventid, out var claimEventGuid))
+                    return BadRequest();
+
+                var dvPatch = new DvSpecialEvent { Id = claimEventGuid };
+
+                if (Guid.TryParse(userSettings.ContactId, out var claimContactGuid))
+                    dvPatch.adoxio_ContactId = new EntityReference("contact", claimContactGuid);
 
                 // it may have an account too
-                if(!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000")
+                if (!string.IsNullOrEmpty(userSettings.AccountId) && userSettings.AccountId != "00000000-0000-0000-0000-000000000000"
+                    && Guid.TryParse(userSettings.AccountId, out var claimAccountGuid))
                 {
-                    patchEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+                    dvPatch.adoxio_AccountId = new EntityReference("account", claimAccountGuid);
                 }
 
                 try
                 {
-                    _dynamicsClient.Specialevents.Update(claim.AdoxioSpecialeventid, patchEvent);
+                    await _dataverse.UpdateSpecialEventAsync(dvPatch);
                 }
-                catch (HttpOperationException httpOperationException)
+                catch (Exception ex)
                 {
-                    _logger.LogError(httpOperationException, "Error claiming SEP event");
-                    throw httpOperationException;
+                    _logger.LogError(ex, "Error claiming SEP event");
+                    throw;
                 }
                 return Ok();
             }else{

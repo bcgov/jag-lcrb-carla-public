@@ -1,15 +1,12 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
-using Newtonsoft.Json;
+using Microsoft.Xrm.Sdk;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,167 +17,93 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [Authorize]
-    // No authorize policy as this controller is used by both workers and BCeID users
     public class AliasController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        public AliasController(IDynamicsClient dynamicsClient, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
+        public AliasController(IDataverseClient dataverse, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(AliasController));
         }
 
-
-        /// <summary>
-        /// Get Aliases associated with the contact id
-        /// </summary>
-        /// <param name="contactId"></param>
-        /// <returns></returns>
         [HttpGet("by-contactid/{contactId}")]
-        public IActionResult GetAliasByContactId(string contactId)
+        public async Task<IActionResult> GetAliasByContactId(string contactId)
         {
+            if (string.IsNullOrEmpty(contactId)) return BadRequest();
+
+            var aliases = await _dataverse.GetAliasesByContactIdAsync(contactId);
+            if (aliases == null) return new NotFoundResult();
+
             var result = new List<ViewModels.Alias>();
-
-            if (!string.IsNullOrEmpty(contactId))
-            {
-                // query the Dynamics system to get the contact record.
-                string filter = $"_adoxio_contactid_value eq {contactId}";
-                List<MicrosoftDynamicsCRMadoxioAlias> aliases = _dynamicsClient.Aliases.Get(filter: filter).Value.ToList();
-
-                if (aliases != null)
-                {
-                    foreach (var item in aliases)
-                    {
-                        result.Add(item.ToViewModel());
-                    }
-                }
-                else
-                {
-                    return new NotFoundResult();
-                }
-            }
-            else
-            {
-                return BadRequest();
-            }
+            foreach (var item in aliases)
+                result.Add(item.ToViewModel());
 
             return new JsonResult(result);
         }
 
-
-        /// <summary>
-        /// Update an Alias
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateAlias([FromBody] ViewModels.Alias item, string id)
         {
-            if (id != null && item.id != null && id != item.id)
-            {
-                return BadRequest();
-            }
+            if (id != null && item.id != null && id != item.id) return BadRequest();
 
-            // get the contact
-            Guid aliasId = Guid.Parse(id);
+            var alias = await _dataverse.GetAliasByIdAsync(id);
+            if (alias == null) return new NotFoundResult();
 
-            MicrosoftDynamicsCRMadoxioAlias alias = await _dynamicsClient.GetAliasById(aliasId);
-
-            if (alias == null)
-            {
-                return new NotFoundResult();
-            }
-            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
+            var patchAlias = new adoxio_alias { Id = Guid.Parse(id) };
             patchAlias.CopyValues(item);
-            try
-            {
-                await _dynamicsClient.Aliases.UpdateAsync(aliasId.ToString(), patchAlias);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error updating contact");
-            }
+            try { await _dataverse.UpdateAliasAsync(patchAlias); }
+            catch (Exception e) { _logger.LogError(e, "Error updating alias"); }
 
-            alias = await _dynamicsClient.GetAliasById(aliasId);
+            alias = await _dataverse.GetAliasByIdAsync(id);
             return new JsonResult(alias.ToViewModel());
         }
 
-        /// <summary>
-        /// Create an Alias
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateAlias([FromBody] ViewModels.Alias item)
         {
-            if (item?.contact?.id == null || item?.worker?.id == null)
-            {
-                return BadRequest();
-            }
+            if (item?.contact?.id == null || item?.worker?.id == null) return BadRequest();
 
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            MicrosoftDynamicsCRMadoxioAlias alias = new MicrosoftDynamicsCRMadoxioAlias();
-            // copy received values to Dynamics Application
+            var alias = new adoxio_alias();
             alias.CopyValues(item);
+            Guid aliasId;
             try
             {
-                alias = _dynamicsClient.Aliases.Create(alias);
+                aliasId = await _dataverse.CreateAliasAsync(alias);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception e)
             {
-                _logger.LogError(httpOperationException, "Error creating application");
-                // fail if we can't create.
-                throw (httpOperationException);
+                _logger.LogError(e, "Error creating alias");
+                throw;
             }
 
-
-            MicrosoftDynamicsCRMadoxioAlias patchAlias = new MicrosoftDynamicsCRMadoxioAlias();
-
-            // set contact and worker associations
-            try
+            var patchAlias = new adoxio_alias { Id = aliasId };
+            patchAlias.adoxio_ContactId = new EntityReference(Contact.EntityLogicalName, Guid.Parse(item.contact.id));
+            patchAlias.adoxio_WorkerId = new EntityReference(adoxio_worker.EntityLogicalName, Guid.Parse(item.worker.id));
+            try { await _dataverse.UpdateAliasAsync(patchAlias); }
+            catch (Exception e)
             {
-                var worker = _dynamicsClient.GetWorkerById(Guid.Parse(item.worker.id));
-                patchAlias.WorkerIdODataBind = _dynamicsClient.GetEntityURI("adoxio_workers", item.worker.id);
-
-                var contact = _dynamicsClient.GetContactById(Guid.Parse(item.contact.id));
-                patchAlias.ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", item.contact.id);
-
-                await _dynamicsClient.Aliases.UpdateAsync(alias.AdoxioAliasid, patchAlias);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error updating application");
-                // fail if we can't create.
-                throw (httpOperationException);
+                _logger.LogError(e, "Error updating alias associations");
+                throw;
             }
 
-            return new JsonResult(alias.ToViewModel());
+            var created = await _dataverse.GetAliasByIdAsync(aliasId.ToString());
+            return new JsonResult(created?.ToViewModel());
         }
 
-        /// <summary>
-        /// Delete an Address.  Using a HTTP Post to avoid Siteminder issues with DELETE
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteAlias(string id)
         {
-            MicrosoftDynamicsCRMadoxioAlias alias = await _dynamicsClient.GetAliasById(Guid.Parse(id));
-            if (alias == null)
-            {
-                return new NotFoundResult();
-            }
+            var alias = await _dataverse.GetAliasByIdAsync(id);
+            if (alias == null) return new NotFoundResult();
 
-            await _dynamicsClient.Aliases.DeleteAsync(id);
-
-            return NoContent(); // 204
+            await _dataverse.DeleteAliasAsync(id);
+            return NoContent();
         }
     }
 }

@@ -4,7 +4,6 @@ using System.Linq;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {

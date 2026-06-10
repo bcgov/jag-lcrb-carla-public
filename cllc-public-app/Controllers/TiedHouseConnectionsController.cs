@@ -1,11 +1,8 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Repositories;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -13,7 +10,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Rest;
-using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -22,19 +18,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class TiedHouseConnectionsController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly TiedHouseConnectionsRepository _tiedHouseConnectionsRepository;
 
         public TiedHouseConnectionsController(
             ILoggerFactory loggerFactory,
-            IDynamicsClient dynamicsClient,
             IHttpContextAccessor httpContextAccessor,
             TiedHouseConnectionsRepository tiedHouseConnectionsRepository
         )
         {
-            _dynamicsClient = dynamicsClient;
             _logger = loggerFactory.CreateLogger(typeof(TiedHouseConnectionsController));
             _httpContextAccessor = httpContextAccessor;
             _tiedHouseConnectionsRepository = tiedHouseConnectionsRepository;
@@ -50,19 +43,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("user/liquor/{accountId?}")]
         [ProducesResponseType(typeof(IEnumerable<TiedHouseConnection>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<IEnumerable<TiedHouseConnection>> GetLiquorTiedHouseConnectionsForUser(string accountId)
+        public async Task<ActionResult<IEnumerable<TiedHouseConnection>>> GetLiquorTiedHouseConnectionsForUser(string accountId)
         {
             try
             {
                 UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-                // Use `accountId` if provided, otherwise use the current logged in user's account Id
-                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+                var accountIdForFilter = accountId ?? userSettings.AccountId;
 
                 _logger.LogDebug($"GetLiquorTiedHouseConnectionsForUser. AccountId = {accountIdForFilter}.");
 
-                var result = _tiedHouseConnectionsRepository.GetLiquorTiedHouseConnectionsForUser(accountIdForFilter);
-
+                var result = await _tiedHouseConnectionsRepository.GetLiquorTiedHouseConnectionsForUser(accountIdForFilter);
                 return new JsonResult(result);
             }
             catch (HttpOperationException httpOperationException)
@@ -87,19 +77,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("user/cannabis/{accountId?}")]
         [ProducesResponseType(typeof(IEnumerable<TiedHouseConnection>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public ActionResult<TiedHouseConnection> GetCannabisTiedHouseConnectionForUser(string accountId)
+        public async Task<ActionResult<TiedHouseConnection>> GetCannabisTiedHouseConnectionForUser(string accountId)
         {
             try
             {
                 UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-                // Use `accountId` if provided, otherwise use the current logged in user's account Id
-                var accountIdForFilter = accountId != null ? accountId : userSettings.AccountId;
+                var accountIdForFilter = accountId ?? userSettings.AccountId;
 
                 _logger.LogDebug($"GetCannabisTiedHouseConnectionForUser. AccountId = {accountIdForFilter}.");
 
-                var result = _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(accountIdForFilter);
-
+                var result = await _tiedHouseConnectionsRepository.GetCannabisTiedHouseConnectionForUser(accountIdForFilter);
                 return new JsonResult(result);
             }
             catch (HttpOperationException httpOperationException)
@@ -117,14 +104,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Gets all liquor tied house connections for an application.
         /// </summary>
-        /// <remarks>
-        /// This includes liquor tied house connections that are associated with the user account, as well as those that
-        /// are associated with the application.
-        /// </remarks>
-        /// <param name="applicationId"></param>
-        /// <returns></returns>
         [HttpGet("liquor/application/{applicationId}")]
-        public JsonResult GetLiquorTiedHouseConnectionsForApplication(string applicationId)
+        public async Task<JsonResult> GetLiquorTiedHouseConnectionsForApplication(string applicationId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
@@ -134,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                var result = _tiedHouseConnectionsRepository.GetLiquorTiedHouseConnectionsForApplication(
+                var result = await _tiedHouseConnectionsRepository.GetLiquorTiedHouseConnectionsForApplication(
                     applicationId,
                     userSettings.AccountId
                 );
@@ -156,14 +137,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Creates a new liquor tied house connection for an application.
         /// </summary>
-        /// <remarks>
-        /// Liquor tied house connections are not updated directly. Instead, a new record is created with the new
-        /// data, and the old record is updated to set the `SupersededBy` field to the new record's ID. In this way,
-        /// the history of changes to the tied house connection record is preserved.
-        /// </remarks>
-        /// <param name="tiedHouseConnection"></param>
-        /// <param name="applicationId"></param>
-        /// <returns></returns>
         [HttpPost("liquor/application/{applicationId}")]
         public async Task<IActionResult> AddLiquorTiedHouseConnectionToApplication(
             [FromBody] TiedHouseConnection tiedHouseConnection,
@@ -196,17 +169,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Creates new liquor tied house connections for a user.
         /// </summary>
-        /// <remarks>
-        /// Business Rules - This endpoint should only be called if:
-        /// <br/>
-        /// <list type="bullet">
-        ///   <item><description>The user does not have any existing tied house connections of type <c>Liquor</c>.</description></item>
-        ///   <item><description>The user does not have any approved applications, of any type.</description></item>
-        /// </list>
-        /// </remarks>
-        /// <param name="tiedHouseConnection">The tied house connection data to create.</param>
-        /// <param name="accountId">The ID of the user's account.</param>
-        /// <returns>The created tied house connection.</returns>
         [HttpPost("liquor/user/{accountId}")]
         public async Task<IActionResult> AddLiquorTiedHouseConnectionToUser(
             [FromBody] TiedHouseConnection tiedHouseConnection,
@@ -239,17 +201,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Creates or Updates the singleton cannabis tied house connection.
         /// </summary>
-        /// <remarks>
-        /// If a cannabis tied house connection already exists for the user, it will update and return that existing
-        /// record.
-        /// <br/>
-        /// If no cannabis tied house connection exists, it will create a new one and return it.
-        /// </remarks>
-        /// <param name="accountId">The ID of the account associated with the cannabis tied house connection.</param>
-        /// <param name="incomingTiedHouseConnectionRecord">Optional cannabis tied house connection record used to
-        /// create or update the record.</param>
-        /// <returns>The cannabis tied house connection record.</returns>
-        /// <exception cref="Exception">Thrown when there is an error creating or updating the record.</exception>
         [HttpPost("cannabis/{accountId}")]
         public async Task<ActionResult<TiedHouseConnection>> UpsertCannabisTiedHouseConnectionForUser(
             string accountId,
@@ -282,10 +233,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Updates an existing cannabis tied house connection for a user.
         /// </summary>
-        /// <param name="tiedHouseConnectionId"></param>
-        /// <param name="tiedHouseConnection"></param>
-        /// <returns>The updating tied house connection</returns>
-        /// <exception cref="Exception">Thrown when there is an error updating the record.</exception>
         [HttpPut("cannabis/{tiedHouseConnectionId}")]
         public async Task<ActionResult<TiedHouseConnection>> UpdateCannabisTiedHouseConnectionForUser(
             string tiedHouseConnectionId,

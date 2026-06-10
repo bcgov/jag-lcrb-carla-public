@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
@@ -48,7 +49,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// <returns></returns>
         [HttpPost("send/{workerIdString}")]
         [AllowAnonymous]
-        public ActionResult SendWorkerScreeningRequest(string workerIdString, string bearer)
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
         {
             if (JwtChecker.Check(bearer, Configuration))
             {
@@ -57,7 +58,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     var workerRequest = new IncompleteWorkerScreening();
                     try
                     {
-                        workerRequest = _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
                     }
                     catch (System.ArgumentOutOfRangeException)
                     {

@@ -42,6 +42,28 @@ Child records are queried by `adoxio_specialevent = specialEvent.Id` and attache
 
 Both child collections are queried in parallel via `Task.WhenAll` and attached to `ev.RelatedEntities`.
 
+## Event CRUD extensions (LCSD-8557)
+
+Added to support LicenceEventsController migration:
+
+| Method | Description |
+|---|---|
+| `GetEventsByAccountAndLicenceAsync(accountId, licenceId, top)` | Query events by account + licence, ordered by `modifiedon desc` |
+| `CreateEventAsync(evt)` | Creates event; returns new `Guid` |
+| `UpdateEventAsync(evt)` | Updates existing event |
+| `DeleteEventAsync(id)` | Deletes event by GUID |
+| `CreateEventScheduleAsync(schedule)` | Creates schedule; returns new `Guid` |
+| `DeleteEventScheduleAsync(id)` | Deletes schedule by GUID |
+| `CreateEventLocationAsync(location)` | Creates location; returns new `Guid` |
+| `DeleteEventLocationAsync(id)` | Deletes location by GUID |
+| `GetTermsConditionsByEventIdAsync(eventId)` | TC limitations linked to an event via `adoxio_licenseeevent` |
+| `GetFolderNameAsync(entityName, entityId)` | SharePoint folder name: checks existing `SharePointDocumentLocation.RelativeUrl`; falls back to `{name}_{IDCLEANED}` for "event" entity |
+
 ## Files modified
 
-- `cllc-interfaces/Dynamics-Dataverse/DataverseClient.cs` — Special Event and Event implementations
+- `cllc-interfaces/Dynamics-Dataverse/DataverseClient.cs` — Special Event and Event implementations; event CRUD extensions and `GetFolderNameAsync`
+- `cllc-interfaces/Dynamics-Dataverse/Interfaces/IDataverseClient.cs` — Added 11 new event-related method signatures
+- `cllc-public-app/Controllers/LicenceEventsController.cs` — Migrated from `IDynamicsClient` to `IDataverseClient` (38 refs)
+- `cllc-public-app/Models.Extensions/LicenceEvent.cs` — Added Dataverse `ToViewModel` and `CopyValues` overloads
+- `cllc-public-app/Models.Extensions/LicenceEventSchedule.cs` — Added Dataverse `ToViewModel` and `CopyValues` overloads
+- `cllc-public-app/Models.Extensions/LicenceEventLocation.cs` — Added Dataverse `ToViewModel` and `CopyValues` overloads

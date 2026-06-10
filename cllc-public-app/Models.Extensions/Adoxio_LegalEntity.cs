@@ -1,6 +1,9 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
+using DvLegalEntity = DV::Gov.Lclb.Cllb.Interfaces.adoxio_legalentity;
+using DvGeneralYesNo = DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -153,6 +156,52 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
 
             }
+            return result;
+        }
+
+        public static LegalEntity ToViewModel(this DvLegalEntity le)
+        {
+            if (le == null) return null;
+            var result = new LegalEntity();
+            result.id = le.adoxio_legalentityId?.ToString() ?? le.Id.ToString();
+            result.accountId = le.adoxio_Account?.Id.ToString();
+            result.shareholderAccountId = le.adoxio_ShareholderAccountID?.Id.ToString();
+            result.parentLegalEntityId = le.adoxio_LegalEntityOwned?.Id.ToString();
+            result.name = le.adoxio_name;
+            result.firstname = le.adoxio_FirstName;
+            result.lastname = le.adoxio_LastName;
+            result.middlename = le.adoxio_MiddleName;
+            result.email = le.adoxio_Email;
+            result.commonnonvotingshares = le.adoxio_CommonNonVotingShares;
+            result.commonvotingshares = le.adoxio_CommonVotingShares;
+            result.preferrednonvotingshares = le.adoxio_PreferredNonVotingShares;
+            result.preferredvotingshares = le.adoxio_PreferredVotingShares;
+            result.dateofbirth = le.adoxio_DateofBirth;
+            result.dateofappointment = le.adoxio_DateofAppointment;
+            result.dateIssued = le.adoxio_DateofSharesIssued;
+            result.securityAssessmentEmailSentOn = le.adoxio_DateEmailSent;
+            result.jobTitle = le.adoxio_JobTitle;
+            result.AnnualMembershipFee = le.adoxio_AnnualMembershipFee;
+            result.NumberOfMembers = le.adoxio_NumberofMembers;
+            result.TotalShares = le.adoxio_TotalShares;
+            if (le.adoxio_InterestPercentage != null)
+                result.interestpercentage = Convert.ToDecimal(le.adoxio_InterestPercentage);
+            result.isindividual = le.adoxio_IsIndividual == DvGeneralYesNo.Yes;
+            result.sameasapplyingperson = le.adoxio_SameAsApplyingPerson == DvGeneralYesNo.Yes;
+            result.isApplicant = le.adoxio_IsApplicant == true;
+            result.isPartner = le.adoxio_IsPartner == true;
+            result.isShareholder = le.adoxio_IsShareholder == true;
+            result.IsTrustee = le.adoxio_IsTrustee == true;
+            result.isDirector = le.adoxio_IsDirector == true;
+            result.isOfficer = le.adoxio_IsOfficer == true;
+            result.isSeniorManagement = le.adoxio_IsSeniorManagement == true;
+            result.isOwner = le.adoxio_IsOwner == true;
+            result.isKeyPersonnel = le.adoxio_IsKeyPersonnel == true;
+            if (le.adoxio_LegalEntityType != null)
+                result.legalentitytype = (AdoxioApplicantTypeCodes)(int)le.adoxio_LegalEntityType;
+            if (le.adoxio_PartnerType != null)
+                result.partnerType = (AdoxioPartnerType)(int)le.adoxio_PartnerType;
+            result.contactId = le.adoxio_Contact?.Id.ToString();
             return result;
         }
 

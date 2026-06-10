@@ -81,6 +81,9 @@ $entities = @(
 
     # File attachments / notes (CRITICAL: required by all supporting-document flows)
     "annotation"
+    # OneStop messaging
+    "adoxio_onestopmessageitem"
+
     # Add new entities here
 )
 

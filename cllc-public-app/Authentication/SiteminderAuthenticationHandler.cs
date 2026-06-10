@@ -1,5 +1,9 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Models;
+using DvContact = DV::Gov.Lclb.Cllb.Interfaces.Contact;
+using DvIDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DvPreviousAddress = DV::Gov.Lclb.Cllb.Interfaces.adoxio_previousaddress;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
@@ -823,16 +827,17 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
             if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1)
             {
-                MicrosoftDynamicsCRMadoxioPreviousaddress prevAddress = new MicrosoftDynamicsCRMadoxioPreviousaddress
+                DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
+                var prevAddress = new DvPreviousAddress
                 {
-                    AdoxioStreetaddress = savedContact.Address1Line1,
-                    AdoxioProvstate = savedContact.Address1Stateorprovince,
-                    AdoxioCity = savedContact.Address1City,
-                    AdoxioCountry = savedContact.Address1Country,
-                    AdoxioPostalcode = savedContact.Address1Postalcode,
-                    ContactIdODataBind = _dynamicsClient.GetEntityURI("contacts", savedContact.Contactid)
+                    adoxio_StreetAddress = savedContact.Address1Line1,
+                    adoxio_PROVSTATE = savedContact.Address1Stateorprovince,
+                    adoxio_City = savedContact.Address1City,
+                    adoxio_Country = savedContact.Address1Country,
+                    adoxio_PostalCode = savedContact.Address1Postalcode,
+                    adoxio_ContactId = new Microsoft.Xrm.Sdk.EntityReference(DvContact.EntityLogicalName, Guid.Parse(savedContact.Contactid))
                 };
-                _dynamicsClient.Previousaddresses.Create(prevAddress);
+                _dataverse.CreatePreviousAddressAsync(prevAddress).GetAwaiter().GetResult();
             }
 
             _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());

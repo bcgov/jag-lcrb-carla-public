@@ -6,7 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj" />
     <ProjectReference Include="..\cllc-interfaces\Dynamics-Dataverse\Dynamics-Dataverse.csproj">
       <Aliases>DV</Aliases>
     </ProjectReference>
