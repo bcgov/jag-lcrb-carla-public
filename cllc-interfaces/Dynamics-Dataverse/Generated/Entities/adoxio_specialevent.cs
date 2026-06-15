@@ -2442,6 +2442,42 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_specialevent_licencedarea
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_licencedarea")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlicencedarea> adoxio_specialevent_licencedarea
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlicencedarea>("adoxio_specialevent_licencedarea", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_specialevent_licencedarea");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlicencedarea>("adoxio_specialevent_licencedarea", null, value);
+				this.OnPropertyChanged("adoxio_specialevent_licencedarea");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_specialevent_schedule
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_schedule")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventschedule> adoxio_specialevent_schedule
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventschedule>("adoxio_specialevent_schedule", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_specialevent_schedule");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventschedule>("adoxio_specialevent_schedule", null, value);
+				this.OnPropertyChanged("adoxio_specialevent_schedule");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_specialevent_SharePointDocumentLocations
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_SharePointDocumentLocations")]
@@ -2456,6 +2492,42 @@ namespace Gov.Lclb.Cllb.Interfaces
 				this.OnPropertyChanging("adoxio_specialevent_SharePointDocumentLocations");
 				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.SharePointDocumentLocation>("adoxio_specialevent_SharePointDocumentLocations", null, value);
 				this.OnPropertyChanged("adoxio_specialevent_SharePointDocumentLocations");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_specialevent_specialeventlocations
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_specialeventlocations")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlocation> adoxio_specialevent_specialeventlocations
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlocation>("adoxio_specialevent_specialeventlocations", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_specialevent_specialeventlocations");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventlocation>("adoxio_specialevent_specialeventlocations", null, value);
+				this.OnPropertyChanged("adoxio_specialevent_specialeventlocations");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_specialevent_specialeventtsacs
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_specialeventtsacs")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventtandc> adoxio_specialevent_specialeventtsacs
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventtandc>("adoxio_specialevent_specialeventtsacs", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_specialevent_specialeventtsacs");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_specialeventtandc>("adoxio_specialevent_specialeventtsacs", null, value);
+				this.OnPropertyChanged("adoxio_specialevent_specialeventtsacs");
 			}
 		}
 		

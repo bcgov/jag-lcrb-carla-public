@@ -198,6 +198,8 @@ public interface IDataverseClient
     Task<IList<adoxio_legalentity>> GetLegalEntitiesByAccountIdAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_legalentity>> GetLegalEntitiesByParentEntityIdAsync(string parentLegalEntityId, CancellationToken ct = default);
     Task<Guid> CreateLegalEntityAsync(adoxio_legalentity entity, CancellationToken ct = default);
+    Task UpdateLegalEntityAsync(adoxio_legalentity entity, CancellationToken ct = default);
+    Task<adoxio_legalentity?> GetLegalEntityByAccountIdAsync(string accountId, CancellationToken ct = default);
     Task DeleteLegalEntityAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
@@ -225,6 +227,46 @@ public interface IDataverseClient
     Task UpdateSpecialEventAsync(adoxio_specialevent specialEvent, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
+    // SEP Drink Sales Forecast (adoxio_sepdrinksalesforecast)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_sepdrinksalesforecast>> GetSepDrinkSalesForecastsByEventIdAsync(string eventId, CancellationToken ct = default);
+    Task<Guid> CreateSepDrinkSalesForecastAsync(adoxio_sepdrinksalesforecast forecast, CancellationToken ct = default);
+    Task UpdateSepDrinkSalesForecastAsync(adoxio_sepdrinksalesforecast forecast, CancellationToken ct = default);
+    Task DeleteSepDrinkSalesForecastAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Special Event Location (adoxio_specialeventlocation)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_specialeventlocation>> GetSpecialEventLocationsByEventIdAsync(string eventId, CancellationToken ct = default);
+    Task<Guid> CreateSpecialEventLocationAsync(adoxio_specialeventlocation location, CancellationToken ct = default);
+    Task UpdateSpecialEventLocationAsync(adoxio_specialeventlocation location, CancellationToken ct = default);
+    Task DeleteSpecialEventLocationAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Special Event Licenced Area (adoxio_specialeventlicencedarea)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_specialeventlicencedarea>> GetSpecialEventLicencedAreasByLocationIdAsync(string locationId, CancellationToken ct = default);
+    Task<Guid> CreateSpecialEventLicencedAreaAsync(adoxio_specialeventlicencedarea area, CancellationToken ct = default);
+    Task UpdateSpecialEventLicencedAreaAsync(adoxio_specialeventlicencedarea area, CancellationToken ct = default);
+    Task DeleteSpecialEventLicencedAreaAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Special Event Schedule (adoxio_specialeventschedule)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_specialeventschedule>> GetSpecialEventSchedulesByLocationIdAsync(string locationId, CancellationToken ct = default);
+    Task<Guid> CreateSpecialEventScheduleAsync(adoxio_specialeventschedule schedule, CancellationToken ct = default);
+    Task UpdateSpecialEventScheduleAsync(adoxio_specialeventschedule schedule, CancellationToken ct = default);
+    Task DeleteSpecialEventScheduleAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Special Event T&C (adoxio_specialeventtandc)
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_specialeventtandc>> GetSpecialEventTandCsByEventIdAsync(string eventId, CancellationToken ct = default);
+    Task<Guid> CreateSpecialEventTandCAsync(adoxio_specialeventtandc tandc, CancellationToken ct = default);
+    Task UpdateSpecialEventTandCAsync(adoxio_specialeventtandc tandc, CancellationToken ct = default);
+    Task DeleteSpecialEventTandCAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
     // SEP City (adoxio_sepcity)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_sepcity>> GetSepCitiesAsync(CancellationToken ct = default);
@@ -234,6 +276,15 @@ public interface IDataverseClient
     // SEP Drink Type (adoxio_sepdrinktype)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_sepdrinktype>> GetSepDrinkTypesAsync(CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // SEP summary queries
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_specialevent>> GetSpecialEventsByApplicantAsync(string contactId, string? accountId, CancellationToken ct = default);
+    Task<IList<adoxio_specialevent>> GetSpecialEventsByJurisdictionAsync(string jurisdictionId, int[]? policeApprovals = null, int[]? excludeStatuses = null, CancellationToken ct = default);
+    Task<IList<adoxio_specialevent>> GetSpecialEventsByRepresentativeAsync(string contactId, int[]? policeApprovals = null, int[]? excludeStatuses = null, int[]? includeStatuses = null, CancellationToken ct = default);
+    Task<(IList<adoxio_specialevent> Results, int TotalCount)> GetSpecialEventsByJurisdictionPagedAsync(string jurisdictionId, int[]? policeApprovals, int[]? excludeStatuses, int pageIndex, int pageSize, string? orderByField, string? sortDir, CancellationToken ct = default);
+    Task<IList<adoxio_sepcity>> GetSepCitiesFilteredAsync(string? nameContains, bool defaultsOnly = false, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Event (adoxio_event)
@@ -406,13 +457,19 @@ public interface IDataverseClient
     Task DeleteLicenceAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
-    // Licensee Changelog (adoxio_licenseechangelog — no generated entity type)
+    // Licensee Changelog (adoxio_licenseechangelog)
     // -------------------------------------------------------------------------
+    Task<IList<adoxio_licenseechangelog>> GetLicenseeChangelogsByAccountIdAsync(string accountId, CancellationToken ct = default);
+    Task<IList<adoxio_licenseechangelog>> GetLicenseeChangelogsByApplicationIdAsync(string applicationId, CancellationToken ct = default);
     Task<IList<string>> GetLicenseeChangelogIdsByAccountIdAsync(string accountId, CancellationToken ct = default);
+    Task<Guid> CreateLicenseeChangelogAsync(adoxio_licenseechangelog changelog, CancellationToken ct = default);
+    Task UpdateLicenseeChangelogAsync(adoxio_licenseechangelog changelog, CancellationToken ct = default);
+    Task DeleteLicenseeChangelogAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Invoice (invoice)
     // -------------------------------------------------------------------------
+    Task<Invoice?> GetInvoiceByIdAsync(string id, CancellationToken ct = default);
     Task DeleteInvoiceAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------

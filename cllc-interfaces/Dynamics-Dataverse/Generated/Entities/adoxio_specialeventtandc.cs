@@ -14,11 +14,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 	
 	
 	/// <summary>
-	/// Status of the OneStop Message Item
+	/// Status of the Special Event T and C
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.16")]
-	public enum adoxio_onestopmessageitem_statecode
+	public enum adoxio_specialeventtandc_statecode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -29,11 +29,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 	}
 	
 	/// <summary>
-	/// Reason for the status of the OneStop Message Item
+	/// Reason for the status of the Special Event T and C
 	/// </summary>
 	[System.Runtime.Serialization.DataContractAttribute()]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.16")]
-	public enum adoxio_onestopmessageitem_statuscode
+	public enum adoxio_specialeventtandc_statuscode
 	{
 		
 		[System.Runtime.Serialization.EnumMemberAttribute()]
@@ -44,24 +44,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 	}
 	
 	[System.Runtime.Serialization.DataContractAttribute()]
-	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("adoxio_onestopmessageitem")]
+	[Microsoft.Xrm.Sdk.Client.EntityLogicalNameAttribute("adoxio_specialeventtandc")]
 	[System.CodeDom.Compiler.GeneratedCodeAttribute("Dataverse Model Builder", "2.0.0.16")]
-	public partial class adoxio_onestopmessageitem : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
+	public partial class adoxio_specialeventtandc : Microsoft.Xrm.Sdk.Entity, System.ComponentModel.INotifyPropertyChanging, System.ComponentModel.INotifyPropertyChanged
 	{
 		
 		/// <summary>
 		/// Default Constructor.
 		/// </summary>
-		public adoxio_onestopmessageitem() : 
+		public adoxio_specialeventtandc() : 
 				base(EntityLogicalName)
 		{
 		}
 		
-		public const string EntityLogicalName = "adoxio_onestopmessageitem";
+		public const string EntityLogicalName = "adoxio_specialeventtandc";
 		
-		public const string EntityLogicalCollectionName = "adoxio_onestopmessageitems";
+		public const string EntityLogicalCollectionName = "adoxio_specialeventtandcs";
 		
-		public const string EntitySetName = "adoxio_onestopmessageitems";
+		public const string EntitySetName = "adoxio_specialeventtandcs";
 		
 		public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
 		
@@ -83,176 +83,71 @@ namespace Gov.Lclb.Cllb.Interfaces
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_acknowledgementstatus")]
-		public string adoxio_AcknowledgementStatus
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adoxio_acknowledgementstatus");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_AcknowledgementStatus");
-				this.SetAttributeValue("adoxio_acknowledgementstatus", value);
-				this.OnPropertyChanged("adoxio_AcknowledgementStatus");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_dateacknowledgementreceived")]
-		public System.Nullable<System.DateTime> adoxio_DateAcknowledgementReceived
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("adoxio_dateacknowledgementreceived");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_DateAcknowledgementReceived");
-				this.SetAttributeValue("adoxio_dateacknowledgementreceived", value);
-				this.OnPropertyChanged("adoxio_DateAcknowledgementReceived");
-			}
-		}
-		
-		/// <summary>
-		/// Replaced by adoxio_datetimesent to resolve a time zone issue.
-		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_datesent")]
-		public System.Nullable<System.DateTime> adoxio_DateSent
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("adoxio_datesent");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_DateSent");
-				this.SetAttributeValue("adoxio_datesent", value);
-				this.OnPropertyChanged("adoxio_DateSent");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_datetimesent")]
-		public System.Nullable<System.DateTime> adoxio_DateTimeSent
-		{
-			get
-			{
-				return this.GetAttributeValue<System.Nullable<System.DateTime>>("adoxio_datetimesent");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_DateTimeSent");
-				this.SetAttributeValue("adoxio_datetimesent", value);
-				this.OnPropertyChanged("adoxio_DateTimeSent");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_errordescription")]
-		public string adoxio_ErrorDescription
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adoxio_errordescription");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_ErrorDescription");
-				this.SetAttributeValue("adoxio_errordescription", value);
-				this.OnPropertyChanged("adoxio_ErrorDescription");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_licence")]
-		public Microsoft.Xrm.Sdk.EntityReference adoxio_Licence
-		{
-			get
-			{
-				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("adoxio_licence");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_Licence");
-				this.SetAttributeValue("adoxio_licence", value);
-				this.OnPropertyChanged("adoxio_Licence");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_messagesendstatus")]
-		public virtual adoxio_messagestatus? adoxio_MessageSendStatus
-		{
-			get
-			{
-				return ((adoxio_messagestatus?)(EntityOptionSetEnum.GetEnum(this, "adoxio_messagesendstatus")));
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_MessageSendStatus");
-				this.SetAttributeValue("adoxio_messagesendstatus", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("adoxio_MessageSendStatus");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_messagestatus")]
-		public string adoxio_MessageStatus
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adoxio_messagestatus");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_MessageStatus");
-				this.SetAttributeValue("adoxio_messagestatus", value);
-				this.OnPropertyChanged("adoxio_MessageStatus");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_messagestatusreason")]
-		public string adoxio_MessageStatusReason
-		{
-			get
-			{
-				return this.GetAttributeValue<string>("adoxio_messagestatusreason");
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_MessageStatusReason");
-				this.SetAttributeValue("adoxio_messagestatusreason", value);
-				this.OnPropertyChanged("adoxio_MessageStatusReason");
-			}
-		}
-		
 		/// <summary>
 		/// The name of the custom entity.
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_name")]
-		public string adoxio_name
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_eventname")]
+		public string adoxio_eventname
 		{
 			get
 			{
-				return this.GetAttributeValue<string>("adoxio_name");
+				return this.GetAttributeValue<string>("adoxio_eventname");
 			}
 			set
 			{
-				this.OnPropertyChanging("adoxio_name");
-				this.SetAttributeValue("adoxio_name", value);
-				this.OnPropertyChanged("adoxio_name");
+				this.OnPropertyChanging("adoxio_eventname");
+				this.SetAttributeValue("adoxio_eventname", value);
+				this.OnPropertyChanged("adoxio_eventname");
+			}
+		}
+		
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_originator")]
+		public string adoxio_Originator
+		{
+			get
+			{
+				return this.GetAttributeValue<string>("adoxio_originator");
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_Originator");
+				this.SetAttributeValue("adoxio_originator", value);
+				this.OnPropertyChanged("adoxio_Originator");
+			}
+		}
+		
+		/// <summary>
+		/// Unique identifier for Special Event associated with Special Event T and C.
+		/// </summary>
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_specialeventid")]
+		public Microsoft.Xrm.Sdk.EntityReference adoxio_SpecialEventId
+		{
+			get
+			{
+				return this.GetAttributeValue<Microsoft.Xrm.Sdk.EntityReference>("adoxio_specialeventid");
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_SpecialEventId");
+				this.SetAttributeValue("adoxio_specialeventid", value);
+				this.OnPropertyChanged("adoxio_SpecialEventId");
 			}
 		}
 		
 		/// <summary>
 		/// Unique identifier for entity instances
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_onestopmessageitemid")]
-		public System.Nullable<System.Guid> adoxio_onestopmessageitemId
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_specialeventtandcid")]
+		public System.Nullable<System.Guid> adoxio_specialeventtandcId
 		{
 			get
 			{
-				return this.GetAttributeValue<System.Nullable<System.Guid>>("adoxio_onestopmessageitemid");
+				return this.GetAttributeValue<System.Nullable<System.Guid>>("adoxio_specialeventtandcid");
 			}
 			set
 			{
-				this.OnPropertyChanging("adoxio_onestopmessageitemId");
-				this.SetAttributeValue("adoxio_onestopmessageitemid", value);
+				this.OnPropertyChanging("adoxio_specialeventtandcId");
+				this.SetAttributeValue("adoxio_specialeventtandcid", value);
 				if (value.HasValue)
 				{
 					base.Id = value.Value;
@@ -261,11 +156,11 @@ namespace Gov.Lclb.Cllb.Interfaces
 				{
 					base.Id = System.Guid.Empty;
 				}
-				this.OnPropertyChanged("adoxio_onestopmessageitemId");
+				this.OnPropertyChanged("adoxio_specialeventtandcId");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_onestopmessageitemid")]
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_specialeventtandcid")]
 		public override System.Guid Id
 		{
 			get
@@ -274,52 +169,37 @@ namespace Gov.Lclb.Cllb.Interfaces
 			}
 			set
 			{
-				this.adoxio_onestopmessageitemId = value;
+				this.adoxio_specialeventtandcId = value;
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_payload")]
-		public string adoxio_Payload
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_termsandcondition")]
+		public string adoxio_TermsandCondition
 		{
 			get
 			{
-				return this.GetAttributeValue<string>("adoxio_payload");
+				return this.GetAttributeValue<string>("adoxio_termsandcondition");
 			}
 			set
 			{
-				this.OnPropertyChanging("adoxio_Payload");
-				this.SetAttributeValue("adoxio_payload", value);
-				this.OnPropertyChanged("adoxio_Payload");
+				this.OnPropertyChanging("adoxio_TermsandCondition");
+				this.SetAttributeValue("adoxio_termsandcondition", value);
+				this.OnPropertyChanged("adoxio_TermsandCondition");
 			}
 		}
 		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_statuschange")]
-		public string adoxio_StatusChange
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_termsandconditiontype")]
+		public System.Nullable<bool> adoxio_TermsandConditionType
 		{
 			get
 			{
-				return this.GetAttributeValue<string>("adoxio_statuschange");
+				return this.GetAttributeValue<System.Nullable<bool>>("adoxio_termsandconditiontype");
 			}
 			set
 			{
-				this.OnPropertyChanging("adoxio_StatusChange");
-				this.SetAttributeValue("adoxio_statuschange", value);
-				this.OnPropertyChanged("adoxio_StatusChange");
-			}
-		}
-		
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_statuschangedescription")]
-		public virtual adoxio_onestophubstatuschange? adoxio_StatusChangeDescription
-		{
-			get
-			{
-				return ((adoxio_onestophubstatuschange?)(EntityOptionSetEnum.GetEnum(this, "adoxio_statuschangedescription")));
-			}
-			set
-			{
-				this.OnPropertyChanging("adoxio_StatusChangeDescription");
-				this.SetAttributeValue("adoxio_statuschangedescription", value.HasValue ? new Microsoft.Xrm.Sdk.OptionSetValue((int)value) : null);
-				this.OnPropertyChanged("adoxio_StatusChangeDescription");
+				this.OnPropertyChanging("adoxio_TermsandConditionType");
+				this.SetAttributeValue("adoxio_termsandconditiontype", value);
+				this.OnPropertyChanged("adoxio_TermsandConditionType");
 			}
 		}
 		
@@ -486,14 +366,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
-		/// Status of the OneStop Message Item
+		/// Status of the Special Event T and C
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statecode")]
-		public virtual adoxio_onestopmessageitem_statecode? statecode
+		public virtual adoxio_specialeventtandc_statecode? statecode
 		{
 			get
 			{
-				return ((adoxio_onestopmessageitem_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
+				return ((adoxio_specialeventtandc_statecode?)(EntityOptionSetEnum.GetEnum(this, "statecode")));
 			}
 			set
 			{
@@ -504,14 +384,14 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
-		/// Reason for the status of the OneStop Message Item
+		/// Reason for the status of the Special Event T and C
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("statuscode")]
-		public virtual adoxio_onestopmessageitem_statuscode? statuscode
+		public virtual adoxio_specialeventtandc_statuscode? statuscode
 		{
 			get
 			{
-				return ((adoxio_onestopmessageitem_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
+				return ((adoxio_specialeventtandc_statuscode?)(EntityOptionSetEnum.GetEnum(this, "statuscode")));
 			}
 			set
 			{
@@ -570,21 +450,21 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
-		/// N:1 adoxio_licences_adoxio_onestopmessageitem_Licence
+		/// N:1 adoxio_specialevent_specialeventtsacs
 		/// </summary>
-		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_licence")]
-		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licences_adoxio_onestopmessageitem_Licence")]
-		public Gov.Lclb.Cllb.Interfaces.adoxio_licences adoxio_licences_adoxio_onestopmessageitem_Licence
+		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_specialeventid")]
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_specialevent_specialeventtsacs")]
+		public Gov.Lclb.Cllb.Interfaces.adoxio_specialevent adoxio_specialevent_specialeventtsacs
 		{
 			get
 			{
-				return this.GetRelatedEntity<Gov.Lclb.Cllb.Interfaces.adoxio_licences>("adoxio_licences_adoxio_onestopmessageitem_Licence", null);
+				return this.GetRelatedEntity<Gov.Lclb.Cllb.Interfaces.adoxio_specialevent>("adoxio_specialevent_specialeventtsacs", null);
 			}
 			set
 			{
-				this.OnPropertyChanging("adoxio_licences_adoxio_onestopmessageitem_Licence");
-				this.SetRelatedEntity<Gov.Lclb.Cllb.Interfaces.adoxio_licences>("adoxio_licences_adoxio_onestopmessageitem_Licence", null, value);
-				this.OnPropertyChanged("adoxio_licences_adoxio_onestopmessageitem_Licence");
+				this.OnPropertyChanging("adoxio_specialevent_specialeventtsacs");
+				this.SetRelatedEntity<Gov.Lclb.Cllb.Interfaces.adoxio_specialevent>("adoxio_specialevent_specialeventtsacs", null, value);
+				this.OnPropertyChanged("adoxio_specialevent_specialeventtsacs");
 			}
 		}
 	}

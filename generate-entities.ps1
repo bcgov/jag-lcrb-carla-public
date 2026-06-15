@@ -32,7 +32,7 @@ $entities = @(
     "adoxio_licences"
     "adoxio_licencetype"
     "adoxio_licencesubcategory"
-    "adoxio_licensechangelog"
+    "adoxio_licenseechangelog"
     "adoxio_endorsement"
 
     # Worker & screening
@@ -50,6 +50,10 @@ $entities = @(
 
     # Special events
     "adoxio_specialevent"
+    "adoxio_specialeventlocation"
+    "adoxio_specialeventlicencedarea"
+    "adoxio_specialeventschedule"
+    "adoxio_specialeventtandc"
     "adoxio_event"
     "adoxio_eventlocation"
     "adoxio_eventschedule"

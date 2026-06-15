@@ -911,6 +911,243 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     }
 
     // -------------------------------------------------------------------------
+    // SEP summary queries
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_specialevent>> GetSpecialEventsByApplicantAsync(string contactId, string? accountId, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_specialevent.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        var orFilter = new FilterExpression(LogicalOperator.Or);
+        if (Guid.TryParse(contactId, out var contactGuid))
+            orFilter.AddCondition("adoxio_contactid", ConditionOperator.Equal, contactGuid);
+        if (!string.IsNullOrEmpty(accountId) && Guid.TryParse(accountId, out var accountGuid))
+            orFilter.AddCondition("adoxio_accountid", ConditionOperator.Equal, accountGuid);
+        query.Criteria.AddFilter(orFilter);
+        query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, (int)adoxio_specialevent_statuscode.Draft);
+        query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, (int)adoxio_specialevent_statuscode.Cancelled);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialevent>()).ToList();
+    }
+
+    public async Task<IList<adoxio_specialevent>> GetSpecialEventsByJurisdictionAsync(string jurisdictionId, int[]? policeApprovals = null, int[]? excludeStatuses = null, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(jurisdictionId, out var jurisdGuid)) return new List<adoxio_specialevent>();
+        var query = new QueryExpression(adoxio_specialevent.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_policejurisdictionid", ConditionOperator.Equal, jurisdGuid);
+        if (policeApprovals?.Length > 0)
+        {
+            var approvalFilter = new FilterExpression(LogicalOperator.Or);
+            foreach (var a in policeApprovals)
+                approvalFilter.AddCondition("adoxio_policeapproval", ConditionOperator.Equal, a);
+            query.Criteria.AddFilter(approvalFilter);
+        }
+        if (excludeStatuses?.Length > 0)
+            foreach (var s in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, s);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialevent>()).ToList();
+    }
+
+    public async Task<IList<adoxio_specialevent>> GetSpecialEventsByRepresentativeAsync(string contactId, int[]? policeApprovals = null, int[]? excludeStatuses = null, int[]? includeStatuses = null, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(contactId, out var contactGuid)) return new List<adoxio_specialevent>();
+        var query = new QueryExpression(adoxio_specialevent.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_policerepresentativeid", ConditionOperator.Equal, contactGuid);
+        if (policeApprovals?.Length > 0)
+        {
+            var approvalFilter = new FilterExpression(LogicalOperator.Or);
+            foreach (var a in policeApprovals)
+                approvalFilter.AddCondition("adoxio_policeapproval", ConditionOperator.Equal, a);
+            query.Criteria.AddFilter(approvalFilter);
+        }
+        if (excludeStatuses?.Length > 0)
+            foreach (var s in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, s);
+        if (includeStatuses?.Length > 0)
+        {
+            var statusFilter = new FilterExpression(LogicalOperator.Or);
+            foreach (var s in includeStatuses)
+                statusFilter.AddCondition("statuscode", ConditionOperator.Equal, s);
+            query.Criteria.AddFilter(statusFilter);
+        }
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialevent>()).ToList();
+    }
+
+    public async Task<(IList<adoxio_specialevent> Results, int TotalCount)> GetSpecialEventsByJurisdictionPagedAsync(
+        string jurisdictionId, int[]? policeApprovals, int[]? excludeStatuses,
+        int pageIndex, int pageSize, string? orderByField, string? sortDir, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(jurisdictionId, out var jurisdGuid))
+            return (new List<adoxio_specialevent>(), 0);
+
+        var query = new QueryExpression(adoxio_specialevent.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_policejurisdictionid", ConditionOperator.Equal, jurisdGuid);
+        if (policeApprovals?.Length > 0)
+        {
+            var approvalFilter = new FilterExpression(LogicalOperator.Or);
+            foreach (var a in policeApprovals)
+                approvalFilter.AddCondition("adoxio_policeapproval", ConditionOperator.Equal, a);
+            query.Criteria.AddFilter(approvalFilter);
+        }
+        if (excludeStatuses?.Length > 0)
+            foreach (var s in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, s);
+
+        if (!string.IsNullOrEmpty(orderByField))
+            query.Orders.Add(new OrderExpression(orderByField,
+                string.Equals(sortDir, "desc", StringComparison.OrdinalIgnoreCase)
+                    ? OrderType.Descending : OrderType.Ascending));
+
+        query.PageInfo = new PagingInfo { Count = pageSize, PageNumber = 1, ReturnTotalRecordCount = true };
+        EntityCollection? result = null;
+        string? cookie = null;
+        for (int i = 0; i <= pageIndex; i++)
+        {
+            if (cookie != null) query.PageInfo.PagingCookie = cookie;
+            query.PageInfo.PageNumber = i + 1;
+            result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+            cookie = result.MoreRecords ? result.PagingCookie : null;
+            if (i < pageIndex && cookie == null) break;
+        }
+        var items = result?.Entities.Select(e => e.ToEntity<adoxio_specialevent>()).ToList()
+                    ?? new List<adoxio_specialevent>();
+        var total = result?.TotalRecordCount ?? 0;
+        return (items, total);
+    }
+
+    public async Task<IList<adoxio_sepcity>> GetSepCitiesFilteredAsync(string? nameContains, bool defaultsOnly = false, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_sepcity.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 100 };
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        if (defaultsOnly)
+            query.Criteria.AddCondition("adoxio_ispreview", ConditionOperator.Equal, true);
+        else if (!string.IsNullOrEmpty(nameContains))
+            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Contains, nameContains);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_sepcity>()).ToList();
+    }
+
+    // -------------------------------------------------------------------------
+    // SEP Drink Sales Forecast (adoxio_sepdrinksalesforecast)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_sepdrinksalesforecast>> GetSepDrinkSalesForecastsByEventIdAsync(string eventId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(eventId, out var guid)) return new List<adoxio_sepdrinksalesforecast>();
+        var query = new QueryExpression(adoxio_sepdrinksalesforecast.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_specialevent", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_sepdrinksalesforecast>()).ToList();
+    }
+
+    public async Task<Guid> CreateSepDrinkSalesForecastAsync(adoxio_sepdrinksalesforecast forecast, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(forecast), ct);
+
+    public async Task UpdateSepDrinkSalesForecastAsync(adoxio_sepdrinksalesforecast forecast, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(forecast), ct);
+
+    public async Task DeleteSepDrinkSalesForecastAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_sepdrinksalesforecast.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Special Event Location (adoxio_specialeventlocation)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_specialeventlocation>> GetSpecialEventLocationsByEventIdAsync(string eventId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(eventId, out var guid)) return new List<adoxio_specialeventlocation>();
+        var query = new QueryExpression(adoxio_specialeventlocation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_specialeventid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialeventlocation>()).ToList();
+    }
+
+    public async Task<Guid> CreateSpecialEventLocationAsync(adoxio_specialeventlocation location, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(location), ct);
+
+    public async Task UpdateSpecialEventLocationAsync(adoxio_specialeventlocation location, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(location), ct);
+
+    public async Task DeleteSpecialEventLocationAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_specialeventlocation.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Special Event Licenced Area (adoxio_specialeventlicencedarea)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_specialeventlicencedarea>> GetSpecialEventLicencedAreasByLocationIdAsync(string locationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(locationId, out var guid)) return new List<adoxio_specialeventlicencedarea>();
+        var query = new QueryExpression(adoxio_specialeventlicencedarea.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_specialeventlocationid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialeventlicencedarea>()).ToList();
+    }
+
+    public async Task<Guid> CreateSpecialEventLicencedAreaAsync(adoxio_specialeventlicencedarea area, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(area), ct);
+
+    public async Task UpdateSpecialEventLicencedAreaAsync(adoxio_specialeventlicencedarea area, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(area), ct);
+
+    public async Task DeleteSpecialEventLicencedAreaAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_specialeventlicencedarea.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Special Event Schedule (adoxio_specialeventschedule)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_specialeventschedule>> GetSpecialEventSchedulesByLocationIdAsync(string locationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(locationId, out var guid)) return new List<adoxio_specialeventschedule>();
+        var query = new QueryExpression(adoxio_specialeventschedule.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_specialeventlocationid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialeventschedule>()).ToList();
+    }
+
+    public async Task<Guid> CreateSpecialEventScheduleAsync(adoxio_specialeventschedule schedule, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(schedule), ct);
+
+    public async Task UpdateSpecialEventScheduleAsync(adoxio_specialeventschedule schedule, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(schedule), ct);
+
+    public async Task DeleteSpecialEventScheduleAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_specialeventschedule.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
+    // Special Event T&C (adoxio_specialeventtandc)
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_specialeventtandc>> GetSpecialEventTandCsByEventIdAsync(string eventId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(eventId, out var guid)) return new List<adoxio_specialeventtandc>();
+        var query = new QueryExpression(adoxio_specialeventtandc.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_specialeventid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_specialeventtandc>()).ToList();
+    }
+
+    public async Task<Guid> CreateSpecialEventTandCAsync(adoxio_specialeventtandc tandc, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(tandc), ct);
+
+    public async Task UpdateSpecialEventTandCAsync(adoxio_specialeventtandc tandc, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(tandc), ct);
+
+    public async Task DeleteSpecialEventTandCAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_specialeventtandc.EntityLogicalName, guid), ct);
+    }
+
+    // -------------------------------------------------------------------------
     // Event (adoxio_event)
     // -------------------------------------------------------------------------
     public async Task<adoxio_event?> GetEventByIdAsync(string id, CancellationToken ct = default)
@@ -1569,6 +1806,15 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<Guid> CreateLegalEntityAsync(adoxio_legalentity entity, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Create(entity), ct);
 
+    public async Task UpdateLegalEntityAsync(adoxio_legalentity entity, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(entity), ct);
+
+    public async Task<adoxio_legalentity?> GetLegalEntityByAccountIdAsync(string accountId, CancellationToken ct = default)
+    {
+        var results = await GetLegalEntitiesByAccountIdAsync(accountId, ct);
+        return results.FirstOrDefault();
+    }
+
     public async Task DeleteLegalEntityAsync(string id, CancellationToken ct = default)
     {
         if (!Guid.TryParse(id, out var guid)) return;
@@ -1585,32 +1831,72 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     }
 
     // -------------------------------------------------------------------------
-    // Licensee Changelog IDs by account (no generated entity type)
+    // Licensee Changelog (adoxio_licenseechangelog)
     // -------------------------------------------------------------------------
-    public async Task<IList<string>> GetLicenseeChangelogIdsByAccountIdAsync(string accountId, CancellationToken ct = default)
+    public async Task<IList<adoxio_licenseechangelog>> GetLicenseeChangelogsByAccountIdAsync(string accountId, CancellationToken ct = default)
     {
-        if (!Guid.TryParse(accountId, out var guid)) return new List<string>();
-        var ids = new List<string>();
+        if (!Guid.TryParse(accountId, out var guid)) return new List<adoxio_licenseechangelog>();
+        var results = new List<adoxio_licenseechangelog>();
         var fields = new[] { "adoxio_parentbusinessaccount", "adoxio_businessaccount", "adoxio_shareholderbusinessaccount" };
+        var seen = new HashSet<Guid>();
         foreach (var field in fields)
         {
-            var query = new QueryExpression("adoxio_licenseechangelog")
-            {
-                ColumnSet = new ColumnSet("adoxio_licenseechangelogid")
-            };
+            var query = new QueryExpression(adoxio_licenseechangelog.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
             query.Criteria.AddCondition(field, ConditionOperator.Equal, guid);
             var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
             foreach (var entity in result.Entities)
             {
-                var id = entity.GetAttributeValue<Guid?>("adoxio_licenseechangelogid") ?? entity.Id;
-                if (id != Guid.Empty && !ids.Contains(id.ToString()))
-                    ids.Add(id.ToString());
+                if (seen.Add(entity.Id))
+                    results.Add(entity.ToEntity<adoxio_licenseechangelog>());
             }
         }
-        return ids;
+        return results;
+    }
+
+    public async Task<IList<adoxio_licenseechangelog>> GetLicenseeChangelogsByApplicationIdAsync(string applicationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationId, out var guid)) return new List<adoxio_licenseechangelog>();
+        var query = new QueryExpression(adoxio_licenseechangelog.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_application", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_licenseechangelog>()).ToList();
+    }
+
+    public async Task<IList<string>> GetLicenseeChangelogIdsByAccountIdAsync(string accountId, CancellationToken ct = default)
+    {
+        var changelogs = await GetLicenseeChangelogsByAccountIdAsync(accountId, ct);
+        return changelogs.Select(c => (c.adoxio_licenseechangelogId ?? c.Id).ToString()).ToList();
+    }
+
+    public async Task<Guid> CreateLicenseeChangelogAsync(adoxio_licenseechangelog changelog, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(changelog), ct);
+
+    public async Task UpdateLicenseeChangelogAsync(adoxio_licenseechangelog changelog, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(changelog), ct);
+
+    public async Task DeleteLicenseeChangelogAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return;
+        await Task.Run(() => _serviceClient.Delete(adoxio_licenseechangelog.EntityLogicalName, guid), ct);
     }
 
     // -------------------------------------------------------------------------
+    // Invoice
+    // -------------------------------------------------------------------------
+    public async Task<Invoice?> GetInvoiceByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await Task.Run(() => _serviceClient.Retrieve(Invoice.EntityLogicalName, guid, new ColumnSet(true)), ct);
+            return entity?.ToEntity<Invoice>();
+        }
+        catch
+        {
+            return null;
+        }
+    }
+
     // Invoice delete
     // -------------------------------------------------------------------------
     public async Task DeleteInvoiceAsync(string id, CancellationToken ct = default)

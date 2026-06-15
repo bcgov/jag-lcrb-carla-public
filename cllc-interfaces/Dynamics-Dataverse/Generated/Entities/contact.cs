@@ -6168,6 +6168,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_licenseechangelog_Contact
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licenseechangelog_Contact")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_licenseechangelog_Contact
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_Contact", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licenseechangelog_Contact");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_Contact", null, value);
+				this.OnPropertyChanged("adoxio_licenseechangelog_Contact");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_policerepresentative_specialevents
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_policerepresentative_specialevents")]

@@ -2559,6 +2559,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_licences_adoxio_onestopmessageitem_Licence
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licences_adoxio_onestopmessageitem_Licence")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_onestopmessageitem> adoxio_licences_adoxio_onestopmessageitem_Licence
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_onestopmessageitem>("adoxio_licences_adoxio_onestopmessageitem_Licence", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licences_adoxio_onestopmessageitem_Licence");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_onestopmessageitem>("adoxio_licences_adoxio_onestopmessageitem_Licence", null, value);
+				this.OnPropertyChanged("adoxio_licences_adoxio_onestopmessageitem_Licence");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_licences_Annotations
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licences_Annotations")]

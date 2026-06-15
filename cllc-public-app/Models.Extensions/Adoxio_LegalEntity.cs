@@ -205,6 +205,42 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
+        public static void CopyValues(this DvLegalEntity to, LegalEntity from)
+        {
+            to.adoxio_name = from.name;
+            to.adoxio_FirstName = from.firstname;
+            to.adoxio_LastName = from.lastname;
+            to.adoxio_MiddleName = from.middlename;
+            to.adoxio_Email = from.email;
+            to.adoxio_CommonNonVotingShares = from.commonnonvotingshares;
+            to.adoxio_CommonVotingShares = from.commonvotingshares;
+            to.adoxio_PreferredNonVotingShares = from.preferrednonvotingshares;
+            to.adoxio_PreferredVotingShares = from.preferredvotingshares;
+            to.adoxio_DateofBirth = from.dateofbirth?.DateTime;
+            to.adoxio_DateofAppointment = from.dateofappointment?.DateTime;
+            to.adoxio_DateofSharesIssued = from.dateIssued?.DateTime;
+            to.adoxio_DateEmailSent = from.securityAssessmentEmailSentOn?.DateTime;
+            to.adoxio_JobTitle = from.jobTitle;
+            to.adoxio_AnnualMembershipFee = from.AnnualMembershipFee;
+            to.adoxio_NumberofMembers = from.NumberOfMembers;
+            to.adoxio_InterestPercentage = from.interestpercentage;
+            to.adoxio_IsIndividual = (from.isindividual == true) ? DvGeneralYesNo.Yes : DvGeneralYesNo.No;
+            to.adoxio_SameAsApplyingPerson = (from.sameasapplyingperson == true) ? DvGeneralYesNo.Yes : DvGeneralYesNo.No;
+            to.adoxio_IsApplicant = from.isApplicant;
+            to.adoxio_IsPartner = from.isPartner;
+            to.adoxio_IsShareholder = from.isShareholder;
+            to.adoxio_IsTrustee = from.IsTrustee;
+            to.adoxio_IsDirector = from.isDirector;
+            to.adoxio_IsOfficer = from.isOfficer;
+            to.adoxio_IsSeniorManagement = from.isSeniorManagement;
+            to.adoxio_IsOwner = from.isOwner;
+            to.adoxio_IsKeyPersonnel = from.isKeyPersonnel;
+            if (from.legalentitytype != null)
+                to.adoxio_LegalEntityType = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicanttypecodes)(int)from.legalentitytype.Value;
+            if (from.partnerType != null)
+                to.adoxio_PartnerType = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_partnertype)(int)from.partnerType.Value;
+        }
+
     }
 
 }

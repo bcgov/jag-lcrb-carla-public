@@ -1851,6 +1851,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType", null, value);
+				this.OnPropertyChanged("adoxio_applicationtype_adoxio_licenseechangelog_ApplicationType");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_applicationtype_adoxio_termsconditionslimitationspreset_ApplicationType")]

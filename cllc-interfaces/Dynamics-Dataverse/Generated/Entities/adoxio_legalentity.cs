@@ -1362,6 +1362,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_legalentity_changelogs
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_legalentity_changelogs")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_legalentity_changelogs
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_legalentity_changelogs", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_legalentity_changelogs");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_legalentity_changelogs", null, value);
+				this.OnPropertyChanged("adoxio_legalentity_changelogs");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_legalentity_personalhistorysummaries
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_legalentity_personalhistorysummaries")]
@@ -1394,6 +1412,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 				this.OnPropertyChanging("adoxio_legalentity_SharePointDocumentLocations");
 				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.SharePointDocumentLocation>("adoxio_legalentity_SharePointDocumentLocations", null, value);
 				this.OnPropertyChanged("adoxio_legalentity_SharePointDocumentLocations");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_parentlegalentity_changelogs
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_parentlegalentity_changelogs")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_parentlegalentity_changelogs
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_parentlegalentity_changelogs", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_parentlegalentity_changelogs");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_parentlegalentity_changelogs", null, value);
+				this.OnPropertyChanged("adoxio_parentlegalentity_changelogs");
 			}
 		}
 		

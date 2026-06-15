@@ -11629,6 +11629,24 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_licenseechangelog_Application
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licenseechangelog_Application")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_licenseechangelog_Application
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_Application", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licenseechangelog_Application");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_Application", null, value);
+				this.OnPropertyChanged("adoxio_licenseechangelog_Application");
+			}
+		}
+		
+		/// <summary>
 		/// N:1 adoxio_account_adoxio_application_Applicant
 		/// </summary>
 		[Microsoft.Xrm.Sdk.AttributeLogicalNameAttribute("adoxio_applicant")]

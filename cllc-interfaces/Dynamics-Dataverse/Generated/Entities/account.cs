@@ -4506,6 +4506,60 @@ namespace Gov.Lclb.Cllb.Interfaces
 		}
 		
 		/// <summary>
+		/// 1:N adoxio_licenseechangelog_BusinessAccount
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licenseechangelog_BusinessAccount")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_licenseechangelog_BusinessAccount
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_BusinessAccount", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licenseechangelog_BusinessAccount");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_BusinessAccount", null, value);
+				this.OnPropertyChanged("adoxio_licenseechangelog_BusinessAccount");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_licenseechangelog_ParentBusinessAccount
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licenseechangelog_ParentBusinessAccount")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_licenseechangelog_ParentBusinessAccount
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_ParentBusinessAccount", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licenseechangelog_ParentBusinessAccount");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_ParentBusinessAccount", null, value);
+				this.OnPropertyChanged("adoxio_licenseechangelog_ParentBusinessAccount");
+			}
+		}
+		
+		/// <summary>
+		/// 1:N adoxio_licenseechangelog_ShareholderBusinessAccount
+		/// </summary>
+		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_licenseechangelog_ShareholderBusinessAccount")]
+		public System.Collections.Generic.IEnumerable<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog> adoxio_licenseechangelog_ShareholderBusinessAccount
+		{
+			get
+			{
+				return this.GetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_ShareholderBusinessAccount", null);
+			}
+			set
+			{
+				this.OnPropertyChanging("adoxio_licenseechangelog_ShareholderBusinessAccount");
+				this.SetRelatedEntities<Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog>("adoxio_licenseechangelog_ShareholderBusinessAccount", null, value);
+				this.OnPropertyChanged("adoxio_licenseechangelog_ShareholderBusinessAccount");
+			}
+		}
+		
+		/// <summary>
 		/// 1:N adoxio_policeaccount_specialevents
 		/// </summary>
 		[Microsoft.Xrm.Sdk.RelationshipSchemaNameAttribute("adoxio_policeaccount_specialevents")]

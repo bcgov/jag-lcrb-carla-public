@@ -1,5 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Utility;
@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
+using Microsoft.Xrm.Sdk;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -19,6 +19,15 @@ using System.Threading.Tasks;
 using Google.Protobuf;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Microsoft.Extensions.Caching.Memory;
+using DvLegalEntity = DV::Gov.Lclb.Cllb.Interfaces.adoxio_legalentity;
+using DvChangelog = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licenseechangelog;
+using DvAccount = DV::Gov.Lclb.Cllb.Interfaces.Account;
+using DvAccountType = DV::Gov.Lclb.Cllb.Interfaces.adoxio_accounttype;
+using DvApplicantType = DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicanttypecodes;
+using DvTiedHouse = DV::Gov.Lclb.Cllb.Interfaces.adoxio_tiedhouseconnection;
+using DvPhsComplete = DV::Gov.Lclb.Cllb.Interfaces.adoxio_contact_adoxio_phscomplete;
+using DvCasComplete = DV::Gov.Lclb.Cllb.Interfaces.adoxio_contact_adoxio_cascomplete;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -28,18 +37,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LegalEntitiesController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IMemoryCache _cache;
         private readonly string _encryptionKey;
         private readonly FileManagerClient _fileManagerClient;
 
-        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IMemoryCache memoryCache)
+        public LegalEntitiesController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDataverseClient dataverse, FileManagerClient fileClient, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _configuration = configuration;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _httpContextAccessor = httpContextAccessor;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
@@ -49,111 +58,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get all Dynamics Legal Entities
         /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         [HttpGet]
-        public JsonResult GetDynamicsLegalEntities()
+        public async Task<JsonResult> GetDynamicsLegalEntities()
         {
-            List<LegalEntity> result = new List<LegalEntity>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
-            String accountfilter = null;
-
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-
-            // set account filter
-            accountfilter = "_adoxio_account_value eq " + userSettings.AccountId;
-            _logger.LogDebug("Account filter = " + accountfilter);
-            try
-            {
-                legalEntities = _dynamicsClient.Legalentities.Get(filter: accountfilter).Value;
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while getting legal entities. ");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
-            }
-
-
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-
-            return new JsonResult(result);
+            var legalEntities = await _dataverse.GetLegalEntitiesByAccountIdAsync(userSettings.AccountId);
+            return new JsonResult(legalEntities.Select(le => le.ToViewModel()).ToList());
         }
 
         /// <summary>
         /// Get all Dynamics Legal Entities for the current Business Profile Summary
         /// </summary>
-        /// <param name=""></param>
-        /// <returns></returns>
         [HttpGet("business-profile-summary")]
-        public JsonResult GetBusinessProfileSummary()
+        public async Task<JsonResult> GetBusinessProfileSummary()
         {
-            List<LegalEntity> result = new List<LegalEntity>();
-
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = GetAccountLegalEntities(userSettings.AccountId);
-
-            foreach (var legalEntity in legalEntities)
-            {
-                result.Add(legalEntity.ToViewModel());
-            }
-
-            return new JsonResult(result);
+            var legalEntities = await GetAccountLegalEntitiesAsync(userSettings.AccountId);
+            return new JsonResult(legalEntities.Select(le => le.ToViewModel()).ToList());
         }
 
         [HttpGet("current-hierarchy")]
-        public JsonResult GetCurrentHierarchy()
+        public async Task<JsonResult> GetCurrentHierarchy()
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-
-            LegalEntity legalEntity = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
+            LegalEntity legalEntity = await GetLegalEntityTreeAsync(userSettings.AccountId);
             return new JsonResult(legalEntity);
         }
 
-        private void GetScreeningData(ref SecurityScreeningCategorySummary securityScreeningCategorySummarycannabisSummary, LegalEntity legalEntity, bool isLiquor, List<string> addedContacts = null)
+        private async Task GetScreeningData(SecurityScreeningCategorySummary summary, LegalEntity legalEntity, bool isLiquor, List<string> addedContacts = null)
         {
             if (addedContacts == null)
-            {
                 addedContacts = new List<string>();
-            }
-            // if the current legal entity is an individual, add it.
 
-            if (legalEntity.isindividual != null && true == legalEntity.isindividual)
+            if (legalEntity.isindividual == true && !string.IsNullOrEmpty(legalEntity.contactId))
             {
                 bool isComplete = false;
                 DateTimeOffset? dateSubmitted = null;
-                // determine if there is a completed change log for this item.
-                if (!string.IsNullOrEmpty(legalEntity.contactId))
-                {
-                    // liquor
-                    var contact = _dynamicsClient.GetContactById(legalEntity.contactId).GetAwaiter().GetResult();
-                    if (isLiquor && contact != null && contact.AdoxioPhscomplete != null && contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
-                    {
-                        isComplete = true;
-                        dateSubmitted = contact.AdoxioPhsdatesubmitted;
-                    }
 
-                    // cannabis
-                    if (!isLiquor && contact != null && contact.AdoxioCascomplete != null && contact.AdoxioCascomplete == (int)YesNoOptions.Yes)
-                    {
-                        isComplete = true;
-                        dateSubmitted = contact.AdoxioCasdatesubmitted;
-                    }
+                var contact = await _dataverse.GetContactByIdAsync(legalEntity.contactId);
+                if (isLiquor && contact?.adoxio_PHSComplete == DvPhsComplete.Yes)
+                {
+                    isComplete = true;
+                    dateSubmitted = contact.adoxio_PHSDateSubmitted.HasValue
+                        ? (DateTimeOffset?)contact.adoxio_PHSDateSubmitted.Value
+                        : null;
                 }
+                if (!isLiquor && contact?.adoxio_cascomplete == DvCasComplete.Yes)
+                {
+                    isComplete = true;
+                    dateSubmitted = contact.adoxio_casdatesubmitted.HasValue
+                        ? (DateTimeOffset?)contact.adoxio_casdatesubmitted.Value
+                        : null;
+                }
+
                 var newItem = new SecurityScreeningStatusItem
                 {
                     FirstName = legalEntity.firstname,
@@ -164,347 +124,206 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     DateSubmitted = dateSubmitted,
                     ContactId = legalEntity.contactId
                 };
+
                 if (isComplete)
                 {
-
-                    if (securityScreeningCategorySummarycannabisSummary.CompletedItems == null)
-                    {
-                        securityScreeningCategorySummarycannabisSummary.CompletedItems = new List<SecurityScreeningStatusItem>();
-                    }
+                    if (summary.CompletedItems == null)
+                        summary.CompletedItems = new List<SecurityScreeningStatusItem>();
                     if (newItem.ContactId != null && !addedContacts.Any(c => c == newItem.ContactId))
-                    {
-                        addedContacts.Add(newItem.ContactId);                                                    
-                    }
-                    securityScreeningCategorySummarycannabisSummary.CompletedItems.Add(newItem);
+                        addedContacts.Add(newItem.ContactId);
+                    summary.CompletedItems.Add(newItem);
                 }
                 else
                 {
-                    if (securityScreeningCategorySummarycannabisSummary.OutstandingItems == null)
-                    {
-                        securityScreeningCategorySummarycannabisSummary.OutstandingItems = new List<SecurityScreeningStatusItem>();
-                    }   
+                    if (summary.OutstandingItems == null)
+                        summary.OutstandingItems = new List<SecurityScreeningStatusItem>();
                     if (newItem.ContactId != null && !addedContacts.Any(c => c == newItem.ContactId))
-                    {
-                        addedContacts.Add(newItem.ContactId);                            
-                    }
-                    securityScreeningCategorySummarycannabisSummary.OutstandingItems.Add(newItem);
+                        addedContacts.Add(newItem.ContactId);
+                    summary.OutstandingItems.Add(newItem);
                 }
             }
+
             if (legalEntity.children != null)
             {
                 foreach (var item in legalEntity.children)
-                {
-                    GetScreeningData(ref securityScreeningCategorySummarycannabisSummary, item, isLiquor, addedContacts);
-                }
+                    await GetScreeningData(summary, item, isLiquor, addedContacts);
             }
-
         }
 
-
         [HttpGet("current-security-summary")]
-        public JsonResult GetCurrentSecurityScreeningSummary()
+        public async Task<JsonResult> GetCurrentSecurityScreeningSummary()
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-
-            // get data for the current account. 
-
             string currentAccountId = userSettings.AccountId;
 
-            LegalEntity legalEntity = _dynamicsClient.GetLegalEntityTree(userSettings.AccountId, _logger, _configuration);
-
-            // get the current user's applications and licences
-            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
-            var applications = _dynamicsClient.GetApplicationsForLicenceByApplicant(currentAccountId);
+            LegalEntity legalEntity = await GetLegalEntityTreeAsync(currentAccountId);
+            var licences = await _dataverse.GetLicencesByAccountIdAsync(currentAccountId);
+            var applications = await _dataverse.GetApplicationsByAccountIdAsync(currentAccountId);
 
             SecurityScreeningSummary result = new SecurityScreeningSummary();
 
-            // determine how many of each licence there are.
-            int cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int cannabisLicenceCount = licences.Count(x => x.adoxio_LicenceType?.Name?.ToUpper().Contains("CANNABIS") == true);
             int liquorLicenceCount = licences.Count() - cannabisLicenceCount;
-
-            // determine how many applications of each type there are.
-            int cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
+            int cannabisApplicationCount = applications.Count(x => x.adoxio_ApplicationTypeId?.Name?.ToUpper().Contains("CANNABIS") == true);
             int liquorApplicationCount = applications.Count() - cannabisApplicationCount;
 
             if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
             {
-                SecurityScreeningCategorySummary cannabisSummary = new SecurityScreeningCategorySummary();
-                GetScreeningData(ref cannabisSummary, legalEntity, false);
+                var cannabisSummary = new SecurityScreeningCategorySummary();
+                await GetScreeningData(cannabisSummary, legalEntity, false);
                 result.Cannabis = cannabisSummary;
             }
 
             if (liquorLicenceCount > 0 || liquorApplicationCount > 0)
             {
-                SecurityScreeningCategorySummary liquorSummary = new SecurityScreeningCategorySummary();
-                GetScreeningData(ref liquorSummary, legalEntity, true);
+                var liquorSummary = new SecurityScreeningCategorySummary();
+                await GetScreeningData(liquorSummary, legalEntity, true);
                 result.Liquor = liquorSummary;
             }
 
             return new JsonResult(result);
         }
 
-
         [HttpGet("legal-entity-change-logs/application/{applicationId}")]
-        public List<LicenseeChangeLog> GetChangeLogsForApplication(string applicationId)
+        public async Task<List<LicenseeChangeLog>> GetChangeLogsForApplication(string applicationId)
         {
-            return _dynamicsClient.GetApplicationChangeLogs(applicationId, _logger);
+            var changelogs = await _dataverse.GetLicenseeChangelogsByApplicationIdAsync(applicationId);
+            return changelogs.Select(c => c.ToViewModel()).ToList();
         }
 
         [HttpGet("legal-entity-change-logs/account/{accountId}")]
-        public ActionResult GetChangeLogsForAccount(string accountId)
+        public async Task<ActionResult> GetChangeLogsForAccount(string accountId)
         {
-            var result = new List<LicenseeChangeLog>();
-            var filter = "_adoxio_businessaccount_value eq " + accountId;
-            try
-            {
-                var response = _dynamicsClient.Licenseechangelogs.Get(filter: filter).Value.ToList();
-                foreach (var item in response)
-                {
-                    result.Add(item.ToViewModel());
-                }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error reading LegalEntityChangelog");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unexpected Exception while reading LegalEntityChangelog");
-            }
-            return new JsonResult(result);
+            var changelogs = await _dataverse.GetLicenseeChangelogsByAccountIdAsync(accountId);
+            return new JsonResult(changelogs.Select(c => c.ToViewModel()).ToList());
         }
 
-        private LegalEntity GetLegalEntityTree(string accountId)
+        private async Task<LegalEntity> GetLegalEntityTreeAsync(string accountId)
         {
-            LegalEntity result = null;
-            var filter = "_adoxio_account_value eq " + accountId;
-            filter += " and _adoxio_legalentityowned_value eq null";
+            var allEntities = await _dataverse.GetLegalEntitiesByAccountIdAsync(accountId);
+            var root = allEntities.FirstOrDefault(e => e.adoxio_LegalEntityOwned == null);
+            if (root == null) return null;
 
-            var expand = new List<string>{
-                "adoxio_Contact"
-            };
-
-            var response = _dynamicsClient.Legalentities.Get(filter: filter, expand: expand);
-
-            if (response != null && response.Value != null)
+            var result = root.ToViewModel();
+            if (!string.IsNullOrEmpty(result.contactId))
             {
-                var legalEntity = response.Value.FirstOrDefault();
-                if (legalEntity != null)
-                {
-                    result = legalEntity.ToViewModel();
-                    if (!string.IsNullOrEmpty(result.contactId))
-                    {
-                        result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
-                        result.CasLink = ContactController.GetCASSLink(result.contactId, _configuration, _encryptionKey);
-                    }
-
-                    List<string> processedEntities = new List<string>();
-                    result.children = GetLegalEntityChildren(result.id, processedEntities);
-                }
+                result.PhsLink = ContactController.GetPhsLink(result.contactId, _configuration, _encryptionKey);
+                result.CasLink = ContactController.GetCASSLink(result.contactId, _configuration, _encryptionKey);
             }
+
+            var processedEntities = new List<string>();
+            result.children = await GetLegalEntityChildrenAsync(result.id, processedEntities);
             return result;
         }
 
-        private List<LegalEntity> GetLegalEntityChildren(string parentLegalEntityId, List<string> processedEntities)
+        private async Task<List<LegalEntity>> GetLegalEntityChildrenAsync(string parentLegalEntityId, List<string> processedEntities)
         {
-            List<LegalEntity> result = new List<LegalEntity>();
-            MicrosoftDynamicsCRMadoxioLegalentityCollection response = null;
-            var filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
+            var result = new List<LegalEntity>();
             if (processedEntities == null)
-            {
                 processedEntities = new List<string>();
-            }
+
+            IList<DvLegalEntity> children;
             try
             {
-                response = _dynamicsClient.Legalentities.Get(filter: filter);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while patching legal entity");
+                children = await _dataverse.GetLegalEntitiesByParentEntityIdAsync(parentLegalEntityId);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unexpected Exception while patching legal entity");
+                _logger.LogError(e, "Unexpected Exception while getting child legal entities");
+                return result;
             }
 
-            if (response != null && response.Value != null)
+            foreach (var child in children)
             {
-                var legalEntities = response.Value.ToList();
-
-                foreach (var legalEntity in legalEntities)
+                var viewModel = child.ToViewModel();
+                if (!string.IsNullOrEmpty(viewModel.id) && !processedEntities.Contains(viewModel.id))
                 {
-                    var viewModel = legalEntity.ToViewModel();
-                    if (!String.IsNullOrEmpty(legalEntity.AdoxioLegalentityid) && !processedEntities.Contains(legalEntity.AdoxioLegalentityid))
-                    {
-                        processedEntities.Add(legalEntity.AdoxioLegalentityid);
-                        viewModel.children = GetLegalEntityChildren(legalEntity.AdoxioLegalentityid, processedEntities);
-                    }
-                    if (!string.IsNullOrEmpty(viewModel.contactId))
-                    {
-                        viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
-                        viewModel.CasLink = ContactController.GetCASSLink(viewModel.contactId, _configuration, _encryptionKey);
-                    }
-
-                    result.Add(viewModel);
+                    processedEntities.Add(viewModel.id);
+                    viewModel.children = await GetLegalEntityChildrenAsync(viewModel.id, processedEntities);
                 }
-
+                if (!string.IsNullOrEmpty(viewModel.contactId))
+                {
+                    viewModel.PhsLink = ContactController.GetPhsLink(viewModel.contactId, _configuration, _encryptionKey);
+                    viewModel.CasLink = ContactController.GetCASSLink(viewModel.contactId, _configuration, _encryptionKey);
+                }
+                result.Add(viewModel);
             }
             return result;
-
         }
 
-        private List<LegalEntity> GetAccountHierarchy(string accountId, List<string> shareHolders = null)
+        private async Task<List<DvLegalEntity>> GetAccountLegalEntitiesAsync(string accountId, List<string> shareHolders = null)
         {
-            List<LegalEntity> result = null;
-            var filter = "_adoxio_account_value eq " + accountId;
             if (shareHolders == null)
-            {
                 shareHolders = new List<string>();
-            }
 
-            var response = _dynamicsClient.Legalentities.Get(filter: filter);
-
-            if (response != null && response.Value != null)
-            {
-                var legalEntities = response.Value.ToList();
-
-                foreach (var legalEntity in legalEntities)
-                {
-                    var viewModel = legalEntity.ToViewModel();
-                    viewModel.children = new List<LegalEntity>();
-                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
-                    {
-                        shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
-                        viewModel.children.AddRange(GetAccountHierarchy(legalEntity._adoxioShareholderaccountidValue, shareHolders));
-                    }
-
-                    result.Add(viewModel);
-                }
-            }
-            return result;
-
-        }
-
-        private List<MicrosoftDynamicsCRMadoxioLegalentity> GetAccountLegalEntities(string accountId, List<string> shareHolders = null)
-        {
-            List<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
-            if (shareHolders == null)
-            {
-                shareHolders = new List<string>();
-            }
-            var filter = "_adoxio_account_value eq " + accountId;
-            filter += " and adoxio_isindividual eq 0";
-
+            IList<DvLegalEntity> legalEntities;
             try
             {
-                legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value.ToList();
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while getting account legal entities. ");
+                var all = await _dataverse.GetLegalEntitiesByAccountIdAsync(accountId);
+                legalEntities = all.Where(le => le.adoxio_IsIndividual != DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes).ToList();
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting account legal entities.");
+                return new List<DvLegalEntity>();
             }
 
-
-            if (legalEntities != null)
+            var children = new List<DvLegalEntity>();
+            foreach (var le in legalEntities)
             {
-                var children = new List<MicrosoftDynamicsCRMadoxioLegalentity>();
-
-                foreach (var legalEntity in legalEntities)
+                if (le.adoxio_ShareholderAccountID != null)
                 {
-                    if (!String.IsNullOrEmpty(legalEntity._adoxioShareholderaccountidValue) && !shareHolders.Contains(legalEntity._adoxioShareholderaccountidValue))
+                    var shareholderId = le.adoxio_ShareholderAccountID.Id.ToString();
+                    if (!shareHolders.Contains(shareholderId))
                     {
-                        shareHolders.Add(legalEntity._adoxioShareholderaccountidValue);
-                        children.AddRange(GetAccountLegalEntities(legalEntity._adoxioShareholderaccountidValue, shareHolders));
+                        shareHolders.Add(shareholderId);
+                        children.AddRange(await GetAccountLegalEntitiesAsync(shareholderId, shareHolders));
                     }
                 }
-                legalEntities.AddRange(children);
             }
-            return legalEntities.Distinct().ToList();
-
+            legalEntities = legalEntities.Concat(children).Distinct().ToList();
+            return legalEntities.ToList();
         }
 
         /// <summary>
         /// Get all Legal Entities where the position matches the parameter received
-        /// By default, the account linked to the current user is used
         /// </summary>
-        /// <param name="positionType"></param>
-        /// <param name="parentLegalEntityId"></param>
-        /// <returns></returns>
         [HttpGet]
         [Route("position/{parentLegalEntityId}/{positionType}")]
-        public IActionResult GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
+        public async Task<IActionResult> GetDynamicsLegalEntitiesByPosition(string parentLegalEntityId, string positionType)
         {
-            List<LegalEntity> result = new List<LegalEntity>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioLegalentity> legalEntities = null;
-            String filter = null;
-
-            // Stops injections
-            try
-            {
-                new Guid(parentLegalEntityId);
-            }
-            catch
-            {
+            if (!Guid.TryParse(parentLegalEntityId, out _))
                 return NotFound();
-            }
 
-            filter = "_adoxio_legalentityowned_value eq " + parentLegalEntityId;
-            switch (positionType)
-            {
-                case "shareholders":
-                case "partners":
-                    filter += " and (adoxio_ispartner eq true or adoxio_isshareholder eq true)";
-                    break;
-                case "key-personnel":
-                    filter += " and adoxio_iskeypersonnel eq true";
-                    break;
-                case "directors-officers-management":
-                    filter += " and (adoxio_isdirector eq true or adoxio_isseniormanagement eq true or adoxio_isofficer eq true)";
-                    break;
-                case "director-officer-shareholder":
-                    filter += " and adoxio_isindividual eq 1";
-                    break;
-                default:
-                    filter += " and adoxio_isindividual eq 2"; //return nothing
-                    break;
-            }
-
+            IList<DvLegalEntity> legalEntities;
             try
             {
-                _logger.LogDebug("Account filter = " + filter);
-                legalEntities = _dynamicsClient.Legalentities.Get(filter: filter).Value;
-
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while getting account legal entities. ");
+                legalEntities = await _dataverse.GetLegalEntitiesByParentEntityIdAsync(parentLegalEntityId);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while getting legal entities by position.");
+                return StatusCode(500);
             }
 
-            // get the current user.
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-            if (legalEntities != null)
+            legalEntities = positionType switch
             {
-                foreach (var legalEntity in legalEntities)
-                {
-                    // Users can't access other users legal entities.
-                    if (!DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(legalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
-                    {
-                        return NotFound();
-                    }
-                    result.Add(legalEntity.ToViewModel());
-                }
+                "shareholders" or "partners" => legalEntities.Where(le => le.adoxio_IsPartner == true || le.adoxio_IsShareholder == true).ToList(),
+                "key-personnel" => legalEntities.Where(le => le.adoxio_IsKeyPersonnel == true).ToList(),
+                "directors-officers-management" => legalEntities.Where(le => le.adoxio_IsDirector == true || le.adoxio_IsSeniorManagement == true || le.adoxio_IsOfficer == true).ToList(),
+                "director-officer-shareholder" => legalEntities.Where(le => le.adoxio_IsIndividual == DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes).ToList(),
+                _ => new List<DvLegalEntity>()
+            };
+
+            var result = new List<LegalEntity>();
+            foreach (var le in legalEntities)
+            {
+                if (le.adoxio_Account == null)
+                    continue;
+                if (!await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(le.adoxio_Account.Id, _httpContextAccessor, _dataverse))
+                    return NotFound();
+                result.Add(le.ToViewModel());
             }
 
             return new JsonResult(result);
@@ -513,35 +332,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get the special applicant legal entity for the current user
         /// </summary>
-        /// <returns></returns>
         [HttpGet("applicant")]
         public async Task<IActionResult> GetApplicantDynamicsLegalEntity()
         {
-            LegalEntity result = null;
-
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
 
-            // query the Dynamics system to get the legal entity record.
-            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = null;
             _logger.LogDebug("Find legal entity for applicant = " + userSettings.AccountId);
-
-            legalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-
+            var legalEntity = await _dataverse.GetLegalEntityByAccountIdAsync(userSettings.AccountId);
             if (legalEntity == null)
-            {
                 return new NotFoundResult();
-            }
-            // fix the account.
 
-            result = legalEntity.ToViewModel();
-
+            var result = legalEntity.ToViewModel();
             if (result.account == null)
             {
-                MicrosoftDynamicsCRMaccount account = await _dynamicsClient.GetAccountByIdAsync(Guid.Parse(userSettings.AccountId));
-                result.account = account.ToViewModel();
+                var account = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+                result.account = account?.ToViewModel();
             }
 
             return new JsonResult(result);
@@ -550,243 +356,138 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get a specific legal entity
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetDynamicsLegalEntity(string id)
         {
-            LegalEntity result = null;
-            // query the Dynamics system to get the legal entity record.
             if (string.IsNullOrEmpty(id))
-            {
                 return new NotFoundResult();
-            }
 
-            // get the current user.
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-            Guid adoxio_legalentityid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-            //prevent getting legal entity data if the user is not associated with the account
-            if (adoxioLegalEntity == null || !DynamicsExtensions.CurrentUserHasAccessToAccount(new Guid(adoxioLegalEntity._adoxioAccountValue), _httpContextAccessor, _dynamicsClient))
-            {
+            var le = await _dataverse.GetLegalEntityByIdAsync(id);
+            if (le == null || le.adoxio_Account == null)
                 return new NotFoundResult();
-            }
-            result = adoxioLegalEntity.ToViewModel();
 
-            return new JsonResult(result);
+            if (!await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(le.adoxio_Account.Id, _httpContextAccessor, _dataverse))
+                return new NotFoundResult();
+
+            return new JsonResult(le.ToViewModel());
         }
 
         /// <summary>
         /// Create a legal entity
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateDynamicsLegalEntity([FromBody] LegalEntity item)
         {
-
-            // create a new legal entity.
-            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-            // copy received values to Dynamics LegalEntity
-            adoxioLegalEntity.CopyValues(item);
+
+            var entity = new DvLegalEntity();
+            entity.CopyValues(item);
+            entity.adoxio_Account = new EntityReference("account", Guid.Parse(userSettings.AccountId));
+
+            var parentEntity = await _dataverse.GetLegalEntityByAccountIdAsync(userSettings.AccountId);
+            if (parentEntity != null)
+                entity.adoxio_LegalEntityOwned = new EntityReference("adoxio_legalentity", parentEntity.Id);
+
+            Guid newId;
             try
             {
-                adoxioLegalEntity = await _dynamicsClient.Legalentities.CreateAsync(adoxioLegalEntity);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error while creating legal entity ");
-                throw new Exception("Unable to create legal entity");
+                newId = await _dataverse.CreateLegalEntityAsync(entity);
             }
             catch (Exception e)
             {
-                _logger.LogError(e, "Unexpected Exception while getting legal entities.");
+                _logger.LogError(e, "Unexpected Exception while creating legal entity");
                 throw new Exception("Unable to create legal entity");
             }
 
-            // setup navigation properties.
-            MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-            Guid accountId = Guid.Parse(userSettings.AccountId);
-            var userAccount = await _dynamicsClient.GetAccountByIdAsync(accountId);
-            patchEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", accountId.ToString());
-
-            // patch the record.
-            try
-            {
-                await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error while patching legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unexpected Exception while patching legal entity");
-            }
-
-            // TODO take the default for now from the parent account's legal entity record
-            // TODO likely will have to re-visit for shareholders that are corporations/organizations
-            MicrosoftDynamicsCRMadoxioLegalentity tempLegalEntity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-            if (tempLegalEntity != null)
-            {
-                Guid tempLegalEntityId = Guid.Parse(tempLegalEntity.AdoxioLegalentityid);
-
-                // see https://msdn.microsoft.com/en-us/library/mt607875.aspx
-                patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-                patchEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", tempLegalEntityId.ToString());
-
-                // patch the record.
-                try
-                {
-                    await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, $"Error adding LegalEntityOwned reference to legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
-                }
-            }
-
-            return new JsonResult(adoxioLegalEntity.ToViewModel());
+            var created = await _dataverse.GetLegalEntityByIdAsync(newId.ToString());
+            return new JsonResult(created?.ToViewModel());
         }
 
         [HttpPost("save-change-tree/{applicationId}")]
-        public IActionResult SaveLicenseeChangeTree(string applicationId, LicenseeChangeLog treeRoot)
+        public async Task<IActionResult> SaveLicenseeChangeTree(string applicationId, LicenseeChangeLog treeRoot)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
-            SaveChangeObjects(treeRoot, applicationId);
+            await SaveChangeObjectsAsync(treeRoot, applicationId);
             return Ok();
         }
 
         [HttpPost("save-change-tree/account/{accountId}")]
-        public IActionResult SaveAccountLicenseeChangeTree(string accountId, LicenseeChangeLog treeRoot)
+        public async Task<IActionResult> SaveAccountLicenseeChangeTree(string accountId, LicenseeChangeLog treeRoot)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
-            SaveAccountChangeObjects(treeRoot, accountId);
+            await SaveAccountChangeObjectsAsync(treeRoot, accountId);
             return Ok();
         }
 
         [HttpPost("cancel-change-logs")]
-        public IActionResult CancelLicenseeChangeLogs(List<LicenseeChangeLog> changeLogs)
+        public async Task<IActionResult> CancelLicenseeChangeLogs(List<LicenseeChangeLog> changeLogs)
         {
             if (!ModelState.IsValid)
-            {
                 return BadRequest();
-            }
             foreach (var change in changeLogs)
             {
-                if (!String.IsNullOrEmpty(change.Id))
+                if (!string.IsNullOrEmpty(change.Id))
                 {
                     try
                     {
-                        _dynamicsClient.Licenseechangelogs.Delete(change.Id);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error deleting LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                        await _dataverse.DeleteLicenseeChangelogAsync(change.Id);
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, "Unexpected Exception while deleteing LicenseeChangeLog");
+                        _logger.LogError(e, "Unexpected Exception while deleting LicenseeChangeLog");
                     }
                 }
             }
             return Ok();
         }
 
-        private void SaveChangeObjects(LicenseeChangeLog node, string applicationId, string parentLegalEntityId = null, string parentChangeLogId = null)
+        private async Task SaveChangeObjectsAsync(LicenseeChangeLog node, string applicationId, string parentLegalEntityId = null, string parentChangeLogId = null)
         {
             if (node.ChangeType != LicenseeChangeType.unchanged)
             {
-                MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
-                patchEntity.CopyValues(node);
+                var entity = new DvChangelog();
+                entity.CopyValues(node);
+
                 if (parentLegalEntityId != null)
-                {
                     node.ParentLegalEntityId = parentLegalEntityId;
-                }
                 if (parentChangeLogId != null)
-                {
                     node.ParentLicenseeChangeLogId = parentChangeLogId;
-                }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
                 {
-                    // bind to Parent legal entity
                     if (!string.IsNullOrEmpty(node.ParentLegalEntityId))
-                    {
-                        patchEntity.ParentLegalEntityOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.ParentLegalEntityId);
-                    }
-                    // bind to legal entity
+                        entity.adoxio_ParentLegalEntityId = new EntityReference("adoxio_legalentity", Guid.Parse(node.ParentLegalEntityId));
                     if (!string.IsNullOrEmpty(node.LegalEntityId))
-                    {
-                        patchEntity.LegalEntityIdOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.LegalEntityId);
-                    }
-
-                    // bind to parent licensee change log
+                        entity.adoxio_LegalEntityId = new EntityReference("adoxio_legalentity", Guid.Parse(node.LegalEntityId));
                     if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
-                    {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
-                    }
-
-                    // bind to application
+                        entity.adoxio_ParentLinceseeChangeLogId = new EntityReference("adoxio_licenseechangelog", Guid.Parse(node.ParentLicenseeChangeLogId));
                     if (!string.IsNullOrEmpty(applicationId))
-                    {
-                        patchEntity.ApplicationOdataBind = _dynamicsClient.GetEntityURI("adoxio_applications", applicationId);                        
-                    }
-
-                    // bind to parent account
+                        entity.adoxio_Application = new EntityReference("adoxio_application", Guid.Parse(applicationId));
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
-                    {
-                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
-                    }
-
-                    // bind to parent account
+                        entity.adoxio_ParentBusinessAccount = new EntityReference("account", Guid.Parse(node.ParentBusinessAccountId));
                     if (!string.IsNullOrEmpty(node.BusinessAccountId))
-                    {
-                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
-                    }
-
+                        entity.adoxio_BusinessAccount = new EntityReference("account", Guid.Parse(node.BusinessAccountId));
                     try
                     {
-                        var result = _dynamicsClient.Licenseechangelogs.Create(patchEntity);
-                        parentChangeLogId = result.AdoxioLicenseechangelogid;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                        var newId = await _dataverse.CreateLicenseeChangelogAsync(entity);
+                        parentChangeLogId = newId.ToString();
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                        _logger.LogError(e, "Unexpected Exception while saving LicenseeChangeLog");
                     }
                 }
                 else if (!string.IsNullOrEmpty(node.Id) && string.IsNullOrEmpty(node.LegalEntityId) && (
-                  node.ChangeType == LicenseeChangeType.removeBusinessShareholder ||
-                  node.ChangeType == LicenseeChangeType.removeIndividualShareholder ||
-                  node.ChangeType == LicenseeChangeType.removeLeadership))
-                { // delete from storage immediately
+                    node.ChangeType == LicenseeChangeType.removeBusinessShareholder ||
+                    node.ChangeType == LicenseeChangeType.removeIndividualShareholder ||
+                    node.ChangeType == LicenseeChangeType.removeLeadership))
+                {
                     try
                     {
-                        _dynamicsClient.Licenseechangelogs.Delete(node.Id);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error deleting LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                        await _dataverse.DeleteLicenseeChangelogAsync(node.Id);
                     }
                     catch (Exception e)
                     {
@@ -795,29 +496,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else // update
                 {
-                    
-
-                    // bind to parent account
+                    entity.Id = Guid.Parse(node.Id);
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
-                    {
-                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
-                    }
-
-                    // bind to account
+                        entity.adoxio_ParentBusinessAccount = new EntityReference("account", Guid.Parse(node.ParentBusinessAccountId));
                     if (!string.IsNullOrEmpty(node.BusinessAccountId))
-                    {
-                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
-                    }
-
+                        entity.adoxio_BusinessAccount = new EntityReference("account", Guid.Parse(node.BusinessAccountId));
                     try
                     {
-                        _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
+                        await _dataverse.UpdateLicenseeChangelogAsync(entity);
                         parentChangeLogId = node.Id;
                         parentLegalEntityId = node.LegalEntityId;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                     }
                     catch (Exception e)
                     {
@@ -830,104 +518,63 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 parentChangeLogId = node.Id;
             }
 
-
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
-                {
-                    SaveChangeObjects(item, applicationId, node.LegalEntityId, parentChangeLogId);
-                }
+                    await SaveChangeObjectsAsync(item, applicationId, node.LegalEntityId, parentChangeLogId);
             }
         }
 
-        private void SaveAccountChangeObjects(LicenseeChangeLog node, string accountId, string parentLegalEntityId = null, string parentChangeLogId = null)
+        private async Task SaveAccountChangeObjectsAsync(LicenseeChangeLog node, string accountId, string parentLegalEntityId = null, string parentChangeLogId = null)
         {
             if (node.ChangeType != LicenseeChangeType.unchanged)
             {
-                MicrosoftDynamicsCRMadoxioLicenseechangelog patchEntity = new MicrosoftDynamicsCRMadoxioLicenseechangelog();
-                patchEntity.CopyValues(node);
+                var entity = new DvChangelog();
+                entity.CopyValues(node);
                 node.ParentBusinessAccountId = accountId;
+
                 if (parentLegalEntityId != null)
-                {
                     node.ParentLegalEntityId = parentLegalEntityId;
-                }
                 if (parentChangeLogId != null)
-                {
                     node.ParentLicenseeChangeLogId = parentChangeLogId;
-                }
 
                 if (string.IsNullOrEmpty(node.Id)) // create
                 {
-                    // bind to Parent legal entity
                     if (!string.IsNullOrEmpty(node.ParentLegalEntityId))
-                    {
-
-                        patchEntity.ParentLegalEntityOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.ParentLegalEntityId);
-                    }
-                    // bind to legal entity
+                        entity.adoxio_ParentLegalEntityId = new EntityReference("adoxio_legalentity", Guid.Parse(node.ParentLegalEntityId));
                     if (!string.IsNullOrEmpty(node.LegalEntityId))
-                    {
-                        patchEntity.LegalEntityIdOdataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", node.LegalEntityId);
-                    }
-
-                    // bind to parent licensee change log
+                        entity.adoxio_LegalEntityId = new EntityReference("adoxio_legalentity", Guid.Parse(node.LegalEntityId));
                     if (!string.IsNullOrEmpty(node.ParentLicenseeChangeLogId))
-                    {
-                        patchEntity.ParentLinceseeChangeLogOdataBind = _dynamicsClient.GetEntityURI("adoxio_licenseechangelogs", node.ParentLicenseeChangeLogId);
-                    }
-
-
-                    // bind to account
+                        entity.adoxio_ParentLinceseeChangeLogId = new EntityReference("adoxio_licenseechangelog", Guid.Parse(node.ParentLicenseeChangeLogId));
                     if (!string.IsNullOrEmpty(node.BusinessAccountId))
                     {
-                        patchEntity.BusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.BusinessAccountId);
+                        entity.adoxio_BusinessAccount = new EntityReference("account", Guid.Parse(node.BusinessAccountId));
                         parentLegalEntityId = node.LegalEntityId;
                     }
-
-                    // bind to parent account
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
-                    {
-                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
-                    }
-
+                        entity.adoxio_ParentBusinessAccount = new EntityReference("account", Guid.Parse(node.ParentBusinessAccountId));
                     try
                     {
-                        var result = _dynamicsClient.Licenseechangelogs.Create(patchEntity);
-                        parentChangeLogId = result.AdoxioLicenseechangelogid;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                        var newId = await _dataverse.CreateLicenseeChangelogAsync(entity);
+                        parentChangeLogId = newId.ToString();
                     }
                     catch (Exception e)
                     {
-                        _logger.LogError(e, "Unexpected Exception while adding LegalEntityOwned reference to legal entity");
+                        _logger.LogError(e, "Unexpected Exception while saving LicenseeChangeLog for Account");
                     }
                 }
                 else // update
                 {
-                    // bind to account
+                    entity.Id = Guid.Parse(node.Id);
                     if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
-                    {
-                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
-                    }
-
-                    // bind to parent account
-                    if (!string.IsNullOrEmpty(node.ParentBusinessAccountId))
-                    {
-                        patchEntity.ParentBusinessAccountOdataBind = _dynamicsClient.GetEntityURI("accounts", node.ParentBusinessAccountId);
-                    }
-
+                        entity.adoxio_ParentBusinessAccount = new EntityReference("account", Guid.Parse(node.ParentBusinessAccountId));
+                    if (!string.IsNullOrEmpty(node.BusinessAccountId))
+                        entity.adoxio_BusinessAccount = new EntityReference("account", Guid.Parse(node.BusinessAccountId));
                     try
                     {
-                        _dynamicsClient.Licenseechangelogs.Update(node.Id, patchEntity);
-                        var result = _dynamicsClient.Licenseechangelogs.GetByKey(node.Id);
-                        parentChangeLogId = result.AdoxioLicenseechangelogid;
+                        await _dataverse.UpdateLicenseeChangelogAsync(entity);
+                        parentChangeLogId = node.Id;
                         parentLegalEntityId = node.LegalEntityId;
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, $"Error saving LicenseeChangeLog for Account: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
                     }
                     catch (Exception e)
                     {
@@ -936,212 +583,153 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
             else
-            {               
+            {
                 parentChangeLogId = node.Id;
             }
 
             if (node.Children != null)
             {
                 foreach (var item in node.Children)
-                {
-                    SaveAccountChangeObjects(item, node.ParentBusinessAccountId, node.LegalEntityId, parentChangeLogId);
-                }
+                    await SaveAccountChangeObjectsAsync(item, node.ParentBusinessAccountId, node.LegalEntityId, parentChangeLogId);
             }
         }
 
         /// <summary>
-        /// Create a legal entity
+        /// Create a child (shareholder) legal entity
         /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
         [HttpPost]
         [Route("child-legal-entity")]
-        public IActionResult CreateDynamicsShareholderLegalEntity([FromBody] LegalEntity item)
+        public async Task<IActionResult> CreateDynamicsShareholderLegalEntity([FromBody] LegalEntity item)
         {
             if (item == null)
-            {
                 return BadRequest();
-            }
 
-            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-            adoxioLegalEntity.CopyValues(item);
+            var entity = new DvLegalEntity();
+            entity.CopyValues(item);
 
             if (item.isindividual != true)
             {
-                var account = new MicrosoftDynamicsCRMaccount();
-                account.Name = item.name;
+                var account = new DvAccount { Name = item.name };
+
                 if (item.isShareholder == true)
-                {
-                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Shareholder;
-                }
+                    account.adoxio_AccountType = (DvAccountType)(int)AdoxioAccountTypeCodes.Shareholder;
                 else if (item.isPartner == true)
-                {
-                    account.AdoxioAccounttype = (int)AdoxioAccountTypeCodes.Partner;
-                }
+                    account.adoxio_AccountType = (DvAccountType)(int)AdoxioAccountTypeCodes.Partner;
+
                 if (item.legalentitytype != null)
-                {
-                    account.AdoxioBusinesstype = (int)Enum.ToObject(typeof(AdoxioApplicantTypeCodes), item.legalentitytype);
-                }
+                    account.adoxio_BusinessType = (DvApplicantType)(int)item.legalentitytype.Value;
+
+                Guid accountId;
                 try
                 {
-                    account = _dynamicsClient.Accounts.Create(account);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, $"Error creating account: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                    accountId = await _dataverse.CreateAccountAsync(account);
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e, "Unexpected Exception while creating tied house connection");
+                    _logger.LogError(e, "Unexpected Exception while creating account");
+                    return StatusCode(500);
                 }
 
-                //create tied house under account
-                var tiedHouse = new MicrosoftDynamicsCRMadoxioTiedhouseconnection
+                var tiedHouse = new DvTiedHouse
                 {
-                    AccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid)
+                    adoxio_AccountId = new EntityReference("account", accountId)
                 };
-
-                adoxioLegalEntity.AdoxioShareholderAccountODataBind = _dynamicsClient.GetEntityURI("accounts", account.Accountid);
                 try
                 {
-                    _dynamicsClient.Tiedhouseconnections.Create(tiedHouse);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error creating tied house connection");
+                    await _dataverse.CreateTiedHouseConnectionAsync(tiedHouse);
                 }
                 catch (Exception e)
                 {
                     _logger.LogError(e, "Unexpected Exception while creating tied house connection");
                 }
-            }
-            adoxioLegalEntity.AdoxioAccountValueODataBind = _dynamicsClient.GetEntityURI("accounts", item.account.id);
-            adoxioLegalEntity.AdoxioLegalEntityOwnedODataBind = _dynamicsClient.GetEntityURI("adoxio_legalentities", item.parentLegalEntityId);
 
+                entity.adoxio_ShareholderAccountID = new EntityReference("account", accountId);
+            }
+
+            if (item.account?.id != null)
+                entity.adoxio_Account = new EntityReference("account", Guid.Parse(item.account.id));
+            if (item.parentLegalEntityId != null)
+                entity.adoxio_LegalEntityOwned = new EntityReference("adoxio_legalentity", Guid.Parse(item.parentLegalEntityId));
+
+            DvLegalEntity created;
             try
             {
-                adoxioLegalEntity = _dynamicsClient.Legalentities.Create(adoxioLegalEntity);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error creating legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                var newId = await _dataverse.CreateLegalEntityAsync(entity);
+                created = await _dataverse.GetLegalEntityByIdAsync(newId.ToString());
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Unexpected Exception while creating legal entity");
+                return StatusCode(500);
             }
 
-            return new JsonResult(adoxioLegalEntity.ToViewModel());
+            return new JsonResult(created?.ToViewModel());
         }
 
         /// <summary>
         /// Update a legal entity
         /// </summary>
-        /// <param name="item"></param>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateDynamicsLegalEntity([FromBody] LegalEntity item, string id)
         {
             if (id != item.id)
-            {
                 return BadRequest();
-            }
 
-            // get the legal entity.
-            Guid adoxio_legalentityid = new Guid(id);
-
-            MicrosoftDynamicsCRMadoxioLegalentity adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-            if (adoxioLegalEntity == null)
-            {
+            var existing = await _dataverse.GetLegalEntityByIdAsync(id);
+            if (existing == null)
                 return new NotFoundResult();
-            }
 
-            // we are doing a patch, so wipe out the record.
-            adoxioLegalEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
+            var patch = new DvLegalEntity { Id = existing.Id };
+            patch.CopyValues(item);
 
-            // copy values over from the data provided
-            adoxioLegalEntity.CopyValues(item);
             try
             {
-                _dynamicsClient.Legalentities.Update(adoxio_legalentityid.ToString(), adoxioLegalEntity);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error updating legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                await _dataverse.UpdateLegalEntityAsync(patch);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Unexpected Exception while updating legal entity");
             }
 
-
-            adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-
-            return new JsonResult(adoxioLegalEntity.ToViewModel());
+            var updated = await _dataverse.GetLegalEntityByIdAsync(id);
+            return new JsonResult(updated?.ToViewModel());
         }
 
         /// <summary>
         /// Delete a legal entity.  Using a HTTP Post to avoid Siteminder issues with DELETE
         /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteDynamicsLegalEntity(string id)
         {
-            // get the legal entity.
-            Guid adoxio_legalentityid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioLegalentity legalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-            if (legalEntity == null)
-            {
+            var existing = await _dataverse.GetLegalEntityByIdAsync(id);
+            if (existing == null)
                 return new NotFoundResult();
-            }
 
             try
             {
-                await _dynamicsClient.Legalentities.DeleteAsync(adoxio_legalentityid.ToString());
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, $"Error deleting legal entity: {httpOperationException.Request.Content} Response: {httpOperationException.Response.Content}");
+                await _dataverse.DeleteLegalEntityAsync(id);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Unexpected Exception while deleting legal entity");
             }
 
-
-            return NoContent(); // 204
+            return NoContent();
         }
-        /// <summary>
-        /// Generate a link to be sent to an email address.
-        /// </summary>
-        /// <param name="email"></param>
-        /// <param name="individualId"></param>
-        /// <param name="parentId"></param>
-        /// <returns></returns>
+
         private string GetConsentLink(string email, string individualId, string parentId)
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
-
             result += "/bcservice?path=/security-consent/" + parentId + "/" + individualId + "?code=";
 
-            // create a newsletter confirmation object.
-
-            SecurityConsentConfirmation securityConsentConfirmation = new SecurityConsentConfirmation
+            var confirmation = new SecurityConsentConfirmation
             {
                 email = email,
                 parentid = parentId,
                 individualid = individualId
             };
-
-            // convert it to a json string.
-            string json = JsonConvert.SerializeObject(securityConsentConfirmation);
-
-            // encrypt that using two way encryption.
-
+            string json = JsonConvert.SerializeObject(confirmation);
             result += System.Net.WebUtility.UrlEncode(EncryptionUtility.EncryptString(json, _encryptionKey));
-
             return result;
         }
 
@@ -1149,127 +737,79 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public JsonResult VerifyConsentCode(string id, string individualid, string code)
         {
             string result = "Error";
-            // validate the code.
-
             string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
             if (decrypted != null)
             {
-                // convert the json back to an object.
-                SecurityConsentConfirmation consentConfirmation = JsonConvert.DeserializeObject<SecurityConsentConfirmation>(decrypted);
-                // check that the keys match.
+                var consentConfirmation = JsonConvert.DeserializeObject<SecurityConsentConfirmation>(decrypted);
                 if (id.Equals(consentConfirmation.parentid) && individualid.Equals(consentConfirmation.individualid))
-                {
-                    // update the appropriate dynamics record here.
                     result = "Success";
-                }
             }
             return new JsonResult(result);
         }
 
-
         /// <summary>
-        /// send consent requests to the supplied list of legal entities.
+        /// Send consent requests to the supplied list of legal entities.
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="idList"></param>
-        /// <returns></returns>
         [HttpPost("{id}/sendconsentrequests")]
         public async Task<IActionResult> SendConsentRequests(string id, [FromBody] List<string> recipientIds)
         {
-            // start by getting the record for the current legal entity.
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
 
-            MicrosoftDynamicsCRMadoxioLegalentity userLegalentity = _dynamicsClient.GetAdoxioLegalentityByAccountId(Guid.Parse(userSettings.AccountId));
-
-            // get the legal entity.
-            Guid adoxio_legalentityid = new Guid(id);
-
-            // TODO verify that this is the current user's legal entity
-            var adoxioLegalEntity = await _dynamicsClient.GetLegalEntityById(adoxio_legalentityid);
-
-            // now get each of the supplied ids and send an email to them.
+            var adoxioLegalEntity = await _dataverse.GetLegalEntityByIdAsync(id);
 
             foreach (string recipientId in recipientIds)
             {
-                Guid recipientIdGuid = new Guid(recipientId);
-                // TODO verify that each recipient is part of the current user's user set
-                // TODO switch over to new AuthAPI framework
-                var recipientEntity = await _dynamicsClient.GetLegalEntityById(recipientIdGuid);
-                string email = recipientEntity.AdoxioEmail;
-                string firstname = recipientEntity.AdoxioFirstname;
-                string lastname = recipientEntity.AdoxioLastname;
+                var recipientEntity = await _dataverse.GetLegalEntityByIdAsync(recipientId);
+                string email = recipientEntity?.adoxio_Email;
+                string firstname = recipientEntity?.adoxio_FirstName;
+                string lastname = recipientEntity?.adoxio_LastName;
 
                 string confirmationEmailLink = GetConsentLink(email, recipientId, id);
                 string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-                /* send the user an email confirmation. */
+
                 string body =
                         "<img src='" + bclogo + "'/><br><h2>Security Screening and Financial Integrity Checks</h2>"
-                    + "<p>"
-                    + "Dear " + firstname + " " + lastname + ","
-                    + "</p>"
-                    + "<p>"
-                    + "An application from " + "[TBD Company Name]"
-                    + " has been submitted for a non-medical retail cannabis licence in British Columbia. "
-                    + "As a " + "[TBD Position]" + " of " + "[TBD Company Name]"
-                    + " you are required to authorize a security screening — including criminal and police record checks—"
-                    + "and financial integrity checks as part of the application process. "
-                    + "</p>"
-                    + "<p>"
-                    + "Where you reside will determine how you are able to authorize the security screening."
-                    + "</p>"
+                    + "<p>Dear " + firstname + " " + lastname + ",</p>"
+                    + "<p>An application from [TBD Company Name] has been submitted for a non-medical retail cannabis licence in British Columbia. "
+                    + "As a [TBD Position] of [TBD Company Name] you are required to authorize a security screening — "
+                    + "including criminal and police record checks — and financial integrity checks as part of the application process.</p>"
+                    + "<p>Where you reside will determine how you are able to authorize the security screening.</p>"
                     + "<p><strong>B.C. Residents</strong></p>"
-                    + "<p>"
-                    + "Residents of B.C. require a Photo B.C. Services Card to login to the application.  A Services Card "
-                    + "verifies your identity, and has enhanced levels of security making the card more secure and helps protect your privacy."
-                    + "</p>"
-                    + "<p>"
-                    + "If you don’t have a B.C. Services Card, or haven’t activated it for online login, visit the B.C. Services Card website to find how to get a card."
-                    + "</p>"
-                    + "<p>"
-                    + "After you receive your verified Photo B.C. Services Card, login through this unique link:"
-                    + "</p>"
+                    + "<p>Residents of B.C. require a Photo B.C. Services Card to login to the application.</p>"
+                    + "<p>After you receive your verified Photo B.C. Services Card, login through this unique link:</p>"
                     + "<p><a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a></p>"
-                    + "<p><strong>Out of Province Residents</strong></p>"
-                    + "<p>TBD</p>"
-                    + "<p><strong>Residents Outside of Canada</strong></p>"
-                    + "<p>TBD</p>"
+                    + "<p><strong>Out of Province Residents</strong></p><p>TBD</p>"
+                    + "<p><strong>Residents Outside of Canada</strong></p><p>TBD</p>"
                     + "<p>If you have any questions about the security authorization, contact helpdesk@lclbc.ca</p>"
                     + "<p>Do not reply to this email address</p>";
 
-                // send the email.
                 SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
-
-                // Specify the message content.
                 MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
                 message.Subject = "BC LCLB Cannabis Licensing Security Consent";
                 message.Body = body;
                 message.IsBodyHtml = true;
                 client.Send(message);
 
-
-                // save the consent link and the fact that the email has been sent
-                MicrosoftDynamicsCRMadoxioLegalentity patchEntity = new MicrosoftDynamicsCRMadoxioLegalentity();
-                patchEntity.AdoxioDateemailsent = DateTime.Now;
-
-                // patch the record.
-                try
+                if (adoxioLegalEntity != null)
                 {
-                    await _dynamicsClient.Legalentities.UpdateAsync(adoxioLegalEntity.AdoxioLegalentityid, patchEntity);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error updating date email sent. ");
-                }
-                catch (Exception e)
-                {
-                    _logger.LogError(e, "Unexpected Exception while updating date email sent.");
+                    var patch = new DvLegalEntity
+                    {
+                        Id = adoxioLegalEntity.Id,
+                        adoxio_DateEmailSent = DateTime.Now
+                    };
+                    try
+                    {
+                        await _dataverse.UpdateLegalEntityAsync(patch);
+                    }
+                    catch (Exception e)
+                    {
+                        _logger.LogError(e, "Unexpected Exception while updating date email sent.");
+                    }
                 }
             }
 
-            return NoContent(); // 204
+            return NoContent();
         }
     }
 }

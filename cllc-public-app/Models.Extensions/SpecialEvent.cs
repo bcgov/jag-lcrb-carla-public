@@ -421,6 +421,30 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.adoxio_TotalServings = from.TotalServings;
             to.adoxio_IsSupportLocalArtsorSports = from.IsSupportLocalArtsOrSports;
         }
+
+        public static ViewModels.SpecialEventSummary ToSummaryViewModel(this DvSpecialEvent se)
+        {
+            if (se == null) return null;
+            var result = new ViewModels.SpecialEventSummary
+            {
+                SpecialEventId = se.Id == Guid.Empty ? null : se.Id.ToString(),
+                EventStartDate = se.adoxio_EventStartDate,
+                EventName = se.adoxio_eventname,
+                IsInvoicePaid = se.adoxio_IsInvoicePaid,
+                MaximumNumberOfGuests = se.adoxio_MaxNumofGuests,
+                DateSubmitted = se.adoxio_DateSubmitted,
+                PoliceApproval = (ApproverStatus?)(int?)se.adoxio_PoliceApproval,
+                LcrbApproval = (ApproverStatus?)(int?)se.adoxio_LCRBApproval,
+                DenialReason = se.adoxio_DenialReason,
+                CancelReason = se.adoxio_CancellationReason,
+                DateOfPoliceDecision = se.adoxio_DatePoliceApproved,
+            };
+            if (se.adoxio_typeofevent != null)
+                result.EventType = (EventType)(int)se.adoxio_typeofevent;
+            if (se.statuscode != null)
+                result.EventStatus = (EventStatus)(int)se.statuscode;
+            return result;
+        }
     }
 }
 

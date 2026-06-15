@@ -99,10 +99,10 @@ All entities referenced across the codebase were identified via audit and added 
 |---|---|
 | Standard CRM | `account`, `contact`, `invoice`, `lead`, `list` |
 | Application | `adoxio_application`, `adoxio_applicationextension`, `adoxio_applicationtype`, `adoxio_applicationtypecontent`, `adoxio_applicationtermsconditionslimitation`, `adoxio_termsconditionslimitationspreset` |
-| Licence | `adoxio_licences`, `adoxio_licencetype`, `adoxio_licencesubcategory`, `adoxio_endorsement` |
+| Licence | `adoxio_licences`, `adoxio_licencetype`, `adoxio_licencesubcategory`, `adoxio_licenseechangelog`, `adoxio_endorsement` |
 | Worker & screening | `adoxio_worker`, `adoxio_personalhistorysummary`, `adoxio_previousaddress`, `adoxio_alias`, `adoxio_login` |
 | Establishment / corporate | `adoxio_establishment`, `adoxio_legalentity`, `adoxio_tiedhouseconnection`, `adoxio_tiedhouseassociation` |
-| Special events | `adoxio_specialevent`, `adoxio_event`, `adoxio_eventlocation`, `adoxio_eventschedule`, `adoxio_sepcity`, `adoxio_sepdrinktype`, `adoxio_sepdrinksalesforecast` |
+| Special events | `adoxio_specialevent`, `adoxio_specialeventlocation`, `adoxio_specialeventlicencedarea`, `adoxio_specialeventschedule`, `adoxio_specialeventtandc`, `adoxio_event`, `adoxio_eventlocation`, `adoxio_eventschedule`, `adoxio_sepcity`, `adoxio_sepdrinktype`, `adoxio_sepdrinksalesforecast` |
 | Licence operations | `adoxio_leconnection`, `adoxio_annualvolume`, `adoxio_servicearea`, `adoxio_hoursofservice`, `adoxio_offsitestorage` |
 | Reporting & sync | `adoxio_cannabismonthlyreport`, `adoxio_cannabisinventoryreport`, `adoxio_ldborder`, `adoxio_federalreportexport` |
 | Reference / policy | `adoxio_policydocument`, `adoxio_policejurisdiction`, `adoxio_localgovindigenousnation` |
@@ -110,14 +110,18 @@ All entities referenced across the codebase were identified via audit and added 
 
 ### Missing entities (not found in dev Dataverse instance)
 
-These 2 entities were silently skipped by `pac modelbuilder` — they do not exist in the dev environment.
+These entities were silently skipped by `pac modelbuilder` in previous runs.
 
-| Entity | Action |
+| Entity | Status |
 |---|---|
-| `adoxio_hoursofsale` | Verify logical name in staging/prod — may be named differently |
-| `adoxio_licensechangelog` | Verify logical name in staging/prod — may be named differently |
+| `adoxio_hoursofsale` | Still unresolved — verify logical name in staging/prod |
+| `adoxio_licensechangelog` | **Was a typo** — correct name is `adoxio_licenseechangelog` (double 'e'). Fixed in `generate-entities.ps1`. Re-run the script to generate. |
+| `adoxio_specialeventlocation` | Added to script — re-run to generate |
+| `adoxio_specialeventlicencedarea` | Added to script — re-run to generate |
+| `adoxio_specialeventschedule` | Added to script — re-run to generate |
+| `adoxio_specialeventtandc` | Added to script — re-run to generate |
 
-If found under a different logical name, update `generate-entities.ps1` and re-run.
+If any are not found after re-running, verify the logical name in staging/prod and update `generate-entities.ps1`.
 
 > **`annotation` is critical** — the codebase has 16+ annotation-related files covering file attachments and notes on records (`documentbody`, `notetext`, `objectid`). Missing it would break every supporting-document upload flow.
 
