@@ -345,6 +345,21 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     var contact = await _dataverse.GetContactByLoginAsync(false, siteMinderGuid);
                     if (contact == null)
                     {
+                        // Fall back to direct ExternalID lookup to cover contacts whose GUID was stored
+                        // on the contact record rather than through the adoxio_login bridge table.
+                        contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(siteMinderGuid));
+                        if (contact != null)
+                        {
+                            _logger.Information($"Found contact via direct ExternalID for {siteMinderGuid}. Creating bridge record. ContactID is {contact.Id}");
+                            await _dataverse.UpdateContactBridgeLoginAsync(
+                                contact.Id.ToString(),
+                                siteMinderGuid,
+                                contact.ParentCustomerId?.Id.ToString(),
+                                siteMinderBusinessGuid);
+                        }
+                    }
+                    if (contact == null)
+                    {
                         _logger.Information($"No bridged contact found for {siteMinderGuid}");
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);
@@ -378,10 +393,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (account == null)
                 {
                     var fallback = await _dataverse.GetAccountByNameAsync(userSettings.BusinessLegalName);
-                    // only use account if it is active and has no ExternalID (non-BCeID account)
                     if (fallback != null
-                        && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0
-                        && string.IsNullOrEmpty(fallback.adoxio_ExternalID))
+                        && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0)
                     {
                         account = fallback;
                     }
@@ -550,8 +563,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     {
                         var fallback = await _dataverse.GetAccountByNameAsync(userSettings.BusinessLegalName);
                         if (fallback != null
-                            && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0
-                            && string.IsNullOrEmpty(fallback.adoxio_ExternalID))
+                            && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0)
                         {
                             account = fallback;
                         }

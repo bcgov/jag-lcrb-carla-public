@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
             if (appTypeName == "Permanent Change to a Licensee")
             {
                 paymentRecieved =
-                    application.adoxio_Invoice != null || application.adoxio_SecondaryApplicationInvoice != null
+                    (application.adoxio_Invoice != null || application.adoxio_SecondaryApplicationInvoice != null)
                     && (application.adoxio_Invoice == null || application.adoxio_PrimaryApplicationInvoicePaid == adoxio_generalyesno.Yes)
                     && (application.adoxio_SecondaryApplicationInvoice == null || application.adoxio_SecondaryApplicationInvoicePaid == adoxio_generalyesno.Yes);
             }

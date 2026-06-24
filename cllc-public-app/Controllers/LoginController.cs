@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using System;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -33,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpGet]
         [Authorize]
-        public ActionResult Login(string path, [FromQuery] string source)
+        public async Task<IActionResult> Login(string path, [FromQuery] string source)
         {
             if (!string.IsNullOrEmpty(path) && (Url.IsLocalUrl(path) || !_env.IsProduction() && path.Equals("headers")))
             {
@@ -54,8 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 if (!string.IsNullOrEmpty(userSettings?.AccountId) && Guid.Parse(userSettings?.AccountId) != Guid.Empty)
                 {
-                    isPoliceRep = _dataverse.IsAccountSepPoliceRepresentativeAsync(userSettings?.AccountId)
-                        .GetAwaiter().GetResult();
+                    isPoliceRep = await _dataverse.IsAccountSepPoliceRepresentativeAsync(userSettings?.AccountId);
                 }
             }
             catch (Exception)
@@ -74,7 +74,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         [Route("token/{userid}")]
         [AllowAnonymous]
-        public virtual IActionResult GetDevAuthenticationCookie(string userId, [FromQuery] string source)
+        public virtual async Task<IActionResult> GetDevAuthenticationCookie(string userId, [FromQuery] string source)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
             if (string.IsNullOrEmpty(userId)) return BadRequest("Missing required userid query parameter.");
@@ -93,8 +93,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             bool isSep = source != null && source == "sep" ||
                          userSettings?.ContactId != null &&
-                         _dataverse.IsAccountSepPoliceRepresentativeAsync(userSettings?.AccountId)
-                             .GetAwaiter().GetResult();
+                         await _dataverse.IsAccountSepPoliceRepresentativeAsync(userSettings?.AccountId);
 
             var basePath = string.IsNullOrEmpty(_configuration["BASE_PATH"]) ? "/" : _configuration["BASE_PATH"];
             var url = "dashboard";
