@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
+﻿extern alias DV;
+using System.Collections.Generic;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -10,37 +11,17 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class ApplicationTypeExtension
     {
-        public static void CopyValues(
-            this MicrosoftDynamicsCRMadoxioApplicationextension to,
-            ViewModels.ApplicationExtension from
-        )
+        public static ViewModels.ApplicationExtension ToViewModel(this adoxio_applicationextension applicationExtension)
         {
-            to.AdoxioApplicationextensionid = from.Id;
-            to.AdoxioHasLiquorTiedHouseThirdPartyAssociations = from.HasLiquorTiedHouseThirdPartyAssociations;
-            to.AdoxioHasLiquorTiedHouseOwnershipOrControl = from.HasLiquorTiedHouseOwnershipOrControl;
-            to.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement = from.HasLiquorTiedHouseFamilyMemberInvolvement;
-        }
-
-        public static ViewModels.ApplicationExtension ToViewModel(
-            this MicrosoftDynamicsCRMadoxioApplicationextension applicationExtension
-        )
-        {
-            ViewModels.ApplicationExtension result = null;
-            if (applicationExtension != null)
+            if (applicationExtension == null) return null;
+            return new ApplicationExtension
             {
-                result = new ApplicationExtension
-                {
-                    Id = applicationExtension.AdoxioApplicationextensionid,
-                    HasLiquorTiedHouseThirdPartyAssociations =
-                        applicationExtension.AdoxioHasLiquorTiedHouseThirdPartyAssociations,
-                    HasLiquorTiedHouseOwnershipOrControl =
-                        applicationExtension.AdoxioHasLiquorTiedHouseOwnershipOrControl,
-                    HasLiquorTiedHouseFamilyMemberInvolvement =
-                        applicationExtension.AdoxioHasLiquorTiedHouseFamilyMemberInvolvement,
-                    RelatedLeOrPclApplicationId = applicationExtension._adoxioRelatedLeOrPclApplicationValue
-                };
-            }
-            return result;
+                Id = applicationExtension.adoxio_applicationextensionId?.ToString(),
+                HasLiquorTiedHouseOwnershipOrControl = (int?)applicationExtension.adoxio_hasLiquortiedhouseownershiporcontrol,
+                HasLiquorTiedHouseThirdPartyAssociations = (int?)applicationExtension.adoxio_hasliquortiedhousethirdpartyassociations,
+                HasLiquorTiedHouseFamilyMemberInvolvement = (int?)applicationExtension.adoxio_hasliquortiedhousefamilymemberinvolvement,
+                RelatedLeOrPclApplicationId = applicationExtension.adoxio_relatedleorpclapplication?.Id.ToString()
+            };
         }
     }
 }

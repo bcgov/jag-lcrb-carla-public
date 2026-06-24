@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias DV;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,7 +7,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Google.Protobuf;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
@@ -19,12 +19,16 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
-using Newtonsoft.Json;
 using Winista.Mime;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DvApplication = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application;
+using DvWorker = DV::Gov.Lclb.Cllb.Interfaces.adoxio_worker;
+using DvContact = DV::Gov.Lclb.Cllb.Interfaces.Contact;
+using DvAccount = DV::Gov.Lclb.Cllb.Interfaces.Account;
+using DvEvent = DV::Gov.Lclb.Cllb.Interfaces.adoxio_event;
+using adoxio_generalyesno = DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno;
 using FileSystemItem = Gov.Lclb.Cllb.Public.ViewModels.FileSystemItem;
-using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -35,26 +39,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class FileController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly string _encryptionKey;
         private readonly FileManagerClient _fileManagerClient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
 
-        /// <summary>
-        /// Constructor
-        /// </summary>
-        /// <param name="configuration"></param>
-        /// <param name="httpContextAccessor"></param>
-        /// <param name="loggerFactory"></param>
-        /// <param name="dynamicsClient"></param>
-        /// <param name="fileClient"></param>
-
-        public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient)
+        public FileController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDataverseClient dataverse, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(FileController));
             _fileManagerClient = fileClient;
@@ -70,59 +65,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> CanAccessEntity(string entityName, string entityId, string relativeUrl, bool isDelete = false)
         {
             var result = false;
-            var id = Guid.Parse(entityId);
-            FolderSegment folderSegment = null;
+            string folderName = null;
             switch (entityName.ToLower())
             {
                 case "account":
-                    var account = await _dynamicsClient.GetAccountByIdAsync(id).ConfigureAwait(true);
+                    var account = await _dataverse.GetAccountByIdAsync(entityId).ConfigureAwait(true);
                     if (account != null)
                     {
-                        result = CurrentUserHasAccessToAccount(account.Accountid);
-                        folderSegment = account.GetDocumentFolderName();
+                        result = CurrentUserHasAccessToAccount(account.Id.ToString());
+                        folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
                     }
                     break;
                 case "application":
-                    var application = await _dynamicsClient.GetApplicationById(id).ConfigureAwait(true);
+                    var application = await _dataverse.GetApplicationByIdAsync(entityId).ConfigureAwait(true);
                     if (application != null)
                     {
-                        result = CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
-                        Console.WriteLine($"User has access to account {application._adoxioApplicantValue}: {result}");
+                        var applicantId = application.adoxio_Applicant?.Id.ToString();
+                        result = CurrentUserHasAccessToAccount(applicantId);
+                        Console.WriteLine($"User has access to account {applicantId}: {result}");
                         var allowLGAccess = await CurrentUserIsLGForApplication(application);
                         result = result || allowLGAccess && !isDelete;
-                        folderSegment = application.GetDocumentFolderName();
+                        folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
                     }
-
                     break;
                 case "contact":
-                    var contact = await _dynamicsClient.GetContactById(id).ConfigureAwait(true);
+                    var contact = await _dataverse.GetContactByIdAsync(entityId).ConfigureAwait(true);
                     if (contact != null)
                     {
-                        result = CurrentUserHasAccessToContactOwnedBy(contact.Contactid);
-                        folderSegment = contact.GetDocumentFolderName();
+                        result = CurrentUserHasAccessToContactOwnedBy(contact.Id.ToString());
+                        folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
                     }
-
                     break;
                 case "worker":
-                    var worker = await _dynamicsClient.GetWorkerById(id).ConfigureAwait(true);
+                    var worker = await _dataverse.GetWorkerByIdAsync(entityId).ConfigureAwait(true);
                     if (worker != null)
                     {
-                        result = CurrentUserHasAccessToContactOwnedBy(worker._adoxioContactidValue);
-                        folderSegment = worker.GetDocumentFolderName();
+                        result = CurrentUserHasAccessToContactOwnedBy(worker.adoxio_ContactId?.Id.ToString());
+                        folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
                     }
                     break;
                 case "event":
-                    var eventEntity = _dynamicsClient.GetEventById(id);
+                    var eventEntity = await _dataverse.GetEventByIdAsync(entityId).ConfigureAwait(true);
                     if (eventEntity != null)
                     {
-                        result = CurrentUserHasAccessToAccount(eventEntity._adoxioAccountValue);
-                        folderSegment = eventEntity.GetDocumentFolderName();
+                        result = CurrentUserHasAccessToAccount(eventEntity.adoxio_Account?.Id.ToString());
+                        folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
                     }
-
                     break;
             }
 
-            if (folderSegment != null && folderSegment.FolderName != null && result && relativeUrl != null) // do a case insensitive comparison of the first part.
+            if (folderName != null && result && relativeUrl != null)
             {
                 int slashPos = relativeUrl.IndexOf("/");
                 if (slashPos != -1 && slashPos < relativeUrl.Length)
@@ -131,23 +123,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (entityName.ToLower() != "account")
                 {
-
-                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderSegment.FolderName.ToUpper());
+                    result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
                     if (!result)
                     {
                         var segments = relativeUrl.Split('/', StringSplitOptions.RemoveEmptyEntries);
-
                         var appIndex = Array.FindIndex(
                             segments,
                             s => string.Equals(s, SharePointConstants.ApplicationFolderInternalName, StringComparison.OrdinalIgnoreCase));
-
                         result = appIndex >= 0
                             && appIndex + 1 < segments.Length
-                            && string.Equals(
-                                segments[appIndex + 1],
-                                folderSegment.FolderName,
-                                StringComparison.OrdinalIgnoreCase);
-
+                            && string.Equals(segments[appIndex + 1], folderName, StringComparison.OrdinalIgnoreCase);
                     }
                 }
             }
@@ -177,7 +162,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 DocumentType = documentType,
                 EntityId = entityId,
                 EntityName = entityName,
-                FolderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true),
+                FolderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true),
                 ServerRelativeUrl = serverRelativeUrl
             };
             Console.WriteLine($"Checking if file exists with serverRelativeUrl {logUrl}");
@@ -195,17 +180,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
 
-        private async Task<bool> CurrentUserIsLGForApplication(MicrosoftDynamicsCRMadoxioApplication application)
+        private async Task<bool> CurrentUserIsLGForApplication(DvApplication application)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
-            // get user account
             var accountId = GuidUtility.SanitizeGuidString(userSettings.AccountId);
-            var account = await _dynamicsClient.GetAccountByIdAsync(new Guid(accountId));
-
-            // make sure the application and account have matching local government values
-            var isLGForApplication = application != null && application._adoxioLocalgovindigenousnationidValue == account._adoxioLginlinkidValue;
+            var account = await _dataverse.GetAccountByIdAsync(accountId);
+            var isLGForApplication = application != null
+                && application.adoxio_localgovindigenousnationid?.Id == account?.adoxio_LGINLinkId?.Id;
             return isLGForApplication;
         }
 
@@ -303,7 +284,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (downloadResult.ResultStatus == ResultStatus.Success)
             {
                 // Update modifiedon to current time
-                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                await UpdateEntityModifiedOnDate(entityName, entityId, true);
                 _logger.LogInformation($"SUCCESS in getting file {logUrl}");
                 var fileContents = downloadResult.Data.ToByteArray();
                 return new FileContentResult(fileContents, "application/octet-stream");
@@ -326,36 +307,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             // currently this service only supports contacts
             var authorized = true;
-            FolderSegment folderSegment = null;
+            string folderName = null;
             if (string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(entityId) || entityName != "contact")
             {
                 authorized = false;
             }
             else
             {
-                // lookup the contact
-                var contact = await _dynamicsClient.GetContactById(entityId);
+                var contact = await _dataverse.GetContactByIdAsync(entityId);
                 if (contact == null)
                 {
                     authorized = false;
                 }
                 else
                 {
-                    // treat empty value as incomplete.
-                    if (contact.AdoxioPhscomplete == null && contact.AdoxioPhscomplete == 845280001) authorized = false;
-                    folderSegment = contact.GetDocumentFolderName();
+                    folderName = await _dataverse.GetFolderNameAsync("contact", entityId);
                 }
-
             }
 
-            if (folderSegment != null && folderSegment.FolderName != null && authorized && relativeUrl != null) // do a case insensitive comparison of the first part.
+            if (folderName != null && authorized && relativeUrl != null)
             {
                 int slashPos = relativeUrl.IndexOf("/");
                 if (slashPos != -1 && slashPos < relativeUrl.Length)
                 {
                     slashPos = relativeUrl.IndexOf("/", slashPos + 1);
                 }
-                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderSegment.FolderName.ToUpper());
+                authorized = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderName.ToUpper());
             }
 
             return authorized;
@@ -450,12 +427,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> PublicCovidApplication([FromRoute] string id,
           [FromForm] IFormFile file, [FromForm] string documentType)
         {
-            var entityName = "application";
-            // decode the entityID
-            var application = _dynamicsClient.GetApplicationById(id);
+            var application = await _dataverse.GetApplicationByIdAsync(id);
             if (application == null)
                 return BadRequest();
-            return await UploadAttachmentInternal(id, entityName, file, documentType, false).ConfigureAwait(true);
+            return await UploadAttachmentInternal(id, "application", file, documentType, false).ConfigureAwait(true);
         }
 
 
@@ -485,7 +460,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!hasAccess) return new NotFoundResult();
 
-            var fileSystemItemVMList = await GetListFilesInFolder(entityId, entityName, documentType, _dynamicsClient, _fileManagerClient, _logger);
+            var fileSystemItemVMList = await GetListFilesInFolder(entityId, entityName, documentType, _dataverse, _fileManagerClient, _logger);
             return new JsonResult(fileSystemItemVMList);
         }
 
@@ -516,22 +491,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(formId)) return BadRequest();
 
-            string folderName = await _dynamicsClient.GetFolderName(entityName, entityId, false);
+            string folderName = await _dataverse.GetFolderNameAsync(entityName, entityId);
 
             if (folderName != null)
             {
                 var folderContents = _fileManagerClient.GetFileDetailsListInFolder(_logger, entityName, entityId, folderName);
 
-                // get any file form fields that are related to the form
-                var formFileFields = _dynamicsClient.Formelementuploadfields.GetDocumentFieldsByForm(formId);
+                var formFileFields = await _dataverse.GetFormDocumentFieldsAsync(formId);
 
                 result = new List<DocumentTypeStatus>();
 
                 foreach (var formFileField in formFileFields)
                 {
-                    var documentTypePrefix = formFileField.AdoxioFileprefix;
-                    var documentTypeName = formFileField.AdoxioName;
-                    var routerLink = formFileField.AdoxioRouterlink;
+                    var documentTypePrefix = formFileField.FilePrefix;
+                    var documentTypeName = formFileField.Name;
+                    var routerLink = formFileField.RouterLink;
 
                     var valid = false;
 
@@ -561,24 +535,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="entityName"></param>
         /// <param name="documentType"></param>
         /// <returns></returns>
-        public static async Task<List<FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType, IDynamicsClient _dynamicsClient, FileManagerClient _fileManagerClient, ILogger _logger)
+        public static async Task<List<FileSystemItem>> GetListFilesInFolder(string entityId, string entityName, string documentType, IDataverseClient _dataverse, FileManagerClient _fileManagerClient, ILogger _logger)
         {
             var fileSystemItemVMList = new List<FileSystemItem>();
-
-            // 4-9-2020 - GW removed session check to resolve issue with PHS links not working.  Session checks occur further up the call stack.
 
             if (string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName) || string.IsNullOrEmpty(documentType)) return fileSystemItemVMList;
             for (int i = 0; i < 3; i++)
             {
                 try
                 {
-                    // call the web service
                     var request = new FolderFilesRequest
                     {
                         DocumentType = documentType,
                         EntityId = entityId,
                         EntityName = entityName,
-                        FolderName = await _dynamicsClient.GetFolderName(entityName, entityId)
+                        FolderName = await _dataverse.GetFolderNameAsync(entityName, entityId)
                     };
 
                     var result = _fileManagerClient.FolderFiles(request);
@@ -668,7 +639,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (deleteResult.ResultStatus == ResultStatus.Success)
             {
                 // Update modifiedon to current time
-                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                await UpdateEntityModifiedOnDate(entityName, entityId, true);
                 _logger.LogInformation($"SUCCESS in deleting file {serverRelativeUrl}");
                 return new OkResult();
             }
@@ -749,9 +720,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 fileName = FileSystemItemExtensions.CombineNameDocumentType(fileName, documentType);
 
-                var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                var folderName = await _dataverse.GetFolderNameAsync(entityName, entityId).ConfigureAwait(true);
 
-                _dynamicsClient.CreateEntitySharePointDocumentLocation(entityName, entityId, folderName, folderName);
+                await _dataverse.CreateEntitySharePointDocumentLocationAsync(entityName, entityId, folderName, folderName);
 
                 // call the web service
                 var uploadRequest = new UploadFileRequest
@@ -771,7 +742,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (uploadResult.ResultStatus == ResultStatus.Success)
                 {
                     // Update modifiedon to current time
-                    UpdateEntityModifiedOnDate(entityName, entityId, true);
+                    await UpdateEntityModifiedOnDate(entityName, entityId, true);
                     _logger.LogInformation($"SUCCESS in uploading file {logFileName} to folder {logFolderName}");
                 }
                 else
@@ -793,50 +764,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="entityId"></param>
         /// <param name="setUploadedFromPortal"></param>
 
-        private void UpdateEntityModifiedOnDate(string entityName, string entityId, bool setUploadedFromPortal = false)
+        private async Task UpdateEntityModifiedOnDate(string entityName, string entityId, bool setUploadedFromPortal = false)
         {
+            if (!Guid.TryParse(entityId, out var guid)) return;
             switch (entityName.ToLower())
             {
                 case "application":
-                    var patchApplication = new MicrosoftDynamicsCRMadoxioApplication();
-                    if (setUploadedFromPortal) patchApplication.AdoxioFileuploadedfromportal = (int?)GeneralYesNo.Yes;
-
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(entityId, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error updating application");
-                        // fail if we can't create.
-                        throw httpOperationException;
-                    }
+                    var patchApplication = new DvApplication { Id = guid };
+                    if (setUploadedFromPortal) patchApplication.adoxio_FileUploadedFromPortal = adoxio_generalyesno.Yes;
+                    try { await _dataverse.UpdateApplicationAsync(patchApplication); }
+                    catch (Exception e) { _logger.LogError(e, "Error updating application"); throw; }
                     break;
                 case "contact":
-                    var patchContact = new MicrosoftDynamicsCRMcontact();
-                    try
-                    {
-                        _dynamicsClient.Contacts.Update(entityId, patchContact);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error updating Contact");
-                        // fail if we can't create.
-                        throw;
-                    }
+                    try { await _dataverse.UpdateContactAsync(new DvContact { Id = guid }); }
+                    catch (Exception e) { _logger.LogError(e, "Error updating Contact"); throw; }
                     break;
                 case "worker":
-                    var patchWorker = new MicrosoftDynamicsCRMadoxioWorker();
-                    try
-                    {
-                        _dynamicsClient.Workers.Update(entityId, patchWorker);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.LogError(httpOperationException, "Error updating Contact");
-                        // fail if we can't create.
-                        throw;
-                    }
+                    try { await _dataverse.UpdateWorkerAsync(new DvWorker { Id = guid }); }
+                    catch (Exception e) { _logger.LogError(e, "Error updating Worker"); throw; }
                     break;
             }
         }

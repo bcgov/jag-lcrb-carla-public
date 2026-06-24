@@ -1,6 +1,5 @@
 ﻿extern alias DV;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Xrm.Sdk;
 using System;
 using adoxio_alias = DV::Gov.Lclb.Cllb.Interfaces.adoxio_alias;
@@ -16,41 +15,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.Alias ToViewModel(this MicrosoftDynamicsCRMadoxioAlias alias)
-        {
-            ViewModels.Alias result = null;
-            if (alias != null)
-            {
-                result = new ViewModels.Alias();
-                if (alias.AdoxioAliasid != null)
-                {
-                    result.id = alias.AdoxioAliasid;
-                }
-
-                result.firstname = alias.AdoxioFirstname;
-                result.middlename = alias.AdoxioMiddlename;
-                result.lastname = alias.AdoxioLastname;
-                if (alias.AdoxioContactId != null)
-                {
-                    result.contact = alias.AdoxioContactId.ToViewModel();
-                }
-                if (alias.AdoxioWorkerId != null)
-                {
-                    result.worker = alias.AdoxioWorkerId.ToViewModel();
-                }
-            }
-            return result;
-        }
-
-
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioAlias to, ViewModels.Alias from)
-        {
-            to.AdoxioFirstname = from.firstname;
-            to.AdoxioMiddlename = from.middlename;
-            to.AdoxioLastname = from.lastname;
-        }
-
-        // ---- Xrm.Sdk adoxio_alias extensions ----
 
         public static ViewModels.Alias ToViewModel(this adoxio_alias alias)
         {

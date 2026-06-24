@@ -70,7 +70,7 @@ namespace Gov.Jag.Lcrb.OneStopService
             foreach (var item in result)
             {
                 // Only update issued and transfer complete
-                switch (item.adoxio_StatusChangeDescription)
+                switch ((OneStopHubStatusChange?)item.adoxio_StatusChangeDescription)
                 {
                     case OneStopHubStatusChange.Issued:
                     case OneStopHubStatusChange.TransferComplete:

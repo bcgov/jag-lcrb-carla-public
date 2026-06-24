@@ -33,6 +33,9 @@ public interface IDataverseClient
     Task UpdateContactAsync(Contact contact, CancellationToken ct = default);
     Task DeleteContactAsync(string id, CancellationToken ct = default);
     Task UpdateContactBridgeLoginAsync(string contactId, string siteminderGuid, string? accountId, string? siteminderBusinessGuid, CancellationToken ct = default);
+    Task<Contact?> GetContactByLoginAsync(bool isServicesCard, string siteminderId, CancellationToken ct = default);
+    Task<Contact?> GetContactByDetailsAsync(string? firstname, string? middlename, string? lastname, string? email, CancellationToken ct = default);
+    Task<Contact?> GetContactByNameAndBirthdateAsync(string firstName, string lastName, string birthDate, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Alias (adoxio_alias)
@@ -49,11 +52,15 @@ public interface IDataverseClient
     Task<adoxio_application?> GetApplicationByIdAsync(string id, CancellationToken ct = default);
     Task<adoxio_application?> GetApplicationByIdWithChildrenAsync(string id, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetApplicationsByAccountIdAsync(string accountId, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetApplicationsByApplicantExpandedAsync(string accountId, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetApplicationsByApplicantAndTypeAsync(string accountId, string? applicationTypeId, IList<int>? excludeStatuses, bool requireStatecode0 = false, string? specificApplicationId = null, CancellationToken ct = default);
     Task<Guid> CreateApplicationAsync(adoxio_application application, CancellationToken ct = default);
     Task UpdateApplicationAsync(adoxio_application application, CancellationToken ct = default);
     Task DeleteApplicationAsync(string id, CancellationToken ct = default);
     Task<Guid> CreateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default);
     Task UpdateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default);
+    Task<adoxio_applicationextension?> GetApplicationExtensionByApplicationIdAsync(string applicationId, CancellationToken ct = default);
+    Task<adoxio_applicationextension?> GetApplicationExtensionByIdAsync(string id, CancellationToken ct = default);
     Task<Guid> CreateAnnualVolumeAsync(adoxio_annualvolume annualVolume, CancellationToken ct = default);
     Task<IList<adoxio_annualvolume>> GetAnnualVolumesByApplicationIdAsync(string applicationId, CancellationToken ct = default);
     Task DeleteAnnualVolumeAsync(string id, CancellationToken ct = default);
@@ -66,12 +73,14 @@ public interface IDataverseClient
     Task<adoxio_licences?> GetLicenceByNumberAsync(string licenceNumber, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByAccountIdAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetActiveLicencesByTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default);
+    Task<IList<adoxio_licences>> GetLicencesByNameOrNumberAsync(string? name, string? licenceNumber, int top = 10, CancellationToken ct = default);
     Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Service Area (adoxio_servicearea)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<IList<adoxio_servicearea>> GetServiceAreasByApplicationIdAsync(string applicationId, CancellationToken ct = default);
     Task<Guid> CreateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
     Task UpdateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
     Task DeleteServiceAreaAsync(string id, CancellationToken ct = default);
@@ -80,8 +89,11 @@ public interface IDataverseClient
     // Hour of Sale (adoxio_hoursofservice)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<adoxio_hoursofservice?> GetHoursOfServiceByApplicationIdAsync(string applicationId, CancellationToken ct = default);
     Task<Guid> CreateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default);
+    Task<Guid> CreateHoursOfServiceAsync(adoxio_hoursofservice hoursOfService, CancellationToken ct = default);
     Task UpdateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default);
+    Task UpdateHoursOfServiceAsync(adoxio_hoursofservice hoursOfService, CancellationToken ct = default);
     Task DeleteHourOfSaleAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
@@ -146,11 +158,13 @@ public interface IDataverseClient
     // Licence Sub-Category (adoxio_licencesubcategory)
     // -------------------------------------------------------------------------
     Task<adoxio_licencesubcategory?> GetLicenceSubCategoryByIdAsync(string id, CancellationToken ct = default);
+    Task<adoxio_licencesubcategory?> GetLicenceSubCategoryByNameAsync(string name, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Application Type — by licence type
     // -------------------------------------------------------------------------
     Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdAsync(string licenceTypeId, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtypecontent>> GetApplicationTypeContentsByTypeIdAsync(string applicationTypeId, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Endorsement (adoxio_endorsement)
@@ -166,6 +180,7 @@ public interface IDataverseClient
     // -------------------------------------------------------------------------
     Task<IList<adoxio_application>> GetApplicationsForLicenceByApplicantAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetActiveApplicationsByAssignedLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetApplicationsByTypeAndAssignedLicenceAsync(string applicationTypeId, string licenceId, IList<int> excludeStatuses, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByThirdPartyOperatorAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByProposedOwnerAsync(string accountId, CancellationToken ct = default);
 
@@ -325,6 +340,12 @@ public interface IDataverseClient
     Task DeleteSharePointDocLocAsync(string id, CancellationToken ct = default);
     Task AssociateFederalReportExportWithDocLocAsync(string exportId, string docLocId, CancellationToken ct = default);
     Task<string?> GetFolderNameAsync(string entityName, string entityId, CancellationToken ct = default);
+    Task CreateEntitySharePointDocumentLocationAsync(string entityName, string entityId, string folderName, string name, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Form Element Upload Fields (adoxio_formelementuploadfield)
+    // -------------------------------------------------------------------------
+    Task<IList<FormDocumentField>> GetFormDocumentFieldsAsync(string formId, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Federal Report Export (adoxio_federalreportexport)
@@ -359,6 +380,14 @@ public interface IDataverseClient
     Task<IList<adoxio_applicationtype>> GetApplicationTypesAsync(CancellationToken ct = default);
     Task<adoxio_applicationtype?> GetApplicationTypeByNameAsync(string name, CancellationToken ct = default);
     Task<adoxio_applicationtype?> GetApplicationTypeByIdAsync(string id, CancellationToken ct = default);
+
+    // -------------------------------------------------------------------------
+    // Application — LG approval queries
+    // -------------------------------------------------------------------------
+    Task<IList<adoxio_application>> GetApplicationsByLginAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, CancellationToken ct = default);
+    Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool? hasDecisionDate = null, IList<string>? includeTypeIds = null, IList<string>? excludeTypeIds = null, IList<int>? excludeStatuses = null, int pageIndex = 0, int pageSize = 10, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetApplicationsByJobNumberContainsAsync(string jobNumber, IList<int> excludeStatuses, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtype>> GetApplicationTypesByFilterAsync(bool? isShowLginApproval = null, bool? isLgZoningConfirmation = null, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Proposed LRS Applications (map data query)
@@ -470,6 +499,7 @@ public interface IDataverseClient
     // Invoice (invoice)
     // -------------------------------------------------------------------------
     Task<Invoice?> GetInvoiceByIdAsync(string id, CancellationToken ct = default);
+    Task UpdateInvoiceAsync(Invoice invoice, CancellationToken ct = default);
     Task DeleteInvoiceAsync(string id, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
@@ -502,3 +532,6 @@ public interface IDataverseClient
     Task<IList<adoxio_applicationtype>> GetApplicationTypesWithLeSectionAsync(CancellationToken ct = default);
     Task<IList<adoxio_application>> GetApplicationsToSendAsync(CancellationToken ct = default);
 }
+
+/// <summary>DTO for adoxio_formelementuploadfield records.</summary>
+public record FormDocumentField(string? FilePrefix, string? Name, string? RouterLink);

@@ -1,7 +1,6 @@
-extern alias DV;
+﻿extern alias DV;
 using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System;
@@ -21,95 +20,6 @@ namespace Gov.Lclb.Cllb.Public.Models
     /// </summary>
     public static class MonthlyReportExtension
     {
-        public static MonthlyReport ToViewModel(this MicrosoftDynamicsCRMadoxioCannabismonthlyreport dynamicsMonthlyReport, IDynamicsClient dynamicsClient, bool expandInventoryReports)
-        {
-            if (dynamicsMonthlyReport == null)
-            {
-                return null;
-            }
-
-            MonthlyReport monthlyReportVM = new MonthlyReport
-            {
-                licenseId = dynamicsMonthlyReport._adoxioLicenceidValue,
-                licenseNumber = dynamicsMonthlyReport.AdoxioLicencenumber,
-                reportingPeriodMonth = dynamicsMonthlyReport.AdoxioReportingperiodmonth,
-                reportingPeriodYear = dynamicsMonthlyReport.AdoxioReportingperiodyear,
-                statusCode = dynamicsMonthlyReport.Statuscode,
-                employeesManagement = dynamicsMonthlyReport.AdoxioEmployeesmanagement,
-                employeesAdministrative = dynamicsMonthlyReport.AdoxioEmployeesadministrative,
-                employeesSales = dynamicsMonthlyReport.AdoxioEmployeessales,
-                employeesProduction = dynamicsMonthlyReport.AdoxioEmployeesproduction,
-                employeesOther = dynamicsMonthlyReport.AdoxioEmployeesother,
-                inventorySalesReports = new List<InventorySalesReport>()
-            };
-
-            monthlyReportVM.monthlyReportId = dynamicsMonthlyReport.AdoxioCannabismonthlyreportid;
-
-            // fetch the establishment and get name and address
-            /*Guid? adoxioEstablishmentId = null;
-            if (!string.IsNullOrEmpty(dynamicsMonthlyReport._adoxioEstablishmentidValue))
-            {
-                adoxioEstablishmentId = Guid.Parse(dynamicsMonthlyReport._adoxioEstablishmentidValue);
-            }
-            if (adoxioEstablishmentId != null)
-            {
-                var select = new List<string>() { "adoxio_establishmentid", "adoxio_name", "adoxio_addresscity", "adoxio_addresspostalcode" };
-                var establishment = dynamicsClient.Establishments.GetByKey(adoxioEstablishmentId.ToString(), select: select);
-                monthlyReportVM.establishmentName = establishment.AdoxioName;
-                monthlyReportVM.establishmentAddressCity = establishment.AdoxioAddresscity;
-                monthlyReportVM.establishmentAddressPostalCode = establishment.AdoxioAddresspostalcode;
-            }*/
-            if(dynamicsMonthlyReport.AdoxioEstablishmentId != null)
-            {
-                monthlyReportVM.establishmentName = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioName;
-                monthlyReportVM.establishmentAddressCity = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioAddresscity;
-                monthlyReportVM.establishmentAddressPostalCode = dynamicsMonthlyReport.AdoxioEstablishmentId.AdoxioAddresspostalcode;
-            }
-            if (expandInventoryReports)
-            {
-                IEnumerable<MicrosoftDynamicsCRMadoxioCannabisinventoryreport> inventoryReports = dynamicsClient.GetInventoryReportsForMonthlyReport(dynamicsMonthlyReport.AdoxioCannabismonthlyreportid);
-                foreach (var inventoryReport in inventoryReports)
-                {
-                    /*var select = new List<string>() { "adoxio_cannabisproductadminid", "adoxio_name", "adoxio_description", "adoxio_displayorder" };
-                    MicrosoftDynamicsCRMadoxioCannabisproductadmin product = dynamicsClient.Cannabisproductadmins.GetByKey(inventoryReport._adoxioProductidValue, select: select);
-                    */
-                    InventorySalesReport inv = new InventorySalesReport
-                    {
-                        product = inventoryReport.AdoxioProductId.AdoxioName,
-                        ProductDescription = inventoryReport.AdoxioProductId.AdoxioDescription,
-                        ProductDisplayOrder = inventoryReport.AdoxioProductId.AdoxioDisplayorder,
-                        inventoryReportId = inventoryReport.AdoxioCannabisinventoryreportid,
-                        openingInventory = inventoryReport.AdoxioOpeninginventory,
-                        domesticAdditions = inventoryReport.AdoxioQtyreceiveddomestic,
-                        returnsAdditions = inventoryReport.AdoxioQtyreceivedreturns,
-                        otherAdditions = inventoryReport.AdoxioQtyreceivedother,
-                        domesticReductions = inventoryReport.AdoxioQtyshippeddomestic,
-                        returnsReductions = inventoryReport.AdoxioQtyshippedreturned,
-                        destroyedReductions = inventoryReport.AdoxioQtydestroyed,
-                        lostReductions = inventoryReport.AdoxioQtyloststolen,
-                        otherReductions = inventoryReport.AdoxioOtherreductions,
-                        closingNumber = inventoryReport.AdoxioClosinginventory,
-                        closingValue = (inventoryReport.AdoxioValueofclosinginventory != null) ? inventoryReport.AdoxioValueofclosinginventory.Value : 0,
-                        totalSalesToConsumerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumber),
-                        totalSalesToConsumerValue = (inventoryReport.AdoxioTotalvalue != null) ? inventoryReport.AdoxioTotalvalue.Value : 0,
-                        totalSalesToRetailerQty = Convert.ToInt32(inventoryReport.AdoxioPackagedunitsnumberretailer),
-                        totalSalesToRetailerValue = (inventoryReport.AdoxioTotalvalueretailer != null) ? inventoryReport.AdoxioTotalvalueretailer.Value : 0,
-                        otherDescription = inventoryReport.AdoxioOtherdescription
-                    };
-                    if (inventoryReport.AdoxioProductId.AdoxioName != "Seeds" && inventoryReport.AdoxioProductId.AdoxioName != "Vegetative Cannabis")
-                    {
-                        inv.closingWeight = (inventoryReport.AdoxioWeightofclosinginventory != null) ? inventoryReport.AdoxioWeightofclosinginventory.Value : 0;
-                    }
-                    if (inventoryReport.AdoxioProductId.AdoxioName == "Seeds")
-                    {
-                        inv.totalSeeds = inventoryReport.AdoxioTotalnumberseeds;
-                    }
-                    monthlyReportVM.inventorySalesReports.Add(inv);
-                }
-            }
-
-            return monthlyReportVM;
-        }
 
         // ---- Xrm.Sdk adoxio_cannabismonthlyreport extensions ----
 

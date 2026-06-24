@@ -1,7 +1,6 @@
 ﻿extern alias DV;
 using System;
 using DV::Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -13,43 +12,6 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.PreviousAddress ToViewModel(this MicrosoftDynamicsCRMadoxioPreviousaddress address)
-        {
-            ViewModels.PreviousAddress result = null;
-            if (address != null)
-            {
-                result = new ViewModels.PreviousAddress();
-                if (address.AdoxioPreviousaddressid != null)
-                {
-                    result.id = address.AdoxioPreviousaddressid;
-                }
-
-                result.name = address.AdoxioName;
-                result.streetaddress = address.AdoxioStreetaddress;
-                result.city = address.AdoxioCity;
-                result.provstate = address.AdoxioProvstate;
-                result.country = address.AdoxioCountry;
-                result.postalcode = address.AdoxioPostalcode;
-                result.fromdate = address.AdoxioFromdate;
-                result.todate = address.AdoxioTodate;
-            }
-            return result;
-        }
-
-
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioPreviousaddress to, ViewModels.PreviousAddress from)
-        {
-            to.AdoxioName = from.name;
-            to.AdoxioStreetaddress = from.streetaddress;
-            to.AdoxioCity = from.city;
-            to.AdoxioProvstate = from.provstate;
-            to.AdoxioCountry = from.country;
-            to.AdoxioPostalcode = from.postalcode;
-            to.AdoxioFromdate = from.fromdate;
-            to.AdoxioTodate = from.todate;
-        }
-
-        // ---- Xrm.Sdk adoxio_previousaddress extensions ----
 
         public static ViewModels.PreviousAddress ToViewModel(this adoxio_previousaddress address)
         {

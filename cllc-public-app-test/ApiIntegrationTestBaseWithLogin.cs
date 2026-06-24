@@ -86,17 +86,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             // create a new account and contact in Dynamics
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+            ViewModels.Account viewmodel_account = new ViewModels.Account
             {
-                Name = user.businessname,
-                AdoxioExternalid = user.accountid
+                name = user.businessname,
+                externalId = user.accountid,
+                businessType = businessType
             };
 
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-
-			viewmodel_account.businessType = businessType;
-
-            Assert.Equal(account.AdoxioExternalid, viewmodel_account.externalId);
+            Assert.Equal(user.accountid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");

@@ -186,7 +186,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                     adoxio_DateTimeSent = DateTime.Now,
                     adoxio_Payload = payload,
                     adoxio_MessageStatus = response,
-                    adoxio_MessageSendStatus = OneStopMessageStatus.Sent
+                    adoxio_MessageSendStatus = (adoxio_messagestatus)OneStopMessageStatus.Sent
                 };
                 try
                 {
@@ -445,17 +445,17 @@ namespace Gov.Jag.Lcrb.OneStopService
                         }
                         else
                         {
-                            switch (queueItem.adoxio_StatusChangeDescription.Value)
+                            switch ((OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value)
                             {
                                 case OneStopHubStatusChange.Issued:
                                 case OneStopHubStatusChange.TransferComplete:
                                 case OneStopHubStatusChange.LicenseeBn9Changed:
                                 case OneStopHubStatusChange.LicenseeBn9Added:
                                 case OneStopHubStatusChange.LicenseeBn9Removed:
-                                    if (queueItem.adoxio_StatusChangeDescription.Value == OneStopHubStatusChange.TransferComplete)
+                                    if ((OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value == OneStopHubStatusChange.TransferComplete)
                                     {
                                         await SendChangeStatusRest(hangfireContext, licenceId,
-                                            queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
+                                            (OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
                                     }
 
                                     bool isAgentLicenceType = false;
@@ -498,7 +498,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                                 case OneStopHubStatusChange.SuspensionEnded:
                                 case OneStopHubStatusChange.EndorsementApproved:
                                     await SendChangeStatusRest(hangfireContext, licenceId,
-                                        queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
+                                        (OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
                                     break;
 
                                 case OneStopHubStatusChange.ChangeOfAddress:
@@ -553,7 +553,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 {
                     Id = itemGuid,
                     adoxio_MessageStatusReason = msg,
-                    adoxio_MessageSendStatus = OneStopMessageStatus.Failed
+                    adoxio_MessageSendStatus = (adoxio_messagestatus)OneStopMessageStatus.Failed
                 };
                 try
                 {

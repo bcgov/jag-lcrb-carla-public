@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
@@ -8,15 +9,24 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Serilog;
-using System.ServiceModel.Channels;
 using Gov.Lclb.Cllb.Public.ViewModels;
-using static System.Net.Mime.MediaTypeNames;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using adoxio_application_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application;
+using adoxio_worker_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_worker;
+using adoxio_specialevent_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_specialevent;
+using adoxio_applicationextension_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicationextension;
+using adoxio_generalyesno_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno;
+using adoxio_application_paymentmethod = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_paymentmethod;
+using adoxio_applicationtype_category = DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicationtype_adoxio_category;
+using adoxio_application_statuscode_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_statuscode;
+using DvInvoice = DV::Gov.Lclb.Cllb.Interfaces.Invoice;
+using invoice_statecode = DV::Gov.Lclb.Cllb.Interfaces.invoice_statecode;
+using invoice_statuscode = DV::Gov.Lclb.Cllb.Interfaces.invoice_statuscode;
 
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -33,18 +43,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IGeocoderService _geocoderClient;
 
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly Serilog.ILogger _logger;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
 
         public PaymentController(IConfiguration configuration,
                                  IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory,
-                                 IDynamicsClient dynamicsClient, IBCEPService bcep, IGeocoderService geocoderClient)
+                                 IDataverseClient dataverse,
+                                 IBCEPService bcep, IGeocoderService geocoderClient)
         {
             _configuration = configuration;
             _bcep = bcep;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _httpContextAccessor = httpContextAccessor;
             _geocoderClient = geocoderClient;
             _logger = Log.Logger;
@@ -64,20 +75,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // get the application and confirm access (call parse to ensure we are getting a valid id)
             Guid applicationId = Guid.Parse(id);
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return NotFound("Application not found");
             }
-            if (application.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+
+            // Check if application's primary invoice is already paid
+            string existingInvoiceId = application.adoxio_Invoice?.Id.ToString();
+            if (existingInvoiceId != null)
             {
-                return NotFound("Payment already made");
-            }
-            else
-            {
-                //TODO Reverify Payment Status with BCEP
-                if (application._adoxioInvoiceValue != null)
+                var existingInvoice = await _dataverse.GetInvoiceByIdAsync(existingInvoiceId);
+                if (existingInvoice?.StatusCode == invoice_statuscode.Complete)
                 {
+                    return NotFound("Payment already made");
+                }
+                else
+                {
+                    //TODO Reverify Payment Status with BCEP
                     bool invoicePaid = await ReVerifyPaymentStatus(id);
                     if (invoicePaid)
                     {
@@ -87,67 +102,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // set the application invoice trigger to create an invoice
-            // no need to copy the whole record over as we are doing a Patch for a single field.
-            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-            {
-                // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
-                AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
-            };
+            var patchApplication = new adoxio_application_dv { Id = applicationId };
+            patchApplication.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.Yes;
 
-            try
-            {
-                _dynamicsClient.Applications.Update(id, patchApplication);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.Error(httpOperationException, "Error updating application");
-                // fail 
-                throw (httpOperationException);
-            }
+            await _dataverse.UpdateApplicationAsync(patchApplication);
+
             application = await GetDynamicsApplication(id);
 
             // now load the invoice for this application to get the pricing
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
             int retries = 0;
-            while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Error($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;
+                invoiceId = application.adoxio_Invoice?.Id.ToString();
             }
 
             if (!string.IsNullOrEmpty(invoiceId))
             {
-
-
                 _logger.Debug("Created invoice for application = " + invoiceId);
 
-                /*
-                 * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-                 *  - we will then re-query the Application to get the Invoice number,
-                 *  - and then query the Invoice to get the amount
-                 *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-                 *  - the Invoice status will be New
-                 * Notes:
-                 *  - If there is already an invoice with Status New, don't need to create a new Invoice
-                 *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-                 *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-                 */
+                DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+                var ordernum = invoice.adoxio_TransactionID;
+                var orderamt = invoice.TotalAmount?.Value;
 
-                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceId);
-                // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-                var ordernum = invoice.AdoxioTransactionid;
-                // dynamics determines the amount based on the licence type of the application
-                var orderamt = invoice.Totalamount;
+                Dictionary<string, string> redirectUrl = new Dictionary<string, string>();
 
-                Dictionary<string, string> redirectUrl;
-                redirectUrl = new Dictionary<string, string>();
-
-                PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // set to true for Liquor.
+                PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType);
 
@@ -181,8 +165,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             const string primary = "primary";
             const string secondary = "secondary";
 
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return NotFound($"Application not found for id {id}");
@@ -203,12 +186,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (invoiceType == primary)
             {
                 _logger.Debug($"Primary invoice for application {id} has been paid");
-                invoicePaid = application?.AdoxioPrimaryapplicationinvoicepaid == 1;
+                invoicePaid = application.adoxio_PrimaryApplicationInvoicePaid == adoxio_generalyesno_dv.Yes;
             }
             else if (invoiceType == secondary)
             {
                 _logger.Debug($"Secondary invoice for application {id} has been paid");
-                invoicePaid = application?.AdoxioSecondaryapplicationinvoicepaid == 1;
+                invoicePaid = application.adoxio_SecondaryApplicationInvoicePaid == adoxio_generalyesno_dv.Yes;
             }
 
             if (invoicePaid)
@@ -217,7 +200,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
             else
             {
-                if (application._adoxioInvoiceValue != null)
+                if (application.adoxio_Invoice?.Id != null)
                 {
                     //TODO Reverify Payment Status with BCEP
                     var verifyInvoicePaid = await ReVerifyPaymentStatus(id);
@@ -228,45 +211,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            // set the application invoice trigger to create an invoice
-            // no need to copy the whole record over as we are doing a Patch for a single field.
-            MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-            {
-                // Set this field to trigger the creation of the invoice(s).
-                AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
-            };
+            var patch = new adoxio_application_dv { Id = Guid.Parse(id) };
+            patch.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.Yes;
 
-            try
-            {
-                // Update the application with the patch to trigger invoice creation.
-                _dynamicsClient.Applications.Update(id, patchApplication);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.Error(httpOperationException, "Error updating application. Failed to set InvoiceTrigger");
-                throw;
-            }
+            await _dataverse.UpdateApplicationAsync(patch);
 
             application = await GetDynamicsApplication(id);
-            // now load the invoice for this application to get the pricing
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
             if (invoiceType == secondary)
             {
-                invoiceId = application._adoxioSecondaryapplicationinvoiceValue;
+                invoiceId = application.adoxio_SecondaryApplicationInvoice?.Id.ToString();
             }
             int retries = 0;
-            while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Warning($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;
+                invoiceId = application.adoxio_Invoice?.Id.ToString();
                 if (invoiceType == secondary)
                 {
-                    invoiceId = application._adoxioSecondaryapplicationinvoiceValue;
+                    invoiceId = application.adoxio_SecondaryApplicationInvoice?.Id.ToString();
                 }
             }
 
@@ -278,52 +244,36 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.Debug($"Created invoice for application {id}. Invoice {invoiceId}");
 
-            /*
-             * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-             *  - we will then re-query the Application to get the Invoice number,
-             *  - and then query the Invoice to get the amount
-             *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-             *  - the Invoice status will be New
-             * Notes:
-             *  - If there is already an invoice with Status New, don't need to create a new Invoice
-             *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-             *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-             */
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceId);
-            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-            var ordernum = invoice.AdoxioTransactionid;
-            // dynamics determines the amount based on the licence type of the application
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice2 = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum2 = invoice2.adoxio_TransactionID;
+            var orderamt2 = invoice2.TotalAmount?.Value;
 
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
+            Dictionary<string, string> redirectUrl2 = new Dictionary<string, string>();
 
-            bool isAlternateAccount = (invoiceType == secondary); // set to true for Liquor. The secondary invoice type is for Liquor.
-            PaymentType paymentType = PaymentType.CANNABIS;
+            bool isAlternateAccount = (invoiceType == secondary);
+            PaymentType paymentType2 = PaymentType.CANNABIS;
             if (isAlternateAccount)
             {
-                paymentType = PaymentType.LIQUOR;
+                paymentType2 = PaymentType.LIQUOR;
             }
 
             string redirectPath;
             if (redirectContext == "permanent-change")
             {
-                // Redirect to the Permanent Change to a Licensee page
                 redirectPath =
                     $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/permanent-change-to-a-licensee/{id}/{invoiceType}";
             }
             else
             {
-                // Redirect to the Permanent Change to a Licensee as a result of a Legal Entity Review page
                 redirectPath =
                     $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/legal-entity-review-permanent-change-to-a-licensee/{id}/{invoiceType}";
             }
 
-            redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
+            redirectUrl2["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum2, id, String.Format("{0:0.00}", orderamt2), paymentType2, redirectPath);
 
-            _logger.Debug($"Payment redirect url = {redirectUrl["url"]}");
+            _logger.Debug($"Payment redirect url = {redirectUrl2["url"]}");
 
-            return new JsonResult(redirectUrl);
+            return new JsonResult(redirectUrl2);
         }
 
         /// <summary>
@@ -338,40 +288,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _logger.Debug($"Called GetLicencePaymentUrl({id})");
 
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
 
             if (application == null)
             {
                 return NotFound("Application not found");
             }
 
-            if (application.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+            string licFeeInvoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
+
+            // Check if licence fee invoice is already paid
+            if (licFeeInvoiceId != null)
             {
-                if (application.AdoxioLicencefeeinvoicepaid == false)
+                var lfInvoice = await _dataverse.GetInvoiceByIdAsync(licFeeInvoiceId);
+                if (lfInvoice?.StatusCode == invoice_statuscode.Complete)
                 {
-                    try
+                    if (application.adoxio_LicenceFeeInvoicePaid == false)
                     {
-                        MicrosoftDynamicsCRMadoxioApplication fixApplication = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioLicencefeeinvoicepaid = true
-                        };
-                        _dynamicsClient.Applications.Update(id, fixApplication);
+                        var fixPatch = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        fixPatch.adoxio_LicenceFeeInvoicePaid = true;
+                        await _dataverse.UpdateApplicationAsync(fixPatch);
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw;
-                    }
+                    return NotFound("Payment already made");
                 }
-                return NotFound("Payment already made");
-            }
-            else
-            {
-                //TODO Reverify Payment Status with BCEP
-                if (application._adoxioLicencefeeinvoiceValue != null)
+                else
                 {
+                    //TODO Reverify Payment Status with BCEP
                     bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
                     if (invoicePaid)
                     {
@@ -380,45 +322,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            if (!string.IsNullOrEmpty(application._adoxioLicencefeeinvoiceValue))
+            if (!string.IsNullOrEmpty(licFeeInvoiceId))
             {
-
-                MicrosoftDynamicsCRMinvoice invoice2 = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioLicencefeeinvoiceValue));
-                if (invoice2 != null && invoice2.Statecode == (int)Adoxio_invoicestates.Cancelled)
+                DvInvoice invoice2 = await _dataverse.GetInvoiceByIdAsync(licFeeInvoiceId);
+                if (invoice2 != null && invoice2.StateCode == invoice_statecode.Canceled)
                 {
-                    // set the application invoice trigger to create an invoice                    
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
-                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
-                    };
-
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw;
-                    }
+                    var triggerPatch = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    triggerPatch.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.Yes;
+                    await _dataverse.UpdateApplicationAsync(triggerPatch);
                     application = await GetDynamicsApplication(id);
                 }
             }
 
-            string invoiceId = application._adoxioLicencefeeinvoiceValue;
+            string invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
 
             int retries = 0;
             while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioLicencefeeinvoiceValue;
+                invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
             }
 
             if (string.IsNullOrEmpty(invoiceId))
@@ -429,28 +354,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             _logger.Debug("Created invoice for application = " + invoiceId);
 
-            /*
-                * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-                *  - we will then re-query the Application to get the Invoice number,
-                *  - and then query the Invoice to get the amount
-                *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-                *  - the Invoice status will be New
-                * Notes:
-                *  - If there is already an invoice with Status New, don't need to create a new Invoice
-                *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-                *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-                */
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+            var orderamt = invoice.TotalAmount?.Value;
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-            var ordernum = invoice.AdoxioTransactionid;
-            // dynamics determines the amount based on the licence type of the application
-            var orderamt = invoice.Totalamount;
+            PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
-            PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // set to true for Liquor.
-
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
+            Dictionary<string, string> redirectUrl = new Dictionary<string, string>();
 
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
@@ -472,41 +382,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _logger.Debug($"Called GetOutStandingPriorBalanceInvoicePaymentUrl({id})");
 
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
-            //Guid applicationGuidId = Guid.Parse(applicationId);
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
 
             if (application == null)
             {
                 return NotFound("Application not found");
             }
-            //LCSD-6388 TODO: add new application.OutstandingPriorBalanceInvoice
-            if (application.AdoxioLicenceFeeInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+
+            string licFeeInvoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
+
+            if (licFeeInvoiceId != null)
             {
-                if (application.AdoxioLicencefeeinvoicepaid == false)
+                var lfInvoice = await _dataverse.GetInvoiceByIdAsync(licFeeInvoiceId);
+                if (lfInvoice?.StatusCode == invoice_statuscode.Complete)
                 {
-                    try
+                    if (application.adoxio_LicenceFeeInvoicePaid == false)
                     {
-                        MicrosoftDynamicsCRMadoxioApplication fixApplication = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioLicencefeeinvoicepaid = true
-                        };
-                        _dynamicsClient.Applications.Update(id, fixApplication);
+                        var fixPatch = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        fixPatch.adoxio_LicenceFeeInvoicePaid = true;
+                        await _dataverse.UpdateApplicationAsync(fixPatch);
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    return NotFound("Payment already made");
                 }
-                return NotFound("Payment already made");
-            }
-            else
-            {
-                //TODO Reverify Payment Status with BCEP
-                if (application._adoxioLicencefeeinvoiceValue != null)
+                else
                 {
+                    //TODO Reverify Payment Status with BCEP
                     bool invoicePaid = await ReVerifyLicenceFeePaymentStatus(id);
                     if (invoicePaid)
                     {
@@ -515,72 +415,41 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            if (!string.IsNullOrEmpty(application._adoxioLicencefeeinvoiceValue))
+            if (!string.IsNullOrEmpty(licFeeInvoiceId))
             {
-
-                MicrosoftDynamicsCRMinvoice invoice2 = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioLicencefeeinvoiceValue));
-                if (invoice2 != null && invoice2.Statecode == (int)Adoxio_invoicestates.Cancelled)
+                DvInvoice invoice2 = await _dataverse.GetInvoiceByIdAsync(licFeeInvoiceId);
+                if (invoice2 != null && invoice2.StateCode == invoice_statecode.Canceled)
                 {
-                    // set the application invoice trigger to create an invoice                    
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
-                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
-                    };
-
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var triggerPatch = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    triggerPatch.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.Yes;
+                    await _dataverse.UpdateApplicationAsync(triggerPatch);
                     application = await GetDynamicsApplication(id);
                 }
             }
-            string invoiceId = application._adoxioLicencefeeinvoiceValue;
+
+            string invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
 
             int retries = 0;
             while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(1000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioLicencefeeinvoiceValue;
+                invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
             }
 
             if (!string.IsNullOrEmpty(invoiceId))
             {
                 _logger.Debug("Created invoice for application = " + invoiceId);
 
-                /*
-                 * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-                 *  - we will then re-query the Application to get the Invoice number,
-                 *  - and then query the Invoice to get the amount
-                 *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-                 *  - the Invoice status will be New
-                 * Notes:
-                 *  - If there is already an invoice with Status New, don't need to create a new Invoice
-                 *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-                 *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-                 */
+                DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+                var ordernum = invoice.adoxio_TransactionID;
+                var orderamt = invoice.TotalAmount?.Value;
 
-                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-                // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-                var ordernum = invoice.AdoxioTransactionid;
-                // dynamics determines the amount based on the licence type of the application
-                var orderamt = invoice.Totalamount;
+                PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
-                PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // set to true for Liquor.
-
-                Dictionary<string, string> redirectUrl;
-                redirectUrl = new Dictionary<string, string>();
+                Dictionary<string, string> redirectUrl = new Dictionary<string, string>();
 
                 var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/licence-fee-payment-confirmation";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
@@ -607,26 +476,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/{id}")]
         public async Task<IActionResult> VerifyPaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return NotFound("Application not found");
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
 
             //LCSD-6409 handle invoiceID is null issue:
             int retries = 0;
             while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Error($"No application {id} invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(2000);
                 application = await GetDynamicsApplication(id);
-                invoiceId = application._adoxioInvoiceValue;
+                invoiceId = application.adoxio_Invoice?.Id.ToString();
             }
             if (invoiceId == null)
             {
@@ -634,148 +500,90 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-            Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+            var orderamt = invoice.TotalAmount?.Value;
 
-            PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // determine if it is for liquor
+            PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
-                return StatusCode(500, response); // client will retry.
+                return StatusCode(500, response);
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
             response["paymentType"] = paymentType.ToString();
 
-            // LCSD-6224 2024-01-24 waynezen: if Application is for Renewal, send renewLicenseNumber to front-end
-            if (application.AdoxioApplicationTypeId?.AdoxioIsrenewal == true && application.AdoxioAssignedLicence != null)
+            // LCSD-6224: if Application is for Renewal, send renewLicenseNumber to front-end
+            string renewLicenseNumber = "";
+            if (application.adoxio_ApplicationTypeId?.Id is Guid appTypeGuid)
             {
-                var applicationVM = new ViewModels.Application();
-                applicationVM.AssignedLicence = application.AdoxioAssignedLicence.ToViewModel(_dynamicsClient);
-
-                response["renewLicenseNumber"] = applicationVM.AssignedLicence.LicenseNumber;
+                var appType = await _dataverse.GetApplicationTypeByIdAsync(appTypeGuid.ToString());
+                if (appType?.adoxio_IsRenewal == true && application.adoxio_AssignedLicence?.Id is Guid licenceGuid)
+                {
+                    var licence = await _dataverse.GetLicenceByIdAsync(licenceGuid.ToString());
+                    if (licence != null)
+                    {
+                        var licVM = await licence.ToViewModelAsync(_dataverse);
+                        renewLicenseNumber = licVM.LicenseNumber ?? "";
+                    }
+                }
             }
-            else
-                // blank renewalLicenseNumber key/val lets front end know not to display message
-                response["renewLicenseNumber"] = "";
+            response["renewLicenseNumber"] = renewLicenseNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set invoice status to Complete
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_PaymentRecieved = true;
+                    patchApp.adoxio_PaymentMethod = adoxio_application_paymentmethod.CreditCard;
+                    patchApp.adoxio_AppChecklistPaymentReceived = adoxio_generalyesno_dv.Yes;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        // set the Application payment status
-                        AdoxioPaymentrecieved = true,
-                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
-                        AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
-                    };
-
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-
-                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
-
+                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        // If message is not 'No Transaction Found or Payment Cancelled' set invoice status to Cancelled
-                        MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                        {
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating invoice");
-                            // fail 
-                            throw (httpOperationException);
-                        }
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-                        try
-                        {
-                            _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating application");
-                            // fail 
-                            throw (httpOperationException);
-                        }
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await _dataverse.UpdateInvoiceAsync(patchInvoice);
+
+                        var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        patchApp.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await _dataverse.UpdateApplicationAsync(patchApp);
                     }
 
-
-                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
-
+                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -785,146 +593,83 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> ReVerifyPaymentStatus(string id)
         {
             Boolean toReturn = false;
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return toReturn;
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
+            if (string.IsNullOrEmpty(invoiceId)) return toReturn;
 
-            Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
 
-            PaymentType paymentType = application.GetPaymentType(_dynamicsClient); // determine if it is for liquor
+            PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT RE-VERIFICATION ERROR - {response["message"]} for application {id}");
                 return toReturn;
             }
-            //Check if the payment processor has any record of this transaction
             var messageId = response["messageId"];
-            var messageText = response["messageText"];
             if (messageId == "559" || messageId == "761")
             {
-                //Payment Processor has no record of this transaction do nothing
                 return false;
             }
-            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
-            response["invoice"] = invoice.Invoicenumber;
+
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set invoice status to Complete
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_PaymentRecieved = true;
+                    patchApp.adoxio_PaymentMethod = adoxio_application_paymentmethod.CreditCard;
+                    patchApp.adoxio_AppChecklistPaymentReceived = adoxio_generalyesno_dv.Yes;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        // set the Application payment status
-                        AdoxioPaymentrecieved = true,
-                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC,
-                        AdoxioAppchecklistpaymentreceived = (int?)ViewModels.GeneralYesNo.Yes
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
                     toReturn = true;
-                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
-
+                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
 
-                    // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Canceled;
+                    patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
+
+                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -943,150 +688,82 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/licence-fee/{id}")]
         public async Task<IActionResult> VerifyLicenceFeePaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return NotFound("Application not found");
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioLicencefeeinvoiceValue;
+            string invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
 
-            PaymentType paymentType = application.GetPaymentType(_dynamicsClient);
+            PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
-                return StatusCode(503); // client will retry.
+                return StatusCode(503);
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set the Application payment status
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioLicencefeeinvoicepaid = true,
-                        AdoxioPaymentrecieved = true,
-                        AdoxioPaymentmethod = (int?)Adoxio_paymentmethods.CC
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_LicenceFeeInvoicePaid = true;
+                    patchApp.adoxio_PaymentRecieved = true;
+                    patchApp.adoxio_PaymentMethod = adoxio_application_paymentmethod.CreditCard;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-                    // trigger geocoding
                     if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
                     {
-                        await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
+                        await _geocoderClient.GeocodeEstablishment(application.adoxio_LicenceEstablishment?.Id.ToString(), _logger);
                     }
 
-                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
-
+                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                        {
-                            // set invoice status to Cancelled
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating invoice");
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                            // fail 
-                            throw (httpOperationException);
-                        }
-
-
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-                        try
-                        {
-                            _dynamicsClient.Applications.Update(id, patchApplication);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating application");
-                            // fail 
-                            throw (httpOperationException);
-                        }
+                        var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await _dataverse.UpdateApplicationAsync(patchApp);
                     }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                 }
-
-
-
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -1097,148 +774,90 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         public async Task<bool> ReVerifyLicenceFeePaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return false;
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioLicencefeeinvoiceValue;
-            _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            string invoiceId = application.adoxio_LicenceFeeInvoice?.Id.ToString();
+            if (string.IsNullOrEmpty(invoiceId)) return false;
 
-            PaymentType paymentType = application.GetPaymentType(_dynamicsClient);
+            _logger.Debug("Found invoice for application = " + invoiceId);
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+
+            PaymentType paymentType = await application.GetPaymentTypeAsync(_dataverse);
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT Re-VERIFICATION ERROR - {response["message"]} for application {id}");
-                return false; // client will retry.
-            }
-            //Check if the payment processor has any record of this transaction
-            var messageId = response["messageId"];
-            var messageText = response["messageText"];
-            if (messageId == "559" || messageId == "761")
-            {
-                //Payment Processor has no record of this transaction do nothing
                 return false;
             }
-            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
-            response["invoice"] = invoice.Invoicenumber;
+            var messageId = response["messageId"];
+            if (messageId == "559" || messageId == "761")
+            {
+                return false;
+            }
+
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set the Application payment status
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioLicencefeeinvoicepaid = true
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_LicenceFeeInvoicePaid = true;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-                    // trigger geocoding
                     if (!string.IsNullOrEmpty(_configuration["FEATURE_MAPS"]))
                     {
-                        await _geocoderClient.GeocodeEstablishment(application._adoxioLicenceestablishmentValue, _logger);
+                        await _geocoderClient.GeocodeEstablishment(application.adoxio_LicenceEstablishment?.Id.ToString(), _logger);
                     }
 
-                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
+                    _logger.Information($"Licence Fee Transaction approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                     return true;
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Cancelled
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Canceled;
+                    patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {paymentType}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {paymentType}");
                     return false;
                 }
             }
+            else
+            {
+                _logger.Debug("Invoice status is not New, skipping updates ...");
+            }
+
             return false;
         }
 
@@ -1262,27 +881,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest("Invalid Invoice Type");
             }
 
-
-            MicrosoftDynamicsCRMadoxioApplication application = await GetDynamicsApplication(id);
+            adoxio_application_dv application = await GetDynamicsApplication(id);
             if (application == null)
             {
                 return NotFound("Application not found");
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
             if (invoiceType == secondary)
             {
-                invoiceId = application._adoxioSecondaryapplicationinvoiceValue;
+                invoiceId = application.adoxio_SecondaryApplicationInvoice?.Id.ToString();
             }
 
             Guid invoiceGuid = Guid.Parse(invoiceId);
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(invoiceGuid);
-            string ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceGuid.ToString());
+            string ordernum = invoice.adoxio_TransactionID;
 
-            bool isAlternateAccount = (invoiceType == secondary); // determine if it is for liquor
+            bool isAlternateAccount = (invoiceType == secondary);
 
             PaymentType paymentType = PaymentType.CANNABIS;
             if (isAlternateAccount)
@@ -1294,125 +910,65 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for application {id}");
-                return StatusCode(500, response); // client will retry.
+                return StatusCode(500, response);
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
 
-                    // set invoice status to Complete
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        // set the Application payment status
-                        AdoxioPrimaryapplicationinvoicepaid = 1
-                    };
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
                     if (invoiceType == secondary)
                     {
-                        adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            // set the Application payment status
-                            AdoxioSecondaryapplicationinvoicepaid = 1
-                        };
+                        patchApp.adoxio_SecondaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
                     }
-
-                    try
+                    else
                     {
-                        _dynamicsClient.Applications.Update(id, adoxioApplication2);
+                        patchApp.adoxio_PrimaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
                     }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
+                    _logger.Information($"Payment approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {isAlternateAccount}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        // set invoice status to Cancelled
-                        MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                        {
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating invoice");
-                            // fail 
-                            throw (httpOperationException);
-                        }
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-                        try
-                        {
-                            _dynamicsClient.Applications.Update(id, adoxioApplication2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating application");
-                            // fail 
-                            throw (httpOperationException);
-                        }
-                    }
-                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Liquor: {isAlternateAccount}");
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
+                        var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        patchApp.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await _dataverse.UpdateApplicationAsync(patchApp);
+                    }
+                    _logger.Information($"Payment not approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Liquor: {isAlternateAccount}");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -1420,120 +976,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get the payment status for a PCL application for a user with liquor invoices.
-        /// This also updates the invoice and application status.
+        /// Get the payment status for a PCL application for a user with liquor invoices — DV overload.
         /// </summary>
-        /// <remarks>
-        /// Note: This function will automatically set any invoice, whose total amount is $0, to "Paid" and update the 
-        /// application accordingly. This does mean the invoice will have no transaction/payment related details from
-        /// the external payment processor.
-        /// </remarks>
-        /// <param name="application"></param>
-        /// <param name="dynamicsClient"></param>
-        /// <param name="bcep"></param>
-        /// <returns></returns>
-        public static async Task<PaymentResult> GetLiquorPaymentStatus(MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient, IBCEPService bcep)
+        public static async Task<PaymentResult> GetLiquorPaymentStatus(adoxio_application_dv application, IDataverseClient dataverse, IBCEPService bcep)
         {
-            if (application == null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
+            if (application == null) throw new ArgumentNullException(nameof(application));
+            if (dataverse == null) throw new ArgumentNullException(nameof(dataverse));
+            if (bcep == null) throw new ArgumentNullException(nameof(bcep));
 
-            if (dynamicsClient == null)
-            {
-                throw new ArgumentNullException(nameof(dynamicsClient));
-            }
+            var invoiceId = application.adoxio_SecondaryApplicationInvoice?.Id.ToString();
 
-            if (bcep == null)
-            {
-                throw new ArgumentNullException(nameof(bcep));
-            }
-
-            var invoiceId = application._adoxioSecondaryapplicationinvoiceValue;
-
-            if (string.IsNullOrEmpty(invoiceId))
-            {
-                return null;
-            }
-
-            Guid invoiceGuid = Guid.Parse(invoiceId);
+            if (string.IsNullOrEmpty(invoiceId)) return null;
 
             Log.Debug("Found invoice for application = " + invoiceId);
+            DvInvoice invoice = await dataverse.GetInvoiceByIdAsync(invoiceId).ConfigureAwait(true);
+            string ordernum = invoice.adoxio_TransactionID;
+            var totalAmount = invoice.TotalAmount?.Value;
 
-            MicrosoftDynamicsCRMinvoice invoice = await dynamicsClient.GetInvoiceById(invoiceGuid).ConfigureAwait(true);
-
-            string ordernum = invoice.AdoxioTransactionid;
-            var totalAmount = invoice.Totalamount;
-
-            // If the total amount of the invoice is $0, then automatically mark it as paid/complete.
             if (totalAmount <= 0)
             {
-                MicrosoftDynamicsCRMinvoice updatedInvoice = new MicrosoftDynamicsCRMinvoice
-                {
-                    Statecode = (int?)Adoxio_invoicestates.Paid,
-                    Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                    AdoxioReturnedtransactionid = null
-                };
+                var patchInvoice = new DvInvoice { Id = invoice.Id };
+                patchInvoice.StateCode = invoice_statecode.Paid;
+                patchInvoice.StatusCode = invoice_statuscode.Complete;
+                patchInvoice.adoxio_returnedtransactionid = null;
+                await dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                try
-                {
-                    dynamicsClient.Invoices.Update(invoice.Invoiceid, updatedInvoice);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    Log.Error(httpOperationException, "Error updating invoice");
-                    throw;
-                }
+                var patchApp = new adoxio_application_dv { Id = application.Id };
+                patchApp.adoxio_PrimaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
+                await dataverse.UpdateApplicationAsync(patchApp);
 
-                MicrosoftDynamicsCRMadoxioApplication updatedApplication = new MicrosoftDynamicsCRMadoxioApplication
+                var ext = await dataverse.GetApplicationExtensionByApplicationIdAsync(application.Id.ToString());
+                if (ext?.adoxio_relatedleorpclapplication?.Id != null)
                 {
-                    AdoxioPrimaryapplicationinvoicepaid = 1
-                };
-
-                try
-                {
-                    dynamicsClient.Applications.Update(application.AdoxioApplicationid, updatedApplication);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    Log.Error(httpOperationException, "Error updating application");
-                    throw;
+                    await UpdateRelatedLeReviewStatus(ext.adoxio_relatedleorpclapplication.Id.ToString(), application.Id.ToString(), dataverse);
                 }
 
-                if (application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue != null)
-                {
-                    await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
-                }
-
-                // This invoice is for $0, and so no payment response exists.
                 return null;
             }
 
-            var response = await bcep.ProcessPaymentResponse(ordernum, application.AdoxioApplicationid, PaymentType.LIQUOR);
+            var response = await bcep.ProcessPaymentResponse(ordernum, application.Id.ToString(), PaymentType.LIQUOR);
 
             if (response.ContainsKey("error"))
             {
                 throw new Exception("Error in response");
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 Log.Debug("GetLiquorPaymentStatus - Payment Response: " + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 Log.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
 
@@ -1541,92 +1039,44 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     Log.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set invoice status to Complete
-                    try
+                    var patchApp = new adoxio_application_dv { Id = application.Id };
+                    patchApp.adoxio_SecondaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
+                    await dataverse.UpdateApplicationAsync(patchApp);
+
+                    var ext = await dataverse.GetApplicationExtensionByApplicationIdAsync(application.Id.ToString());
+                    if (ext?.adoxio_relatedleorpclapplication?.Id != null)
                     {
-                        dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating invoice");
-                        throw;
+                        await UpdateRelatedLeReviewStatus(ext.adoxio_relatedleorpclapplication.Id.ToString(), application.Id.ToString(), dataverse);
                     }
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioSecondaryapplicationinvoicepaid = 1
-                    };
-
-                    try
-                    {
-                        dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating application");
-                        throw;
-                    }
-
-                    if (application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue != null)
-                    {
-                        await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
-                    }
-
-                    Log.Information($"Liquor Invoice Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
+                    Log.Information($"Liquor Invoice Payment approved.  Application ID: {application.Id} Invoice: {invoice.InvoiceNumber}.");
                 }
-                // if payment failed:
                 else
                 {
                     Log.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        // set invoice status to Cancelled
-                        MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                        {
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                        try
-                        {
-                            dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            Log.Error(httpOperationException, "Error updating invoice");
-                            throw;
-                        }
-
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-
-                        try
-                        {
-                            dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            Log.Error(httpOperationException, "Error updating application");
-                            throw;
-                        }
+                        var patchApp = new adoxio_application_dv { Id = application.Id };
+                        patchApp.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await dataverse.UpdateApplicationAsync(patchApp);
                     }
 
-                    Log.Information($"Liquor Invoice Payment not approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
+                    Log.Information($"Liquor Invoice Payment not approved.  Application ID: {application.Id} Invoice: {invoice.InvoiceNumber}.");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 Log.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -1634,261 +1084,149 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Get the payment status for a PCL application for a user with cannabis invoices.
-        /// This also updates the invoice and application status.
+        /// Get the payment status for a PCL application for a user with cannabis invoices — DV overload.
         /// </summary>
-        /// <remarks>
-        /// Note: This function will automatically set any invoice, whose total amount is $0, to "Paid" and update the 
-        /// application accordingly. This does mean the invoice will have no transaction/payment related details from
-        /// the external payment processor.
-        /// </remarks>
-        /// <param name="application"></param>
-        /// <param name="dynamicsClient"></param>
-        /// <param name="bcep"></param>
-        /// <returns></returns>
-        public static async Task<PaymentResult> GetCannabisPaymentStatus(MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient, IBCEPService bcep)
+        public static async Task<PaymentResult> GetCannabisPaymentStatus(adoxio_application_dv application, IDataverseClient dataverse, IBCEPService bcep)
         {
-            if (application == null)
-            {
-                throw new ArgumentNullException(nameof(application));
-            }
+            if (application == null) throw new ArgumentNullException(nameof(application));
+            if (dataverse == null) throw new ArgumentNullException(nameof(dataverse));
+            if (bcep == null) throw new ArgumentNullException(nameof(bcep));
 
-            if (dynamicsClient == null)
-            {
-                throw new ArgumentNullException(nameof(dynamicsClient));
-            }
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
 
-            if (bcep == null)
-            {
-                throw new ArgumentNullException(nameof(bcep));
-            }
-
-            string invoiceId = application._adoxioInvoiceValue;
-
-            if (string.IsNullOrEmpty(invoiceId))
-            {
-                return null;
-            }
-
-            Guid invoiceGuid = Guid.Parse(invoiceId);
+            if (string.IsNullOrEmpty(invoiceId)) return null;
 
             Log.Debug("Found invoice for application = " + invoiceId);
+            DvInvoice invoice = await dataverse.GetInvoiceByIdAsync(invoiceId).ConfigureAwait(true);
+            string ordernum = invoice.adoxio_TransactionID;
+            var totalAmount = invoice.TotalAmount?.Value;
 
-            MicrosoftDynamicsCRMinvoice invoice = await dynamicsClient.GetInvoiceById(invoiceGuid).ConfigureAwait(true);
-
-            string ordernum = invoice.AdoxioTransactionid;
-            var totalAmount = invoice.Totalamount;
-
-            // If the total amount of the invoice is $0, then automatically mark it as paid/complete.
             if (totalAmount <= 0)
             {
-                MicrosoftDynamicsCRMinvoice updatedInvoice = new MicrosoftDynamicsCRMinvoice
-                {
-                    Statecode = (int?)Adoxio_invoicestates.Paid,
-                    Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                    AdoxioReturnedtransactionid = null
-                };
+                var patchInvoice = new DvInvoice { Id = invoice.Id };
+                patchInvoice.StateCode = invoice_statecode.Paid;
+                patchInvoice.StatusCode = invoice_statuscode.Complete;
+                patchInvoice.adoxio_returnedtransactionid = null;
+                await dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                try
-                {
-                    dynamicsClient.Invoices.Update(invoice.Invoiceid, updatedInvoice);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    Log.Error(httpOperationException, "Error updating invoice");
-                    throw;
-                }
+                var patchApp = new adoxio_application_dv { Id = application.Id };
+                patchApp.adoxio_PrimaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
+                await dataverse.UpdateApplicationAsync(patchApp);
 
-                MicrosoftDynamicsCRMadoxioApplication updatedApplication = new MicrosoftDynamicsCRMadoxioApplication
+                var ext = await dataverse.GetApplicationExtensionByApplicationIdAsync(application.Id.ToString());
+                if (ext?.adoxio_relatedleorpclapplication?.Id != null)
                 {
-                    AdoxioPrimaryapplicationinvoicepaid = 1
-                };
-
-                try
-                {
-                    dynamicsClient.Applications.Update(application.AdoxioApplicationid, updatedApplication);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    Log.Error(httpOperationException, "Error updating application");
-                    throw;
+                    await UpdateRelatedLeReviewStatus(ext.adoxio_relatedleorpclapplication.Id.ToString(), application.Id.ToString(), dataverse);
                 }
 
-                if (application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue != null)
-                {
-                    await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
-                }
-
-                // This invoice is for $0, and so no payment response exists.
                 return null;
             }
 
-            var response = await bcep.ProcessPaymentResponse(ordernum, application.AdoxioApplicationid, PaymentType.CANNABIS);
+            var response = await bcep.ProcessPaymentResponse(ordernum, application.Id.ToString(), PaymentType.CANNABIS);
 
             if (response.ContainsKey("error"))
             {
                 throw new Exception("Error in response");
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 Log.Debug("GetCannabisPaymentStatus - Payment Response: " + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 Log.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     Log.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice updatedInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    try
-                    {
-                        dynamicsClient.Invoices.Update(invoice.Invoiceid, updatedInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating invoice");
-                        throw;
-                    }
+                    var patchApp = new adoxio_application_dv { Id = application.Id };
+                    patchApp.adoxio_PrimaryApplicationInvoicePaid = adoxio_generalyesno_dv.Yes;
+                    await dataverse.UpdateApplicationAsync(patchApp);
 
-                    MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
+                    var ext = await dataverse.GetApplicationExtensionByApplicationIdAsync(application.Id.ToString());
+                    if (ext?.adoxio_relatedleorpclapplication?.Id != null)
                     {
-                        AdoxioPrimaryapplicationinvoicepaid = 1
-                    };
-
-                    try
-                    {
-                        dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        Log.Error(httpOperationException, "Error updating application");
-                        throw;
+                        await UpdateRelatedLeReviewStatus(ext.adoxio_relatedleorpclapplication.Id.ToString(), application.Id.ToString(), dataverse);
                     }
 
-                    if (application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue != null)
-                    {
-                        await UpdateRelatedLeReviewStatus(application.AdoxioApplicationExtension._adoxioRelatedLeOrPclApplicationValue, application.AdoxioApplicationid, dynamicsClient);
-                    }
-
-                    Log.Information($"Liquor Invoice Payment approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
+                    Log.Information($"Cannabis Invoice Payment approved.  Application ID: {application.Id} Invoice: {invoice.InvoiceNumber}.");
                 }
-                // if payment failed:
                 else
                 {
                     Log.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        // set invoice status to Cancelled
-                        MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                        {
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            Log.Error(httpOperationException, "Error updating invoice");
-                            throw;
-                        }
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication adoxioApplication2 = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-                        try
-                        {
-                            dynamicsClient.Applications.Update(application.AdoxioApplicationid, adoxioApplication2);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            Log.Error(httpOperationException, "Error updating application");
-                            throw;
-                        }
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await dataverse.UpdateInvoiceAsync(patchInvoice);
+
+                        var patchApp = new adoxio_application_dv { Id = application.Id };
+                        patchApp.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await dataverse.UpdateApplicationAsync(patchApp);
                     }
 
-                    Log.Information($"Cannabis Invoice Payment not approved.  Application ID: {application.AdoxioApplicationid} Invoice: {invoice.Invoicenumber}.");
+                    Log.Information($"Cannabis Invoice Payment not approved.  Application ID: {application.Id} Invoice: {invoice.InvoiceNumber}.");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 Log.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return new PaymentResult(response);
         }
 
-        private async Task<MicrosoftDynamicsCRMadoxioApplication> GetDynamicsApplication(string id)
+        private async Task<adoxio_application_dv> GetDynamicsApplication(string id)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             _logger.Debug($"Application id = {id}");
             _logger.Debug($"User id = {userSettings.AccountId}");
-            var expand = new List<string> { "adoxio_LicenceFeeInvoice", "adoxio_Invoice", "adoxio_Establishment" };
 
-            MicrosoftDynamicsCRMadoxioApplication dynamicsApplication = await _dynamicsClient.GetApplicationByIdWithChildren(Guid.Parse(id));
+            var app = await _dataverse.GetApplicationByIdWithChildrenAsync(id);
 
-            if (dynamicsApplication == null)
+            if (app == null)
             {
                 return null;
             }
 
-            if (!CurrentUserHasAccessToApplicationOwnedBy(dynamicsApplication._adoxioApplicantValue))
+            if (!CurrentUserHasAccessToApplicationOwnedBy(app.adoxio_Applicant?.Id.ToString()))
             {
                 return null;
             }
 
-            return dynamicsApplication;
+            return app;
         }
-        private async Task<MicrosoftDynamicsCRMadoxioWorker> GetDynamicsWorker(string id, bool getInvoice)
+
+        private async Task<adoxio_worker_dv> GetDynamicsWorker(string workerId, bool getInvoice)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            _logger.Debug($"Worker id = {id}");
+            _logger.Debug($"Worker id = {workerId}");
             _logger.Debug($"User Contact id = {userSettings.ContactId}");
 
-            MicrosoftDynamicsCRMadoxioWorker worker = null;
-            if (getInvoice)
-            {
-                List<string> expand = new List<string> { "adoxio_Invoice" };
-                worker = await _dynamicsClient.Workers.GetByKeyAsync(Guid.Parse(id).ToString(), expand: expand);
-            }
-            else
-            {
-                worker = await _dynamicsClient.Workers.GetByKeyAsync(Guid.Parse(id).ToString());
-            }
+            var worker = await _dataverse.GetWorkerByIdAsync(workerId);
+
             if (worker == null)
             {
                 return null;
             }
 
-            if (worker._adoxioContactidValue != userSettings.ContactId)
+            if (worker.adoxio_ContactId?.Id.ToString() != userSettings.ContactId)
             {
                 return null;
             }
@@ -1896,23 +1234,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return worker;
         }
 
-        /// <summary>
-        /// Verify whether currently logged in user has access to this account id
-        /// </summary>
-        /// <returns>boolean</returns>
         private bool CurrentUserHasAccessToApplicationOwnedBy(string accountId)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            // For now, check if the account id matches the user's account.
-            // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
             {
                 return userSettings.AccountId == accountId;
             }
 
-            // if current user doesn't have an account they are probably not logged in
             return false;
         }
 
@@ -1952,22 +1282,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _logger.Debug($"Called GetWorkerPaymentUrl({workerId})");
 
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
-            Guid workerGuid = Guid.Parse(workerId);
-            MicrosoftDynamicsCRMadoxioWorker worker = await GetDynamicsWorker(workerId, true);
+            adoxio_worker_dv worker = await GetDynamicsWorker(workerId, true);
             if (worker == null)
             {
                 return NotFound();
             }
-            if (worker.AdoxioInvoice?.Statuscode == (int?)Adoxio_invoicestatuses.Paid)
+
+            string existingInvoiceId = worker.adoxio_Invoice?.Id.ToString();
+            if (existingInvoiceId != null)
             {
-                return NotFound("Payment already made");
-            }
-            else
-            {
-                if (worker.AdoxioInvoice != null)
+                var existingInvoice = await _dataverse.GetInvoiceByIdAsync(existingInvoiceId);
+                if (existingInvoice?.StatusCode == invoice_statuscode.Complete)
                 {
-                    //TODO Reverify Payment Status with BCEP
+                    return NotFound("Payment already made");
+                }
+                else
+                {
                     bool invoicePaid = await ReVerifyWorkerPaymentStatus(workerId);
                     if (invoicePaid)
                     {
@@ -1975,63 +1305,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
-            // set the application invoice trigger to create an invoice            
-            MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-            {
-                // this is the money - setting this flag to "Y" triggers a dynamics workflow that creates an invoice
-                AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.Yes
-            };
 
-            try
-            {
-                _dynamicsClient.Workers.Update(workerId, patchWorker);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.Error(httpOperationException, "Error updating worker");
-                // fail 
-                throw (httpOperationException);
-            }
-            // we set the getInvoice parameter to false here as there is a chance the Invoice is not created yet - so we may not be able to expand.
-            patchWorker = await GetDynamicsWorker(workerId, false);
+            var patchWorker = new adoxio_worker_dv { Id = Guid.Parse(workerId) };
+            patchWorker.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.Yes;
+            await _dataverse.UpdateWorkerAsync(patchWorker);
 
-            // now load the invoice for this application to get the pricing
-            string invoiceId = patchWorker._adoxioInvoiceValue;
+            worker = await GetDynamicsWorker(workerId, false);
+
+            string invoiceId = worker.adoxio_Invoice?.Id.ToString();
             int retries = 0;
-            while (retries < 10 && (invoiceId == null || invoiceId.Length == 0))
+            while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug($"No invoice found, retry = {retries}");
                 System.Threading.Thread.Sleep(1000);
-                patchWorker = await GetDynamicsWorker(workerId, false);
-                invoiceId = patchWorker._adoxioInvoiceValue;
+                worker = await GetDynamicsWorker(workerId, false);
+                invoiceId = worker.adoxio_Invoice?.Id.ToString();
             }
             _logger.Debug($"Created invoice for worker = {invoiceId}");
 
-            /*
-             * When the applicant submits their Application, we will set the application "Application Invoice Trigger" to "Y" - this will trigger a workflow that will create the Invoice
-             *  - we will then re-query the Application to get the Invoice number,
-             *  - and then query the Invoice to get the amount
-             *  - the Invoice will also contain a Transaction Id (starting at 0500000000)
-             *  - the Invoice status will be New
-             * Notes:
-             *  - If there is already an invoice with Status New, don't need to create a new Invoice
-             *  - If there is already an invoice with Status Complete, it is an error (can't pay twice)
-             *  - We will deal with the history later (i.e. there can be multiple "Cancelled" Invoices - we need to keep them for reconciliation but we don't need them for MVP
-             */
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+            var orderamt = invoice.TotalAmount?.Value;
 
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-            var ordernum = invoice.AdoxioTransactionid;
-            // dynamics determines the amount based on the licence type of the application
-            var orderamt = invoice.Totalamount;
+            PaymentType paymentType = PaymentType.CANNABIS;
 
-            PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
-
-            Dictionary<string, string> redirectUrl;
-            redirectUrl = new Dictionary<string, string>();
+            Dictionary<string, string> redirectUrl = new Dictionary<string, string>();
             var redirectPath = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/worker-qualification/payment-confirmation";
             redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, workerId, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
 
@@ -2039,7 +1338,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             return new JsonResult(redirectUrl);
         }
-
 
         /// <summary>
         /// Update a payment response from Bamboora (payment success or failed)
@@ -2053,140 +1351,73 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/worker/{workerId}")]
         public async Task<IActionResult> VerifyWorkerPaymentStatus(string workerId)
         {
-            MicrosoftDynamicsCRMadoxioWorker worker = await GetDynamicsWorker(workerId, true);
+            adoxio_worker_dv worker = await GetDynamicsWorker(workerId, true);
             if (worker == null)
             {
                 return NotFound();
             }
 
-            // load the invoice for this application
-            string invoiceId = worker._adoxioInvoiceValue;
+            string invoiceId = worker.adoxio_Invoice?.Id.ToString();
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
 
-            PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
+            PaymentType paymentType = PaymentType.CANNABIS;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
-                return StatusCode(503); // client will retry.
+                return StatusCode(503);
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-                    {
-                        // set the Application payment status
-                        AdoxioPaymentreceived = 1,
-                        AdoxioPaymentreceiveddate = DateTime.UtcNow
-                    };
-                    try
-                    {
-                        _dynamicsClient.Workers.Update(workerId, patchWorker);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error("Error updating worker");
-                        _logger.Error("Request:");
-                        _logger.Error(httpOperationException.Request.Content);
-                        _logger.Error("Response:");
-                        _logger.Error(httpOperationException.Response.Content);
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
+                    var patchWorker = new adoxio_worker_dv { Id = Guid.Parse(workerId) };
+                    patchWorker.adoxio_PaymentReceived = adoxio_generalyesno_dv.Yes;
+                    patchWorker.adoxio_PaymentReceivedDate = DateTime.UtcNow;
+                    await _dataverse.UpdateWorkerAsync(patchWorker);
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        // set invoice status to Cancelled
-                        MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                        {
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating invoice");
-                            // fail 
-                            throw (httpOperationException);
-                        }
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-                        {
-                            // set the Application payment status
-                            AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-
-                        try
-                        {
-                            _dynamicsClient.Workers.Update(workerId, patchWorker);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating worker");
-                            // fail 
-                            throw (httpOperationException);
-                        }
+                        var patchWorker = new adoxio_worker_dv { Id = Guid.Parse(workerId) };
+                        patchWorker.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await _dataverse.UpdateWorkerAsync(patchWorker);
                     }
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -2196,175 +1427,88 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> ReVerifyWorkerPaymentStatus(string workerId)
         {
             Boolean toReturn = false;
-            MicrosoftDynamicsCRMadoxioWorker worker = await GetDynamicsWorker(workerId, true);
+            adoxio_worker_dv worker = await GetDynamicsWorker(workerId, true);
             if (worker == null)
             {
                 return toReturn;
             }
 
-            // load the invoice for this application
-            string invoiceId = worker._adoxioInvoiceValue;
-            _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            string invoiceId = worker.adoxio_Invoice?.Id.ToString();
+            if (string.IsNullOrEmpty(invoiceId)) return toReturn;
 
-            PaymentType paymentType = PaymentType.CANNABIS; // always cannabis
+            _logger.Debug("Found invoice for application = " + invoiceId);
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+
+            PaymentType paymentType = PaymentType.CANNABIS;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, workerId, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for worker {workerId}");
-                return toReturn; // client will retry.
+                return toReturn;
             }
-            //Check if the payment processor has any record of this transaction
             var messageId = response["messageId"];
-            var messageText = response["messageText"];
             if (messageId == "559" || messageId == "761")
             {
-                //Payment Processor has no record of this transaction do nothing
                 return false;
             }
-            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
-            response["invoice"] = invoice.Invoicenumber;
+
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
                     toReturn = true;
-                    MicrosoftDynamicsCRMinvoice invoice2 = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, invoice2);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-                    {
-                        // set the Application payment status
-                        AdoxioPaymentreceived = 1,
-                        AdoxioPaymentreceiveddate = DateTime.UtcNow
-                    };
-                    try
-                    {
-                        _dynamicsClient.Workers.Update(workerId, patchWorker);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error("Error updating worker");
-                        _logger.Error("Request:");
-                        _logger.Error(httpOperationException.Request.Content);
-                        _logger.Error("Response:");
-                        _logger.Error(httpOperationException.Response.Content);
-                        // fail 
-                        throw (httpOperationException);
-                    }
 
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
+
+                    var patchWorker = new adoxio_worker_dv { Id = Guid.Parse(workerId) };
+                    patchWorker.adoxio_PaymentReceived = adoxio_generalyesno_dv.Yes;
+                    patchWorker.adoxio_PaymentReceivedDate = DateTime.UtcNow;
+                    await _dataverse.UpdateWorkerAsync(patchWorker);
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
 
-                    // set invoice status to Cancelled
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Canceled;
+                    patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-                    {
-                        // set the Application payment status
-                        AdoxioInvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-
-                    try
-                    {
-                        _dynamicsClient.Workers.Update(workerId, patchWorker);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating worker");
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchWorker = new adoxio_worker_dv { Id = Guid.Parse(workerId) };
+                    patchWorker.adoxio_InvoiceTrigger = adoxio_generalyesno_dv.No;
+                    await _dataverse.UpdateWorkerAsync(patchWorker);
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return toReturn;
         }
 
-        private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
+        private async Task<adoxio_specialevent_dv> GetSpecialEventDataAsync(string eventId)
         {
-            string[] expand = new[] {
-                "adoxio_Invoice",
-                // "adoxio_specialevent_licencedarea",
-                // "adoxio_specialevent_schedule",
-                // "adoxio_specialevent_specialeventlocations",
-                // "adoxio_SpecialEventCityDistrictId",
-                // "adoxio_ContactId",
-                // "adoxio_AccountId"
-            };
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
-            if (!string.IsNullOrEmpty(eventId))
-            {
-                try
-                {
-                    specialEvent = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand);
-                }
-                catch (HttpOperationException)
-                {
-                    specialEvent = null;
-                }
-            }
-            return specialEvent;
+            if (string.IsNullOrEmpty(eventId)) return null;
+            return await _dataverse.GetSpecialEventByIdAsync(eventId);
         }
 
         /// <summary>
@@ -2379,19 +1523,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             _logger.Debug($"Called GetSepPaymentUrl({id})");
 
-            // get the application and confirm access (call parse to ensure we are getting a valid id)
-            MicrosoftDynamicsCRMadoxioSpecialevent application = GetSpecialEventData(id);
+            adoxio_specialevent_dv application = await GetSpecialEventDataAsync(id);
             if (application == null)
             {
                 return NotFound();
             }
-            if (application.AdoxioIsinvoicepaid == true)
+            if (application.adoxio_IsInvoicePaid == true)
             {
                 return NotFound("Payment already made");
             }
             else
             {
-                if (application._adoxioInvoiceValue != null)
+                if (application.adoxio_Invoice?.Id != null)
                 {
                     //TODO Reverify Payment Status with BCEP
                     bool invoicePaid = await ReVerifySepPaymentStatus(id);
@@ -2401,70 +1544,53 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
             }
+
             bool generateInvoice = false;
-            if (string.IsNullOrEmpty(application._adoxioInvoiceValue))
+            string existingInvoiceId = application.adoxio_Invoice?.Id.ToString();
+            if (string.IsNullOrEmpty(existingInvoiceId))
             {
                 generateInvoice = true;
             }
             else
             {
-                MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(application._adoxioInvoiceValue));
-                if (invoice != null && invoice.Statecode == (int)Adoxio_invoicestates.Cancelled)
+                var existingInvoice = await _dataverse.GetInvoiceByIdAsync(existingInvoiceId);
+                if (existingInvoice != null && existingInvoice.StateCode == invoice_statecode.Canceled)
                 {
                     generateInvoice = true;
                 }
             }
+
             if (generateInvoice)
             {
-                var patchEvent = new MicrosoftDynamicsCRMadoxioSpecialevent()
-                {
-                    AdoxioInvoicetrigger = true
-                };
-
-                try
-                {
-                    _dynamicsClient.Specialevents.Update(id, patchEvent);
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.Error(httpOperationException, "Error creating/updating special event");
-                    throw httpOperationException;
-                }
-                application = GetSpecialEventData(id);
+                var patchEvent = new adoxio_specialevent_dv { Id = Guid.Parse(id) };
+                patchEvent.adoxio_InvoiceTrigger = true;
+                await _dataverse.UpdateSpecialEventAsync(patchEvent);
+                application = await GetSpecialEventDataAsync(id);
             }
-            string invoiceId = application._adoxioInvoiceValue;
 
-
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
 
             int retries = 0;
             while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(2000);
-                application = GetSpecialEventData(id);
-                invoiceId = application._adoxioInvoiceValue;
+                application = await GetSpecialEventDataAsync(id);
+                invoiceId = application.adoxio_Invoice?.Id.ToString();
             }
 
             if (!string.IsNullOrEmpty(invoiceId))
             {
+                _logger.Debug("Getting payment URL for SEP invoice with id = " + invoiceId);
 
+                DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+                var ordernum = invoice.adoxio_TransactionID;
+                var orderamt = invoice.TotalAmount?.Value;
 
-                _logger.Debug("Getting payment URL for SEP invoice with id = " + application._adoxioInvoiceValue);
+                Dictionary<string, string> redirectUrl = new Dictionary<string, string>();
 
-
-                MicrosoftDynamicsCRMinvoice invoice = application.AdoxioInvoice;
-                // dynamics creates a unique transaction id per invoice, used as the "order number" for payment
-                var ordernum = invoice.AdoxioTransactionid;
-                // dynamics determines the amount based on the licence type of the application
-                var orderamt = invoice.Totalamount;
-
-                Dictionary<string, string> redirectUrl;
-                redirectUrl = new Dictionary<string, string>();
-
-                PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always special event
+                PaymentType paymentType = PaymentType.SPECIAL_EVENT;
 
                 var redirectPath = $"{_configuration["BASE_URI"]}{_configuration["BASE_PATH"]}/sep/application-summary/{id}";
                 redirectUrl["url"] = _bcep.GeneratePaymentRedirectUrl(ordernum, id, String.Format("{0:0.00}", orderamt), paymentType, redirectPath);
@@ -2478,7 +1604,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return NotFound();
         }
 
-
         /// <summary>
         /// Update a payment response from Bambora (payment success or failed)
         /// This can be called if no response is received from Bambora - it will query the server directly
@@ -2491,25 +1616,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("verify/sep-application/{id}")]
         public async Task<IActionResult> VerifySepPaymentStatus(string id)
         {
-            MicrosoftDynamicsCRMadoxioSpecialevent application = GetSpecialEventData(id);
+            adoxio_specialevent_dv application = await GetSpecialEventDataAsync(id);
             if (application == null)
             {
                 return NotFound();
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioInvoiceValue;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
 
             int retries = 0;
             while (retries < 10 && string.IsNullOrEmpty(invoiceId))
             {
-                // should happen immediately, but ...
-                // pause and try again - in case Dynamics is slow ...
                 retries++;
                 _logger.Debug("No invoice found, retry = " + retries);
                 System.Threading.Thread.Sleep(2000);
-                application = GetSpecialEventData(id);
-                invoiceId = application._adoxioInvoiceValue;
+                application = await GetSpecialEventDataAsync(id);
+                invoiceId = application.adoxio_Invoice?.Id.ToString();
             }
             if (invoiceId == null)
             {
@@ -2517,131 +1639,68 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
-
             _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
 
-            PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always Special Event
+            PaymentType paymentType = PaymentType.SPECIAL_EVENT;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for SEP application {id}");
-                return StatusCode(503); // client will retry.
+                return StatusCode(503);
             }
 
-            response["invoice"] = invoice.Invoicenumber;
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 var messageId = response["messageId"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw;
-                    }
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    // set the Application payment status
-                    MicrosoftDynamicsCRMadoxioSpecialevent patchApplication = new MicrosoftDynamicsCRMadoxioSpecialevent
-                    {
-                        AdoxioIsinvoicepaid = true
-                    };
-                    try
-                    {
-                        _dynamicsClient.Specialevents.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating AdoxioLicencefeeinvoicepaid in SEP application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} PaymentType: {paymentType}");
+                    var patchEvent = new adoxio_specialevent_dv { Id = Guid.Parse(id) };
+                    patchEvent.adoxio_IsInvoicePaid = true;
+                    await _dataverse.UpdateSpecialEventAsync(patchEvent);
 
+                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} PaymentType: {paymentType}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
                     if (messageId != "559" && messageId != "761")
                     {
-                        MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                        {
-                            // set invoice status to Cancelled
-                            Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                            Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                        };
-                        try
-                        {
-                            _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating invoice");
+                        var patchInvoice = new DvInvoice { Id = invoice.Id };
+                        patchInvoice.StateCode = invoice_statecode.Canceled;
+                        patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                        await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                            // fail 
-                            throw (httpOperationException);
-                        }
-
-
-                        // set the Application invoice status back to No
-                        MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                        {
-                            AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                        };
-                        try
-                        {
-                            _dynamicsClient.Applications.Update(id, patchApplication);
-                        }
-                        catch (HttpOperationException httpOperationException)
-                        {
-                            _logger.Error(httpOperationException, "Error updating application");
-                            // fail 
-                            throw (httpOperationException);
-                        }
+                        var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                        patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
+                        await _dataverse.UpdateApplicationAsync(patchApp);
                     }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Payment Type: {paymentType}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Payment Type: {paymentType}");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
@@ -2651,167 +1710,98 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> ReVerifySepPaymentStatus(string id)
         {
             bool toReturn = false;
-            MicrosoftDynamicsCRMadoxioSpecialevent application = GetSpecialEventData(id);
+            adoxio_specialevent_dv application = await GetSpecialEventDataAsync(id);
             if (application == null)
             {
                 return toReturn;
             }
 
-            // load the invoice for this application
-            string invoiceId = application._adoxioInvoiceValue;
-            _logger.Debug("Found invoice for application = " + invoiceId);
-            MicrosoftDynamicsCRMinvoice invoice = await _dynamicsClient.GetInvoiceById(Guid.Parse(invoiceId));
-            var ordernum = invoice.AdoxioTransactionid;
-            var orderamt = invoice.Totalamount;
+            string invoiceId = application.adoxio_Invoice?.Id.ToString();
+            if (string.IsNullOrEmpty(invoiceId)) return toReturn;
 
-            PaymentType paymentType = PaymentType.SPECIAL_EVENT; // always Special Event
+            _logger.Debug("Found invoice for application = " + invoiceId);
+            DvInvoice invoice = await _dataverse.GetInvoiceByIdAsync(invoiceId);
+            var ordernum = invoice.adoxio_TransactionID;
+
+            PaymentType paymentType = PaymentType.SPECIAL_EVENT;
 
             var response = await _bcep.ProcessPaymentResponse(ordernum, id, paymentType);
 
             if (response.ContainsKey("error"))
             {
-                // handle error.
                 _logger.Error($"PAYMENT VERIFICATION ERROR - {response["message"]} for SEP application {id}");
-                return toReturn; // client will retry.
+                return toReturn;
             }
-            //Check if the payment processor has any record of this transaction
             var messageId = response["messageId"];
-            var messageText = response["messageText"];
             if (messageId == "559" || messageId == "761")
             {
-                //Payment Processor has no record of this transaction do nothing
                 return false;
             }
-            //If the payment processor has a record proceed and verify if it was successful or not and update the record on our end. 
-            response["invoice"] = invoice.Invoicenumber;
+
+            response["invoice"] = invoice.InvoiceNumber;
 
             foreach (var key in response.Keys)
             {
                 _logger.Debug(">>>>>" + key + ":" + response[key]);
             }
 
-            /* 
-			 * - if the invoice status is not "New", skip
-             * - we will update the Invoice status to "Complete" (if paid) or "Cancelled" (if payment was rejected)
-             * - if payment is successful, we will also set the Application "Payment Received" to "Y" and "Method" to "Credit Card"
-             */
-
-            if (invoice.Statecode == (int?)Adoxio_invoicestates.New || invoice.Statecode == null)
+            if (invoice.StateCode == invoice_statecode.Active || invoice.StateCode == null)
             {
                 _logger.Debug("Processing invoice with status New");
 
-
-                // if payment was successful:
                 var pay_status = response["trnApproved"];
                 if (pay_status == "1")
                 {
                     _logger.Debug("Transaction approved");
                     toReturn = true;
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Complete
-                        Statecode = (int?)Adoxio_invoicestates.Paid,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Paid,
-                        AdoxioReturnedtransactionid = response["trnId"]
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
-                        // fail 
-                        throw;
-                    }
 
-                    // set the Application payment status
-                    MicrosoftDynamicsCRMadoxioSpecialevent patchApplication = new MicrosoftDynamicsCRMadoxioSpecialevent
-                    {
-                        AdoxioIsinvoicepaid = true
-                    };
-                    try
-                    {
-                        _dynamicsClient.Specialevents.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating AdoxioLicencefeeinvoicepaid in SEP application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} PaymentType: {paymentType}");
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Paid;
+                    patchInvoice.StatusCode = invoice_statuscode.Complete;
+                    patchInvoice.adoxio_returnedtransactionid = response["trnId"];
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
+                    var patchEvent = new adoxio_specialevent_dv { Id = Guid.Parse(id) };
+                    patchEvent.adoxio_IsInvoicePaid = true;
+                    await _dataverse.UpdateSpecialEventAsync(patchEvent);
+
+                    _logger.Information($"SEP Application Payment Transaction approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} PaymentType: {paymentType}");
                 }
-                // if payment failed:
                 else
                 {
                     _logger.Debug("Transaction NOT approved");
 
-                    MicrosoftDynamicsCRMinvoice patchInvoice = new MicrosoftDynamicsCRMinvoice
-                    {
-                        // set invoice status to Cancelled
-                        Statecode = (int?)Adoxio_invoicestates.Cancelled,
-                        Statuscode = (int?)Adoxio_invoicestatuses.Cancelled
-                    };
-                    try
-                    {
-                        _dynamicsClient.Invoices.Update(invoice.Invoiceid, patchInvoice);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating invoice");
+                    var patchInvoice = new DvInvoice { Id = invoice.Id };
+                    patchInvoice.StateCode = invoice_statecode.Canceled;
+                    patchInvoice.StatusCode = invoice_statuscode.Canceled;
+                    await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                        // fail 
-                        throw (httpOperationException);
-                    }
+                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
+                    patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
+                    await _dataverse.UpdateApplicationAsync(patchApp);
 
-
-                    // set the Application invoice status back to No
-                    MicrosoftDynamicsCRMadoxioApplication patchApplication = new MicrosoftDynamicsCRMadoxioApplication
-                    {
-                        AdoxioLicencefeeinvoicetrigger = (int?)ViewModels.GeneralYesNo.No
-                    };
-                    try
-                    {
-                        _dynamicsClient.Applications.Update(id, patchApplication);
-                    }
-                    catch (HttpOperationException httpOperationException)
-                    {
-                        _logger.Error(httpOperationException, "Error updating application");
-                        // fail 
-                        throw (httpOperationException);
-                    }
-                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.Invoicenumber} Payment Type: {paymentType}");
+                    _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Payment Type: {paymentType}");
                 }
             }
             else
             {
-                // that can happen if we are re-validating a completed invoice (paid or cancelled)
                 _logger.Debug("Invoice status is not New, skipping updates ...");
             }
 
             return toReturn;
         }
 
-        private async static Task UpdateRelatedLeReviewStatus(string LeReviewId, string pclId, IDynamicsClient dynamicsClient)
+        private async static Task UpdateRelatedLeReviewStatus(string leReviewId, string pclId, IDataverseClient dataverse)
         {
-            var pclApplication = await dynamicsClient.Applications.GetByKeyAsync(pclId);
+            var pclApplication = await dataverse.GetApplicationByIdAsync(pclId);
+            if (pclApplication == null) return;
 
-            if (pclApplication.AdoxioSecondaryapplicationinvoicepaid == 1 && pclApplication.AdoxioPrimaryapplicationinvoicepaid == 1)
+            if (pclApplication.adoxio_SecondaryApplicationInvoicePaid == adoxio_generalyesno_dv.Yes
+                && pclApplication.adoxio_PrimaryApplicationInvoicePaid == adoxio_generalyesno_dv.Yes)
             {
-                MicrosoftDynamicsCRMadoxioApplication adoxioApplication = new MicrosoftDynamicsCRMadoxioApplication
-                {
-                    Statuscode = (int)AdoxioApplicationStatusCodes.UnderReview
-                };
-                try
-                {
-                    dynamicsClient.Applications.Update(LeReviewId, adoxioApplication);
-                }
-                catch (HttpOperationException ex)
-                {
-                    throw (ex);
-                }
+                var patch = new adoxio_application_dv { Id = Guid.Parse(leReviewId) };
+                patch.statuscode = (adoxio_application_statuscode_dv)AdoxioApplicationStatusCodes.UnderReview;
+                await dataverse.UpdateApplicationAsync(patch);
             }
         }
     }

@@ -1,18 +1,20 @@
+using System.Collections.Generic;
+using Newtonsoft.Json;
+
 namespace Gov.Lclb.Cllb.Interfaces.Models
 {
-    using Newtonsoft.Json;
-    using System.Collections.Generic;
+    public class MicrosoftDynamicsCRMpicklistAttributeMetadata
+    {
+        [JsonProperty(PropertyName = "OptionSet")]
+        public object OptionSet { get; set; }
+    }
 
     public class MicrosoftDynamicsCRMpicklistAttributeMetadataCollection
     {
-
-        /// <summary>
-        /// </summary>
         [JsonProperty(PropertyName = "@odata.context")]
-        public string ODataContext{ get; set; }
+        public string ODataContext { get; set; }
 
         [JsonProperty(PropertyName = "value")]
         public List<MicrosoftDynamicsCRMpicklistAttributeMetadata> Value { get; set; }
-
     }
 }

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
@@ -17,7 +18,6 @@ using System.Web;
 using Gov.Lclb.Cllb.Public.Extensions;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.Utils;
-using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xrm.Sdk;
 using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
@@ -804,66 +804,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private MicrosoftDynamicsCRMadoxioSpecialevent GetSpecialEventData(string eventId)
-        {
-            string[] expand = new[] {
-                "adoxio_Invoice",
-                "adoxio_specialevent_licencedarea",
-                "adoxio_specialevent_schedule",
-                "adoxio_specialevent_specialeventlocations",
-                "adoxio_SpecialEventCityDistrictId",
-                "adoxio_ContactId",
-                "adoxio_AccountId",
-                "adoxio_specialevent_adoxio_sepdrinksalesforecast_SpecialEvent",
-                "adoxio_specialevent_specialeventtsacs",
-                "adoxio_PoliceAccountId"
-            };
-            MicrosoftDynamicsCRMadoxioSpecialevent specialEvent = null;
-            if (!string.IsNullOrEmpty(eventId))
-            {
-                try
-                {
-                    specialEvent = _dynamicsClient.Specialevents.GetByKey(eventId, expand: expand);
-                    var locations = specialEvent.AdoxioSpecialeventSpecialeventlocations;
-                    var areas = specialEvent.AdoxioSpecialeventLicencedarea;
-                    var schedules = specialEvent.AdoxioSpecialeventSchedule;
-
-                    foreach (var schedule in schedules)
-                    {
-                        var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == schedule._adoxioSpecialeventlocationidValue).FirstOrDefault();
-                        if (parentLocation != null)
-                        {
-                            if (parentLocation.AdoxioSpecialeventlocationSchedule == null)
-                            {
-                                parentLocation.AdoxioSpecialeventlocationSchedule = new List<MicrosoftDynamicsCRMadoxioSpecialeventschedule>();
-                            }
-                            parentLocation.AdoxioSpecialeventlocationSchedule.Add(schedule);
-                        }
-
-                    }
-
-                    foreach (var area in areas)
-                    {
-                        var parentLocation = locations.Where(loc => loc.AdoxioSpecialeventlocationid == area._adoxioSpecialeventlocationidValue).FirstOrDefault();
-                        if (parentLocation != null)
-                        {
-                            if (parentLocation.AdoxioSpecialeventlocationLicencedareas == null)
-                            {
-                                parentLocation.AdoxioSpecialeventlocationLicencedareas = new List<MicrosoftDynamicsCRMadoxioSpecialeventlicencedarea>();
-                            }
-                            parentLocation.AdoxioSpecialeventlocationLicencedareas.Add(area);
-                        }
-                    }
-                }
-                catch (HttpOperationException e)
-                {
-                    _logger.LogError(e, "Error getting special event");
-                    specialEvent = null;
-                }
-            }
-            return specialEvent;
-        }
-
         [HttpPost]
         public async Task<IActionResult> CreateSpecialEvent([FromBody] ViewModels.SpecialEvent specialEvent)
         {
@@ -1302,300 +1242,131 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-        private ItemsToDelete GetItemsToDelete(ViewModels.SpecialEvent updateEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+        private ItemsToDelete GetItemsToDelete(ViewModels.SpecialEvent updateEvent, IList<DvLocation> existingLocations, IList<DvArea> existingAreas, IList<DvSchedule> existingSchedules)
         {
             var toDelete = new ItemsToDelete();
 
-            // create a list of id that exist in dynamics
-            List<string> existingLocations = existingEvent.AdoxioSpecialeventSpecialeventlocations
-                .Select(loc => loc.AdoxioSpecialeventlocationid)
-                .ToList();
-            List<string> existingEventDates = existingEvent.AdoxioSpecialeventSchedule
-                .Select(eventDate => eventDate.AdoxioSpecialeventscheduleid)
-                .ToList();
-            List<string> existingServiceAreas = existingEvent.AdoxioSpecialeventLicencedarea
-                .Select(area => area.AdoxioSpecialeventlicencedareaid)
-                .ToList();
+            var existingLocationIds = existingLocations.Select(l => l.adoxio_specialeventlocationId?.ToString()).ToList();
+            var existingEventDateIds = existingSchedules.Select(s => s.adoxio_specialeventscheduleId?.ToString()).ToList();
+            var existingServiceAreaIds = existingAreas.Select(a => a.adoxio_specialeventlicencedareaId?.ToString()).ToList();
 
-            // make the list of id present in the special event being sent to dynamis
-            List<string> updateLocations = new List<string>();
-            List<string> updateEventDates = new List<string>();
-            List<string> updateServiceAreas = new List<string>();
+            var updateLocations = new List<string>();
+            var updateEventDates = new List<string>();
+            var updateServiceAreas = new List<string>();
 
             updateEvent?.EventLocations?.ForEach(loc =>
             {
-                if (!string.IsNullOrEmpty(loc.Id))
-                {
-                    updateLocations.Add(loc.Id);
-                }
-
-                loc?.EventDates?.ForEach(eventDate =>
-                {
-                    if (!string.IsNullOrEmpty(eventDate.Id))
-                    {
-                        updateEventDates.Add(eventDate.Id);
-                    }
-                });
-
-                loc?.ServiceAreas?.ForEach(area =>
-                {
-                    if (!string.IsNullOrEmpty(area.Id))
-                    {
-                        updateServiceAreas.Add(area.Id);
-                    }
-                });
+                if (!string.IsNullOrEmpty(loc.Id)) updateLocations.Add(loc.Id);
+                loc?.EventDates?.ForEach(eventDate => { if (!string.IsNullOrEmpty(eventDate.Id)) updateEventDates.Add(eventDate.Id); });
+                loc?.ServiceAreas?.ForEach(area => { if (!string.IsNullOrEmpty(area.Id)) updateServiceAreas.Add(area.Id); });
             });
 
-
-            // Subtract the sets of list to get ids due for deletion
-            toDelete.Locations = existingLocations.Except(updateLocations).ToList();
-            toDelete.ServiceAreas = existingServiceAreas.Except(updateServiceAreas).ToList();
-            toDelete.EventDates = existingEventDates.Except(updateEventDates).ToList();
+            toDelete.Locations = existingLocationIds.Except(updateLocations).Where(id => id != null).ToList();
+            toDelete.ServiceAreas = existingServiceAreaIds.Except(updateServiceAreas).Where(id => id != null).ToList();
+            toDelete.EventDates = existingEventDateIds.Except(updateEventDates).Where(id => id != null).ToList();
 
             return toDelete;
         }
 
-        private void DeleteSpecialEventItems(ViewModels.ItemsToDelete itemsToDelete)
+        private async Task DeleteSpecialEventItemsAsync(ViewModels.ItemsToDelete itemsToDelete)
         {
-
-            if (itemsToDelete.EventDates.Count > 0)
-            {
-                itemsToDelete.EventDates.ForEach(id =>
-                {
-                    _dynamicsClient.Specialeventschedules.Delete(id);
-                });
-            }
-            if (itemsToDelete.ServiceAreas.Count > 0)
-            {
-                itemsToDelete.ServiceAreas.ForEach(id =>
-                {
-                    _dynamicsClient.Specialeventlicencedareas.Delete(id);
-                });
-            }
-            if (itemsToDelete.Locations.Count > 0)
-            {
-                itemsToDelete.Locations.ForEach(id =>
-                {
-                    _dynamicsClient.Specialeventlocations.Delete(id);
-                });
-            }
+            foreach (var id in itemsToDelete.EventDates)
+                await _dataverse.DeleteSpecialEventScheduleAsync(id);
+            foreach (var id in itemsToDelete.ServiceAreas)
+                await _dataverse.DeleteSpecialEventLicencedAreaAsync(id);
+            foreach (var id in itemsToDelete.Locations)
+                await _dataverse.DeleteSpecialEventLocationAsync(id);
         }
-        private void SaveTotalServings(ViewModels.SpecialEvent specialEvent, MicrosoftDynamicsCRMadoxioSpecialevent existingEvent)
+
+        private async Task SaveTotalServingsAsync(ViewModels.SpecialEvent specialEvent, string eventId)
         {
-            // get drink types
-            var filter = "adoxio_name eq 'Beer/Cider/Cooler' or ";
-            filter += "adoxio_name eq 'Wine' or ";
-            filter += "adoxio_name eq 'Spirits'";
-            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value
-                            .ToList();
+            var drinkTypes = await _dataverse.GetSepDrinkTypesAsync();
+            var existingForecasts = await _dataverse.GetSepDrinkSalesForecastsByEventIdAsync(eventId);
 
-            specialEvent.Beer = specialEvent.Beer ?? 0;
-            specialEvent.Wine = specialEvent.Wine ?? 0;
-            specialEvent.Spirits = specialEvent.Spirits ?? 0;
+            specialEvent.Beer ??= 0;
+            specialEvent.Wine ??= 0;
+            specialEvent.Spirits ??= 0;
 
-            // calculate serving amounts from percentages
-            int totalServings = specialEvent.TotalServings == null ? 0 : (int)specialEvent.TotalServings;
-            var typeData = new List<(string, int, bool, decimal?)>{
-                ("Beer/Cider/Cooler", (int)specialEvent.Beer,true, specialEvent.AverageBeerPrice),
-                ("Wine", (int)specialEvent.Wine,true, specialEvent.AverageWinePrice),
-                ("Spirits", (int)specialEvent.Spirits,true, specialEvent.AverageSpiritsPrice)
-            };
-            // if ChargingForLiquorReason is Combination, Adding 3 records with 0 price
-            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination || specialEvent.ChargingForLiquorReason ==ChargingForLiquorReasons.RaiseMoney)
+            var typeData = new List<(string, int, bool, decimal?)>
             {
-                typeData.AddRange(new List<(string, int, bool, decimal?)>{
-                ("Beer/Cider/Cooler", (int)(specialEvent.Beer_free ?? 0), false, 0),
-                ("Wine", (int)(specialEvent.Wine_free ?? 0), false, 0),
-                ("Spirits", (int)(specialEvent.Spirits_free ?? 0), false, 0)
-                }
-            );
+                ("Beer/Cider/Cooler", (int)specialEvent.Beer, true, specialEvent.AverageBeerPrice),
+                ("Wine", (int)specialEvent.Wine, true, specialEvent.AverageWinePrice),
+                ("Spirits", (int)specialEvent.Spirits, true, specialEvent.AverageSpiritsPrice)
+            };
+
+            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination || specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.RaiseMoney)
+            {
+                typeData.AddRange(new List<(string, int, bool, decimal?)>
+                {
+                    ("Beer/Cider/Cooler", (int)(specialEvent.Beer_free ?? 0), false, 0),
+                    ("Wine", (int)(specialEvent.Wine_free ?? 0), false, 0),
+                    ("Spirits", (int)(specialEvent.Spirits_free ?? 0), false, 0)
+                });
             }
 
             foreach (var type in typeData)
             {
-                string drinkTypeName = type.Item1;
-                int estimatedServings = type.Item2;
-                bool ischarging = type.Item3;
-                var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
-                MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
-                if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
-                {
-                    existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-                        .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid
-                        && drink.AdoxioIscharging == ischarging).FirstOrDefault();
-                }
-                CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, type.Item4, ischarging);
-
+                var drinkType = drinkTypes.FirstOrDefault(dt => dt.adoxio_name == type.Item1);
+                var existingForecast = existingForecasts.FirstOrDefault(f =>
+                    f.adoxio_Type?.Id.ToString() == drinkType?.adoxio_sepdrinktypeId?.ToString()
+                    && f.adoxio_IsCharging == type.Item3);
+                await CreateOrUpdateForecastAsync(specialEvent, existingForecast, drinkType, type.Item2, type.Item4, type.Item3);
             }
-            // Create or Update Drink Sale Forecast with the serving amounts
-            //typeData.ForEach(data =>
-            //{
-            //    string drinkTypeName = data.Item1;
-            //    int estimatedServings = data.Item2;
-            //    var drinkType = drinkTypes.Where(drinkType => drinkType.AdoxioName == drinkTypeName).FirstOrDefault();
-            //    MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingForecast = null;
-            //    if (existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent != null)
-            //    {
-            //        existingForecast = existingEvent.AdoxioSpecialeventAdoxioSepdrinksalesforecastSpecialEvent
-            //            .Where(drink => drink._adoxioTypeValue == drinkType.AdoxioSepdrinktypeid)
-            //            .FirstOrDefault();
-            //    }
-            //    CreateOrUpdateForecast(specialEvent, existingForecast, drinkType, estimatedServings, data.Item4);
-            //});
         }
 
-        private void CreateOrUpdateForecast(
+        private async Task CreateOrUpdateForecastAsync(
             ViewModels.SpecialEvent specialEvent,
-            MicrosoftDynamicsCRMadoxioSepdrinksalesforecast existingDrinkForecast,
-            MicrosoftDynamicsCRMadoxioSepdrinktype beerType,
+            DvForecast existingDrinkForecast,
+            DvDrinkType drinkType,
             int estimatedServings,
-            decimal? averagePrice,bool ischarging)
+            decimal? averagePrice,
+            bool ischarging)
         {
             if (averagePrice == null)
             {
-                // do not allow a null update
-                _logger.LogError($"Invalid SEP drink forecast encountered - Average Price is null.  SEP ID - {specialEvent.Id}");
+                _logger.LogError($"Invalid SEP drink forecast encountered - Average Price is null. SEP ID - {specialEvent.Id}");
+                return;
             }
-            else
+            try
             {
-                try
-
+                if (existingDrinkForecast == null)
                 {
-                    var newForecast = new MicrosoftDynamicsCRMadoxioSepdrinksalesforecast()
+                    var newForecast = new DvForecast
                     {
-                        AdoxioIscharging = ischarging,
-                        AdoxioPriceperserving = averagePrice,
-                        AdoxioEstimatedservings = estimatedServings,
+                        adoxio_IsCharging = ischarging,
+                        adoxio_PricePerServing = averagePrice,
+                        adoxio_EstimatedServings = estimatedServings,
                     };
-
-
-                    if (existingDrinkForecast == null)
-                    { // create record
-                        newForecast.SpecialEventODataBind = _dynamicsClient.GetEntityURI("adoxio_specialevents", specialEvent.Id);
-                        if (!string.IsNullOrEmpty(beerType?.AdoxioSepdrinktypeid))
-                        {
-                            newForecast.DrinkTypeODataBind = _dynamicsClient.GetEntityURI("adoxio_sepdrinktypes", beerType.AdoxioSepdrinktypeid);
-                        }
-                        _dynamicsClient.Sepdrinksalesforecasts.Create(newForecast);
-                    }
-                    else
-                    { // update record
-                        _dynamicsClient.Sepdrinksalesforecasts.Update((string)existingDrinkForecast.AdoxioSepdrinksalesforecastid, newForecast);
-                    }
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    _logger.LogError(httpOperationException, "Error creating/updating sep drinks sales forecast");
-                    throw httpOperationException;
-                }
-            }
-
-        }
-
-        [HttpGet("drink-types")]
-        public IActionResult GetDrinkTypes()
-        {
-            List<ViewModels.SepDrinkType> result = new List<ViewModels.SepDrinkType>();
-            var drinkTypes = _dynamicsClient.Sepdrinktypes.Get().Value;
-            foreach (var item in drinkTypes)
-            {
-                result.Add(item.ToViewModel());
-            }
-            return new JsonResult(result);
-        }
-
-        private List<ViewModels.SpecialEventSummary> GetSepSummaries(string filter)
-        {
-            List<ViewModels.SpecialEventSummary> result = new List<ViewModels.SpecialEventSummary>();
-
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
-            IList<MicrosoftDynamicsCRMadoxioSpecialevent> items = null;
-            try
-            {
-                items = _dynamicsClient.Specialevents.Get(filter: filter, expand: expand).Value;
-
-                foreach (var item in items)
-                {
-                    result.Add(item.ToSummaryViewModel());
-                }
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting special events");
-            }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, "Unexpected Error getting special events");
-            }
-
-            return result;
-        }
-
-        private PagingResult<ViewModels.SpecialEventSummary> GetPagedSepSummaries(string filter, int pageIndex, int pageSize, string sort, string sortdir)
-        {
-            PagingResult<ViewModels.SpecialEventSummary> result = new PagingResult<ViewModels.SpecialEventSummary>()
-            {
-                Value = new List<SpecialEventSummary>()
-            };
-
-            var orderby = new List<string> {};
-            if(sort != null && sort.Length > 0 && sortdir != null && sortdir.Length > 0)
-            {
-                string tmp = transformColumnNametoSchemaName(sort);
-                tmp = tmp + " " + sortdir;
-                orderby.Add(tmp);
-
-            }
-            string[] expand = new[] { "adoxio_PoliceRepresentativeId", "adoxio_PoliceAccountId", "adoxio_specialevent_specialeventtsacs" };
-            try
-            {
-                var customHeaders = new Dictionary<string, List<string>>();
-                var preferHeader = new List<string>();
-                var odataVersionHeader = new List<string>();
-
-                preferHeader.Add($"odata.maxpagesize={pageSize}");
-                customHeaders.Add("Prefer", preferHeader);
-                odataVersionHeader.Add("4.0");
-                customHeaders.Add("OData-Version", odataVersionHeader);
-                customHeaders.Add("OData-MaxVersion", odataVersionHeader);
-                //HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialeventCollection>();
-                var sepSummaryQuery = new HttpOperationResponse<MicrosoftDynamicsCRMadoxioSpecialeventCollection>();
-                if(orderby.Count > 0)
-                {
-                    sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, orderby: orderby, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
+                    if (Guid.TryParse(specialEvent.Id, out var seGuid))
+                        newForecast.adoxio_SpecialEvent = new EntityReference("adoxio_specialevents", seGuid);
+                    if (drinkType?.adoxio_sepdrinktypeId != null)
+                        newForecast.adoxio_Type = new EntityReference("adoxio_sepdrinktypes", drinkType.adoxio_sepdrinktypeId.Value);
+                    await _dataverse.CreateSepDrinkSalesForecastAsync(newForecast);
                 }
                 else
                 {
-                    sepSummaryQuery = _dynamicsClient.Specialevents.GetWithHttpMessagesAsync(filter: filter, expand: expand, customHeaders: customHeaders, count: true).GetAwaiter().GetResult();
-                }
-
-
-                while(pageIndex > 0)
-                {
-                    string odataNextLink = sepSummaryQuery.Body.OdataNextLink;
-                    sepSummaryQuery = _dynamicsClient.Specialevents.GetNextLink(odataNextLink, customHeaders);
-                    pageIndex--;
-                }
-
-                var sepSummaries = sepSummaryQuery.Body.Value;
-                result.Count = Int32.Parse(sepSummaryQuery.Body.Count);
-
-                foreach(var sepSummary in sepSummaries)
-                {
-                    var viewModel = sepSummary.ToSummaryViewModel();//.GetAwaiter().GetResult();
-                    result.Value.Add(viewModel);
+                    var patchForecast = new DvForecast
+                    {
+                        Id = existingDrinkForecast.adoxio_sepdrinksalesforecastId ?? Guid.Empty,
+                        adoxio_IsCharging = ischarging,
+                        adoxio_PricePerServing = averagePrice,
+                        adoxio_EstimatedServings = estimatedServings,
+                    };
+                    await _dataverse.UpdateSepDrinkSalesForecastAsync(patchForecast);
                 }
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error getting special events");
+                _logger.LogError(ex, "Error creating/updating sep drinks sales forecast");
+                throw;
             }
-            catch (Exception exception)
-            {
-                _logger.LogError(exception, "Unexpected Error getting special events");
-            }
+        }
 
-            return result;
+        [HttpGet("drink-types")]
+        public async Task<IActionResult> GetDrinkTypes()
+        {
+            var drinkTypes = await _dataverse.GetSepDrinkTypesAsync();
+            return new JsonResult(drinkTypes.Select(dt => dt.ToViewModel()).ToList());
         }
 
         private String transformColumnNametoSchemaName(String colName)
@@ -1619,7 +1390,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 else if (colName == "policeDecisionBy")
                 {
-                    return "_adoxio_policerepresentativeid_value";
+                    return "adoxio_policerepresentativeid";
                 }
                 else if (colName == "maximumNumberOfGuests")
                 {
@@ -1641,108 +1412,130 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         // police get summary list of applications waiting approval
         [HttpGet("police/all")]
-        public IActionResult GetPoliceCurrent()
+        public async Task<IActionResult> GetPoliceCurrent()
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
+            var jurisdictionId = userAccount.adoxio_PoliceJurisdictionId.Id.ToString();
 
-            var result = new SpecialEventPoliceJobSummary()
+            var inProgressTask = _dataverse.GetSpecialEventsByJurisdictionAsync(jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.PendingReview });
+            var policeApprovedTask = _dataverse.GetSpecialEventsByJurisdictionAsync(jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.AutoReviewed, (int)adoxio_specialevent_adoxio_policeapproval.Reviewed },
+                excludeStatuses: new[] { (int)adoxio_specialevent_statuscode.Draft });
+            var policeDeniedTask = _dataverse.GetSpecialEventsByJurisdictionAsync(jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.Denied, (int)adoxio_specialevent_adoxio_policeapproval.Cancelled });
+
+            await Task.WhenAll(inProgressTask, policeApprovedTask, policeDeniedTask);
+
+            var result = new SpecialEventPoliceJobSummary
             {
-                // Application Status == Pending Review && Police Decision == Under Review
-                InProgress = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
-
-                // Police Decision == Reviewed
-                PoliceApproved = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
-
-                // Police Decision == Denied || Cancelled
-                PoliceDenied = GetSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
+                InProgress = (await inProgressTask).Select(se => se.ToSummaryViewModel()).ToList(),
+                PoliceApproved = (await policeApprovedTask).Select(se => se.ToSummaryViewModel()).ToList(),
+                PoliceDenied = (await policeDeniedTask).Select(se => se.ToSummaryViewModel()).ToList()
             };
 
             return new JsonResult(result);
-
         }
 
         [HttpGet("police/pending-review")]
-        public IActionResult GetPolicePendingReview([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "" )
+        public async Task<IActionResult> GetPolicePendingReview([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
+            var jurisdictionId = userAccount.adoxio_PoliceJurisdictionId.Id.ToString();
+            var orderByField = string.IsNullOrEmpty(sort) ? null : transformColumnNametoSchemaName(sort);
 
-            // Application Status == Pending Review && Police Decision == Under Review
-            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview} and statuscode ne {(int?)EventStatus.Cancelled} and statuscode ne {(int?)EventStatus.Denied}", pageIndex, pageSize, sort, sortdir);
+            var (items, totalCount) = await _dataverse.GetSpecialEventsByJurisdictionPagedAsync(
+                jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.PendingReview },
+                excludeStatuses: new[] { (int)adoxio_specialevent_statuscode.Cancelled, (int)adoxio_specialevent_statuscode.Denied },
+                pageIndex, pageSize, orderByField, sortdir);
 
+            var result = new PagingResult<ViewModels.SpecialEventSummary>
+            {
+                Value = items.Select(se => se.ToSummaryViewModel()).ToList(),
+                Count = totalCount
+            };
             return new JsonResult(result);
-
         }
 
         [HttpGet("police/approved")]
-        public IActionResult GetPoliceApproved([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
+        public async Task<IActionResult> GetPoliceApproved([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
+            var jurisdictionId = userAccount.adoxio_PoliceJurisdictionId.Id.ToString();
+            var orderByField = string.IsNullOrEmpty(sort) ? null : transformColumnNametoSchemaName(sort);
 
-            // Police Decision == Reviewed
-            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq {(int?)ApproverStatus.AutoReviewed} or adoxio_policeapproval eq {(int?)ApproverStatus.Approved} or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})", pageIndex, pageSize, sort, sortdir);
+            var (items, totalCount) = await _dataverse.GetSpecialEventsByJurisdictionPagedAsync(
+                jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.AutoReviewed, (int)adoxio_specialevent_adoxio_policeapproval.Reviewed },
+                excludeStatuses: new[] { (int)adoxio_specialevent_statuscode.Draft },
+                pageIndex, pageSize, orderByField, sortdir);
 
+            var result = new PagingResult<ViewModels.SpecialEventSummary>
+            {
+                Value = items.Select(se => se.ToSummaryViewModel()).ToList(),
+                Count = totalCount
+            };
             return new JsonResult(result);
-
         }
 
         [HttpGet("police/denied")]
-        public IActionResult GetPoliceDenied([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
+        public async Task<IActionResult> GetPoliceDenied([FromQuery] int pageIndex = 0, [FromQuery] int pageSize = 10, [FromQuery] string sort = "", [FromQuery] string sortdir = "")
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
+            var jurisdictionId = userAccount.adoxio_PoliceJurisdictionId.Id.ToString();
+            var orderByField = string.IsNullOrEmpty(sort) ? null : transformColumnNametoSchemaName(sort);
 
-            // Police Decision == Denied || Cancelled
-            var result = GetPagedSepSummaries($"_adoxio_policejurisdictionid_value eq {userAccount._adoxioPolicejurisdictionidValue} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})", pageIndex, pageSize, sort, sortdir);
+            var (items, totalCount) = await _dataverse.GetSpecialEventsByJurisdictionPagedAsync(
+                jurisdictionId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.Denied, (int)adoxio_specialevent_adoxio_policeapproval.Cancelled },
+                excludeStatuses: null,
+                pageIndex, pageSize, orderByField, sortdir);
 
+            var result = new PagingResult<ViewModels.SpecialEventSummary>
+            {
+                Value = items.Select(se => se.ToSummaryViewModel()).ToList(),
+                Count = totalCount
+            };
             return new JsonResult(result);
-
         }
 
         // police get summary list of applications for the current user
         [HttpGet("police/my")]
-        public IActionResult GetPoliceMy()
+        public async Task<IActionResult> GetPoliceMy()
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
 
-            var result = new SpecialEventPoliceJobSummary()
+            var inProgressTask = _dataverse.GetSpecialEventsByRepresentativeAsync(userSettings.ContactId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.PendingReview });
+            var policeApprovedTask = _dataverse.GetSpecialEventsByRepresentativeAsync(userSettings.ContactId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.AutoReviewed, (int)adoxio_specialevent_adoxio_policeapproval.Reviewed },
+                excludeStatuses: new[] { (int)adoxio_specialevent_statuscode.Draft });
+            var policeDeniedTask = _dataverse.GetSpecialEventsByRepresentativeAsync(userSettings.ContactId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.Denied, (int)adoxio_specialevent_adoxio_policeapproval.Cancelled });
+
+            await Task.WhenAll(inProgressTask, policeApprovedTask, policeDeniedTask);
+
+            var result = new SpecialEventPoliceJobSummary
             {
-                // Application Status == Pending Review && Police Decision == Under Review
-                InProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq {(int?)ApproverStatus.PendingReview}"),
-
-                // Police Decision == Reviewed
-                PoliceApproved = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode ne {(int?)EventStatus.Draft} and (adoxio_policeapproval eq { (int?)ApproverStatus.AutoReviewed } or adoxio_policeapproval eq { (int?)ApproverStatus.Approved } or adoxio_policeapproval eq {(int?)ApproverStatus.Reviewed})"),
-
-                // Police Decision == Denied || Cancelled
-                PoliceDenied = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and (adoxio_policeapproval eq {(int?)ApproverStatus.Denied} or adoxio_policeapproval eq {(int?)ApproverStatus.Cancelled})")
+                InProgress = (await inProgressTask).Select(se => se.ToSummaryViewModel()).ToList(),
+                PoliceApproved = (await policeApprovedTask).Select(se => se.ToSummaryViewModel()).ToList(),
+                PoliceDenied = (await policeDeniedTask).Select(se => se.ToSummaryViewModel()).ToList()
             };
 
             return new JsonResult(result);
@@ -1752,34 +1545,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> PoliceAssign([FromBody] string assignee, string id)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
-            // get the special event.
 
-            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
-            {
+            var specialEvent = await _dataverse.GetSpecialEventByIdAsync(id);
+            if (specialEvent == null)
+                return NotFound();
+            if (specialEvent.adoxio_PoliceJurisdictionId != null &&
+                specialEvent.adoxio_PoliceJurisdictionId.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
                 return Unauthorized();
-            }
 
-            // get the assignee.
-
-
-            var contact = await _dynamicsClient.GetContactById(assignee);
-            if (contact == null || contact.ParentcustomeridAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)
-            {
+            var assigneeContact = await _dataverse.GetContactByIdAsync(assignee);
+            if (assigneeContact == null)
                 return Unauthorized();
-            }
 
-            // update the given special event.
-            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var assignEventGuid))
+            var contactAccount = assigneeContact.ParentCustomerId != null
+                ? await _dataverse.GetAccountByIdAsync(assigneeContact.ParentCustomerId.Id.ToString())
+                : null;
+            if (contactAccount?.adoxio_PoliceJurisdictionId?.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
+                return Unauthorized();
+
+            if (!Guid.TryParse(id, out var assignEventGuid))
                 return BadRequest();
             if (!Guid.TryParse(assignee, out var assigneeGuid))
                 return BadRequest();
+
             var dvPatch = new DvSpecialEvent
             {
                 Id = assignEventGuid,
@@ -1795,32 +1586,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return StatusCode(500);
             }
 
-
-            return new JsonResult(contact.ToViewModel());
+            return new JsonResult(assigneeContact.ToViewModel());
         }
 
         [HttpPost("police/{id}/approve")]
         public async Task<IActionResult> PoliceApprove(string id)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
-            // get the special event.
 
-            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (specialEvent._adoxioPolicejurisdictionidValue != null  && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
-            {
+            var specialEvent = await _dataverse.GetSpecialEventByIdAsync(id);
+            if (specialEvent == null)
+                return NotFound();
+            if (specialEvent.adoxio_PoliceJurisdictionId != null &&
+                specialEvent.adoxio_PoliceJurisdictionId.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
                 return Unauthorized();
-            }
 
-            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var approveEventGuid))
+            if (!Guid.TryParse(id, out var approveEventGuid))
                 return BadRequest();
 
-            // update the given special event.
             var dvPatch = new DvSpecialEvent
             {
                 Id = approveEventGuid,
@@ -1836,33 +1622,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return StatusCode(500);
             }
 
-
             return Ok();
         }
 
         [HttpPost("police/{id}/deny")]
         public async Task<IActionResult> PoliceDeny(string id, SepPoliceReviewReason reasonText)
         {
-
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
-            // get the special event.
 
-            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
-            {
+            var specialEvent = await _dataverse.GetSpecialEventByIdAsync(id);
+            if (specialEvent == null)
+                return NotFound();
+            if (specialEvent.adoxio_PoliceJurisdictionId != null &&
+                specialEvent.adoxio_PoliceJurisdictionId.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
                 return Unauthorized();
-            }
 
-            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var denyEventGuid))
+            if (!Guid.TryParse(id, out var denyEventGuid))
                 return BadRequest();
 
-            // update the given special event.
             var dvPatch = new DvSpecialEvent
             {
                 Id = denyEventGuid,
@@ -1880,7 +1660,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return StatusCode(500);
             }
 
-
             return Ok();
         }
 
@@ -1888,24 +1667,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> PoliceCancel(string id, SepPoliceReviewReason reasonText)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
-            // get the special event.
 
-            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
-            {
+            var specialEvent = await _dataverse.GetSpecialEventByIdAsync(id);
+            if (specialEvent == null)
+                return NotFound();
+            if (specialEvent.adoxio_PoliceJurisdictionId != null &&
+                specialEvent.adoxio_PoliceJurisdictionId.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
                 return Unauthorized();
-            }
 
-            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var cancelEventGuid))
+            if (!Guid.TryParse(id, out var cancelEventGuid))
                 return BadRequest();
 
-            // update the given special event.
             var dvPatch = new DvSpecialEvent
             {
                 Id = cancelEventGuid,
@@ -1923,7 +1698,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return StatusCode(500);
             }
 
-
             return Ok();
         }
 
@@ -1931,26 +1705,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         public async Task<IActionResult> PoliceSetMunicipality(string id, string cityId)
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
-            // get the special event.
 
-            var specialEvent = _dynamicsClient.Specialevents.GetByKey(id);
-            if (specialEvent._adoxioPolicejurisdictionidValue != null && userAccount._adoxioPolicejurisdictionidValue != specialEvent._adoxioPolicejurisdictionidValue)  // ensure the current account has a matching police jurisdiction.
-            {
+            var specialEvent = await _dataverse.GetSpecialEventByIdAsync(id);
+            if (specialEvent == null)
+                return NotFound();
+            if (specialEvent.adoxio_PoliceJurisdictionId != null &&
+                specialEvent.adoxio_PoliceJurisdictionId.Id != userAccount.adoxio_PoliceJurisdictionId.Id)
                 return Unauthorized();
-            }
 
-            if (!Guid.TryParse(specialEvent.AdoxioSpecialeventid, out var municipalEventGuid))
+            if (!Guid.TryParse(id, out var municipalEventGuid))
                 return BadRequest();
             if (!Guid.TryParse(cityId, out var cityGuid))
                 return BadRequest();
 
-            // update the given special event.
             var dvPatch = new DvSpecialEvent
             {
                 Id = municipalEventGuid,
@@ -1966,27 +1736,32 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return StatusCode(500);
             }
 
-
             return Ok();
         }
 
         [HttpGet("police/home")]
-        public IActionResult GetPoliceHome()
+        public async Task<IActionResult> GetPoliceHome()
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // get the account details.
-            var userAccount = _dynamicsClient.GetAccountById(userSettings.AccountId);
-            if (string.IsNullOrEmpty(userAccount._adoxioPolicejurisdictionidValue))  // ensure the current account has a police jurisdiction.
-            {
+            var userAccount = await _dataverse.GetAccountByIdAsync(userSettings.AccountId);
+            if (userAccount?.adoxio_PoliceJurisdictionId == null)
                 return Unauthorized();
-            }
 
-            var result = new SpecialEventPoliceHome()
+            var inProgressTask = _dataverse.GetSpecialEventsByRepresentativeAsync(userSettings.ContactId,
+                policeApprovals: new[] { (int)adoxio_specialevent_adoxio_policeapproval.PendingReview });
+            var issuedTask = _dataverse.GetSpecialEventsByRepresentativeAsync(userSettings.ContactId,
+                includeStatuses: new[] { (int)adoxio_specialevent_statuscode.Issued });
+
+            await Task.WhenAll(inProgressTask, issuedTask);
+
+            var inProgress = (await inProgressTask);
+            var issued = (await issuedTask);
+
+            var result = new SpecialEventPoliceHome
             {
-                AssignedJobsInProgress = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001").Count, // Under review
-                // TODO - revise the filter for this query.
-                AssignedJobsInProgressWithExceptions = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and adoxio_policeapproval eq 100000001").Count,  // Approved
-                AssignedApplicationsIssued = GetSepSummaries($"_adoxio_policerepresentativeid_value eq {userSettings.ContactId} and statuscode eq 845280003").Count // status is issued
+                AssignedJobsInProgress = inProgress.Count,
+                AssignedJobsInProgressWithExceptions = inProgress.Count,
+                AssignedApplicationsIssued = issued.Count
             };
 
             return new JsonResult(result);
@@ -1998,78 +1773,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="defaults">If set to true, the name parameter is ignored and a list of `preview` cities is returned instead</param>
         /// <param name="name">The name to filter by using startswith</param>
         /// <returns>Dictionary of key value pairs with accountid and name as the pairs</returns>
-[HttpGet("sep-city/autocomplete")]
-public IActionResult GetAutocomplete(string name, bool defaults = false)
-{
-    try
-    {
-        // ─── 1. Validate ────────────────────────────────────────────────
-        if (!defaults)
+        [HttpGet("sep-city/autocomplete")]
+        public async Task<IActionResult> GetAutocomplete(string name, bool defaults = false)
         {
-            if (string.IsNullOrWhiteSpace(name) || name.Trim().Length < 3)
-                return BadRequest("Please enter at least 3 characters.");
-
-            name = name.Trim();
-        }
-
-        // ─── 2. Build OData filter (no tolower!) ────────────────────────
-        var sb = new StringBuilder("statecode eq 0");
-
-        if (defaults)
-        {
-            sb.Append(" and adoxio_ispreview eq true");
-        }
-        else
-        {
-            var safe = name.Replace("'", "''");         // OData escape
-            sb.Append($" and contains(adoxio_name,'{safe}')");
-        }
-
-        var expand = new[] { "adoxio_PoliceJurisdictionId", "adoxio_LGINId" };
-
-        // ─── 3. Fetch & client‑side sort ───────────────────────────────
-        var cities = _dynamicsClient.Sepcities
-                                    .Get(filter: sb.ToString(), expand: expand, top: 100)
-                                    .Value;
-
-        var ordered = cities
-            .OrderByDescending(c => c.AdoxioName.StartsWith(name, StringComparison.OrdinalIgnoreCase))
-            .ThenBy(c => c.AdoxioName, StringComparer.OrdinalIgnoreCase)
-            .Select(c => new ViewModels.SepCity
+            if (!defaults)
             {
-                Id                    = c.AdoxioSepcityid,
-                Name                  = c.AdoxioName,
-                PoliceJurisdictionName= c?.AdoxioPoliceJurisdictionId?.AdoxioName,
-                LGINName              = c?.AdoxioLGINId?.AdoxioName
-            })
-            .ToList();
+                if (string.IsNullOrWhiteSpace(name) || name.Trim().Length < 3)
+                    return BadRequest("Please enter at least 3 characters.");
+                name = name.Trim();
+            }
 
-        return Ok(ordered);
-    }
-    catch (HttpOperationException ex)
-    {
-        _logger.LogError(ex, "Dynamics CRM returned an error while fetching SEP cities.");
-        return StatusCode((int)ex.Response.StatusCode, ex.Response.Content);
-    }
-    catch (Exception ex)
-    {
-        _logger.LogError(ex, "Unhandled error while fetching SEP cities.");
-        return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
-    }
-}
+            var cities = await _dataverse.GetSepCitiesFilteredAsync(defaults ? null : name, defaultsOnly: defaults);
+
+            var ordered = cities
+                .OrderByDescending(c => !defaults && c.adoxio_name != null && c.adoxio_name.StartsWith(name, StringComparison.OrdinalIgnoreCase))
+                .ThenBy(c => c.adoxio_name, StringComparer.OrdinalIgnoreCase)
+                .Select(c => c.ToViewModel())
+                .ToList();
+
+            return Ok(ordered);
+        }
 
 
         [HttpGet("claim-info/{jobNumber}")]
-        public IActionResult getClaimInfo(string jobNumber)
+        public async Task<IActionResult> getClaimInfo(string jobNumber)
         {
-            var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
-            var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.ToList()
-            .Select(sepEvent => new SepClaimInfo
-            {
-                JobNumber = sepEvent.AdoxioSpecialeventpermitnumber,
-                AssociatedContactId = sepEvent._adoxioContactidValue
+            var se = await _dataverse.GetSpecialEventByLicenceNumberAsync(jobNumber);
+            if (se == null || se.statuscode != adoxio_specialevent_statuscode.Issued)
+                return new JsonResult(null);
 
-            }).FirstOrDefault();
+            var claim = new SepClaimInfo
+            {
+                JobNumber = se.adoxio_SpecialEventPermitNumber,
+                AssociatedContactId = se.adoxio_ContactId?.Id.ToString()
+            };
             return new JsonResult(claim);
         }
 
@@ -2082,13 +1819,14 @@ public IActionResult GetAutocomplete(string name, bool defaults = false)
             // there must be a contact
             if (!string.IsNullOrEmpty(userSettings.ContactId) && userSettings.ContactId != "00000000-0000-0000-0000-000000000000")
             {
-                var filter = $"adoxio_specialeventpermitnumber eq '{jobNumber}' and statuscode eq 845280003";
-                var claim = _dynamicsClient.Specialevents.Get(filter: filter).Value.FirstOrDefault();
+                var claim = await _dataverse.GetSpecialEventByLicenceNumberAsync(jobNumber);
+                if (claim == null || claim.statuscode != adoxio_specialevent_statuscode.Issued)
+                    return NotFound();
 
-                if (!Guid.TryParse(claim?.AdoxioSpecialeventid, out var claimEventGuid))
+                if (claim.Id == Guid.Empty)
                     return BadRequest();
 
-                var dvPatch = new DvSpecialEvent { Id = claimEventGuid };
+                var dvPatch = new DvSpecialEvent { Id = claim.Id };
 
                 if (Guid.TryParse(userSettings.ContactId, out var claimContactGuid))
                     dvPatch.adoxio_ContactId = new EntityReference("contact", claimContactGuid);

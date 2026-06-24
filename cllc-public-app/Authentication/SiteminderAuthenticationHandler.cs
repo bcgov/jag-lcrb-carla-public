@@ -1,9 +1,12 @@
-﻿extern alias DV;
+extern alias DV;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Models;
 using DvContact = DV::Gov.Lclb.Cllb.Interfaces.Contact;
 using DvIDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using DvPreviousAddress = DV::Gov.Lclb.Cllb.Interfaces.adoxio_previousaddress;
+using DvWorker = DV::Gov.Lclb.Cllb.Interfaces.adoxio_worker;
+using DvAccount = DV::Gov.Lclb.Cllb.Interfaces.Account;
+using DvGender = DV::Gov.Lclb.Cllb.Interfaces.adoxio_gender;
 using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Hosting;
@@ -16,7 +19,6 @@ using System.Security.Claims;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Services.FileManager;
 using System.Collections.Generic;
@@ -25,10 +27,8 @@ using Microsoft.Extensions.Configuration;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Web;
 using Gov.Lclb.Cllb.Public.Utility;
-using Microsoft.Rest;
 using System.Collections.Specialized;
 using Serilog;
-using FolderSegment = Gov.Lclb.Cllb.Interfaces.FolderSegment;
 
 namespace Gov.Lclb.Cllb.Public.Authentication
 {
@@ -201,7 +201,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         public string LoginDisabledError { get; set; }
     }
-    #endregion    
+    #endregion
 
     /// <summary>
     /// Setup Siteminder Authentication Handler
@@ -228,10 +228,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private readonly Serilog.ILogger _logger;
         private readonly Microsoft.Extensions.Logging.ILogger _ms_logger;
         private readonly SiteMinderAuthOptions _options;
-        private IDynamicsClient _dynamicsClient;
 
         /// <summary>
-        /// Siteminder Authentication Constructir
+        /// Siteminder Authentication Constructor
         /// </summary>
         /// <param name="configureOptions"></param>
         /// <param name="loggerFactory"></param>
@@ -253,6 +252,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
             _logger.Debug("Getting user data from headers");
 
+            DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
@@ -297,8 +297,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
 
             _logger.Debug("Loading user external id = " + siteMinderGuid);
-            // 3/18/2020 - Note that LoadUserLegacy will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
-            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(siteMinderGuid, context.Request.Headers, _ms_logger);
+            userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, siteMinderGuid, context.Request.Headers);
             _logger.Information("After getting authenticated user = " + userSettings.GetJson());
 
             // check that the user is active
@@ -340,58 +339,61 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             if (userSettings.AuthenticatedUser != null)
             {
                 userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                // ensure that the given account has a documents folder.
 
                 if (siteMinderBusinessGuid != null) // BCeID user
                 {
-                    var contact = _dynamicsClient.GetActiveContactByExternalIdBridged(false, siteMinderGuid);
+                    var contact = await _dataverse.GetContactByLoginAsync(false, siteMinderGuid);
                     if (contact == null)
                     {
                         _logger.Information($"No bridged contact found for {siteMinderGuid}");
-                        // try by other means.
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);
-                        var temp = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
-                        if (temp != null) // ensure it is active.
+                        var temp = await _dataverse.GetContactByDetailsAsync(contactVM.firstname, contactVM.middlename, contactVM.lastname, contactVM.emailaddress1);
+                        if (temp != null)
                         {
                             contact = temp;
-                            // update the contact.
-                            _logger.Information(
-                                $"Adding bridge record for login.  ContactID is {contact.Contactid}, GUID is {siteMinderGuid}");
-                            _dynamicsClient.UpdateContactBridgeLogin(contact.Contactid, siteMinderGuid,
-                                contact._accountidValue, siteMinderBusinessGuid);
+                            _logger.Information($"Adding bridge record for login.  ContactID is {contact.Id}, GUID is {siteMinderGuid}");
+                            await _dataverse.UpdateContactBridgeLoginAsync(
+                                contact.Id.ToString(),
+                                siteMinderGuid,
+                                contact.ParentCustomerId?.Id.ToString(),
+                                siteMinderBusinessGuid);
                         }
                         else
                         {
                             _logger.Error("No existing contact found by search by header info.");
                         }
                     }
-                    if (contact != null && contact.Contactid != null)
+                    if (contact != null && contact.Id != Guid.Empty)
                     {
                         await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
                     }
                 }
-                
             }
 
             // populate the Account settings.
             if (siteMinderBusinessGuid != null) // BCeID user
             {
-                // Note that this will search for active accounts
-                var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                var account = await _dataverse.GetAccountByExternalIdAsync(GuidUtility.SanitizeGuidString(siteMinderBusinessGuid));
                 if (account == null)
                 {
-                    // try by other means.
-                    account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
+                    var fallback = await _dataverse.GetAccountByNameAsync(userSettings.BusinessLegalName);
+                    // only use account if it is active and has no ExternalID (non-BCeID account)
+                    if (fallback != null
+                        && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0
+                        && string.IsNullOrEmpty(fallback.adoxio_ExternalID))
+                    {
+                        account = fallback;
+                    }
                 }
-                if (account != null && account.Accountid != null)
+                if (account != null)
                 {
-                    userSettings.AccountId = account.Accountid;
+                    userSettings.AccountId = account.Id.ToString();
                     if (userSettings.AuthenticatedUser == null)
                     {
                         userSettings.AuthenticatedUser = new Models.User();
                     }
-                    userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+                    userSettings.AuthenticatedUser.AccountId = account.Id;
 
                     // ensure that the given account has a documents folder.
                     await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
@@ -402,7 +404,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings.IsNewUserRegistration = true;
                 }
             }
-                                               
+
 
             // add the worker settings if it is a new user.
             if (userSettings.IsNewUserRegistration)
@@ -424,7 +426,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
             // **************************************************
             // Update user settings
-            // **************************************************                
+            // **************************************************
             UserSettings.SaveUserSettings(userSettings, context);
 
             return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
@@ -439,6 +441,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
             _logger.Debug("Getting user data from headers");
 
+            DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
@@ -483,8 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
 
             _logger.Debug("Loading user external id = " + siteMinderGuid);
-            // 3/18/2020 - Note that LoadUserLegacy will now work if there is a match on the guid, as well as a match on name in a case where there is no guid.
-            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(siteMinderGuid, context.Request.Headers, _ms_logger);
+            userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, siteMinderGuid, context.Request.Headers);
             _logger.Information("After getting authenticated user = " + userSettings.GetJson());
 
 
@@ -527,34 +529,37 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             if (userSettings.AuthenticatedUser != null)
             {
                 userSettings.ContactId = userSettings.AuthenticatedUser.ContactId.ToString();
-                // ensure that the given account has a documents folder.
 
                 if (siteMinderBusinessGuid != null) // BCeID user
                 {
-                    var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.ContactId);
+                    var contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(userSettings.ContactId));
                     if (contact == null)
                     {
-                        // try by other means.
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);
-                        contact = _dynamicsClient.GetContactByContactVmBlankSmGuid(contactVM);
+                        contact = await _dataverse.GetContactByDetailsAsync(contactVM.firstname, contactVM.middlename, contactVM.lastname, contactVM.emailaddress1);
                     }
-                    if (contact != null && contact.Contactid != null)
+                    if (contact != null && contact.Id != Guid.Empty)
                     {
                         await CreateSharePointContactDocumentLocation(_fileManagerClient, contact);
                     }
 
                     // Note that this will search for active accounts
-                    var account = await _dynamicsClient.GetActiveAccountBySiteminderBusinessGuid(siteMinderBusinessGuid);
+                    var account = await _dataverse.GetAccountByExternalIdAsync(GuidUtility.SanitizeGuidString(siteMinderBusinessGuid));
                     if (account == null)
                     {
-                        // try by other means.
-                        account = _dynamicsClient.GetActiveAccountByLegalName(userSettings.BusinessLegalName);
+                        var fallback = await _dataverse.GetAccountByNameAsync(userSettings.BusinessLegalName);
+                        if (fallback != null
+                            && fallback.GetAttributeValue<Microsoft.Xrm.Sdk.OptionSetValue>("statecode")?.Value == 0
+                            && string.IsNullOrEmpty(fallback.adoxio_ExternalID))
+                        {
+                            account = fallback;
+                        }
                     }
-                    if (account != null && account.Accountid != null)
+                    if (account != null)
                     {
-                        userSettings.AccountId = account.Accountid;
-                        userSettings.AuthenticatedUser.AccountId = Guid.Parse(account.Accountid);
+                        userSettings.AccountId = account.Id.ToString();
+                        userSettings.AuthenticatedUser.AccountId = account.Id;
 
                         // ensure that the given account has a documents folder.
                         await CreateSharePointAccountDocumentLocation(_fileManagerClient, account);
@@ -570,7 +575,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     {
                         userSettings.IsNewUserRegistration = true;
                     }
-
                 }
             }
 
@@ -594,7 +598,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
             // **************************************************
             // Update user settings
-            // **************************************************                
+            // **************************************************
             UserSettings.SaveUserSettings(userSettings, context);
 
             return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, Options.Scheme));
@@ -623,8 +627,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 UserSettings userSettings = new UserSettings();
 
                 IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-                _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
-                
+                DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
+
                 IWebHostEnvironment hostingEnv = (IWebHostEnvironment)context.RequestServices.GetService(typeof(IWebHostEnvironment));
 
                 // Fail if login disabled
@@ -651,11 +655,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     if (userSettings?.AuthenticatedUser?.ContactId != null &&
                         userSettings?.AuthenticatedUser?.ContactId == Guid.Empty && !string.IsNullOrEmpty(userSettings?.SiteMinderGuid))
                     {
-                        
-                        var contact = _dynamicsClient.GetActiveContactByExternalId(userSettings.SiteMinderGuid);
+                        var contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(userSettings.SiteMinderGuid));
                         if (contact != null)
                         {
-                            userSettings.AuthenticatedUser.ContactId = Guid.Parse(contact.Contactid);
+                            userSettings.AuthenticatedUser.ContactId = contact.Id;
                         }
                     }
 
@@ -689,7 +692,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     try
                     {
-                        return await LoginDevUser(context, _dynamicsClient);
+                        return await LoginDevUser(context, _dataverse);
                     }
                     catch (Exception ex)
                     {
@@ -715,21 +718,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateSharePointAccountDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMaccount account)
+        private static string CleanGuidForSharePoint(Guid id) =>
+            id.ToString().ToUpper().Replace("-", "");
+
+        private async Task CreateSharePointAccountDocumentLocation(FileManagerClient _fileManagerClient, DvAccount account)
         {
-            string logFolderName = "";
+            string folderName = $"{account.Name}_{CleanGuidForSharePoint(account.Id)}";
+            string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
-                FolderSegment folderSegment = account.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
-
-                var createFolderRequest = new CreateFolderRequest
+                var createFolderResult = _fileManagerClient.CreateFolder(new CreateFolderRequest
                 {
                     EntityName = "account",
-                    FolderName = folderSegment.FolderName
-                };
-
-                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+                    FolderName = folderName
+                });
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
@@ -742,21 +744,17 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateSharePointContactDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMcontact contact)
+        private async Task CreateSharePointContactDocumentLocation(FileManagerClient _fileManagerClient, DvContact contact)
         {
-            string logFolderName = "";
+            string folderName = $"contact_{CleanGuidForSharePoint(contact.Id)}";
+            string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
-                FolderSegment folderSegment = contact.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
-
-                var createFolderRequest = new CreateFolderRequest
+                var createFolderResult = _fileManagerClient.CreateFolder(new CreateFolderRequest
                 {
                     EntityName = "contact",
-                    FolderName = folderSegment.FolderName
-                };
-
-                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+                    FolderName = folderName
+                });
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
@@ -769,120 +767,114 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task CreateSharePointWorkerDocumentLocation(FileManagerClient _fileManagerClient, MicrosoftDynamicsCRMadoxioWorker worker)
+        private async Task CreateSharePointWorkerDocumentLocation(FileManagerClient _fileManagerClient, DvWorker worker)
         {
-            string logFolderName = "";
+            string folderName = $"{worker.adoxio_name}_{CleanGuidForSharePoint(worker.Id)}";
+            string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
-                FolderSegment folderSegment = worker.GetDocumentFolderName();
-                logFolderName = WordSanitizer.Sanitize(folderSegment.FolderName);
-
-                var createFolderRequest = new CreateFolderRequest
+                var createFolderResult = _fileManagerClient.CreateFolder(new CreateFolderRequest
                 {
                     EntityName = "worker",
-                    FolderName = folderSegment.FolderName
-                };
-
-                var createFolderResult = _fileManagerClient.CreateFolder(createFolderRequest);
+                    FolderName = folderName
+                });
 
                 if (createFolderResult.ResultStatus == ResultStatus.Fail)
                 {
-                    _logger.Error($"Error creating folder for contact {logFolderName}. Error is {createFolderResult.ErrorDetail}");
+                    _logger.Error($"Error creating folder for worker {logFolderName}. Error is {createFolderResult.ErrorDetail}");
                 }
             }
             catch (Exception e)
             {
-                _logger.Error(e, $"Error creating folder for contact {logFolderName}");
+                _logger.Error(e, $"Error creating folder for worker {logFolderName}");
             }
         }
 
         private async Task HandleVerifiedIndividualLogin(UserSettings userSettings, HttpContext context)
         {
             IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
-            FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
+            DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
 
-            BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof (BCeIDBusinessQuery));
+            BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof(BCeIDBusinessQuery));
 
             ViewModels.Contact contact = new ViewModels.Contact();
             contact.CopyHeaderValues(context.Request.Headers);
             //LCSD-6488 - Change to Alway get First & Lastname from BCEID Web Query
             //These fields (FIRSTNAME & LASTNAME) are READONLY on our form and managed in BCEID.
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            if(bceidBusiness != null) 
+            if (bceidBusiness != null)
             {
                 contact.firstname = bceidBusiness.individualFirstname;
                 contact.lastname = bceidBusiness.individualSurname;
             }
             else
             {
-                Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
-                if(bceidBasic != null)
+                BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                if (bceidBasic != null)
                 {
                     contact.firstname = bceidBasic.individualFirstname;
                     contact.lastname = bceidBasic.individualSurname;
                 }
             }
 
-            MicrosoftDynamicsCRMcontact savedContact = _dynamicsClient.Contacts.GetByKey(userSettings.ContactId);
-            if (savedContact.Address1Line1 != null && savedContact.Address1Line1 != contact.address1_line1)
+            var savedContact = await _dataverse.GetContactByIdAsync(userSettings.ContactId);
+            if (savedContact != null && savedContact.Address1_Line1 != null && savedContact.Address1_Line1 != contact.address1_line1)
             {
-                DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
                 var prevAddress = new DvPreviousAddress
                 {
-                    adoxio_StreetAddress = savedContact.Address1Line1,
-                    adoxio_PROVSTATE = savedContact.Address1Stateorprovince,
-                    adoxio_City = savedContact.Address1City,
-                    adoxio_Country = savedContact.Address1Country,
-                    adoxio_PostalCode = savedContact.Address1Postalcode,
-                    adoxio_ContactId = new Microsoft.Xrm.Sdk.EntityReference(DvContact.EntityLogicalName, Guid.Parse(savedContact.Contactid))
+                    adoxio_StreetAddress = savedContact.Address1_Line1,
+                    adoxio_PROVSTATE = savedContact.Address1_StateOrProvince,
+                    adoxio_City = savedContact.Address1_City,
+                    adoxio_Country = savedContact.Address1_Country,
+                    adoxio_PostalCode = savedContact.Address1_PostalCode,
+                    adoxio_ContactId = new Microsoft.Xrm.Sdk.EntityReference(DvContact.EntityLogicalName, savedContact.Id)
                 };
-                _dataverse.CreatePreviousAddressAsync(prevAddress).GetAwaiter().GetResult();
+                await _dataverse.CreatePreviousAddressAsync(prevAddress);
             }
 
-            _dynamicsClient.Contacts.Update(userSettings.ContactId, contact.ToModel());
+            var patchContact = new DvContact { Id = Guid.Parse(userSettings.ContactId) };
+            patchContact.CopyValues(contact);
+            await _dataverse.UpdateContactAsync(patchContact);
         }
 
         private async Task HandleWorkerLogin(UserSettings userSettings, HttpContext context)
         {
             IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-            IDynamicsClient _dynamicsClient = (IDynamicsClient)context.RequestServices.GetService(typeof(IDynamicsClient));
+            DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             // Update worker with latest info from BC Service Card
-            MicrosoftDynamicsCRMadoxioWorkerCollection workerCollection = _dynamicsClient.Workers.Get(filter: $"_adoxio_contactid_value eq {userSettings.ContactId}");
-            if (workerCollection.Value.Count > 0)
+            var workerCollection = await _dataverse.GetWorkersByContactIdAsync(userSettings.ContactId);
+            if (workerCollection.Count > 0)
             {
-                MicrosoftDynamicsCRMadoxioWorker savedWorker = workerCollection.Value[0];
+                var savedWorker = workerCollection[0];
 
                 Worker worker = new Worker();
                 worker.CopyHeaderValues(context.Request.Headers);
 
-                MicrosoftDynamicsCRMadoxioWorker patchWorker = new MicrosoftDynamicsCRMadoxioWorker
-                {
-                    AdoxioFirstname = worker.firstname,
-                    AdoxioLastname = worker.lastname,
-                    AdoxioMiddlename = worker.middlename
-                };
+                var patchWorker = new DvWorker { Id = savedWorker.Id };
+                patchWorker.adoxio_FirstName = worker.firstname;
+                patchWorker.adoxio_LastName = worker.lastname;
+                patchWorker.adoxio_MiddleName = worker.middlename;
                 if (worker.gender != 0)
                 {
-                    patchWorker.AdoxioGendercode = (int)worker.gender;
+                    patchWorker.adoxio_GenderCode = (DvGender?)(int?)worker.gender;
                 }
 
-                _dynamicsClient.Workers.Update(savedWorker.AdoxioWorkerid, patchWorker);
+                await _dataverse.UpdateWorkerAsync(patchWorker);
 
-                var updatedWorker = await _dynamicsClient.GetWorkerByIdWithChildren(savedWorker.AdoxioWorkerid);
+                var updatedWorker = await _dataverse.GetWorkerByIdWithChildrenAsync(savedWorker.Id.ToString());
 
                 // only create the worker document location if the FEATURE_NO_WET_SIGNATURE setting is blank
                 if (string.IsNullOrEmpty(_configuration["FEATURE_NO_WET_SIGNATURE"]))
                 {
-                    // ensure that the worker has a documents folder.                        
+                    // ensure that the worker has a documents folder.
                     await CreateSharePointWorkerDocumentLocation(_fileManagerClient, updatedWorker);
                 }
             }
         }
 
-        private async Task<AuthenticateResult> LoginDevUser(HttpContext context, IDynamicsClient dynamicsClient)
+        private async Task<AuthenticateResult> LoginDevUser(HttpContext context, DvIDataverseClient _dataverse)
         {
             string userId = null;
             string devCompanyId = null;
@@ -891,7 +883,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             UserSettings userSettings = new UserSettings();
 
             // check for a fake BCeID login
-            
+
             string temp = context.Request.Cookies[_options.DevAuthenticationTokenKey];
 
             if (string.IsNullOrEmpty(temp)) // could be an automated test user.
@@ -992,7 +984,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("DEV MODE Setting identity and creating session for: " + userId);
 
             // create session info for the current user
-            userSettings.AuthenticatedUser = await _dynamicsClient.LoadUserLegacy(userSettings.SiteMinderGuid, context.Request.Headers, _ms_logger);
+            userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, userSettings.SiteMinderGuid, context.Request.Headers);
             if (userSettings.AuthenticatedUser == null)
             {
                 userSettings.UserAuthenticated = true;
@@ -1012,6 +1004,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             UserSettings.SaveUserSettings(userSettings, context);
             return AuthenticateResult.Success(new AuthenticationTicket(userPrincipal, null, _options.Scheme));
         }
+
         private bool UserIsUnderage(HttpContext context)
         {
             string rawBirthDate = context.Request.Headers[_options.SiteMinderBirthDate];
@@ -1028,7 +1021,96 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             return false;
         }
 
-        
-        
+        /// <summary>
+        /// Replicates the DynamicsExtensions.LoadUserLegacy logic using Dataverse SDK calls.
+        /// </summary>
+        private async Task<Models.User> LoadUserLegacyAsync(DvIDataverseClient _dataverse, string smGuid, IHeaderDictionary headers)
+        {
+            Models.User user = null;
+
+            _ms_logger.LogDebug(">>>> LoadUserLegacyAsync start.");
+
+            if (Guid.TryParse(smGuid, out _))
+            {
+                // BCeID path: smGuid is a proper GUID
+                _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BCEID.");
+                var contact = await _dataverse.GetContactByExternalIdAsync(smGuid);
+                if (contact == null)
+                {
+                    var contactVM = new ViewModels.Contact();
+                    contactVM.CopyHeaderValues(headers);
+                    var temp = await _dataverse.GetContactByDetailsAsync(contactVM.firstname, contactVM.middlename, contactVM.lastname, contactVM.emailaddress1);
+                    if (temp != null && string.IsNullOrEmpty(temp.adoxio_ExternalID))
+                        contact = temp;
+                }
+                if (contact != null)
+                {
+                    _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BCEID: contact found.");
+                    user = new Models.User();
+                    user.FromContact(contact);
+
+                    var contactVM = new ViewModels.Contact();
+                    contactVM.CopyHeaderValues(headers);
+                    var patchContact = new DvContact { Id = contact.Id };
+                    patchContact.CopyValues(contactVM);
+                    await _dataverse.UpdateContactAsync(patchContact);
+                }
+            }
+            else
+            {
+                // BC Services Card path
+                _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BC Services Card.");
+                string externalId = ParseServiceCardId(smGuid);
+                var contact = await _dataverse.GetContactByExternalIdAsync(externalId);
+                if (contact == null)
+                {
+                    string firstInitial = headers["smgov_givenname"];
+                    string lastName = headers["smgov_surname"];
+                    string birthDate = headers["smgov_birthdate"];
+                    contact = await _dataverse.GetContactByNameAndBirthdateAsync(firstInitial, lastName, birthDate);
+                }
+                if (contact != null)
+                {
+                    _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BC Services Card: contact found.");
+                    user = new Models.User();
+                    user.FromContact(contact);
+
+                    var contactVM = new ViewModels.Contact();
+                    contactVM.CopyHeaderValues(headers);
+                    var patchContact = new DvContact { Id = contact.Id };
+                    patchContact.CopyValuesNoEmailPhone(contactVM);
+                    await _dataverse.UpdateContactAsync(patchContact);
+
+                    var workerVm = new ViewModels.Worker();
+                    workerVm.CopyHeaderValues(headers);
+                    var workers = await _dataverse.GetWorkersByContactIdAsync(contact.Id.ToString());
+                    foreach (var w in workers)
+                    {
+                        var patchWorker = new DvWorker { Id = w.Id };
+                        patchWorker.CopyValuesNoEmailPhone(workerVm);
+                        await _dataverse.UpdateWorkerAsync(patchWorker);
+                    }
+                }
+            }
+
+            return user;
+        }
+
+        private static string ParseServiceCardId(string raw)
+        {
+            string result = "";
+            if (!string.IsNullOrEmpty(raw))
+            {
+                var tokens = raw.Split('|');
+                if (tokens.Length > 0)
+                    result = tokens[0];
+                if (!string.IsNullOrEmpty(result))
+                {
+                    tokens = result.Split(':');
+                    result = tokens[tokens.Length - 1];
+                }
+            }
+            return GuidUtility.SanitizeGuidString(result);
+        }
     }
 }

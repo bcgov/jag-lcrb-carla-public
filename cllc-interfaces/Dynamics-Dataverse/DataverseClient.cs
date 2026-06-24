@@ -270,6 +270,68 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task UpdateApplicationExtensionAsync(adoxio_applicationextension extension, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Update(extension), ct);
 
+    public async Task<adoxio_applicationextension?> GetApplicationExtensionByApplicationIdAsync(string applicationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationId, out var guid)) return null;
+        var query = new QueryExpression(adoxio_applicationextension.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_application", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.FirstOrDefault()?.ToEntity<adoxio_applicationextension>();
+    }
+
+    public async Task<adoxio_applicationextension?> GetApplicationExtensionByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await Task.Run(() =>
+                _serviceClient.Retrieve(adoxio_applicationextension.EntityLogicalName, guid, new ColumnSet(true)), ct);
+            return entity?.ToEntity<adoxio_applicationextension>();
+        }
+        catch (Exception ex) when (ex.Message.Contains("Does Not Exist"))
+        {
+            return null;
+        }
+    }
+
+    public async Task<IList<adoxio_application>> GetApplicationsByApplicantExpandedAsync(string accountId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(accountId, out var guid)) return new List<adoxio_application>();
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicant", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
+    public async Task<IList<adoxio_application>> GetApplicationsByApplicantAndTypeAsync(
+        string accountId,
+        string? applicationTypeId,
+        IList<int>? excludeStatuses,
+        bool requireStatecode0 = false,
+        string? specificApplicationId = null,
+        CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(accountId, out var accountGuid)) return new List<adoxio_application>();
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicant", ConditionOperator.Equal, accountGuid);
+
+        if (!string.IsNullOrEmpty(applicationTypeId) && Guid.TryParse(applicationTypeId, out var typeGuid))
+            query.Criteria.AddCondition("adoxio_applicationtypeid", ConditionOperator.Equal, typeGuid);
+
+        if (requireStatecode0)
+            query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+
+        if (excludeStatuses != null)
+            foreach (var status in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, status);
+
+        if (!string.IsNullOrEmpty(specificApplicationId) && Guid.TryParse(specificApplicationId, out var appGuid))
+            query.Criteria.AddCondition("adoxio_applicationid", ConditionOperator.Equal, appGuid);
+
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
     public async Task<Guid> CreateAnnualVolumeAsync(adoxio_annualvolume annualVolume, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Create(annualVolume), ct);
 
@@ -372,6 +434,21 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result.Entities.Select(e => e.ToEntity<adoxio_licences>()).ToList();
     }
 
+    public async Task<IList<adoxio_licences>> GetLicencesByNameOrNumberAsync(string? name, string? licenceNumber, int top = 10, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_licences.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = top };
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        var orFilter = new FilterExpression(LogicalOperator.Or);
+        if (!string.IsNullOrWhiteSpace(name))
+            orFilter.AddCondition("adoxio_name", ConditionOperator.Contains, name);
+        if (!string.IsNullOrWhiteSpace(licenceNumber))
+            orFilter.AddCondition("adoxio_licencenumber", ConditionOperator.Contains, licenceNumber);
+        if (orFilter.Conditions.Count > 0)
+            query.Criteria.AddFilter(orFilter);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_licences>()).ToList();
+    }
+
     public async Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Update(licence), ct);
 
@@ -383,6 +460,15 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_servicearea>();
         var query = new QueryExpression(adoxio_servicearea.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_servicearea>()).ToList();
+    }
+
+    public async Task<IList<adoxio_servicearea>> GetServiceAreasByApplicationIdAsync(string applicationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationId, out var guid)) return new List<adoxio_servicearea>();
+        var query = new QueryExpression(adoxio_servicearea.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicationid", ConditionOperator.Equal, guid);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_servicearea>()).ToList();
     }
@@ -411,11 +497,26 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result.Entities.Select(e => e.ToEntity<adoxio_hoursofservice>()).ToList();
     }
 
+    public async Task<adoxio_hoursofservice?> GetHoursOfServiceByApplicationIdAsync(string applicationId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationId, out var guid)) return null;
+        var query = new QueryExpression(adoxio_hoursofservice.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_application", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.FirstOrDefault()?.ToEntity<adoxio_hoursofservice>();
+    }
+
     public async Task<Guid> CreateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Create(hourOfSale), ct);
 
+    public async Task<Guid> CreateHoursOfServiceAsync(adoxio_hoursofservice hoursOfService, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Create(hoursOfService), ct);
+
     public async Task UpdateHourOfSaleAsync(adoxio_hoursofservice hourOfSale, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Update(hourOfSale), ct);
+
+    public async Task UpdateHoursOfServiceAsync(adoxio_hoursofservice hoursOfService, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(hoursOfService), ct);
 
     public async Task DeleteHourOfSaleAsync(string id, CancellationToken ct = default)
     {
@@ -1418,6 +1519,58 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return null;
     }
 
+    public async Task CreateEntitySharePointDocumentLocationAsync(string entityName, string entityId, string folderName, string name, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(entityId, out var entityGuid)) return;
+
+        var (parentLibraryUrl, entityLogicalName) = entityName.ToLower() switch
+        {
+            "account"     => ("account",             Account.EntityLogicalName),
+            "application" => ("adoxio_application",  adoxio_application.EntityLogicalName),
+            "contact"     => ("contact",              Contact.EntityLogicalName),
+            "worker"      => ("adoxio_worker",        adoxio_worker.EntityLogicalName),
+            "event"       => ("adoxio_event",         adoxio_event.EntityLogicalName),
+            "licence"     => ("adoxio_licences",      adoxio_licences.EntityLogicalName),
+            _             => (null, null)
+        };
+        if (parentLibraryUrl == null) return;
+
+        var parentQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
+        parentQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, parentLibraryUrl);
+        parentQuery.Criteria.AddCondition("parentsiteorlocationid", ConditionOperator.Null);
+        var parentResult = await Task.Run(() => _serviceClient.RetrieveMultiple(parentQuery), ct);
+        var parentLib = parentResult.Entities.FirstOrDefault();
+        if (parentLib == null) return;
+
+        var checkQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
+        checkQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, folderName);
+        checkQuery.Criteria.AddCondition("regardingobjectid", ConditionOperator.Equal, entityGuid);
+        var existing = (await Task.Run(() => _serviceClient.RetrieveMultiple(checkQuery), ct)).Entities.FirstOrDefault();
+        if (existing != null) return;
+
+        var location = new SharePointDocumentLocation
+        {
+            RegardingObjectId = new EntityReference(entityLogicalName!, entityGuid),
+            ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, parentLib.Id),
+            RelativeUrl = folderName,
+            Name = name
+        };
+        await Task.Run(() => _serviceClient.Create(location), ct);
+    }
+
+    public async Task<IList<FormDocumentField>> GetFormDocumentFieldsAsync(string formId, CancellationToken ct = default)
+    {
+        var query = new QueryExpression("adoxio_formelementuploadfield") { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_formguid", ConditionOperator.Equal, formId);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities
+            .Select(e => new FormDocumentField(
+                e.GetAttributeValue<string>("adoxio_fileprefix"),
+                e.GetAttributeValue<string>("adoxio_name"),
+                e.GetAttributeValue<string>("adoxio_routerlink")))
+            .ToList();
+    }
+
     // -------------------------------------------------------------------------
     // Federal Report Export
     // -------------------------------------------------------------------------
@@ -1504,6 +1657,124 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // -------------------------------------------------------------------------
     // Proposed LRS Applications
     // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_application>> GetApplicationsByLginAsync(
+        string lginId, IList<int> includeStatuses, int? lgDecision = null, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(lginId, out var lginGuid)) return new List<adoxio_application>();
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.TopCount = 50;
+        query.Criteria.AddCondition("adoxio_localgovindigenousnationid", ConditionOperator.Equal, lginGuid);
+        if (includeStatuses.Count > 0)
+        {
+            var statusGroup = new FilterExpression(LogicalOperator.Or);
+            foreach (var s in includeStatuses)
+                statusGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
+            query.Criteria.AddFilter(statusGroup);
+        }
+        if (lgDecision.HasValue)
+            query.Criteria.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
+    public async Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(
+        string lginId,
+        IList<int> includeStatuses,
+        int? lgDecision = null,
+        bool? hasDecisionDate = null,
+        IList<string>? includeTypeIds = null,
+        IList<string>? excludeTypeIds = null,
+        IList<int>? excludeStatuses = null,
+        int pageIndex = 0,
+        int pageSize = 10,
+        CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(lginId, out var lginGuid))
+            return (new List<adoxio_application>(), 0);
+
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_localgovindigenousnationid", ConditionOperator.Equal, lginGuid);
+
+        if (includeStatuses.Count > 0)
+        {
+            var statusGroup = new FilterExpression(LogicalOperator.Or);
+            foreach (var s in includeStatuses)
+                statusGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
+            query.Criteria.AddFilter(statusGroup);
+        }
+        if (lgDecision.HasValue)
+            query.Criteria.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+        if (hasDecisionDate == true)
+            query.Criteria.AddCondition("adoxio_lgdecisionsubmissiondate", ConditionOperator.NotNull);
+        else if (hasDecisionDate == false)
+            query.Criteria.AddCondition("adoxio_lgdecisionsubmissiondate", ConditionOperator.Null);
+        if (excludeStatuses != null)
+            foreach (var s in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, s);
+
+        if (includeTypeIds != null && includeTypeIds.Count > 0)
+        {
+            var typeGroup = new FilterExpression(LogicalOperator.Or);
+            foreach (var tid in includeTypeIds)
+                if (Guid.TryParse(tid, out var tGuid))
+                    typeGroup.AddCondition("adoxio_applicationtypeid", ConditionOperator.Equal, tGuid);
+            query.Criteria.AddFilter(typeGroup);
+        }
+        if (excludeTypeIds != null)
+            foreach (var tid in excludeTypeIds)
+                if (Guid.TryParse(tid, out var tGuid))
+                    query.Criteria.AddCondition("adoxio_applicationtypeid", ConditionOperator.NotEqual, tGuid);
+
+        // fetch page 1 with total count
+        query.PageInfo = new PagingInfo { Count = pageSize, PageNumber = 1, ReturnTotalRecordCount = true };
+        string? pagingCookie = null;
+        int totalCount = 0;
+        var pageEntities = new List<adoxio_application>();
+
+        for (int page = 0; page <= pageIndex; page++)
+        {
+            if (page > 0)
+            {
+                query.PageInfo.PageNumber = page + 1;
+                query.PageInfo.PagingCookie = pagingCookie;
+            }
+            var res = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+            if (page == 0) totalCount = res.TotalRecordCount;
+            pagingCookie = res.PagingCookie;
+            if (page == pageIndex)
+                pageEntities = res.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+        }
+
+        return (pageEntities, totalCount);
+    }
+
+    public async Task<IList<adoxio_application>> GetApplicationsByJobNumberContainsAsync(
+        string jobNumber, IList<int> excludeStatuses, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_jobnumber", ConditionOperator.Like, $"%{jobNumber}%");
+        foreach (var s in excludeStatuses)
+            query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, s);
+        query.AddOrder("adoxio_jobnumber", OrderType.Ascending);
+        var lnk = query.AddLink("adoxio_licences", "adoxio_assignedlicence", "adoxio_licencesid", JoinOperator.LeftOuter);
+        lnk.Columns = new ColumnSet("adoxio_licencenumber", "adoxio_expirydate");
+        lnk.EntityAlias = "lic";
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
+    public async Task<IList<adoxio_applicationtype>> GetApplicationTypesByFilterAsync(
+        bool? isShowLginApproval = null, bool? isLgZoningConfirmation = null, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        if (isShowLginApproval.HasValue)
+            query.Criteria.AddCondition("adoxio_isshowlginapproval", ConditionOperator.Equal, isShowLginApproval.Value);
+        if (isLgZoningConfirmation.HasValue)
+            query.Criteria.AddCondition("adoxio_islgzoningconfirmation", ConditionOperator.Equal, isLgZoningConfirmation.Value);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
+    }
+
     public async Task<IList<adoxio_application>> GetProposedLrsApplicationsAsync(string applicationTypeId, IList<int> excludeStatuses, CancellationToken ct = default)
     {
         if (!Guid.TryParse(applicationTypeId, out var typeGuid)) return new List<adoxio_application>();
@@ -1791,6 +2062,60 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         await Task.Run(() => _serviceClient.Create(login), ct);
     }
 
+    public async Task<Contact?> GetContactByLoginAsync(bool isServicesCard, string siteminderId, CancellationToken ct = default)
+    {
+        if (string.IsNullOrEmpty(siteminderId)) return null;
+        var sanitized = siteminderId.Replace("-", "").ToUpperInvariant();
+        var loginType = isServicesCard ? adoxio_logintype.BCServicesCard : adoxio_logintype.BusinessBCeID;
+        var query = new QueryExpression(adoxio_login.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_type", ConditionOperator.Equal, (int)loginType);
+        query.Criteria.AddCondition("adoxio_externalid", ConditionOperator.Equal, sanitized);
+        var logins = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        foreach (var entity in logins.Entities)
+        {
+            var login = entity.ToEntity<adoxio_login>();
+            if (login.adoxio_Contact?.Id == null) continue;
+            var contact = await GetContactByIdAsync(login.adoxio_Contact.Id.ToString(), ct);
+            if (contact != null && contact.GetAttributeValue<OptionSetValue>("statecode")?.Value == 0)
+                return contact;
+        }
+        return null;
+    }
+
+    public async Task<Contact?> GetContactByDetailsAsync(string? firstname, string? middlename, string? lastname, string? email, CancellationToken ct = default)
+    {
+        if (firstname == null && lastname == null && email == null) return null;
+        var query = new QueryExpression(Contact.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        if (!string.IsNullOrEmpty(firstname))
+            query.Criteria.AddCondition("firstname", ConditionOperator.Equal, firstname.Replace("'", "''"));
+        if (!string.IsNullOrEmpty(middlename))
+            query.Criteria.AddCondition("middlename", ConditionOperator.Equal, middlename.Replace("'", "''"));
+        if (!string.IsNullOrEmpty(lastname))
+            query.Criteria.AddCondition("lastname", ConditionOperator.Equal, lastname.Replace("'", "''"));
+        if (!string.IsNullOrEmpty(email))
+            query.Criteria.AddCondition("emailaddress1", ConditionOperator.Equal, email.Replace("'", "''"));
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Count == 1 ? result.Entities[0].ToEntity<Contact>() : null;
+    }
+
+    public async Task<Contact?> GetContactByNameAndBirthdateAsync(string firstName, string lastName, string birthDate, CancellationToken ct = default)
+    {
+        if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(birthDate)) return null;
+        var query = new QueryExpression(Contact.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("lastname", ConditionOperator.Equal, lastName);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        if (!DateTimeOffset.TryParse(birthDate, out var dob)) return null;
+        return result.Entities
+            .Select(e => e.ToEntity<Contact>())
+            .FirstOrDefault(c =>
+                c.FirstName != null && c.FirstName.Length > 0 &&
+                c.FirstName[0].ToString().ToLower() == firstName[0].ToString().ToLower() &&
+                c.BirthDate?.Year == dob.Year &&
+                c.BirthDate?.Month == dob.Month &&
+                c.BirthDate?.Day == dob.Day);
+    }
+
     // -------------------------------------------------------------------------
     // Legal Entity helpers
     // -------------------------------------------------------------------------
@@ -1896,6 +2221,9 @@ public class DataverseClient : IDataverseClient, IHealthCheck
             return null;
         }
     }
+
+    public async Task UpdateInvoiceAsync(Invoice invoice, CancellationToken ct = default)
+        => await Task.Run(() => _serviceClient.Update(invoice), ct);
 
     // Invoice delete
     // -------------------------------------------------------------------------
@@ -2036,6 +2364,14 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result.Entities.FirstOrDefault()?.ToEntity<adoxio_licencesubcategory>();
     }
 
+    public async Task<adoxio_licencesubcategory?> GetLicenceSubCategoryByNameAsync(string name, CancellationToken ct = default)
+    {
+        var query = new QueryExpression(adoxio_licencesubcategory.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
+        query.Criteria.AddCondition("adoxio_name", ConditionOperator.Equal, name);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.FirstOrDefault()?.ToEntity<adoxio_licencesubcategory>();
+    }
+
     // -------------------------------------------------------------------------
     // Application types by licence type
     // -------------------------------------------------------------------------
@@ -2047,6 +2383,18 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
+    }
+
+    // -------------------------------------------------------------------------
+    // Application type contents
+    // -------------------------------------------------------------------------
+    public async Task<IList<adoxio_applicationtypecontent>> GetApplicationTypeContentsByTypeIdAsync(string applicationTypeId, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationTypeId, out var guid)) return new List<adoxio_applicationtypecontent>();
+        var query = new QueryExpression(adoxio_applicationtypecontent.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicationtype", ConditionOperator.Equal, guid);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtypecontent>()).ToList();
     }
 
     // -------------------------------------------------------------------------
@@ -2130,6 +2478,21 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("adoxio_assignedlicence", ConditionOperator.Equal, guid);
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
+    }
+
+    public async Task<IList<adoxio_application>> GetApplicationsByTypeAndAssignedLicenceAsync(string applicationTypeId, string licenceId, IList<int> excludeStatuses, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(applicationTypeId, out var typeGuid)) return new List<adoxio_application>();
+        if (!Guid.TryParse(licenceId, out var licGuid)) return new List<adoxio_application>();
+        var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_applicationtypeid", ConditionOperator.Equal, typeGuid);
+        query.Criteria.AddCondition("adoxio_assignedlicence", ConditionOperator.Equal, licGuid);
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        if (excludeStatuses?.Count > 0)
+            foreach (var status in excludeStatuses)
+                query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, status);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
     }

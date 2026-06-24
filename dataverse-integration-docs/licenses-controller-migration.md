@@ -14,6 +14,8 @@ Migrates `cllc-public-app/Controllers/LicensesController.cs` from `IDynamicsClie
 | `ClearAccountProposedOperatorAsync` | Disassociate `adoxio_account_adoxio_licences_ProposedOperator` from an account |
 | `CreateLicenceSharePointDocLocAsync` | Create a SharePoint document location for a licence |
 | `ExecuteWorkflowAsync` | Execute a Dynamics workflow by GUID against an entity record |
+| `GetLicencesByNameOrNumberAsync` | `statecode=0` licences filtered by OR-contains on `adoxio_name` / `adoxio_licencenumber`; `TopCount` configurable |
+| `GetApplicationsByTypeAndAssignedLicenceAsync` | Applications by `adoxio_applicationtypeid` + `adoxio_assignedlicence` + `statecode=0` + exclude statuses list |
 
 ## Migration decisions
 
@@ -39,19 +41,29 @@ Migrates `cllc-public-app/Controllers/LicensesController.cs` from `IDynamicsClie
 | `PUT /{licenceId}/ldbordertotals` | Patch `adoxio_LDBOrderTotals` (decimal?) via `UpdateLicenceAsync` |
 | `PUT /{licenceId}/establishment` | Patch establishment address fields via `UpdateLicenceAsync` |
 
+### Phase 2 — Remaining AutoRest methods migrated (Ticket D)
+
+| Method | What changed |
+|---|---|
+| `GET /autocomplete` | `GetLicencesByNameOrNumberAsync` (new); async; DV licence fields (`adoxio_name`, `adoxio_licencenumber`, `adoxio_EstablishmentAddressStreet/City/PostalCode`, EntityReference `.Name` for licencee/establishment) |
+| `POST /initiate-tied-house-excemption` | `GetLicenceByIdAsync` × 2; `CreateApplicationAsync` |
+| `POST /{licenceId}/create-action-application` | `CreateApplicationAsync` + `ToViewModelAsync` |
+| `POST /{licenceId}/create-action-application-term/{termId}` | `GetTermChangeApplicationAsync` + `CreateApplicationAsync` + `AssociateTermsConditionsToApplicationAsync` + `ToViewModelAsync` |
+| `CreateApplication` (private) → `CreateApplicationAsync` | `GetLicenceByIdAsync`, `GetApplicationTypeByNameAsync`, `GetAccountByIdAsync`, `GetEstablishmentByIdAsync`, `GetActiveApplicationsByAssignedLicenceIdAsync`; EntityReference bindings for type/licence/subcategory/establishment/applicant/LGIN/police |
+| `GetTermChangeApplication` (private) → `GetTermChangeApplicationAsync` | `GetApplicationsByTypeAndAssignedLicenceAsync` (new); checks `adoxio_application` N:1 on TC via `GetTermsConditionsByIdAsync` |
+| `GET /outstanding-prior-balance-invoice` | `GetApplicationsByApplicantTypeAndStatusesAsync` + `GetInvoiceByIdAsync` + `GetLicenceByIdAsync`; `DvInvoice.ToViewModel()` overload added to `Invoice.cs` |
+| `isConclusivelyDeemed` (private) → `isConclusivelyDeemedAsync` | `GetApplicationsByApplicantAndTypeAsync` + client-side filter by `adoxio_AssignedLicence`; checks `adoxio_ChecklistConclusivelyDeem == Yes` enum |
+
 ### Kept on `_dynamicsClient`
 
-| Endpoint / method | Reason |
+Nothing. The `_dynamicsClient` field, constructor parameter, and `_dynamicsClient = dynamicsClient;` assignment have been removed. Zero IDynamicsClient references remain in LicensesController.
+
+### Completed pinned TODOs
+
+| Item | Resolution |
 |---|---|
-| `GET /autocomplete` | No search/contains query in `IDataverseClient` |
-| `POST /initiate-tied-house-excemption` + `CreateApplication` | Complex: `CopyValuesForChangeOfLocation`, ODataBind, LGIN + police jurisdiction lookups |
-| `POST /{licenceId}/create-action-application` | Calls `CreateApplication` |
-| `POST /{licenceId}/create-action-application-term/{termId}` | Calls `CreateApplication` + `GetTermChangeApplication` |
-| `GetTermChangeApplication` (private) | Complex multi-status filter |
-| `GET /outstanding-prior-balance-invoice` | `Invoice` model not in `IDataverseClient` |
-| `isConclusivelyDeemed` (private) | Complex application status + type filter |
-| `GetPaidLicensesOnTransfer` call in `GetCurrentUserLicences` | Complex paid-application filter not in `IDataverseClient` |
-| `GetFolderName` in `GetLicencePDF` | TODO: pending migration |
+| `GetFolderName` in `GetLicencePDF` | Replaced with `await _dataverse.GetFolderNameAsync(entityName, entityId)` |
+| `Endorsement.ToHtml(_dynamicsClient)` × 2 in `GetLicencePDF` | `ToHtml` renamed to `ToHtmlAsync(IDataverseClient)` using `GetHoursOfSaleByEndorsementIdAsync` + `GetServiceAreasByEndorsementIdAsync`; callers updated to `await ... ToHtmlAsync(_dataverse)` |
 
 ## Property name notes (DV entity → field used)
 
@@ -61,6 +73,16 @@ Migrates `cllc-public-app/Controllers/LicensesController.cs` from `IDynamicsClie
 - `adoxio_hoursofservice.adoxio_MondayOpen` etc. — `adoxio_servicehoursoptionsethours?` enum, cast to `(int?)` for `StoreHoursUtility.ConvertOpenHoursToString`
 - `adoxio_licences_adoxio_transferrequested.No/Yes` and `adoxio_licences_adoxio_tporequested.No/Yes` — option set enums on the generated entity
 - `adoxio_application_statuscode.Terminated` — used when cancelling transfer/TPO applications
+
+## `DvInvoice.ToViewModel()` overload
+
+Added to `cllc-public-app/Models.Extensions/Invoice.cs` (requires `extern alias DV`). Maps:
+- `InvoiceId` → `id` (string)
+- `Name`, `InvoiceNumber` → `name`, `invoicenumber`
+- `StateCode`, `StatusCode` → `statecode`, `statuscode` (cast to `int?`)
+- `TotalTax.Value`, `TotalAmount.Value` → decimal fields
+- `adoxio_TransactionID`, `adoxio_returnedtransactionid` → `transactionId`, `returnedTransactionId`
+- `DueDate` → `duedate` (`DateTime.SpecifyKind(..., Local)`)
 
 ## `GetActiveApplicationsByAssignedLicenceIdAsync` implementation
 

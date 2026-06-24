@@ -79,3 +79,42 @@ AutoRest generated a REST client that used OData `@odata.bind` strings like `"ad
 | `MicrosoftDynamicsCRMpicklistAttributeMetadataCollection` | `DynamicsPicklistAttributeMetadataCollection` |
 
 Any callers referencing the old `MicrosoftDynamicsCRM*` class names for these metadata types need to be updated to use the new `Dynamics*` names.
+
+## Phase 2: Dead code removal from cllc-public-app
+
+With all controllers migrated to `IDataverseClient`, the old `MicrosoftDynamicsCRM*` overloads in `cllc-public-app` became unreachable dead code and were deleted.
+
+### Files cleaned in Models.Extensions/
+
+| File | What was removed |
+|---|---|
+| `Application.cs` (1724→762 lines) | Old `CopyValues(MicrosoftDynamicsCRMadoxioApplication, ...)`, `CopyValuesForCovidApplication`, `CopyValuesForChangeOfLocation`, `GetCachedLicenceType`, `GetCachedApplicationPicklists(IDynamicsClient)`, `PopulateLicenceType(IDynamicsClient)`, `ToViewModel(IDynamicsClient)`, `ToSummaryViewModel(MicrosoftDynamicsCRM)` |
+| `License.cs` (548→373 lines) | Old `GetEndorsements`, `GetHoursOfServiceList`, `GetAreaCapacitySync`, `GetOffsiteStorage`, `GetServiceAreas` (all IDynamicsClient params), old `ToViewModel(MicrosoftDynamicsCRMadoxioLicences, IDynamicsClient)`. `GetHourService(int,int?,int?)` kept — shared by new DV `GetHoursOfServiceListAsync` |
+| `LicenceEvent.cs` (611→322 lines) | Old `ToViewModel(MicrosoftDynamicsCRMadoxioEvent, IDynamicsClient)`, old `CopyValues(MicrosoftDynamicsCRMadoxioEvent, ...)`. `DetermineEventClass` kept — pure logic, no AutoRest deps |
+| `MonthlyReport.cs` (174→85 lines) | Old `ToViewModel(MicrosoftDynamicsCRMadoxioCannabismonthlyreport, IDynamicsClient, bool)` |
+| `Contact.cs` (634→203 lines) | Old `ToViewModel(MicrosoftDynamicsCRMcontact)`, `CopyHeaderValues`, `CopyValues`, `CopyContactUserSettings`, `CopyValuesNoEmailPhone` (all MicrosoftDynamicsCRM overloads), old `ToModel(this Contact)` returning `MicrosoftDynamicsCRMcontact` |
+| `SpecialEvent.cs` (450→156 lines) | Old `ToViewModel(MicrosoftDynamicsCRM, IDynamicsClient)`, `ToSummaryViewModel(MicrosoftDynamicsCRM)`, `CopyValues(MicrosoftDynamicsCRM)` |
+| `Adoxio_LegalEntity.cs` (246→99 lines) | Old `CopyValues(MicrosoftDynamicsCRMadoxioLegalentity)`, `ToViewModel(MicrosoftDynamicsCRMadoxioLegalentity)` |
+| `Adoxio_Establishment.cs` (278→95 lines) | Old `CopyValues(MicrosoftDynamicsCRM*)`, `ToViewModel(MicrosoftDynamicsCRM*)`, old `ToModel(ViewModels.Establishment)` returning `MicrosoftDynamicsCRMadoxioEstablishment` |
+| `Worker.cs` (236→110 lines) | Old `ToViewModel(MicrosoftDynamicsCRMadoxioWorker)`, `CopyValues(MicrosoftDynamicsCRM)`, `CopyValuesNoEmailPhone(MicrosoftDynamicsCRM)` |
+| `ApplicationExtension.cs` (61→28 lines) | Old `CopyValues(MicrosoftDynamicsCRMadoxioApplicationextension, ...)`, old `ToViewModel(MicrosoftDynamicsCRMadoxioApplicationextension)` |
+| `AdoxioTiedHouseConnections.cs` | Emptied — both methods dead; DV version lives in `AdoxioTiedHouseConnectionDataverse.cs` |
+| `Alias.cs`, `LicenceEventLocation.cs`, `LicenceEventSchedule.cs`, `PreviousAddress.cs`, `SepDrinksSalesForecast.cs`, `SepEventDates.cs`, `SepEventLocation.cs`, `SepServiceArea.cs` | Old MicrosoftDynamicsCRM overloads removed; DV methods retained |
+| `CapacityArea.cs`, `OffsiteStorage.cs`, `PolicyDocument.cs` | Old overloads removed from end of file |
+| `Invoice.cs`, `LicenseeChangeLog.cs` | Interleaved old/DV layout flattened; only DV methods kept |
+| `ApplicationType.cs`, `ApplicationTypeContent.cs`, `IndigenousNation.cs`, `LicenseType.cs`, `SepCity.cs`, `SepDrinkTypes.cs` | Old blocks removed; DV methods retained |
+| `PoliceJurisdiction.cs`, `TiedHouseAssociation.cs`, `User.cs`, `AdoxioApplicationTermsConditionsLimitations.cs` | Emptied — only had old methods, no DV equivalents needed |
+
+### Other files cleaned
+
+| File | What was removed |
+|---|---|
+| `Contexts/DynamicsExtensions.cs` | `GetInvoiceById(Guid/string)`, `GetApplicationById(Guid)`, `GetApplicationByIdWithChildren(Guid)`, `GetInventoryReportsForMonthlyReport(string)`, `GetApplicationTypeByName/ById(string)`, `GetSystemformViewModel(IDynamicsClient, ...)` (~200 lines), `IsMostlyLiquor(List<MicrosoftDynamicsCRM*>)` |
+| `Utils/StatusUtility.cs` (318→65 lines) | `GetTranslatedApplicationStatus(MicrosoftDynamicsCRM)`, `GetTranslatedApplicationStatusV2(MicrosoftDynamicsCRM)`, `GetLicenceStatus(MicrosoftDynamicsCRM, IList<...>)` |
+| `ViewModels/SecurityScreeningStatusItem.cs` | `public MicrosoftDynamicsCRMcontact Contact { get; set; }` property (dead, never assigned by any controller) |
+
+### Post-cleanup state
+
+After cleanup, `MicrosoftDynamicsCRM*` references in `cllc-public-app` are reduced to:
+- `Startup.cs` — DI registration (intentionally kept until legacy client is fully decommissioned, LCSD-8564)
+- One comment in `AdoxioTiedHouseConnectionDataverse.cs`
