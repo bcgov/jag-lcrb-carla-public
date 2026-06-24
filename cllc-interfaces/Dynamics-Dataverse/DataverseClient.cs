@@ -122,11 +122,13 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(Account.EntityLogicalName)
         {
             ColumnSet = new ColumnSet(true),
-            TopCount = 1
+            TopCount = 2
         };
         query.Criteria.AddCondition("name", ConditionOperator.Equal, name);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
-        return result.Entities.FirstOrDefault()?.ToEntity<Account>();
+        if (result.Entities.Count != 1)
+            return null;
+        return result.Entities[0].ToEntity<Account>();
     }
 
     public async Task<IList<Account>> GetAccountsAsync(string? filter = null, CancellationToken ct = default)
