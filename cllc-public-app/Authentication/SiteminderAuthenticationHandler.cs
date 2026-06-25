@@ -253,6 +253,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("Getting user data from headers");
 
             DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
+            if (_dataverse == null)
+            {
+                _logger.Error("Dataverse service is not available. Check DYNAMICS_ODATA_URI configuration.");
+                return AuthenticateResult.Fail("Dataverse service is not configured.");
+            }
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
@@ -350,12 +355,25 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                         contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(siteMinderGuid));
                         if (contact != null)
                         {
-                            _logger.Information($"Found contact via direct ExternalID for {siteMinderGuid}. Creating bridge record. ContactID is {contact.Id}");
-                            await _dataverse.UpdateContactBridgeLoginAsync(
-                                contact.Id.ToString(),
-                                siteMinderGuid,
-                                contact.ParentCustomerId?.Id.ToString(),
-                                siteMinderBusinessGuid);
+                            // N1: Verify the stored ExternalID exactly matches the incoming GUID (after normalization)
+                            // to prevent auto-creating a bridge record for the wrong business association.
+                            if (!string.Equals(
+                                GuidUtility.SanitizeGuidString(contact.adoxio_ExternalID),
+                                GuidUtility.SanitizeGuidString(siteMinderGuid),
+                                StringComparison.OrdinalIgnoreCase))
+                            {
+                                _logger.Warning($"ExternalID mismatch for contact {contact.Id}: stored={contact.adoxio_ExternalID}, incoming={siteMinderGuid}. Skipping bridge record creation.");
+                                contact = null;
+                            }
+                            else
+                            {
+                                _logger.Information($"Found contact via direct ExternalID for {siteMinderGuid}. Creating bridge record. ContactID is {contact.Id}");
+                                await _dataverse.UpdateContactBridgeLoginAsync(
+                                    contact.Id.ToString(),
+                                    siteMinderGuid,
+                                    contact.ParentCustomerId?.Id.ToString(),
+                                    siteMinderBusinessGuid);
+                            }
                         }
                     }
                     if (contact == null)
@@ -455,6 +473,11 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             _logger.Debug("Getting user data from headers");
 
             DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
+            if (_dataverse == null)
+            {
+                _logger.Error("Dataverse service is not available. Check DYNAMICS_ODATA_URI configuration.");
+                return AuthenticateResult.Fail("Dataverse service is not configured.");
+            }
             FileManagerClient _fileManagerClient = (FileManagerClient)context.RequestServices.GetService(typeof(FileManagerClient));
 
             if (!string.IsNullOrEmpty(context.Request.Headers[_options.SiteMinderUserDisplayNameKey]))
@@ -733,9 +756,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         private static string CleanGuidForSharePoint(Guid id) =>
             id.ToString().ToUpper().Replace("-", "");
 
+        // Replaces characters that are invalid in SharePoint folder names with a dash.
+        private static string SanitizeSharePointFolderSegment(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return string.Empty;
+            var invalid = new HashSet<char> { '~', '#', '%', '*', '[', ']', '{', '}', ':', '<', '>', '?', '/', '\\', '|', '"' };
+            var chars = name.ToCharArray();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                if (chars[i] < 32 || invalid.Contains(chars[i]))
+                    chars[i] = '-';
+            }
+            return new string(chars).TrimEnd('.');
+        }
+
         private async Task CreateSharePointAccountDocumentLocation(FileManagerClient _fileManagerClient, DvAccount account)
         {
-            string folderName = $"{account.Name}_{CleanGuidForSharePoint(account.Id)}";
+            string folderName = $"{SanitizeSharePointFolderSegment(account.Name ?? string.Empty)}_{CleanGuidForSharePoint(account.Id)}";
             string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {
@@ -781,7 +818,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task CreateSharePointWorkerDocumentLocation(FileManagerClient _fileManagerClient, DvWorker worker)
         {
-            string folderName = $"{worker.adoxio_name}_{CleanGuidForSharePoint(worker.Id)}";
+            string folderName = $"{SanitizeSharePointFolderSegment(worker.adoxio_name ?? string.Empty)}_{CleanGuidForSharePoint(worker.Id)}";
             string logFolderName = WordSanitizer.Sanitize(folderName);
             try
             {

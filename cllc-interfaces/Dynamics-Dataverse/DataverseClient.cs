@@ -167,9 +167,19 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<Contact?> GetContactByExternalIdAsync(string externalId, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(externalId)) return null;
+        // Normalize to no-hyphens uppercase — the canonical stored format for new records.
+        var normalized = externalId.Replace("-", "").ToUpperInvariant();
         var query = new QueryExpression(Contact.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-        query.Criteria.AddCondition("adoxio_externalid", ConditionOperator.Equal, externalId);
+        // Match either the normalized form or the standard hyphenated GUID form to handle
+        // contacts whose adoxio_ExternalID was stored by the old Dynamics client with hyphens.
+        var idFilter = new FilterExpression(LogicalOperator.Or);
+        idFilter.AddCondition("adoxio_externalid", ConditionOperator.Equal, normalized);
+        if (Guid.TryParse(normalized, out var parsedGuid))
+        {
+            idFilter.AddCondition("adoxio_externalid", ConditionOperator.Equal, parsedGuid.ToString("D").ToUpperInvariant());
+        }
+        query.Criteria.AddFilter(idFilter);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.FirstOrDefault()?.ToEntity<Contact>();
     }
