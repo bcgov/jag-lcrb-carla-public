@@ -592,6 +592,13 @@ namespace Gov.Lclb.Cllb.Public.Models
             vm.IsSubmitted = app.adoxio_InvoiceTrigger == adoxio_generalyesno.Yes;
             vm.PrevPaymentFailed = app.adoxio_Invoice != null && !vm.IsSubmitted;
 
+            if (app.adoxio_LicenceFeeInvoice != null)
+            {
+                var feeInvoice = await dataverse.GetInvoiceByIdAsync(app.adoxio_LicenceFeeInvoice.Id.ToString());
+                if (feeInvoice != null)
+                    vm.LicenceFeeInvoice = feeInvoice.ToViewModel();
+            }
+
             // applying person
             if (applyingPerson != null)
                 vm.ApplyingPerson = applyingPerson.FullName;

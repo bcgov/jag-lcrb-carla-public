@@ -12,7 +12,6 @@ RUN dotnet tool install --tool-path /tools dotnet-dump
 
 WORKDIR /src
 COPY ["orgbook-service/orgbook-service.csproj", "orgbook-service/"]
-COPY ["cllc-interfaces/Dynamics-Autorest/DynamicsAutorest.csproj", "cllc-interfaces/Dynamics-Autorest/"]
 RUN dotnet restore "orgbook-service/orgbook-service.csproj"
 COPY . .
 WORKDIR "/src/orgbook-service"

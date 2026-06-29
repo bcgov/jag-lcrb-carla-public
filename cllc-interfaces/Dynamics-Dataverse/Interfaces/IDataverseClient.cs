@@ -14,7 +14,7 @@ public interface IDataverseClient
     Task<Account?> GetAccountByIdAsync(string id, CancellationToken ct = default);
     Task<Account?> GetAccountByIdWithChildrenAsync(string id, CancellationToken ct = default);
     Task<Account?> GetAccountByNameAsync(string name, CancellationToken ct = default);
-    Task<IList<Account>> GetAccountsAsync(string? filter = null, CancellationToken ct = default);
+    Task<IList<Account>> GetAccountsAsync(string? filter = null, bool activeOnly = false, CancellationToken ct = default);
     Task<Guid> CreateAccountAsync(Account account, CancellationToken ct = default);
     Task UpdateAccountAsync(Account account, CancellationToken ct = default);
     Task DeleteAccountAsync(string id, CancellationToken ct = default);

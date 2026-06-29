@@ -10,7 +10,6 @@ namespace Gov.Lclb.Cllb.Public.Models
 {
     /// <summary>
     /// Dataverse SDK extension methods for adoxio_tiedhouseconnection.
-    /// Replaces the AutoRest-based MicrosoftDynamicsCRMadoxioTiedhouseconnection extensions.
     /// </summary>
     public static class AdoxioTiedHouseConnectionDataverseExtensions
     {

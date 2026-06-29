@@ -1,6 +1,5 @@
 ﻿extern alias DV;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Mapping;
@@ -490,12 +489,11 @@ namespace Gov.Lclb.Cllb.Interfaces
             return form;
         }
 
-        public static bool IsMostlyLiquor(List<MicrosoftDynamicsCRMadoxioLicences> licences)
+        public static bool IsMostlyLiquor(IList<Public.ViewModels.ApplicationTypeCategory?> categories)
         {
-            if (licences == null || licences.Count == 0) return false;
-            int liquorCount = licences.Count(l =>
-                l.AdoxioLicenceType?.AdoxioCategory == (int?)Public.ViewModels.ApplicationTypeCategory.Liquor);
-            return (liquorCount * 1.0f) >= (licences.Count * 1.0f) / 2.0f;
+            if (categories == null || categories.Count == 0) return false;
+            int liquorCount = categories.Count(c => c == Public.ViewModels.ApplicationTypeCategory.Liquor);
+            return (liquorCount * 1.0f) >= (categories.Count * 1.0f) / 2.0f;
         }
 
         public static async Task<PaymentType> GetPaymentTypeAsync(

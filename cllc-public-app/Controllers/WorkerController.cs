@@ -61,22 +61,28 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             foreach (var w in workers)
                 results.Add(w.ToViewModel());
 
+            var sharedContact = await _dataverse.GetContactByIdAsync(contactId);
+
             if (results.Count == 0)
             {
-                var contact = await _dataverse.GetContactByIdAsync(contactId);
-                if (contact != null)
+                if (sharedContact != null)
                 {
                     var worker = new ViewModels.Worker
                     {
-                        firstname = contact.FirstName,
-                        middlename = contact.MiddleName,
-                        lastname = contact.LastName,
+                        firstname = sharedContact.FirstName,
+                        middlename = sharedContact.MiddleName,
+                        lastname = sharedContact.LastName,
                         contact = new ViewModels.Contact { id = contactId }
                     };
                     worker = await this.CreateWorkerRecord(worker);
-                    worker.contact = contact.ToViewModel();
+                    worker.contact = sharedContact.ToViewModel();
                     results.Add(worker);
                 }
+            }
+            else if (sharedContact != null)
+            {
+                foreach (var r in results)
+                    r.contact = sharedContact.ToViewModel();
             }
 
             return new JsonResult(results);
@@ -98,7 +104,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!CurrentUserHasAccessToContactWorkerApplicationOwnedBy(worker.adoxio_ContactId?.Id.ToString()))
                 return NotFound("No access to worker");
 
-            return new JsonResult(worker.ToViewModel());
+            var workerVm = worker.ToViewModel();
+            if (worker.adoxio_ContactId != null)
+            {
+                var contact = await _dataverse.GetContactByIdAsync(worker.adoxio_ContactId.Id.ToString());
+                if (contact != null)
+                    workerVm.contact = contact.ToViewModel();
+            }
+            return new JsonResult(workerVm);
         }
 
         /// <summary>
@@ -126,7 +139,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             await _dataverse.UpdateWorkerAsync(patchWorker);
 
             var updated = await _dataverse.GetWorkerByIdAsync(id);
-            return new JsonResult(updated.ToViewModel());
+            var updatedVm = updated.ToViewModel();
+            if (updated.adoxio_ContactId != null)
+            {
+                var contact = await _dataverse.GetContactByIdAsync(updated.adoxio_ContactId.Id.ToString());
+                if (contact != null)
+                    updatedVm.contact = contact.ToViewModel();
+            }
+            return new JsonResult(updatedVm);
         }
 
         /// <summary>
@@ -163,7 +183,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
-            return worker.ToViewModel();
+            var workerVm = worker.ToViewModel();
+            workerVm.contact = item.contact;
+            return workerVm;
         }
 
         /// <summary>

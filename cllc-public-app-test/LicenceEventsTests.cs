@@ -1,4 +1,3 @@
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;

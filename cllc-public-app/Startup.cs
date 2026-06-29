@@ -29,7 +29,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using NWebsec.AspNetCore.Mvc;
@@ -290,7 +289,6 @@ namespace Gov.Lclb.Cllb.Public
                 });
             });
 
-            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
             services.AddSingleton<IDataverseClient, DataverseClient>();
             services.AddSingleton(sp => (DataverseClient)sp.GetRequiredService<IDataverseClient>());
 
@@ -368,46 +366,6 @@ namespace Gov.Lclb.Cllb.Public
 
             string connectionString = "unknown.";
 
-#if (USE_MSSQL)
-
-            if (!string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
-            {
-
-                try
-                {
-                    using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        log.LogDebug("Fetching the application's database context ...");
-                        AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                        IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
-
-                        connectionString = context.Database.GetDbConnection().ConnectionString;
-
-                        log.LogDebug("Migrating the database ...");
-                        context.Database.Migrate();
-                        log.LogDebug("The database migration complete.");
-
-                        // run the database seeders
-                        log.LogDebug("Adding/Updating seed data ...");
-
-                        Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
-                        seederFactory.Seed((AppDbContext)context);
-                        log.LogDebug("Seeding operations are complete.");
-                    }
-                }
-                catch (Exception e)
-                {
-                    StringBuilder msg = new StringBuilder();
-                    msg.AppendLine("The database migration failed!");
-                    msg.AppendLine("The database may not be available and the application will not function as expected.");
-                    msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                    msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
-                    msg.AppendLine("Which is: " + connectionString);
-                    log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
-                }
-
-            }
-#endif
 
 
             string pathBase = _configuration["BASE_PATH"];

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using adoxio_application_dv = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application;
 using adoxio_application_statuscode = DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_statuscode;

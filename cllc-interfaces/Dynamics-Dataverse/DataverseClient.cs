@@ -131,11 +131,13 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result.Entities[0].ToEntity<Account>();
     }
 
-    public async Task<IList<Account>> GetAccountsAsync(string? filter = null, CancellationToken ct = default)
+    public async Task<IList<Account>> GetAccountsAsync(string? filter = null, bool activeOnly = false, CancellationToken ct = default)
     {
         var query = new QueryExpression(Account.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         if (!string.IsNullOrEmpty(filter))
             query.Criteria.AddCondition("name", ConditionOperator.Like, filter);
+        if (activeOnly)
+            query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<Account>()).ToList();
     }

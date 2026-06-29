@@ -23,8 +23,5 @@
     <PackageReference Include="Microsoft.Rest.ClientRuntime.Azure" Version="3.3.19" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Dynamics-Autorest\DynamicsAutorest.csproj" />
-  </ItemGroup>
 
 </Project>

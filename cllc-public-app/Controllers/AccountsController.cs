@@ -98,6 +98,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
                 }
                 result = account.ToViewModel();
+                if (account.PrimaryContactId != null)
+                {
+                    var primaryContact = await _dataverse.GetContactByIdAsync(account.PrimaryContactId.Id.ToString());
+                    if (primaryContact != null)
+                        result.primarycontact = primaryContact.ToViewModel();
+                }
             }
             else
             {
@@ -191,9 +197,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     name = name.Replace("'", "''");
                     filter = $"%{name}%";
                 }
-                var accounts = (await _dataverse.GetAccountsAsync(filter))
-                    .Where(a => a.StateCode == DV::Gov.Lclb.Cllb.Interfaces.account_statecode.Active)
-                    .Take(10);
+                var accounts = (await _dataverse.GetAccountsAsync(filter, activeOnly: true)).Take(10);
                 foreach (var account in accounts)
                 {
                     var transferAccount = new TransferAccount
@@ -262,6 +266,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     return new NotFoundResult();
                 }
                 result = account.ToViewModel();
+                if (account.PrimaryContactId != null)
+                {
+                    var primaryContact = await _dataverse.GetContactByIdAsync(account.PrimaryContactId.Id.ToString());
+                    if (primaryContact != null)
+                        result.primarycontact = primaryContact.ToViewModel();
+                }
             }
             else
             {
@@ -731,6 +741,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             result = account.ToViewModel();
+            if (account.PrimaryContactId != null)
+            {
+                var primaryContact = await _dataverse.GetContactByIdAsync(account.PrimaryContactId.Id.ToString());
+                if (primaryContact != null)
+                    result.primarycontact = primaryContact.ToViewModel();
+            }
 
             _logger.LogDebug(LoggingEvents.HttpPost, "result: " +
                 JsonConvert.SerializeObject(result, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
@@ -801,6 +817,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var updatedAccount = adoxioAccount.ToViewModel();
+            updatedAccount.primarycontact = item.primarycontact;
             _logger.LogDebug(LoggingEvents.HttpPut, "updatedAccount: " +
                 JsonConvert.SerializeObject(updatedAccount, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
 
