@@ -195,7 +195,7 @@ namespace Gov.Lclb.Cllb.Public
                     config += ",abortConnect=false";
                 }
 
-                services.AddDistributedRedisCache(o =>
+                services.AddStackExchangeRedisCache(o =>
                 {
                     o.Configuration = config;
                 });

@@ -46,6 +46,8 @@ export class LicencesComponent extends FormBase implements OnInit {
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceMappings = {};
+  hasOutstandingPriorBalance = false;
+  isOutstandingPriorBalanceInvoiceDue = false;
   liquorThree: boolean;
   RLRS: boolean;
   PRS: boolean;
@@ -139,7 +141,24 @@ export class LicencesComponent extends FormBase implements OnInit {
 
         this.dataLoaded = true;
       });
-    this.subscriptionList.push(sub);
+
+    // Fire once in parent so all LicenceRowComponents share a single HTTP call
+    const balanceSub = this.licenceDataService.getOutstandingBalancePriorInvoices()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data) => {
+        data.forEach((item: any) => {
+          if (!this.hasOutstandingPriorBalance) {
+            this.hasOutstandingPriorBalance = true;
+          }
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
+            const toDay = new Date(new Date().toISOString().split("T")[0]);
+            const tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
+            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
+          }
+        });
+      });
+
+    this.subscriptionList.push(sub, balanceSub);
   }
 
   hasPaidForRenewalApplication(licence: ApplicationLicenseSummary): boolean {

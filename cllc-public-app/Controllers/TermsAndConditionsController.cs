@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -26,10 +27,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet("{licenceId}")]
         public async Task<JsonResult> GetTermsAndConditionsForLicence(string licenceId)
         {
-            var result = new List<TermsAndConditions>();
             var terms = await _dataverse.GetTermsConditionsByLicenceIdAsync(licenceId);
 
-            foreach (var term in terms)
+            var resultTasks = terms.Select(async term =>
             {
                 bool? isDefault = null;
                 if (term.adoxio_TermsConditionsPreset?.Id != null)
@@ -38,17 +38,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         term.adoxio_TermsConditionsPreset.Id.ToString());
                     isDefault = preset?.adoxio_IsDefault;
                 }
-
-                result.Add(new TermsAndConditions
+                return new TermsAndConditions
                 {
                     Id = term.Id.ToString(),
                     LicenceId = term.adoxio_Licence?.Id.ToString(),
                     Content = term.adoxio_TermsandConditions,
                     IsDefault = isDefault
-                });
-            }
+                };
+            });
 
-            return new JsonResult(result);
+            return new JsonResult(new List<TermsAndConditions>(await Task.WhenAll(resultTasks)));
         }
 
         [HttpGet("term/{termId}")]

@@ -79,31 +79,50 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private async Task<List<ApplicationSummary>> GetApplicationSummariesByApplicantAsync(string applicantId)
         {
-            var result = new List<ApplicationSummary>();
             var apps = await _dataverse.GetApplicationsByApplicantExpandedAsync(applicantId);
 
-            // cache app types to avoid repeated fetches
-            var appTypeCache = new Dictionary<string, adoxio_applicationtype_dv?>();
-            async Task<adoxio_applicationtype_dv?> GetAppType(string? id)
-            {
-                if (string.IsNullOrEmpty(id)) return null;
-                if (!appTypeCache.TryGetValue(id, out var t))
-                {
-                    t = await _dataverse.GetApplicationTypeByIdAsync(id);
-                    appTypeCache[id] = t;
-                }
-                return t;
-            }
+            // Collect all unique referenced IDs upfront so we can fetch in parallel
+            var uniqueAppTypeIds = apps
+                .Select(a => a.adoxio_ApplicationTypeId?.Id.ToString())
+                .OfType<string>().Distinct().ToList();
+            var uniqueAssignedLicIds = apps
+                .Where(a => a.adoxio_AssignedLicence != null)
+                .Select(a => a.adoxio_AssignedLicence.Id.ToString())
+                .Distinct().ToList();
+            var uniqueLicTypeIds = apps
+                .Where(a => a.adoxio_LicenceType != null)
+                .Select(a => a.adoxio_LicenceType.Id.ToString())
+                .Distinct().ToList();
 
+            // Fetch all three entity sets in 3 parallel batch queries — 1 Dataverse call each instead of N
+            var appTypeTask = _dataverse.GetApplicationTypesByIdsAsync(uniqueAppTypeIds);
+            var licenceTask = _dataverse.GetLicencesByIdsAsync(uniqueAssignedLicIds);
+            var licTypeTask = _dataverse.GetApplicationTypesByLicenceTypeIdsAsync(uniqueLicTypeIds);
+            await Task.WhenAll(appTypeTask, licenceTask, licTypeTask);
+
+            var appTypeDict = appTypeTask.Result
+                .Where(t => t.adoxio_applicationtypeId.HasValue)
+                .ToDictionary(t => t.adoxio_applicationtypeId!.Value.ToString());
+            var licenceDict = licenceTask.Result
+                .Where(l => l.adoxio_licencesId.HasValue)
+                .ToDictionary(l => l.adoxio_licencesId!.Value.ToString());
+            var licTypeDict = licTypeTask.Result
+                .Where(t => t.adoxio_LicenceType != null)
+                .GroupBy(t => t.adoxio_LicenceType!.Id.ToString())
+                .ToDictionary(g => g.Key, g => (IList<adoxio_applicationtype_dv>)g.ToList());
+
+            // Loop is now pure dictionary lookups — zero Dataverse calls
+            var result = new List<ApplicationSummary>();
             foreach (var app in apps)
             {
-                var appType = await GetAppType(app.adoxio_ApplicationTypeId?.Id.ToString());
+                var appTypeId = app.adoxio_ApplicationTypeId?.Id.ToString();
+                var appType = appTypeId != null && appTypeDict.TryGetValue(appTypeId, out var at) ? at : null;
 
                 // skip apps for expired licences unless it's a renewal
                 if (appType?.adoxio_IsRenewal != true && app.adoxio_AssignedLicence != null)
                 {
-                    var lic = await _dataverse.GetLicenceByIdAsync(app.adoxio_AssignedLicence.Id.ToString());
-                    if (lic?.statuscode == adoxio_licences_statuscode.Expired)
+                    var assignedLicId = app.adoxio_AssignedLicence.Id.ToString();
+                    if (licenceDict.TryGetValue(assignedLicId, out var lic) && lic?.statuscode == adoxio_licences_statuscode.Expired)
                         continue;
                 }
 
@@ -113,9 +132,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     app.adoxio_PaymentRecieved == true)
                 {
                     var licTypeId = app.adoxio_LicenceType?.Id.ToString();
-                    if (!string.IsNullOrEmpty(licTypeId))
+                    if (!string.IsNullOrEmpty(licTypeId) && licTypeDict.TryGetValue(licTypeId, out var appTypes))
                     {
-                        var appTypes = await _dataverse.GetApplicationTypesByLicenceTypeIdAsync(licTypeId);
                         endorsements = appTypes
                             .Where(t => t.adoxio_IsEndorsement == true || t.adoxio_CopyLicenceTC == true)
                             .Select(t => t.adoxio_name ?? string.Empty)
@@ -139,15 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var result = new List<Application>();
             var apps = await _dataverse.GetApplicationsByApplicantExpandedAsync(applicantId);
             foreach (var app in apps)
-            {
-                // hide terminated applications from view
-                var sc = app.statuscode;
-                if (sc != adoxio_application_statuscode.Terminated
-                    && sc != adoxio_application_statuscode.Refused
-                    && sc != adoxio_application_statuscode.Cancelled
-                    && sc != adoxio_application_statuscode.TerminatedandRefunded)
-                    result.Add(await app.ToViewModelAsync(_dataverse, _cache, _logger));
-            }
+                result.Add(await app.ToViewModelAsync(_dataverse, _cache, _logger));
 
             // second pass to determine if location change is in progress
             foreach (var item in result)

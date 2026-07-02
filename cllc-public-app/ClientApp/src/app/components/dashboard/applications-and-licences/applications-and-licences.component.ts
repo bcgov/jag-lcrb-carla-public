@@ -22,7 +22,7 @@ import { PaymentDataService } from '@services/payment-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
 import { differenceInDays, startOfDay, startOfToday } from 'date-fns';
-import { forkJoin, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -54,7 +54,10 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   account: Account;
   @Output()
   marketerApplicationExists = new EventEmitter<boolean>();
+  @Output()
+  hasLicenceChange = new EventEmitter<boolean>();
   dataLoaded = false;
+  private _loadedApplications: ApplicationSummary[] = [];
   licencePresentLabel: string;
   licenceAbsentLabel: string;
   submittedApplications = 8;
@@ -147,15 +150,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
    */
   private displayApplications() {
     this.dataLoaded = false;
+    this._loadedApplications = [];
     this.inProgressApplications = [];
-    const sub = forkJoin([
-      this.applicationDataService.getAllCurrentApplications(),
-      this.licenceDataService.getAllCurrentLicenses()
-    ])
+
+    // Applications: show "In Progress Applications" tab as soon as this call returns
+    const appsSub = this.applicationDataService.getAllCurrentApplications()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(([applications, licenses]) => {
+      .subscribe((applications) => {
+        this._loadedApplications = applications;
         this.checkIndigenousNationState(applications);
-        // filter out approved applications
         applications
           .filter(
             (app) => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1
@@ -165,25 +168,29 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
               this.inProgressApplications.push(application);
             }
           });
+        this.hasInProgressLeReviewApplication = this.userHasInProgressLegalEntityReviewApplication(applications);
+        this.dataLoaded = true;
+      });
 
+    // Licences: fires in parallel; updates marketer flags and emits hasLicence when ready
+    const licSub = this.licenceDataService.getAllCurrentLicenses()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((licenses) => {
+        const applications = this._loadedApplications;
         // LCSD-6843: 2024-03-01 waynezen; executes asynchronously on long-running thread
         this.marketerExists = this.marketerExistsFunc(applications, licenses);
-
         this.nonMarketerExists =
           applications
             .filter((item) => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
             .map((item) => item as any)
             .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
-
-        this.hasInProgressLeReviewApplication = this.userHasInProgressLegalEntityReviewApplication(applications);
-
-        this.dataLoaded = true;
+        this.hasLicenceChange.emit(licenses.length > 0);
       });
 
     // LCSD-6843: 2024-03-01 waynezen; executes immediately; set marketerExists flag here first which hides the Cannabis tiles initially
     this.marketerExists = true;
 
-    this.subscriptionList.push(sub);
+    this.subscriptionList.push(appsSub, licSub);
   }
 
   /**

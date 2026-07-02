@@ -73,6 +73,7 @@ public interface IDataverseClient
     Task<adoxio_licences?> GetLicenceByNumberAsync(string licenceNumber, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByAccountIdAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetActiveLicencesByTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default);
+    Task<IList<adoxio_licences>> GetLicencesByIdsAsync(IList<string> ids, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByNameOrNumberAsync(string? name, string? licenceNumber, int top = 10, CancellationToken ct = default);
     Task UpdateLicenceAsync(adoxio_licences licence, CancellationToken ct = default);
 
@@ -164,6 +165,7 @@ public interface IDataverseClient
     // Application Type — by licence type
     // -------------------------------------------------------------------------
     Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdAsync(string licenceTypeId, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default);
     Task<IList<adoxio_applicationtypecontent>> GetApplicationTypeContentsByTypeIdAsync(string applicationTypeId, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
@@ -380,6 +382,7 @@ public interface IDataverseClient
     Task<IList<adoxio_applicationtype>> GetApplicationTypesAsync(CancellationToken ct = default);
     Task<adoxio_applicationtype?> GetApplicationTypeByNameAsync(string name, CancellationToken ct = default);
     Task<adoxio_applicationtype?> GetApplicationTypeByIdAsync(string id, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtype>> GetApplicationTypesByIdsAsync(IList<string> ids, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
     // Application — LG approval queries

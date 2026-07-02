@@ -13,6 +13,7 @@ using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -114,7 +115,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private IActionResult GetCSV(List<EstablishmentMapData> data, string filename)
         {
             StringWriter csvString = new StringWriter();
-            using (var csv = new CsvWriter(csvString))
+            using (var csv = new CsvWriter(csvString, CultureInfo.InvariantCulture))
             {
                 // headers
                 csv.WriteField("Licence");

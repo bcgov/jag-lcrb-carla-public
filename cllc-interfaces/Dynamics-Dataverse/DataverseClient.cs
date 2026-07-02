@@ -313,6 +313,14 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         if (!Guid.TryParse(accountId, out var guid)) return new List<adoxio_application>();
         var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("adoxio_applicant", ConditionOperator.Equal, guid);
+        foreach (var status in new[]
+        {
+            (int)adoxio_application_statuscode.Terminated,
+            (int)adoxio_application_statuscode.Refused,
+            (int)adoxio_application_statuscode.Cancelled,
+            (int)adoxio_application_statuscode.TerminatedandRefunded
+        })
+            query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, status);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
     }
@@ -435,6 +443,19 @@ public class DataverseClient : IDataverseClient, IHealthCheck
             if (Guid.TryParse(typeId, out var tGuid))
                 typeFilter.AddCondition("adoxio_licencetype", ConditionOperator.Equal, tGuid);
         query.Criteria.AddFilter(typeFilter);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_licences>()).ToList();
+    }
+
+    public async Task<IList<adoxio_licences>> GetLicencesByIdsAsync(IList<string> ids, CancellationToken ct = default)
+    {
+        if (ids.Count == 0) return new List<adoxio_licences>();
+        var query = new QueryExpression(adoxio_licences.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        var filter = new FilterExpression(LogicalOperator.Or);
+        foreach (var id in ids)
+            if (Guid.TryParse(id, out var guid))
+                filter.AddCondition("adoxio_licencesid", ConditionOperator.Equal, guid);
+        query.Criteria.AddFilter(filter);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_licences>()).ToList();
     }
@@ -1668,6 +1689,19 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result?.ToEntity<adoxio_applicationtype>();
     }
 
+    public async Task<IList<adoxio_applicationtype>> GetApplicationTypesByIdsAsync(IList<string> ids, CancellationToken ct = default)
+    {
+        if (ids.Count == 0) return new List<adoxio_applicationtype>();
+        var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        var filter = new FilterExpression(LogicalOperator.Or);
+        foreach (var id in ids)
+            if (Guid.TryParse(id, out var guid))
+                filter.AddCondition("adoxio_applicationtypeid", ConditionOperator.Equal, guid);
+        query.Criteria.AddFilter(filter);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
+    }
+
     // -------------------------------------------------------------------------
     // Proposed LRS Applications
     // -------------------------------------------------------------------------
@@ -2395,6 +2429,20 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("adoxio_licencetype", ConditionOperator.Equal, guid);
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
+    }
+
+    public async Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default)
+    {
+        if (licenceTypeIds.Count == 0) return new List<adoxio_applicationtype>();
+        var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        var typeFilter = new FilterExpression(LogicalOperator.Or);
+        foreach (var id in licenceTypeIds)
+            if (Guid.TryParse(id, out var guid))
+                typeFilter.AddCondition("adoxio_licencetype", ConditionOperator.Equal, guid);
+        query.Criteria.AddFilter(typeFilter);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
     }

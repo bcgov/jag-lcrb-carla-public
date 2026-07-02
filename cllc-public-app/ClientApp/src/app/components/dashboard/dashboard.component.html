@@ -36,7 +36,7 @@
       </p>
       <p></p>
 
-      <app-applications-and-licences [account]="account"></app-applications-and-licences>
+      <app-applications-and-licences [account]="account" (hasLicenceChange)="hasLicence = $event"></app-applications-and-licences>
     </div>
 
     <div class="col-lg-4 col-sm-12" style="position: relative">

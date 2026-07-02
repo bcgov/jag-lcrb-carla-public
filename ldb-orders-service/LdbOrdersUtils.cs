@@ -4,6 +4,7 @@ using adoxio_ldborder = DV::Gov.Lclb.Cllb.Interfaces.adoxio_ldborder;
 using adoxio_licences = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licences;
 
 using CsvHelper;
+using CsvHelper.Configuration;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
@@ -14,6 +15,7 @@ using Renci.SshNet;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -87,14 +89,15 @@ namespace LdbOrdersService
 
         private List<LdbOrderCsv> GetOrderCsvs(byte[] data)
         {
-            CsvHelper.Configuration.Configuration config = new CsvHelper.Configuration.Configuration();
-            config.SanitizeForInjection = true;
-            config.IgnoreBlankLines = true;
-            config.HasHeaderRecord = false;
-            config.TrimOptions = CsvHelper.Configuration.TrimOptions.Trim;
-            config.ShouldSkipRecord = record => { return record.All(string.IsNullOrEmpty); };
-            config.PrepareHeaderForMatch =
-                (string header, int index) => header = header.Trim();
+            var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+            {
+                InjectionOptions = InjectionOptions.Escape,
+                IgnoreBlankLines = true,
+                HasHeaderRecord = false,
+                TrimOptions = TrimOptions.Trim,
+                ShouldSkipRecord = args => args.Row.Parser.Record.All(string.IsNullOrEmpty),
+                PrepareHeaderForMatch = args => args.Header.Trim()
+            };
 
             using (var ms = new MemoryStream(data))
             {

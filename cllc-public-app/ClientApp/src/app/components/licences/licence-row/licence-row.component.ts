@@ -34,7 +34,6 @@ import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
 import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
-import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 import { LicenceTypeNames } from "../../../models/license-type.model";
 import { FeatureFlagService } from "@services/feature-flag.service";
 
@@ -83,8 +82,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   licenceType: string;
   @Input()
   licences: ApplicationLicenseSummary[];
-  isOutstandingPriorBalanceInvoiceDue: boolean;
-  hasOutstandingPriorBalance: boolean;
+  @Input()
+  hasOutstandingPriorBalance = false;
+  @Input()
+  isOutstandingPriorBalanceInvoiceDue = false;
   constructor(
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -118,20 +119,6 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         });
     });
 
-    this.licenceDataService.getOutstandingBalancePriorInvoices()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data) => {
-        data.forEach((item: OutstandingPriorBalanceInvoice) => {
-          if (!this.hasOutstandingPriorBalance) {
-            this.hasOutstandingPriorBalance = true;
-          }
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
-            const toDay = new Date(new Date().toISOString().split("T")[0]);
-            let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
-            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
-          }
-        });
-      });
 
     // Set the disableLicenceRenewalDate based on the "DisableLicenceRenewalDate" feature flag.
     this.featureFlagService.featureValue("DisableLicenceRenewalDate").subscribe(feature => {

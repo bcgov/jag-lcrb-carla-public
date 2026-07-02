@@ -233,58 +233,70 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (licence.adoxio_ThirdPartyOperatorId != null)
                 licenseSummary.ThirdPartyOperatorAccountName = licence.adoxio_ThirdPartyOperatorId.Name;
 
-            if (licence.adoxio_establishment != null)
-            {
-                var est = await dataverse.GetEstablishmentByIdAsync(licence.adoxio_establishment.Id.ToString());
-                if (est != null)
-                {
-                    licenseSummary.EstablishmentName = est.adoxio_name;
-                    licenseSummary.EstablishmentIsOpen = est.adoxio_IsOpen;
-                    licenseSummary.EstablishmentId = est.Id.ToString();
-                    licenseSummary.EstablishmentEmail = est.adoxio_Email;
-                }
-            }
-
-            if (licence.adoxio_LicenceSubCategoryId != null)
-            {
-                var subCat = await GetCachedLicenceSubCategoryAsync(licence.adoxio_LicenceSubCategoryId.Id.ToString(), dataverse, cache);
-                licenseSummary.LicenseSubCategory = subCat?.adoxio_name;
-            }
-
             var mainApplication = applications.FirstOrDefault(app => (int?)app.statuscode == 845280004); // Approved
+            var licTypeId = licence.adoxio_LicenceType?.Id.ToString();
+            var mainAppTypeId = mainApplication?.adoxio_ApplicationTypeId?.Id.ToString();
+
+            // Phase 1: 5 independent cached lookups in parallel (max 5 concurrent per licence)
+            var estTask = licence.adoxio_establishment != null
+                ? GetCachedEstablishmentAsync(licence.adoxio_establishment.Id.ToString(), dataverse, cache)
+                : Task.FromResult<adoxio_establishment?>(null);
+            var subCatTask = licence.adoxio_LicenceSubCategoryId != null
+                ? GetCachedLicenceSubCategoryAsync(licence.adoxio_LicenceSubCategoryId.Id.ToString(), dataverse, cache)
+                : Task.FromResult<adoxio_licencesubcategory?>(null);
+            var mainAppTypeTask = !string.IsNullOrEmpty(mainAppTypeId)
+                ? GetCachedApplicationTypeAsync(mainAppTypeId, dataverse, cache)
+                : Task.FromResult<adoxio_applicationtype?>(null);
+            var licTypeTask = !string.IsNullOrEmpty(licTypeId)
+                ? GetCachedLicenceTypeAsync(licTypeId, dataverse, cache)
+                : Task.FromResult<adoxio_licencetype?>(null);
+            var appTypesTask = !string.IsNullOrEmpty(licTypeId)
+                ? GetCachedApplicationTypesByLicenceTypeIdAsync(licTypeId, dataverse, cache)
+                : Task.FromResult<IList<adoxio_applicationtype>>(new List<adoxio_applicationtype>());
+            await Task.WhenAll(estTask, subCatTask, mainAppTypeTask, licTypeTask, appTypesTask);
+
+            var est = estTask.Result;
+            if (est != null)
+            {
+                licenseSummary.EstablishmentName = est.adoxio_name;
+                licenseSummary.EstablishmentIsOpen = est.adoxio_IsOpen;
+                licenseSummary.EstablishmentId = est.Id.ToString();
+                licenseSummary.EstablishmentEmail = est.adoxio_Email;
+            }
+
+            licenseSummary.LicenseSubCategory = subCatTask.Result?.adoxio_name;
+
             if (mainApplication != null)
             {
                 licenseSummary.ApplicationId = mainApplication.Id.ToString();
                 licenseSummary.ApplicationTypeName = mainApplication.adoxio_ApplicationTypeId?.Name;
-                if (mainApplication.adoxio_ApplicationTypeId != null)
-                {
-                    var appType = await GetCachedApplicationTypeAsync(mainApplication.adoxio_ApplicationTypeId.Id.ToString(), dataverse, cache);
-                    licenseSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)(int?)appType?.adoxio_Category;
-                }
+                licenseSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)(int?)mainAppTypeTask.Result?.adoxio_Category;
             }
 
-            if (licence.adoxio_LicenceType != null)
+            var licenceType = licTypeTask.Result;
+            if (licenceType != null)
             {
-                var licenceType = await GetCachedLicenceTypeAsync(licence.adoxio_LicenceType.Id.ToString(), dataverse, cache);
-                if (licenceType != null)
-                {
-                    licenseSummary.LicenceTypeName = licenceType.adoxio_name;
-                    licenseSummary.LicenceTypeCategory = (LicenceTypeCategory?)(int?)licenceType.adoxio_Category;
+                licenseSummary.LicenceTypeName = licenceType.adoxio_name;
+                licenseSummary.LicenceTypeCategory = (LicenceTypeCategory?)(int?)licenceType.adoxio_Category;
 
-                    var appTypes = await dataverse.GetApplicationTypesByLicenceTypeIdAsync(licenceType.Id.ToString());
-                    foreach (var item in appTypes.OrderBy(at => at.adoxio_ActionText))
-                    {
-                        bool isEndorsementThatIsProcessed = item.adoxio_IsEndorsement == true
-                            && (licenseSummary.Endorsements?.Any(e => e.ApplicationTypeId == item.Id.ToString()) ?? false);
-                        if (!isEndorsementThatIsProcessed)
-                            licenseSummary.AllowedActions.Add(item.ToViewModel());
-                    }
+                foreach (var item in appTypesTask.Result.OrderBy(at => at.adoxio_ActionText))
+                {
+                    bool isEndorsementThatIsProcessed = item.adoxio_IsEndorsement == true
+                        && (licenseSummary.Endorsements?.Any(e => e.ApplicationTypeId == item.Id.ToString()) ?? false);
+                    if (!isEndorsementThatIsProcessed)
+                        licenseSummary.AllowedActions.Add(item.ToViewModel());
                 }
             }
 
-            licenseSummary.Endorsements = await GetEndorsementsAsync(licenceId, dataverse);
-            licenseSummary.OffsiteStorageLocations = await GetOffsiteStorageAsync(licenceId, dataverse);
-            licenseSummary.ServiceAreas = await GetServiceAreasAsync(licenceId, dataverse);
+            // Phase 2: 3 uncached per-licence queries in parallel
+            var endorsementsTask = GetEndorsementsAsync(licenceId, dataverse);
+            var offsiteTask = GetOffsiteStorageAsync(licenceId, dataverse);
+            var serviceAreasTask = GetServiceAreasAsync(licenceId, dataverse);
+            await Task.WhenAll(endorsementsTask, offsiteTask, serviceAreasTask);
+
+            licenseSummary.Endorsements = endorsementsTask.Result;
+            licenseSummary.OffsiteStorageLocations = offsiteTask.Result;
+            licenseSummary.ServiceAreas = serviceAreasTask.Result;
 
             return licenseSummary;
         }
@@ -333,13 +345,40 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static async Task<List<ApplicationLicenseSummary>> GetPaidLicenseSummariesOnTransferAsync(IDataverseClient dataverse, string accountId, IMemoryCache? cache = null)
         {
-            var proposed = await dataverse.GetLicencesByProposedOwnerAsync(accountId);
-            var tpo = await dataverse.GetLicencesByThirdPartyOperatorAsync(accountId);
-            var all = proposed.Concat(tpo).GroupBy(l => l.adoxio_licencesId).Select(g => g.First()).ToList();
-            var result = new List<ApplicationLicenseSummary>();
-            foreach (var lic in all)
-                result.Add(await lic.ToLicenseSummaryViewModelAsync(new List<adoxio_application>(), dataverse, cache));
+            var proposedTask = dataverse.GetLicencesByProposedOwnerAsync(accountId);
+            var tpoTask = dataverse.GetLicencesByThirdPartyOperatorAsync(accountId);
+            await Task.WhenAll(proposedTask, tpoTask);
+            var all = proposedTask.Result.Concat(tpoTask.Result)
+                .GroupBy(l => l.adoxio_licencesId).Select(g => g.First()).ToList();
+            var summaryTasks = all.Select(lic =>
+                lic.ToLicenseSummaryViewModelAsync(new List<adoxio_application>(), dataverse, cache));
+            return new List<ApplicationLicenseSummary>(await Task.WhenAll(summaryTasks));
+        }
+
+        private static async Task<adoxio_establishment?> GetCachedEstablishmentAsync(string id, IDataverseClient dataverse, IMemoryCache cache)
+        {
+            if (cache == null) return await dataverse.GetEstablishmentByIdAsync(id);
+            string key = "Establishment_" + id;
+            if (!cache.TryGetValue(key, out adoxio_establishment result))
+            {
+                result = await dataverse.GetEstablishmentByIdAsync(id);
+                if (result != null)
+                    cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60)));
+            }
             return result;
+        }
+
+        private static async Task<IList<adoxio_applicationtype>> GetCachedApplicationTypesByLicenceTypeIdAsync(string licenceTypeId, IDataverseClient dataverse, IMemoryCache cache)
+        {
+            if (cache == null) return await dataverse.GetApplicationTypesByLicenceTypeIdAsync(licenceTypeId);
+            string key = CacheKeys.ApplicationTypePrefix + "ByLicenceType_" + licenceTypeId;
+            if (!cache.TryGetValue(key, out IList<adoxio_applicationtype> result))
+            {
+                result = await dataverse.GetApplicationTypesByLicenceTypeIdAsync(licenceTypeId);
+                if (result != null)
+                    cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromMinutes(60)));
+            }
+            return result ?? new List<adoxio_applicationtype>();
         }
 
         private static async Task<adoxio_licencesubcategory?> GetCachedLicenceSubCategoryAsync(string id, IDataverseClient dataverse, IMemoryCache cache)

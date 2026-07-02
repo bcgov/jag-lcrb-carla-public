@@ -670,22 +670,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            var dvLicences = await _dataverse.GetLicencesByAccountIdAsync(userSettings.AccountId);
-            var allApps = await _dataverse.GetApplicationsForLicenceByApplicantAsync(userSettings.AccountId);
+            // Fetch licences and their applications in parallel (previously sequential)
+            var dvLicencesTask = _dataverse.GetLicencesByAccountIdAsync(userSettings.AccountId);
+            var allAppsTask = _dataverse.GetApplicationsForLicenceByApplicantAsync(userSettings.AccountId);
+            await Task.WhenAll(dvLicencesTask, allAppsTask);
 
-            var adoxioLicences = new List<ApplicationLicenseSummary>();
-            foreach (var lic in dvLicences)
+            var dvLicences = dvLicencesTask.Result;
+            var allApps = allAppsTask.Result;
+
+            var adoxioLicences = new List<ApplicationLicenseSummary>(await Task.WhenAll(dvLicences.Select(lic =>
             {
                 var licId = lic.adoxio_licencesId?.ToString();
                 var licApps = allApps.Where(app => app.adoxio_AssignedLicence?.Id.ToString() == licId).ToList();
-                adoxioLicences.Add(await lic.ToLicenseSummaryViewModelAsync(licApps, _dataverse, _cache));
-            }
+                return lic.ToLicenseSummaryViewModelAsync(licApps, _dataverse, _cache);
+            })));
 
             var transferredLicences = await LicenseExtensions.GetPaidLicenseSummariesOnTransferAsync(_dataverse, userSettings.AccountId, _cache);
             adoxioLicences.AddRange(transferredLicences);
 
+            var transferApps = await FetchConclusiveDeemedTransferAppsAsync(userSettings.AccountId);
             foreach (var lic in adoxioLicences)
-                lic.ChecklistConclusivelyDeem = await isConclusivelyDeemedAsync(lic);
+                lic.ChecklistConclusivelyDeem = IsLicenceConclusivelyDeemed(lic, transferApps);
 
             return adoxioLicences;
         }
@@ -713,13 +718,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             foreach (var app in applications)
             {
                 if (app.adoxio_Invoice == null) continue;
-                var invoice = await _dataverse.GetInvoiceByIdAsync(app.adoxio_Invoice.Id.ToString());
+
+                // Fetch invoice and assigned licence in parallel
+                var invoiceTask = _dataverse.GetInvoiceByIdAsync(app.adoxio_Invoice.Id.ToString());
+                var licTask = app.adoxio_AssignedLicence != null
+                    ? _dataverse.GetLicenceByIdAsync(app.adoxio_AssignedLicence.Id.ToString())
+                    : Task.FromResult<adoxio_licences?>(null);
+                await Task.WhenAll(invoiceTask, licTask);
+
+                var invoice = invoiceTask.Result;
                 if (invoice == null || invoice.StatusCode == invoice_statuscode.Complete) continue;
 
                 var temp = new OutstandingParioBalanceInvoice
                 {
                     invoice = invoice.ToViewModel(),
-                    applicationId = app.Id.ToString()
+                    applicationId = app.Id.ToString(),
+                    licenceNumber = licTask.Result?.adoxio_LicenceNumber
                 };
 
                 if (invoice.DueDate.HasValue)
@@ -730,24 +744,21 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     temp.overdue = temp.invoice.duedate <= today;
                 }
 
-                if (app.adoxio_AssignedLicence != null)
-                {
-                    var lic = await _dataverse.GetLicenceByIdAsync(app.adoxio_AssignedLicence.Id.ToString());
-                    temp.licenceNumber = lic?.adoxio_LicenceNumber;
-                }
-
                 results.Add(temp);
             }
 
             return results;
         }
 
-        private async Task<bool> isConclusivelyDeemedAsync(ApplicationLicenseSummary lic)
+        private async Task<IList<adoxio_application>> FetchConclusiveDeemedTransferAppsAsync(string accountId)
         {
-            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            // Cache per account for 2 minutes — all 3 licence endpoints call this concurrently on page load
+            var cacheKey = $"TransferApps_{accountId}";
+            if (_cache.TryGetValue(cacheKey, out IList<adoxio_application> cached))
+                return cached;
 
             var appType = await _dataverse.GetApplicationTypeByNameAsync("Liquor Licence Transfer");
-            if (appType == null) return false;
+            if (appType == null) return new List<adoxio_application>();
 
             var excludeStatuses = new List<int>
             {
@@ -759,11 +770,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded
             };
 
-            var apps = await _dataverse.GetApplicationsByApplicantAndTypeAsync(
-                userSettings.AccountId, appType.adoxio_applicationtypeId!.Value.ToString(), excludeStatuses, requireStatecode0: true);
+            var result = await _dataverse.GetApplicationsByApplicantAndTypeAsync(
+                accountId, appType.adoxio_applicationtypeId!.Value.ToString(), excludeStatuses, requireStatecode0: true);
 
-            var transferApp = apps.FirstOrDefault(a => a.adoxio_AssignedLicence?.Id.ToString() == lic.LicenseId);
-            return transferApp?.adoxio_ChecklistConclusivelyDeem == adoxio_application_adoxio_checklistconclusivelydeem.Yes;
+            _cache.Set(cacheKey, result, new MemoryCacheEntryOptions()
+                .SetSlidingExpiration(TimeSpan.FromMinutes(2)));
+
+            return result;
+        }
+
+        private static bool IsLicenceConclusivelyDeemed(ApplicationLicenseSummary lic, IList<adoxio_application> transferApps)
+        {
+            return transferApps.Any(a =>
+                a.adoxio_AssignedLicence?.Id.ToString() == lic.LicenseId &&
+                a.adoxio_ChecklistConclusivelyDeem == adoxio_application_adoxio_checklistconclusivelydeem.Yes);
         }
 
         /// GET all licenses in Dynamics by Licencee using the account Id assigned to the user logged in
@@ -773,13 +793,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var licences = await _dataverse.GetLicencesByThirdPartyOperatorAsync(userSettings.AccountId);
-            var summaries = new List<ApplicationLicenseSummary>();
-            foreach (var lic in licences)
-            {
-                summaries.Add(await lic.ToLicenseSummaryViewModelAsync(new List<adoxio_application>(), _dataverse, _cache));
-            }
+            var summaryTasks = licences.Select(lic =>
+                lic.ToLicenseSummaryViewModelAsync(new List<adoxio_application>(), _dataverse, _cache));
+            var summaries = new List<ApplicationLicenseSummary>(await Task.WhenAll(summaryTasks));
+
+            var transferApps = await FetchConclusiveDeemedTransferAppsAsync(userSettings.AccountId);
             foreach (var lic in summaries)
-                lic.ChecklistConclusivelyDeem = await isConclusivelyDeemedAsync(lic);
+                lic.ChecklistConclusivelyDeem = IsLicenceConclusivelyDeemed(lic, transferApps);
 
             return new JsonResult(summaries);
         }
@@ -791,16 +811,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var licences = await _dataverse.GetLicencesByProposedOwnerAsync(userSettings.AccountId);
-            var summaries = new List<ApplicationLicenseSummary>();
-            foreach (var lic in licences)
+            var summaryTasks = licences.Select(async lic =>
             {
                 var licId = lic.adoxio_licencesId?.ToString();
                 var allApps = await _dataverse.GetApplicationsForLicenceByApplicantAsync(lic.adoxio_Licencee?.Id.ToString() ?? "");
                 var licApps = allApps.Where(app => app.adoxio_AssignedLicence?.Id.ToString() == licId).ToList();
-                summaries.Add(await lic.ToLicenseSummaryViewModelAsync(licApps, _dataverse, _cache));
-            }
+                return await lic.ToLicenseSummaryViewModelAsync(licApps, _dataverse, _cache);
+            });
+            var summaries = new List<ApplicationLicenseSummary>(await Task.WhenAll(summaryTasks));
+
+            var transferApps = await FetchConclusiveDeemedTransferAppsAsync(userSettings.AccountId);
             foreach (var lic in summaries)
-                lic.ChecklistConclusivelyDeem = await isConclusivelyDeemedAsync(lic);
+                lic.ChecklistConclusivelyDeem = IsLicenceConclusivelyDeemed(lic, transferApps);
 
             return new JsonResult(summaries);
         }
