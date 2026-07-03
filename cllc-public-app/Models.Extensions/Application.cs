@@ -592,13 +592,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             vm.IsSubmitted = app.adoxio_InvoiceTrigger == adoxio_generalyesno.Yes;
             vm.PrevPaymentFailed = app.adoxio_Invoice != null && !vm.IsSubmitted;
 
-            if (app.adoxio_LicenceFeeInvoice != null)
-            {
-                var feeInvoice = await dataverse.GetInvoiceByIdAsync(app.adoxio_LicenceFeeInvoice.Id.ToString());
-                if (feeInvoice != null)
-                    vm.LicenceFeeInvoice = feeInvoice.ToViewModel();
-            }
-
             // applying person
             if (applyingPerson != null)
                 vm.ApplyingPerson = applyingPerson.FullName;
@@ -615,44 +608,81 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (licenceSubCategory != null)
                 vm.LicenceSubCategory = licenceSubCategory.adoxio_name;
 
-            // application type
-            if (app.adoxio_ApplicationTypeId != null)
-            {
-                var appType = await dataverse.GetApplicationTypeByIdAsync(app.adoxio_ApplicationTypeId.Id.ToString());
-                if (appType != null)
-                {
-                    vm.ApplicationType = appType.ToViewModel();
-                    if (!string.IsNullOrEmpty(vm.ApplicationType.FormReference))
-                        vm.ApplicationType.DynamicsForm = await dataverse.GetSystemformViewModelAsync(cache, logger, vm.ApplicationType.FormReference);
-
-                    // populate content types if not already loaded via nav property
-                    if (vm.ApplicationType.ContentTypes == null)
-                    {
-                        var contents = await dataverse.GetApplicationTypeContentsByTypeIdAsync(app.adoxio_ApplicationTypeId.Id.ToString());
-                        if (contents.Count > 0)
-                        {
-                            vm.ApplicationType.ContentTypes = contents.Select(c => c.ToViewModel()).ToList();
-                        }
-                    }
-                }
-            }
-
             // assigned licence (populated by GetApplicationByIdWithChildrenAsync via N:1 nav property)
             var assignedLicence = app.adoxio_adoxio_licences_adoxio_application_AssignedLicence;
-            if (assignedLicence != null)
-                vm.AssignedLicence = await assignedLicence.ToViewModelAsync(dataverse);
+
+            // Round 1: launch all independent Dataverse lookups in parallel
+            var invoiceTask         = app.adoxio_LicenceFeeInvoice != null
+                                        ? dataverse.GetInvoiceByIdAsync(app.adoxio_LicenceFeeInvoice.Id.ToString())
+                                        : null;
+            var appTypeTask         = app.adoxio_ApplicationTypeId != null
+                                        ? dataverse.GetApplicationTypeByIdAsync(app.adoxio_ApplicationTypeId.Id.ToString())
+                                        : null;
+            var assignedLicenceTask = assignedLicence != null
+                                        ? assignedLicence.ToViewModelAsync(dataverse)
+                                        : null;
+            var lginTask            = app.adoxio_localgovindigenousnationid != null
+                                        ? dataverse.GetLginByIdAsync(app.adoxio_localgovindigenousnationid.Id.ToString())
+                                        : null;
+
+            var round1 = new List<Task>();
+            if (invoiceTask != null)         round1.Add(invoiceTask);
+            if (appTypeTask != null)         round1.Add(appTypeTask);
+            if (assignedLicenceTask != null) round1.Add(assignedLicenceTask);
+            if (lginTask != null)            round1.Add(lginTask);
+            if (round1.Count > 0) await Task.WhenAll(round1);
+
+            var feeInvoice = invoiceTask != null ? await invoiceTask : null;
+            var appType    = appTypeTask != null ? await appTypeTask : null;
+            vm.AssignedLicence = assignedLicenceTask != null ? await assignedLicenceTask : null;
+            var lgin       = lginTask != null ? await lginTask : null;
+
+            // Map round-1 results before launching round-2 (needed to determine sub-task conditions)
+            if (feeInvoice != null)
+                vm.LicenceFeeInvoice = feeInvoice.ToViewModel();
+
+            // application type
+            if (appType != null)
+                vm.ApplicationType = appType.ToViewModel();
 
             // LGIN
-            if (app.adoxio_localgovindigenousnationid != null)
+            if (lgin != null)
+                vm.IndigenousNation = lgin.ToViewModel();
+
+            // Round 2: sub-lookups that depend on round-1 results — also in parallel
+            var formTask        = vm.ApplicationType != null && !string.IsNullOrEmpty(vm.ApplicationType.FormReference)
+                                    ? dataverse.GetSystemformViewModelAsync(cache, logger, vm.ApplicationType.FormReference)
+                                    : null;
+            // only fetch content types if not already loaded via nav property
+            var contentsTask    = vm.ApplicationType != null && vm.ApplicationType.ContentTypes == null
+                                    ? dataverse.GetApplicationTypeContentsByTypeIdAsync(app.adoxio_ApplicationTypeId.Id.ToString())
+                                    : null;
+            var lginAccountTask = lgin != null
+                                    ? dataverse.GetAccountByLginLinkIdAsync(lgin.adoxio_localgovindigenousnationId?.ToString())
+                                    : null;
+
+            var round2 = new List<Task>();
+            if (formTask != null)        round2.Add(formTask);
+            if (contentsTask != null)    round2.Add(contentsTask);
+            if (lginAccountTask != null) round2.Add(lginAccountTask);
+            if (round2.Count > 0) await Task.WhenAll(round2);
+
+            // Assign round-2 results
+            if (formTask != null)
+                vm.ApplicationType.DynamicsForm = await formTask;
+
+            if (contentsTask != null)
             {
-                var lgin = await dataverse.GetLginByIdAsync(app.adoxio_localgovindigenousnationid.Id.ToString());
-                if (lgin != null)
-                {
-                    vm.IndigenousNation = lgin.ToViewModel();
-                    var linkedAccount = await dataverse.GetAccountByLginLinkIdAsync(lgin.adoxio_localgovindigenousnationId?.ToString());
-                    if (linkedAccount?.WebSiteURL != null)
-                        vm.IndigenousNation.WebsiteUrl = linkedAccount.WebSiteURL;
-                }
+                var contents = await contentsTask;
+                if (contents.Count > 0)
+                    vm.ApplicationType.ContentTypes = contents.Select(c => c.ToViewModel()).ToList();
+            }
+
+            if (lginAccountTask != null)
+            {
+                var linkedAccount = await lginAccountTask;
+                if (linkedAccount?.WebSiteURL != null)
+                    vm.IndigenousNation.WebsiteUrl = linkedAccount.WebSiteURL;
             }
 
             // police jurisdiction

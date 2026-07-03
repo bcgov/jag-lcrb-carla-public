@@ -1068,7 +1068,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             if (!CurrentUserHasAccessToApplicationOwnedBy(dvApplication.adoxio_Applicant?.Id.ToString()) && !allowLgAccess)
                 return new NotFoundResult();
 
-            Application result = await dvApplication.ToViewModelAsync(_dataverse, _cache, _logger);
+            // Run view model build and SharePoint doc check in parallel — neither depends on the other
+            var viewModelTask = dvApplication.ToViewModelAsync(_dataverse, _cache, _logger);
+            var spDocsTask    = _dataverse.GetSharePointDocLocsByObjectIdAsync(id);
+            await Task.WhenAll(viewModelTask, spDocsTask);
+
+            Application result = await viewModelTask;
 
             // LCSD-8519: hydrate TiedHouse for Marketer apps
             if (result?.ApplicationType?.Name == "Marketing"
@@ -1080,7 +1085,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     result.TiedHouse = tiedHouse;
             }
 
-            var spDocs = await _dataverse.GetSharePointDocLocsByObjectIdAsync(id);
+            var spDocs = await spDocsTask;
             if (spDocs.Count == 0)
                 await InitializeSharepointAsync(dvApplication);
 

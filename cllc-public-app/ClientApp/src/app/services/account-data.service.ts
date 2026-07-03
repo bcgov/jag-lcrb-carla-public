@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Account } from "@models/account.model";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ProfileValidation } from "@models/profile-validation.model";
 import { Observable, forkJoin } from "rxjs";
 import { DataService } from "./data.service";
 import { catchError, map } from "rxjs/operators";
@@ -54,11 +53,6 @@ export class AccountDataService extends DataService {
         this.store.dispatch(new SetCurrentAccountAction({ ...account } as Account));
         return account;
       }));
-  }
-
-  getBusinessProfile(accountId: string) {
-    return this.http.get<ProfileValidation[]>(`${this.apiPath}business-profile/${accountId}`, { headers: this.headers })
-      .pipe(catchError(this.handleError));
   }
 
   getBCeID() {

@@ -801,6 +801,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
+            // Preserve T&C acceptance from existing record — the profile form does not include
+            // these fields, so they arrive as null and would otherwise overwrite the accepted state.
+            if (item.TermsOfUseAccepted == null)
+            {
+                item.TermsOfUseAccepted = adoxioAccount.adoxio_TermsofUseAccepted;
+                item.TermsOfUseAcceptedDate = adoxioAccount.adoxio_TermsofUseAcceptedDate.HasValue
+                    ? (DateTimeOffset?)adoxioAccount.adoxio_TermsofUseAcceptedDate.Value
+                    : null;
+            }
+
             // patch - create a new entity with only the changed values
             adoxioAccount = new DvAccount();
             adoxioAccount.CopyValues(item, copyIfNull: true);

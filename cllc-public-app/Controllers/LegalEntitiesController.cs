@@ -252,38 +252,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return result;
         }
 
-        private async Task<List<DvLegalEntity>> GetAccountLegalEntitiesAsync(string accountId, List<string> shareHolders = null)
+        private async Task<List<DvLegalEntity>> GetAccountLegalEntitiesAsync(string accountId)
         {
-            if (shareHolders == null)
-                shareHolders = new List<string>();
+            var result = new List<DvLegalEntity>();
+            var visited = new HashSet<string> { accountId };
+            var queue = new Queue<string>();
+            queue.Enqueue(accountId);
 
-            IList<DvLegalEntity> legalEntities;
-            try
+            while (queue.Count > 0)
             {
-                var all = await _dataverse.GetLegalEntitiesByAccountIdAsync(accountId);
-                legalEntities = all.Where(le => le.adoxio_IsIndividual != DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes).ToList();
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Unexpected Exception while getting account legal entities.");
-                return new List<DvLegalEntity>();
-            }
+                var currentBatch = queue.ToArray();
+                queue.Clear();
 
-            var children = new List<DvLegalEntity>();
-            foreach (var le in legalEntities)
-            {
-                if (le.adoxio_ShareholderAccountID != null)
+                IEnumerable<DvLegalEntity>[] batchResults;
+                try
                 {
-                    var shareholderId = le.adoxio_ShareholderAccountID.Id.ToString();
-                    if (!shareHolders.Contains(shareholderId))
+                    batchResults = await Task.WhenAll(
+                        currentBatch.Select(id => _dataverse.GetLegalEntitiesByAccountIdAsync(id))
+                    );
+                }
+                catch (Exception e)
+                {
+                    _logger.LogError(e, "Unexpected Exception while getting account legal entities.");
+                    return result;
+                }
+
+                foreach (var entities in batchResults)
+                {
+                    var nonIndividuals = entities
+                        .Where(le => le.adoxio_IsIndividual != DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes)
+                        .ToList();
+
+                    result.AddRange(nonIndividuals);
+
+                    foreach (var le in nonIndividuals.Where(le => le.adoxio_ShareholderAccountID != null))
                     {
-                        shareHolders.Add(shareholderId);
-                        children.AddRange(await GetAccountLegalEntitiesAsync(shareholderId, shareHolders));
+                        var shareholderId = le.adoxio_ShareholderAccountID.Id.ToString();
+                        if (visited.Add(shareholderId))
+                            queue.Enqueue(shareholderId);
                     }
                 }
             }
-            legalEntities = legalEntities.Concat(children).Distinct().ToList();
-            return legalEntities.ToList();
+
+            return result.Distinct().ToList();
         }
 
         /// <summary>
