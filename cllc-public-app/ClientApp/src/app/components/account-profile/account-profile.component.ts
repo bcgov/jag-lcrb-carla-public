@@ -567,7 +567,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
 
     const saves = [
       this.accountDataService.updateAccount(value),
-      this.contactDataService.updateContact(this.form.get('contact').getRawValue())
+      this.contactDataService.updateContact((this.form.get('contact') as FormGroup).getRawValue())
     ];
 
     // Save the cannabis tied house connection form data

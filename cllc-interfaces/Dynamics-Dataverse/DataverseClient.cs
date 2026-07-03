@@ -1572,7 +1572,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
 
         var parentQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
         parentQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, parentLibraryUrl);
-        parentQuery.Criteria.AddCondition("parentsiteorlocationid", ConditionOperator.Null);
+        parentQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.Null);
         var parentResult = await Task.Run(() => _serviceClient.RetrieveMultiple(parentQuery), ct);
         var parentLib = parentResult.Entities.FirstOrDefault();
         if (parentLib == null) return;
@@ -2054,7 +2054,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
 
         var parentQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
         parentQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, "account");
-        parentQuery.Criteria.AddCondition("parentsiteorlocationid", ConditionOperator.Null);
+        parentQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.Null);
         var parentResult = await Task.Run(() => _serviceClient.RetrieveMultiple(parentQuery), ct);
         var parentLib = parentResult.Entities.FirstOrDefault();
         if (parentLib == null) return;
@@ -2630,7 +2630,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
 
         var parentQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
         parentQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, "adoxio_licences");
-        parentQuery.Criteria.AddCondition("parentsiteorlocationid", ConditionOperator.Null);
+        parentQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.Null);
         var parentResult = await Task.Run(() => _serviceClient.RetrieveMultiple(parentQuery), ct);
         var parentLib = parentResult.Entities.FirstOrDefault();
         if (parentLib == null) return;
