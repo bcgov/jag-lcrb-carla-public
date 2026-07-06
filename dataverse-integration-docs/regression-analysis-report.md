@@ -17,7 +17,7 @@
 | Deleted model extensions partially replaced | 3 | — | — |
 | Deleted model extensions NOT replaced | 0 | — | — |
 
-**All 27 identified issues are fully resolved.** 5 code fixes applied; all remaining items verified as false positives, no-callers, or SDK-handled patterns. The migration is complete and production-ready.
+**All 27 identified issues are fully resolved.** 5 code fixes applied at time of analysis; 4 additional fixes applied post-analysis (see below). The migration is complete and production-ready.
 
 ---
 
@@ -250,6 +250,33 @@ The migration from AutoRest Dynamics client to the Dataverse SDK is **100% compl
 2. `LicenceFeeInvoice` not populated → `Application.ToViewModelAsync` now fetches and maps the licence fee invoice.
 3. Account `primarycontact` null → `AccountsController.GetCurrentAccount`, `GetAccount`, `CreateAccount` now fetch primary contact; `UpdateAccount` restores from request.
 4. `GetAutocomplete` active-state filter client-side → moved server-side via `activeOnly` parameter on `GetAccountsAsync`.
+
+**Post-analysis fixes (2026-07-02 — 2026-07-03):**
+
+5. **SharePoint doc-location parent query — wrong attribute name** (3 locations, commit `a87ca9d`)  
+   `parentsiteorlocationid` → `parentsiteorlocation` in `QueryExpression.Criteria.AddCondition` calls for finding the root library record. The `-id` suffix is incorrect for relationship-condition lookups against the Dataverse SDK; the correct logical name is `parentsiteorlocation`.  
+   *Impact:* All three SharePoint document-location creation helpers (`CreateWorkerSharePointDocumentLocation`, `CreateAccountSharePointDocumentLocation`, `CreateLicenceSharePointDocumentLocation`) would silently fail to locate the root library and return without creating the folder.
+
+6. **Application.ToViewModelAsync — sequential lookups replaced with parallel** (commit `baaeb08`)  
+   Invoice, application type, assigned licence, and LGIN are now fetched with `Task.WhenAll` in two rounds (round 1: independent lookups; round 2: sub-lookups dependent on round-1 results). No behavior change but significant latency improvement for application detail pages.
+
+7. **LegalEntitiesController.GetAccountLegalEntitiesAsync — recursive tree → parallel BFS** (commit `baaeb08`)  
+   The old recursive implementation fetched one shareholder subtree at a time (sequential). Rewritten to use a `Queue<string>`+`HashSet<string>` BFS that batches each level of the shareholder tree with `Task.WhenAll`. No behavior change; fixes potential stack overflow on deep trees and improves throughput.
+
+8. **New bulk-fetch methods added to IDataverseClient / DataverseClient** (commit `e8730fe`)  
+   - `GetLicencesByIdsAsync(IList<string>)` — OR-filter over `adoxio_licencesid`  
+   - `GetApplicationTypesByIdsAsync(IList<string>)` — OR-filter over `adoxio_applicationtypeid`  
+   - `GetApplicationTypesByLicenceTypeIdsAsync(IList<string>)` — active application types filtered by licence type IDs  
+   Used by dashboard and licences component to replace N+1 individual fetches.
+
+**Upstream port (2026-07-06):**
+
+9. **LCSD-8499: SEP pay button disabled bug fix** (upstream commit `277d8c68d`, cherry-picked onto `dv-migration`)  
+   Angular-only change in `final-confirmation.component.html` + `.ts`. Replaced two conditional `*ngIf` PAY NOW buttons with a single button using `[disabled]="payNowClicked"`. Refactored `payNow()` to guard-clause style; `payNowClicked` now resets to `false` on error so the button re-enables after a failed payment attempt.  
+   *Impact:* Fixes the SEP pay button staying permanently disabled after a transient payment error.
+
+10. **File download incorrectly triggers upload workflow** (upstream commit `22483a284` / fork commit `e445d619c`, manually ported to Dataverse-migrated `FileController.cs`)  
+    `FileController.DownloadFile`: `UpdateEntityModifiedOnDate(entityName, entityId, true)` → `false`. Setting `AdoxioFileuploadedfromportal = true` on download incorrectly triggered the Dynamics workflow that resolves application incompleteness. Only the upload path (line 745) should trigger this flag.
 
 **Verified non-issues:**
 - `Contact.ToModel()` removed: build clean confirms no callers.

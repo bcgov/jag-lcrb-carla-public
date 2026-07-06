@@ -283,8 +283,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (downloadResult.ResultStatus == ResultStatus.Success)
             {
-                // Update modifiedon to current time
-                await UpdateEntityModifiedOnDate(entityName, entityId, true);
+                // Update modifiedon to current time — do NOT set AdoxioFileuploadedfromportal
+                // here because this is a download, not an upload. Setting it on download
+                // incorrectly triggers the Dynamics workflow that resolves incompleteness.
+                await UpdateEntityModifiedOnDate(entityName, entityId, false);
                 _logger.LogInformation($"SUCCESS in getting file {logUrl}");
                 var fileContents = downloadResult.Data.ToByteArray();
                 return new FileContentResult(fileContents, "application/octet-stream");
