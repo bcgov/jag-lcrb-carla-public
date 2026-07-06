@@ -50,7 +50,4 @@ cllc-public-app/sep.json
 .claude/
 cllc-public-app/.claude/
 dv-migration-risk-report.md
-login-security-review-comparison.md
-login-security-review-develop.md
-login-security-review.md
-qa-verification-plan.md
+localdocs/
