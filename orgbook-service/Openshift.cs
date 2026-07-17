@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RedHat.OpenShift.Utils;
@@ -23,7 +24,9 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
 public static class PlatformEnvironment
 {
-    public static bool IsOpenShift => !string.IsNullOrEmpty(OpenShiftEnvironment.BuildName);
+    // KUBERNETES_SERVICE_HOST is present in every pod at runtime on any k8s/OpenShift cluster.
+    // OPENSHIFT_BUILD_NAME is only set during S2I builds, never at pod runtime — don't use it.
+    public static bool IsOpenShift => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("KUBERNETES_SERVICE_HOST"));
 }
 
 public static class OpenShiftEnvironment
@@ -102,10 +105,10 @@ internal class OpenShiftCertificateExpiration : Microsoft.Extensions.Hosting.Bac
     private static TimeSpan NotAfterMargin => TimeSpan.FromMinutes(15);
     private readonly IOptions<OpenShiftIntegrationOptions> _options;
     private readonly OpenShiftCertificateLoader _certificateLoader;
-    private readonly IApplicationLifetime _applicationLifetime;
+    private readonly IHostApplicationLifetime _applicationLifetime;
     private readonly ILogger<OpenShiftCertificateExpiration> _logger;
 
-    public OpenShiftCertificateExpiration(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader, IApplicationLifetime applicationLifetime, ILogger<OpenShiftCertificateExpiration> logger)
+    public OpenShiftCertificateExpiration(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader, IHostApplicationLifetime applicationLifetime, ILogger<OpenShiftCertificateExpiration> logger)
     {
         _options = options;
         _certificateLoader = certificateLoader;

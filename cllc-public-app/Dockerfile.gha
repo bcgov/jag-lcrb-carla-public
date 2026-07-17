@@ -1,0 +1,33 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["cllc-public-app/cllc-public-app.csproj", "cllc-public-app/"]
+COPY ["cllc-interfaces/BCeID/BCeID.csproj", "cllc-interfaces/BCeID/"]
+COPY ["cllc-interfaces/BCEP/BCEP.csproj", "cllc-interfaces/BCEP/"]
+COPY ["cllc-interfaces/GeocoderClient/Geocoder.csproj", "cllc-interfaces/GeocoderClient/"]
+COPY ["cllc-interfaces/SharePoint/SharePoint.csproj", "cllc-interfaces/SharePoint/"]
+COPY ["cllc-interfaces/OrgBookClient/OrgBookClient.csproj", "cllc-interfaces/OrgBookClient/"]
+COPY ["cllc-interfaces/PDF/PDF.csproj", "cllc-interfaces/PDF/"]
+COPY ["cllc-interfaces/Dynamics-Dataverse/Dynamics-Dataverse.csproj", "cllc-interfaces/Dynamics-Dataverse/"]
+
+RUN dotnet restore "cllc-public-app/cllc-public-app.csproj"
+
+COPY cllc-public-app/ cllc-public-app/
+COPY cllc-interfaces/ cllc-interfaces/
+COPY file-manager-service/Protos/ file-manager-service/Protos/
+
+WORKDIR "/src/cllc-public-app"
+RUN dotnet build "cllc-public-app.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "cllc-public-app.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "cllc-public-app.dll"]

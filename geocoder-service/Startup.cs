@@ -35,11 +35,8 @@ namespace Gov.Lclb.Cllb.Geocoder
 {
     public class Startup
     {
-        private readonly ILoggerFactory _loggerFactory;
-
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
-            _loggerFactory = loggerFactory;
             Configuration = configuration;
         }
 
@@ -49,7 +46,8 @@ namespace Gov.Lclb.Cllb.Geocoder
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("Geocoder"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(sp =>
+                sp.GetRequiredService<ILoggerFactory>().CreateLogger("Geocoder"));
 
             services.AddMvc(config =>
             {
