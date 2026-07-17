@@ -1,0 +1,8 @@
+**/bin
+**/obj
+**/*.user
+**/*.suo
+cllc-public-app/ClientApp/node_modules
+cllc-public-app/ClientApp/dist
+cllc-public-app/ClientApp/.angular
+cllc-public-app/ClientApp/coverage

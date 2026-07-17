@@ -32,15 +32,13 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 {
     public class Startup
     {
-        private readonly ILoggerFactory _loggerFactory;
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment _env { get; set; }
         public FileManagerClient _fileManagerClient { get; set; }
 
-        public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IWebHostEnvironment env)
         {
             _env = env;
-            _loggerFactory = loggerFactory;
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -60,7 +58,9 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("FederalReportingService"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(sp =>
+                sp.GetService<Microsoft.Extensions.Logging.ILoggerFactory>()?.CreateLogger("FederalReportingService")
+                ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
             services.AddHangfire(config =>
             {
@@ -97,27 +97,32 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
               
                 var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
-                
+
                 var initialClient = new FileManagerClient(initialChannel);
-                // call the token service to get a token.
                 var tokenRequest = new TokenRequest()
                 {
                     Secret = Configuration["FILE_MANAGER_SECRET"]
                 };
 
-                var tokenReply = initialClient.GetToken(tokenRequest);
-
-                if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                try
                 {
-                    // Add the bearer token to the client.
-                    
-                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+                    var tokenReply = initialClient.GetToken(tokenRequest);
 
-                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });                   
-                    _fileManagerClient = new FileManagerClient(channel);
-                    services.AddTransient<FileManagerClient>(_ => _fileManagerClient);
-
+                    if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                    {
+                        httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+                        var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });
+                        _fileManagerClient = new FileManagerClient(channel);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    // file-manager not ready at startup — jobs will fail gracefully when they run
+                    Console.WriteLine($"[federal-reporting] Could not connect to file-manager at startup: {ex.Message}");
+                }
+
+                // always register so DI doesn't throw; null client is guarded inside job handlers
+                services.AddTransient<FileManagerClient>(_ => _fileManagerClient);
             }
             services.AddSingleton<IDataverseClient, DataverseClient>();
         }

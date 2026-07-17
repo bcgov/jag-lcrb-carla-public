@@ -1,0 +1,39 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
+
+# wkhtmltopdf system dependencies — must run as root before switching back to app user
+USER root
+RUN apt-get update && apt-get install -y \
+    fontconfig \
+    libfontconfig1 \
+    libfreetype6 \
+    libjpeg62-turbo \
+    libpng16-16 \
+    libssl3 \
+    bzip2 \
+    libstdc++6 \
+    libx11-6 \
+    libxext6 \
+    libxrender1 \
+    && rm -rf /var/lib/apt/lists/*
+USER app
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["pdf-service/pdf-service.csproj", "pdf-service/"]
+RUN dotnet restore "pdf-service/pdf-service.csproj"
+
+COPY pdf-service/ pdf-service/
+WORKDIR "/src/pdf-service"
+RUN dotnet build "pdf-service.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "pdf-service.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "pdf-service.dll"]
