@@ -1,6 +1,10 @@
 name: Build and Deploy All GHA Services
 
 on:
+  push:
+    branches: [dv-migration]
+    paths:
+      - '.github/workflows/ci-build-all-gha.yml'
   workflow_dispatch:
     inputs:
       ref:
