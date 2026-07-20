@@ -1,4 +1,5 @@
 name: CI - carla-spice-sync-service-gha
+run-name: "CI carla-spice-sync-service-gha → ${{ github.ref_name }}"
 
 on:
   push:

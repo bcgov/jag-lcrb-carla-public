@@ -1,4 +1,5 @@
 name: Build and Deploy All GHA Services
+run-name: "Build all GHA services → ${{ inputs.ref || 'dv-migration' }}"
 
 on:
   push:

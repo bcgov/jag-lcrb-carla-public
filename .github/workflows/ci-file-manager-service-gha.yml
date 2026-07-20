@@ -1,4 +1,5 @@
 name: CI - file-manager-service-gha
+run-name: "CI file-manager-service-gha → ${{ github.ref_name }}"
 
 on:
   push:

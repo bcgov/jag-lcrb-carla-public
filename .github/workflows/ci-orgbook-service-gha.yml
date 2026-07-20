@@ -1,4 +1,5 @@
 name: CI - orgbook-service-gha
+run-name: "CI orgbook-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
