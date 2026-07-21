@@ -3,7 +3,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { PaymentDataService } from '@services/payment-data.service';
-import { map, mergeMap, takeWhile } from "rxjs/operators";
+import { filter, finalize, map, mergeMap, switchMap, take, takeWhile } from "rxjs/operators";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
 import { ActivatedRoute, Params } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
@@ -42,12 +42,15 @@ export class FinalConfirmationComponent implements OnInit {
 
     {
 
-      this.store.select(state => state.currentUserState.currentUser)
-      .subscribe(user => {
-        this.contactDataService.getContact(user.contactid)
-          .subscribe(contact => {
+    this.busy = this.store
+      .select((state) => state.currentUserState.currentUser)
+      .pipe(
+        filter((user) => !!user?.contactid),
+        take(1),
+        switchMap((user) => this.contactDataService.getContact(user.contactid)),
+      )
+      .subscribe((contact) => {
             this.contact = contact;
-          });
       });
 
       if (data) {
@@ -72,24 +75,29 @@ export class FinalConfirmationComponent implements OnInit {
 
   async payNow() {
     // and payment is required due to an invoice being generated
-    if (this?.application?.id) {
-      this.payNowClicked = true;
-      // ensure the application is updated with the invoice trigger
-      //const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
-      //  .toPromise();
-      // proceed to payment
-      this.busy = this.submitPayment()
-        .subscribe(res => {
-        },
-          error => {
-            if (error === "Payment already made") {
-              this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-            } else {
-              this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-            }
-          }
-        );
+    if (!this?.application?.id) {
+      this.payNowClicked = false;
+      this.snackBar.open("Unable to submit payment. Please refresh and try again.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+      return;
     }
+
+    this.payNowClicked = true;
+    // ensure the application is updated with the invoice trigger
+    //const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
+    //  .toPromise();
+    // proceed to payment
+    this.busy = this.submitPayment()
+      .subscribe(res => {
+      },
+        error => {
+          this.payNowClicked = false;
+          if (error === "Payment already made") {
+            this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+          } else {
+            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+          }
+        }
+      );
   }
 
   setApplication(id: string) {

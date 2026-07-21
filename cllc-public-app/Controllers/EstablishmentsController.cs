@@ -362,8 +362,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 string alternateLicenceTypeId = GetLicenceTypeId("S119 CRS Authorization");
                 if (string.IsNullOrEmpty(alternateLicenceTypeId))
                 {
-                    alternateLicenceTypeId=GetLicenceTypeId("Section 119 Authorization");
+                    alternateLicenceTypeId = GetLicenceTypeId("Section 119 Authorization");
                 }
+                string prsTypeId = GetLicenceTypeId("Producer Retail Store");
+                string s119PrsTypeId = GetLicenceTypeId("S119 PRS Authorization");
                 if (licenceTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for Cannabis Retail Store");
@@ -379,6 +381,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         if (alternateLicenceTypeId != null)
                         {
                             licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId}";
+                        }
+
+                        if (prsTypeId != null)
+                        {
+                            licenseFilter += $" or _adoxio_licencetype_value eq {prsTypeId}";
+                        }
+
+                        if (s119PrsTypeId != null)
+                        {
+                            licenseFilter += $" or _adoxio_licencetype_value eq {s119PrsTypeId}";
                         }
 
                         licenseFilter += ")";

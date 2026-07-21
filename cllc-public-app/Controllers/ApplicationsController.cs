@@ -14,6 +14,7 @@ using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Repositories;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Grpc.Core;
@@ -47,11 +48,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
         private readonly IBCEPService _bcep;
+        private readonly TiedHouseConnectionsRepository _tiedHouseConnectionsRepository;
 
 
         public ApplicationsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
             ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, FileManagerClient fileClient, IBCEPService bcep,
-            IWebHostEnvironment env, IMemoryCache memoryCache)
+            IWebHostEnvironment env, IMemoryCache memoryCache,
+            TiedHouseConnectionsRepository tiedHouseConnectionsRepository)
         {
             _cache = memoryCache;
             _configuration = configuration;
@@ -61,6 +64,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _fileManagerClient = fileClient;
             _env = env;
             _bcep = bcep;
+            _tiedHouseConnectionsRepository = tiedHouseConnectionsRepository;
         }
 
 
@@ -1518,6 +1522,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 && !allowLgAccess)
                 return new NotFoundResult();
             result = await dynamicsApplication.ToViewModel(_dynamicsClient, _cache, _logger);
+
+            // LCSD-8519: hydrate TiedHouse for Marketer apps so the
+            // "Connections to non-medical" section can render on load.
+            if (result?.ApplicationType?.Name == "Marketing"
+                && !string.IsNullOrEmpty(dynamicsApplication._adoxioApplicantValue))
+            {
+                var tiedHouse = _tiedHouseConnectionsRepository
+                    .GetCannabisTiedHouseConnectionForUser(dynamicsApplication._adoxioApplicantValue);
+                if (tiedHouse != null)
+                {
+                    result.TiedHouse = tiedHouse;
+                }
+            }
             //if (result.LicenseType == "Manufacturer")
             //{
             //    string filter = $"_adoxio_application_value eq {id}";

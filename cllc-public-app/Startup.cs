@@ -1,6 +1,6 @@
 // change to a #define to enable MSSQL
 #undef USE_MSSQL
-#undef USE_GEOCODER_CHECK 
+#undef USE_GEOCODER_CHECK
 
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
@@ -122,7 +122,7 @@ namespace Gov.Lclb.Cllb.Public
            })
             .SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
-            // setup siteminder authentication 
+            // setup siteminder authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = SiteMinderAuthOptions.AuthenticationSchemeName;
@@ -192,7 +192,7 @@ namespace Gov.Lclb.Cllb.Public
                 {
                     config += ",abortConnect=false";
                 }
-                
+
                 services.AddDistributedRedisCache(o =>
                 {
                     o.Configuration = config;
@@ -272,7 +272,7 @@ namespace Gov.Lclb.Cllb.Public
         {
 
             AuthenticationResult authenticationResult = null;
-            
+
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -284,12 +284,13 @@ namespace Gov.Lclb.Cllb.Public
                                         "https://lcrb-cllcms-portal-prod.silver.devops.bcgov",
                                         "https://dev.justice.gov.bc.ca",
                                         "https://test.justice.gov.bc.ca",
-                                        "https://justice.gov.bc.ca");
+                                        "https://justice.gov.bc.ca"
+                                      );
                 });
             });
 
             services.AddHttpClient<IDynamicsClient, DynamicsClient>();
-            
+
             // add BCeID Web Services
 
             string bceidUrl = _configuration["BCEID_SERVICE_URL"];
@@ -300,8 +301,7 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
 
             // add BC Express Pay (Bambora) service
-            services.AddHttpClient<IBCEPService, BCEPService>()
-                .AddPolicyHandler(GetRetryPolicy());
+            services.AddHttpClient<IBCEPService, BCEPService>();
 
             // add the PDF client.
             services.AddHttpClient<IPdfService, PdfService>()
@@ -321,10 +321,10 @@ namespace Gov.Lclb.Cllb.Public
             {
                 var httpClientHandler = new HttpClientHandler();
 
-                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
+                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.
                                           // This allows you to use OpenShift self-signed certificates for testing.
                 {
-                    // Return `true` to allow certificates that are untrusted/invalid                    
+                    // Return `true` to allow certificates that are untrusted/invalid
                     httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
                 }
@@ -504,8 +504,8 @@ namespace Gov.Lclb.Cllb.Public
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-            
-            
+
+
 
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
@@ -521,7 +521,7 @@ namespace Gov.Lclb.Cllb.Public
                 var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
                 var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
 
-                // Fix for bad SSL issues 
+                // Fix for bad SSL issues
 
 
                 Log.Logger = new LoggerConfiguration()

@@ -41,6 +41,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                     IsShowLGINApproval = applicationType.AdoxioIsshowlginapproval,
                     IsShowLGZoningConfirmation = applicationType.AdoxioIslgzoningconfirmation,
                     ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
+                    ShowPoliceInformationCheckUpload = applicationType.AdoxioIsshowpoliceinformationcheckuploaded,
                     ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
                     ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
                     ShowOwnershipDeclaration = applicationType.AdoxioIsownershipconfirmation,
