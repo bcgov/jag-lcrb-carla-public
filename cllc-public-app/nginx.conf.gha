@@ -27,6 +27,7 @@ http {
 
     sendfile on;
     keepalive_timeout 65;
+    underscores_in_headers on;
 
     # allow nginx to run as non-root
     client_body_temp_path /tmp/client_body;
