@@ -7,6 +7,7 @@
     "start": "set NODE_ENV=development && ng serve --host 0.0.0.0",
     "build": "ng build --progress=false --verbose=false --statsJson=false --base-href /lcrb/",
     "builduat": "ng build --progress=false --verbose=false --statsJson=false --base-href /uat/lcrb/",
+    "build-sandbox": "ng build --progress=false --verbose=false --statsJson=false --base-href /lcrb-sandbox/",
     "buildprod": "ng build --progress=false --verbose=false --statsJson=false --base-href /",
     "watch": "ng build --watch --base-href /lcrb/",
     "build:ssr": "npm run build -- --app=ssr --output-hashing=media",
