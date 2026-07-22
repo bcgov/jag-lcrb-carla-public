@@ -35,8 +35,8 @@ jobs:
                           echo "BUILD_SCRIPT=build"     >> $GITHUB_OUTPUT ;;
             master)       echo "ENV_TAG=prod"        >> $GITHUB_OUTPUT
                           echo "BUILD_SCRIPT=buildprod" >> $GITHUB_OUTPUT ;;
-            dv-migration) echo "ENV_TAG=sandbox-dev" >> $GITHUB_OUTPUT
-                          echo "BUILD_SCRIPT=build"     >> $GITHUB_OUTPUT ;;
+            dv-migration) echo "ENV_TAG=sandbox-dev"     >> $GITHUB_OUTPUT
+                          echo "BUILD_SCRIPT=build-sandbox" >> $GITHUB_OUTPUT ;;
           esac
 
       - name: Log in to GitHub Container Registry
