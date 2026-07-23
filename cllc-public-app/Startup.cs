@@ -157,10 +157,40 @@ namespace Gov.Lclb.Cllb.Public
 
             });
             services.RegisterPermissionHandler();
-            if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
+
+            // Build the Redis connection string once — reused for the Data Protection
+            // key ring and the distributed cache below.
+            string redisConfiguration = null;
+            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            {
+                redisConfiguration = _configuration["REDIS_SERVER"];
+                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
+                {
+                    redisConfiguration += $",password={_configuration["REDIS_PASSWORD"]}";
+                }
+                // For cloud installs (e.g. Azure) abortConnect should be false.
+                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
+                {
+                    redisConfiguration += ",abortConnect=false";
+                }
+            }
+
+            // Data Protection key ring MUST be shared across replicas so a session
+            // cookie encrypted by one pod can be decrypted by another. Prefer Redis
+            // (shared); fall back to the file system for single-pod / local runs.
+            if (redisConfiguration != null)
+            {
+                var dataProtectionRedis = StackExchange.Redis.ConnectionMultiplexer.Connect(redisConfiguration);
+                services.AddDataProtection()
+                    .PersistKeysToStackExchangeRedis(dataProtectionRedis, "DataProtection-Keys")
+                    .SetApplicationName("carla-public");
+            }
+            else if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
-                services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
+                services.AddDataProtection()
+                    .PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]))
+                    .SetApplicationName("carla-public");
             }
 
             // In production, the Angular files will be served from this directory
@@ -180,20 +210,9 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(_ => (IOrgBookClient)orgBook);
 
 
-            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            if (redisConfiguration != null)
             {
-                string config = _configuration["REDIS_SERVER"];
-                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
-                {
-                    string redisPassword = _configuration["REDIS_PASSWORD"];
-                    config += $",password={redisPassword}";
-                }
-                // Abort Connect is a setting that controls if Redis will try a connection if it thinks the service is not available.
-                // For cloud installations such as Azure it should be set to false.
-                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
-                {
-                    config += ",abortConnect=false";
-                }
+                string config = redisConfiguration;
 
                 services.AddStackExchangeRedisCache(o =>
                 {
