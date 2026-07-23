@@ -1,11 +1,14 @@
 <h3 class="blue-header">
   <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>
-  Cannabis Associate Security Screening Forms
+  Cannabis Screening Forms
 </h3>
 <div class="content-bottom">
   <p>
-    Newly added associates for a cannabis licence or authorization are required to submit documentation for security
-    screenings and/or financial integrity checks. Cannabis retail store licence or authorization applications cannot be
+    Newly added associates for a cannabis licence or authorization are required to submit <a
+      href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
+      forms
+    </a>. Cannabis retail store
+    licence or authorization applications cannot be
     processed until all required materials have been received.
   </p>
 
@@ -13,47 +16,42 @@
 
   <p>
     Please provide the documents as outlined on
-    <a
-      href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2"
-      target="_blank">
+    <a href="https://www2.gov.bc.ca/gov/content?id=B8E6EBE15A594CB7832B490C0A2815B2" target="_blank">
       this page
     </a>
     .
   </p>
 
-  <h4>Cannabis Associate Security Screening Forms</h4>
-  <app-file-uploader
-    *ngIf="application?.id"
-    documentType="CAS"
-    fileTypes="FILE MUST BE IN PDF FORMAT."
-    [multipleFiles]="true"
-    entityName="application"
-    [extensions]="['pdf']"
-    (numberOfUploadedFiles)="onUploadedCAS($event)"
-    [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD CANNABIS ASSOCIATES DOCUMENTS, DRAG FILES HERE OR'"
-    [disableUploads]="disabled"
-    [enableFileDeletion]="!disabled"></app-file-uploader>
+  <span *ngIf="showPoliceInformationCheckUpload()">
+    <h4>Police Information Check (may be referred to as Criminal Record and Judicial Matters Check outside of British
+      Columbia)</h4>
+    <p>
+      Each associate must provide a complete <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a>.
+    </p>
+    <app-file-uploader documentType="PoliceInformationCheck" fileTypes="FILE MUST BE IN PDF FORMAT."
+      [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+      (numberOfUploadedFiles)="uploadedPIC = $event" [entityId]="application.id"
+      [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+      [maxNumberOfFiles]="20">
+    </app-file-uploader>
+    <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+      A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+      <span style="white-space: nowrap;">contact <a
+          href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
+    </p>
+  </span>
 
-  <h4>Financial Integrity Documents</h4>
-  <p>
-    Each associate must provide a complete a
-    <a
-      href="https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/cannabis-forms/form-cannabis-retail-store-fin-integrity--associate.pdf">
-      Financial Integrity Form
-    </a>
-    .
+  <h4>Cannabis Screening Forms</h4>
+  <app-file-uploader *ngIf="application?.id" documentType="CAS" fileTypes="FILE MUST BE IN PDF FORMAT."
+    [multipleFiles]="true" entityName="application" [extensions]="['pdf']"
+    (numberOfUploadedFiles)="onUploadedCAS($event)" [entityId]="application.id"
+    [uploadHeader]="'TO UPLOAD SUPPORTING DOCUMENTS, DRAG FILES HERE OR'" [useDocumentTypeForName]="true"
+    [maxNumberOfFiles]="20" [disableUploads]="disabled" [enableFileDeletion]="!disabled">
+  </app-file-uploader>
+  <p style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;">
+    A maximum of 20 files can be uploaded. If you need to upload more than 20 files, please
+    <span style="white-space: nowrap;">contact <a
+        href="mailto:LCRBCannabis@gov.bc.ca">LCRBCannabis@gov.bc.ca</a>.</span>
   </p>
-  <app-file-uploader
-    *ngIf="application?.id"
-    documentType="FinancialIntegrity"
-    fileTypes="FILE MUST BE IN PDF FORMAT."
-    [multipleFiles]="true"
-    entityName="application"
-    [extensions]="['pdf']"
-    (numberOfUploadedFiles)="onUploadedFinancialIntegrity($event)"
-    [entityId]="application.id"
-    [uploadHeader]="'TO UPLOAD FINANCIAL INTEGRITY DOCUMENTS, DRAG FILES HERE OR'"
-    [disableUploads]="disabled"
-    [enableFileDeletion]="!disabled"></app-file-uploader>
+
 </div>

@@ -21,6 +21,7 @@ export class ApplicationType {
   showAssociatesFormUpload: boolean;
   showFinancialIntegrityFormUpload: boolean;
   showSupportingDocuments: boolean;
+  showPoliceInformationCheckUpload: boolean;
   showDeclarations: boolean;
   showLgNoObjection: boolean;
   showLiquorDeclarations: boolean;

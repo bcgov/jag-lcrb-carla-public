@@ -87,6 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (application != null)
                     {
                         result = CurrentUserHasAccessToAccount(application._adoxioApplicantValue);
+                        Console.WriteLine($"User has access to account {application._adoxioApplicantValue}: {result}");
                         var allowLGAccess = await CurrentUserIsLGForApplication(application);
                         result = result || allowLGAccess && !isDelete;
                         folderSegment = application.GetDocumentFolderName();
@@ -130,10 +131,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 if (entityName.ToLower() != "account")
                 {
+
                     result = relativeUrl.ToUpper().Substring(slashPos + 1).StartsWith(folderSegment.FolderName.ToUpper());
+                    if (!result)
+                    {
+                        var segments = relativeUrl.Split('/', StringSplitOptions.RemoveEmptyEntries);
+
+                        var appIndex = Array.FindIndex(
+                            segments,
+                            s => string.Equals(s, SharePointConstants.ApplicationFolderInternalName, StringComparison.OrdinalIgnoreCase));
+
+                        result = appIndex >= 0
+                            && appIndex + 1 < segments.Length
+                            && string.Equals(
+                                segments[appIndex + 1],
+                                folderSegment.FolderName,
+                                StringComparison.OrdinalIgnoreCase);
+
+                    }
                 }
             }
-
             return result;
         }
 
@@ -148,8 +165,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private async Task<bool> CanAccessEntityFile(string entityName, string entityId, string documentType, string serverRelativeUrl, bool isDelete = false)
         {
             var logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
-
+            Console.WriteLine($"CanAccessEntityFile called with entityName {entityName}, entityId {entityId}, documentType {documentType}, serverRelativeUrl {serverRelativeUrl}, isDelete {isDelete}");
             var result = await CanAccessEntity(entityName, entityId, serverRelativeUrl, isDelete).ConfigureAwait(true);
+
+            Console.WriteLine($"CanAccessEntity result: {result}");
             //get list of files for entity
             var hasFile = false;
 
@@ -161,7 +180,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 FolderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true),
                 ServerRelativeUrl = serverRelativeUrl
             };
-
+            Console.WriteLine($"Checking if file exists with serverRelativeUrl {logUrl}");
             var hasFileResult = _fileManagerClient.FileExists(fileExistsRequest);
 
             if (hasFileResult.ResultStatus == FileExistStatus.Exist)
@@ -169,6 +188,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 hasFile = true;
             else
                 _logger.LogError($"Unexpected error - Unable to validate file - {logUrl}");
+
+
 
             return result && hasFile;
         }
@@ -195,9 +216,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>boolean</returns>
         private bool CurrentUserHasAccessToAccount(string accountId)
         {
+
+
             // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-
             // For now, check if the account id matches the user's account.
             // TODO there may be some account relationships in the future
             if (userSettings.AccountId != null && userSettings.AccountId.Length > 0) return userSettings.AccountId == accountId;
@@ -231,7 +253,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="serverRelativeUrl"></param>
         /// <param name="documentType"></param>
         /// <returns>The file as binary data, or bad request if the request is invalid</returns>
-        /// 
+        ///
         [HttpGet("{entityId}/download-file/{entityName}/{fileName}")]
         public async Task<IActionResult> DownloadAttachment(string entityId, string entityName, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType)
         {
@@ -249,17 +271,24 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns></returns>
         private async Task<IActionResult> DownloadAttachmentInternal(string entityId, string entityName, [FromQuery] string serverRelativeUrl, [FromQuery] string documentType, bool checkUser)
         {
+            Console.WriteLine("******************************************");
+            Console.WriteLine($"DownloadAttachmentInternal called with entityId {entityId}, entityName {entityName}, serverRelativeUrl {serverRelativeUrl}, documentType {documentType}, checkUser {checkUser}");
             // get the file.
             if (string.IsNullOrEmpty(serverRelativeUrl) || string.IsNullOrEmpty(documentType) || string.IsNullOrEmpty(entityId) || string.IsNullOrEmpty(entityName)) return BadRequest();
 
             var hasAccess = true;
+
             if (checkUser)
             {
                 ValidateSession();
                 hasAccess = await CanAccessEntityFile(entityName, entityId, documentType, serverRelativeUrl).ConfigureAwait(true);
             }
 
+            _logger.LogInformation($"Attempting to download file {serverRelativeUrl} for entity {entityName}, entityId {entityId}, documentType {documentType}");
+            Console.WriteLine($"User has access: {hasAccess}");
             if (!hasAccess) return BadRequest();
+            _logger.LogInformation($"Attempting to download file {serverRelativeUrl} for entity {entityName}, entityId {entityId}, documentType {documentType}");
+
 
             var logUrl = WordSanitizer.Sanitize(serverRelativeUrl);
 
@@ -273,8 +302,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (downloadResult.ResultStatus == ResultStatus.Success)
             {
-                // Update modifiedon to current time
-                UpdateEntityModifiedOnDate(entityName, entityId, true);
+                // Update modifiedon to current time — do NOT set AdoxioFileuploadedfromportal
+                // here because this is a download, not an upload. Setting it on download
+                // incorrectly triggers the Dynamics workflow that resolves incompleteness.
+                UpdateEntityModifiedOnDate(entityName, entityId, false);
                 _logger.LogInformation($"SUCCESS in getting file {logUrl}");
                 var fileContents = downloadResult.Data.ToByteArray();
                 return new FileContentResult(fileContents, "application/octet-stream");
@@ -390,7 +421,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Public version of the file upload.  
+        /// Public version of the file upload.
         /// </summary>
         /// <param name="entityId"></param>
         /// <param name="entityName"></param>
