@@ -1542,16 +1542,38 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var existing = docLocs.FirstOrDefault(d => !string.IsNullOrEmpty(d.RelativeUrl));
         if (existing != null) return existing.RelativeUrl;
 
-        if (entityName == "event")
+        // No existing document location — build the folder name from the entity's
+        // primary name as "{Name}_{IdCleaned}" (matches how account creation names
+        // its folder). Falls back to the cleaned id when the name is unavailable.
+        // Previously only "event" was handled here, so uploads to applications,
+        // accounts, contacts, workers and licences got a null folder name and threw.
+        if (!Guid.TryParse(entityId, out var entityGuid)) return null;
+
+        var (logicalName, nameAttr) = entityName.ToLower() switch
         {
-            var ev = await GetEventByIdAsync(entityId, ct);
-            if (ev != null)
-            {
-                var idCleaned = entityId.ToUpper().Replace("-", "");
-                return $"{ev.adoxio_name}_{idCleaned}";
-            }
+            "account"     => (Account.EntityLogicalName,            "name"),
+            "contact"     => (Contact.EntityLogicalName,            "fullname"),
+            "application" => (adoxio_application.EntityLogicalName, "adoxio_name"),
+            "worker"      => (adoxio_worker.EntityLogicalName,      "adoxio_name"),
+            "licence"     => (adoxio_licences.EntityLogicalName,    "adoxio_name"),
+            "event"       => (adoxio_event.EntityLogicalName,       "adoxio_name"),
+            _             => (null, null)
+        };
+        if (logicalName == null) return null;
+
+        var idCleaned = entityId.ToUpper().Replace("-", "");
+        try
+        {
+            var entity = await Task.Run(() => _serviceClient.Retrieve(logicalName, entityGuid, new ColumnSet(true)), ct);
+            var name = entity?.GetAttributeValue<string>(nameAttr);
+            return string.IsNullOrEmpty(name) ? idCleaned : $"{name}_{idCleaned}";
         }
-        return null;
+        catch
+        {
+            // If the entity can't be read for any reason, still return a usable
+            // (non-null) folder name so the upload doesn't crash.
+            return idCleaned;
+        }
     }
 
     public async Task CreateEntitySharePointDocumentLocationAsync(string entityName, string entityId, string folderName, string name, CancellationToken ct = default)
