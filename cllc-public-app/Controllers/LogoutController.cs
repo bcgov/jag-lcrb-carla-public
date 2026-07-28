@@ -40,10 +40,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // SMSESSION is commonly scoped to a parent domain (e.g. .gov.bc.ca)
             // so it's shared across the SSO realm — clearing with no Domain only
             // targets the exact host and silently leaves that cookie in place.
-            // Clear across every plausible domain scope for the current host.
+            //
+            // Deliberately only 2 domain variants (not every parent-domain level
+            // for every cookie): SiteMinder's SMSESSION cookie is large (~2-3KB)
+            // and a full combinatorial clear (many cookies x many domains)
+            // generates enough Set-Cookie response headers to exceed a proxy's
+            // response-header size limit between here and the browser (F5 /
+            // OpenShift Route), producing a 502 instead of the redirect.
+            //
+            // Request.Host is NOT reliable for this — F5/the OpenShift Route can
+            // present a different Host than the public URL the browser actually
+            // used (observed: the internal *.apps.silver.devops.gov.bc.ca route
+            // name instead of dev.justice.gov.bc.ca). Derive the domain from the
+            // configured public BASE_URI instead.
+            var publicHost = Uri.TryCreate(Configuration["BASE_URI"], UriKind.Absolute, out var baseUri)
+                ? baseUri.Host
+                : null;
+            var domainScopes = new[] { null, GetSsoParentDomain(publicHost) }.Distinct();
+
             foreach (var cookieName in Request.Cookies.Keys)
             {
-                foreach (var domain in GetDomainScopes(Request.Host.Host))
+                foreach (var domain in domainScopes)
                 {
                     var options = new CookieOptions
                     {
@@ -69,30 +86,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         /// <summary>
-        /// Every domain scope a cookie could plausibly have been set with for the
-        /// given host: no Domain (exact host), the exact host as an explicit
-        /// Domain, and each parent domain (e.g. dev.justice.gov.bc.ca yields
-        /// .dev.justice.gov.bc.ca, .justice.gov.bc.ca, .gov.bc.ca, .bc.ca).
-        /// Clearing on all of them guarantees a match regardless of which scope
-        /// SiteMinder (or anything else) actually used.
+        /// The broad parent domain SiteMinder/BCeID SSO cookies are typically
+        /// scoped to for a BC government host, e.g. dev.justice.gov.bc.ca
+        /// yields ".gov.bc.ca" (last 3 labels). Returns null if the host is too
+        /// short to have a meaningful parent (e.g. localhost, an IP, or already
+        /// only 3 labels).
         /// </summary>
-        private static IEnumerable<string> GetDomainScopes(string host)
+        private static string GetSsoParentDomain(string host)
         {
-            yield return null; // no Domain attribute — defaults to the exact host
-
             if (string.IsNullOrEmpty(host) || Uri.CheckHostName(host) != UriHostNameType.Dns)
             {
-                yield break; // IP address / unknown host — nothing further to try
+                return null;
             }
 
             var labels = host.Split('.');
-            // Stop at the last two labels (registrable domain, e.g. "bc.ca") —
-            // going further would clear cookies for an unrelated public suffix.
-            for (var i = 0; i < labels.Length - 2; i++)
+            if (labels.Length <= 3)
             {
-                yield return "." + string.Join(".", labels.Skip(i));
+                return null; // host is already at or below the target scope
             }
-            yield return "." + string.Join(".", labels.Skip(labels.Length - 2));
+
+            return "." + string.Join(".", labels.Skip(labels.Length - 3));
         }
     }
 }
