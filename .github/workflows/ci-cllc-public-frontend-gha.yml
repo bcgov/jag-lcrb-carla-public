@@ -39,6 +39,15 @@ jobs:
                           echo "BUILD_SCRIPT=build-sandbox" >> $GITHUB_OUTPUT ;;
           esac
 
+      - name: Inject UI version info
+        run: |
+          FILE=cllc-public-app/ClientApp/src/app/components/version-info/version-info-dialog.component.html
+          BUILD_DATE=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          sed -i "s#<!-- UI_GIT_REF -->#${{ github.ref_name }}#" "$FILE"
+          sed -i "s#<!-- UI_GIT_REPO -->#https://github.com/${{ github.repository }}#" "$FILE"
+          sed -i "s#<!-- UI_GIT_COMMIT -->#${{ github.sha }}#" "$FILE"
+          sed -i "s#<!-- UI_BUILD_DATE -->#$BUILD_DATE#" "$FILE"
+
       - name: Log in to GitHub Container Registry
         uses: docker/login-action@9780b0c442fbb1117ed29e0efdff1e18412f7567 # v3.3.0
         with:

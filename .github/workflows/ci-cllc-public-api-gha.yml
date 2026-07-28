@@ -62,4 +62,4 @@ jobs:
           token: ${{ secrets.DEPLOY_TRIGGER_TOKEN }}
           repository: bcgov-c/lcrb-carla-pipelines
           event-type: deploy
-          client-payload: '{"service":"cllc-public-app","env":"${{ steps.env-tag.outputs.ENV_TAG }}","image":"${{ env.IMAGE_NAME }}:${{ steps.env-tag.outputs.ENV_TAG }}"}'
+          client-payload: '{"service":"cllc-public-app","env":"${{ steps.env-tag.outputs.ENV_TAG }}","image":"${{ env.IMAGE_NAME }}:${{ steps.env-tag.outputs.ENV_TAG }}","buildCommit":"${{ github.sha }}","buildReference":"${{ github.ref_name }}","buildSource":"https://github.com/${{ github.repository }}"}'
