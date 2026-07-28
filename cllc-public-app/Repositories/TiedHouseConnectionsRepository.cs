@@ -323,8 +323,9 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             connection.adoxio_CategoryType = adoxio_tiedhouseconnection_adoxio_categorytype.Cannabis;
             connection.statuscode = adoxio_tiedhouseconnection_statuscode.Existing;
-            connection.adoxio_tiedhouseconnectionId = null;
-            connection.Id = Guid.Empty;
+            // Do not set Id/primary key before Create — an explicit Guid.Empty is treated
+            // by Dataverse as an invalid supplied key ("Expected non-empty Guid") rather than
+            // "generate one". Leave it untouched, matching every other Create*Async call site.
             connection.adoxio_AccountId = new Microsoft.Xrm.Sdk.EntityReference("account", new Guid(accountId));
 
             var newId = await _dataverse.CreateTiedHouseConnectionAsync(connection);

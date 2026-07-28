@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Public.Authentication;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +14,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _env;
-        private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
 
         public LogoutController(IConfiguration configuration, IWebHostEnvironment env)
         {
@@ -27,19 +25,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public ActionResult Logout(string path)
         {
-            // clear session
+            // clear session server-side
             HttpContext.Session.Clear();
-            string tempSession = HttpContext.Request.Cookies[".AspNetCore.Session"];
-            if (tempSession == null)
+
+            // Expire every cookie the browser sent us (session cookie, SiteMinder
+            // cookies, dev tokens, etc.) so the next visit starts from a clean
+            // slate instead of silently re-authenticating off a stale cookie.
+            // This only runs on an explicit sign-out request.
+            foreach (var cookieName in Request.Cookies.Keys)
             {
-                tempSession = "";
-            }
-            if (! string.IsNullOrEmpty(tempSession))
-            {
-                // expire session user cookie
                 Response.Cookies.Append(
-                    ".AspNetCore.Session",
-                    tempSession,
+                    cookieName,
+                    "",
                     new CookieOptions
                     {
                         Path = "/",
@@ -49,48 +46,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 );
             }
 
-
-            if (!_env.IsProduction()) // clear dev tokens
+            if (!_env.IsProduction())
             {
-                string temp = HttpContext.Request.Cookies[_options.DevAuthenticationTokenKey];
-                if (temp == null)
-                {
-                    temp = "";
-                }
-                // expire "dev" user cookie
-                Response.Cookies.Append(
-                    _options.DevAuthenticationTokenKey,
-                    temp,
-                    new CookieOptions
-                    {
-                        Path = "/",
-                        SameSite = SameSiteMode.Strict,
-                        Expires = DateTime.UtcNow.AddDays(-1)
-                    }
-                );
-                // expire "dev" user cookie
-                temp = HttpContext.Request.Cookies[_options.DevBCSCAuthenticationTokenKey];
-                if (temp == null)
-                {
-                    temp = "";
-                }
-                Response.Cookies.Append(
-                    _options.DevBCSCAuthenticationTokenKey,
-                    temp,
-                    new CookieOptions
-                    {
-                        Path = "/",
-                        SameSite = SameSiteMode.Strict,
-                        Expires = DateTime.UtcNow.AddDays(-1)
-                    }
-                );
                 return Redirect($"{Configuration["BASE_PATH"]}");
             }
 
             string logoutPath = string.IsNullOrEmpty(Configuration["SITEMINDER_LOGOUT_URL"]) ? "/" : Configuration["SITEMINDER_LOGOUT_URL"];
             return Redirect(logoutPath + $"?returl={Configuration["BASE_URI"]}{Configuration["BASE_PATH"]}&retnow=1");
-
-
         }
     }
 }
