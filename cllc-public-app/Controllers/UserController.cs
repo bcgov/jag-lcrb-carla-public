@@ -12,6 +12,7 @@ using System;
 using Gov.Lclb.Cllb.Public.Utils;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Microsoft.Extensions.Logging;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -23,13 +24,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IConfiguration _configuration;
         private readonly IDataverseClient _dataverse;
         private readonly BCeIDBusinessQuery _bceid;
+        private readonly ILogger _logger;
 
-        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IDataverseClient dataverse, BCeIDBusinessQuery bceid)
+        public UserController(IHttpContextAccessor httpContextAccessor, IConfiguration configuration, IDataverseClient dataverse, BCeIDBusinessQuery bceid, ILoggerFactory loggerFactory)
         {
             _httpContextAccessor = httpContextAccessor;
             _configuration = configuration;
             _dataverse = dataverse;
             _bceid = bceid;
+            _logger = loggerFactory.CreateLogger(typeof(UserController));
         }
 
         protected ClaimsPrincipal CurrentUser => _httpContextAccessor.HttpContext.User;
@@ -40,7 +43,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             SiteMinderAuthOptions siteMinderAuthOptions = new SiteMinderAuthOptions();
             ViewModels.User user = new ViewModels.User();
 
+            bool sessionHadUserSettings = _httpContextAccessor.HttpContext.Session.GetString("UserSettings") != null;
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            _logger.LogInformation(
+                "UsersCurrentGet: sessionHadUserSettings={SessionHad}, AuthenticatedUser==null:{AuthNull}, IsNewUserRegistration(from session)={IsNew}, SiteMinderGuid={Guid}, SessionId={SessionId}",
+                sessionHadUserSettings, userSettings.AuthenticatedUser == null, userSettings.IsNewUserRegistration,
+                userSettings.SiteMinderGuid, _httpContextAccessor.HttpContext.Session.Id);
+
             user.id = userSettings.UserId;
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
@@ -57,15 +66,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     {
                         userSettings.AuthenticatedUser = new Models.User();
                         userSettings.AuthenticatedUser.FromContact(contact);
+                        _logger.LogInformation("UsersCurrentGet: contact FOUND via GetContactByExternalIdAsync for SiteMinderGuid={Guid}, ContactId={ContactId}", userSettings.SiteMinderGuid, contact.Id);
                     }
                     else
                     {
                         userSettings.IsNewUserRegistration = true;
+                        _logger.LogWarning("UsersCurrentGet: contact NOT FOUND via GetContactByExternalIdAsync for SiteMinderGuid={Guid} — treating as new user", userSettings.SiteMinderGuid);
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     userSettings.IsNewUserRegistration = true;
+                    _logger.LogError(ex, "UsersCurrentGet: exception looking up contact for SiteMinderGuid={Guid} — treating as new user", userSettings.SiteMinderGuid);
                 }
             }
 
