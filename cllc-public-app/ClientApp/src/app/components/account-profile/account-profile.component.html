@@ -472,7 +472,7 @@
                   [application]="application"
                   (onFormChanges)="connectionToProducersFormData = $event"></app-connection-to-producers>
               </div>
-              <div *ngIf="application?.applicationType?.name !== 'Ethyl Alcohol Permit'">
+              <div>
                 <app-connection-to-other-liquor-licences
                   [account]="account"
                   [application]="application"
