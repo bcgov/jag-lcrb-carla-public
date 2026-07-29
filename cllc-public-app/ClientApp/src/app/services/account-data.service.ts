@@ -91,7 +91,9 @@ export class AccountDataService extends DataService {
     for (const file of files) {
       file.name = `${documentType}__${file.name}`;
       file.downloadUrl = `api/file/${accountId}/download-file/account/${file.name}`;
-      file.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(file.serverrelativeurl)}&documentType=${documentType
+      // serverrelativeurl is already URL-encoded by the backend — encoding it
+      // again here double-encodes it (e.g. %20 -> %2520), breaking the download.
+      file.downloadUrl += `?serverRelativeUrl=${file.serverrelativeurl}&documentType=${documentType
         }`;
     }
     return files;
