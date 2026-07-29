@@ -11,5 +11,5 @@ export class SepDrinkType {
     storageMethod: string;
     servingMethod: string;
     servingSizeMl: number;
-    storaheSizeMl: number;
+    storageSizeMl: number;
 }
