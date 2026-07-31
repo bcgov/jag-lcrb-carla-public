@@ -256,13 +256,14 @@ namespace Gov.Lclb.Cllb.Interfaces
             responseDict["query_url"] = query_url;
 
             // special case for unit testing
-            if (bcep_hashkey.Equals("APPROVE"))
+            string hashkey = GetHashKey(paymentType);
+            if (hashkey != null && hashkey.Equals("APPROVE"))
             {
                 responseDict["trnId"] = "01234567";
                 responseDict["trnApproved"] = "1";
                 return responseDict;
             }
-            else if (bcep_hashkey.Equals("DECLINE"))
+            else if (hashkey != null && hashkey.Equals("DECLINE"))
             {
                 responseDict["trnApproved"] = "0";
                 return responseDict;
