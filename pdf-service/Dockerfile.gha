@@ -22,9 +22,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # libwkhtmltox.so was built against OpenSSL 1.1, which bookworm's base image
-# no longer ships (only libssl3/OpenSSL 3.x) — pull the last bullseye-security
+# no longer ships (only libssl3/OpenSSL 3.x) — pull the bullseye (deb11) security
 # build of libssl1.1 directly since it's no longer available via apt on bookworm.
-RUN wget -q -O /tmp/libssl1.1.deb http://archive.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1w-0+deb11u1_amd64.deb \
+RUN wget -q -O /tmp/libssl1.1.deb http://deb.debian.org/debian-security/pool/updates/main/o/openssl/libssl1.1_1.1.1w-0+deb11u8_amd64.deb \
     && dpkg -i /tmp/libssl1.1.deb \
     && rm /tmp/libssl1.1.deb \
     && apt-get purge -y wget \
