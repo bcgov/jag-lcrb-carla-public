@@ -44,7 +44,11 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
-            string filename = $"Templates/{template}.mustache";
+            // Use an absolute path tied to where the assembly actually lives —
+            // a relative path here depends on Environment.CurrentDirectory,
+            // which isn't guaranteed to equal AppContext.BaseDirectory in every
+            // hosting context, and silently causes File.Exists to return false.
+            string filename = System.IO.Path.Combine(AppContext.BaseDirectory, "Templates", $"{template}.mustache");
 
             if (System.IO.File.Exists(filename))
             {
@@ -88,7 +92,11 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
-            string filename = $"Templates/{template}.mustache";
+            // Use an absolute path tied to where the assembly actually lives —
+            // a relative path here depends on Environment.CurrentDirectory,
+            // which isn't guaranteed to equal AppContext.BaseDirectory in every
+            // hosting context, and silently causes File.Exists to return false.
+            string filename = System.IO.Path.Combine(AppContext.BaseDirectory, "Templates", $"{template}.mustache");
 
             if (System.IO.File.Exists(filename))
             {
