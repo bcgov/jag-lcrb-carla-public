@@ -387,7 +387,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var saTask = Task.Run(() => _serviceClient.RetrieveMultiple(saQuery), ct);
 
         var hosQuery = new QueryExpression(adoxio_hoursofservice.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
-        hosQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        hosQuery.Criteria.AddCondition("adoxio_licence", ConditionOperator.Equal, licenceId);
         var hosTask = Task.Run(() => _serviceClient.RetrieveMultiple(hosQuery), ct);
 
         var ossQuery = new QueryExpression(adoxio_offsitestorage.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
@@ -395,7 +395,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var ossTask = Task.Run(() => _serviceClient.RetrieveMultiple(ossQuery), ct);
 
         var tclQuery = new QueryExpression(adoxio_applicationtermsconditionslimitation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
-        tclQuery.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, licenceId);
+        tclQuery.Criteria.AddCondition("adoxio_licence", ConditionOperator.Equal, licenceId);
         var tclTask = Task.Run(() => _serviceClient.RetrieveMultiple(tclQuery), ct);
 
         await Task.WhenAll(saTask, hosTask, ossTask, tclTask);
