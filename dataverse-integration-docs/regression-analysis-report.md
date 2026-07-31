@@ -251,6 +251,20 @@ The migration from AutoRest Dynamics client to the Dataverse SDK is **100% compl
 3. Account `primarycontact` null → `AccountsController.GetCurrentAccount`, `GetAccount`, `CreateAccount` now fetch primary contact; `UpdateAccount` restores from request.
 4. `GetAutocomplete` active-state filter client-side → moved server-side via `activeOnly` parameter on `GetAccountsAsync`.
 
+**OpenShift deployment fixes (2026-07-06 — 2026-07-23):**
+
+9. **FileController download incorrectly triggers upload workflow** (Jul 6, commit `043fc31c5`)  
+   `DownloadFile` called `UpdateEntityModifiedOnDate(entityId, true)` — the `true` flag sets `AdoxioFileuploadedfromportal = true`, triggering the Dynamics "files complete" workflow. Every download advanced the application checklist. Fixed: downloads now pass `false`.
+
+10. **nginx drops SiteMinder auth headers** (Jul 22, commit `a010ef905`)  
+   SiteMinder passes headers with underscores (`sm_universalid`, `sm_user`, etc.). nginx silently drops headers with underscores unless `underscores_in_headers on` is configured. Without this fix, all SiteMinder logins failed on OpenShift. Added to `nginx.conf.gha`.
+
+11. **Session cookies fail across pods** (Jul 23, commit `d8eeed1d6`)  
+   ASP.NET Data Protection key ring was per-pod (in-memory). Cookies encrypted by pod A failed decryption by pod B. Fixed: key ring persisted to Redis (`DataProtection-Keys`); `SetApplicationName("carla-public")` applied to both Redis and file-system paths. File-system path also now correctly sets application name.
+
+12. **SharePoint folder name null for all entity types except event** (Jul 23, commit `7bed2c836`)  
+   `GetFolderNameAsync` only handled `event` entity type; all others (account, contact, application, worker, licence) returned `null`, causing uploads to crash with a null folder name. Fixed: resolves the entity's display name from Dataverse and builds `{Name}_{IdCleaned}` for all supported types; returns `idCleaned` as fallback if name fetch fails.
+
 **Post-analysis fixes (2026-07-02 — 2026-07-03):**
 
 5. **SharePoint doc-location parent query — wrong attribute name** (3 locations, commit `a87ca9d`)  

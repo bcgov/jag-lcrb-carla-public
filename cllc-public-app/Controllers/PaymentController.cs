@@ -1691,9 +1691,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         patchInvoice.StatusCode = invoice_statuscode.Canceled;
                         await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                        var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
-                        patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
-                        await _dataverse.UpdateApplicationAsync(patchApp);
+                        var patchEvent = new adoxio_specialevent_dv { Id = Guid.Parse(id) };
+                        patchEvent.adoxio_InvoiceTrigger = false;
+                        await _dataverse.UpdateSpecialEventAsync(patchEvent);
                     }
                     _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Payment Type: {paymentType}");
                 }
@@ -1775,9 +1775,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     patchInvoice.StatusCode = invoice_statuscode.Canceled;
                     await _dataverse.UpdateInvoiceAsync(patchInvoice);
 
-                    var patchApp = new adoxio_application_dv { Id = Guid.Parse(id) };
-                    patchApp.adoxio_LicenceFeeInvoiceTrigger = adoxio_generalyesno_dv.No;
-                    await _dataverse.UpdateApplicationAsync(patchApp);
+                    var patchEvent = new adoxio_specialevent_dv { Id = Guid.Parse(id) };
+                    patchEvent.adoxio_InvoiceTrigger = false;
+                    await _dataverse.UpdateSpecialEventAsync(patchEvent);
 
                     _logger.Information($"Licence Fee Transaction NOT approved.  Application ID: {id} Invoice: {invoice.InvoiceNumber} Payment Type: {paymentType}");
                 }

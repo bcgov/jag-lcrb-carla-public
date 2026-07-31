@@ -1,45 +1,143 @@
-# Dataverse Integration Docs
+# Dataverse Integration
 
-Documentation for the Dataverse SDK migration replacing the AutoRest-generated `DynamicsClient` with `Microsoft.PowerPlatform.Dataverse.Client.ServiceClient`.
+Reference for how this codebase talks to Dataverse — replaces the old AutoRest-generated
+`DynamicsClient` with `Microsoft.PowerPlatform.Dataverse.Client.ServiceClient`.
 
-## Documents
+---
 
-| File | Covers |
+## Project layout
+
+| Path | Purpose |
 |---|---|
-| [setup-and-authentication.md](setup-and-authentication.md) | Project skeleton, NuGet packages, solution setup, `DataverseClient` auth wrapper, health check, env vars |
-| [entity-generation.md](entity-generation.md) | `pac modelbuilder` setup, entity generation script, full entity list, missing entities, re-generation guide |
-| [application-operations.md](application-operations.md) | LCSD-8536: Application CRUD, WithChildren parallel loading (Licence, Establishment, LegalEntity), ApplicationExtension, AnnualVolume |
-| [licence-operations.md](licence-operations.md) | LCSD-8537: Licence CRUD, WithChildren parallel loading (ServiceArea, HourOfSale, OffSiteStorage, TermsConditions), child entity CRUD |
-| [worker-operations.md](worker-operations.md) | LCSD-8538: Worker CRUD, WithChildren parallel loading (PersonalHistorySummary, PreviousAddress), child entity CRUD |
-| [event-and-specialevent-operations.md](event-and-specialevent-operations.md) | LCSD-8539/8557: Special Event CRUD, Event CRUD, WithChildren loading; LCSD-8557 adds full event CRUD + TC lookup + `GetFolderNameAsync` + `LicenceEventsController` migration |
-| [account-contact-and-supporting-entity-operations.md](account-contact-and-supporting-entity-operations.md) | LCSD-8540: Account CRUD + WithChildren (Establishment, LegalEntity, TiedHouseConnection), Contact CRUD, Establishment/LegalEntity/TiedHouseConnection, Annotation, SharePointDocumentLocation, RetrievePagedAsync |
-| [model-extensions-port.md](model-extensions-port.md) | LCSD-8541: Port 46 ModelExtension files — OData bind props dropped, enums/standalone classes moved to Dynamics-Dataverse/Extensions/, metadata classes renamed DynamicsLabel/Option/OptionSet/etc. |
-| [ldb-orders-service-migration.md](ldb-orders-service-migration.md) | LCSD-8543: Migrate ldb-orders-service — `LdbOrdersUtils` constructor injection, `CreateLdbOrderAsync` added to IDataverseClient, Hangfire DI wiring |
-| [geocoder-service-migration.md](geocoder-service-migration.md) | Migrate geocoder-service — `GeocodeUtils` + `GeocoderController` constructor injection, 4 new IDataverseClient methods (LicenceType, LGIN, active licences by type IDs, establishments by name), AutoRest support file gotcha |
-| [watchdog-migration.md](watchdog-migration.md) | LCSD-8545: Migrate watchdog — DataverseClient health check wiring, ApplicationTypesCheck multi-env migration, `GetApplicationTypesAsync` + `GetSystemFormXmlByIdAsync` added to IDataverseClient |
-| [orgbook-service-migration.md](orgbook-service-migration.md) | LCSD-8546: Migrate orgbook-service — `OrgBookController` + `VonAgentClient` to `IDataverseClient`, 3 new OrgBook sync query methods, two-constructor pattern for Hangfire compatibility, EntityReference.Name for licence type, account cache for licencee lookups |
-| [federal-reporting-service-migration.md](federal-reporting-service-migration.md) | LCSD-8547: Migrate federal-reporting-service — `FederalReportingController` to `IDataverseClient`, 8 new methods (federal report export, cannabis monthly/inventory report, product admin name lookup, SharePoint doc loc queries + associate), `PopulateProduct` signature updated to use SDK types + string productName, Money field `.Value` access |
-| [contact-controller-migration.md](contact-controller-migration.md) | LCSD-8548: Migrate `ContactController` to `IDataverseClient` — 4 new IDataverseClient methods (GetContactByExternalId, CreateAlias, UpdateAlias, CreateWorkerSharePointDocLoc), Xrm.Sdk model extensions for Contact/Alias/Worker, `extern alias DV` pattern applied to 5 files, deep-insert replaced with sequential create |
-| [sharepoint-sync-tool-migration.md](sharepoint-sync-tool-migration.md) | LCSD-8549: Migrate `sharepoint-sync-tool/SyncService.cs` — `IDynamicsClient` replaced with `IDataverseClient`, `MicrosoftDynamicsCRMsharepointdocumentlocation` → `SharePointDocumentLocation` SDK type, OData bind strings replaced with `EntityReference`, `GetSharePointDocLocsByRelativeUrlAsync` added to IDataverseClient |
-| [special-events-controller-migration.md](special-events-controller-migration.md) | LCSD-8539/8550: Complete migration of `SpecialEventsController` — all `IDynamicsClient` references removed; sub-entity CRUD, police listing/actions, PDF generation, forecasts, T&Cs, autocomplete, and claim endpoints fully async on `IDataverseClient`; `GetSpecialEventData`, `GetSepSummaries`, `GetPagedSepSummaries` helpers deleted |
-| [one-stop-service-migration.md](one-stop-service-migration.md) | LCSD-8551: Migrate `one-stop-service/` — `OneStopUtils`, `ReceiveFromHubService`, `OneStopController`, `Startup`; bridge helper pattern for XML builders; Hangfire DI wiring; hand-crafted `adoxio_onestopmessageitem` entity; zero `IDynamicsClient` references remaining |
-| [establishments-controller-migration.md](establishments-controller-migration.md) | LCSD-8552: Migrate `EstablishmentsController` — all map/LRS/CRUD endpoints async; DV `ToViewModel`+`CopyValues` on `adoxio_establishment`; N+1 establishment fetch for map data (cached 1–2 days); 4 new IDataverseClient methods |
-| [tied-house-connections-controller-migration.md](tied-house-connections-controller-migration.md) | LCSD-8553: Migrate `TiedHouseConnectionsController` + `TiedHouseConnectionsRepository` — 8 new IDataverseClient methods, N:N licence associate/disassociate via SDK, OR-filter queries, sync actions → async, new DV extensions on `adoxio_tiedhouseconnection` |
-| [accounts-controller-migration.md](accounts-controller-migration.md) | LCSD-8554: Migrate `AccountsController` — full rewrite, 4 new IDataverseClient methods (LegalEntityChildren, DeleteLicence, LicenseeChangelogIds, SharePointDocLocsByObjectId), DV ToViewModel+CopyValues on Account+LegalEntity, deep-insert → sequential creates, `adoxio_licenseechangelog` logical-name delete pattern |
-| [worker-controller-migration.md](worker-controller-migration.md) | LCSD-8555: Migrate `WorkerController` — full rewrite, 2 new IDataverseClient methods (GetWorkersByContactId, DeleteWorker), DV `ToViewModel` on `adoxio_worker`, single-step contact-linked create, PDF contact fetched separately, `GetFolderName` replaced with `GetSharePointDocLocsByObjectIdAsync` |
-| [spice-sync-service-migration.md](spice-sync-service-migration.md) | LCSD-8556: Migrate `carla-spice-sync-service` — `SpiceUtils.cs` + `Validation.cs` full rewrite, 10 new IDataverseClient SPICE query methods, V1 legalentity overloads removed, self-constructing DataverseClient for Hangfire compatibility, related entities fetched with separate async calls |
-| [licenses-controller-migration.md](licenses-controller-migration.md) | LCSD-8558 + Phase 2 (Ticket D): Migrate `LicensesController` — full rewrite to `IDataverseClient`, 10 new interface methods; `GetAutocomplete`, `CreateApplication`/`GetTermChangeApplication`/`isConclusivelyDeemed`/`OutstandingPriorBalanceInvoice` all migrated in Phase 2; `DvInvoice.ToViewModel()` added; `_dynamicsClient` field, constructor param, and assignment removed — zero IDynamicsClient references remain |
-| [legal-entity-and-sep-forecast-operations.md](legal-entity-and-sep-forecast-operations.md) | Phase 2 prerequisites: `UpdateLegalEntityAsync`, `GetLegalEntityByAccountIdAsync`, `CopyValues(DvLegalEntity)`, and `adoxio_sepdrinksalesforecast` CRUD (4 methods) |
-| [legal-entities-controller-migration.md](legal-entities-controller-migration.md) | Full rewrite of `LegalEntitiesController` — `IDynamicsClient` removed, all 20+ methods async on `IDataverseClient`, changelog tree save/cancel, shareholder entity creation, screening summary, consent email |
-| [build-validation-common-fixes.md](build-validation-common-fixes.md) | Cross-cutting build fixes found during full solution validation: orphan usings in Startup.cs files, Newtonsoft.Json version bumps, DateTimeOffset→DateTime conversions, Dataverse property casing, enum ambiguity (AutoRest vs DV), duplicate extension methods |
-| [siteminder-handler-migration.md](siteminder-handler-migration.md) | Migrate `SiteminderAuthenticationHandler` — 23 `_dynamicsClient` refs removed; `LoadUserLegacyAsync` inlined; 3 new IDataverseClient lookup methods; `CreateSharePoint*DocumentLocation` rewritten for DV types; bridge + legacy auth + dev login all ported |
-| [applications-controller-migration.md](applications-controller-migration.md) | Ticket E (final): All PCL/LE-review flow fully migrated — `GetCurrentLicenseeApplicationAsync`, `GetOngoingLicenseeApplicationId`, `_GetExistingInProgressPermanentChangeApplication`, `_createPermanentChangeApplication`, `_GetPermanentChangesToLicenseeData`, `_GetPermanentChangesToLicenseeDataForLegalEntityReview`, `_GetLegalEntityReviewData`, `GetOrCreatePermanentChangeForLegalEntityReviewApplicationAsync`, `CopyLEReviewApplicationToPCL`; dead AutoRest overloads + `_dynamicsClient` field removed; `IDynamicsClient` dependency dropped from controller |
-| [payment-controller-migration.md](payment-controller-migration.md) | LCSD-8557: Migrate `PaymentController` — all instance methods on `IDataverseClient`; AutoRest static overloads for `GetCannabisPaymentStatus`/`GetLiquorPaymentStatus`/`UpdateRelatedLeReviewStatus` preserved for `ApplicationsController` backward compat; DV overloads added; `GetPaymentTypeAsync` extension added to `DynamicsExtensions.cs`; `invoice_statecode`/`invoice_statuscode` enum mapping; `TotalAmount.Value` for Money type |
-| [dynamics-extensions-cleanup.md](dynamics-extensions-cleanup.md) | Dead code cleanup + DV migration for `DynamicsExtensions.cs` and `License.cs` — Siteminder-orphaned helpers removed (Phase 1); 4 new DV async methods added replacing `GetApplicationChangeLogs`, `GetLegalEntityTree`, `GetLegalEntityChildren`, `GetNotTerminatedCRSApplicationCount`; `GetPaidLicensesOnTransfer` + dead helpers removed; `ToLicenseSummaryViewModel(IDynamicsClient)` removed from `LicenseExtensions` (Phase 2) |
-| [autorest-reference-cleanup.md](autorest-reference-cleanup.md) | LCSD-8561: Safety-gate audit before AutoRest deletion — zero `IDynamicsClient`, `MicrosoftDynamicsCRM*`, AutoRest usings, and `Microsoft.Rest` usings confirmed outside `Dynamics-Autorest`; `IsMostlyLiquor` migrated to `IList<ApplicationTypeCategory?>`; dual `HttpOperationException+Exception` catch blocks collapsed; dead `#if (USE_MSSQL)` seeder block removed from `Startup.cs` |
-| [autorest-package-cleanup.md](autorest-package-cleanup.md) | LCSD-8562: Remove deprecated NuGet packages — ADAL removed from `geocoder-service.csproj`, `sharepoint-sync-tool.csproj`, `GeocoderClient/Geocoder.csproj`, `PDF/PDF.csproj`; `Microsoft.Rest.ClientRuntime` removed from `PDF.csproj`; stale ADAL `using` removed from `Startup.cs`; dead `LoggerExtensions.cs` deleted from `cllc-public-app` |
-| [onprem-auth-config-cleanup.md](onprem-auth-config-cleanup.md) | LCSD-8563: Remove on-premises auth config — ADFS/Basic auth env vars (`ADFS_OAUTH2_URI`, `DYNAMICS_APP_GROUP_*`, `DYNAMICS_USERNAME/PASSWORD`, `SSG_USERNAME/PASSWORD`) removed from 7 OpenShift deploy JSON files; `README.md` updated to document cloud-only AAD auth variables |
-| [autorest-project-deletion.md](autorest-project-deletion.md) | LCSD-8564: Delete `cllc-interfaces/Dynamics-Autorest/` (~5,900 files) — `ProjectReference` removed from `cllc-public-app.csproj` and `odata2openapi.csproj`; DynamicsAutorest entry removed from all 10 `.sln` files; stale references cleaned from `.gitignore`, `.gitattributes`, `Dockerfile`, `cd-orgbook-service.yml` |
-| [autorest-migration-complete.md](autorest-migration-complete.md) | LCSD-8565: Final regression and documentation — `MockDataverseClientBuilder` added to test project; `README.md` updated to reflect Dataverse cloud stack; `docs/adding-new-entities.md` created; zero AutoRest/ADAL/Microsoft.Rest dependencies remain |
-| [regression-analysis-report.md](regression-analysis-report.md) | Cross-branch regression analysis (`develop` vs `dv-migration`) — all regressions resolved: 4 fixes applied Jun 29; 4 additional fixes Jul 2–3; 2 upstream ports Jul 6 (LCSD-8499 SEP pay button fix, FileController download workflow trigger fix) |
-| [../tasks/QA-verification-plan.md](../tasks/QA-verification-plan.md) | Full QA verification plan — build/test commands, service startup checks, feature smoke tests for all 9 services, high-risk area matrix, .NET 8.0 upgrade checks, post-merge actions |
+| `cllc-interfaces/Dynamics-Dataverse/` | SDK-based interface project |
+| `cllc-interfaces/Dynamics-Dataverse/Interfaces/IDataverseClient.cs` | The interface every service codes against |
+| `cllc-interfaces/Dynamics-Dataverse/DataverseClient.cs` | Auth wrapper + all entity CRUD methods |
+| `cllc-interfaces/Dynamics-Dataverse/Generated/` | `pac modelbuilder` output — entity classes and option-set enums |
+| `cllc-interfaces/Dynamics-Dataverse/Extensions/` | `DataverseClient` extension methods |
+| `cllc-interfaces-test/Dataverse/` | Unit tests for the interface project |
+
+This is a multi-solution repo — each service has its own `.sln`. When a service's `.csproj`
+references `Dynamics-Dataverse`, its `.sln` picks it up transitively.
+
+---
+
+## Authentication
+
+Dataverse auth is **app-registration client credentials** (Azure AD), not a username/password.
+`DataverseClient`'s constructor builds a `ServiceClient` connection string from 4 required
+environment variables:
+
+| Variable | Description |
+|---|---|
+| `DYNAMICS_NATIVE_ODATA_URI` (preferred) or `DYNAMICS_ODATA_URI` (fallback) | Dataverse org URL. Only `scheme://host` is used — any `/api/data/vX.X/` suffix or path is stripped automatically (`ExtractOrgUrl`) |
+| `DYNAMICS_AAD_TENANT_ID` | Azure AD tenant ID |
+| `DYNAMICS_APP_REG_CLIENT_ID` | App registration client ID |
+| `DYNAMICS_APP_REG_CLIENT_KEY` | App registration client **secret value** (not the secret ID — pasting the ID instead of the value produces `AADSTS7000215: Invalid client secret`) |
+
+`DYNAMICS_USERNAME` / `DYNAMICS_PASSWORD` are legacy on-prem AD credentials and are **not**
+used by this auth path — don't rely on them.
+
+Missing config throws `InvalidOperationException` (not a null reference) at startup.
+`DataverseClient` also implements `IHealthCheck`, returning `Healthy` when
+`ServiceClient.IsReady`.
+
+### Verifying credentials directly (bypassing the app)
+
+```bash
+ORG_URL=<scheme://host derived as above>
+TOKEN=$(curl -s -X POST "https://login.microsoftonline.com/${TENANT_ID}/oauth2/v2.0/token" \
+  -d "grant_type=client_credentials" -d "client_id=${CLIENT_ID}" \
+  -d "client_secret=${CLIENT_SECRET}" -d "scope=${ORG_URL}/.default" \
+  | jq -r '.access_token')
+
+curl -s "${ORG_URL}/api/data/v9.2/accounts(<id>)?\$select=name" \
+  -H "Authorization: Bearer $TOKEN" -H "Accept: application/json" \
+  -H "OData-MaxVersion: 4.0" -H "OData-Version: 4.0"
+```
+
+---
+
+## DI registration
+
+Registered as a singleton in every consuming service's `Startup.cs` / `Program.cs`:
+
+```csharp
+services.AddSingleton<IDataverseClient, DataverseClient>();
+```
+
+Services wired: `cllc-public-app`, `carla-spice-sync-service`, `federal-reporting-service`,
+`ldb-orders-service`, `geocoder-service`, `one-stop-service`, `orgbook-service`, `watchdog`,
+`sharepoint-sync-tool`.
+
+### Namespace alias
+
+`Dynamics-Autorest` (legacy, being phased out) and `Dynamics-Dataverse` both export types in
+`Gov.Lclb.Cllb.Interfaces`. Consuming projects reference `Dynamics-Dataverse` with an MSBuild
+alias to avoid collisions:
+
+```xml
+<ProjectReference Include="..\cllc-interfaces\Dynamics-Dataverse\Dynamics-Dataverse.csproj">
+  <Aliases>DV</Aliases>
+</ProjectReference>
+```
+
+```csharp
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+```
+
+---
+
+## Code patterns
+
+**Async** — always use the SDK's native async methods, never `Task.Run` wrappers:
+
+```csharp
+// Avoid
+var entity = await Task.Run(() => _serviceClient.Retrieve(name, id, cols), ct);
+
+// Prefer
+var entity = await _serviceClient.RetrieveAsync(name, id, cols, ct);
+```
+
+**Reading records** — SDK entity → ViewModel via `ToViewModel()` extension methods.
+
+**Writing records** — ViewModel → SDK entity via `CopyValues()` extension methods. Only
+populate the fields that changed; use `copyIfNull` where the caller must be able to explicitly
+clear a field.
+
+**Creating a new entity — do not set `Id`.** Leave the primary key untouched before `Create`;
+letting Dataverse generate it. Explicitly assigning `Guid.Empty` is treated by Dataverse as a
+supplied-but-invalid key (`Expected non-empty Guid`), not as "please generate one."
+
+**Child/related data** — loaded with parallel `WithChildren`-style calls (multiple async
+fetches issued together, then awaited), not sequential N+1 queries.
+
+**Adding a new entity**: run `pac modelbuilder` to regenerate the SDK entity class into
+`Generated/`, add the corresponding method(s) to `IDataverseClient`, implement them in
+`DataverseClient.cs`.
+
+---
+
+## Configuration model (OpenShift / GHA secrets)
+
+Dataverse credentials are **shared** across every GHA service via the `cllc-public` secret
+(pre-existing in every namespace) — this is the single source of truth; do not duplicate
+`DYNAMICS_*` values into a service-specific secret. See `lcrb-carla-pipelines/docs/SECRETS.md`
+for the full secret model and the credential-rotation runbook.
+
+---
+
+## Reference documents
+
+| Topic | File |
+|---|---|
+| Full setup, packages, DI, async patterns | `setup-and-authentication.md` |
+| Entity generation (`pac modelbuilder`) | `entity-generation.md` |
+| Model-extension conventions (`ToViewModel`/`CopyValues`) | `model-extensions-port.md` |
+| Cross-cutting build fixes / gotchas | `build-validation-common-fixes.md` |
+| Cross-branch regression analysis | `regression-analysis-report.md` |
+
+Per-controller/per-service migration history (ticket-by-ticket detail) lives in the remaining
+files in this folder and in `../tasks/`.
