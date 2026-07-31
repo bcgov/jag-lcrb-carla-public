@@ -849,7 +849,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var newLocation = new DvLocation();
                     newLocation.CopyValues(location);
-                    newLocation.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", createdId);
+                    newLocation.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", createdId);
                     try
                     {
                         var locationId = await _dataverse.CreateSpecialEventLocationAsync(newLocation);
@@ -867,9 +867,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             var newArea = new DvArea();
                             newArea.CopyValues(area);
-                            newArea.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", createdId);
+                            newArea.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", createdId);
                             if (Guid.TryParse(location.Id, out var locGuid))
-                                newArea.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocations", locGuid);
+                                newArea.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocation", locGuid);
                             try
                             {
                                 var areaId = await _dataverse.CreateSpecialEventLicencedAreaAsync(newArea);
@@ -889,9 +889,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         {
                             var newDates = new DvSchedule();
                             newDates.CopyValues(dates);
-                            newDates.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", createdId);
+                            newDates.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", createdId);
                             if (Guid.TryParse(location.Id, out var locGuid))
-                                newDates.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocations", locGuid);
+                                newDates.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocation", locGuid);
                             try
                             {
                                 var schedId = await _dataverse.CreateSpecialEventScheduleAsync(newDates);
@@ -959,7 +959,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         adoxio_Originator = tnc.Originator,
                         adoxio_TermsandCondition = tnc.Content,
                         adoxio_SpecialEventId = Guid.TryParse(eventId, out var seGuid)
-                            ? new EntityReference("adoxio_specialevents", seGuid)
+                            ? new EntityReference("adoxio_specialevent", seGuid)
                             : null
                     };
                     await _dataverse.CreateSpecialEventTandCAsync(newTnC);
@@ -1153,7 +1153,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     var dvLocation = new DvLocation();
                     dvLocation.CopyValues(location);
-                    dvLocation.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", seUpdateGuidForLocations);
+                    dvLocation.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", seUpdateGuidForLocations);
                     try
                     {
                         if (string.IsNullOrEmpty(location.Id))
@@ -1174,9 +1174,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 var dvArea = new DvArea();
                                 dvArea.CopyValues(area);
-                                dvArea.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", seUpdateGuidForLocations);
+                                dvArea.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", seUpdateGuidForLocations);
                                 if (Guid.TryParse(location.Id, out var locGuid2))
-                                    dvArea.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocations", locGuid2);
+                                    dvArea.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocation", locGuid2);
                                 try
                                 {
                                     if (string.IsNullOrEmpty((string)area.Id))
@@ -1205,9 +1205,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             {
                                 var dvDates = new DvSchedule();
                                 dvDates.CopyValues(dates);
-                                dvDates.adoxio_SpecialEventId = new EntityReference("adoxio_specialevents", seUpdateGuidForLocations);
+                                dvDates.adoxio_SpecialEventId = new EntityReference("adoxio_specialevent", seUpdateGuidForLocations);
                                 if (Guid.TryParse(location.Id, out var locGuid3))
-                                    dvDates.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocations", locGuid3);
+                                    dvDates.adoxio_SpecialEventLocationId = new EntityReference("adoxio_specialeventlocation", locGuid3);
                                 try
                                 {
                                     if (string.IsNullOrEmpty(dates.Id))
@@ -1338,9 +1338,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         adoxio_EstimatedServings = estimatedServings,
                     };
                     if (Guid.TryParse(specialEvent.Id, out var seGuid))
-                        newForecast.adoxio_SpecialEvent = new EntityReference("adoxio_specialevents", seGuid);
+                        newForecast.adoxio_SpecialEvent = new EntityReference("adoxio_specialevent", seGuid);
                     if (drinkType?.adoxio_sepdrinktypeId != null)
-                        newForecast.adoxio_Type = new EntityReference("adoxio_sepdrinktypes", drinkType.adoxio_sepdrinktypeId.Value);
+                        newForecast.adoxio_Type = new EntityReference("adoxio_sepdrinktype", drinkType.adoxio_sepdrinktypeId.Value);
                     await _dataverse.CreateSepDrinkSalesForecastAsync(newForecast);
                 }
                 else
