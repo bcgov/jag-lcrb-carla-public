@@ -19,7 +19,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./final-confirmation.component.scss']
 })
 export class FinalConfirmationComponent implements OnInit {
-  busy: Subscription;
+  busy: Subscription[];
   @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
   mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
@@ -42,7 +42,7 @@ export class FinalConfirmationComponent implements OnInit {
 
     {
 
-    this.busy = this.store
+    const contactSub = this.store
       .select((state) => state.currentUserState.currentUser)
       .pipe(
         filter((user) => !!user?.contactid),
@@ -53,9 +53,9 @@ export class FinalConfirmationComponent implements OnInit {
             this.contact = contact;
       });
 
-      if (data) {
-        this.setApplication(data.id);
-      }
+      const appSub = data ? this.setApplication(data.id) : Subscription.EMPTY;
+
+      this.busy = [contactSub, appSub];
     }
 
   ngOnInit(): void {
@@ -86,7 +86,7 @@ export class FinalConfirmationComponent implements OnInit {
     //const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
     //  .toPromise();
     // proceed to payment
-    this.busy = this.submitPayment()
+    this.busy = [this.submitPayment()
       .subscribe(res => {
       },
         error => {
@@ -97,18 +97,18 @@ export class FinalConfirmationComponent implements OnInit {
             this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
           }
         }
-      );
+      )];
   }
 
-  setApplication(id: string) {
-
-    if (id) {
-      this.sepDataService.getSpecialEventForApplicant(id)
-        .subscribe(app => {
-          this.application = app;
-          //this.formatEventDatesForDisplay();
-        });
+  setApplication(id: string): Subscription {
+    if (!id) {
+      return Subscription.EMPTY;
     }
+    return this.sepDataService.getSpecialEventForApplicant(id)
+      .subscribe(app => {
+        this.application = app;
+        //this.formatEventDatesForDisplay();
+      });
   }
 
   /**

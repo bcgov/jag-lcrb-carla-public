@@ -14,7 +14,7 @@
 <div class="d-flex" style="margin-top: 20px;">
     <!--button mat-raised-button color="secondary" class="mr-2">BACK</button-->
 
-    <button mat-raised-button color="primary" (click)="payNow()" [disabled]="payNowClicked">
+    <button mat-raised-button color="primary" (click)="payNow()" [disabled]="payNowClicked || !application">
         PAY NOW</button>
 
 
