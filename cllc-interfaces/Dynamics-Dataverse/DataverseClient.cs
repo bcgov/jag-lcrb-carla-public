@@ -527,7 +527,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     {
         if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_hoursofservice>();
         var query = new QueryExpression(adoxio_hoursofservice.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
-        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        query.Criteria.AddCondition("adoxio_licence", ConditionOperator.Equal, guid);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_hoursofservice>()).ToList();
     }
@@ -590,7 +590,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     {
         if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_applicationtermsconditionslimitation>();
         var query = new QueryExpression(adoxio_applicationtermsconditionslimitation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
-        query.Criteria.AddCondition("adoxio_licenceid", ConditionOperator.Equal, guid);
+        query.Criteria.AddCondition("adoxio_licence", ConditionOperator.Equal, guid);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_applicationtermsconditionslimitation>()).ToList();
     }
