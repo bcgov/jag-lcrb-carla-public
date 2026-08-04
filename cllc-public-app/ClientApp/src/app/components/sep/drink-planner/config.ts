@@ -2,9 +2,11 @@ import { faBeer, faGlassMartini, faWineBottle, faWineGlass, IconDefinition } fro
 
 export const HOURS_OF_LIQUOR_SERVICE = 3;
 export const SERVINGS_PER_PERSON = 4;
+export const GST_MULTIPLIER = 1.05;
 
 export type DrinkConfig = {
   id: number;
+  drinkTypeName: string;
   group: string;
   group_free: string;
   description: string;
@@ -24,6 +26,7 @@ export type DrinkConfig = {
 const configuration: Array<DrinkConfig> = [
   {
     id: 1,
+    drinkTypeName: 'Beer/Cider/Cooler',
     group: 'beer',
     group_free: 'beer_free',
     description: 'Beer, Ciders & Coolers',
@@ -41,6 +44,7 @@ const configuration: Array<DrinkConfig> = [
   },
   {
     id: 2,
+    drinkTypeName: 'Wine',
     group: 'wine',
     group_free: 'wine_free',
     description: 'Wine',
@@ -58,6 +62,7 @@ const configuration: Array<DrinkConfig> = [
   },
   {
     id: 3,
+    drinkTypeName: 'Spirits',
     group: 'spirits',
     group_free: 'spirits_free',
     description: 'Spirits',
