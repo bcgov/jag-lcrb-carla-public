@@ -223,16 +223,51 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
             }
 
-            var responseEvents = new List<LicenceEvent>();
-            foreach (var evt in dynamicsEvents)
+            var responseEventTasks = dynamicsEvents.Select(async evt =>
             {
                 var evtId = evt.adoxio_eventId?.ToString();
-                var schedules = evtId != null ? await _dataverse.GetEventSchedulesByEventIdAsync(evtId) : new List<adoxio_eventschedule>();
-                var locations = evtId != null ? await _dataverse.GetEventLocationsByEventIdAsync(evtId) : new List<adoxio_eventlocation>();
-                responseEvents.Add(evt.ToViewModel(schedules, locations));
+                var schedulesTask = evtId != null ? _dataverse.GetEventSchedulesByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventschedule>>(new List<adoxio_eventschedule>());
+                var locationsTask = evtId != null ? _dataverse.GetEventLocationsByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventlocation>>(new List<adoxio_eventlocation>());
+                await Task.WhenAll(schedulesTask, locationsTask);
+                return evt.ToViewModel(schedulesTask.Result, locationsTask.Result);
+            });
+
+            return new JsonResult(await Task.WhenAll(responseEventTasks));
+        }
+
+        [HttpPost("list/batch/{num}")]
+        public async Task<IActionResult> GetLicenceEventsListBatch(int num, [FromBody] List<string> licenceIds)
+        {
+            if (licenceIds == null || licenceIds.Count == 0) return new JsonResult(new List<LicenceEvent>());
+
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+
+            IList<adoxio_event> dynamicsEvents;
+            try
+            {
+                dynamicsEvents = await _dataverse.GetEventsByAccountAndLicencesAsync(userSettings.AccountId, licenceIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving Events");
+                return new NotFoundResult();
             }
 
-            return new JsonResult(responseEvents);
+            // cap at `num` most-recent events per licence, matching the per-licence endpoint's behaviour
+            var trimmedEvents = dynamicsEvents
+                .GroupBy(evt => evt.adoxio_Licence?.Id)
+                .SelectMany(g => g.OrderByDescending(evt => evt.ModifiedOn).Take(num));
+
+            var responseEventTasks = trimmedEvents.Select(async evt =>
+            {
+                var evtId = evt.adoxio_eventId?.ToString();
+                var schedulesTask = evtId != null ? _dataverse.GetEventSchedulesByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventschedule>>(new List<adoxio_eventschedule>());
+                var locationsTask = evtId != null ? _dataverse.GetEventLocationsByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventlocation>>(new List<adoxio_eventlocation>());
+                await Task.WhenAll(schedulesTask, locationsTask);
+                return evt.ToViewModel(schedulesTask.Result, locationsTask.Result);
+            });
+
+            return new JsonResult(await Task.WhenAll(responseEventTasks));
         }
 
         [HttpGet("{eventId}/authorization.pdf")]

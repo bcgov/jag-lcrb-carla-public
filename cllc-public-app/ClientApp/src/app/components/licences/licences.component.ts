@@ -139,6 +139,32 @@ export class LicencesComponent extends FormBase implements OnInit {
           this.addOrUpdateLicence(licence);
         });
 
+        // Fetch events for every eligible licence in a single batched request instead of
+        // one HTTP call per licence.
+        const eventLicenceIds = combinedLicences
+          .filter((licence) => this.licenceTypeHasEvents(licence.licenceTypeName))
+          .map((licence) => licence.licenseId);
+        if (eventLicenceIds.length > 0) {
+          const eventsBusy = this.licenceEventsService.getLicenceEventsListBatch(eventLicenceIds, 20)
+            .subscribe((allEvents) => {
+              combinedLicences.forEach((licence) => {
+                if (!this.licenceTypeHasEvents(licence.licenceTypeName)) {
+                  return;
+                }
+                const events = allEvents.filter((event) => event.licenceId === licence.licenseId);
+                licence.events = events;
+                if (events.length > 0) {
+                  licence.headerRowSpan += 1;
+                }
+              });
+            });
+          combinedLicences.forEach((licence) => {
+            if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
+              licence.eventsBusy = eventsBusy;
+            }
+          });
+        }
+
         this.dataLoaded = true;
       });
 
@@ -191,18 +217,6 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
-      licence.eventsBusy = forkJoin([
-        this.licenceEventsService.getLicenceEventsList(licence.licenseId, 20)
-      ])
-        .subscribe(data => {
-          licence.events = data[0];
-          if (licence.events.length > 0) {
-            licence.headerRowSpan += 1;
-          }
-        });
-    }
-
     if (typeof this.licenceMappings[licence.licenceTypeName] === "undefined") {
       this.licenceMappings[licence.licenceTypeName] = [];
     }

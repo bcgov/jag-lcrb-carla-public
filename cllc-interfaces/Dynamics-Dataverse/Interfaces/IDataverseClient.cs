@@ -109,6 +109,7 @@ public interface IDataverseClient
     // Application Terms Conditions Limitation (adoxio_applicationtermsconditionslimitation)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdsAsync(IEnumerable<string> licenceIds, CancellationToken ct = default);
     Task<Guid> CreateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
     Task UpdateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
 
@@ -311,6 +312,7 @@ public interface IDataverseClient
     Task<IList<adoxio_eventschedule>> GetEventSchedulesByEventIdAsync(string eventId, CancellationToken ct = default);
     Task<IList<adoxio_eventlocation>> GetEventLocationsByEventIdAsync(string eventId, CancellationToken ct = default);
     Task<IList<adoxio_event>> GetEventsByAccountAndLicenceAsync(string accountId, string licenceId, int top, CancellationToken ct = default);
+    Task<IList<adoxio_event>> GetEventsByAccountAndLicencesAsync(string accountId, IEnumerable<string> licenceIds, CancellationToken ct = default);
     Task<Guid> CreateEventAsync(adoxio_event evt, CancellationToken ct = default);
     Task UpdateEventAsync(adoxio_event evt, CancellationToken ct = default);
     Task DeleteEventAsync(string id, CancellationToken ct = default);

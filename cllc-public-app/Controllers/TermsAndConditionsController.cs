@@ -50,6 +50,34 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(new List<TermsAndConditions>(await Task.WhenAll(resultTasks)));
         }
 
+        [HttpPost("batch")]
+        public async Task<JsonResult> GetTermsAndConditionsForLicences([FromBody] List<string> licenceIds)
+        {
+            if (licenceIds == null || licenceIds.Count == 0) return new JsonResult(new List<TermsAndConditions>());
+
+            var terms = await _dataverse.GetTermsConditionsByLicenceIdsAsync(licenceIds);
+
+            var resultTasks = terms.Select(async term =>
+            {
+                bool? isDefault = null;
+                if (term.adoxio_TermsConditionsPreset?.Id != null)
+                {
+                    var preset = await _dataverse.GetTermsConditionsPresetByIdAsync(
+                        term.adoxio_TermsConditionsPreset.Id.ToString());
+                    isDefault = preset?.adoxio_IsDefault;
+                }
+                return new TermsAndConditions
+                {
+                    Id = term.Id.ToString(),
+                    LicenceId = term.adoxio_Licence?.Id.ToString(),
+                    Content = term.adoxio_TermsandConditions,
+                    IsDefault = isDefault
+                };
+            });
+
+            return new JsonResult(new List<TermsAndConditions>(await Task.WhenAll(resultTasks)));
+        }
+
         [HttpGet("term/{termId}")]
         public async Task<TermsAndConditions> GetTermsAndCondition(string termId)
         {

@@ -58,22 +58,23 @@ namespace Gov.Lclb.Cllb.Public.Models
             try
             {
                 var endorsements = await dataverse.GetEndorsementsByLicenceIdAsync(licenceId);
-                foreach (var item in endorsements)
+                var endorsementTasks = endorsements.Select(async item =>
                 {
                     var endorsementId = item.adoxio_endorsementId?.ToString();
-                    var hoursOfServiceList = await GetHoursOfServiceListAsync(endorsementId, dataverse);
-                    var areaCapacity = await GetAreaCapacityAsync(endorsementId, dataverse);
-                    var endorsement = new ViewModels.Endorsement
+                    var hoursOfServiceTask = GetHoursOfServiceListAsync(endorsementId, dataverse);
+                    var areaCapacityTask = GetAreaCapacityAsync(endorsementId, dataverse);
+                    await Task.WhenAll(hoursOfServiceTask, areaCapacityTask);
+                    return new ViewModels.Endorsement
                     {
                         ApplicationTypeId = item.adoxio_ApplicationType?.Id.ToString(),
                         ApplicationTypeName = item.adoxio_ApplicationType?.Name,
                         EndorsementId = endorsementId,
                         EndorsementName = item.adoxio_name,
-                        HoursOfServiceList = hoursOfServiceList,
-                        AreaCapacity = areaCapacity
+                        HoursOfServiceList = hoursOfServiceTask.Result,
+                        AreaCapacity = areaCapacityTask.Result
                     };
-                    endorsementsList.Add(endorsement);
-                }
+                });
+                endorsementsList.AddRange(await Task.WhenAll(endorsementTasks));
             }
             catch (Exception ex)
             {
@@ -288,10 +289,10 @@ namespace Gov.Lclb.Cllb.Public.Models
                 }
             }
 
-            // Phase 2: 3 uncached per-licence queries in parallel
-            var endorsementsTask = GetEndorsementsAsync(licenceId, dataverse);
-            var offsiteTask = GetOffsiteStorageAsync(licenceId, dataverse);
-            var serviceAreasTask = GetServiceAreasAsync(licenceId, dataverse);
+            // Phase 2: 3 cached per-licence queries in parallel (short TTL - see GetCached* methods below)
+            var endorsementsTask = GetCachedEndorsementsAsync(licenceId, dataverse, cache);
+            var offsiteTask = GetCachedOffsiteStorageAsync(licenceId, dataverse, cache);
+            var serviceAreasTask = GetCachedServiceAreasAsync(licenceId, dataverse, cache);
             await Task.WhenAll(endorsementsTask, offsiteTask, serviceAreasTask);
 
             licenseSummary.Endorsements = endorsementsTask.Result;
@@ -403,6 +404,49 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result = await dataverse.GetApplicationTypeByIdAsync(id);
                 if (result != null)
                     cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(TimeSpan.FromDays(365)));
+            }
+            return result;
+        }
+
+        // Phase 2 per-licence data (endorsements, offsite storage, service areas) uses a short TTL,
+        // unlike the near-static reference data cached above. Endorsements have no in-app write path
+        // (created out-of-band by back-office processes) so a short TTL is the only way to bound
+        // staleness. Offsite storage and service areas ARE written to in-app, so callers that mutate
+        // them must remove the corresponding cache entry - see LicensesController/ApplicationsController.
+        private static readonly TimeSpan Phase2CacheDuration = TimeSpan.FromMinutes(2);
+
+        public static async Task<List<ViewModels.Endorsement>> GetCachedEndorsementsAsync(string licenceId, IDataverseClient dataverse, IMemoryCache cache)
+        {
+            if (cache == null) return await GetEndorsementsAsync(licenceId, dataverse);
+            string key = CacheKeys.EndorsementsByLicencePrefix + licenceId;
+            if (!cache.TryGetValue(key, out List<ViewModels.Endorsement> result))
+            {
+                result = await GetEndorsementsAsync(licenceId, dataverse);
+                cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(Phase2CacheDuration));
+            }
+            return result;
+        }
+
+        public static async Task<List<OffsiteStorage>> GetCachedOffsiteStorageAsync(string licenceId, IDataverseClient dataverse, IMemoryCache cache)
+        {
+            if (cache == null) return await GetOffsiteStorageAsync(licenceId, dataverse);
+            string key = CacheKeys.OffsiteStorageByLicencePrefix + licenceId;
+            if (!cache.TryGetValue(key, out List<OffsiteStorage> result))
+            {
+                result = await GetOffsiteStorageAsync(licenceId, dataverse);
+                cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(Phase2CacheDuration));
+            }
+            return result;
+        }
+
+        public static async Task<List<CapacityArea>> GetCachedServiceAreasAsync(string licenceId, IDataverseClient dataverse, IMemoryCache cache)
+        {
+            if (cache == null) return await GetServiceAreasAsync(licenceId, dataverse);
+            string key = CacheKeys.ServiceAreasByLicencePrefix + licenceId;
+            if (!cache.TryGetValue(key, out List<CapacityArea> result))
+            {
+                result = await GetServiceAreasAsync(licenceId, dataverse);
+                cache.Set(key, result, new MemoryCacheEntryOptions().SetSlidingExpiration(Phase2CacheDuration));
             }
             return result;
         }

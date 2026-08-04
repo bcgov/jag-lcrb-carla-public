@@ -76,6 +76,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [Authorize(Policy = "Business-User")]
         public async Task<List<RelatedLicence>> GetAutocomplete(string name = null, string licenceNumber = null)
         {
+            name = name?.Trim();
+            licenceNumber = licenceNumber?.Trim();
+
             var results = new List<RelatedLicence>();
             if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(licenceNumber))
                 return results;
@@ -220,6 +223,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             licence = await _dataverse.GetLicenceByIdWithChildrenAsync(licenceId);
             var allApps = await _dataverse.GetApplicationsForLicenceByApplicantAsync(licence.adoxio_Licencee?.Id.ToString() ?? "");
             var licenceApps = allApps.Where(app => app.adoxio_AssignedLicence?.Id.ToString() == licenceId).ToList();
+
+            // Invalidate the Phase-2 offsite storage cache so the caller sees their own edit
+            // immediately instead of a stale cached copy for up to the cache's TTL.
+            _cache.Remove(CacheKeys.OffsiteStorageByLicencePrefix + licenceId);
 
             return new JsonResult(await licence.ToLicenseSummaryViewModelAsync(licenceApps, _dataverse, _cache));
         }

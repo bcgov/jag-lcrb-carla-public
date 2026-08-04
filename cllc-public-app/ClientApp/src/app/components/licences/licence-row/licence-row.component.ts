@@ -110,13 +110,23 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         phone: [licence.establishmentPhoneNumber],
         email: [licence.establishmentEmail]
       });
-      licence.termsAndConditionsBusy = this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
-        .subscribe((terms) => {
+    });
+
+    // Fetch terms and conditions for every licence in this type group in a single batched
+    // request instead of one HTTP call per licence.
+    const licenceIds = this.licences.map((licence) => licence.licenseId);
+    const termsBusy = this.termsAndConditionsService.getTermsAndCondtionsBatch(licenceIds)
+      .subscribe((allTerms) => {
+        this.licences.forEach((licence) => {
+          const terms = allTerms.filter((term) => term.licenceId === licence.licenseId);
           licence.termsAndConditions = terms;
           if (terms.length > 0) {
             licence.headerRowSpan += 1;
           }
         });
+      });
+    this.licences.forEach((licence) => {
+      licence.termsAndConditionsBusy = termsBusy;
     });
 
 

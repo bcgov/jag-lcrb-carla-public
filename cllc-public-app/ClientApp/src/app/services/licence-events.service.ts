@@ -28,4 +28,8 @@ export class LicenceEventsService extends DataService {
     return this.http.get<LicenceEvent[]>(`${this.apiPath}list/${licenceId}/${num}`, { headers: this.headers });
   }
 
+  getLicenceEventsListBatch(licenceIds: string[], num: number): Observable<LicenceEvent[]> {
+    return this.http.post<LicenceEvent[]>(`${this.apiPath}list/batch/${num}`, licenceIds, { headers: this.headers });
+  }
+
 }

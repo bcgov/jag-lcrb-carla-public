@@ -406,16 +406,16 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var termsConditions = (await tclTask).Entities;
 
         if (serviceAreas.Count > 0)
-            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_servicearea")] =
+            licence.RelatedEntities[new Relationship("adoxio_licence_serviceareas")] =
                 new EntityCollection(serviceAreas.ToList());
         if (hoursOfSale.Count > 0)
-            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_hoursofservice")] =
+            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_hoursofservice_Licence")] =
                 new EntityCollection(hoursOfSale.ToList());
         if (offSiteStorages.Count > 0)
-            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_offsitestorage")] =
+            licence.RelatedEntities[new Relationship("adoxio_licences_offsitestoragelocations")] =
                 new EntityCollection(offSiteStorages.ToList());
         if (termsConditions.Count > 0)
-            licence.RelatedEntities[new Relationship("adoxio_licences_adoxio_applicationtermsconditionslimitation")] =
+            licence.RelatedEntities[new Relationship("adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence")] =
                 new EntityCollection(termsConditions.ToList());
 
         return licence;
@@ -473,11 +473,14 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     {
         var query = new QueryExpression(adoxio_licences.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = top };
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        // Contains requires a full-text index, which isn't enabled on these
+        // attributes in this org — Like performs the same substring match
+        // via SQL LIKE without that dependency.
         var orFilter = new FilterExpression(LogicalOperator.Or);
         if (!string.IsNullOrWhiteSpace(name))
-            orFilter.AddCondition("adoxio_name", ConditionOperator.Contains, name);
+            orFilter.AddCondition("adoxio_name", ConditionOperator.Like, $"%{name}%");
         if (!string.IsNullOrWhiteSpace(licenceNumber))
-            orFilter.AddCondition("adoxio_licencenumber", ConditionOperator.Contains, licenceNumber);
+            orFilter.AddCondition("adoxio_licencenumber", ConditionOperator.Like, $"%{licenceNumber}%");
         if (orFilter.Conditions.Count > 0)
             query.Criteria.AddFilter(orFilter);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
@@ -595,6 +598,17 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         return result.Entities.Select(e => e.ToEntity<adoxio_applicationtermsconditionslimitation>()).ToList();
     }
 
+    public async Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdsAsync(IEnumerable<string> licenceIds, CancellationToken ct = default)
+    {
+        var guids = licenceIds.Select(id => Guid.TryParse(id, out var g) ? g : (Guid?)null)
+            .Where(g => g.HasValue).Select(g => g.Value).Cast<object>().ToArray();
+        if (guids.Length == 0) return new List<adoxio_applicationtermsconditionslimitation>();
+        var query = new QueryExpression(adoxio_applicationtermsconditionslimitation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_licence", ConditionOperator.In, guids);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtermsconditionslimitation>()).ToList();
+    }
+
     public async Task<Guid> CreateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default)
         => await Task.Run(() => _serviceClient.Create(terms), ct);
 
@@ -638,10 +652,10 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var prevAddresses = (await prevAddrTask).Entities;
 
         if (phs.Count > 0)
-            worker.RelatedEntities[new Relationship("adoxio_worker_adoxio_personalhistorysummary")] =
+            worker.RelatedEntities[new Relationship("adoxio_workerregistration_personalhistorysummary")] =
                 new EntityCollection(phs.ToList());
         if (prevAddresses.Count > 0)
-            worker.RelatedEntities[new Relationship("adoxio_previousaddress_worker")] =
+            worker.RelatedEntities[new Relationship("adoxio_worker_previousaddresses")] =
                 new EntityCollection(prevAddresses.ToList());
 
         return worker;
@@ -1158,7 +1172,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         if (defaultsOnly)
             query.Criteria.AddCondition("adoxio_ispreview", ConditionOperator.Equal, true);
         else if (!string.IsNullOrEmpty(nameContains))
-            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Contains, nameContains);
+            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Like, $"%{nameContains}%");
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_sepcity>()).ToList();
     }
@@ -1354,6 +1368,20 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(adoxio_event.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = top };
         query.Criteria.AddCondition("adoxio_account", ConditionOperator.Equal, accountGuid);
         query.Criteria.AddCondition("adoxio_licence", ConditionOperator.Equal, licenceGuid);
+        query.AddOrder("modifiedon", OrderType.Descending);
+        var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
+        return result.Entities.Select(e => e.ToEntity<adoxio_event>()).ToList();
+    }
+
+    public async Task<IList<adoxio_event>> GetEventsByAccountAndLicencesAsync(string accountId, IEnumerable<string> licenceIds, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(accountId, out var accountGuid)) return new List<adoxio_event>();
+        var guids = licenceIds.Select(id => Guid.TryParse(id, out var g) ? g : (Guid?)null)
+            .Where(g => g.HasValue).Select(g => g.Value).Cast<object>().ToArray();
+        if (guids.Length == 0) return new List<adoxio_event>();
+        var query = new QueryExpression(adoxio_event.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
+        query.Criteria.AddCondition("adoxio_account", ConditionOperator.Equal, accountGuid);
+        query.Criteria.AddCondition("adoxio_licence", ConditionOperator.In, guids);
         query.AddOrder("modifiedon", OrderType.Descending);
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_event>()).ToList();
@@ -1882,7 +1910,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     {
         var query = new QueryExpression(adoxio_policejurisdiction.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         if (!string.IsNullOrEmpty(nameContains))
-            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Contains, nameContains);
+            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Like, $"%{nameContains}%");
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_policejurisdiction>()).ToList();
     }
@@ -2712,7 +2740,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(adoxio_localgovindigenousnation.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
         if (!string.IsNullOrEmpty(nameContains))
-            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Contains, nameContains);
+            query.Criteria.AddCondition("adoxio_name", ConditionOperator.Like, $"%{nameContains}%");
         var result = await Task.Run(() => _serviceClient.RetrieveMultiple(query), ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_localgovindigenousnation>()).ToList();
     }
