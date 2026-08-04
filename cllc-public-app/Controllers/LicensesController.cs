@@ -16,6 +16,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Xrm.Sdk;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -722,38 +723,39 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 new List<int> { (int)AdoxioApplicationStatusCodes.PendingForLicenceFee });
 
             DateTime today = DateTime.Now;
-            foreach (var app in applications)
-            {
-                if (app.adoxio_Invoice == null) continue;
-
-                // Fetch invoice and assigned licence in parallel
-                var invoiceTask = _dataverse.GetInvoiceByIdAsync(app.adoxio_Invoice.Id.ToString());
-                var licTask = app.adoxio_AssignedLicence != null
-                    ? _dataverse.GetLicenceByIdAsync(app.adoxio_AssignedLicence.Id.ToString())
-                    : Task.FromResult<adoxio_licences?>(null);
-                await Task.WhenAll(invoiceTask, licTask);
-
-                var invoice = invoiceTask.Result;
-                if (invoice == null || invoice.StatusCode == invoice_statuscode.Complete) continue;
-
-                var temp = new OutstandingParioBalanceInvoice
+            var resultTasks = applications
+                .Where(app => app.adoxio_Invoice != null)
+                .Select(async app =>
                 {
-                    invoice = invoice.ToViewModel(),
-                    applicationId = app.Id.ToString(),
-                    licenceNumber = licTask.Result?.adoxio_LicenceNumber
-                };
+                    // Fetch invoice and assigned licence in parallel
+                    var invoiceTask = _dataverse.GetInvoiceByIdAsync(app.adoxio_Invoice.Id.ToString());
+                    var licTask = app.adoxio_AssignedLicence != null
+                        ? _dataverse.GetLicenceByIdAsync(app.adoxio_AssignedLicence.Id.ToString())
+                        : Task.FromResult<adoxio_licences?>(null);
+                    await Task.WhenAll(invoiceTask, licTask);
 
-                if (invoice.DueDate.HasValue)
-                {
-                    var d = invoice.DueDate.Value;
-                    var offset = today.IsDaylightSavingTime() ? "-08:00" : "-07:00";
-                    temp.invoice.duedate = DateTime.Parse($"{d.Year}-{d.Month}-{d.Day}T00:00:00.0000000{offset}");
-                    temp.overdue = temp.invoice.duedate <= today;
-                }
+                    var invoice = invoiceTask.Result;
+                    if (invoice == null || invoice.StatusCode == invoice_statuscode.Complete) return null;
 
-                results.Add(temp);
-            }
+                    var temp = new OutstandingParioBalanceInvoice
+                    {
+                        invoice = invoice.ToViewModel(),
+                        applicationId = app.Id.ToString(),
+                        licenceNumber = licTask.Result?.adoxio_LicenceNumber
+                    };
 
+                    if (invoice.DueDate.HasValue)
+                    {
+                        var d = invoice.DueDate.Value;
+                        var offset = today.IsDaylightSavingTime() ? "-08:00" : "-07:00";
+                        temp.invoice.duedate = DateTime.Parse($"{d.Year}-{d.Month}-{d.Day}T00:00:00.0000000{offset}");
+                        temp.overdue = temp.invoice.duedate <= today;
+                    }
+
+                    return temp;
+                });
+
+            results.AddRange((await Task.WhenAll(resultTasks)).Where(r => r != null));
             return results;
         }
 
@@ -818,10 +820,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
             var licences = await _dataverse.GetLicencesByProposedOwnerAsync(userSettings.AccountId);
+
+            // Several proposed-owner licences can share the same current-owner applicant; fetch
+            // each distinct applicant's application list once instead of once per licence.
+            var appsByApplicant = new ConcurrentDictionary<string, Task<IList<adoxio_application>>>();
             var summaryTasks = licences.Select(async lic =>
             {
                 var licId = lic.adoxio_licencesId?.ToString();
-                var allApps = await _dataverse.GetApplicationsForLicenceByApplicantAsync(lic.adoxio_Licencee?.Id.ToString() ?? "");
+                var applicantId = lic.adoxio_Licencee?.Id.ToString() ?? "";
+                var allApps = await appsByApplicant.GetOrAdd(applicantId, id => _dataverse.GetApplicationsForLicenceByApplicantAsync(id));
                 var licApps = allApps.Where(app => app.adoxio_AssignedLicence?.Id.ToString() == licId).ToList();
                 return await lic.ToLicenseSummaryViewModelAsync(licApps, _dataverse, _cache);
             });
