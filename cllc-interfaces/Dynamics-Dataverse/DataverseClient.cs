@@ -2888,7 +2888,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<adoxio_alias?> GetAliasByIdAsync(string id, CancellationToken ct = default)
     {
         if (!Guid.TryParse(id, out var guid)) return null;
-        try { return await _serviceClient.RetrieveAsync(adoxio_alias.EntityLogicalName, guid, new ColumnSet(true)).ToEntity<adoxio_alias>(, ct); }
+        try { return (await _serviceClient.RetrieveAsync(adoxio_alias.EntityLogicalName, guid, new ColumnSet(true), ct)).ToEntity<adoxio_alias>(); }
         catch { return null; }
     }
 
@@ -2922,7 +2922,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<adoxio_previousaddress?> GetPreviousAddressByIdAsync(string id, CancellationToken ct = default)
     {
         if (!Guid.TryParse(id, out var guid)) return null;
-        try { return await _serviceClient.RetrieveAsync(adoxio_previousaddress.EntityLogicalName, guid, new ColumnSet(true)).ToEntity<adoxio_previousaddress>(, ct); }
+        try { return (await _serviceClient.RetrieveAsync(adoxio_previousaddress.EntityLogicalName, guid, new ColumnSet(true), ct)).ToEntity<adoxio_previousaddress>(); }
         catch { return null; }
     }
 
@@ -2932,7 +2932,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<adoxio_cannabismonthlyreport?> GetCannabisMonthlyReportByIdAsync(string reportId, CancellationToken ct = default)
     {
         if (!Guid.TryParse(reportId, out var guid)) return null;
-        try { return await _serviceClient.RetrieveAsync(adoxio_cannabismonthlyreport.EntityLogicalName, guid, new ColumnSet(true)).ToEntity<adoxio_cannabismonthlyreport>(, ct); }
+        try { return (await _serviceClient.RetrieveAsync(adoxio_cannabismonthlyreport.EntityLogicalName, guid, new ColumnSet(true), ct)).ToEntity<adoxio_cannabismonthlyreport>(); }
         catch { return null; }
     }
 
