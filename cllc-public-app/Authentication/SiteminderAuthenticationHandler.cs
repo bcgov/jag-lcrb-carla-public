@@ -350,34 +350,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     var contact = await _dataverse.GetContactByLoginAsync(false, siteMinderGuid);
                     if (contact == null)
                     {
-                        // Fall back to direct ExternalID lookup to cover contacts whose GUID was stored
-                        // on the contact record rather than through the adoxio_login bridge table.
-                        contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(siteMinderGuid));
-                        if (contact != null)
-                        {
-                            // N1: Verify the stored ExternalID exactly matches the incoming GUID (after normalization)
-                            // to prevent auto-creating a bridge record for the wrong business association.
-                            if (!string.Equals(
-                                GuidUtility.SanitizeGuidString(contact.adoxio_ExternalID),
-                                GuidUtility.SanitizeGuidString(siteMinderGuid),
-                                StringComparison.OrdinalIgnoreCase))
-                            {
-                                _logger.Warning($"ExternalID mismatch for contact {contact.Id}: stored={contact.adoxio_ExternalID}, incoming={siteMinderGuid}. Skipping bridge record creation.");
-                                contact = null;
-                            }
-                            else
-                            {
-                                _logger.Information($"Found contact via direct ExternalID for {siteMinderGuid}. Creating bridge record. ContactID is {contact.Id}");
-                                await _dataverse.UpdateContactBridgeLoginAsync(
-                                    contact.Id.ToString(),
-                                    siteMinderGuid,
-                                    contact.ParentCustomerId?.Id.ToString(),
-                                    siteMinderBusinessGuid);
-                            }
-                        }
-                    }
-                    if (contact == null)
-                    {
                         _logger.Information($"No bridged contact found for {siteMinderGuid}");
                         var contactVM = new ViewModels.Contact();
                         contactVM.CopyHeaderValues(context.Request.Headers);

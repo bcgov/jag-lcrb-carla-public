@@ -123,11 +123,17 @@ public class DataverseClient : IDataverseClient, IHealthCheck
             ColumnSet = new ColumnSet(true),
             TopCount = 2
         };
+        // Only match among active accounts, and only accept a match that isn't already
+        // bound to a different BCeID via adoxio_externalid — mirrors the old client's
+        // GetActiveAccountByLegalName so an ambiguous/duplicate inactive account can't
+        // block resolution of the correct active one.
+        query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
         query.Criteria.AddCondition("name", ConditionOperator.Equal, name);
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
         if (result.Entities.Count != 1)
             return null;
-        return result.Entities[0].ToEntity<Account>();
+        var account = result.Entities[0].ToEntity<Account>();
+        return string.IsNullOrEmpty(account.adoxio_ExternalID) ? account : null;
     }
 
     public async Task<IList<Account>> GetAccountsAsync(string? filter = null, bool activeOnly = false, CancellationToken ct = default)
@@ -2057,10 +2063,19 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     public async Task<Account?> GetAccountByExternalIdAsync(string externalId, CancellationToken ct = default)
     {
         if (string.IsNullOrEmpty(externalId)) return null;
+        // Normalize to no-hyphens uppercase — the canonical stored format for new records.
         var sanitized = externalId.Replace("-", "").ToUpperInvariant();
         var query = new QueryExpression(Account.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-        query.Criteria.AddCondition("adoxio_externalid", ConditionOperator.Equal, sanitized);
+        // Match either the normalized form or the standard hyphenated GUID form to handle
+        // accounts whose adoxio_ExternalID was stored by the old Dynamics client with hyphens.
+        var idFilter = new FilterExpression(LogicalOperator.Or);
+        idFilter.AddCondition("adoxio_externalid", ConditionOperator.Equal, sanitized);
+        if (Guid.TryParse(sanitized, out var parsedGuid))
+        {
+            idFilter.AddCondition("adoxio_externalid", ConditionOperator.Equal, parsedGuid.ToString("D").ToUpperInvariant());
+        }
+        query.Criteria.AddFilter(idFilter);
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
         return result.Entities.FirstOrDefault()?.ToEntity<Account>();
     }
@@ -2132,10 +2147,12 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     {
         if (!Guid.TryParse(contactId, out var contactGuid)) return;
         var isServiceCard = siteminderBusinessGuid == null;
+        // Store in the same no-hyphens uppercase form that GetContactByLoginAsync queries against —
+        // otherwise a freshly created bridge record can never be found by its own lookup.
         var login = new adoxio_login
         {
             adoxio_Type = isServiceCard ? adoxio_logintype.BCServicesCard : adoxio_logintype.BusinessBCeID,
-            adoxio_ExternalID = siteminderGuid,
+            adoxio_ExternalID = siteminderGuid.Replace("-", "").ToUpperInvariant(),
             adoxio_Contact = new EntityReference(Contact.EntityLogicalName, contactGuid)
         };
         if (!string.IsNullOrEmpty(accountId) && Guid.TryParse(accountId, out var accountGuid))
