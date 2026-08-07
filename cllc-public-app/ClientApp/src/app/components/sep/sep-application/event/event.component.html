@@ -134,6 +134,7 @@
                           <section formGroupName="serviceAreas">
                               <mat-card class="mat-elevation-z0">
                                   <h3>Service Areas</h3>
+                                  <p>A service area is the area within your event site where your permit allows liquor to be sold, served and consumed. An event site can have one or more service areas.</p>
                                   <mat-accordion multi>
                                       <mat-expansion-panel [expanded]="true" [formGroupName]="j"
                                           *ngFor="let area of getServiceAreas(i).controls; let j = index;">
@@ -164,7 +165,7 @@
                                                           placeholder="For example: beverage garden, bar area, courtyard, etc.">
                                                   </app-field>
                                                   <app-field
-                                                      label="Maximum number of guests in the service area at any given time"
+                                                      label="This is the total number of individual guests who will visit this specific service area throughout the event period."
                                                       errorMessage="Please enter a value"
                                                       [required]="true"
                                                       [valid]="!area.get('licencedAreaMaxNumberOfGuests').touched || area.get('licencedAreaMaxNumberOfGuests').valid">
@@ -175,7 +176,7 @@
                                                             Maximum number of guests in the service area exceeds maximum number of guests at location
                                                           </div>
                                                   </app-field>
-                                                  
+
                                                   <app-field label="Will minors be in the service area?"
                                                       errorMessage="Please enter a value"
                                                       [valid]="!area.get('minorPresent').touched || area.get('minorPresent').valid">
@@ -351,12 +352,12 @@
                                         <tr>
                                           <td colspan="4">
                                             <div>
-                                              <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>  
+                                              <button (click)="checkTimeZone()">Is the event located outside of Pacific Standard Time? </button>
                                                 <app-error-alert *ngIf="!isPacificTimeZone">
                                                   <p>
                                                     If the area you’re applying from or if the event is located outside of PST, please note the time on your permit may not accurately reflect the time your event is scheduled to start. Please contact the LCRB team at <a href="mailto:LCRB.SEP@gov.bc.ca">LCRB.SEP@gov.bc.ca</a>
                                                   </p>
-                                                </app-error-alert>                                                
+                                                </app-error-alert>
                                             </div>
                                           </td>
                                         </tr>

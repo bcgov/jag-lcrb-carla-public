@@ -146,8 +146,16 @@
             </mat-form-field>
 </div> <!-- ngFor -->
     </div>
-    <p *ngIf="!canRaisePrice()" style="text-align: center;"><small>*The maximum
-        sales price for drinks cannot exceed the price set by the Branch for non-charitable events.<br><sup>ⱡ</sup> If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price. </small></p>
+    <p *ngIf="!canRaisePrice()" style="text-align: center;">
+      <small>
+        *The maximum sales price for drinks cannot exceed the price set by the Branch for non-charitable events.
+        <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-liquor-special-event-permit/before-event#review-rules" target="_blank">
+          Learn more about maximum drink prices and liquor quantities
+        </a><br>
+        <sup>ⱡ</sup> If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price.<br>
+        **The number of servings entered in each field above must be a whole number and cannot include a decimal.
+      </small>
+    </p>
 
     <!-- Drink Totals -->
 
