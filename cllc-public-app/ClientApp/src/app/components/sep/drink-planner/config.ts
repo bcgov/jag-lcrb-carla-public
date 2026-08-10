@@ -32,8 +32,8 @@ const configuration: Array<DrinkConfig> = [
     description: 'Beer, Ciders & Coolers',
     servingMethod: 'bottles/cans/glasses',
     storageMethod: 'kegs',
-    servingSizeMl: 340,
-    storageSizeMl: 50000,
+    servingSizeMl: 341, // do not use
+    storageSizeMl: 50000, // do not use
     defaultPercentage: 0,
     perServingDescription: '* 12oz / serving',
     imageUrl: 'assets/sep/beer.png',
@@ -50,8 +50,8 @@ const configuration: Array<DrinkConfig> = [
     description: 'Wine',
     servingMethod: 'glasses',
     storageMethod: 'bottles',
-    servingSizeMl: 147,
-    storageSizeMl: 750,
+    servingSizeMl: 142, // do not use
+    storageSizeMl: 750, // do not use
     defaultPercentage: 0,
     perServingDescription: '* 5oz / serving',
     imageUrl: 'assets/sep/wine.png',
@@ -68,8 +68,8 @@ const configuration: Array<DrinkConfig> = [
     description: 'Spirits',
     servingMethod: 'shots',
     storageMethod: 'bottles',
-    servingSizeMl: 29,
-    storageSizeMl: 750,
+    servingSizeMl: 43, // do not use
+    storageSizeMl: 750, // do not use
     defaultPercentage: 0,
     perServingDescription: '* 1oz / serving',
     imageUrl: 'assets/sep/spirits.png',
