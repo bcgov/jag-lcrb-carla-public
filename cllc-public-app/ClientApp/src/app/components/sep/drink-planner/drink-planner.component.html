@@ -111,24 +111,24 @@
             <span *ngIf="item.group == 'beer'">
               <p>
                 <strong>{{this.form.get(item.group).value + this.form.get(item.group_free).value | mask : 'separator' : ','}}</strong>
-                &nbsp;Draught Beer/Cider (12oz or 341ml)
+                &nbsp;Draught Beer/Cider ({{unitSize(item)}})
               </p>
               <p>
                 <strong>{{this.form.get(item.group).value + this.form.get(item.group_free).value | mask : 'separator' : ','}}</strong>
-                &nbsp;Beer/Cider/Cooler (bottle or can to 340ml)
+                &nbsp;Beer/Cider/Cooler by bottle or can ({{unitSize(item)}})
               </p>
             </span>
             <span *ngIf="item.group == 'wine'">
               <p>
                 <strong>{{this.form.get(item.group).value + this.form.get(item.group_free).value | mask : 'separator' : ','}}</strong>
-                &nbsp;Wine by glass (5oz or 142ml)
+                &nbsp;Wine by glass ({{unitSize(item)}})
               </p>
               <p>&nbsp;</p>
             </span>
             <span *ngIf="item.group == 'spirits'">
               <p>
                 <strong>{{this.form.get(item.group).value + this.form.get(item.group_free).value | mask : 'separator' : ','}}</strong>
-                &nbsp;Spirits (1.5oz or 43ml)
+                &nbsp;Spirits ({{unitSize(item)}})
               </p>
               <p>&nbsp;</p>
             </span>

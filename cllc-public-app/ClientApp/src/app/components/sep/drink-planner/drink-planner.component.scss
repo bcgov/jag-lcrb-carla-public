@@ -23,6 +23,12 @@
       top: 0 !important;
     }
 
+    .mat-form-field {
+      display: block;
+      position: relative;
+      text-align: left;
+    }
+
     .average-price {
       text-align: right;
     }
