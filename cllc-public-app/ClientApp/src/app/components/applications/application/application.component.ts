@@ -2529,6 +2529,10 @@ export class ApplicationComponent extends FormBase implements OnInit {
     );
   }
 
+  isLPCTransition(): boolean {
+    return this.application?.applicationType?.name === ApplicationTypeNames.ApplicationToTransitionToLiquorPrimaryLicence;
+  }
+
   isTemporaryRelocation(): boolean {
     return this.application?.applicationType?.name === ApplicationTypeNames.LRSTemporaryRelocation;
   }
