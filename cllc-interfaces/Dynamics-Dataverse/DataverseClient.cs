@@ -1747,21 +1747,36 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // Proposed LRS Applications
     // -------------------------------------------------------------------------
     public async Task<IList<adoxio_application>> GetApplicationsByLginAsync(
-        string lginId, IList<int> includeStatuses, int? lgDecision = null, CancellationToken ct = default)
+        string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, CancellationToken ct = default)
     {
         if (!Guid.TryParse(lginId, out var lginGuid)) return new List<adoxio_application>();
         var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.TopCount = 50;
         query.Criteria.AddCondition("adoxio_localgovindigenousnationid", ConditionOperator.Equal, lginGuid);
+
+        // Status and decision are alternative ways for an application to qualify for the LGIN queue,
+        // so they must be OR'd together, not AND'd.
+        var orGroup = new FilterExpression(LogicalOperator.Or);
+        var hasOrConditions = false;
         if (includeStatuses.Count > 0)
         {
-            var statusGroup = new FilterExpression(LogicalOperator.Or);
             foreach (var s in includeStatuses)
-                statusGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
-            query.Criteria.AddFilter(statusGroup);
+                orGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
+            hasOrConditions = true;
         }
-        if (lgDecision.HasValue)
-            query.Criteria.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+        if (lgDecisionPending)
+        {
+            orGroup.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Null);
+            hasOrConditions = true;
+        }
+        else if (lgDecision.HasValue)
+        {
+            orGroup.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+            hasOrConditions = true;
+        }
+        if (hasOrConditions)
+            query.Criteria.AddFilter(orGroup);
+
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
     }
@@ -1770,6 +1785,7 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         string lginId,
         IList<int> includeStatuses,
         int? lgDecision = null,
+        bool lgDecisionPending = false,
         bool? hasDecisionDate = null,
         IList<string>? includeTypeIds = null,
         IList<string>? excludeTypeIds = null,
@@ -1784,15 +1800,29 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var query = new QueryExpression(adoxio_application.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("adoxio_localgovindigenousnationid", ConditionOperator.Equal, lginGuid);
 
+        // Status and decision are alternative ways for an application to qualify for the LGIN queue,
+        // so they must be OR'd together, not AND'd.
+        var orGroup = new FilterExpression(LogicalOperator.Or);
+        var hasOrConditions = false;
         if (includeStatuses.Count > 0)
         {
-            var statusGroup = new FilterExpression(LogicalOperator.Or);
             foreach (var s in includeStatuses)
-                statusGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
-            query.Criteria.AddFilter(statusGroup);
+                orGroup.AddCondition("statuscode", ConditionOperator.Equal, s);
+            hasOrConditions = true;
         }
-        if (lgDecision.HasValue)
-            query.Criteria.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+        if (lgDecisionPending)
+        {
+            orGroup.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Null);
+            hasOrConditions = true;
+        }
+        else if (lgDecision.HasValue)
+        {
+            orGroup.AddCondition("adoxio_lgapprovaldecision", ConditionOperator.Equal, lgDecision.Value);
+            hasOrConditions = true;
+        }
+        if (hasOrConditions)
+            query.Criteria.AddFilter(orGroup);
+
         if (hasDecisionDate == true)
             query.Criteria.AddCondition("adoxio_lgdecisionsubmissiondate", ConditionOperator.NotNull);
         else if (hasDecisionDate == false)
@@ -2473,28 +2503,54 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // -------------------------------------------------------------------------
     // Application types by licence type
     // -------------------------------------------------------------------------
+    // adoxio_applicationtype's link to a licence type is the N:N relationship "adoxio_licencetypes_applicationtypes"
+    // (an application type can apply to multiple licence types) — NOT the single-valued adoxio_licencetype lookup,
+    // which only covers a small subset of application types (e.g. the licence's own primary application type).
     public async Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdAsync(string licenceTypeId, CancellationToken ct = default)
     {
         if (!Guid.TryParse(licenceTypeId, out var guid)) return new List<adoxio_applicationtype>();
         var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
-        query.Criteria.AddCondition("adoxio_licencetype", ConditionOperator.Equal, guid);
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
+        var link = query.AddLink("adoxio_licencetypes_applicationtypes", "adoxio_applicationtypeid", "adoxio_applicationtypeid");
+        link.LinkCriteria.AddCondition("adoxio_licencetypeid", ConditionOperator.Equal, guid);
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
     }
 
-    public async Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default)
+    // Returns application types grouped by the licence type id they're linked to via the N:N relationship.
+    // A join key is returned explicitly (via the link's aliased column) rather than relying on the returned
+    // adoxio_applicationtype's own adoxio_LicenceType field, which is unpopulated for most N:N-linked types.
+    public async Task<IDictionary<string, IList<adoxio_applicationtype>>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default)
     {
-        if (licenceTypeIds.Count == 0) return new List<adoxio_applicationtype>();
+        var resultDict = new Dictionary<string, IList<adoxio_applicationtype>>();
+        var guids = licenceTypeIds
+            .Select(id => Guid.TryParse(id, out var guid) ? (Guid?)guid : null)
+            .Where(guid => guid.HasValue)
+            .Select(guid => (object)guid!.Value)
+            .ToArray();
+        if (guids.Length == 0) return resultDict;
+
         var query = new QueryExpression(adoxio_applicationtype.EntityLogicalName) { ColumnSet = new ColumnSet(true) };
         query.Criteria.AddCondition("statecode", ConditionOperator.Equal, 0);
-        var typeFilter = new FilterExpression(LogicalOperator.Or);
-        foreach (var id in licenceTypeIds)
-            if (Guid.TryParse(id, out var guid))
-                typeFilter.AddCondition("adoxio_licencetype", ConditionOperator.Equal, guid);
-        query.Criteria.AddFilter(typeFilter);
+        var link = query.AddLink("adoxio_licencetypes_applicationtypes", "adoxio_applicationtypeid", "adoxio_applicationtypeid");
+        link.LinkCriteria.AddCondition("adoxio_licencetypeid", ConditionOperator.In, guids);
+        link.EntityAlias = "lt";
+        link.Columns = new ColumnSet("adoxio_licencetypeid");
+
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
-        return result.Entities.Select(e => e.ToEntity<adoxio_applicationtype>()).ToList();
+        foreach (var entity in result.Entities)
+        {
+            if (!(entity.GetAttributeValue<AliasedValue>("lt.adoxio_licencetypeid")?.Value is Guid licTypeGuid))
+                continue;
+            var key = licTypeGuid.ToString();
+            if (!resultDict.TryGetValue(key, out var list))
+            {
+                list = new List<adoxio_applicationtype>();
+                resultDict[key] = list;
+            }
+            list.Add(entity.ToEntity<adoxio_applicationtype>());
+        }
+        return resultDict;
     }
 
     // -------------------------------------------------------------------------

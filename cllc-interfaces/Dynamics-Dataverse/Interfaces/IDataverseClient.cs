@@ -166,7 +166,7 @@ public interface IDataverseClient
     // Application Type — by licence type
     // -------------------------------------------------------------------------
     Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdAsync(string licenceTypeId, CancellationToken ct = default);
-    Task<IList<adoxio_applicationtype>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default);
+    Task<IDictionary<string, IList<adoxio_applicationtype>>> GetApplicationTypesByLicenceTypeIdsAsync(IList<string> licenceTypeIds, CancellationToken ct = default);
     Task<IList<adoxio_applicationtypecontent>> GetApplicationTypeContentsByTypeIdAsync(string applicationTypeId, CancellationToken ct = default);
 
     // -------------------------------------------------------------------------
@@ -389,8 +389,8 @@ public interface IDataverseClient
     // -------------------------------------------------------------------------
     // Application — LG approval queries
     // -------------------------------------------------------------------------
-    Task<IList<adoxio_application>> GetApplicationsByLginAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, CancellationToken ct = default);
-    Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool? hasDecisionDate = null, IList<string>? includeTypeIds = null, IList<string>? excludeTypeIds = null, IList<int>? excludeStatuses = null, int pageIndex = 0, int pageSize = 10, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetApplicationsByLginAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, CancellationToken ct = default);
+    Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, bool? hasDecisionDate = null, IList<string>? includeTypeIds = null, IList<string>? excludeTypeIds = null, IList<int>? excludeStatuses = null, int pageIndex = 0, int pageSize = 10, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetApplicationsByJobNumberContainsAsync(string jobNumber, IList<int> excludeStatuses, CancellationToken ct = default);
     Task<IList<adoxio_applicationtype>> GetApplicationTypesByFilterAsync(bool? isShowLginApproval = null, bool? isLgZoningConfirmation = null, CancellationToken ct = default);
 

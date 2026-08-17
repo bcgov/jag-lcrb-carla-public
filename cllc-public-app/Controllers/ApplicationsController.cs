@@ -106,10 +106,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var licenceDict = licenceTask.Result
                 .Where(l => l.adoxio_licencesId.HasValue)
                 .ToDictionary(l => l.adoxio_licencesId!.Value.ToString());
-            var licTypeDict = licTypeTask.Result
-                .Where(t => t.adoxio_LicenceType != null)
-                .GroupBy(t => t.adoxio_LicenceType!.Id.ToString())
-                .ToDictionary(g => g.Key, g => (IList<adoxio_applicationtype_dv>)g.ToList());
+            var licTypeDict = licTypeTask.Result;
 
             // Loop is now pure dictionary lookups — zero Dataverse calls
             var result = new List<ApplicationSummary>();
@@ -310,7 +307,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 var includeStatuses = new List<int> { (int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback };
                 var apps = await _dataverse.GetApplicationsByLginAsync(
-                    lginId, includeStatuses, lgDecision: (int)LGDecision.Pending);
+                    lginId, includeStatuses, lgDecisionPending: true);
 
                 var results = new List<Application>();
                 foreach (var app in apps)
@@ -348,7 +345,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var (apps, totalCount) = await _dataverse.GetApplicationsByLginPagedAsync(
                     lginId,
                     includeStatuses,
-                    lgDecision: (int)LGDecision.Pending,
+                    lgDecisionPending: true,
                     hasDecisionDate: false,
                     includeTypeIds: includeTypeIds.Count > 0 ? includeTypeIds : null,
                     excludeTypeIds: null,
@@ -391,7 +388,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var (apps, totalCount) = await _dataverse.GetApplicationsByLginPagedAsync(
                     lginId,
                     includeStatuses,
-                    lgDecision: (int)LGDecision.Pending,
+                    lgDecisionPending: true,
                     hasDecisionDate: false,
                     includeTypeIds: includeTypeIds.Count > 0 ? includeTypeIds : null,
                     pageIndex: pageIndex,
@@ -426,7 +423,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var (apps, totalCount) = await _dataverse.GetApplicationsByLginPagedAsync(
                     lginId,
                     includeStatuses,
-                    lgDecision: (int)LGDecision.Pending,
+                    lgDecisionPending: true,
                     hasDecisionDate: true,   // adoxio_lgdecisionsubmissiondate ne null
                     pageIndex: pageIndex,
                     pageSize: pageSize);
