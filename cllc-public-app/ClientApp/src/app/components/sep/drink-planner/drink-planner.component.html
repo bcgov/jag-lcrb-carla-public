@@ -54,13 +54,13 @@
         </div>
 
         <mat-form-field appearance="outline" floatLabel="always">
-          <mat-label>No. Servings</mat-label>
+          <mat-label>No. Servings<sup>3</sup></mat-label>
           <input matInput type="number" (input)="validateInput($event)" [formControlName]="item.group" class="average-price" placeholder="0" min="0" pattern="^[0-9]*$">
         </mat-form-field>
 
         <ng-container *ngIf="someFree">
           <mat-form-field appearance="outline" floatLabel="always">
-            <mat-label>No. Free Servings</mat-label>
+            <mat-label>No. Free Servings<sup>3</sup></mat-label>
             <input matInput type="number" (input)="validateInput($event)" [formControlName]="item.group_free" class="average-price" placeholder="0" min="0" pattern="^[0-9]*$">
           </mat-form-field>
         </ng-container>
@@ -136,7 +136,7 @@
         </ng-container>
 
             <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
-              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)<sup>*ⱡ</sup></mat-label>
+              <mat-label *ngIf="!canRaisePrice()">Max Drink Price (inc. PST)<sup>1,2</sup></mat-label>
               <mat-label *ngIf="canRaisePrice()">Avg. Drink Price (inc. PST)</mat-label>
               <input matInput [formControlName]="getAVControlName(item.group)" class="average-price"
                      placeholder="0.00"
@@ -148,12 +148,12 @@
     </div>
     <p *ngIf="!canRaisePrice()" style="text-align: center;">
       <small>
-        *The maximum sales price for drinks cannot exceed the price set by the Branch for non-charitable events.
+        <sup>1</sup>The maximum sales price for drinks cannot exceed the price set by the Branch for non-charitable events.
         <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/liquor-licence-permits/apply-for-liquor-licence-permit/apply-for-liquor-special-event-permit/before-event#review-rules" target="_blank">
           Learn more about maximum drink prices and liquor quantities
         </a><br>
-        <sup>ⱡ</sup> If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price.<br>
-        **The number of servings entered in each field above must be a whole number and cannot include a decimal.
+        <sup>2</sup>If your venue is in a local government that requires a single-use cup charge, do not include the single-use cup charge in the max drink price.<br>
+        <sup>3</sup>The number of servings entered in each field above must be a whole number and cannot include a decimal.
       </small>
     </p>
 
