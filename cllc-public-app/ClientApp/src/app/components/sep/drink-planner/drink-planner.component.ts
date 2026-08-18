@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { FormBase } from "@shared/form-base";
 import { Subscription } from "rxjs";
 import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
-import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from "./config";
+import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON, GST_MULTIPLIER } from "./config";
 import { SepApplication } from "@models/sep-application.model";
 import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { SpecialEventsDataService } from "@services/special-events-data.service";
@@ -108,27 +108,30 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     private sepDataService: SpecialEventsDataService
   ) {
     super();
-    this.sepDataService.getSepDrinkTypes()
-    .subscribe(data => {
+    this.drinkTypes = <any>{};
+    this.sepDataService.getSepDrinkTypes().subscribe((data) => {
       this.drinkTypes = <any>{};
-      (data || []).forEach(drinkType => {
+      (data || []).forEach((drinkType) => {
         this.drinkTypes[drinkType.name] = drinkType;
       });
-        this.updateFormValidation();
+      this.updateFormValidation();
 
-        if (this.disabled) {
-          this.form.disable();
-        }
-      });
+      if (this.disabled) {
+        this.form.disable();
+      }
+    });
   }
 
   isValid(): boolean {
     const isRaiseMoney = this.canRaisePrice();
     const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
+    //const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;  // Add GST for GST Registered Organizations
+    const multiplier = 1; // Don't use the GST multiplier until LCSD-8637 has the goahead.
+
     if (isRaiseMoney != true && notCharging != true) {
-      if ((this.form.value.averageBeerPrice && this.drinkTypes && this.drinkTypes["Beer/Cider/Cooler"].pricePerServing < this.form.value.averageBeerPrice) ||
-        (this.form.value.averageWinePrice && this.drinkTypes && this.drinkTypes["Wine"].pricePerServing < this.form.value.averageWinePrice)||
-        (this.form.value.averageSpiritsPrice && this.drinkTypes && this.drinkTypes["Spirits"].pricePerServing < this.form.value.averageSpiritsPrice))
+      if ((this.form.value.averageBeerPrice && (this.drinkTypes?.["Beer/Cider/Cooler"]?.pricePerServing * multiplier) < this.form.value.averageBeerPrice) ||
+        (this.form.value.averageWinePrice && (this.drinkTypes?.["Wine"]?.pricePerServing * multiplier) < this.form.value.averageWinePrice) ||
+        (this.form.value.averageSpiritsPrice && (this.drinkTypes?.["Spirits"]?.pricePerServing * multiplier) < this.form.value.averageSpiritsPrice))
       {
         return false;
       }
@@ -202,9 +205,16 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   storageUnits(config: DrinkConfig): number {
     //calculate free and paid servings
-    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;  
-    const storageUnits = servings * config.servingSizeMl / config.storageSizeMl;
+    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;
+    const servingSizemL = this.drinkTypes[config.drinkTypeName]?.servingSizeMl || 0;
+    const storageSizemL = this.drinkTypes[config.drinkTypeName]?.storageSizeMl || 0;
+    const storageUnits = (storageSizemL > 0) ? servings * servingSizemL / storageSizemL : 0; // div by zero check
     return storageUnits > 0 && storageUnits < 1 ? 1 : storageUnits;
+  }
+
+  unitSize(config: DrinkConfig): string {
+    const curDrinkType = this.drinkTypes[config.drinkTypeName];
+    return curDrinkType?.unitSize;
   }
 
   editPrice(): boolean {
@@ -218,10 +228,14 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   storageMethodDescription(config: DrinkConfig): string {
-    if (config.storageMethod === "kegs") {
-      return `${config.storageMethod} of ${config.group}`;
-    } else {
-      return `${config.storageSizeMl} ml ${config.storageMethod} of ${config.group}`;
+    const curDrinkType = this.drinkTypes[config.drinkTypeName];
+
+    if (curDrinkType) { // drinkTypes may not have been initialized yet, so check for null before accessing properties
+      if (curDrinkType.storageMethod === 'kegs') {
+        return `${curDrinkType.storageMethod} of ${curDrinkType.group}`;
+      } else {
+        return `${curDrinkType.storageSizeMl} ml ${curDrinkType.storageMethod} of ${curDrinkType.group}`;
+      }
     }
   }
 
@@ -229,14 +243,14 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     if (!this.drinkTypes || !this.sepApplication) {
       return;
     }
-   
+
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
     const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
 
-    // GST Registered Organizations can add 5% to the sell price, to recover 
-    // operating costs; otherwise the max price is the price set by LCRB
-    const multiplier = this.sepApplication?.isGSTRegisteredOrg ? 1.05 : 1;
+    // GST Registered Organizations can add GST to the sell price;
+    // otherwise the max price is the price set by LCRB
+    const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
 
     let maxBeerPrice = 0;
     let maxWinePrice = 0;

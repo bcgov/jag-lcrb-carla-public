@@ -42,6 +42,6 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonConverter(typeof(StringEnumConverter))]
         public ServingMethod? ServingMethod { get; set; }
         public decimal? ServingSizeMl { get; set; }
-        public decimal? StoraheSizeMl { get; set; }
+        public decimal? StorageSizeMl { get; set; }
     }
 }

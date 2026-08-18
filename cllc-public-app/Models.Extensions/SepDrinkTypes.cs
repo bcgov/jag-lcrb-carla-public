@@ -30,7 +30,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 StorageMethod = (ViewModels.StorageMethod?)(int?)drinkType.adoxio_StorageMethod,
                 ServingMethod = (ViewModels.ServingMethod?)(int?)drinkType.adoxio_ServingMethod,
                 ServingSizeMl = drinkType.adoxio_ServingSizeML,
-                StoraheSizeMl = drinkType.adoxio_StorageSizeML,
+                StorageSizeMl = drinkType.adoxio_StorageSizeML,
             };
         }
     }

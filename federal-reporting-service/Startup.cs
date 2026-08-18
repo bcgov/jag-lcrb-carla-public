@@ -222,9 +222,16 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 {
                     log.LogInformation($"Creating Hangfire jobs for {typeof(Startup)} ...");
 
-                    // Run every 10 minutes
+                    // Run at specified interval with default to hourly at 0 minutes past the hour, but allow override via configuration.
+                    string interval = Cron.Hourly();
+                    if (!string.IsNullOrEmpty(Configuration["QUEUE_CHECK_INTERVAL"]))
+                    {
+                        interval = (Configuration["QUEUE_CHECK_INTERVAL"]);
+                    }
+                    log.LogInformation($"Using interval: {interval}");
+
                     var dataverseClient = serviceScope.ServiceProvider.GetRequiredService<IDataverseClient>();
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient, dataverseClient).ExportFederalReports(null), "*/10 * * * *");
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient, dataverseClient).ExportFederalReports(null), interval);
 
                     log.LogInformation("Hangfire jobs setup.");
                 }
