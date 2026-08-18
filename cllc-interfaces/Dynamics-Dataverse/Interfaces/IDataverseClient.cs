@@ -80,7 +80,7 @@ public interface IDataverseClient
     // -------------------------------------------------------------------------
     // Service Area (adoxio_servicearea)
     // -------------------------------------------------------------------------
-    Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdAsync(string licenceId, bool activeOnly = false, CancellationToken ct = default);
     Task<IList<adoxio_servicearea>> GetServiceAreasByApplicationIdAsync(string applicationId, CancellationToken ct = default);
     Task<Guid> CreateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
     Task UpdateServiceAreaAsync(adoxio_servicearea serviceArea, CancellationToken ct = default);
@@ -108,7 +108,7 @@ public interface IDataverseClient
     // -------------------------------------------------------------------------
     // Application Terms Conditions Limitation (adoxio_applicationtermsconditionslimitation)
     // -------------------------------------------------------------------------
-    Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdAsync(string licenceId, CancellationToken ct = default);
+    Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdAsync(string licenceId, bool activeOnly = false, CancellationToken ct = default);
     Task<IList<adoxio_applicationtermsconditionslimitation>> GetTermsConditionsByLicenceIdsAsync(IEnumerable<string> licenceIds, CancellationToken ct = default);
     Task<Guid> CreateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
     Task UpdateTermsConditionsAsync(adoxio_applicationtermsconditionslimitation terms, CancellationToken ct = default);
@@ -173,8 +173,8 @@ public interface IDataverseClient
     // Endorsement (adoxio_endorsement)
     // -------------------------------------------------------------------------
     Task<IList<adoxio_endorsement>> GetEndorsementsByLicenceIdAsync(string licenceId, CancellationToken ct = default);
-    Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByEndorsementIdAsync(string endorsementId, CancellationToken ct = default);
-    Task<IList<adoxio_servicearea>> GetServiceAreasByEndorsementIdAsync(string endorsementId, CancellationToken ct = default);
+    Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByEndorsementIdAsync(string endorsementId, bool activeOnly = false, CancellationToken ct = default);
+    Task<IList<adoxio_servicearea>> GetServiceAreasByEndorsementIdAsync(string endorsementId, bool activeOnly = false, CancellationToken ct = default);
     Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByLicenceIdNoEndorsementAsync(string licenceId, CancellationToken ct = default);
     Task<IList<adoxio_servicearea>> GetServiceAreasByLicenceIdNoEndorsementAsync(string licenceId, CancellationToken ct = default);
 
@@ -182,6 +182,7 @@ public interface IDataverseClient
     // Licence — related entity queries
     // -------------------------------------------------------------------------
     Task<IList<adoxio_application>> GetApplicationsForLicenceByApplicantAsync(string accountId, CancellationToken ct = default);
+    Task<IList<adoxio_application>> GetPaidTransferApplicationsByApplicantAsync(string accountId, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetActiveApplicationsByAssignedLicenceIdAsync(string licenceId, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetApplicationsByTypeAndAssignedLicenceAsync(string applicationTypeId, string licenceId, IList<int> excludeStatuses, CancellationToken ct = default);
     Task<IList<adoxio_licences>> GetLicencesByThirdPartyOperatorAsync(string accountId, CancellationToken ct = default);
@@ -390,7 +391,7 @@ public interface IDataverseClient
     // Application — LG approval queries
     // -------------------------------------------------------------------------
     Task<IList<adoxio_application>> GetApplicationsByLginAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, CancellationToken ct = default);
-    Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, bool? hasDecisionDate = null, IList<string>? includeTypeIds = null, IList<string>? excludeTypeIds = null, IList<int>? excludeStatuses = null, int pageIndex = 0, int pageSize = 10, CancellationToken ct = default);
+    Task<(IList<adoxio_application> Results, int TotalCount)> GetApplicationsByLginPagedAsync(string lginId, IList<int> includeStatuses, int? lgDecision = null, bool lgDecisionPending = false, bool? hasDecisionDate = null, IList<string>? includeTypeIds = null, IList<string>? excludeTypeIds = null, int? excludeTypesStatusException = null, bool requireLgDecisionPending = false, IList<int>? excludeStatuses = null, int pageIndex = 0, int pageSize = 10, CancellationToken ct = default);
     Task<IList<adoxio_application>> GetApplicationsByJobNumberContainsAsync(string jobNumber, IList<int> excludeStatuses, CancellationToken ct = default);
     Task<IList<adoxio_applicationtype>> GetApplicationTypesByFilterAsync(bool? isShowLginApproval = null, bool? isLgZoningConfirmation = null, CancellationToken ct = default);
 
