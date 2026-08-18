@@ -348,7 +348,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     lgDecisionPending: true,
                     hasDecisionDate: false,
                     includeTypeIds: includeTypeIds.Count > 0 ? includeTypeIds : null,
-                    excludeTypeIds: null,
+                    excludeTypeIds: excludeTypeIds.Count > 0 ? excludeTypeIds : null,
+                    excludeTypesStatusException: (int)AdoxioApplicationStatusCodes.PendingForLGFNPFeedback,
                     pageIndex: pageIndex,
                     pageSize: pageSize);
 
@@ -425,6 +426,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     includeStatuses,
                     lgDecisionPending: true,
                     hasDecisionDate: true,   // adoxio_lgdecisionsubmissiondate ne null
+                    requireLgDecisionPending: true,
                     pageIndex: pageIndex,
                     pageSize: pageSize);
 

@@ -346,14 +346,29 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static async Task<List<ApplicationLicenseSummary>> GetPaidLicenseSummariesOnTransferAsync(IDataverseClient dataverse, string accountId, IMemoryCache? cache = null)
         {
-            var proposedTask = dataverse.GetLicencesByProposedOwnerAsync(accountId);
-            var tpoTask = dataverse.GetLicencesByThirdPartyOperatorAsync(accountId);
-            await Task.WhenAll(proposedTask, tpoTask);
-            var all = proposedTask.Result.Concat(tpoTask.Result)
-                .GroupBy(l => l.adoxio_licencesId).Select(g => g.First()).ToList();
-            var summaryTasks = all.Select(lic =>
-                lic.ToLicenseSummaryViewModelAsync(new List<adoxio_application>(), dataverse, cache));
-            return new List<ApplicationLicenseSummary>(await Task.WhenAll(summaryTasks));
+            // Matches legacy GetPaidLicensesOnTransfer: paid, in-progress "Liquor Licence Transfer"
+            // applications, resolved to their assigned licence and labelled "Transfer in Progress - ".
+            var transferAppsTask = dataverse.GetPaidTransferApplicationsByApplicantAsync(accountId);
+            var inProgressAppsTask = dataverse.GetApplicationsForLicenceByApplicantAsync(accountId);
+            await Task.WhenAll(transferAppsTask, inProgressAppsTask);
+
+            var licenceIds = transferAppsTask.Result
+                .Where(app => app.adoxio_AssignedLicence != null)
+                .Select(app => app.adoxio_AssignedLicence.Id.ToString())
+                .Distinct().ToList();
+            var licenceTasks = licenceIds.Select(id => dataverse.GetLicenceByIdAsync(id));
+            var licences = (await Task.WhenAll(licenceTasks)).Where(lic => lic != null).ToList();
+
+            var summaries = new List<ApplicationLicenseSummary>();
+            foreach (var licence in licences)
+            {
+                var applications = inProgressAppsTask.Result
+                    .Where(app => app.adoxio_AssignedLicence?.Id == licence!.Id).ToList();
+                var summary = await licence!.ToLicenseSummaryViewModelAsync(applications, dataverse, cache);
+                summary.LicenceTypeName = "Transfer in Progress - " + summary.LicenceTypeName;
+                summaries.Add(summary);
+            }
+            return summaries;
         }
 
         private static async Task<adoxio_establishment?> GetCachedEstablishmentAsync(string id, IDataverseClient dataverse, IMemoryCache cache)

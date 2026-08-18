@@ -32,7 +32,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         {
             string htmlVal = "";
 
-            var hours = await _dataverse.GetHoursOfSaleByEndorsementIdAsync(EndorsementId);
+            var hours = await _dataverse.GetHoursOfSaleByEndorsementIdAsync(EndorsementId, activeOnly: true);
             if (hours.Count > 0)
             {
                 var hoursVal = hours.First();
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                             </table>";
             }
 
-            var allServiceAreas = await _dataverse.GetServiceAreasByEndorsementIdAsync(EndorsementId);
+            var allServiceAreas = await _dataverse.GetServiceAreasByEndorsementIdAsync(EndorsementId, activeOnly: true);
             if (allServiceAreas.Count > 0)
             {
                 var serviceAreas = allServiceAreas

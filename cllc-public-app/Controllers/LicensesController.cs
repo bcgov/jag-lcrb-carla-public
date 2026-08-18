@@ -880,7 +880,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 expiraryDateParam = adoxioLicense.adoxio_ExpiryDate.Value.ToString("MMMM dd, yyyy");
             }
 
-            var licenceTermsAndConditions = await _dataverse.GetTermsConditionsByLicenceIdAsync(licenceId);
+            var licenceTermsAndConditions = await _dataverse.GetTermsConditionsByLicenceIdAsync(licenceId, activeOnly: true);
 
             var termsAndConditions = "";
             foreach (var tcItem in licenceTermsAndConditions)
@@ -972,7 +972,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 try
                 {
-                    allServiceAreas = await _dataverse.GetServiceAreasByLicenceIdAsync(licenceId);
+                    allServiceAreas = await _dataverse.GetServiceAreasByLicenceIdAsync(licenceId, activeOnly: true);
                 }
                 catch (Exception e)
                 {
