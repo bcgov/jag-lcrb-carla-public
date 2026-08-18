@@ -323,6 +323,13 @@ public class DataverseClient : IDataverseClient, IHealthCheck
             (int)adoxio_application_statuscode.TerminatedandRefunded
         })
             query.Criteria.AddCondition("statuscode", ConditionOperator.NotEqual, status);
+        // "Licensee Changes" applications are handled through a separate flow and must not
+        // appear in the general applicant dashboard list.
+        var licenseeChangesType = await GetApplicationTypeByNameAsync("Licensee Changes", ct);
+        if (licenseeChangesType?.adoxio_applicationtypeId != null)
+            query.Criteria.AddCondition("adoxio_applicationtypeid", ConditionOperator.NotEqual, licenseeChangesType.adoxio_applicationtypeId.Value);
+        // Most-recently-updated first — matches the dashboard's expected ordering.
+        query.AddOrder("modifiedon", OrderType.Descending);
         var result = await _serviceClient.RetrieveMultipleAsync(query, ct);
         return result.Entities.Select(e => e.ToEntity<adoxio_application>()).ToList();
     }
