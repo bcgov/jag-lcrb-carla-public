@@ -811,6 +811,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     : null;
             }
 
+            // Preserve name and BCeID external-id link from existing record — the profile form
+            // does not include these fields either, so they'd otherwise be silently nulled out
+            // on every save via CopyValues' copyIfNull:true, breaking the account's login linkage.
+            if (item.name == null) item.name = adoxioAccount.Name;
+            if (item.externalId == null) item.externalId = adoxioAccount.adoxio_ExternalID;
+
             // patch - create a new entity with only the changed values
             adoxioAccount = new DvAccount();
             adoxioAccount.CopyValues(item, copyIfNull: true);
