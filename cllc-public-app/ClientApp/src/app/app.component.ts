@@ -58,6 +58,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
   aiAssistantFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
+  isOnSepDashboard = false;
   testAPIResult = "";
   mockSchema: any;
   mockValues: Record<string, any> = {};
@@ -96,6 +97,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy, AfterVi
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((event) => {
         if (event instanceof NavigationEnd) {
+          this.isOnSepDashboard = event.url.includes("sep/dashboard");
           if (event.url.search("federal-reporting") >= 0) {
             this.showMessageCenterContent = false;
           } else if (event.url.search("application") >= 0 || event.url.search("event") >= 0) {
