@@ -49,6 +49,7 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:${{ steps.env-tag.outputs.ENV_TAG }}
             ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
+            ${{ github.ref_name == 'master' && format('{0}:prod-sha-{1}', env.IMAGE_NAME, github.sha) || '' }}
           labels: |
             org.opencontainers.image.source=https://github.com/bcgov/jag-lcrb-carla-public
             org.opencontainers.image.revision=${{ github.sha }}
