@@ -341,13 +341,15 @@ namespace Gov.Lclb.Cllb.Public
             {
                 var httpClientHandler = new HttpClientHandler();
 
-                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.
-                                          // This allows you to use OpenShift self-signed certificates for testing.
-                {
-                    // Return `true` to allow certificates that are untrusted/invalid
-                    httpClientHandler.ServerCertificateCustomValidationCallback =
+                // file-manager-service always presents an OpenShift auto-generated,
+                // cluster-internal self-signed certificate (service-serving-signer),
+                // in every tier including Production, so this must not depend on
+                // ASPNETCORE_ENVIRONMENT (which is hardcoded to "Production" in all
+                // deployed tiers for an unrelated DI startup fix). The connection
+                // never leaves the cluster, so bypassing chain/name validation here
+                // is safe.
+                httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                }
 
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
