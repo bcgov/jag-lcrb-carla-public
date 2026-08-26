@@ -11,7 +11,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         BCIdCard = 845280005
     }
 
-    public enum YesNoOptions {
+    public enum YesNoOptions
+    {
         Yes = 845280000,
         No = 845280001
     }
@@ -89,29 +90,29 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public string PhsConnectionsDetails { get; set; }
         public DateTimeOffset? PhsDateSubmitted { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsLivesInCanada { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsHasLivedInCanada { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsExpired { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsComplete { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsConnectionsToOtherLicences { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsCanadianDrugAlchoholDrivingOffence { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? PhsForeignDrugAlchoholOffence { get; set; }
 
-                
+
         [JsonConverter(typeof(StringEnumConverter))]
         public YesNoOptions? CasComplete { get; set; }
         public DateTimeOffset? CasDateSubmitted { get; set; }
@@ -122,11 +123,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public List<Alias> Aliases { get; set; }
 
 
-        public YesNoOptions? PhsExclusiveMFG  { get; set; }
-        public string phsExclusiveDetails   { get; set; }
-        public YesNoOptions? phsFinancialInt   { get; set; }
-        public string phsFinancialIntDetails   { get; set; }
-        public YesNoOptions? phsProfitAgreement   { get; set; }
-        public string phsProfitAgreementDetails   { get; set; }
+        public YesNoOptions? PhsExclusiveMFG { get; set; }
+        public string phsExclusiveDetails { get; set; }
+        public YesNoOptions? phsFinancialInt { get; set; }
+        public string phsFinancialIntDetails { get; set; }
+        public YesNoOptions? phsProfitAgreement { get; set; }
+        public string phsProfitAgreementDetails { get; set; }
     }
 }

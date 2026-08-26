@@ -1,17 +1,15 @@
 <div class="form-wrapper position-relative">
-  
-
   <div>
     <h1>Applications Awaiting Comment</h1>
-    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+    <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
       <p>The following applications have been submitted for your review.</p>
       <p>
-        Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Review Application</strong> to see a
-        copy of the application, including all relevant attachments. At the bottom of the application you will be able to
-        provide your comment and validation, as requested. When comment is required you can <strong>Accept</strong> the application with
-        feedback, <strong>opt-out</strong> of the comment process, or <strong>reject</strong> the application altogether. The applicant will be notified on
-        completion of your review.
+        Click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px"></fa-icon>Review Application</strong> to
+        see a copy of the application, including all relevant attachments. At the bottom of the application you will be
+        able to provide your comment and validation, as requested. When comment is required you can
+        <strong>Accept</strong> the application with feedback, <strong>opt-out</strong> of the comment process, or
+        <strong>reject</strong> the application altogether. The applicant will be notified on completion of your review.
       </p>
     </div>
     <app-decision-not-made-applications></app-decision-not-made-applications>
@@ -19,8 +17,8 @@
 
   <div>
     <h1>Applications Awaiting Zoning Confirmation</h1>
-    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+    <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
       <p>The following applications have been submitted for your review.</p>
     </div>
     <app-for-zoning-applications></app-for-zoning-applications>
@@ -29,20 +27,28 @@
   <div>
     <h1>Applications Awaiting Resolution</h1>
 
-    <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-    <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
-      <p>You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution assessment within 90 days.</p>
-      <p>If you are ready to provide this information, click <strong><fa-icon [icon]="faPencilAlt" style="margin-right: 5px;"></fa-icon>Provide Resolution Documentation</strong></p>
+    <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+    <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
+      <p>
+        You have indicated your intent to accept the below application(s). LCRB requires documentation of the resolution
+        assessment within 90 days.
+      </p>
+      <p>
+        If you are ready to provide this information, click
+        <strong
+          ><fa-icon [icon]="faPencilAlt" style="margin-right: 5px"></fa-icon>Provide Resolution Documentation</strong
+        >
+      </p>
     </div>
     <app-decision-made-but-no-docs-applications></app-decision-made-but-no-docs-applications>
   </div>
 
-    <div>
-      <h1>Resolved Applications</h1>
-      <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-      <div class="flex-grow-1 p-3 mb-2" style="background-color: #F1F4FA; padding: 20px;">
-        <p>The following applications are resolved.</p>
-      </div>
-      <app-resolved-applications></app-resolved-applications>
+  <div>
+    <h1>Resolved Applications</h1>
+    <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+    <div class="flex-grow-1 p-3 mb-2" style="background-color: #f1f4fa; padding: 20px">
+      <p>The following applications are resolved.</p>
     </div>
+    <app-resolved-applications></app-resolved-applications>
+  </div>
 </div>

@@ -64,7 +64,7 @@ namespace Gov.Jag.Lcrb.PdfService
 
             services.AddSwaggerGen(c =>
             {
-                
+
                 c.CustomOperationIds(e => $"{e.ActionDescriptor.RouteValues["controller"]}_{e.HttpMethod}");
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG LCRB PDF Service", Version = "v1" });
                 c.ParameterFilter<AutoRestParameterFilter>();
@@ -156,7 +156,7 @@ namespace Gov.Jag.Lcrb.PdfService
             }
 
             app.UseMvc();
-            
+
             app.UseHealthChecks("/hc", new HealthCheckOptions
             {
                 Predicate = _ => true,

@@ -1,5 +1,5 @@
 <mat-progress-bar class="mt-1" *ngIf="!dataLoaded" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="application && account && dataLoaded">
+<div *ngIf="application && account && dataLoaded" [ngBusy]="[busy, busyPromise]">
   <!--LCSD-6243: 2024-02-28 waynezen: prevent deep-linking-->
   <div *ngIf="!canVisitApplicationForm()">
     <app-forbidden-modal></app-forbidden-modal>
@@ -600,7 +600,7 @@
                 </p>
 
                 <span *ngIf="showPoliceInformationCheckUpload()">
-                  <h4>Police Information Check (may be referred to as Criminal Record and Judicial Matters Check outside
+                  <h4><a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a> (may be referred to as Criminal Record and Judicial Matters Check outside
                     of British Columbia)</h4>
                   <p>
                     Each associate must provide a complete <a href="https://www2.gov.bc.ca/gov/content?id=FBAB712D610340A0AB7FF7F13B5CEC2D" target="_blank" rel="noopener noreferrer">Police Information Check</a>.
@@ -3052,7 +3052,6 @@
                 <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER
               </span>
-              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
             <!-- NEXT STEP BUTTONS
@@ -3070,7 +3069,6 @@
             <button mat-raised-button class="ng-test-submit-for-lg-review" color="primary" *ngIf="showSubmitToLG()"
               [disabled]="disableSubmitForLGINApproval" (click)="submitForLGINApproval()">
               <span><fa-icon [icon]="faUniversity" class="mr-1"></fa-icon>SUBMIT FOR LG/IN REVIEW OR COMMENT</span>
-              <mat-progress-bar *ngIf="disableSubmitForLGINApproval" mode="indeterminate"></mat-progress-bar>
             </button>
 
             <!-- LG Approved OR NO LG Approvals Required -->
@@ -3085,13 +3083,11 @@
                 SUBMIT&nbsp;<span
                   *ngIf="!isFreeEndorsement() && !application?.applicationType?.isFree && !skipPayment && !isRAS()">&amp;
                   PAY</span>
-                <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
 
               <button mat-raised-button *ngIf="application?.applicationType?.requiresSecurityScreening" color="primary"
                 (click)="proceedToSecurityScreening()" [disabled]="proceedToSecurityScreeningInProgress">
                 <span> <fa-icon [icon]="faIdCard" class="mr-1"></fa-icon>PROCEED TO SECURITY SCREENING </span>
-                <mat-progress-bar *ngIf="proceedToSecurityScreeningInProgress" mode="indeterminate"></mat-progress-bar>
               </button>
             </ng-container>
 
@@ -3112,14 +3108,12 @@
                 <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER
               </span>
-              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
             <button mat-raised-button color="primary" (click)="submit_application()">
               <span>
                 <fa-icon [icon]="faCreditCard" *ngIf="!skipPayment"></fa-icon>SUBMIT&nbsp;<span
                   *ngIf="!skipPayment && !isRAS()">&amp; PAY</span>
               </span>
-              <mat-progress-bar *ngIf="submitApplicationInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
             <span style="color: #1a5a96; float: right; padding-top: 10px">
@@ -3282,14 +3276,12 @@
                 <fa-icon [icon]="faSave"></fa-icon>
                 SAVE FOR LATER
               </span>
-              <mat-progress-bar *ngIf="saveForLaterInProgress" mode="indeterminate"></mat-progress-bar>
             </button>
 
             <button mat-raised-button class="ng-test-submit-incomplete" color="primary"
               (click)="resolveIncompleteness()">
               <span>SUBMIT</span>
             </button>
-            <mat-progress-bar *ngIf="disableIncomplete" mode="indeterminate"></mat-progress-bar>
           </section>
         </div>
       </div>

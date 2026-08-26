@@ -1,4 +1,5 @@
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Utils;
 using System;
@@ -11,34 +12,27 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class LicenceEventScheduleExtensions
     {
         // Converts a dynamics entity into a view model
-        public static LicenceEventSchedule ToViewModel(this MicrosoftDynamicsCRMadoxioEventschedule item)
+
+        public static LicenceEventSchedule ToViewModel(this adoxio_eventschedule item)
         {
-            LicenceEventSchedule result = null;
-            if (item != null)
+            if (item == null) return null;
+            return new LicenceEventSchedule
             {
-                result = new LicenceEventSchedule();
-                if (item.AdoxioEventscheduleid != null)
-                {
-                    result.Id = item.AdoxioEventscheduleid;
-                }
-                result.EventId = item._adoxioEventidValue;
-                result.EventStartDateTime = item.AdoxioEventstartdatetime;
-                result.EventEndDateTime = item.AdoxioEventenddatetime;
-                result.ServiceStartDateTime = item.AdoxioServicestartdatetime;
-                result.ServiceEndDateTime = item.AdoxioServiceenddatetime;
-            }
-            return result;
+                Id = item.adoxio_eventscheduleId?.ToString(),
+                EventId = item.adoxio_EventId?.Id.ToString(),
+                EventStartDateTime = item.adoxio_EventStartDateTime.HasValue ? (DateTimeOffset?)item.adoxio_EventStartDateTime.Value : null,
+                EventEndDateTime = item.adoxio_EventEndDateTime.HasValue ? (DateTimeOffset?)item.adoxio_EventEndDateTime.Value : null,
+                ServiceStartDateTime = item.adoxio_ServiceStartDateTime.HasValue ? (DateTimeOffset?)item.adoxio_ServiceStartDateTime.Value : null,
+                ServiceEndDateTime = item.adoxio_ServiceEndDateTime.HasValue ? (DateTimeOffset?)item.adoxio_ServiceEndDateTime.Value : null,
+            };
         }
 
-
-        // Converts a view model into a dynamics entity
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioEventschedule to, LicenceEventSchedule from)
+        public static void CopyValues(this adoxio_eventschedule to, LicenceEventSchedule from)
         {
-            to.AdoxioEventscheduleid = from.Id;
-            to.AdoxioEventstartdatetime = from.EventStartDateTime;
-            to.AdoxioEventenddatetime = from.EventEndDateTime;
-            to.AdoxioServicestartdatetime = from.ServiceStartDateTime;
-            to.AdoxioServiceenddatetime = from.ServiceEndDateTime;
+            to.adoxio_EventStartDateTime = from.EventStartDateTime?.UtcDateTime;
+            to.adoxio_EventEndDateTime = from.EventEndDateTime?.UtcDateTime;
+            to.adoxio_ServiceStartDateTime = from.ServiceStartDateTime?.UtcDateTime;
+            to.adoxio_ServiceEndDateTime = from.ServiceEndDateTime?.UtcDateTime;
         }
     }
 }

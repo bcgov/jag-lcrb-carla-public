@@ -1,8 +1,8 @@
-import { Action } from "@ngrx/store";
-import { Application } from "@models/application.model";
+import { Application } from '@models/application.model';
+import { Action } from '@ngrx/store';
 
-export const CURRENT_APPLICATION = "CURRENT_APPLICATION";
-export const SET_CURRENT_APPLICATION = "SET_CURRENT_APPLICATION";
+export const CURRENT_APPLICATION = 'CURRENT_APPLICATION';
+export const SET_CURRENT_APPLICATION = 'SET_CURRENT_APPLICATION';
 
 export class CurrentApplicationAction implements Action {
   readonly type = CURRENT_APPLICATION;
@@ -14,6 +14,4 @@ export class SetCurrentApplicationAction implements Action {
   constructor(public payload: Application) {}
 }
 
-export type Actions =
-  CurrentApplicationAction
-  | SetCurrentApplicationAction;
+export type Actions = CurrentApplicationAction | SetCurrentApplicationAction;

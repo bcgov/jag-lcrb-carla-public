@@ -12,22 +12,22 @@ namespace Watchdog
             CreateHostBuilder(args).Build().Run();
         }
 
-      
+
         public static IWebHostBuilder CreateHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)                
+            WebHost.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     if (hostingContext.HostingEnvironment.IsDevelopment())
                     {
                         config.AddUserSecrets<Startup>();
                     }
-                    
+
                     config.AddEnvironmentVariables();
-                   
+
                 })
                 .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                 .UseStartup<Startup>();
-                
+
     }
     /*
         
@@ -39,4 +39,4 @@ namespace Watchdog
                 });
         }
         */
-    }
+}

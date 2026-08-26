@@ -26,7 +26,7 @@ export class PermanentChangeCannabisSecurityScreeningFormsComponent implements O
 
   form: FormGroup;
 
-  constructor(public controlContainer: ControlContainer) { }
+  constructor(public controlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;

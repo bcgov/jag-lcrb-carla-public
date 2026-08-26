@@ -1,11 +1,20 @@
 <div [formGroup]="form">
-  <input type="text" class="form-control" style="width: 500px;" placeholder="" formControlName="autocompleteInput" [matAutocomplete]="auto"
-         #autocomplete>
-  <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onOptionSelect($event)" [displayWith]="autocompleteDisplay">
+  <input
+    type="text"
+    class="form-control"
+    style="width: 500px"
+    placeholder=""
+    formControlName="autocompleteInput"
+    [matAutocomplete]="auto"
+    #autocomplete />
+  <mat-autocomplete
+    #auto="matAutocomplete"
+    (optionSelected)="onOptionSelect($event)"
+    [displayWith]="autocompleteDisplay">
     <mat-option *ngFor="let item of autocompleteAccounts" [value]="item">
-      {{item.accountName}}
+      {{ item.accountName }}
     </mat-option>
   </mat-autocomplete>
-  <br>
+  <br />
   <mat-progress-bar *ngIf="accountRequestInProgress" mode="indeterminate"></mat-progress-bar>
 </div>

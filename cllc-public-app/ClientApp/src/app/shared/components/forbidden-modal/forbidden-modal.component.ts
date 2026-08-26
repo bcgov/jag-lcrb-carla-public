@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-forbidden-modal',
@@ -10,11 +9,7 @@ import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPho
 export class ForbiddenModalComponent implements OnInit {
   faExclamationTriangle = faExclamationTriangle;
 
-  constructor() {
+  constructor() {}
 
-  }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

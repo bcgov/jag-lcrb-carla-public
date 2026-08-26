@@ -1,4 +1,5 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -10,20 +11,14 @@ namespace Gov.Lclb.Cllb.Public.Models
         /// <summary>
         /// Convert a given voteQuestion to a ViewModel
         /// </summary>        
-        public static ViewModels.IndigenousNation ToViewModel(this MicrosoftDynamicsCRMadoxioLocalgovindigenousnation item)
+        public static ViewModels.IndigenousNation ToViewModel(this adoxio_localgovindigenousnation item)
         {
-            ViewModels.IndigenousNation result = null;
-            if (item != null)
+            if (item == null) return null;
+            return new ViewModels.IndigenousNation
             {
-                result = new ViewModels.IndigenousNation
-                {
-                    Id = item.AdoxioLocalgovindigenousnationid,
-                    Name = item.AdoxioName
-                };
-
-
-            }
-            return result;
+                Id = item.adoxio_localgovindigenousnationId?.ToString(),
+                Name = item.adoxio_name
+            };
         }
     }
 }

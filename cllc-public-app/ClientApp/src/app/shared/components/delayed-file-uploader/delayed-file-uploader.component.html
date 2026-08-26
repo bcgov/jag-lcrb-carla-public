@@ -1,34 +1,50 @@
 <div class="upload-wrapper">
   <p></p>
-  <ngx-file-drop [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
-                 (onFileDrop)="dropped($event)" customstype="filedrop">
+  <ngx-file-drop
+    [hidden]="disableFileUpload()"
+    [ngClass]="{ 'no-drop': disableFileUpload() }"
+    (onFileDrop)="dropped($event)"
+    customstype="filedrop">
     <ng-template ngx-file-drop-content-tmp>
       <div style="text-align: center">
-        <span>{{uploadHeader}} </span>
-        <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}"
-           (click)="browseFiles(fileBrowserM, fileBrowser)">
-          BROWSE
-        </a>.
-        <br>
-        <span style="color: #A9A9A9">{{fileTypes}}</span>
-        <br>
-        <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
-        <br>
+        <span>{{ uploadHeader }} </span>
+        <a
+          href="javascript:void(0)"
+          [ngClass]="{ 'no-drop': disableFileUpload() }"
+          (click)="browseFiles(fileBrowserM, fileBrowser)">
+          BROWSE </a
+        >.
+        <br />
+        <span style="color: #a9a9a9">{{ fileTypes }}</span>
+        <br />
+        <span style="color: #a9a9a9">MAX FILE SIZE: 25MB.</span>
+        <br />
         <div class="hidden-content">
-          <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" style="height: 0; width: 0;" multiple
-                 #fileBrowserM>
-          <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" style="height: 0; width: 0;" #fileBrowser>
+          <input
+            (change)="onBrowserFileSelect($event, fileBrowserM)"
+            type="file"
+            style="height: 0; width: 0"
+            multiple
+            #fileBrowserM />
+          <input
+            (change)="onBrowserFileSelect($event, fileBrowser)"
+            type="file"
+            style="height: 0; width: 0"
+            #fileBrowser />
         </div>
       </div>
     </ng-template>
   </ngx-file-drop>
-  <div *ngFor="let error of validationErrors" class="error-states error-container" style="word-break: break-all;" [innerHTML]="error"></div>
-  <div style="color: #2C679E; margin-top: 5px;">
-
-    <section *ngFor="let item of files; let i=index" class="file-list">
+  <div
+    *ngFor="let error of validationErrors"
+    class="error-states error-container"
+    style="word-break: break-all"
+    [innerHTML]="error"></div>
+  <div style="color: #2c679e; margin-top: 5px">
+    <section *ngFor="let item of files; let i = index" class="file-list">
       <span>{{ item.name }}</span>
       <span>
-        <span style="color: #A9A9A9; margin-right: 20px;">{{item.size}} kb</span>
+        <span style="color: #a9a9a9; margin-right: 20px">{{ item.size }} kb</span>
         <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="removeFile(item)">Delete</a>
       </span>
     </section>

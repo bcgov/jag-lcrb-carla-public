@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ConversionToolComponent } from './conversion-tool.component';
 
 describe('ConversionToolComponent', () => {
@@ -8,9 +7,8 @@ describe('ConversionToolComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ConversionToolComponent ]
-    })
-    .compileComponents();
+      declarations: [ConversionToolComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

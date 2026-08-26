@@ -1,28 +1,25 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { KeyPersonnelComponent } from './key-personnel.component';
 
-import { KeyPersonnelComponent } from "./key-personnel.component";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+describe('KeyPersonelComponent', () => {
+  let component: KeyPersonnelComponent;
+  let fixture: ComponentFixture<KeyPersonnelComponent>;
 
-describe("KeyPersonelComponent",
-  () => {
-    let component: KeyPersonnelComponent;
-    let fixture: ComponentFixture<KeyPersonnelComponent>;
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [KeyPersonnelComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
-    beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-          declarations: [KeyPersonnelComponent],
-          schemas: [NO_ERRORS_SCHEMA]
-        })
-        .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(KeyPersonnelComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    // it('should create', () => {
-    //   expect(component).toBeTruthy();
-    // });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(KeyPersonnelComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
+
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
+});

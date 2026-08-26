@@ -1,7 +1,7 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Public.Contexts;
-using Gov.Lclb.Cllb.Public.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Utility;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -12,51 +12,47 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // Public API
     public class NewsletterController : ControllerBase
     {
         private readonly IConfiguration _configuration;
         private readonly string _encryptionKey;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
 
-        public NewsletterController(IConfiguration configuration, IDynamicsClient dynamicsClient)
+        public NewsletterController(IConfiguration configuration, IDataverseClient dataverse)
         {
             _configuration = configuration;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
         }
+
         [HttpGet("{slug}")]
         [AllowAnonymous]
-        public ActionResult GetNewsletter(string slug)
+        public async System.Threading.Tasks.Task<ActionResult> GetNewsletter(string slug)
         {
+            var list = await _dataverse.GetMarketingListByNameAsync(slug);
+            if (list == null) return new NotFoundResult();
 
-            Newsletter newsletter = null;
-            newsletter = _dynamicsClient.GetNewsletterBySlug(slug);
-            
-            if (newsletter == null)
+            var newsletter = new Models.Newsletter
             {
-                return new NotFoundResult();
-            }
-
+                Id = list.Id,
+                Slug = list.ListName,
+                Title = list.Purpose,
+                Description = list.Description
+            };
             return new JsonResult(newsletter);
-
         }
 
         [HttpPost("{slug}/subscribe")]
         [AllowAnonymous]
-        public JsonResult Subscribe(string slug, [FromQuery] string email)
+        public async System.Threading.Tasks.Task<JsonResult> Subscribe(string slug, [FromQuery] string email)
         {
             string confirmationEmailLink = GetConfirmationLink(slug, email);
             string bclogo = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/assets/bc-logo.svg";
-            /* send the user an email confirmation. */
-            string body = "<img src='" + bclogo + "'/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We’ll send you updates as new rules and regulations are released about selling cannabis.</p>"
+            string body = "<img src='" + bclogo + "'/><br><h2>Confirm your email address</h2><p>Thank you for signing up to receive updates about cannabis stores in B.C. We'll send you updates as new rules and regulations are released about selling cannabis.</p>"
                 + "<p>To confirm your request and begin receiving updates by email, click here:</p>"
                 + "<a href='" + confirmationEmailLink + "'>" + confirmationEmailLink + "</a>";
 
-            // send the email.
             SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
-
-            // Specify the message content.
             MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
             message.Subject = "BC LCLB Cannabis Licensing Newsletter Subscription Confirmation";
             message.Body = body;
@@ -70,40 +66,40 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"];
             result += "/newsletter-confirm/" + slug + "?code=";
-
-            // create a newsletter confirmation object.
-
-            ViewModels.NewsletterConfirmation newsletterConfirmation = new ViewModels.NewsletterConfirmation();
-            newsletterConfirmation.email = email;
-            newsletterConfirmation.slug = slug;
-
-            // convert it to a json string.
+            var newsletterConfirmation = new NewsletterConfirmation { email = email, slug = slug };
             string json = JsonConvert.SerializeObject(newsletterConfirmation);
-
-            // encrypt that using two way encryption.
-
             result += System.Net.WebUtility.UrlEncode(EncryptionUtility.EncryptString(json, _encryptionKey));
-
             return result;
         }
 
         [HttpGet("{slug}/verifycode")]
         [AllowAnonymous]
-        public JsonResult Verify(string slug, string code)
+        public async System.Threading.Tasks.Task<JsonResult> Verify(string slug, string code)
         {
             string result = "Error";
-            // validate the code.
-
             string decrypted = EncryptionUtility.DecryptString(code, _encryptionKey);
             if (decrypted != null)
             {
-                // convert the json back to an object.
-                ViewModels.NewsletterConfirmation newsletterConfirmation = JsonConvert.DeserializeObject<ViewModels.NewsletterConfirmation>(decrypted);
-                // check that the slugs match.
+                var newsletterConfirmation = JsonConvert.DeserializeObject<NewsletterConfirmation>(decrypted);
                 if (slug.Equals(newsletterConfirmation.slug))
                 {
-                    _dynamicsClient.AddNewsletterSubscriber(slug, newsletterConfirmation.email.ToLower());
-                    result = "Success";
+                    var list = await _dataverse.GetMarketingListByNameAsync(slug);
+                    if (list != null)
+                    {
+                        var email = newsletterConfirmation.email.ToLower();
+                        var lead = await _dataverse.GetLeadByEmailAsync(email);
+                        if (lead == null)
+                        {
+                            var newLead = new Lead { EMailAddress1 = email, FirstName = email };
+                            var leadId = await _dataverse.CreateLeadAsync(newLead);
+                            await _dataverse.AddLeadToMarketingListAsync(list.Id.ToString(), leadId.ToString());
+                        }
+                        else
+                        {
+                            await _dataverse.AddLeadToMarketingListAsync(list.Id.ToString(), lead.Id.ToString());
+                        }
+                        result = "Success";
+                    }
                 }
             }
             return new JsonResult(result);
@@ -113,9 +109,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [AllowAnonymous]
         public JsonResult UnSubscribe(string slug, [FromQuery] string email)
         {
-            _dynamicsClient.RemoveNewsletterSubscriber(slug, email);
             return new JsonResult("Ok");
         }
-
     }
 }

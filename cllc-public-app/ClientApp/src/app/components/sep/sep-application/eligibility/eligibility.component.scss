@@ -1,34 +1,34 @@
 .wrapp {
-    max-width: 900px;
-    button {
-        margin-right: 8px;
-    }
+  max-width: 900px;
+  button {
+    margin-right: 8px;
+  }
 }
 
 mat-divider {
-    margin: 20px 0;
+  margin: 20px 0;
 }
 
 fa-icon[mattooltip] {
-    color: #38598a;
+  color: #38598a;
 }
 
 ::ng-deep {
-    .app-field > label {
-        font-size: 16px;
-    }
+  .app-field > label {
+    font-size: 16px;
+  }
 
-    .mat-tooltip-panel .mat-tooltip {
-        background-color: #f1f4fa;
-        margin: 4px;
-        color: #222;
-        font-size: 16px;
-        border: solid 1px #ccc;
-    }
+  .mat-tooltip-panel .mat-tooltip {
+    background-color: #f1f4fa;
+    margin: 4px;
+    color: #222;
+    font-size: 16px;
+    border: solid 1px #ccc;
+  }
 
-    .mat-tooltip {
-        &.custom-tooltip {
-            white-space: pre-line;
-        }
+  .mat-tooltip {
+    &.custom-tooltip {
+      white-space: pre-line;
     }
+  }
 }

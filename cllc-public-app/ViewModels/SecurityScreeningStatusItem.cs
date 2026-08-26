@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
@@ -21,8 +18,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         [JsonIgnore] //Exclude from json serialization
         public string ContactId { get; set; }
         [JsonIgnore] //Exclude from json serialization
-        public MicrosoftDynamicsCRMcontact Contact { get; set; }
-        [JsonIgnore] //Exclude from json serialization
         public bool IsComplete { get; set; }
+        [JsonIgnore] //Exclude from json serialization
+        public bool PhsIsCompleted { get; set; }
+        [JsonIgnore] //Exclude from json serialization
+        public bool CasIsCompleted { get; set; }
     }
 }

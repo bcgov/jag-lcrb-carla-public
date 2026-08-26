@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace geocoder_tests
 {
@@ -27,10 +28,10 @@ namespace geocoder_tests
             var conf = new Dictionary<string, string>
              {
                 {"DYNAMICS_ODATA_URI", "http://localhost"},
-                {"GEOCODER_API_URI", "http://localhost"},                
+                {"GEOCODER_API_URI", "http://localhost"},
                 {"SSG_USERNAME", "test"},
                 {"SSG_PASSWORD", "test"},
-                
+
             };
             var loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger("GeocoderUnitTests");
@@ -38,7 +39,9 @@ namespace geocoder_tests
 
             _configuration = new ConfigurationBuilder().AddInMemoryCollection(conf).Build();
 
-            _geocodeUtils = new GeocodeUtils(_configuration, _logger);
+            var dataverseMock = new Mock<IDataverseClient>();
+
+            _geocodeUtils = new GeocodeUtils(_configuration, dataverseMock.Object, _logger);
         }
 
         /// <summary>

@@ -1,33 +1,39 @@
-import { Injectable } from "@angular/core";
-import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
-import { UserDataService } from "./user-data.service";
-import { Store } from "@ngrx/store";
-import { AppState } from "../app-state/models/app-state";
-import { map } from "rxjs/operators";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { Store } from '@ngrx/store';
+import { map } from 'rxjs/operators';
+import { AppState } from '../app-state/models/app-state';
+import { UserDataService } from './user-data.service';
 
 @Injectable()
 export class BCeidOrServiceCardAuthGuard implements CanActivate {
   window = window;
-  constructor(private userService: UserDataService,
+  constructor(
+    private userService: UserDataService,
     private router: Router,
-    private store: Store<AppState>) {
-  }
+    private store: Store<AppState>
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    console.log("BCeidOrServiceCardAuthGuard#canActivate called");
-    return this.store.select((s) => s.currentUserState.currentUser)
-      .pipe(map(user => {
-        // 2021-05-05 - added support for Individual, for Basic BCeID logins.
-        const allowAccess = (user && (user.userType === "Business" || user.userType === "VerifiedIndividual" || user.userType === "Individual"));
-        if (!allowAccess) {
-          if (route.routeConfig.path === "sep/claim/:jobNumber") {
-            const sourceUrl = state.url;
-            this.router.navigateByUrl(`/sep?source=${sourceUrl}`);
-          } else {
-            this.router.navigate(["/"]);
+    console.log('BCeidOrServiceCardAuthGuard#canActivate called');
+    return this.store
+      .select((s) => s.currentUserState.currentUser)
+      .pipe(
+        map((user) => {
+          // 2021-05-05 - added support for Individual, for Basic BCeID logins.
+          const allowAccess =
+            user &&
+            (user.userType === 'Business' || user.userType === 'VerifiedIndividual' || user.userType === 'Individual');
+          if (!allowAccess) {
+            if (route.routeConfig.path === 'sep/claim/:jobNumber') {
+              const sourceUrl = state.url;
+              this.router.navigateByUrl(`/sep?source=${sourceUrl}`);
+            } else {
+              this.router.navigate(['/']);
+            }
           }
-        }
-        return allowAccess;
-      }));
+          return allowAccess;
+        })
+      );
   }
 }

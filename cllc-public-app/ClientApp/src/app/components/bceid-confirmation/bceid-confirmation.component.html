@@ -2,13 +2,15 @@
   <!-- <img style="margin-left: -18px;" *ngIf="termsAccepted" src="assets/bceid_default_logo.jpg" alt="BCeID Logo"> -->
   <div [ngBusy]="busySubscription"></div>
 
-  <app-terms-of-use (termsAccepted)="onTermsAccepted($event)" *ngIf="bceidConfirmAccount && !termsAccepted"></app-terms-of-use>
+  <app-terms-of-use
+    (termsAccepted)="onTermsAccepted($event)"
+    *ngIf="bceidConfirmAccount && !termsAccepted"></app-terms-of-use>
 
   <div *ngIf="bceidConfirmAccount && !account && termsAccepted">
     <h2>Please confirm the business or organization name associated to the Business BCeID.</h2>
     <div *ngIf="!showBceidCorrection">
       <p>
-        <b>{{currentUser.businessname}}</b>
+        <b>{{ currentUser.businessname }}</b>
       </p>
       <p>Is this correct?</p>
       <div class="row">
@@ -28,7 +30,9 @@
     <h2>Please confirm the organization type associated with the Business BCeID:</h2>
     <section class="radio-buttons">
       <mat-radio-group [(ngModel)]="businessType">
-        <mat-radio-button *ngFor="let item of businessTypes" class="mr-5" [value]="item.value">{{item.name}}</mat-radio-button>
+        <mat-radio-button *ngFor="let item of businessTypes" class="mr-5" [value]="item.value">{{
+          item.name
+        }}</mat-radio-button>
       </mat-radio-group>
     </section>
 
@@ -52,11 +56,9 @@
     <h2>Please confirm the name associated with the Business BCeID login provided.</h2>
     <div *ngIf="showBceidUserContinue">
       <p>
-        <b>{{currentUser.name}}</b>
+        <b>{{ currentUser.name }}</b>
       </p>
-      <p>
-        Is this correct?
-      </p>
+      <p>Is this correct?</p>
       <div class="row">
         <div class="col-md-12 text-left">
           <button class="btn btn-primary" (click)="confirmContactYes()">
@@ -65,7 +67,7 @@
           <button class="btn btn-secondary" (click)="confirmContactNo()">
             <strong>No</strong>
           </button>
-          <br>
+          <br />
           <div [ngBusy]="busy"></div>
         </div>
       </div>
@@ -76,11 +78,11 @@
     <p>
       Before continuing, please update your information with
       <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx">Business BCeID</a> or
-      <br>login with a different account.
+      <br />login with a different account.
     </p>
-    <br>
+    <br />
     <div [ngBusy]="busy"></div>
     <a href="logout">&lt;&lt; Return to Information Portal Homepage</a>
   </div>
-  <div *ngIf="termsAccepted" style="margin-bottom: 40%;"></div>
+  <div *ngIf="termsAccepted" style="margin-bottom: 40%"></div>
 </div>

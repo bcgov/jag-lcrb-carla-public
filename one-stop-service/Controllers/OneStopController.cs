@@ -1,9 +1,8 @@
-﻿using Gov.Jag.Lcrb.OneStopService;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
+using Gov.Jag.Lcrb.OneStopService;
 using Hangfire;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Configuration;
 using Serilog;
 
 namespace one_stop_service.Controllers
@@ -11,29 +10,22 @@ namespace one_stop_service.Controllers
     [Route("api/[controller]")]
     public class OneStopController : Controller
     {
-        private readonly IConfiguration Configuration;
-        private readonly IMemoryCache _cache;
         private readonly ILogger _logger;
 
-        public OneStopController(IConfiguration configuration, IMemoryCache cache)
+        public OneStopController()
         {
-            Configuration = configuration;
-            _cache = cache;
             _logger = Log.Logger;
-
-
         }
 
         /// <summary>
         /// Check the queue for items to process.
         /// </summary>
-        /// <param name="licenceGuid"></param>
         /// <returns></returns>
         [HttpGet("CheckQueue")]
         public IActionResult CheckQueue()
         {
             _logger.Information($"Reached CheckQueue.");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).CheckForNewLicences(null));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.CheckForNewLicences(null));
             return Ok();
         }
 
@@ -41,7 +33,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendChangeAddressMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendChangeAddressMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeAddressRest(null, licenceGuid, null));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeAddressRest(null, licenceGuid, null));
             return Ok();
         }
 
@@ -49,7 +41,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendChangeNameMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ChangeName));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ChangeName));
             return Ok();
         }
 
@@ -58,7 +50,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendTransferMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.Transfer));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.Transfer));
             return Ok();
         }
 
@@ -67,7 +59,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendThirdPartyOperatorMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendChangeNameMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ThirdPartyOperator));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeNameRest(null, licenceGuid, null, false, ChangeNameType.ThirdPartyOperator));
             return Ok();
         }
 
@@ -75,7 +67,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendChangeStatusMessage(string licenceGuid, OneStopHubStatusChange statusChange)
         {
             _logger.Information($"Reached SendChangeStatusMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendChangeStatusRest(null, licenceGuid, statusChange, null));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeStatusRest(null, licenceGuid, statusChange, null));
             return Ok();
         }
 
@@ -84,7 +76,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendLicenceCreationMessage(string licenceGuid)
         {
             _logger.Information($"Reached SendLicenceCreationMessage. licenceGuid: {licenceGuid}");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountRequestREST(null, licenceGuid, "001", null));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendProgramAccountRequestREST(null, licenceGuid, "001", null));
             return Ok();
         }
 
@@ -92,7 +84,7 @@ namespace one_stop_service.Controllers
         public IActionResult SendProgramAccountDetailsBroadcastMessage(string licenceGuid)
         {
             _logger.Information("Reached SendProgramAccountDetailsBroadcastMessage");
-            BackgroundJob.Enqueue(() => new OneStopUtils(Configuration, _cache).SendProgramAccountDetailsBroadcastMessageRest(null, licenceGuid));
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendProgramAccountDetailsBroadcastMessageRest(null, licenceGuid));
             return Ok();
         }
 

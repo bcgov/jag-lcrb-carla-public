@@ -1,34 +1,34 @@
 .sep-alert,
 .sep-error {
-    padding: 16px;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    max-width: 800px;
-    border-radius: 5px;
-    fa-icon {
-        margin-right: 8px;
-    }
-    p {
-        margin: 0;
-    }
+  padding: 16px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+  max-width: 800px;
+  border-radius: 5px;
+  fa-icon {
+    margin-right: 8px;
+  }
+  p {
+    margin: 0;
+  }
 
-    .header{
-        display: flex;
-        align-items: center;
-        margin-bottom: 4px;
-    }
-    span.mat-title{
-        margin: 0;
-    }
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  span.mat-title {
+    margin: 0;
+  }
 }
 
-.sep-error{
-    background-color: #ff3d3b;
-    color: white;
+.sep-error {
+  background-color: #ff3d3b;
+  color: white;
 }
 
 .sep-alert {
-    // background-color: #FEDD35;
-    background-color: #fcba19;
-    color: #000;
+  // background-color: #FEDD35;
+  background-color: #fcba19;
+  color: #000;
 }

@@ -10,9 +10,7 @@ export class ErrorAlertComponent implements OnInit {
   @Input() type: 'error' | 'alert' = 'alert';
   faExclamationCircle = faExclamationCircle;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }

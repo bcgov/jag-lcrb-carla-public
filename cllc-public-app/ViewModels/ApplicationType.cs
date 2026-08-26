@@ -72,10 +72,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? ShowLgNoObjection { get; set; }
         public bool? ShowLiquorDeclarations { get; set; }
-        public bool? ShowOwnershipDeclaration { get; set;}
-        
+        public bool? ShowOwnershipDeclaration { get; set; }
+
         public bool? ShowDescription1 { get; set; }
-        
+
         public bool? IsShowLGINApproval { get; set; }
         public bool? IsShowLGZoningConfirmation { get; set; }
         public bool? RequiresSecurityScreening { get; set; }
@@ -86,8 +86,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         public bool? IsFree { get; set; }
 
-        public bool? IsEndorsement { get; set;}
-        public bool? IsStructural { get; set;}
+        public bool? IsEndorsement { get; set; }
+        public bool? IsStructural { get; set; }
         public bool? IsDefault { get; set; }
 
         public Form DynamicsForm { get; set; }
@@ -96,7 +96,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool OutsideAreas { get; set; }
         public bool CapacityArea { get; set; }
 
-        public bool? ShowPatio {get; set;}
+        public bool? ShowPatio { get; set; }
         public bool? HasPatio { get; set; }       // 2024-04-03 LCSD-6975 waynezen
 
         [JsonConverter(typeof(StringEnumConverter))]

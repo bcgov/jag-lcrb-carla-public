@@ -36,7 +36,9 @@
       </p>
       <p></p>
 
-      <app-applications-and-licences [account]="account"></app-applications-and-licences>
+      <app-applications-and-licences
+        [account]="account"
+        (hasLicenceChange)="hasLicence = $event"></app-applications-and-licences>
     </div>
 
     <div class="col-lg-4 col-sm-12" style="position: relative">
@@ -72,7 +74,7 @@
                 <div title="Past Due Invoice!" *ngIf="item.overdue">
                   <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px"></fa-icon>
                 </div>
-                {{ item.invoice.duedate | date : 'dd/MM/yy' }}
+                {{ item.invoice.duedate | date: 'dd/MM/yy' }}
               </td>
               <td>
                 <a

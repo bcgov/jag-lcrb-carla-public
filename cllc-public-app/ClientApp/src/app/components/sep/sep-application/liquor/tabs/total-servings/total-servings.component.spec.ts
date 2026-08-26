@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TotalServingsComponent } from './total-servings.component';
 
 describe('TotalServingsComponent', () => {
@@ -8,9 +7,8 @@ describe('TotalServingsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TotalServingsComponent ]
-    })
-    .compileComponents();
+      declarations: [TotalServingsComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

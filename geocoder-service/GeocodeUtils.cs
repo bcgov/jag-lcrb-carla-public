@@ -1,20 +1,16 @@
-﻿using System;
+extern alias DV;
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.GeoCoder;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Gov.Lclb.Cllb.Geocoder
 {
@@ -23,22 +19,22 @@ namespace Gov.Lclb.Cllb.Geocoder
         private static readonly HttpClient Client = new HttpClient();
 
         private IConfiguration Configuration { get; }
-               
-        private IDynamicsClient _dynamics;
+
+        private IDataverseClient _dataverse;
 
         private IGeocoderClient _geocoder;
 
         private ILogger _logger;
 
-        public GeocodeUtils(IConfiguration Configuration, ILogger logger)
+        public GeocodeUtils(IConfiguration Configuration, IDataverseClient dataverse, ILogger logger)
         {
             this.Configuration = Configuration;
-            _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
+            _dataverse = dataverse;
             _logger = logger;
             _geocoder = GeocoderSetupUtil.SetupGeocoder(Configuration);
         }
 
-        public string SanitizeStreetAddress (string address)
+        public string SanitizeStreetAddress(string address)
         {
             string result = null;
             if (address != null)
@@ -55,7 +51,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                 {
                     result = address;
                 }
-            }            
+            }
 
             return result;
         }
@@ -71,84 +67,79 @@ namespace Gov.Lclb.Cllb.Geocoder
                 hangfireContext.WriteLine("Geocoding an establishment");
             }
 
-            var establishment = _dynamics.GetEstablishmentById(establishmentId);
+            var establishment = await _dataverse.GetEstablishmentByIdAsync(establishmentId);
 
             await GeocodeEstablishment(hangfireContext, establishment);
         }
 
-        private async Task GeocodeEstablishment(PerformContext hangfireContext, MicrosoftDynamicsCRMadoxioEstablishment establishment)
+        private async Task GeocodeEstablishment(PerformContext hangfireContext, adoxio_establishment establishment)
         {
-            if (establishment != null && ! string.IsNullOrEmpty(establishment.AdoxioAddresscity) )
+            if (establishment != null && !string.IsNullOrEmpty(establishment.adoxio_AddressCity))
             {
-                string streetAddress = SanitizeStreetAddress(establishment.AdoxioAddressstreet);
-                string address = $"{establishment.AdoxioAddressstreet}, {establishment.AdoxioAddresscity}, BC";
+                string streetAddress = SanitizeStreetAddress(establishment.adoxio_AddressStreet);
+                string address = $"{establishment.adoxio_AddressStreet}, {establishment.adoxio_AddressCity}, BC";
                 // output format can be xhtml, kml, csv, shpz, geojson, geojsonp, gml
                 var output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
 
                 hangfireContext.WriteLine($"{address} returns {output.Features[0].Properties.Faults.Count} faults");
 
                 // if there are any faults try a query based on the LGIN instead of the city.
-                if (output.Features[0].Properties.Faults.Count > 1  && establishment._adoxioLginValue != null) 
+                if (output.Features[0].Properties.Faults.Count > 1 && establishment.adoxio_LGIN != null)
                 {
-                    var lgin = _dynamics.GetLginById(establishment._adoxioLginValue);
-                    _logger.LogError($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
-                    hangfireContext.WriteLine($"Unable to find a good match for address {address}, using lgin of {lgin.AdoxioName}");
-
-                    string sanitizedLgin = lgin.AdoxioName;
-                    if (sanitizedLgin.Contains("First Nation"))
+                    var lgin = await _dataverse.GetLginByIdAsync(establishment.adoxio_LGIN.Id.ToString());
+                    if (lgin != null)
                     {
-                        sanitizedLgin = sanitizedLgin.Replace("First Nation", "").Trim();
-                    }
+                        _logger.LogError($"Unable to find a good match for address {address}, using lgin of {lgin.adoxio_name}");
+                        hangfireContext.WriteLine($"Unable to find a good match for address {address}, using lgin of {lgin.adoxio_name}");
 
-                    address = $"{establishment.AdoxioAddressstreet}, {sanitizedLgin}, BC";
-                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
-                    hangfireContext.WriteLine($"{address} returns {output.Features[0].Properties.Faults.Count} faults");
+                        string sanitizedLgin = lgin.adoxio_name;
+                        if (sanitizedLgin.Contains("First Nation"))
+                        {
+                            sanitizedLgin = sanitizedLgin.Replace("First Nation", "").Trim();
+                        }
+
+                        address = $"{establishment.adoxio_AddressStreet}, {sanitizedLgin}, BC";
+                        output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: address);
+                        hangfireContext.WriteLine($"{address} returns {output.Features[0].Properties.Faults.Count} faults");
+                    }
                 }
-                
+
                 // if the LGIN did not provide a good match just default to the specified city.
                 if (output.Features[0].Properties.Faults.Count > 3)
                 {
-                    _logger.LogError($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
-                    hangfireContext.WriteLine($"Unable to find a good match for address {address} with city {establishment._adoxioLginValue}, defaulting to just {establishment.AdoxioAddresscity}");
-                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: $"{establishment.AdoxioAddresscity}, BC");
+                    _logger.LogError($"Unable to find a good match for address {address} with city {establishment.adoxio_LGIN?.Id}, defaulting to just {establishment.adoxio_AddressCity}");
+                    hangfireContext.WriteLine($"Unable to find a good match for address {address} with city {establishment.adoxio_LGIN?.Id}, defaulting to just {establishment.adoxio_AddressCity}");
+                    output = _geocoder.GeoCoderAPI.Sites(outputFormat: "json", addressString: $"{establishment.adoxio_AddressCity}, BC");
                 }
-                    
 
                 // get the lat and long for the pin.
                 double? longData = output.Features[0].Geometry.Coordinates[0];
                 double? latData = output.Features[0].Geometry.Coordinates[1];
 
                 // update the establishment.
-
-                var patchEstablishment = new MicrosoftDynamicsCRMadoxioEstablishment()
+                var patchEstablishment = new adoxio_establishment()
                 {
-                    AdoxioLongitude = (decimal?)longData,
-                    AdoxioLatitude = (decimal?)latData
+                    Id = establishment.Id,
+                    adoxio_Longitude = longData,
+                    adoxio_Latitude = latData
                 };
                 try
                 {
-                    _dynamics.Establishments.Update(establishment.AdoxioEstablishmentid, patchEstablishment);
+                    await _dataverse.UpdateEstablishmentAsync(patchEstablishment);
                     _logger.LogInformation($"Updated establishment with address {address}");
                     hangfireContext.WriteLine($"Updated establishment with address {address}");
                 }
-                catch (HttpOperationException odee)
+                catch (Exception ex)
                 {
                     if (hangfireContext != null)
                     {
-                        _logger.LogError("Error updating establishment");
-                        _logger.LogError("Request:");
-                        _logger.LogError(odee.Request.Content);
-                        _logger.LogError("Response:");
-                        _logger.LogError(odee.Response.Content);
+                        _logger.LogError(ex, "Error updating establishment");
                         hangfireContext.WriteLine("Error updating establishment");
-                        hangfireContext.WriteLine("Request:");
-                        hangfireContext.WriteLine(odee.Request.Content);
-                        hangfireContext.WriteLine("Response:");
-                        hangfireContext.WriteLine(odee.Response.Content);
+                        hangfireContext.WriteLine(ex.Message);
                     }
-                    
+
                     // fail if we can't update.
-                    throw (odee);
+                    throw;
                 }
             }
         }
@@ -165,60 +156,44 @@ namespace Gov.Lclb.Cllb.Geocoder
                 hangfireContext.WriteLine("Starting GeocodeEstablishments job.");
             }
 
+            var crsType = await _dataverse.GetLicenceTypeByNameAsync("Cannabis Retail Store");
+            var s119Type = await _dataverse.GetLicenceTypeByNameAsync("Section 119 Authorization");
 
-            // get licenses
-            IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
+            var typeIds = new List<string>();
+            if (crsType != null) typeIds.Add(crsType.Id.ToString());
+            if (s119Type != null) typeIds.Add(s119Type.Id.ToString());
 
+            IList<adoxio_licences> licences = null;
 
-
-            string crsTypeId = _dynamics.GetAdoxioLicencetypeByName("Cannabis Retail Store")?.AdoxioLicencetypeid;
-            string s119TypeId = _dynamics.GetAdoxioLicencetypeByName("Section 119 Authorization")?.AdoxioLicencetypeid; 
-
-
-            string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {crsTypeId}"; // only active licenses
-
-            if (s119TypeId != null)
+            if (typeIds.Count > 0)
             {
-                licenseFilter += $" or _adoxio_licencetype_value eq {s119TypeId} and statuscode eq 1";
-            }
-
-            
-            string[] licenseExpand = { "adoxio_LicenceType" };
-
-            try
-            {
-                licences = _dynamics.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting licenses");
-                if (hangfireContext != null)
+                try
                 {
-                    hangfireContext.WriteLine("Error getting licenses");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(httpOperationException.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(httpOperationException.Response.Content);
+                    licences = await _dataverse.GetActiveLicencesByTypeIdsAsync(typeIds);
                 }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Error getting licenses");
+                    if (hangfireContext != null)
+                    {
+                        hangfireContext.WriteLine("Error getting licenses");
+                        hangfireContext.WriteLine(ex.Message);
+                    }
 
-                throw new Exception("Unable to get licences");
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, $"Unexpected error getting establishment map data.");
+                    throw new Exception("Unable to get licences");
+                }
             }
 
             if (licences != null)
             {
                 foreach (var license in licences)
                 {
-                    if (license.AdoxioLicenceType != null &&
-                        (license.AdoxioLicenceType.AdoxioName.Equals("Cannabis Retail Store") || license.AdoxioLicenceType.AdoxioName.Equals("Section 119 Authorization")) &&
-                        license._adoxioEstablishmentValue != null)
+                    var estRef = license.adoxio_establishment;
+                    if (estRef != null)
                     {
-                        var establishment = _dynamics.GetEstablishmentById(license._adoxioEstablishmentValue);
+                        var establishment = await _dataverse.GetEstablishmentByIdAsync(estRef.Id.ToString());
 
-                        if (establishment != null && (redoGeocoded || establishment.AdoxioLatitude == null))
+                        if (establishment != null && (redoGeocoded || establishment.adoxio_Latitude == null))
                         {
                             await GeocodeEstablishment(hangfireContext, establishment);
                         }
@@ -228,43 +203,33 @@ namespace Gov.Lclb.Cllb.Geocoder
 
             // second pass to get BC Cannabis Stores.
 
-            IList<MicrosoftDynamicsCRMadoxioEstablishment> establishments = null;
-            string establishmentFilter = "adoxio_name eq 'BC Cannabis Store'";
+            IList<adoxio_establishment> establishments = null;
             try
             {
-                establishments = _dynamics.Establishments.Get(filter: establishmentFilter).Value;
+                establishments = await _dataverse.GetEstablishmentsByNameAsync("BC Cannabis Store");
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error getting establishments");
+                _logger.LogError(ex, "Error getting establishments");
                 if (hangfireContext != null)
                 {
                     hangfireContext.WriteLine("Error getting establishments");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(httpOperationException.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(httpOperationException.Response.Content);
+                    hangfireContext.WriteLine(ex.Message);
                 }
 
                 throw new Exception("Unable to get establishments");
             }
-            catch (Exception e)
-            {
-                _logger.LogError(e, $"Unexpected error getting establishment map data.");
-            }
+
             if (establishments != null)
             {
                 foreach (var establishment in establishments)
                 {
-                    
-                    if (establishment != null && (redoGeocoded || establishment.AdoxioLatitude == null))
+                    if (establishment != null && (redoGeocoded || establishment.adoxio_Latitude == null))
                     {
                         await GeocodeEstablishment(hangfireContext, establishment);
                     }
-                    
                 }
             }
-
 
             _logger.LogInformation("End of GeocodeEstablishments job.");
             if (hangfireContext != null)

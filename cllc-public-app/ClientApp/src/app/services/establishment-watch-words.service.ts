@@ -1,51 +1,51 @@
-import { Injectable } from "@angular/core";
-import { DataService } from "./data.service";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { KeyValue } from "../../../node_modules/@angular/common";
-import { AbstractControl, ValidatorFn } from "@angular/forms";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { KeyValue } from '../../../node_modules/@angular/common';
+import { DataService } from './data.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class EstablishmentWatchWordsService extends DataService {
   private _forbiddenWords: Array<string> = [];
   private _problematicWords: Array<string> = [];
 
-  apiPath = "api/establishmentwatchwords";
+  apiPath = 'api/establishmentwatchwords';
 
   constructor(private http: HttpClient) {
     super();
   }
 
   getEstablishmentWatchWords(): Observable<KeyValue<string, boolean>[]> {
-    return this.http.get<KeyValue<string, boolean>[]>(this.apiPath, { headers: this.headers })
+    return this.http
+      .get<KeyValue<string, boolean>[]>(this.apiPath, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   initialize() {
-    this.getEstablishmentWatchWords()
-      .subscribe(watchWords => {
-        this._forbiddenWords = watchWords["forbidden"];
-        this._problematicWords = watchWords["problematic"];
-      });
+    this.getEstablishmentWatchWords().subscribe((watchWords) => {
+      this._forbiddenWords = watchWords['forbidden'];
+      this._problematicWords = watchWords['problematic'];
+    });
   }
 
   forbiddenNameValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      const nameWordList = control.value.toLowerCase().split(" ");
-      const wordsUnioned = this._forbiddenWords.filter(x => nameWordList.includes(x));
+      const nameWordList = control.value.toLowerCase().split(' ');
+      const wordsUnioned = this._forbiddenWords.filter((x) => nameWordList.includes(x));
       if (wordsUnioned.length > 0) {
-        return { 'forbiddenName': { value: control.value } };
+        return { forbiddenName: { value: control.value } };
       }
       return null;
     };
   }
 
   potentiallyProblematicValidator(name: string) {
-    const nameWordList = name.toLowerCase().split(" ");
-    const wordsUnioned = this._problematicWords.filter(x => nameWordList.includes(x));
+    const nameWordList = name.toLowerCase().split(' ');
+    const wordsUnioned = this._problematicWords.filter((x) => nameWordList.includes(x));
     return wordsUnioned.length > 0;
   }
 }

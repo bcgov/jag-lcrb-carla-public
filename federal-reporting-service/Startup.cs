@@ -1,4 +1,6 @@
-using Gov.Lclb.Cllb.Interfaces;
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
@@ -30,15 +32,13 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 {
     public class Startup
     {
-        private readonly ILoggerFactory _loggerFactory;
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment _env { get; set; }
         public FileManagerClient _fileManagerClient { get; set; }
 
-        public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IWebHostEnvironment env)
         {
             _env = env;
-            _loggerFactory = loggerFactory;
 
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
@@ -58,7 +58,9 @@ namespace Gov.Lclb.Cllb.FederalReportingService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("FederalReportingService"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(sp =>
+                sp.GetService<Microsoft.Extensions.Logging.ILoggerFactory>()?.CreateLogger("FederalReportingService")
+                ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
 
             services.AddHangfire(config =>
             {
@@ -72,56 +74,62 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             services.AddHealthChecks()
                 .AddCheck("Federal Reporting Service", () => HealthCheckResult.Healthy());
 
-                // add the file manager.
+            // add the file manager.
             string fileManagerURI = Configuration["FILE_MANAGER_URI"];
             if (!_env.IsProduction()) // needed for macOS TLS being turned off
             {
                 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             }
-            if (!string.IsNullOrEmpty (fileManagerURI))
+            if (!string.IsNullOrEmpty(fileManagerURI))
             {
                 var httpClientHandler = new HttpClientHandler();
 
                 if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
-                                         // This allows you to use OpenShift self-signed certificates for testing.
+                                          // This allows you to use OpenShift self-signed certificates for testing.
                 {
                     // Return `true` to allow certificates that are untrusted/invalid                    
                     httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
                 }
-                
+
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
-              
+
                 var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
-                
+
                 var initialClient = new FileManagerClient(initialChannel);
-                // call the token service to get a token.
                 var tokenRequest = new TokenRequest()
                 {
                     Secret = Configuration["FILE_MANAGER_SECRET"]
                 };
 
-                var tokenReply = initialClient.GetToken(tokenRequest);
-
-                if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                try
                 {
-                    // Add the bearer token to the client.
-                    
-                    httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+                    var tokenReply = initialClient.GetToken(tokenRequest);
 
-                    var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });                   
-                    _fileManagerClient = new FileManagerClient(channel);
-                    services.AddTransient<FileManagerClient>(_ => _fileManagerClient);
-
+                    if (tokenReply != null && tokenReply.ResultStatus == ResultStatus.Success)
+                    {
+                        httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {tokenReply.Token}");
+                        var channel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions() { HttpClient = httpClient });
+                        _fileManagerClient = new FileManagerClient(channel);
+                    }
                 }
+                catch (Exception ex)
+                {
+                    // file-manager not ready at startup — jobs will fail gracefully when they run
+                    Console.WriteLine($"[federal-reporting] Could not connect to file-manager at startup: {ex.Message}");
+                }
+
+                // always register so DI doesn't throw; null client is guarded inside job handlers
+                services.AddTransient<FileManagerClient>(_ => _fileManagerClient);
             }
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {            
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -173,8 +181,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                    .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -182,7 +190,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }
 #pragma warning restore CA2000 // Dispose objects before losing scope
-                     )                    
+                     )
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);
@@ -222,7 +230,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     }
                     log.LogInformation($"Using interval: {interval}");
 
-                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient).ExportFederalReports(null), interval);
+                    var dataverseClient = serviceScope.ServiceProvider.GetRequiredService<IDataverseClient>();
+                    RecurringJob.AddOrUpdate(() => new FederalReportingController(Configuration, loggerFactory, _fileManagerClient, dataverseClient).ExportFederalReports(null), interval);
 
                     log.LogInformation("Hangfire jobs setup.");
                 }

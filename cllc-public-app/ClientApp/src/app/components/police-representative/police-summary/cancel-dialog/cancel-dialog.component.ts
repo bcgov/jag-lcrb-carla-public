@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cancel-dialog',
@@ -7,13 +7,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./cancel-dialog.component.scss']
 })
 export class CancelDialogComponent implements OnInit {
-
   reason: string;
 
-  constructor(public dialogRef: MatDialogRef<CancelDialogComponent>) {
-  }
-  ngOnInit(): void {
-  }
+  constructor(public dialogRef: MatDialogRef<CancelDialogComponent>) {}
+  ngOnInit(): void {}
 
   close() {
     this.dialogRef.close([false]);
@@ -22,5 +19,4 @@ export class CancelDialogComponent implements OnInit {
   cancel() {
     this.dialogRef.close([true, this.reason]);
   }
-
 }

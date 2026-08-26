@@ -1,14 +1,14 @@
-mat-card{
-    background-color: #EFF3FC !important;
-    padding: 0px;
-    border: solid #ccc 1px;
+mat-card {
+  background-color: #eff3fc !important;
+  padding: 0px;
+  border: solid #ccc 1px;
 }
-mat-card-content{
-  background-color:white;
+mat-card-content {
+  background-color: white;
   margin: 1px;
   padding: 5px;
 }
-mat-card-header{
+mat-card-header {
   border-bottom: solid #ccc 1px;
   padding: 5px;
 }
@@ -19,14 +19,14 @@ mat-card-header{
   margin-bottom: 5px;
 }
 
-.mad-card-header{
+.mad-card-header {
   font-size: 14px;
   font-weight: 900;
   margin: 5px;
   margin-bottom: 5px;
 }
 
-mat-raised-button{
+mat-raised-button {
   width: 200px;
 }
 
@@ -34,41 +34,42 @@ mat-raised-button{
   max-width: 400px;
   margin: 40px 0px 40px -15px;
   padding: 45px;
-  background-color: #EFF3FC;
+  background-color: #eff3fc;
   border: 3px solid #38598a;
   border-bottom: 3px solid #fcba19 !important;
   h2,
-  p,li {
-      color: black;
+  p,
+  li {
+    color: black;
   }
 
-  li,a {
-    color: #1A5A96;
+  li,
+  a {
+    color: #1a5a96;
   }
 
   h2 {
-      font-size: 22px;
-      margin-top: 0;
-      margin-bottom: 30px;
+    font-size: 22px;
+    margin-top: 0;
+    margin-bottom: 30px;
   }
   .btn {
-      background-color: #003366;
+    background-color: #003366;
   }
 }
 
 .warning {
-    background-color: #E1E8F2;
-    padding: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    div:first-of-type {
-        margin-right: 10px;
-        font-size: 30px;
-        color: #38598a;
-    }
-    p {
-        font-size: 12px;
-    }
+  background-color: #e1e8f2;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  div:first-of-type {
+    margin-right: 10px;
+    font-size: 30px;
+    color: #38598a;
+  }
+  p {
+    font-size: 12px;
+  }
 }
-

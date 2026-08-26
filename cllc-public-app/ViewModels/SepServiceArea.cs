@@ -4,7 +4,8 @@ using Newtonsoft.Json.Converters;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public enum ServiceAreaSetting{
+    public enum ServiceAreaSetting
+    {
         Indoors = 845280000,
         Outdoors = 845280001,
         BothOutdoorsAndIndoors = 845280002
@@ -22,7 +23,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? IsIndoors { get; set; }
         public int? NumberOfMinors { get; set; }
         public int? LicencedAreaNumberOfMinors { get; set; }
-        
+
         [JsonConverter(typeof(StringEnumConverter))]
         public ServiceAreaSetting? Setting { get; set; }
         public int? StatusCode { get; set; }

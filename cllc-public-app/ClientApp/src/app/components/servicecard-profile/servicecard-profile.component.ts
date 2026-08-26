@@ -1,15 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { faAddressCard, faChevronRight, faEnvelope, faExclamationTriangle, faPhone, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { AppState } from '@app/app-state/models/app-state';
+import {
+  faAddressCard,
+  faChevronRight,
+  faEnvelope,
+  faExclamationTriangle,
+  faPhone,
+  faTrash
+} from '@fortawesome/free-solid-svg-icons';
+import { Contact } from '@models/contact.model';
+import { User } from '@models/user.model';
+import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
-import { Contact } from '@models/contact.model';
 import { filter, takeWhile } from 'rxjs/operators';
-import { User } from '@models/user.model';
 
 @Component({
   selector: 'app-servicecard-profile',
@@ -52,8 +59,8 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
       address2_city: ['', Validators.required],
       address2_stateorprovince: ['British Columbia', Validators.required],
       address2_postalcode: ['', [Validators.required, this.customZipCodeValidator('address2_country')]],
-      address2_country: ['Canada', Validators.required],
-    }),
+      address2_country: ['Canada', Validators.required]
+    })
   });
 
   constructor(
@@ -61,7 +68,7 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
     private contactDataService: ContactDataService,
     private userDataService: UserDataService,
     private fb: FormBuilder,
-    private router: Router,
+    private router: Router
   ) {
     super();
   }
@@ -72,22 +79,22 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
   }
 
   private subscribeForData() {
-    this.store.select(state => state.currentUserState.currentUser)
+    this.store
+      .select((state) => state.currentUserState.currentUser)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(user => !!user))
-      .subscribe(user => this.loadUser(user));
+      .pipe(filter((user) => !!user))
+      .subscribe((user) => this.loadUser(user));
   }
 
   private loadUser(user: User) {
     this.currentUser = user;
     if (this.currentUser && this.currentUser.contactid) {
-      this.contactDataService.getContact(this.currentUser.contactid)
-        .subscribe(contact => {
-          this.form.patchValue({
-            contact: { ...contact, address1_country: 'Canada' }
-          });
-          this.makePrimaryAddressReadOnly(contact);
+      this.contactDataService.getContact(this.currentUser.contactid).subscribe((contact) => {
+        this.form.patchValue({
+          contact: { ...contact, address1_country: 'Canada' }
         });
+        this.makePrimaryAddressReadOnly(contact);
+      });
     }
   }
 
@@ -100,11 +107,12 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
 
   private initializeForm() {
     // copy physical address when checkbox is checked
-    this.form.get('contact._mailingSameAsPhysicalAddress').valueChanges.pipe(
-      filter(value => value === true)
-    ).subscribe(() => {
-      this.copyPhysicalToMailingAddress();
-    });
+    this.form
+      .get('contact._mailingSameAsPhysicalAddress')
+      .valueChanges.pipe(filter((value) => value === true))
+      .subscribe(() => {
+        this.copyPhysicalToMailingAddress();
+      });
 
     // keep mailing address up-to-date with changes to the main address (when checkbox is checked)
     this.applyChangesFrom('contact.address1_line1');
@@ -115,11 +123,12 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
   }
 
   private applyChangesFrom(field: string) {
-    this.form.get(field).valueChanges.pipe(
-      filter(() => this.form.get('contact._mailingSameAsPhysicalAddress').value)
-    ).subscribe(() => {
-      this.copyPhysicalToMailingAddress();
-    });
+    this.form
+      .get(field)
+      .valueChanges.pipe(filter(() => this.form.get('contact._mailingSameAsPhysicalAddress').value))
+      .subscribe(() => {
+        this.copyPhysicalToMailingAddress();
+      });
   }
 
   private copyPhysicalToMailingAddress() {
@@ -145,12 +154,10 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
     this.showErrorSection = false;
 
     // Save contact
-    this.contactDataService
-      .updateContact(this.form.get('contact').value)
-      .subscribe(() => {
-        // reload the user to fetch updated contact information
-        this.userDataService.loadUserToStore().then(() => this.router.navigate(['/sep/dashboard']));
-      });
+    this.contactDataService.updateContact(this.form.get('contact').value).subscribe(() => {
+      // reload the user to fetch updated contact information
+      this.userDataService.loadUserToStore().then(() => this.router.navigate(['/sep/dashboard']));
+    });
   }
 
   validateForm(): boolean {
@@ -177,7 +184,7 @@ export class ServiceCardProfileComponent extends FormBase implements OnInit {
       'contact.address2_city': 'Please enter the mailing address city',
       'contact.address2_stateorprovince': 'Please enter the mailing address province',
       'contact.address2_postalcode': 'Please enter the mailing address postal code',
-      'contact.address2_country': 'Please enter the mailing address country',
+      'contact.address2_country': 'Please enter the mailing address country'
     };
   }
 }

@@ -1,13 +1,17 @@
-﻿using System.Net.Http;
+extern alias DV;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Grpc.Core;
-using System.Collections.Generic;
-using Microsoft.Rest;
-using System.Linq;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using adoxio_licences = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licences;
+using adoxio_licences_adoxio_orgbookcredentialresult = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licences_adoxio_orgbookcredentialresult;
+using Account = DV::Gov.Lclb.Cllb.Interfaces.Account;
+using adoxio_account_adoxio_isorgbooklinkfound = DV::Gov.Lclb.Cllb.Interfaces.adoxio_account_adoxio_isorgbooklinkfound;
 
 namespace Gov.Lclb.Cllb.OrgbookService
 {
@@ -15,104 +19,112 @@ namespace Gov.Lclb.Cllb.OrgbookService
     {
         readonly IConfiguration Configuration;
         private readonly ILogger _logger;
-        private IDynamicsClient _dynamics;
+        private readonly IDataverseClient _dataverse;
         private OrgBookClient _orgbookClient;
 
-        public OrgBookController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public OrgBookController(IConfiguration configuration, ILoggerFactory loggerFactory, IDataverseClient dataverse)
         {
             Configuration = configuration;
-            if (Configuration["DYNAMICS_ODATA_URI"] != null)
-            {
-                _dynamics = DynamicsSetupUtil.SetupDynamics(Configuration);
-            }
+            _dataverse = dataverse;
             _orgbookClient = new OrgBookClient(new HttpClient(), Configuration["ORGBOOK_URL"]);
             _logger = loggerFactory.CreateLogger("OrgbookController");
+        }
+
+        public OrgBookController(IConfiguration configuration, ILoggerFactory loggerFactory)
+            : this(configuration, loggerFactory, new DataverseClient(configuration))
+        {
         }
 
         public override async Task<MessageResult> IssueLicenceCredential(IssueLicenceCredentialMessage message, ServerCallContext context)
         {
             var (schema, schemaVersion) = OrgBookUtils.GetSchemaFromConfig(message.LicenceType);
             int? orgbookTopicId = await _orgbookClient.GetTopicId(message.RegistrationId);
+
             if (orgbookTopicId == null)
             {
-                _dynamics.Licenceses.Update(message.LicenceId, new MicrosoftDynamicsCRMadoxioLicences() { AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail });
+                await UpdateLicenceOrgBookResult(message.LicenceId, adoxio_licences_adoxio_orgbookcredentialresult.Fail);
                 _logger.LogError($"Failed to issue credential - Registration ID: {message.RegistrationId} does not exist.");
-                return  new MessageResult() {
-                    Success = false
-                };
+                return new MessageResult() { Success = false };
             }
-            else if(schema == null || schemaVersion == null)
-            {
-                _dynamics.Licenceses.Update(message.LicenceId, new MicrosoftDynamicsCRMadoxioLicences() { AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail });
-                _logger.LogError($"Schema {message.LicenceType} not found.");
-                return  new MessageResult() {
-                    Success = false
-                };
-            }
-            else
-            {
-                string licenceGuid = Utils.ParseGuid(message.LicenceId);
-                var licence = _dynamics.GetLicenceByIdWithChildren(licenceGuid);
-                VonAgentClient _vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"], Configuration["X_API_KEY"]);
-                bool issueSuccess = await _vonAgentClient.CreateLicenceCredential(licence, message.RegistrationId);
 
-                if(issueSuccess)
-                {
-                    _dynamics.Licenceses.Update(message.LicenceId, new MicrosoftDynamicsCRMadoxioLicences()
-                    {
-                        AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Pass
-                    });
-                    _logger.LogInformation($"Successfully issued credential to {message.RegistrationId}.");
-                    return  new MessageResult() {
-                        Success = true
-                    };
-                }
-                else
-                {
-                    _dynamics.Licenceses.Update(message.LicenceId, new MicrosoftDynamicsCRMadoxioLicences()
-                    {
-                        AdoxioOrgbookcredentialresult = (int)OrgBookCredentialStatus.Fail
-                    });
-                    _logger.LogInformation($"Failed to issue licence credential to {message.RegistrationId}.");
-                    return  new MessageResult() {
-                        Success = false
-                    };
-                }
+            if (schema == null || schemaVersion == null)
+            {
+                await UpdateLicenceOrgBookResult(message.LicenceId, adoxio_licences_adoxio_orgbookcredentialresult.Fail);
+                _logger.LogError($"Schema {message.LicenceType} not found.");
+                return new MessageResult() { Success = false };
             }
+
+            string licenceGuid = Utils.ParseGuid(message.LicenceId);
+            var licence = await _dataverse.GetLicenceByIdWithChildrenAsync(licenceGuid);
+            var vonAgentClient = new VonAgentClient(new HttpClient(), _logger, schema, schemaVersion, Configuration["AGENT_URL"], Configuration["X_API_KEY"]);
+            bool issueSuccess = await vonAgentClient.CreateLicenceCredential(licence, message.RegistrationId);
+
+            await UpdateLicenceOrgBookResult(message.LicenceId, issueSuccess
+                ? adoxio_licences_adoxio_orgbookcredentialresult.Pass
+                : adoxio_licences_adoxio_orgbookcredentialresult.Fail);
+
+            if (issueSuccess)
+                _logger.LogInformation($"Successfully issued credential to {message.RegistrationId}.");
+            else
+                _logger.LogInformation($"Failed to issue licence credential to {message.RegistrationId}.");
+
+            return new MessageResult() { Success = issueSuccess };
+        }
+
+        private async Task UpdateLicenceOrgBookResult(string licenceId, adoxio_licences_adoxio_orgbookcredentialresult result)
+        {
+            if (!Guid.TryParse(licenceId, out var guid)) return;
+            await _dataverse.UpdateLicenceAsync(new adoxio_licences
+            {
+                Id = guid,
+                adoxio_OrgBookCredentialResult = result
+            });
         }
 
         public override async Task<MessageResult> SyncLicencesToOrgbook(GenericRequest request, ServerCallContext context)
         {
             _logger.LogInformation("Starting SyncLicencesToOrgbook");
-            IList<MicrosoftDynamicsCRMadoxioLicences> result;
+            IList<adoxio_licences> result;
             try
             {
-                // Get active licences missing orgbook credential
-                var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
-                string filter = $"adoxio_orgbookcredentialresult eq null and statuscode eq 1";
-                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
-                result = result.Where(l => l.AdoxioLicencee?.AdoxioOrgbookorganizationlink != null).ToList();
+                result = await _dataverse.GetActiveLicencesMissingOrgBookCredentialAsync();
             }
-            catch (HttpOperationException odee)
+            catch (Exception e)
             {
-                _logger.LogError("Error getting Licences");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-
-                // fail if we can't get results.
-                return new MessageResult() {
-                    Success = false
-                };
+                _logger.LogError(e, "Error getting Licences");
+                return new MessageResult() { Success = false };
             }
 
-            // now for each one process it.
+            // Pre-fetch licencee accounts and filter to those with an orgbook link
+            var accountCache = new Dictionary<Guid, Account?>();
+            async Task<Account?> GetCachedAccount(Guid accountId)
+            {
+                if (!accountCache.TryGetValue(accountId, out var acc))
+                {
+                    acc = await _dataverse.GetAccountByIdAsync(accountId.ToString());
+                    accountCache[accountId] = acc;
+                }
+                return acc;
+            }
+
+            var filteredResult = new List<adoxio_licences>();
             foreach (var item in result)
             {
-                string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
-                string licenceId = item.AdoxioLicencesid;
-                string licenceType = item.AdoxioLicenceType?.AdoxioName;
+                if (item.adoxio_Licencee == null) continue;
+                var account = await GetCachedAccount(item.adoxio_Licencee.Id);
+                if (account?.adoxio_OrgBookOrganizationLink != null)
+                    filteredResult.Add(item);
+            }
+
+            foreach (var item in filteredResult)
+            {
+                var account = item.adoxio_Licencee != null
+                    ? await GetCachedAccount(item.adoxio_Licencee.Id)
+                    : null;
+                string registrationId = account?.adoxio_BCIncorporationNumber;
+                string licenceId = item.Id.ToString();
+                string licenceType = item.adoxio_LicenceType?.Name;
+
                 if (string.IsNullOrEmpty(registrationId))
                 {
                     _logger.LogError($"No registration id (incorporation number), Not issuing licence credential to {licenceId}");
@@ -127,7 +139,8 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 }
                 else
                 {
-                    await IssueLicenceCredential(new IssueLicenceCredentialMessage() {
+                    await IssueLicenceCredential(new IssueLicenceCredentialMessage()
+                    {
                         RegistrationId = registrationId,
                         LicenceId = licenceId,
                         LicenceType = licenceType
@@ -136,61 +149,61 @@ namespace Gov.Lclb.Cllb.OrgbookService
             }
 
             _logger.LogInformation("End of SyncLicencesToOrgbook");
-            return new MessageResult() {
-                Success = true
-            };
+            return new MessageResult() { Success = true };
         }
 
         public override async Task<MessageResult> SyncOrgbookToLicences(GenericRequest request, ServerCallContext context)
         {
             _logger.LogInformation("Starting SyncOrgbookToLicences");
-            IList<MicrosoftDynamicsCRMadoxioLicences> result;
+            IList<adoxio_licences> result;
             try
             {
-                var expand = new List<string> { "adoxio_Licencee", "adoxio_LicenceType" };
-                string filter = $"adoxio_orgbookcredentialresult eq {(int)OrgBookCredentialStatus.Pass} and adoxio_orgbookcredentialid eq null and statuscode eq 1";
-                result = _dynamics.Licenceses.Get(filter: filter, expand: expand).Value;
+                result = await _dataverse.GetActiveLicencesWithOrgBookCredentialPendingSyncAsync();
             }
-            catch (HttpOperationException odee)
+            catch (Exception e)
             {
-                _logger.LogError("Error getting Licences");
-                _logger.LogError("Request:");
-                _logger.LogError(odee.Request.Content);
-                _logger.LogError("Response:");
-                _logger.LogError(odee.Response.Content);
-
-                // fail if we can't get results.
-                return new MessageResult() {
-                    Success = false
-                };
+                _logger.LogError(e, "Error getting Licences");
+                return new MessageResult() { Success = false };
             }
 
-            // now for each one process it.
             foreach (var item in result)
             {
-                string registrationId = item.AdoxioLicencee?.AdoxioBcincorporationnumber;
-                string licenceId = item.AdoxioLicencesid;
-                string licenceNumber = item.AdoxioLicencenumber;
+                string licenceId = item.Id.ToString();
+                string licenceNumber = item.adoxio_LicenceNumber;
+                string registrationId = null;
+
+                if (item.adoxio_Licencee != null)
+                {
+                    var account = await _dataverse.GetAccountByIdAsync(item.adoxio_Licencee.Id.ToString());
+                    registrationId = account?.adoxio_BCIncorporationNumber;
+                }
+
                 int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
 
                 if (orgbookTopicId != null)
                 {
-                    var (schemaName, schemaVersion) = OrgBookUtils.GetSchemaFromConfig(item.AdoxioLicenceType.AdoxioName);
-                    
+                    string licenceTypeName = item.adoxio_LicenceType?.Name;
+                    var (schemaName, schemaVersion) = OrgBookUtils.GetSchemaFromConfig(licenceTypeName);
                     var schemaId = await _orgbookClient.GetSchemaId(schemaName, schemaVersion);
                     var credentialId = await _orgbookClient.GetLicenceCredentialId((int)orgbookTopicId, (int)schemaId, licenceNumber);
+
                     if (credentialId == null)
                     {
                         _logger.LogInformation($"Credential ID for {licenceNumber} not found in the orgbook.");
                         continue;
                     }
+
                     string credentialLink = _orgbookClient.ORGBOOK_BASE_URL + "/entity/" + registrationId + "/credential/" + credentialId.ToString();
 
-                    _dynamics.Licenceses.Update(licenceId, new MicrosoftDynamicsCRMadoxioLicences()
+                    if (Guid.TryParse(licenceId, out var licGuid))
                     {
-                        AdoxioOrgbookcredentialid = credentialId.ToString(),
-                        AdoxioOrgbookcredentiallink = credentialLink
-                    });
+                        await _dataverse.UpdateLicenceAsync(new adoxio_licences
+                        {
+                            Id = licGuid,
+                            adoxio_OrgBookCredentialID = credentialId.ToString(),
+                            adoxio_OrgBookCredentialLink = credentialLink
+                        });
+                    }
                     _logger.LogInformation($"Successfully updated licence - credential ID: {credentialId} to {registrationId}.");
                 }
                 else
@@ -200,92 +213,71 @@ namespace Gov.Lclb.Cllb.OrgbookService
             }
 
             _logger.LogInformation("End of SyncOrgbookToLicences");
-            return new MessageResult() {
-                Success = true
-            };
+            return new MessageResult() { Success = true };
         }
 
         public override async Task<MessageResult> SyncOrgbookToAccounts(GenericRequest request, ServerCallContext context)
         {
             _logger.LogInformation("Starting SyncOrgbookToAccounts.");
-            IList<MicrosoftDynamicsCRMaccount> result;
+            IList<Account> result;
             try
             {
-                var select = new List<string> {"adoxio_bcincorporationnumber", "accountid"};
-                string filter = $"adoxio_orgbookorganizationlink eq null and adoxio_businessregistrationnumber eq null and adoxio_bcincorporationnumber ne null and adoxio_bcincorporationnumber ne 'BC1234567'";
-                result = _dynamics.Accounts.Get(filter: filter, select: select).Value;
+                result = await _dataverse.GetAccountsMissingOrgBookLinkAsync();
             }
-            catch (HttpOperationException odee)
+            catch (Exception e)
             {
-                _logger.LogError(odee,"Error getting accounts");
-
-                // fail if we can't get results.
-                return new MessageResult() {
-                    Success = false
-                };
+                _logger.LogError(e, "Error getting accounts");
+                return new MessageResult() { Success = false };
             }
 
             _logger.LogInformation($"Found {result.Count} organizations to query orgbook for.");
 
-            // now for each one process it.
             foreach (var item in result)
             {
-                string registrationId = item.AdoxioBcincorporationnumber;
-                string accountId = item.Accountid;
+                string registrationId = item.adoxio_BCIncorporationNumber;
+                Guid accountGuid = item.Id;
                 int? orgbookTopicId = await _orgbookClient.GetTopicId(registrationId);
 
                 if (orgbookTopicId != null)
                 {
-                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/entity/" + item.AdoxioBcincorporationnumber;
-                    _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
+                    string orgbookLink = _orgbookClient.ORGBOOK_BASE_URL + "/entity/" + registrationId;
+                    await _dataverse.UpdateAccountAsync(new Account
                     {
-                        AdoxioOrgbookorganizationlink = orgbookLink,
-                        AdoxioIsorgbooklinkfound = 845280000
+                        Id = accountGuid,
+                        adoxio_OrgBookOrganizationLink = orgbookLink,
+                        adoxio_IsOrgbookLinkFound = adoxio_account_adoxio_isorgbooklinkfound.Yes
                     });
                     _logger.LogInformation($"Successfully added orgbook link to account with registration id {registrationId}.");
                 }
                 else
                 {
-                    _dynamics.Accounts.Update(accountId, new MicrosoftDynamicsCRMaccount()
+                    await _dataverse.UpdateAccountAsync(new Account
                     {
-                        AdoxioIsorgbooklinkfound = 845280001
+                        Id = accountGuid,
+                        adoxio_IsOrgbookLinkFound = adoxio_account_adoxio_isorgbooklinkfound.No
                     });
                     _logger.LogError($"Failed to add orgbook link to account with registration id {registrationId}.");
                 }
             }
 
             _logger.LogInformation($"Ending SyncOrgbookToAccounts");
-            return new MessageResult() {
-                Success = true
-            };
+            return new MessageResult() { Success = true };
         }
 
         public override async Task<MessageResult> CompanyExistsInOrgbook(CompanyNameRequest request, ServerCallContext context)
         {
             var result = await _orgbookClient.SearchCompanyName(request.CompanyName);
-            return new MessageResult() {
-                Success = result != null
-            };
+            return new MessageResult() { Success = result != null };
         }
 
         public override async Task<CompaniesNameResult> CompaniesExistInOrgbook(CompaniesNameRequest request, ServerCallContext context)
         {
             List<bool> results = new List<bool>();
-            foreach(string name in request.CompanyNames)
+            foreach (string name in request.CompanyNames)
             {
-                CompanyNameRequest req = new CompanyNameRequest()
-                {
-                    CompanyName = name
-                };
+                CompanyNameRequest req = new CompanyNameRequest() { CompanyName = name };
                 MessageResult exists = await this.CompanyExistsInOrgbook(req, context);
-                if (exists.Success)
-                {
-                    results.Add(true);
-                }
-                else
-                {
-                    results.Add(false);
-                }
+                results.Add(exists.Success);
             }
             CompaniesNameResult result = new CompaniesNameResult();
             result.CompanyNames.AddRange(request.CompanyNames);

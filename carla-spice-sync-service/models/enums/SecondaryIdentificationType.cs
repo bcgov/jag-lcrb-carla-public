@@ -7,6 +7,6 @@
         BCIDCard = 845280005,
         BirthCertificate = 845280001,
         Other = 845280002,
-        CreditCard= 845280004
+        CreditCard = 845280004
     }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { Router, ActivatedRoute } from '@angular/router';
-import { PaymentDataService } from '@services/payment-data.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { PaymentDataService } from '@services/payment-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-sep-payment-confirmation',
@@ -39,12 +39,13 @@ export class SepPaymentConfirmationComponent implements OnInit {
   inputWorkerId: string;
 
   /** payment-confirmation ctor */
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private paymentDataService: PaymentDataService,
     public snackBar: MatSnackBar
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       this.transactionId = params['trnId'];
       this.appId = params['SessionKey'];
     });
@@ -63,27 +64,27 @@ export class SepPaymentConfirmationComponent implements OnInit {
   verify_payment() {
     this.retryCount++;
     this.busy = this.paymentDataService.verifyPaymentURI('specialEventInvoice', this.appId).subscribe(
-      res => {
+      (res) => {
         const verifyPayResponse = res as any;
         // console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
-        case 'VI':
-          this.cardType = 'Visa';
-          break;
-        case 'PV':
-          this.cardType = 'Visa Debit';
-          break;
-        case 'MC':
-          this.cardType = 'MasterCard';
-          break;
-        case 'AM':
-          this.cardType = 'American Express';
-          break;
-        case 'MD':
-          this.cardType = 'Debit MasterCard';
-          break;
-        default:
-          this.cardType = verifyPayResponse.cardType;
+          case 'VI':
+            this.cardType = 'Visa';
+            break;
+          case 'PV':
+            this.cardType = 'Visa Debit';
+            break;
+          case 'MC':
+            this.cardType = 'MasterCard';
+            break;
+          case 'AM':
+            this.cardType = 'American Express';
+            break;
+          case 'MD':
+            this.cardType = 'Debit MasterCard';
+            break;
+          default:
+            this.cardType = verifyPayResponse.cardType;
         }
         this.authCode = verifyPayResponse.authCode;
         this.avsMessage = verifyPayResponse.avsMessage;
@@ -112,30 +113,32 @@ export class SepPaymentConfirmationComponent implements OnInit {
               <p>Please note, your application remains listed under Applications In Progress. </p>`;
           } else {
             this.paymentTransactionTitle = 'Declined';
-            this.paymentTransactionMessage =
-              `Your payment transaction was declined. Please contact your bank for more information. <br><br>
+            this.paymentTransactionMessage = `Your payment transaction was declined. Please contact your bank for more information. <br><br>
             <p>Please note, your application remains listed under Applications In Progress. </p>`;
           }
         }
 
         this.loaded = true;
       },
-      err => {
+      (err) => {
         if (err === '503' || err === '502' || err === '500' || err === '504') {
           if (this.retryCount < 30) {
-            this.snackBar.open(`Attempt ${this.retryCount} at payment verification, please wait...`,
+            this.snackBar.open(
+              `Attempt ${this.retryCount} at payment verification, please wait...`,
               'Verifying Payment',
-              { duration: 3500, panelClass: ['red - snackbar'] });
+              { duration: 3500, panelClass: ['red - snackbar'] }
+            );
             this.verify_payment();
           }
         } else {
-          this.snackBar.open('An unexpected error occured, please contact the branch to check if payment was processed',
+          this.snackBar.open(
+            'An unexpected error occured, please contact the branch to check if payment was processed',
             'Verifying Payment',
-            { duration: 3500, panelClass: ['red - snackbar'] });
+            { duration: 3500, panelClass: ['red - snackbar'] }
+          );
           console.log('Unexpected Error occured:');
           console.log(err);
         }
-
       }
     );
   }
@@ -145,7 +148,7 @@ export class SepPaymentConfirmationComponent implements OnInit {
    * */
   return_to_application() {
     // if (this.trnApproved === '1') {
-      this.router.navigate(['/sep/dashboard']);
+    this.router.navigate(['/sep/dashboard']);
     // } else {
     //   this.router.navigate([`/worker-qualification/application/${this.appId}`]);
     // }

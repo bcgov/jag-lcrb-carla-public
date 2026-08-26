@@ -1,17 +1,17 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { SepApplication } from '@models/sep-application.model';
-import { IndexedDBService } from '@services/indexed-db.service';
-import { PaymentDataService } from '@services/payment-data.service';
-import { filter, finalize, map, mergeMap, switchMap, take, takeWhile } from "rxjs/operators";
-import { SpecialEventsDataService } from "@services/special-events-data.service";
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
+import { Contact } from '@models/contact.model';
+import { SepApplication } from '@models/sep-application.model';
 import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
-import { Contact } from '@models/contact.model';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IndexedDBService } from '@services/indexed-db.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { Subscription } from 'rxjs';
+import { filter, map, switchMap, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-final-confirmation',
@@ -19,10 +19,10 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./final-confirmation.component.scss']
 })
 export class FinalConfirmationComponent implements OnInit {
-  busy: Subscription;
+  busy: Subscription[];
   @Input() account: any; // TODO: change to Account and fix prod error
   @Output() saveComplete = new EventEmitter<boolean>();
-  mode: "readonlySummary" | "pendingReview" | "payNow" = "readonlySummary";
+  mode: 'readonlySummary' | 'pendingReview' | 'payNow' = 'readonlySummary';
   _appID: number;
   application: SepApplication;
   contact: Contact;
@@ -38,35 +38,29 @@ export class FinalConfirmationComponent implements OnInit {
     private sepDataService: SpecialEventsDataService,
     private contactDataService: ContactDataService,
     @Inject(MAT_DIALOG_DATA) public data: any
-    )
-
-    {
-
-    this.busy = this.store
+  ) {
+    const contactSub = this.store
       .select((state) => state.currentUserState.currentUser)
       .pipe(
         filter((user) => !!user?.contactid),
         take(1),
-        switchMap((user) => this.contactDataService.getContact(user.contactid)),
+        switchMap((user) => this.contactDataService.getContact(user.contactid))
       )
       .subscribe((contact) => {
-            this.contact = contact;
+        this.contact = contact;
       });
 
-      if (data) {
-        this.setApplication(data.id);
-      }
-    }
+    const appSub = data ? this.setApplication(data.id) : Subscription.EMPTY;
 
-  ngOnInit(): void {
+    this.busy = [contactSub, appSub];
   }
+
+  ngOnInit(): void {}
 
   @Input() set localId(value: number) {
     this._appID = value;
     // get the last saved application
-    this.db.getSepApplication(value)
-      .then(app => {
-      });
+    this.db.getSepApplication(value).then((app) => {});
   }
 
   get localId() {
@@ -77,7 +71,10 @@ export class FinalConfirmationComponent implements OnInit {
     // and payment is required due to an invoice being generated
     if (!this?.application?.id) {
       this.payNowClicked = false;
-      this.snackBar.open("Unable to submit payment. Please refresh and try again.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+      this.snackBar.open('Unable to submit payment. Please refresh and try again.', 'Fail', {
+        duration: 3500,
+        panelClass: ['red-snackbar']
+      });
       return;
     }
 
@@ -86,46 +83,55 @@ export class FinalConfirmationComponent implements OnInit {
     //const result = await this.sepDataService.generateInvoiceSepApplication(this.application.id)
     //  .toPromise();
     // proceed to payment
-    this.busy = this.submitPayment()
-      .subscribe(res => {
-      },
-        error => {
+    this.busy = [
+      this.submitPayment().subscribe(
+        (res) => {},
+        (error) => {
           this.payNowClicked = false;
-          if (error === "Payment already made") {
-            this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+          if (error === 'Payment already made') {
+            this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
           } else {
-            this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+            this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           }
         }
-      );
+      )
+    ];
   }
 
-  setApplication(id: string) {
-
-    if (id) {
-      this.sepDataService.getSpecialEventForApplicant(id)
-        .subscribe(app => {
-          this.application = app;
-          //this.formatEventDatesForDisplay();
-        });
+  setApplication(id: string): Subscription {
+    if (!id) {
+      return Subscription.EMPTY;
     }
+    return this.sepDataService.getSpecialEventForApplicant(id).subscribe((app) => {
+      this.application = app;
+      //this.formatEventDatesForDisplay();
+    });
   }
 
   /**
- * Redirect to payment processing page (Express Pay / Bambora service)
- * */
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
   private submitPayment() {
-     return this.paymentDataService.getPaymentURI("specialEventInvoice", this.application.id)
-      .pipe(map(jsonUrl => {
-        window.location.href = jsonUrl["url"];
-        return jsonUrl["url"];
-      }, (err: any) => {
-        if (err === "Payment already made") {
-          this.snackBar.open("Application payment has already been made, please refresh the page.", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-        } else {
-          this.snackBar.open("Error submitting payment", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
+    return this.paymentDataService.getPaymentURI('specialEventInvoice', this.application.id).pipe(
+      map(
+        (jsonUrl) => {
+          window.location.href = jsonUrl['url'];
+          return jsonUrl['url'];
+        },
+        (err: any) => {
+          if (err === 'Payment already made') {
+            this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
+          } else {
+            this.snackBar.open('Error submitting payment', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          }
         }
-      }));
-
+      )
+    );
   }
 }

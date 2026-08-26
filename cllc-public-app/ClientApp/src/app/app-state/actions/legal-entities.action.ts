@@ -1,8 +1,8 @@
-import { Action } from "@ngrx/store";
-import { LegalEntity } from "@models/legal-entity.model";
+import { LegalEntity } from '@models/legal-entity.model';
+import { Action } from '@ngrx/store';
 
-export const LEGAL_ENTITIES = "LEGAL_ENTITIES";
-export const SET_LEGAL_ENTITIES = "SET_LEGAL_ENTITIES";
+export const LEGAL_ENTITIES = 'LEGAL_ENTITIES';
+export const SET_LEGAL_ENTITIES = 'SET_LEGAL_ENTITIES';
 
 export class LegalEntitiesAction implements Action {
   readonly type = LEGAL_ENTITIES;
@@ -14,6 +14,4 @@ export class SetLegalEntitiesAction implements Action {
   constructor(public payload: LegalEntity[]) {}
 }
 
-export type Actions =
-  LegalEntitiesAction
-  | SetLegalEntitiesAction;
+export type Actions = LegalEntitiesAction | SetLegalEntitiesAction;

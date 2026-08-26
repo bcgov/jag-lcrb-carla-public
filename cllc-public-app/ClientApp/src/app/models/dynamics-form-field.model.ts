@@ -1,4 +1,4 @@
-import { DynamicsFormFieldOption } from "./dynamics-form-field-option.model";
+import { DynamicsFormFieldOption } from './dynamics-form-field-option.model';
 
 export class DynamicsFormField {
   classid: string;
@@ -11,5 +11,5 @@ export class DynamicsFormField {
   visible: boolean;
   options: DynamicsFormFieldOption[];
 
-  constructor() { }
+  constructor() {}
 }

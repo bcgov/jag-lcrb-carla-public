@@ -1,14 +1,13 @@
-
-import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectorRef } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import { PolicyDocument } from "@models/policy-document.model";
-import { PolicyDocumentDataService } from "@services/policy-document-data.service";
-import { Title, DomSanitizer, SafeHtml } from "@angular/platform-browser";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
+import { ActivatedRoute } from '@angular/router';
+import { PolicyDocument } from '@models/policy-document.model';
+import { PolicyDocumentDataService } from '@services/policy-document-data.service';
 
 @Component({
-  selector: "app-policy-document",
-  templateUrl: "./policy-document.component.html",
-  styleUrls: ["./policy-document.component.scss"]
+  selector: 'app-policy-document',
+  templateUrl: './policy-document.component.html',
+  styleUrls: ['./policy-document.component.scss']
 })
 /** PolicyDocument component*/
 export class PolicyDocumentComponent implements OnInit {
@@ -27,21 +26,20 @@ export class PolicyDocumentComponent implements OnInit {
   busy: Promise<any>;
 
   /** PolicyDocument ctor */
-  constructor(private policyDocumentDataService: PolicyDocumentDataService,
+  constructor(
+    private policyDocumentDataService: PolicyDocumentDataService,
     private titleService: Title,
     private route: ActivatedRoute,
     private sanitizer: DomSanitizer,
     private cd: ChangeDetectorRef
-  ) {
-
-  }
+  ) {}
 
   ngOnInit(): void {
     if (!!this.slug) {
       this.setSlug(this.slug);
     } else {
       this.route.paramMap.subscribe((data) => {
-        const slug = data.get("slug");
+        const slug = data.get('slug');
         if (slug) {
           this.setSlug(slug);
         }
@@ -51,7 +49,8 @@ export class PolicyDocumentComponent implements OnInit {
 
   setSlug(slug: string) {
     this.slugChange.emit(slug);
-    this.busy = this.policyDocumentDataService.getPolicyDocument(slug)
+    this.busy = this.policyDocumentDataService
+      .getPolicyDocument(slug)
       .toPromise()
       .then((data) => {
         this.dataLoaded = true;
@@ -61,7 +60,7 @@ export class PolicyDocumentComponent implements OnInit {
         this.category = this.policyDocument.category;
         this.titleService.setTitle(`${this.title} - Liquor and Cannabis Regulation Branch`);
         this.cd.detectChanges();
-      }).catch(error => this.dataLoaded = true);
+      })
+      .catch((error) => (this.dataLoaded = true));
   }
-
 }

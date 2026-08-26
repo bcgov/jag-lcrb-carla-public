@@ -1,9 +1,16 @@
-import { Component, Input, forwardRef } from '@angular/core';
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators } from '@angular/forms';
+import { Component, forwardRef, Input } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validators
+} from '@angular/forms';
 import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { OffsiteStorage, OffsiteStorageStatus } from '@models/offsite-storage.model';
 import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
-
 
 @Component({
   selector: 'app-offsite-table',
@@ -35,12 +42,16 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
   offsiteStorageStatus = OffsiteStorageStatus;
   validationMessages: string[] = [];
 
-  registerOnChange(fn: any) { this.onChange = fn; }
-  registerOnTouched(fn: any) { this.onTouched = fn; }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 
   constructor(private fb: FormBuilder) {
     super();
-    this.rows.valueChanges.subscribe(val => {
+    this.rows.valueChanges.subscribe((val) => {
       this.onChange(val);
       this.value = val;
     });
@@ -136,7 +147,7 @@ export class OffsiteTableComponent extends BaseControlValueAccessor<OffsiteStora
         const control = form.get(c);
 
         if (control.valid || control.status === 'DISABLED') {
-          continue;  // skip valid fields
+          continue; // skip valid fields
         }
 
         if (control instanceof FormGroup || control instanceof FormArray) {

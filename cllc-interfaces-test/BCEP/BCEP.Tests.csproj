@@ -1,18 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="MSTest.TestAdapter" Version="1.2.0" />
-    <PackageReference Include="MSTest.TestFramework" Version="1.2.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="MSTest.TestAdapter" Version="4.2.3" />
+    <PackageReference Include="MSTest.TestFramework" Version="4.2.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../../cllc-interfaces/BCEP/BCEP.csproj" />
+  </ItemGroup>
+
+  <!-- Excluded: tests a `BCEPWrapper` class that no longer exists; BCEPService's API has moved on
+       (HttpClient/IConfiguration ctor, PaymentType-aware methods) since this file was last touched in 2019.
+       Needs a rewrite against the current BCEPService API, tracked as follow-up debt, not part of the net8 migration. -->
+  <ItemGroup>
+    <Compile Remove="BCEPWrapperTests.cs" />
   </ItemGroup>
 
 </Project>

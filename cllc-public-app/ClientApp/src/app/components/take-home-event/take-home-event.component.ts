@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { FormBase } from '@shared/form-base';
-import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
-import { EventCategory, EventStatus, EventType, LicenceEvent, SpecificLocation } from '@models/licence-event.model';
-import { AppState } from '@app/app-state/models/app-state';
-import { LicenceEventsService } from '@services/licence-events.service';
-import { LicenseDataService } from '@services/license-data.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { faSave } from '@fortawesome/free-regular-svg-icons';
 import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
+import { EventCategory, EventStatus, EventType, LicenceEvent, SpecificLocation } from '@models/licence-event.model';
 import { License } from '@models/license.model';
+import { LicenceEventsService } from '@services/licence-events.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
+import { FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-take-home-event',
@@ -44,52 +43,56 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
 
   // Take-Home Sampling event form
   timeForms = this.fb.array([]);
-  form = this.fb.group({
-    id: ['', []],
-    status: ['', [Validators.required]],
-    licenceId: ['', []],
-    accountId: ['', []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Take Home Sampling').value, []],
+  form = this.fb.group(
+    {
+      id: ['', []],
+      status: ['', [Validators.required]],
+      licenceId: ['', []],
+      accountId: ['', []],
+      eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Take Home Sampling').value, []],
 
-    // event details
-    eventName: ['', [Validators.required]],
-    eventTypeDescription: ['', []],
-    eventType: ['', [Validators.required]],
-    clientHostname: ['', [Validators.required]],
-    venueDescription: ['', [Validators.required]],
-    specificLocation: ['', [Validators.required]],
-    additionalLocationInformation: ['', []],
-    street1: ['', [Validators.required]],
-    street2: ['', []],
-    city: ['', [Validators.required]],
-    province: ["BC", [Validators.required]],
-    postalCode: ['', [Validators.required]],
+      // event details
+      eventName: ['', [Validators.required]],
+      eventTypeDescription: ['', []],
+      eventType: ['', [Validators.required]],
+      clientHostname: ['', [Validators.required]],
+      venueDescription: ['', [Validators.required]],
+      specificLocation: ['', [Validators.required]],
+      additionalLocationInformation: ['', []],
+      street1: ['', [Validators.required]],
+      street2: ['', []],
+      city: ['', [Validators.required]],
+      province: ['BC', [Validators.required]],
+      postalCode: ['', [Validators.required]],
 
-    // contact information
-    contactName: ['', [Validators.required]],
-    contactPhone: ['', [Validators.required]],
-    contactEmail: ['', [Validators.required]],
-    contactEmailConfirmation: ['', [Validators.required]],
+      // contact information
+      contactName: ['', [Validators.required]],
+      contactPhone: ['', [Validators.required]],
+      contactEmail: ['', [Validators.required]],
+      contactEmailConfirmation: ['', [Validators.required]],
 
-    // date & time
-    startDate: ['', [Validators.required]],
-    endDate: ['', [Validators.required]],
+      // date & time
+      startDate: ['', [Validators.required]],
+      endDate: ['', [Validators.required]],
 
-    isAgreement1: [false, [Validators.requiredTrue]],
-    isAgreement2: [false, [Validators.requiredTrue]],
-  }, {
-    // end date must be later than or equal to start date
-    validators: dateRangeValidator('startDate', 'endDate')
-  });
+      isAgreement1: [false, [Validators.requiredTrue]],
+      isAgreement2: [false, [Validators.requiredTrue]]
+    },
+    {
+      // end date must be later than or equal to start date
+      validators: dateRangeValidator('startDate', 'endDate')
+    }
+  );
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private licenceEvents: LicenceEventsService,
     private licenceDataService: LicenseDataService,
     private router: Router,
     private route: ActivatedRoute
   ) {
     super();
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       const licenceId = params.get('licenceId');
       this.form.get('licenceId').setValue(licenceId);
       this.retrieveLicence(licenceId);
@@ -104,8 +107,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   get status(): string {
     const statusObj = this.getOptionFromValue(this.eventStatus, this.form?.get('status')?.value);
@@ -113,18 +115,16 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
   }
 
   retrieveLicence(licenceId: string) {
-    this.busy = this.licenceDataService.getLicenceById(licenceId)
-      .subscribe((licence) => {
-        this.licence = licence;
-      });
+    this.busy = this.licenceDataService.getLicenceById(licenceId).subscribe((licence) => {
+      this.licence = licence;
+    });
   }
 
   retrieveSavedEvent(eventId: string) {
-    this.busy = this.licenceEvents.getLicenceEvent(eventId)
-      .subscribe((licenceEvent) => {
-        this.licenceEvent = licenceEvent;
-        this.setFormToLicenceEvent(licenceEvent);
-      });
+    this.busy = this.licenceEvents.getLicenceEvent(eventId).subscribe((licenceEvent) => {
+      this.licenceEvent = licenceEvent;
+      this.setFormToLicenceEvent(licenceEvent);
+    });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
@@ -165,7 +165,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       endDate: new Date(licenceEvent.endDate),
       // agreements
       isAgreement1: licenceEvent.isAgreement1,
-      isAgreement2: licenceEvent.isAgreement2,
+      isAgreement2: licenceEvent.isAgreement2
     });
 
     const schedules = licenceEvent.schedules;
@@ -179,7 +179,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       // Make them re-sign the declaration section whenever changes are made to the form
       this.form.patchValue({
         isAgreement1: true,
-        isAgreement2: true,
+        isAgreement2: true
       });
     }
   }
@@ -191,7 +191,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       const liquorStart = new Date(sched.serviceStartDateTime);
       const liquorEnd = new Date(sched.serviceEndDateTime);
 
-      const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
+      const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
       }
@@ -218,10 +218,9 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       const licenceId = this.form.get('licenceId').value;
       const statusCancelled = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
       const payload: LicenceEvent = { ...this.form.value, status: statusCancelled, licenceId };
-      this.busy = this.licenceEvents.updateLicenceEvent(id, payload)
-        .subscribe((licenceEvent) => {
-          this.router.navigate(['/licences']);
-        });
+      this.busy = this.licenceEvents.updateLicenceEvent(id, payload).subscribe((licenceEvent) => {
+        this.router.navigate(['/licences']);
+      });
     } else {
       this.router.navigate(['/licences']);
     }
@@ -284,11 +283,11 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       serviceEnd.setHours(this.timeForms.controls[i]['controls']['liquorEndTime'].value['hour']);
       serviceEnd.setMinutes(this.timeForms.controls[i]['controls']['liquorEndTime'].value['minute']);
 
-      if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
+      if (eventEnd.getTime() - eventBegin.getTime() < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
       }
 
-      if ((serviceEnd.getTime() - serviceBegin.getTime()) < 0) {
+      if (serviceEnd.getTime() - serviceBegin.getTime() < 0) {
         serviceEnd.setDate(serviceEnd.getDate() + 1);
       }
 
@@ -344,27 +343,31 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
 
   resetTimeFormsToDefault() {
     this.timeForms = this.fb.array([]);
-    this.timeForms.push(this.fb.group({
-      dateTitle: [null, []],
-      date: [null, []],
-      startTime: [DEFAULT_START_TIME, [Validators.required]],
-      endTime: [DEFAULT_END_TIME, [Validators.required]],
-      liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-      liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-    }));
+    this.timeForms.push(
+      this.fb.group({
+        dateTitle: [null, []],
+        date: [null, []],
+        startTime: [DEFAULT_START_TIME, [Validators.required]],
+        endTime: [DEFAULT_END_TIME, [Validators.required]],
+        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+      })
+    );
   }
 
   resetTimeFormsToArray(datesArray: Date[]) {
     this.timeForms = this.fb.array([]);
     for (const dt of datesArray) {
-      this.timeForms.push(this.fb.group({
-        dateTitle: [DAYS[dt.getDay()] + ', ' + dt.toLocaleDateString('en-US'), []],
-        date: [dt, []],
-        startTime: [DEFAULT_START_TIME, [Validators.required]],
-        endTime: [DEFAULT_END_TIME, [Validators.required]],
-        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-      }));
+      this.timeForms.push(
+        this.fb.group({
+          dateTitle: [DAYS[dt.getDay()] + ', ' + dt.toLocaleDateString('en-US'), []],
+          date: [dt, []],
+          startTime: [DEFAULT_START_TIME, [Validators.required]],
+          endTime: [DEFAULT_END_TIME, [Validators.required]],
+          liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+          liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+        })
+      );
     }
   }
 
@@ -386,7 +389,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       startDate: 'Please enter the start date',
       endDate: 'Please enter the end date',
       isAgreement1: 'Please agree to all terms',
-      isAgreement2: 'Please agree to all terms',
+      isAgreement2: 'Please agree to all terms'
     };
   }
 

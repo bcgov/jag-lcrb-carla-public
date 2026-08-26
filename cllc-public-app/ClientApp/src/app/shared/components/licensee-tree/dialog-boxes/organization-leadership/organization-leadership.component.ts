@@ -1,14 +1,14 @@
-import { Component, Inject } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { LicenseeChangeLog } from "@models/licensee-change-log.model";
-import { FormBase } from "@shared/form-base";
-import { startOfToday, subDays } from "date-fns";
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { FormBase } from '@shared/form-base';
+import { startOfToday, subDays } from 'date-fns';
 
 @Component({
-  selector: "app-organization-leadership",
-  templateUrl: "./organization-leadership.component.html",
-  styleUrls: ["./organization-leadership.component.scss"]
+  selector: 'app-organization-leadership',
+  templateUrl: './organization-leadership.component.html',
+  styleUrls: ['./organization-leadership.component.scss']
 })
 export class OrganizationLeadershipComponent extends FormBase {
   form: FormGroup;
@@ -16,30 +16,32 @@ export class OrganizationLeadershipComponent extends FormBase {
   parentName: string;
   maxDate19: Date; // used to limit the birth date control to make sure the user is 19 years or older
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<OrganizationLeadershipComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     super();
     // max date is 19 years ago
     this.maxDate19 = subDays(startOfToday(), 19);
     this.parentName = data.parentName;
     this.form = fb.group(
       {
-        id: [""],
+        id: [''],
         isDirectorNew: [false],
         isOfficerNew: [false],
         isManagerNew: [false],
-        firstNameNew: ["", Validators.required],
-        lastNameNew: ["", Validators.required],
-        emailNew: ["", [Validators.email, Validators.required]],
+        firstNameNew: ['', Validators.required],
+        lastNameNew: ['', Validators.required],
+        emailNew: ['', [Validators.email, Validators.required]],
         isIndividual: [true],
-        dateofBirthNew: ["", Validators.required],
-        titleNew: [""],
-        dateofappointment: ["", Validators.required]
+        dateofBirthNew: ['', Validators.required],
+        titleNew: [''],
+        dateofappointment: ['', Validators.required]
       },
       {
-        validators: this.dateLessThanToday("dateofappointment"),
-        updateOn: "change"
+        validators: this.dateLessThanToday('dateofappointment'),
+        updateOn: 'change'
       }
     );
 
@@ -50,7 +52,7 @@ export class OrganizationLeadershipComponent extends FormBase {
   }
 
   dateLessThanToday(field1) {
-    return form => {
+    return (form) => {
       const d1 = form.controls[field1].value;
       if (!d1) {
         return {};
@@ -74,7 +76,7 @@ export class OrganizationLeadershipComponent extends FormBase {
     this.dialogRef.close(formData);
 
     if (!this.form.valid) {
-      Object.keys(this.form.controls).forEach(field => {
+      Object.keys(this.form.controls).forEach((field) => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });

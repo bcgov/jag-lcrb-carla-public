@@ -1,0 +1,53 @@
+name: Cleanup old GHCR image versions
+
+# Every CI build pushes a permanent sha-<full-git-sha> tag alongside the
+# mutable :dev/:test/:prod tag, so those accumulate forever with nothing
+# else to prune them. This repo/package is public, so GHCR storage itself
+# is free — but unbounded growth is still poor practice (clutter, slower to
+# browse, and it would become a real cost if visibility ever changes to
+# private). This keeps the most recent 30 versions per service.
+#
+# min-versions-to-keep counts ALL versions of a package together, regardless
+# of which branch built them. Dev pushes far more often than Test or Prod,
+# so a plain recency count could burn through the 30-slot window on Dev
+# churn alone and prune a Prod-relevant sha- tag much sooner than intended.
+# To prevent that, master builds are ALSO tagged prod-sha-<sha> (a second,
+# permanent tag distinct from the shared sha-<sha> one — see ci-*-gha.yml),
+# and that prefix is explicitly protected below, so every Prod build stays
+# available for rollback indefinitely, independent of Dev/Test build volume.
+
+on:
+  schedule:
+    - cron: '0 10 1 * *'  # 1st of each month, 10:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+    strategy:
+      matrix:
+        image:
+          - cllc-public-api-gha
+          - cllc-public-frontend-gha
+          - geocoder-service-gha
+          - pdf-service-gha
+          - file-manager-service-gha
+          - orgbook-service-gha
+          - one-stop-service-gha
+          - federal-reporting-service-gha
+          - carla-spice-sync-service-gha
+      fail-fast: false
+    steps:
+      - name: Delete old sha-tagged versions of ${{ matrix.image }}
+        uses: actions/delete-package-versions@e5bc658cc4c965c472cf1c7d5deb02b1c907a53c # v5.0.0
+        with:
+          package-name: ${{ matrix.image }}
+          package-type: container
+          min-versions-to-keep: 30
+          # Never delete the mutable environment tags, or any Prod build
+          # (identified by its permanent prod-sha-<sha> tag), no matter how
+          # old. Only untagged/older plain sha-<...> versions from Dev/Test
+          # builds are eligible for pruning.
+          ignore-versions: '^(dev|test|prod|sandbox-dev|sandbox-test|sandbox-prod|latest|prod-sha-.*)$'

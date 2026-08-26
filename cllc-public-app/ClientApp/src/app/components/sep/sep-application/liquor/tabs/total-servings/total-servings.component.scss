@@ -22,13 +22,12 @@
   }
 
   .t-servings .ngx-slider .ngx-slider-pointer {
-    background-color:#38598a;
+    background-color: #38598a;
   }
 
   .t-servings .ngx-slider[disabled] .ngx-slider-pointer {
     background-color: #e1e8f2;
-
-}
+  }
 
   .ngx-slider-pointer:focus-visible {
     outline: none !important;

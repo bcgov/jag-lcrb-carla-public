@@ -1,5 +1,5 @@
-import { Worker } from "./worker.model";
-import { Contact } from "./contact.model";
+import { Contact } from './contact.model';
+import { Worker } from './worker.model';
 
 export interface Alias {
   id: string;

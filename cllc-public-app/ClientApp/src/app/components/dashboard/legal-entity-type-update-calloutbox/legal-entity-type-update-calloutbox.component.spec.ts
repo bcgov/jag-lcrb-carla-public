@@ -1,27 +1,23 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { LegalEntityTypeUpdateCalloutboxComponent } from './legal-entity-type-update-calloutbox.component';
 
-import { LegalEntityTypeUpdateCalloutboxComponent } from "./legal-entity-type-update-calloutbox.component";
+describe('LegalEntityTypeUpdateCalloutboxComponent', () => {
+  let component: LegalEntityTypeUpdateCalloutboxComponent;
+  let fixture: ComponentFixture<LegalEntityTypeUpdateCalloutboxComponent>;
 
-describe("LegalEntityTypeUpdateCalloutboxComponent",
-  () => {
-    let component: LegalEntityTypeUpdateCalloutboxComponent;
-    let fixture: ComponentFixture<LegalEntityTypeUpdateCalloutboxComponent>;
-
-    beforeEach(async () => {
-      await TestBed.configureTestingModule({
-          declarations: [LegalEntityTypeUpdateCalloutboxComponent]
-        })
-        .compileComponents();
-    });
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(LegalEntityTypeUpdateCalloutboxComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it("should create",
-      () => {
-        expect(component).toBeTruthy();
-      });
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [LegalEntityTypeUpdateCalloutboxComponent]
+    }).compileComponents();
   });
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LegalEntityTypeUpdateCalloutboxComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

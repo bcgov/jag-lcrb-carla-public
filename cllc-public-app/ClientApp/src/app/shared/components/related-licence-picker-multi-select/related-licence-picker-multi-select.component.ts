@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef, Input } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatAutocompleteTrigger } from '@angular/material/autocomplete';
-import { filter, debounceTime, distinctUntilChanged, switchMap, tap } from 'rxjs/operators';
-import { LicenseDataService } from '@services/license-data.service';
 import { RelatedLicence } from '@models/related-licence';
+import { LicenseDataService } from '@services/license-data.service';
+import { filter, switchMap, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-related-licence-picker-multi-select',
@@ -19,14 +19,15 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
   @Output() selectedLicencesChange = new EventEmitter<any[]>();
   @Output() autoCompFldFocusEvent = new EventEmitter<string>();
 
-
   @Input() form: FormGroup;
   autocompleteLicences: any[];
   @Input() selectedLicences: any[] = [];
   licenceRequestInProgress: boolean;
 
-  constructor(private licenceDataService: LicenseDataService,
-    private fb: FormBuilder) { }
+  constructor(
+    private licenceDataService: LicenseDataService,
+    private fb: FormBuilder
+  ) {}
 
   get associatedLicencesFormArray(): FormArray {
     return this.form.get('associatedLiquorLicense') as FormArray;
@@ -36,22 +37,26 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
     if (!this.form)
       this.form = this.fb.group({
         autocompleteInput: [''],
-        associatedLiquorLicense: this.fb.array([]),
+        associatedLiquorLicense: this.fb.array([])
       });
 
-    this.form.get("autocompleteInput").valueChanges
-      .pipe(filter(value => value && value.length >= 3),
-        tap(_ => {
+    this.form
+      .get('autocompleteInput')
+      .valueChanges.pipe(
+        filter((value) => value && value.length >= 3),
+        tap((_) => {
           this.autocompleteLicences = [];
           this.licenceRequestInProgress = true;
         }),
-        switchMap(value => this.licenceDataService.getAutocomplete({
-          name: value,
-          licenceNumber: value
-        }))
+        switchMap((value) =>
+          this.licenceDataService.getAutocomplete({
+            name: value,
+            licenceNumber: value
+          })
+        )
       )
-      .subscribe(data => {
-        this.autocompleteLicences = data.filter(l => !this.selectedLicences.some(sl => sl.id === l.id));
+      .subscribe((data) => {
+        this.autocompleteLicences = data.filter((l) => !this.selectedLicences.some((sl) => sl.id === l.id));
         this.licenceRequestInProgress = false;
         this.inputAutoComplete.openPanel();
       });
@@ -63,7 +68,7 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
 
   autoCompFldClear() {
     // clear field
-    this.form.get("autocompleteInput").setValue('');
+    this.form.get('autocompleteInput').setValue('');
     this.autocompleteLicences = null;
   }
 
@@ -75,7 +80,7 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
     const selectedLicence = $event.option.value as RelatedLicence;
 
     // Avoid duplicates
-    if (!this.selectedLicences.some(l => l.id === selectedLicence.id)) {
+    if (!this.selectedLicences.some((l) => l.id === selectedLicence.id)) {
       this.selectedLicences.push(selectedLicence);
       //this.selectedLicencesChange.emit(this.selectedLicences);
 
@@ -84,7 +89,7 @@ export class RelatedLicencePickerMulitiSelectComponent implements OnInit {
       formArray.push(this.fb.control(selectedLicence)); // Add full object or selectedLicence.id depending on your needs
     }
 
-    this.form.get("autocompleteInput").setValue('');
+    this.form.get('autocompleteInput').setValue('');
     this.autocompleteLicences = [];
   }
 

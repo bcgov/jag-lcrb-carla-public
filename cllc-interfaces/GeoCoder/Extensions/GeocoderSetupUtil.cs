@@ -27,11 +27,11 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
         }
 
         public static ServiceClientCredentials GetServiceClientCredentials(IConfiguration Configuration)
-        {            
+        {
             string apiKey = Configuration["GEOCODER_API_KEY"];
 
             ServiceClientCredentials serviceClientCredentials = new ApiKeyCredentials(apiKey);
-            
+
             return serviceClientCredentials;
         }
 
@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
 
             ServiceClientCredentials serviceClientCredentials = GetServiceClientCredentials(Configuration);
 
-            IGeocoderClient client = new GeocoderClient(new Uri(geocoderUri), serviceClientCredentials);            
+            IGeocoderClient client = new GeocoderClient(new Uri(geocoderUri), serviceClientCredentials);
 
             return client;
         }

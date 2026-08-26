@@ -1,8 +1,8 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { faPrint, faAngleDoubleLeft } from '@fortawesome/free-solid-svg-icons';
-import { HttpErrorResponse } from '@angular/common/http';
-import { SepPaymentService, SepPayment } from '../../services/sep.payment.service';
+import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { SepPayment, SepPaymentService } from '../../services/sep.payment.service';
 
 @Component({
   selector: 'app-standalone-payment-confirmation',
@@ -37,11 +37,11 @@ export class StandalonePaymentConfirmationComponent implements OnInit {
     this.isDuplicate = query.get('trnApproved') === '0';
     if (this.isDuplicate) {
       /* Only parse the specific items requested—no extra checks */
-      this.trnId         = query.get('trnId');
-      this.messageId     = query.get('messageId');
-      this.messageText   = query.get('messageText');
-      this.trnOrderNumber= query.get('trnOrderNumber');
-      return;            // ← Skip every API call when duplicate
+      this.trnId = query.get('trnId');
+      this.messageId = query.get('messageId');
+      this.messageText = query.get('messageText');
+      this.trnOrderNumber = query.get('trnOrderNumber');
+      return; // ← Skip every API call when duplicate
     }
 
     /* ---------- 2. Normal confirmation flow (unchanged) ---------- */

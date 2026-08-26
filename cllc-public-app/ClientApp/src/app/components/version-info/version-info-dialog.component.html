@@ -1,31 +1,29 @@
-<h2 mat-dialog-title>
-  Application Version
-</h2>
+<h2 mat-dialog-title>Application Version</h2>
 <mat-dialog-content>
   <section class="row">
     <table class="mat-list mat-list-base">
       <tr class="mat-list-item">
         <td>Environment:</td>
-        <td>{{versionInfo?.environment}}</td>
-      </tr>      
-      <tr class="mat-list-item">
-        <td>API Last Updated:</td>
-        <td>{{versionInfo?.fileCreationTime | date:'medium' }}</td>
+        <td>{{ versionInfo?.deploymentTier }}</td>
       </tr>
       <tr class="mat-list-item">
-        <td>API Git Reference:</td>        
-        <td>{{versionInfo?.sourceReference}}</td>
+        <td>API Last Updated:</td>
+        <td>{{ versionInfo?.fileCreationTime | date: 'medium' }}</td>
+      </tr>
+      <tr class="mat-list-item">
+        <td>API Git Reference:</td>
+        <td>{{ versionInfo?.sourceReference }}</td>
       </tr>
       <tr class="mat-list-item">
         <td>Repository:</td>
-        <td>{{versionInfo?.sourceRepository}}</td>
+        <td>{{ versionInfo?.sourceRepository }}</td>
       </tr>
       <tr class="mat-list-item">
         <td>Commit:</td>
-        <td>{{versionInfo?.sourceCommit}}</td>
+        <td>{{ versionInfo?.sourceCommit }}</td>
       </tr>
       <tr class="mat-list-item">
-        <td>UI Git Reference:</td>        
+        <td>UI Git Reference:</td>
         <td><!-- UI_GIT_REF --></td>
       </tr>
       <tr class="mat-list-item">
@@ -40,7 +38,6 @@
         <td>UI Build Date:</td>
         <td><!-- UI_BUILD_DATE --></td>
       </tr>
-      
     </table>
   </section>
 </mat-dialog-content>

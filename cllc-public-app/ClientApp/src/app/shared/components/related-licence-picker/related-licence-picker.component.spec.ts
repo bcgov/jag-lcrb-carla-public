@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RelatedLicencePickerComponent } from './related-licence-picker.component';
 
 describe('RelatedLicencePickerComponent', () => {
@@ -8,9 +7,8 @@ describe('RelatedLicencePickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RelatedLicencePickerComponent ]
-    })
-    .compileComponents();
+      declarations: [RelatedLicencePickerComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

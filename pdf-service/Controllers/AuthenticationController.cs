@@ -15,7 +15,7 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
     {
         private readonly IConfiguration Configuration;
 
-        public AuthenticationController(IConfiguration configuration) 
+        public AuthenticationController(IConfiguration configuration)
         {
             Configuration = configuration;
         }

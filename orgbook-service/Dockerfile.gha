@@ -1,0 +1,26 @@
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
+WORKDIR /app
+EXPOSE 8080
+ENV ASPNETCORE_URLS=http://*:8080
+
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+WORKDIR /src
+
+COPY ["orgbook-service/orgbook-service.csproj", "orgbook-service/"]
+COPY ["cllc-interfaces/Dynamics-Dataverse/Dynamics-Dataverse.csproj", "cllc-interfaces/Dynamics-Dataverse/"]
+
+RUN dotnet restore "orgbook-service/orgbook-service.csproj"
+
+COPY orgbook-service/ orgbook-service/
+COPY cllc-interfaces/ cllc-interfaces/
+
+WORKDIR "/src/orgbook-service"
+RUN dotnet build "orgbook-service.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "orgbook-service.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "orgbook-service.dll"]

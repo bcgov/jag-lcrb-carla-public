@@ -2,8 +2,8 @@
 @use '@angular/material' as mat;
 
 /* Controls Survey styles */
-@import "~material-design-icons/iconfont/material-icons.css";
-@import "./style/custom-theme.scss";
+@import '~material-design-icons/iconfont/material-icons.css';
+@import './style/custom-theme.scss';
 
 @include mat.all-component-typographies($custom-typography);
 body {
@@ -12,8 +12,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 
-  font-style: MyriadWebPro, Calibri, Arial, "sans serif";
-  font-feature-settings: "kern" 1;
+  font-style: MyriadWebPro, Calibri, Arial, 'sans serif';
+  font-feature-settings: 'kern' 1;
 }
 
 .btn.btn-primary {
@@ -104,7 +104,7 @@ body {
 p {
   font-weight: Regular;
   font-size: 14px;
-  font-feature-settings: "kern" 1;
+  font-feature-settings: 'kern' 1;
 }
 
 h1 {
@@ -188,7 +188,7 @@ select.form-control:not([size]):not([multiple]) {
   font-weight: 600;
   font-style: normal;
   line-height: 16px;
-  font-feature-settings: "kern" 1;
+  font-feature-settings: 'kern' 1;
 }
 
 h4.plain-header {
@@ -202,7 +202,7 @@ h4.plain-header {
   font-size: 16px;
   font-weight: semi-bold;
   text-transform: uppercase;
-  font-feature-settings: "kern" 1;
+  font-feature-settings: 'kern' 1;
 }
 
 .grey-header {
@@ -379,9 +379,7 @@ mat-checkbox.text-wrap {
   }
 }
 
-
 .mat-form-field-infix {
   min-width: 50% !important;
   width: auto !important;
 }
-

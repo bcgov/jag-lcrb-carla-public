@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { EventLocationTableComponent } from './event-location-table.component';
 
 describe('TuaTableComponent', () => {
@@ -12,8 +9,7 @@ describe('TuaTableComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [EventLocationTableComponent]
-    })
-      .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

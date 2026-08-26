@@ -1,11 +1,10 @@
-import { ValidatorFn, AbstractControl, FormGroup, FormArray } from '@angular/forms';
 import { Injectable, OnDestroy } from '@angular/core';
-import { Application } from '@models/application.model';
-import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { AbstractControl, FormArray, FormGroup, ValidatorFn } from '@angular/forms';
 import { Account } from '@models/account.model';
-import { Subscription } from 'rxjs';
+import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { Application } from '@models/application.model';
 import { isValidOrNotTouched } from '@shared/form-utils';
-
+import { Subscription } from 'rxjs';
 
 export const CanadaPostalRegex = '^[A-Za-z][0-9][A-Za-z] ?[0-9][A-Za-z][0-9]$';
 export const USPostalRegex = '^\\d{5}([\-]\\d{4})?$';
@@ -31,7 +30,6 @@ export class ApplicationHTMLContent {
   CannabisAssociateContent: string;
   LiquorPHSContent: string;
   paymentConfirmation: string;
-
 }
 
 @Injectable()
@@ -72,19 +70,18 @@ export class FormBase implements OnDestroy {
   }
 
   showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !== -1;
+    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()].indexOf(state) !== -1;
   }
 
   getApplicationContent(contentCartegory: string) {
     let body = '';
     if (this.application.applicationType.contentTypes) {
-      const contents =
-        this.application.applicationType.contentTypes
-          .filter(t => t.category === contentCartegory
-            && (t.businessTypes.indexOf(this.application.applicantType) !== -1
-              || t.businessTypes.indexOf(this.account && this.account.businessType) !== -1)
-          );
+      const contents = this.application.applicationType.contentTypes.filter(
+        (t) =>
+          t.category === contentCartegory &&
+          (t.businessTypes.indexOf(this.application.applicantType) !== -1 ||
+            t.businessTypes.indexOf(this.account && this.account.businessType) !== -1)
+      );
       if (contents.length > 0) {
         body = contents[0].body;
       }
@@ -103,8 +100,25 @@ export class FormBase implements OnDestroy {
   }
 
   rejectIfNotDigitOrBackSpace(event) {
-    const acceptedKeys = ['Backspace', 'Tab', 'End', 'Home', 'ArrowLeft', 'ArrowRight', 'Control',
-      '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+    const acceptedKeys = [
+      'Backspace',
+      'Tab',
+      'End',
+      'Home',
+      'ArrowLeft',
+      'ArrowRight',
+      'Control',
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '6',
+      '7',
+      '8',
+      '9',
+      '0'
+    ];
     if (acceptedKeys.indexOf(event.key) === -1) {
       event.preventDefault();
     }
@@ -115,7 +129,7 @@ export class FormBase implements OnDestroy {
       if (control.value === true) {
         return null;
       } else {
-        return { 'shouldBeTrue': 'But value is false' };
+        return { shouldBeTrue: 'But value is false' };
       }
     };
   }
@@ -144,7 +158,7 @@ export class FormBase implements OnDestroy {
         return null;
       }
       let valid = false;
-      checkboxFields.forEach(f => {
+      checkboxFields.forEach((f) => {
         valid = valid || control.parent.get(f).value;
       });
       return valid ? null : { 'required-set': { value: control.value } };
@@ -157,7 +171,7 @@ export class FormBase implements OnDestroy {
         return null;
       }
       let valid = false;
-      fields.forEach(f => {
+      fields.forEach((f) => {
         valid = valid || !!control.parent.get(f).value;
       });
       return valid ? null : { 'require-one-of': { value: control.value } };
@@ -173,31 +187,32 @@ export class FormBase implements OnDestroy {
       if (!parentIsChecked) {
         return null;
       }
-      return control.value ? null : { 'required': { value: control.value } };
+      return control.value ? null : { required: { value: control.value } };
     };
   }
 
   requiredAutoCompleteId(control: AbstractControl): { [key: string]: any } | null {
-    let result = { 'required': { value: control.value } }; // invalid by default
+    let result = { required: { value: control.value } }; // invalid by default
     if (control.value && control.value.id) {
       result = null; // valid
     }
     return result;
   }
 
-
   requiredSelectChildValidator(selectField: string, conditionalValue: any[]): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      if (!control.parent
-        || !control.parent.get(selectField)
-        || conditionalValue.indexOf(control.parent.get(selectField).value) === -1) {
+      if (
+        !control.parent ||
+        !control.parent.get(selectField) ||
+        conditionalValue.indexOf(control.parent.get(selectField).value) === -1
+      ) {
         return null;
       }
       const parentIsChecked = control.parent.get(selectField).value;
       if (!parentIsChecked) {
         return null;
       }
-      return (control.value !== null && control.value !== '') ? null : { 'required': { value: control.value } };
+      return control.value !== null && control.value !== '' ? null : { required: { value: control.value } };
     };
   }
 
@@ -208,18 +223,21 @@ export class FormBase implements OnDestroy {
   }
 
   isTouchedAndInvalid(fieldName: string): boolean {
-    return this.form.get(fieldName).touched
-      && !this.form.get(fieldName).valid;
+    return this.form.get(fieldName).touched && !this.form.get(fieldName).valid;
   }
 
   ngOnDestroy(): void {
     this.componentActive = false;
-    this.subscriptionList.forEach(sub => {
+    this.subscriptionList.forEach((sub) => {
       sub.unsubscribe();
     });
   }
 
-  listControlsWithErrors(form: FormGroup | FormArray, ValidationFieldNameMap: any = {}, parentName: string = ''): string[] {
+  listControlsWithErrors(
+    form: FormGroup | FormArray,
+    ValidationFieldNameMap: any = {},
+    parentName: string = ''
+  ): string[] {
     let list = [];
     // list errors at the form level
     if (form instanceof FormGroup) {
@@ -264,7 +282,6 @@ export class FormBase implements OnDestroy {
     return list;
   }
 
-
   markControlsAsTouched(form: FormGroup | FormArray) {
     if (form instanceof FormGroup) {
       for (const c in form.controls) {
@@ -293,7 +310,7 @@ export class FormBase implements OnDestroy {
   }
 
   getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
+    const idx = options.findIndex((opt) => opt.label === label);
     if (idx >= 0) {
       return options[idx];
     }
@@ -304,7 +321,7 @@ export class FormBase implements OnDestroy {
   }
 
   getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
+    const idx = options.findIndex((opt) => opt.value === value);
     if (idx >= 0) {
       return options[idx];
     }

@@ -1,17 +1,17 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { PaymentDataService } from "@services/payment-data.service";
-import { Subscription } from "rxjs";
-import { ApplicationDataService } from "../../services/application-data.service";
-import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Application } from "@models/application.model";
-import { faAngleDoubleLeft, faPrint } from "@fortawesome/free-solid-svg-icons";
+import { Component, Input, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faAngleDoubleLeft, faPrint } from '@fortawesome/free-solid-svg-icons';
+import { Application } from '@models/application.model';
+import { PaymentDataService } from '@services/payment-data.service';
+import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
+import { ApplicationDataService } from '../../services/application-data.service';
 
 @Component({
-  selector: "app-payment-confirmation",
-  templateUrl: "./payment-confirmation.component.html",
-  styleUrls: ["./payment-confirmation.component.scss"]
+  selector: 'app-payment-confirmation',
+  templateUrl: './payment-confirmation.component.html',
+  styleUrls: ['./payment-confirmation.component.scss']
 })
 /** payment-confirmation component*/
 export class PaymentConfirmationComponent extends FormBase implements OnInit {
@@ -53,25 +53,25 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
 
   static parseVerifyResponse(res) {
     const verifyPayResponse = res as any;
-    let cardType: string = "";
+    let cardType: string = '';
     switch (verifyPayResponse.cardType) {
-    case "VI":
-      cardType = "Visa";
-      break;
-    case "PV":
-      cardType = "Visa Debit";
-      break;
-    case "MC":
-      cardType = "MasterCard";
-      break;
-    case "AM":
-      cardType = "American Express";
-      break;
-    case "MD":
-      cardType = "Debit MasterCard";
-      break;
-    default:
-      cardType = verifyPayResponse.cardType;
+      case 'VI':
+        cardType = 'Visa';
+        break;
+      case 'PV':
+        cardType = 'Visa Debit';
+        break;
+      case 'MC':
+        cardType = 'MasterCard';
+        break;
+      case 'AM':
+        cardType = 'American Express';
+        break;
+      case 'MD':
+        cardType = 'Debit MasterCard';
+        break;
+      default:
+        cardType = verifyPayResponse.cardType;
     }
     const authCode = verifyPayResponse.authCode;
     const avsMessage = verifyPayResponse.avsMessage;
@@ -91,25 +91,25 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     const licNumber = verifyPayResponse.renewLicenseNumber;
 
     let isApproved = false;
-    let paymentTransactionTitle = "";
-    let paymentTransactionMessage = "";
+    let paymentTransactionTitle = '';
+    let paymentTransactionMessage = '';
 
-    if (trnApproved === "1") {
+    if (trnApproved === '1') {
       isApproved = true;
     } else {
       isApproved = false;
-      if (messageId === "559") {
-        paymentTransactionTitle = "Cancelled";
+      if (messageId === '559') {
+        paymentTransactionTitle = 'Cancelled';
         paymentTransactionMessage =
-          "Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
-      } else if (messageId === "7") {
-        paymentTransactionTitle = "Declined";
+          'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+      } else if (messageId === '7') {
+        paymentTransactionTitle = 'Declined';
         paymentTransactionMessage =
-          "Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
+          'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
       } else {
-        paymentTransactionTitle = "Declined";
+        paymentTransactionTitle = 'Declined';
         paymentTransactionMessage =
-          "Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
+          'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
       }
     }
 
@@ -137,16 +137,17 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
   }
 
   /** payment-confirmation ctor */
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private paymentDataService: PaymentDataService,
     private applicationDataService: ApplicationDataService,
-    public snackBar: MatSnackBar,
+    public snackBar: MatSnackBar
   ) {
     super();
-    this.route.queryParams.subscribe(params => {
-      this.transactionId = params["trnId"];
-      this.applicationId = params["SessionKey"];
+    this.route.queryParams.subscribe((params) => {
+      this.transactionId = params['trnId'];
+      this.applicationId = params['SessionKey'];
     });
   }
 
@@ -155,22 +156,19 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
       this.applicationId = this.inputApplicationId;
     }
 
-    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
-      (data: Application) => {
-        this.applicationType = data.applicationType.name;
-        this.isLiquor = data.applicationType.category == "Liquor";
-        this.isCannabis = data.applicationType.category === "Cannabis";
-  
-        this.application = data;
-        this.addDynamicContent();
-      });
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe((data: Application) => {
+      this.applicationType = data.applicationType.name;
+      this.isLiquor = data.applicationType.category == 'Liquor';
+      this.isCannabis = data.applicationType.category === 'Cannabis';
 
+      this.application = data;
+      this.addDynamicContent();
+    });
   }
 
   ngAfterViewInit() {
     setTimeout(() => this.verify_payment(), 3000);
   }
-
 
   /**
    * Payment verification
@@ -179,27 +177,27 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     this.retryCount++;
 
     this.busy = this.paymentDataService.verifyPaymentSubmission(this.applicationId).subscribe(
-      res => {
+      (res) => {
         const verifyPayResponse = res as any;
         // console.log(verifyPayResponse);
         switch (verifyPayResponse.cardType) {
-        case "VI":
-          this.cardType = "Visa";
-          break;
-        case "PV":
-          this.cardType = "Visa Debit";
-          break;
-        case "MC":
-          this.cardType = "MasterCard";
-          break;
-        case "AM":
-          this.cardType = "American Express";
-          break;
-        case "MD":
-          this.cardType = "Debit MasterCard";
-          break;
-        default:
-          this.cardType = verifyPayResponse.cardType;
+          case 'VI':
+            this.cardType = 'Visa';
+            break;
+          case 'PV':
+            this.cardType = 'Visa Debit';
+            break;
+          case 'MC':
+            this.cardType = 'MasterCard';
+            break;
+          case 'AM':
+            this.cardType = 'American Express';
+            break;
+          case 'MD':
+            this.cardType = 'Debit MasterCard';
+            break;
+          default:
+            this.cardType = verifyPayResponse.cardType;
         }
         this.authCode = verifyPayResponse.authCode;
         this.avsMessage = verifyPayResponse.avsMessage;
@@ -216,41 +214,44 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
         this.licType = verifyPayResponse.paymentType;
         this.licNumber = verifyPayResponse.renewLicenseNumber;
 
-
-        if (this.trnApproved === "1") {
+        if (this.trnApproved === '1') {
           this.isApproved = true;
         } else {
           this.isApproved = false;
-          if (this.messageId === "559") {
-            this.paymentTransactionTitle = "Cancelled";
+          if (this.messageId === '559') {
+            this.paymentTransactionTitle = 'Cancelled';
             this.paymentTransactionMessage =
-              "Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
-          } else if (this.messageId === "7") {
-            this.paymentTransactionTitle = "Declined";
+              'Your payment transaction was cancelled. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
+          } else if (this.messageId === '7') {
+            this.paymentTransactionTitle = 'Declined';
             this.paymentTransactionMessage =
-              "Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
+              'Your payment transaction was declined. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
           } else {
-            this.paymentTransactionTitle = "Declined";
+            this.paymentTransactionTitle = 'Declined';
             this.paymentTransactionMessage =
-              "Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>";
+              'Your payment transaction was declined. Please contact your bank for more information. <br><br> <p>Please note, your application remains listed under Applications In Progress. </p>';
           }
         }
 
         this.loaded = true;
       },
-      err => {
-        if (err === "503" || err === "502" || err === "500" || err === "504") {
+      (err) => {
+        if (err === '503' || err === '502' || err === '500' || err === '504') {
           if (this.retryCount < 30) {
-            this.snackBar.open(`Attempt ${this.retryCount} at payment verification, please wait...`,
-              "Verifying Payment",
-              { duration: 3500, panelClass: ["red - snackbar"] });
+            this.snackBar.open(
+              `Attempt ${this.retryCount} at payment verification, please wait...`,
+              'Verifying Payment',
+              { duration: 3500, panelClass: ['red - snackbar'] }
+            );
             setTimeout(() => this.verify_payment(), 3000);
           }
         } else {
-          this.snackBar.open("An unexpected error occured, please contact the branch to check if payment was processed",
-            "Verifying Payment",
-            { duration: 3500, panelClass: ["red - snackbar"] });
-          console.log("Unexpected Error occured:");
+          this.snackBar.open(
+            'An unexpected error occured, please contact the branch to check if payment was processed',
+            'Verifying Payment',
+            { duration: 3500, panelClass: ['red - snackbar'] }
+          );
+          console.log('Unexpected Error occured:');
           console.log(err);
         }
         this.loaded = true;
@@ -258,13 +259,12 @@ export class PaymentConfirmationComponent extends FormBase implements OnInit {
     );
   }
 
-
   /**
    * Return to dashboard
    * */
   return_to_application() {
-    if (this.trnApproved === "1") {
-      this.router.navigate(["./dashboard"]);
+    if (this.trnApproved === '1') {
+      this.router.navigate(['./dashboard']);
     } else {
       this.router.navigate([`./application/${this.applicationId}`]);
     }

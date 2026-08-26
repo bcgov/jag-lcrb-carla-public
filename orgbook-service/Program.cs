@@ -1,7 +1,7 @@
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Serilog;
@@ -15,13 +15,13 @@ namespace Gov.Lclb.Cllb.OrgbookService
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args)
+            CreateHostBuilder(args)
                 .Build()
                 .Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, config) =>
                 {
                     config.AddUserSecrets(Assembly.GetExecutingAssembly());
@@ -35,10 +35,14 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     logging.AddEventSourceLogger();
                 })
                 .UseSerilog()
-                .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
-                .UseStartup<Startup>();
-                //.UseKestrel(options => {
-                //    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
-                //});
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder
+                        .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
+                        .UseStartup<Startup>();
+                    //.UseKestrel(options => {
+                    //    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
+                    //});
+                });
     }
 }

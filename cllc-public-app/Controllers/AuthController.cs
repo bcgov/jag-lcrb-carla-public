@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     "DelegationJwt:SigningKey is not configured.");
             }
 
-            var key   = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKey));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             // Build claims (fully-qualify Claim to avoid type shadowing)
@@ -67,11 +67,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var minutes = int.TryParse(sec["LifetimeMinutes"], out var m) ? m : 10;
 
             var jwt = new JwtSecurityToken(
-                issuer:            sec["Issuer"],
-                audience:          sec["Audience"],
-                claims:            claims,
-                notBefore:         DateTime.UtcNow,
-                expires:           DateTime.UtcNow.AddMinutes(minutes),
+                issuer: sec["Issuer"],
+                audience: sec["Audience"],
+                claims: claims,
+                notBefore: DateTime.UtcNow,
+                expires: DateTime.UtcNow.AddMinutes(minutes),
                 signingCredentials: creds);
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -79,8 +79,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return Ok(new
             {
                 access_token = token,
-                token_type   = "Bearer",
-                expires_in   = minutes * 60
+                token_type = "Bearer",
+                expires_in = minutes * 60
             });
         }
     }

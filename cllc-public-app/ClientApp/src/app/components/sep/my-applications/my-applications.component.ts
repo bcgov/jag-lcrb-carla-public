@@ -3,14 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AppState } from '@app/app-state/models/app-state';
 import { ApplicationCancellationDialogComponent } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
+import { SepApplicationSummary } from '@models/sep-application-summary.model';
 import { SepApplication } from '@models/sep-application.model';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { StarterChecklistComponent } from '../starter-checklist/starter-checklist.component';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { SEP_APPLICATION_STEPS } from '../sep-application/sep-application.component';
-import { SepApplicationSummary } from '@models/sep-application-summary.model';
 
 @Component({
   selector: 'app-my-applications',
@@ -23,13 +21,15 @@ export class MyApplicationsComponent implements OnInit {
   currentUser: User;
   submittedApplication: SepApplicationSummary[];
 
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private db: IndexedDBService,
     private route: ActivatedRoute,
     private router: Router,
-    private dialog: MatDialog,
-    ) {
-    store.select(state => state.currentUserState.currentUser)
+    private dialog: MatDialog
+  ) {
+    store
+      .select((state) => state.currentUserState.currentUser)
       .subscribe((user: User) => {
         this.currentUser = user;
       });
@@ -41,7 +41,7 @@ export class MyApplicationsComponent implements OnInit {
 
   async getApplications() {
     let applications = await this.db.applications.toArray();
-    applications = applications.filter(app => app.eventStatus === 'Draft');
+    applications = applications.filter((app) => app.eventStatus === 'Draft');
     applications = applications.sort((a, b) => {
       const dateA = new Date(a.dateCreated).getTime();
       const dateB = new Date(b.dateCreated).getTime();
@@ -62,18 +62,16 @@ export class MyApplicationsComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(StarterChecklistComponent, dialogConfig);
-    dialogRef.afterClosed()
-      .subscribe((startApplication: boolean) => {
-        if (startApplication) {
-          const data = {
-            dateCreated: new Date()
-          } as SepApplication;
-          this.db.saveSepApplication(data)
-            .then(localId => {
-              this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
-            });
-        }
-      });
+    dialogRef.afterClosed().subscribe((startApplication: boolean) => {
+      if (startApplication) {
+        const data = {
+          dateCreated: new Date()
+        } as SepApplication;
+        this.db.saveSepApplication(data).then((localId) => {
+          this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
+        });
+      }
+    });
   }
 
   /**
@@ -95,16 +93,13 @@ export class MyApplicationsComponent implements OnInit {
     };
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(ApplicationCancellationDialogComponent, dialogConfig);
-    dialogRef.afterClosed()
-      .subscribe(async (cancelApplication) => {
-        if (cancelApplication) {
-          this.db.deleteSepApplication(localId);
-          await this.getApplications();
-        }
-      });
-
+    dialogRef.afterClosed().subscribe(async (cancelApplication) => {
+      if (cancelApplication) {
+        this.db.deleteSepApplication(localId);
+        await this.getApplications();
+      }
+    });
   }
-
 
   async cloneApplication(app: SepApplication) {
     const clone = { ...app };
@@ -112,15 +107,15 @@ export class MyApplicationsComponent implements OnInit {
     clone.id = undefined;
     clone.localId = undefined;
     if (clone?.eventLocations?.length > 0) {
-      clone.eventLocations.forEach(loc => {
+      clone.eventLocations.forEach((loc) => {
         loc.id = undefined;
         if (loc?.serviceAreas?.length > 0) {
-          loc.serviceAreas.forEach(area => {
+          loc.serviceAreas.forEach((area) => {
             area.id = undefined;
           });
         }
         if (loc?.eventDates?.length > 0) {
-          loc.eventDates.forEach(ed => {
+          loc.eventDates.forEach((ed) => {
             ed.id = undefined;
           });
         }
@@ -134,6 +129,4 @@ export class MyApplicationsComponent implements OnInit {
     } as SepApplication);
     this.router.navigateByUrl(`/sep/application/${localId}/applicant`);
   }
-
-
 }

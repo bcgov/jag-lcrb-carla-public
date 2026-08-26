@@ -13,7 +13,7 @@ export class MockApplicationComponent {
   @Input() values: Record<string, any> = {};
   @Input() uploadStatuses: Record<string, UploadStatus> = {};
 
-  @Input() activeFieldId? : string;
+  @Input() activeFieldId?: string;
 
   @Output() valueChange = new EventEmitter<{ id: string; value: any }>();
   @Output() uploadRequested = new EventEmitter<string>();
@@ -22,12 +22,20 @@ export class MockApplicationComponent {
   readonly days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
   // --- helpers for layouts
-  isUploads(sec: any) { return (sec?.layout || '').toLowerCase() === 'uploads'; }
-  isHours(sec: any) { return (sec?.layout || '').toLowerCase() === 'hours'; }
-  isGrid(sec: any) { return !this.isUploads(sec) && !this.isHours(sec); }
+  isUploads(sec: any) {
+    return (sec?.layout || '').toLowerCase() === 'uploads';
+  }
+  isHours(sec: any) {
+    return (sec?.layout || '').toLowerCase() === 'hours';
+  }
+  isGrid(sec: any) {
+    return !this.isUploads(sec) && !this.isHours(sec);
+  }
 
   // --- values api
-  getVal(id: string, fallback: any = '') { return this.values?.[id] ?? fallback; }
+  getVal(id: string, fallback: any = '') {
+    return this.values?.[id] ?? fallback;
+  }
 
   setVal(id: string, value: any) {
     // emit change (parent persists and mirrors back)
@@ -60,7 +68,7 @@ export class MockApplicationComponent {
   colClass(span?: number) {
     const s = span ?? 12;
     return {
-      'col': true,
+      col: true,
       'col-12': s === 12,
       'col-6': s === 6,
       'col-4': s === 4,
