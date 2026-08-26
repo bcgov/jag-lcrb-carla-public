@@ -15,14 +15,18 @@
     </div>
     <section *ngFor="let mappingItem of licenceMappings | keyvalue">
       <div *ngIf="LicenceTypeSupported(mappingItem.key)">
-        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="true">
+        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="true"
+          [hasOutstandingPriorBalance]="hasOutstandingPriorBalance"
+          [isOutstandingPriorBalanceInvoiceDue]="isOutstandingPriorBalanceInvoiceDue">
         </app-licence-row>
       </div>
     </section>
 
     <section *ngFor="let mappingItem of licenceMappings | keyvalue">
       <div *ngIf="!LicenceTypeSupported(mappingItem.key)">
-        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="false">
+        <app-licence-row [licenceType]="mappingItem.key" [licences]="mappingItem.value" [available]="false"
+          [hasOutstandingPriorBalance]="hasOutstandingPriorBalance"
+          [isOutstandingPriorBalanceInvoiceDue]="isOutstandingPriorBalanceInvoiceDue">
         </app-licence-row>
       </div>
     </section>

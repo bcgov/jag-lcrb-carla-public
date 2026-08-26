@@ -46,6 +46,8 @@ export class LicencesComponent extends FormBase implements OnInit {
   dataLoaded = false;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceMappings = {};
+  hasOutstandingPriorBalance = false;
+  isOutstandingPriorBalanceInvoiceDue = false;
   liquorThree: boolean;
   RLRS: boolean;
   PRS: boolean;
@@ -137,9 +139,52 @@ export class LicencesComponent extends FormBase implements OnInit {
           this.addOrUpdateLicence(licence);
         });
 
+        // Fetch events for every eligible licence in a single batched request instead of
+        // one HTTP call per licence.
+        const eventLicenceIds = combinedLicences
+          .filter((licence) => this.licenceTypeHasEvents(licence.licenceTypeName))
+          .map((licence) => licence.licenseId);
+        if (eventLicenceIds.length > 0) {
+          const eventsBusy = this.licenceEventsService.getLicenceEventsListBatch(eventLicenceIds, 20)
+            .subscribe((allEvents) => {
+              combinedLicences.forEach((licence) => {
+                if (!this.licenceTypeHasEvents(licence.licenceTypeName)) {
+                  return;
+                }
+                const events = allEvents.filter((event) => event.licenceId === licence.licenseId);
+                licence.events = events;
+                if (events.length > 0) {
+                  licence.headerRowSpan += 1;
+                }
+              });
+            });
+          combinedLicences.forEach((licence) => {
+            if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
+              licence.eventsBusy = eventsBusy;
+            }
+          });
+        }
+
         this.dataLoaded = true;
       });
-    this.subscriptionList.push(sub);
+
+    // Fire once in parent so all LicenceRowComponents share a single HTTP call
+    const balanceSub = this.licenceDataService.getOutstandingBalancePriorInvoices()
+      .pipe(takeWhile(() => this.componentActive))
+      .subscribe((data) => {
+        data.forEach((item: any) => {
+          if (!this.hasOutstandingPriorBalance) {
+            this.hasOutstandingPriorBalance = true;
+          }
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
+            const toDay = new Date(new Date().toISOString().split("T")[0]);
+            const tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
+            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
+          }
+        });
+      });
+
+    this.subscriptionList.push(sub, balanceSub);
   }
 
   hasPaidForRenewalApplication(licence: ApplicationLicenseSummary): boolean {
@@ -172,18 +217,6 @@ export class LicencesComponent extends FormBase implements OnInit {
       };
       licence.actionApplications.push(action);
     });
-    if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
-      licence.eventsBusy = forkJoin([
-        this.licenceEventsService.getLicenceEventsList(licence.licenseId, 20)
-      ])
-        .subscribe(data => {
-          licence.events = data[0];
-          if (licence.events.length > 0) {
-            licence.headerRowSpan += 1;
-          }
-        });
-    }
-
     if (typeof this.licenceMappings[licence.licenceTypeName] === "undefined") {
       this.licenceMappings[licence.licenceTypeName] = [];
     }

@@ -1,15 +1,14 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Models
@@ -35,1071 +34,764 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, ViewModels.Application from)
+        public static void CopyValues(this DV::Gov.Lclb.Cllb.Interfaces.adoxio_application to, ViewModels.Application from)
         {
-            to.AdoxioName = from.Name;
-            //to.Adoxio_jobnumber = from.jobNumber;            
-            to.AdoxioEstablishmentpropsedname = from.EstablishmentName;
-            to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
-            to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
-            to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
-            to.AdoxioPin = from.Pin;
-            // 12-10-2019 - Removed the update to AdoxioAddressCity as the Dynamics workflow handles that.
-
-            to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
-            to.AdoxioEstablishmentphone = from.EstablishmentPhone;
-            to.AdoxioEstablishmentemail = from.EstablishmentEmail;
-
-            to.AdoxioContactpersonfirstname = from.ContactPersonFirstName;
-            to.AdoxioContactpersonlastname = from.ContactPersonLastName;
-            to.AdoxioRole = from.ContactPersonRole;
-            to.AdoxioEmail = from.ContactPersonEmail;
-            to.AdoxioContactpersonphone = from.ContactPersonPhone;
-            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-            to.AdoxioSignatureagreement = from.SignatureAgreement;
-            to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
-            to.AdoxioFederalproducernames = from.FederalProducerNames;
-
-            to.AdoxioInvoicetrigger = (int?)from.InvoiceTrigger;
-
-            to.AdoxioRenewalcriminaloffencecheck = (int?)from.RenewalCriminalOffenceCheck;
-            to.AdoxioRenewalunreportedsaleofbusiness = (int?)from.RenewalUnreportedSaleOfBusiness;
-            to.AdoxioRenewalbusinesstype = (int?)from.RenewalBusinessType;
-            to.AdoxioRenewaltiedhouse = (int?)from.RenewalTiedhouse;
-            to.AdoxioRenewalorgleadership = (int?)from.RenewalOrgLeadership;
-            to.AdoxioRenewalkeypersonnel = (int?)from.Renewalkeypersonnel;
-            to.AdoxioRenewalshareholders = (int?)from.RenewalShareholders;
-            to.AdoxioRenewaloutstandingfines = (int?)from.RenewalOutstandingFines;
-            to.AdoxioRenewalbranding = (int?)from.RenewalBranding;
-            to.AdoxioRenewalsignage = (int?)from.RenewalSignage;
-            to.AdoxioRenewalestablishmentaddress = (int?)from.RenewalEstablishmentAddress;
-            to.AdoxioRenewalvalidinterest = (int?)from.RenewalValidInterest;
-            to.AdoxioRenewalzoning = (int?)from.RenewalZoning;
-            to.AdoxioRenewalfloorplan = (int?)from.RenewalFloorPlan;
-            to.AdoxioRenewalsitemap = (int?)from.RenewalSiteMap;
-            to.AdoxioRenewaltiedhousefederalinterest = (int?)from.TiedhouseFederalInterest;
-            to.AdoxioRenewalfedlic = (int?)from.RenewalFederalLicence;
-            to.AdoxioRenewalfedsec = (int?)from.RenewalFederalSecurity;
-            to.AdoxioDescription1 = from.Description1;
-            to.AdoxioDescription2 = from.Description2;
-            to.AdoxioDescription3 = from.Description3;
-            to.AdoxioTempdatefrom = from.TempDateFrom;
-            to.AdoxioTempdateto = from.TempDateTo;
-
-            to.AdoxioM01 = from.IsMonth01;
-            to.AdoxioM02 = from.IsMonth02;
-            to.AdoxioM03 = from.IsMonth03;
-
-            to.AdoxioM04 = from.IsMonth04;
-            to.AdoxioM05 = from.IsMonth05;
-            to.AdoxioM06 = from.IsMonth06;
-
-            to.AdoxioM07 = from.IsMonth07;
-            to.AdoxioM08 = from.IsMonth08;
-            to.AdoxioM09 = from.IsMonth09;
-
-            to.AdoxioM10 = from.IsMonth10;
-            to.AdoxioM11 = from.IsMonth11;
-            to.AdoxioM12 = from.IsMonth12;
-
-            //store opening
-            to.AdoxioIsreadyworkers = from.IsReadyWorkers;
-            to.AdoxioIsreadynamebranding = from.IsReadyNameBranding;
-            to.AdoxioIsreadydisplays = from.IsReadyDisplays;
-            to.AdoxioIsreadyintruderalarm = from.IsReadyIntruderAlarm;
-            to.AdoxioIsreadyfirealarm = from.IsReadyFireAlarm;
-            to.AdoxioIsreadylockedcases = from.IsReadyLockedCases;
-            to.AdoxioIsreadylockedstorage = from.IsReadyLockedStorage;
-            to.AdoxioIsreadyperimeter = from.IsReadyPerimeter;
-            to.AdoxioIsreadyretailarea = from.IsReadyRetailArea;
-            to.AdoxioIsreadystorage = from.IsReadyStorage;
-            to.AdoxioIsreadyentranceexit = from.IsReadyExtranceExit;
-            to.AdoxioIsreadysurveillancenotice = from.IsReadySurveillanceNotice;
-            to.AdoxioIsreadyproductnotvisibleoutside = from.IsReadyProductNotVisibleOutside;
-            to.AdoxioIslocatedingrocerystore = from.IsLocatedInGroceryStore;
-            to.AdoxioEstablishmentopeningdate = from.Establishmentopeningdate;
-            to.AdoxioIsreadyvalidinterest = from.IsReadyValidInterest;
-
-            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-            to.AdoxioSignatureagreement = from.SignatureAgreement;
-
-            to.AdoxioApplicanttype = (int?)from.ApplicantType == 0 ? null: (int?)from.ApplicantType;
-            to.AdoxioLgzoning = (int?)from.LgZoning;
-            to.AdoxioLgdecisioncomments = from.LGDecisionComments;
-
-            // catering fields
-            to.AdoxioPreviouslicenceapplication = from.PreviousApplication;
-            to.AdoxioPreviouslicenceapplicationdetails = from.PreviousApplicationDetails;
-            to.AdoxioRuralagencystoreappointment = from.RuralAgencyStoreAppointment;
-            to.AdoxioLiquorindustryconnections = from.LiquorIndustryConnections;
-            to.AdoxioLiquorindustryconnectionsdetails = from.LiquorIndustryConnectionsDetails;
-            to.AdoxioOtherbusinessesatthesamelocation = from.OtherBusinesses;
-            to.AdoxioOtherbusinesssamelocationdetails = from.OtherBusinessesDetails;
-            to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-
-            to.AdoxioRenewaldui = (int?)from.RenewalDUI;
-            to.AdoxioRenewalthirdparty = (int?)from.RenewalThirdParty;
-
-            to.AdoxioIsownerbusiness = from.IsOwnerBusiness;
-            to.AdoxioIsownerhasvalidinterest = from.HasValidInterest;
-            to.AdoxioIsownerwillhavevalidinterest = from.WillHaveValidInterest;
-            to.AdoxioZoningstatus = @from.ZoningStatus;
-
-            to.AdoxioIshaspatio = from.IsHasPatio;
-
-            //lg approval fields
-            to.AdoxioLgnoobjection = from.LgNoObjection;
-
-            to.AdoxioLgnameofofficial = from.LGNameOfOfficial;
-            to.AdoxioLgtitleposition = from.LGTitlePosition;
-            to.AdoxioLgcontactphone = from.LGContactPhone;
-            to.AdoxioLgcontactemail = from.LGContactEmail;
-            to.AdoxioLgdecisionsubmissiondate = from.LGDecisionSubmissionDate;
-            to.AdoxioLgapprovaldecision = (int?)from.LGApprovalDecision;
-
-            // Manufacturing fields
-            to.AdoxioIspackaging = from.IsPackaging;
-            to.AdoxioMfgpipedinproduct = (int?)from.MfgPipedInProduct;
-            to.AdoxioMfgbrewpubonsite = (int?)from.MfgBrewPubOnSite;
-            to.AdoxioMfgacresoffruit = from.MfgAcresOfFruit;
-            to.AdoxioMfgacresofgrapes = from.MfgAcresOfGrapes;
-            to.AdoxioMfgacresofhoney = from.MfgAcresOfHoney;
-            to.AdoxioMfgmeetsproductionminimum = from.MfgMeetsProductionMinimum;
-            to.AdoxioMfgstepblending = from.MfgStepBlending;
-            to.AdoxioMfgstepcrushing = from.MfgStepCrushing;
-            to.AdoxioMfgstepfiltering = from.MfgStepFiltering;
-            to.AdoxioMfgstepsecfermorcarb = from.MfgStepSecFermOrCarb;
-            to.AdoxioMfgusesneutralgrainspirits = (int?)from.MfgUsesNeutralGrainSpirits;
-            to.AdoxioPidlist = from.PidList;
-            to.AdoxioIspermittedinzoning = from.IsPermittedInZoning;
-
-            // Permanent Change to a Licensee
-            to.AdoxioFirstnameold = from.FirstNameOld;
-            to.AdoxioFirstnamenew = from.FirstNameNew;
-            to.AdoxioLastnameold = from.LastNameOld;
-            to.AdoxioLastnamenew = from.LastNameNew;
-
-            to.AdoxioCsinternaltransferofshares = from.CsInternalTransferOfShares;
-            to.AdoxioCsexternaltransferofshares = from.CsExternalTransferOfShares;
-            to.AdoxioCschangeofdirectorsorofficers = from.CsChangeOfDirectorsOrOfficers;
-            to.AdoxioCsnamechangelicenseecorporation = from.CsNameChangeLicenseeCorporation;
-            to.AdoxioCsnamechangelicenseepartnership = from.CsNameChangeLicenseePartnership;
-            to.AdoxioCsnamechangelicenseesociety = from.CsNameChangeLicenseeSociety;
-            to.AdoxioCsnamechangeperson = from.CsNameChangeLicenseePerson;
-            to.AdoxioCsadditionofreceiverorexecutor = from.CsAdditionalReceiverOrExecutor;
-            to.AdoxioCschangetotiedhouse = from.CsTiedHouseDeclaration;
-
-            // Manufacturing structural change fields
-
-            to.AdoxioPatiocompdescription = from.PatioCompDescription;
-            to.AdoxioPatiolocationdescription = from.PatioLocationDescription;
-            to.AdoxioPatioaccessdescription = from.PatioAccessDescription;
-            to.AdoxioPatioisliquorcarried = from.PatioIsLiquorCarried;
-            to.AdoxioPatioliquorcarrieddescription = from.PatioLiquorCarriedDescription;
-            to.AdoxioPatioaccesscontroldescription = from.PatioAccessControlDescription;
-            to.AdoxioLocatedabovedescription = @from.LocatedAboveDescription;
-            to.AdoxioPatioservicebar = from.PatioServiceBar;
-
-            to.AdoxioProposedestablishmentisalr = from.IsAlr;
-            to.AdoxioHascooleraccess = from.HasCoolerAccess;
-
-            to.AdoxioLocatedaboveother = from.LocatedAboveOther;
-
-            if (from.IsOnINLand == true)
-            {
-                to.AdoxioIsoninland = (int)DefaultYesNoLookup.Yes;
-            }
-            else
-            {
-                to.AdoxioIsoninland = null;
-            }
-
-            // RLRS - Eligibility fields
-
-            to.AdoxioIsrlrslocatedinruralcommunityalone = from.IsRlrsLocatedInRuralCommunityAlone;
-            to.AdoxioIsrlrslocatedattouristdestinationalone = from.IsRlrsLocatedAtTouristDestinationAlone;
-            to.AdoxioDescriberlrsresortcommunity = from.RlrsResortCommunityDescription;
-            to.AdoxioHasyearroundallweatherroadaccess = from.HasYearRoundAllWeatherRoadAccess;
-            to.AdoxioDoesgeneralstoreoperateseasonally = from.DoesGeneralStoreOperateSeasonally;
-            to.AdoxioSurroundingresidentsofrlrs = from.SurroundingResidentsOfRlrs;
-            to.AdoxioIsrlrsatleast10kmfromanotherstore = from.IsRlrsAtLeast10kmFromAnotherStore;
-            to.AdoxioIsapplicantownerofstore = from.IsApplicantOwnerOfStore;
-            to.AdoxioLegalandbeneficialownersofstore = from.LegalAndBeneficialOwnersOfStore;
-            to.AdoxioIsapplicantfranchiseoraffiliated = from.IsApplicantFranchiseOrAffiliated;
-            to.AdoxioFranchiseoraffiliatedbusiness = from.FranchiseOrAffiliatedBusiness;
-            to.AdoxioHassufficientrangeofproducts = from.HasSufficientRangeOfProducts;
-            to.AdoxioHasotherproducts = from.HasOtherProducts;
-            to.AdoxioHasadditionalservices = from.HasAdditionalServices;
-            to.AdoxioStoreopendate = from.StoreOpenDate;
-            to.AdoxioConfirmliquorsalesisnotprimarybusiness = from.ConfirmLiquorSalesIsNotPrimaryBusiness;
-            to.AdoxioManufacturerproductionamountforprevyear = from.ManufacturerProductionAmountForPrevYear;
-            to.AdoxioManufacturerproductionamountunit = from.ManufacturerProductionAmountUnit;
-            //LCSD-6304
-            to.AdoxioPicnicconfirmslgfnsupportscapacity = from.PicnicConfirmLGFNCapacity;
-            to.AdoxioPicnicconfirmszoning = from.PicnicConfirmZoning;
-            to.AdoxioPicnicreadandaccepttermsandconditions = from.PicnicReadAndAccept;
-            //LCSD-6406
-            to.AdoxioFederallicencenumber = from.FederalLicenceNumber;
-            to.AdoxioFederallicencename = from.FederalLicenceName;
-            to.AdoxioFpaddresscity = from.FPAddressCity;
-            to.AdoxioFpaddresspostalcode = from.FPAddressPostalCode;
-            to.AdoxioFpaddressstreet = from.FPAddressStreet;
-
-            to.AdoxioProductslistanddescription = from.ProductsListAndDescription;
-
-            to.AdoxioUploaddeclarations = from.UploadDeclarations;
-
-            to.AdoxioMfrsupinforeadunderstand = from.MfrSupInfoReadUnderstand;
-            to.AdoxioMfrsupinfointendproduce = from.MfrSupInfoIntendProduce;
-            to.AdoxioMfrsupinfoownrent = from.MfrSupInfoOwnRent;
-            to.AdoxioMfrsupinfoproductionequipment = from.MfrSupInfoProductionEquipment;
-
-            to.AdoxioVolumeproduced = from.VolumeProduced;
-            to.AdoxioVolumedestroyed = from.VolumeDestroyed;
-            to.AdoxioLdbordertotals = from.LdbOrderTotals==0? default(decimal?): from.LdbOrderTotals;
-            //LCSD-5779
-            to.AdoxioTiedhouseexemption = from.WillHaveTiedHouseExemption;
-            to.AdoxioTempsuspensionorpatronparticipationstart = from.TempSuspensionOrPatronParticipationStart;
-
-            to.AdoxioRelocateonsitestore = from.RelocateOnSiteStore ? 1:0;
-            to.AdoxioConfirmpermitsretailsales = from.ConfirmPermitsRetailSales ? 1:0;
-            to.AdoxioRelocatepicnicareaendorsement = from.RelocatePicnicAreaEndorsement ? 1:0;
-            to.AdoxioConfirmrelocatepicnicareaendorsement = from.ConfirmrelocatePicnicAreaEndorsement ? 1:0;
-            to.AdoxioRelocatewinerylicence = from.RelocateWinaryLicence ? 1:0;
-            to.AdoxioConfirmunderstandingwinerylicence= from.ConfirmRelocateWinaryLicence?1:0;
-            to.AdoxioDormancystartdate = from.DormancyStartDate;
-            to.AdoxioDormancyenddate = from.DormancyEndDate;
-            to.AdoxioDormancynotes = from.DormancyNotes;
-            to.AdoxioDormancyreasons = from.DormancyReasons;
-            to.AdoxioEstablishmentstatus = from.EstablishmentStatus;
-            to.AdoxioDormancyintentionforreopening = from.DormancyIntentionForReopening;
-            // LCSD-6170: 2024-02-02 waynezen
-            to.AdoxioIspatioboundingsufficientforcontrol = from.isBoundingSufficientForControl;
-            to.AdoxioIspatioboundingsufficienttodefinearea = from.isBoundingSufficientToDefine;
-            to.AdoxioIsadequatecareandcontroloverthepatio = from.isAdequateCare;
-            to.AdoxioIspatioincompliance = from.isInCompliance;
-
-            // LCSD-6959: 2024-02-12 waynezen
-            to.AdoxioStatusofconstruction = from.statusOfConstruction;
-
-            to.AdoxioValidinterestdormancyperiod = from.validInterestDormancyPeriod ? 1 : 0; 
-            to.AdoxioAffirminformationproividedtrueandcomplete = from.affirmInformationProividedTrueAndComplete ? 1 : 0; 
-            to.AdoxioValidinterestestablishmentlocation = from.validInterestEstablishmentLocation? 1 : 0;
-            to.AdoxioEstablishmentreopeningdate = from.EstablishmentReopeningDate;
-            
-            to.AdoxioChecklistdrivingrecordcomplete = from.temporaryRelocationCriteria;
-
-            to.Statuscode = (int?)from.ApplicationStatus == 0 ? null : (int?)from.ApplicationStatus;
-
+            to.adoxio_name = from.Name;
+            to.adoxio_EstablishmentPropsedName = from.EstablishmentName;
+            to.adoxio_EstablishmentAddressStreet = from.EstablishmentAddressStreet;
+            to.adoxio_EstablishmentAddressCity = from.EstablishmentAddressCity;
+            to.adoxio_EstablishmentAddressPostalCode = from.EstablishmentAddressPostalCode;
+            to.adoxio_PIN = from.Pin;
+            to.adoxio_EstablishmentParcelID = from.EstablishmentParcelId;
+            to.adoxio_EstablishmentPhone = from.EstablishmentPhone;
+            to.adoxio_EstablishmentEmail = from.EstablishmentEmail;
+            to.adoxio_ContactPersonFirstName = from.ContactPersonFirstName;
+            to.adoxio_ContactPersonLastName = from.ContactPersonLastName;
+            to.adoxio_Role = from.ContactPersonRole;
+            to.adoxio_Email = from.ContactPersonEmail;
+            to.adoxio_ContactPersonPhone = from.ContactPersonPhone;
+            to.adoxio_AuthorizedtoSubmit = from.AuthorizedToSubmit;
+            to.adoxio_SignatureAgreement = from.SignatureAgreement;
+            to.adoxio_AdditionalPropertyInformation = from.AdditionalPropertyInformation;
+            to.adoxio_FederalProducerNames = from.FederalProducerNames;
+            to.adoxio_InvoiceTrigger = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.InvoiceTrigger;
+            to.adoxio_RenewalCriminalOffenceCheck = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalcriminaloffencecheck?)(int?)from.RenewalCriminalOffenceCheck;
+            to.adoxio_RenewalUnreportedSaleofBusiness = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalunreportedsaleofbusiness?)(int?)from.RenewalUnreportedSaleOfBusiness;
+            to.adoxio_RenewalBusinessType = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalbusinesstype?)(int?)from.RenewalBusinessType;
+            to.adoxio_RenewalTiedHouse = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewaltiedhouse?)(int?)from.RenewalTiedhouse;
+            to.adoxio_RenewalOrgLeadership = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalorgleadership?)(int?)from.RenewalOrgLeadership;
+            to.adoxio_RenewalKeyPersonnel = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalkeypersonnel?)(int?)from.Renewalkeypersonnel;
+            to.adoxio_RenewalShareholders = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalshareholders?)(int?)from.RenewalShareholders;
+            to.adoxio_RenewalOutstandingFines = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewaloutstandingfines?)(int?)from.RenewalOutstandingFines;
+            to.adoxio_RenewalBranding = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalbranding?)(int?)from.RenewalBranding;
+            to.adoxio_RenewalSignage = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalsignage?)(int?)from.RenewalSignage;
+            to.adoxio_RenewalEstablishmentAddress = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalestablishmentaddress?)(int?)from.RenewalEstablishmentAddress;
+            to.adoxio_RenewalValidInterest = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalvalidinterest?)(int?)from.RenewalValidInterest;
+            to.adoxio_RenewalZoning = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalzoning?)(int?)from.RenewalZoning;
+            to.adoxio_RenewalFloorPlan = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalfloorplan?)(int?)from.RenewalFloorPlan;
+            to.adoxio_RenewalSiteMap = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalsitemap?)(int?)from.RenewalSiteMap;
+            to.adoxio_RenewalTiedHouseFederalInterest = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewaltiedhousefederalinterest?)(int?)from.TiedhouseFederalInterest;
+            to.adoxio_renewalfedlic = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalfedlic?)(int?)from.RenewalFederalLicence;
+            to.adoxio_renewalfedsec = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalfedsec?)(int?)from.RenewalFederalSecurity;
+            to.adoxio_Description1 = from.Description1;
+            to.adoxio_Description2 = from.Description2;
+            to.adoxio_Description3 = from.Description3;
+            to.adoxio_TempDateFrom = from.TempDateFrom?.UtcDateTime;
+            to.adoxio_TempDateTo = from.TempDateTo?.UtcDateTime;
+            to.adoxio_M01 = from.IsMonth01;
+            to.adoxio_M02 = from.IsMonth02;
+            to.adoxio_M03 = from.IsMonth03;
+            to.adoxio_M04 = from.IsMonth04;
+            to.adoxio_M05 = from.IsMonth05;
+            to.adoxio_M06 = from.IsMonth06;
+            to.adoxio_M07 = from.IsMonth07;
+            to.adoxio_M08 = from.IsMonth08;
+            to.adoxio_M09 = from.IsMonth09;
+            to.adoxio_M10 = from.IsMonth10;
+            to.adoxio_M11 = from.IsMonth11;
+            to.adoxio_M12 = from.IsMonth12;
+            to.adoxio_IsReadyWorkers = from.IsReadyWorkers;
+            to.adoxio_IsReadyNameBranding = from.IsReadyNameBranding;
+            to.adoxio_IsReadyDisplays = from.IsReadyDisplays;
+            to.adoxio_IsReadyIntruderAlarm = from.IsReadyIntruderAlarm;
+            to.adoxio_IsReadyFireAlarm = from.IsReadyFireAlarm;
+            to.adoxio_IsReadyLockedCases = from.IsReadyLockedCases;
+            to.adoxio_IsReadyLockedStorage = from.IsReadyLockedStorage;
+            to.adoxio_IsReadyPerimeter = from.IsReadyPerimeter;
+            to.adoxio_IsReadyRetailArea = from.IsReadyRetailArea;
+            to.adoxio_IsReadyStorage = from.IsReadyStorage;
+            to.adoxio_IsReadyEntranceExit = from.IsReadyExtranceExit;
+            to.adoxio_IsReadySurveillanceNotice = from.IsReadySurveillanceNotice;
+            to.adoxio_IsReadyProductNotVisibleOutside = from.IsReadyProductNotVisibleOutside;
+            to.adoxio_isLocatedInGroceryStore = from.IsLocatedInGroceryStore;
+            to.adoxio_EstablishmentOpeningDate = from.Establishmentopeningdate?.UtcDateTime;
+            to.adoxio_IsReadyValidInterest = from.IsReadyValidInterest;
+            to.adoxio_ApplicantType = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicanttypecodes?)(int?)from.ApplicantType == 0 ? null : (DV::Gov.Lclb.Cllb.Interfaces.adoxio_applicanttypecodes?)(int?)from.ApplicantType;
+            to.adoxio_LGZoning = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_lgzoning?)(int?)from.LgZoning;
+            to.adoxio_LGDecisionComments = from.LGDecisionComments;
+            to.adoxio_PreviousLicenceApplication = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_previouslicenceapplication?)(int?)from.PreviousApplication;
+            to.adoxio_PreviousLicenceApplicationDetails = from.PreviousApplicationDetails;
+            to.adoxio_RuralAgencyStoreAppointment = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_ruralagencystoreappointment?)(int?)from.RuralAgencyStoreAppointment;
+            to.adoxio_LiquorIndustryConnections = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_liquorindustryconnections?)(int?)from.LiquorIndustryConnections;
+            to.adoxio_LiquorIndustryConnectionsDetails = from.LiquorIndustryConnectionsDetails;
+            to.adoxio_Otherbusinessesatthesamelocation = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.OtherBusinesses;
+            to.adoxio_OtherBusinessSameLocationDetails = from.OtherBusinessesDetails;
+            to.adoxio_IsApplicationComplete = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.IsApplicationComplete;
+            to.adoxio_RenewalDUI = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewaldui?)(int?)from.RenewalDUI;
+            to.adoxio_RenewalThirdParty = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_renewalthirdparty?)(int?)from.RenewalThirdParty;
+            to.adoxio_IsOwnerBusiness = from.IsOwnerBusiness;
+            to.adoxio_IsOwnerHasValidInterest = from.HasValidInterest;
+            to.adoxio_IsOwnerWillHaveValidInterest = from.WillHaveValidInterest;
+            to.adoxio_ZoningStatus = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_zoningstatus?)(int?)from.ZoningStatus;
+            to.adoxio_IsHasPatio = from.IsHasPatio;
+            to.adoxio_LGNoObjection = from.LgNoObjection;
+            to.adoxio_LGNameofOfficial = from.LGNameOfOfficial;
+            to.adoxio_LGTitlePosition = from.LGTitlePosition;
+            to.adoxio_LGContactPhone = from.LGContactPhone;
+            to.adoxio_LGContactEmail = from.LGContactEmail;
+            to.adoxio_LGDecisionSubmissionDate = from.LGDecisionSubmissionDate?.UtcDateTime;
+            to.adoxio_LGApprovalDecision = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_lgapprovaldecision?)(int?)from.LGApprovalDecision;
+            to.adoxio_IsPackaging = from.IsPackaging;
+            to.adoxio_MFGPipedInProduct = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_mfgpipedinproduct?)(int?)from.MfgPipedInProduct;
+            to.adoxio_MFGBrewpubOnSite = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_mfgbrewpubonsite?)(int?)from.MfgBrewPubOnSite;
+            to.adoxio_MFGAcresOfFruit = from.MfgAcresOfFruit;
+            to.adoxio_MFGAcresOfGrapes = from.MfgAcresOfGrapes;
+            to.adoxio_MFGAcresOfHoney = from.MfgAcresOfHoney;
+            to.adoxio_MFGMeetsProductionMinimum = from.MfgMeetsProductionMinimum;
+            to.adoxio_MFGStepBlending = from.MfgStepBlending;
+            to.adoxio_MFGStepCrushing = from.MfgStepCrushing;
+            to.adoxio_MFGStepFiltering = from.MfgStepFiltering;
+            to.adoxio_MFGStepSecFermOrCarb = from.MfgStepSecFermOrCarb;
+            to.adoxio_MFGUsesNeutralGrainSpirits = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_mfgusesneutralgrainspirits?)(int?)from.MfgUsesNeutralGrainSpirits;
+            to.adoxio_PIDList = from.PidList;
+            to.adoxio_IsPermittedInZoning = from.IsPermittedInZoning;
+            to.adoxio_FirstNameOld = from.FirstNameOld;
+            to.adoxio_FirstNameNew = from.FirstNameNew;
+            to.adoxio_LastNameOld = from.LastNameOld;
+            to.adoxio_LastNameNew = from.LastNameNew;
+            to.adoxio_CSInternalTransferofShares = from.CsInternalTransferOfShares;
+            to.adoxio_CSExternalTransferofShares = from.CsExternalTransferOfShares;
+            to.adoxio_CSChangeofDirectorsorOfficers = from.CsChangeOfDirectorsOrOfficers;
+            to.adoxio_CSNameChangeLicenseeCorporation = from.CsNameChangeLicenseeCorporation;
+            to.adoxio_CSNameChangeLicenseePartnership = from.CsNameChangeLicenseePartnership;
+            to.adoxio_CSNameChangeLicenseeSociety = from.CsNameChangeLicenseeSociety;
+            to.adoxio_CSNameChangePerson = from.CsNameChangeLicenseePerson;
+            to.adoxio_CSAdditionofReceiverorExecutor = from.CsAdditionalReceiverOrExecutor;
+            to.adoxio_CSChangeToTiedHouse = from.CsTiedHouseDeclaration;
+            to.adoxio_PatioCompDescription = from.PatioCompDescription;
+            to.adoxio_PatioLocationDescription = from.PatioLocationDescription;
+            to.adoxio_PatioAccessDescription = from.PatioAccessDescription;
+            to.adoxio_PatioIsLiquorCarried = from.PatioIsLiquorCarried;
+            to.adoxio_PatioLiquorCarriedDescription = from.PatioLiquorCarriedDescription;
+            to.adoxio_PatioAccessControlDescription = from.PatioAccessControlDescription;
+            to.adoxio_LocatedAboveDescription = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_locatedabovedescription?)(int?)from.LocatedAboveDescription;
+            to.adoxio_PatioServiceBar = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_patioservicebar?)(int?)from.PatioServiceBar;
+            to.adoxio_proposedestablishmentisALR = from.IsAlr;
+            to.adoxio_HasCoolerAccess = from.HasCoolerAccess;
+            to.adoxio_LocatedAboveOther = from.LocatedAboveOther;
+            to.adoxio_IsonINLand = from.IsOnINLand == true
+                ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isoninland.Yes
+                : (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isoninland?)null;
+            to.adoxio_IsRLRSLocatedinRuralCommunityAlone = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isrlrslocatedinruralcommunityalone?)(int?)from.IsRlrsLocatedInRuralCommunityAlone;
+            to.adoxio_IsRLRSLocatedAtTouristDestinationAlone = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isrlrslocatedattouristdestinationalone?)(int?)from.IsRlrsLocatedAtTouristDestinationAlone;
+            to.adoxio_DescribeRLRSResortCommunity = from.RlrsResortCommunityDescription;
+            to.adoxio_HasYearRoundAllWeatherRoadAccess = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_hasyearroundallweatherroadaccess?)(int?)from.HasYearRoundAllWeatherRoadAccess;
+            to.adoxio_DoesGeneralStoreOperateSeasonally = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_doesgeneralstoreoperateseasonally?)(int?)from.DoesGeneralStoreOperateSeasonally;
+            to.adoxio_SurroundingResidentsOfRLRS = from.SurroundingResidentsOfRlrs;
+            to.adoxio_IsRLRSAtLeast10KMFromAnotherStore = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isrlrsatleast10kmfromanotherstore?)(int?)from.IsRlrsAtLeast10kmFromAnotherStore;
+            to.adoxio_IsApplicantOwnerofStore = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isapplicantownerofstore?)(int?)from.IsApplicantOwnerOfStore;
+            to.adoxio_LegalandBeneficialOwnersofStore = from.LegalAndBeneficialOwnersOfStore;
+            to.adoxio_IsApplicantFranchiseorAffiliated = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_isapplicantfranchiseoraffiliated?)(int?)from.IsApplicantFranchiseOrAffiliated;
+            to.adoxio_FranchiseOrAffiliatedBusiness = from.FranchiseOrAffiliatedBusiness;
+            to.adoxio_HasSufficientRangeofProducts = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_hassufficientrangeofproducts?)(int?)from.HasSufficientRangeOfProducts;
+            to.adoxio_HasOtherProducts = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_hasotherproducts?)(int?)from.HasOtherProducts;
+            to.adoxio_HasAdditionalServices = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_hasadditionalservices?)(int?)from.HasAdditionalServices;
+            to.adoxio_StoreOpenDate = from.StoreOpenDate?.UtcDateTime;
+            to.adoxio_ConfirmLiquorSalesIsNotPrimaryBusiness = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_confirmliquorsalesisnotprimarybusiness?)(int?)from.ConfirmLiquorSalesIsNotPrimaryBusiness;
+            to.adoxio_manufacturerproductionamountforprevyear = from.ManufacturerProductionAmountForPrevYear;
+            to.adoxio_manufacturerproductionamountunit = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_manufacturerproductionamountunit?)(int?)from.ManufacturerProductionAmountUnit;
+            to.adoxio_PicnicConfirmsLGFNSupportsCapacity = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.PicnicConfirmLGFNCapacity;
+            to.adoxio_PicnicConfirmsZoning = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.PicnicConfirmZoning;
+            to.adoxio_PicnicReadandAcceptTermsandConditions = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno?)(int?)from.PicnicReadAndAccept;
+            to.adoxio_FederalLicenceNumber = from.FederalLicenceNumber;
+            to.adoxio_FederalLicenceName = from.FederalLicenceName;
+            to.adoxio_FPAddressCity = from.FPAddressCity;
+            to.adoxio_FPAddressPostalCode = from.FPAddressPostalCode;
+            to.adoxio_FPAddressStreet = from.FPAddressStreet;
+            to.adoxio_productslistanddescription = from.ProductsListAndDescription;
+            to.adoxio_uploaddeclarations = from.UploadDeclarations;
+            to.adoxio_MfrSupInfoReadUnderstand = from.MfrSupInfoReadUnderstand;
+            to.adoxio_MfrSupInfoIntendProduce = from.MfrSupInfoIntendProduce;
+            to.adoxio_MfrSupInfoOwnRent = from.MfrSupInfoOwnRent;
+            to.adoxio_MfrSupInfoProductionEquipment = from.MfrSupInfoProductionEquipment;
+            to.adoxio_volumeproduced = from.VolumeProduced;
+            to.adoxio_volumedestroyed = from.VolumeDestroyed;
+            to.adoxio_ldbordertotals = from.LdbOrderTotals == 0 ? (decimal?)null : from.LdbOrderTotals;
+            to.adoxio_TiedHouseExemption = from.WillHaveTiedHouseExemption;
+            to.adoxio_tempsuspensionorpatronparticipationstart = from.TempSuspensionOrPatronParticipationStart?.UtcDateTime;
+            to.adoxio_tempsuspensionorpatronparticipationend = from.TempSuspensionOrPatronParticipationEnd?.UtcDateTime;
+            to.adoxio_relocateOnSiteStore = from.RelocateOnSiteStore ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_confirmPermitsRetailSales = from.ConfirmPermitsRetailSales ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_relocatePicnicAreaEndorsement = from.RelocatePicnicAreaEndorsement ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_confirmrelocatePicnicAreaEndorsement = from.ConfirmrelocatePicnicAreaEndorsement ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_RelocateWineryLicence = from.RelocateWinaryLicence ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_confirmUnderstandingWineryLicence = from.ConfirmRelocateWinaryLicence ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_DormancyStartDate = from.DormancyStartDate?.UtcDateTime;
+            to.adoxio_DormancyEndDate = from.DormancyEndDate?.UtcDateTime;
+            to.adoxio_DormancyNotes = from.DormancyNotes;
+            to.adoxio_DormancyReasons = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_dormancyreasons?)(int?)from.DormancyReasons;
+            to.adoxio_EstablishmentStatus = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_establishmentstatus?)(int?)from.EstablishmentStatus;
+            to.adoxio_DormancyIntentionforReopening = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_dormancyintentionforreopening?)(int?)from.DormancyIntentionForReopening;
+            to.adoxio_IsPatioBoundingSufficientForControl = from.isBoundingSufficientForControl;
+            to.adoxio_IsPatioBoundingSufficientToDefineArea = from.isBoundingSufficientToDefine;
+            to.adoxio_IsAdequateCareandControlOverthePatio = from.isAdequateCare;
+            to.adoxio_IsPatioInCompliance = from.isInCompliance;
+            to.adoxio_StatusOfConstruction = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_statusofconstruction?)(int?)from.statusOfConstruction;
+            to.adoxio_ValidInterestDormancyPeriod = from.validInterestDormancyPeriod ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_AffirmInformationProividedTrueAndComplete = from.affirmInformationProividedTrueAndComplete ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_ValidInterestEstablishmentLocation = from.validInterestEstablishmentLocation ? DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.Yes : DV::Gov.Lclb.Cllb.Interfaces.adoxio_generalyesno.No;
+            to.adoxio_EstablishmentReopeningDate = from.EstablishmentReopeningDate?.UtcDateTime;
+            to.adoxio_ChecklistDrivingRecordComplete = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_adoxio_checklistdrivingrecordcomplete?)(int?)from.temporaryRelocationCriteria;
+            to.statuscode = (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_statuscode?)(int?)from.ApplicationStatus == 0 ? null : (DV::Gov.Lclb.Cllb.Interfaces.adoxio_application_statuscode?)(int?)from.ApplicationStatus;
         }
 
 
-        public static void CopyValues(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
+        // -------------------------------------------------------------------------
+        // Dataverse SDK extensions
+        // -------------------------------------------------------------------------
+
+        public static ApplicationSummary ToSummaryViewModel(this adoxio_application app, adoxio_applicationtype? appType = null)
         {
-            to.AdoxioName = from.Name;
-            //to.Adoxio_jobnumber = from.jobNumber;            
-            to.AdoxioEstablishmentpropsedname = from.EstablishmentName;
-            to.AdoxioEstablishmentaddressstreet = from.EstablishmentAddressStreet;
-            to.AdoxioEstablishmentaddresscity = from.EstablishmentAddressCity;
-            to.AdoxioEstablishmentaddresspostalcode = from.EstablishmentAddressPostalCode;
-            // 12-10-2019 - Removed the update to AdoxioAddressCity as the Dynamics workflow handles that.
-
-            to.AdoxioEstablishmentparcelid = from.EstablishmentParcelId;
-            to.AdoxioEstablishmentphone = from.EstablishmentPhone;
-            to.AdoxioEstablishmentemail = from.EstablishmentEmail;
-
-            to.AdoxioContactpersonfirstname = from.ContactPersonFirstName;
-            to.AdoxioContactpersonlastname = from.ContactPersonLastName;
-            to.AdoxioRole = from.ContactPersonRole;
-            to.AdoxioEmail = from.ContactPersonEmail;
-            to.AdoxioContactpersonphone = from.ContactPersonPhone;
-            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-            to.AdoxioAdditionalpropertyinformation = from.AdditionalPropertyInformation;
-
-
-
-            //store opening
-
-
-            to.AdoxioAuthorizedtosubmit = from.AuthorizedToSubmit;
-
-            to.AdoxioApplicanttype = (int?)from.ApplicantType;
-
-            // catering fields
-            to.AdoxioIsapplicationcomplete = (int?)from.IsApplicationComplete;
-
-        }
-
-        public static void CopyValuesForCovidApplication(this MicrosoftDynamicsCRMadoxioApplication to, CovidApplication from)
-        {
-            to.CopyValues(from);
-
-            to.AdoxioProposedestablishmentisalr = from.ProposedEstablishmentIsAlr;
-
-            to.AdoxioNameofapplicant = from.NameOfApplicant;
-
-            /* 2020/5/15 - Copy values has a comment that says to not copy this fields because of a dynamics workflow
-            * Including this fields for the covid application as the workflow should not be relevant ?
-            */
-            to.AdoxioAddressstreet = from.AddressStreet;
-            to.AdoxioAddresscity = from.AddressCity;
-            to.AdoxioAddresspostalcode = from.AddressPostalCode;
-        }
-        public static void CopyValuesForChangeOfLocation(this MicrosoftDynamicsCRMadoxioApplication to, MicrosoftDynamicsCRMadoxioLicences from, bool copyAddress)
-        {
-            // copy establishment information
-            if (copyAddress)
+            var appTypeName = appType?.adoxio_name;
+            var summary = new ApplicationSummary
             {
-                // 12-10-2019 - Removed set to AdoxioAddressCity as it is set by Dynamics Workflow, not the portal                
-                to.AdoxioEstablishmentaddressstreet = from.AdoxioEstablishmentaddressstreet;
-                to.AdoxioEstablishmentaddresscity = from.AdoxioEstablishmentaddresscity;
-                to.AdoxioEstablishmentaddresspostalcode = from.AdoxioEstablishmentaddresspostalcode;
+                Id = app.adoxio_applicationId?.ToString(),
+                Name = app.adoxio_name,
+                JobNumber = app.adoxio_JobNumber,
+                EstablishmentName = app.adoxio_EstablishmentPropsedName,
+                LicenceId = app.adoxio_AssignedLicence?.Id.ToString(),
+                IsPaid = app.adoxio_PaymentRecieved == true,
+                EstablishmentAddressStreet = app.adoxio_EstablishmentAddressStreet,
+                EstablishmentAddressCity = app.adoxio_EstablishmentAddressCity,
+                EstablishmentAddressPostalCode = app.adoxio_EstablishmentAddressPostalCode,
+                EstablishmentAddress = $"{app.adoxio_EstablishmentAddressStreet}, {app.adoxio_EstablishmentAddressCity} {app.adoxio_EstablishmentAddressPostalCode}",
+                EstablishmentPhone = app.adoxio_EstablishmentPhone,
+                EstablishmentEmail = app.adoxio_EstablishmentEmail,
+                EstablishmentParcelId = app.adoxio_EstablishmentParcelID,
+                IndigenousNationId = app.adoxio_localgovindigenousnationid?.Id.ToString(),
+                PoliceJurisdictionId = app.adoxio_PoliceJurisdictionId?.Id.ToString(),
+                IsApplicationComplete = (GeneralYesNo?)(int?)app.adoxio_IsApplicationComplete,
+                IsStructuralChange = appType?.adoxio_IsStructuralChange == true,
+                DateApplicationSubmitted = app.adoxio_DateApplicationSubmitted,
+                DateApplicantSentToLG = app.adoxio_DateApplicantSenttoLG,
+            };
+
+            if (app.statuscode != null)
+                summary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatusV2(app, appTypeName);
+
+            if (appType != null)
+            {
+                summary.ApplicationTypeName = appType.adoxio_name;
+                summary.IsForLicence = appType.adoxio_LicenceType != null;
+                summary.Portallabel = appType.adoxio_PortalLabel;
+                summary.ApplicationTypeCategory = (ApplicationTypeCategory?)(int?)appType.adoxio_Category;
             }
 
-            if (from.AdoxioEstablishment != null)
-            {
-                to.AdoxioEstablishmentpropsedname = from.AdoxioEstablishment.AdoxioName;
-                to.AdoxioEstablishmentemail = from.AdoxioEstablishment.AdoxioEmail;
-                to.AdoxioEstablishmentphone = from.AdoxioEstablishment.AdoxioPhone;
-                to.AdoxioEstablishmentparcelid = from.AdoxioEstablishment.AdoxioParcelid;
-                to.AdoxioIsoninland = from.AdoxioEstablishment.AdoxioIsoninland;
-                to.AdoxioPoliceJurisdictionId = from.AdoxioEstablishment.AdoxioPDJurisdiction;
-                to.AdoxioLocalgovindigenousnationid = from.AdoxioEstablishment.AdoxioLGIN;
-            }
+            summary.LGHasApproved =
+                app.adoxio_LGApprovalDecision == adoxio_application_adoxio_lgapprovaldecision.Resolved
+                || app.adoxio_LGApprovalDecision == adoxio_application_adoxio_lgapprovaldecision.OptOut
+                || app.adoxio_LGApprovalDecision == adoxio_application_adoxio_lgapprovaldecision.AcceptedPendingResolution
+                || app.adoxio_LGZoning == adoxio_application_adoxio_lgzoning.Allows;
 
+            summary.IsIndigenousNation = app.adoxio_ApplicantType == adoxio_applicanttypecodes.IndigenousNation;
+
+            return summary;
         }
 
-        public static MicrosoftDynamicsCRMadoxioLicencetype GetCachedLicenceType(string id, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
+        public static async Task<ViewModels.Application> ToViewModelAsync(
+            this adoxio_application app,
+            IDataverseClient dataverse,
+            IMemoryCache cache,
+            ILogger logger,
+            adoxio_applicationextension? extension = null)
         {
-            string cacheKey = CacheKeys.LicenceTypePrefix + id;
-            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out MicrosoftDynamicsCRMadoxioLicencetype result))
+            var appId = app.adoxio_applicationId?.ToString();
+
+            // parallel: applying person, applicant, licence type, licence sub-category
+            var applyingPersonTask = app.adoxio_ApplyingPerson != null
+                ? dataverse.GetContactByIdAsync(app.adoxio_ApplyingPerson.Id.ToString())
+                : Task.FromResult((DV::Gov.Lclb.Cllb.Interfaces.Contact?)null);
+            var applicantTask = app.adoxio_Applicant != null
+                ? dataverse.GetAccountByIdAsync(app.adoxio_Applicant.Id.ToString())
+                : Task.FromResult((DV::Gov.Lclb.Cllb.Interfaces.Account?)null);
+            var licenceTypeTask = app.adoxio_LicenceType != null
+                ? dataverse.GetLicenceTypeByIdAsync(app.adoxio_LicenceType.Id.ToString())
+                : Task.FromResult((adoxio_licencetype?)null);
+            var licenceSubCategoryTask = app.adoxio_LicenceSubCategoryId != null
+                ? dataverse.GetLicenceSubCategoryByIdAsync(app.adoxio_LicenceSubCategoryId.Id.ToString())
+                : Task.FromResult((adoxio_licencesubcategory?)null);
+            var serviceAreasTask = appId != null
+                ? dataverse.GetServiceAreasByApplicationIdAsync(appId)
+                : Task.FromResult((IList<adoxio_servicearea>)new List<adoxio_servicearea>());
+            var hoursTask = appId != null
+                ? dataverse.GetHoursOfServiceByApplicationIdAsync(appId)
+                : Task.FromResult((adoxio_hoursofservice?)null);
+
+            await Task.WhenAll(applyingPersonTask, applicantTask, licenceTypeTask, licenceSubCategoryTask, serviceAreasTask, hoursTask);
+
+            var applyingPerson = await applyingPersonTask;
+            var applicant = await applicantTask;
+            var licenceType = await licenceTypeTask;
+            var licenceSubCategory = await licenceSubCategoryTask;
+            var serviceAreas = await serviceAreasTask;
+            var hours = await hoursTask;
+
+            var vm = new ViewModels.Application
             {
-                // Key not in cache, so get data.
-                result = dynamicsClient.GetAdoxioLicencetypeById(id);
+                Id = appId,
+                Name = app.adoxio_name,
+                JobNumber = app.adoxio_JobNumber,
+                EstablishmentName = app.adoxio_EstablishmentPropsedName,
+                EstablishmentAddressStreet = app.adoxio_EstablishmentAddressStreet,
+                EstablishmentAddressCity = app.adoxio_EstablishmentAddressCity,
+                EstablishmentAddressPostalCode = app.adoxio_EstablishmentAddressPostalCode,
+                EstablishmentAddress = $"{app.adoxio_EstablishmentAddressStreet}, {app.adoxio_EstablishmentAddressCity} {app.adoxio_EstablishmentAddressPostalCode}",
+                EstablishmentPhone = app.adoxio_EstablishmentPhone,
+                EstablishmentEmail = app.adoxio_EstablishmentEmail,
+                EstablishmentParcelId = app.adoxio_EstablishmentParcelID,
+                FederalProducerNames = app.adoxio_FederalProducerNames,
+                IsApplicationComplete = (GeneralYesNo?)(int?)app.adoxio_IsApplicationComplete,
 
-                if (memoryCache != null)
-                {
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                .SetSlidingExpiration(TimeSpan.FromDays(365));
-                    // Save data in cache.
-                    memoryCache.Set(cacheKey, result, cacheEntryOptions);
-                }
-            }
+                RenewalCriminalOffenceCheck = (ValueNotChanged?)(int?)app.adoxio_RenewalCriminalOffenceCheck,
+                RenewalUnreportedSaleOfBusiness = (ValueNotChanged?)(int?)app.adoxio_RenewalUnreportedSaleofBusiness,
+                RenewalBusinessType = (ValueNotChanged?)(int?)app.adoxio_RenewalBusinessType,
+                RenewalTiedhouse = (ValueNotChanged?)(int?)app.adoxio_RenewalTiedHouse,
+                RenewalOrgLeadership = (ValueNotChanged?)(int?)app.adoxio_RenewalOrgLeadership,
+                Renewalkeypersonnel = (ValueNotChanged?)(int?)app.adoxio_RenewalKeyPersonnel,
+                RenewalShareholders = (ValueNotChanged?)(int?)app.adoxio_RenewalShareholders,
+                RenewalOutstandingFines = (ValueNotChanged?)(int?)app.adoxio_RenewalOutstandingFines,
+                RenewalBranding = (ValueNotChanged?)(int?)app.adoxio_RenewalBranding,
+                RenewalSignage = (ValueNotChanged?)(int?)app.adoxio_RenewalSignage,
+                RenewalEstablishmentAddress = (ValueNotChanged?)(int?)app.adoxio_RenewalEstablishmentAddress,
+                RenewalValidInterest = (ValueNotChanged?)(int?)app.adoxio_RenewalValidInterest,
+                RenewalZoning = (ValueNotChanged?)(int?)app.adoxio_RenewalZoning,
+                RenewalFloorPlan = (ValueNotChanged?)(int?)app.adoxio_RenewalFloorPlan,
+                RenewalSiteMap = (ValueNotChanged?)(int?)app.adoxio_RenewalSiteMap,
+                TiedhouseFederalInterest = (ValueNotChanged?)(int?)app.adoxio_RenewalTiedHouseFederalInterest,
+                RenewalDUI = (ValueNotChanged?)(int?)app.adoxio_RenewalDUI,
+                RenewalThirdParty = (ValueNotChanged?)(int?)app.adoxio_RenewalThirdParty,
+                RenewalFederalLicence = (ValueNotChanged?)(int?)app.adoxio_renewalfedlic,
+                RenewalFederalSecurity = (ValueNotChanged?)(int?)app.adoxio_renewalfedsec,
 
-            return result;
-        }
+                AuthorizedToSubmit = app.adoxio_AuthorizedtoSubmit,
+                SignatureAgreement = app.adoxio_SignatureAgreement,
 
-        public static List<MicrosoftDynamicsCRMpicklistAttributeMetadata> GetCachedApplicationPicklists(this IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
-        {
-            string cacheKey = CacheKeys.PicklistTypePrefix + "Application";
-            if (memoryCache == null || !memoryCache.TryGetValue(cacheKey, out List<MicrosoftDynamicsCRMpicklistAttributeMetadata> result))
-            {
-                // Key not in cache, so get data.
-                try
-                {
-                    result = dynamicsClient.Entitydefinitions.GetEntityPicklists("adoxio_application").Value;
-                    if (memoryCache != null)
-                    {
-                        var cacheEntryOptions = new MemoryCacheEntryOptions()
-                    .SetSlidingExpiration(TimeSpan.FromDays(365));
-                        // Save data in cache.
-                        memoryCache.Set(cacheKey, result, cacheEntryOptions);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Serilog.Log.Error(e, "ERROR getting accounts picklist metadata");
-                    result = new List<MicrosoftDynamicsCRMpicklistAttributeMetadata>();
-                }
+                LicenceFeeInvoicePaid = app.adoxio_LicenceFeeInvoicePaid == true,
+                IsPaid = app.adoxio_PaymentRecieved == true,
 
+                IndigenousNationId = app.adoxio_localgovindigenousnationid?.Id.ToString(),
+                PoliceJurisdictionId = app.adoxio_PoliceJurisdictionId?.Id.ToString(),
 
-            }
+                Pin = app.adoxio_PIN,
+                AdditionalPropertyInformation = app.adoxio_AdditionalPropertyInformation,
+                InvoiceId = app.adoxio_Invoice?.Id.ToString(),
+                SecondaryInvoiceId = app.adoxio_SecondaryApplicationInvoice?.Id.ToString(),
 
-            return result;
-        }
+                PaymentReceivedDate = app.adoxio_PaymentReceivedDate,
+                Description1 = app.adoxio_Description1,
+                Description2 = app.adoxio_Description2,
+                Description3 = app.adoxio_Description3,
+                TempDateFrom = app.adoxio_TempDateFrom,
+                TempDateTo = app.adoxio_TempDateTo,
 
+                IsMonth01 = app.adoxio_M01,
+                IsMonth02 = app.adoxio_M02,
+                IsMonth03 = app.adoxio_M03,
+                IsMonth04 = app.adoxio_M04,
+                IsMonth05 = app.adoxio_M05,
+                IsMonth06 = app.adoxio_M06,
+                IsMonth07 = app.adoxio_M07,
+                IsMonth08 = app.adoxio_M08,
+                IsMonth09 = app.adoxio_M09,
+                IsMonth10 = app.adoxio_M10,
+                IsMonth11 = app.adoxio_M11,
+                IsMonth12 = app.adoxio_M12,
 
-        /// <summary>
-        /// Get the licence type
-        /// </summary>
-        /// <param name="application"></param>
-        /// <param name="dynamicsClient"></param>
-        /// <param name="memoryCache"></param>
-        public static void PopulateLicenceType(this MicrosoftDynamicsCRMadoxioApplication application, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
-        {
-            if (application._adoxioLicencetypeValue != null)
-            {
-                application.AdoxioLicenceType = GetCachedLicenceType(application._adoxioLicencetypeValue, dynamicsClient, memoryCache);
-            }
+                ContactPersonFirstName = app.adoxio_ContactPersonFirstName,
+                ContactPersonLastName = app.adoxio_ContactPersonLastName,
+                ContactPersonRole = app.adoxio_Role,
+                ContactPersonEmail = app.adoxio_Email,
+                ContactPersonPhone = app.adoxio_ContactPersonPhone,
 
-            if (application.AdoxioAssignedLicence != null && application.AdoxioAssignedLicence._adoxioLicencetypeValue != null)
-            {
-                application.AdoxioAssignedLicence.AdoxioLicenceType = GetCachedLicenceType(application.AdoxioAssignedLicence._adoxioLicencetypeValue, dynamicsClient, memoryCache);
-            }
-        }
+                CreatedOn = app.CreatedOn,
+                ModifiedOn = app.ModifiedOn,
 
-        public async static Task<ViewModels.Application> ToViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
-        {
+                IsReadyWorkers = app.adoxio_IsReadyWorkers,
+                IsReadyNameBranding = app.adoxio_IsReadyNameBranding,
+                IsReadyDisplays = app.adoxio_IsReadyDisplays,
+                IsReadyIntruderAlarm = app.adoxio_IsReadyIntruderAlarm,
+                IsReadyFireAlarm = app.adoxio_IsReadyFireAlarm,
+                IsReadyLockedCases = app.adoxio_IsReadyLockedCases,
+                IsReadyLockedStorage = app.adoxio_IsReadyLockedStorage,
+                IsReadyPerimeter = app.adoxio_IsReadyPerimeter,
+                IsReadyRetailArea = app.adoxio_IsReadyRetailArea,
+                IsReadyStorage = app.adoxio_IsReadyStorage,
+                IsReadyExtranceExit = app.adoxio_IsReadyEntranceExit,
+                IsReadySurveillanceNotice = app.adoxio_IsReadySurveillanceNotice,
+                IsReadyProductNotVisibleOutside = app.adoxio_IsReadyProductNotVisibleOutside,
+                IsLocatedInGroceryStore = app.adoxio_isLocatedInGroceryStore,
+                Establishmentopeningdate = app.adoxio_EstablishmentOpeningDate,
+                IsReadyValidInterest = app.adoxio_IsReadyValidInterest,
 
-            ViewModels.Application applicationVM = new ViewModels.Application
-            {
-                Name = dynamicsApplication.AdoxioName,
-                JobNumber = dynamicsApplication.AdoxioJobnumber,
-                //get establishment name and address
-                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
-                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
-                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
-                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
-                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
-                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
-                FederalProducerNames = dynamicsApplication.AdoxioFederalproducernames,
-                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
+                IsHasPatio = app.adoxio_IsHasPatio,
 
-                RenewalCriminalOffenceCheck = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalcriminaloffencecheck,
-                RenewalUnreportedSaleOfBusiness = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalunreportedsaleofbusiness,
-                RenewalBusinessType = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalbusinesstype,
-                RenewalTiedhouse = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhouse,
-                RenewalOrgLeadership = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalorgleadership,
-                Renewalkeypersonnel = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalkeypersonnel,
-                RenewalShareholders = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalshareholders,
-                RenewalOutstandingFines = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaloutstandingfines,
-                RenewalBranding = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalbranding,
-                RenewalSignage = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsignage,
-                RenewalEstablishmentAddress = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalestablishmentaddress,
-                RenewalValidInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalvalidinterest,
-                RenewalZoning = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalzoning,
-                RenewalFloorPlan = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfloorplan,
-                RenewalSiteMap = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalsitemap,
-                TiedhouseFederalInterest = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaltiedhousefederalinterest,
-                RenewalDUI = (ValueNotChanged?)dynamicsApplication.AdoxioRenewaldui,
-                RenewalThirdParty = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalthirdparty,
-                RenewalFederalLicence = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfedlic,
-                RenewalFederalSecurity = (ValueNotChanged?)dynamicsApplication.AdoxioRenewalfedsec,
+                LgNoObjection = app.adoxio_LGNoObjection,
+                LGNameOfOfficial = app.adoxio_LGNameofOfficial,
+                LGTitlePosition = app.adoxio_LGTitlePosition,
+                LGContactPhone = app.adoxio_LGContactPhone,
+                LGContactEmail = app.adoxio_LGContactEmail,
+                LGDecisionSubmissionDate = app.adoxio_LGDecisionSubmissionDate,
+                LGApprovalDecision = (LGDecision?)(int?)app.adoxio_LGApprovalDecision,
+                LgZoning = (Zoning?)(int?)app.adoxio_LGZoning,
+                LGDecisionComments = app.adoxio_LGDecisionComments,
+                DateApplicantSentToLG = app.adoxio_datesentlgin,
 
-                AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
-                SignatureAgreement = dynamicsApplication.AdoxioSignatureagreement,
-
-                LicenceFeeInvoicePaid = (dynamicsApplication.AdoxioLicencefeeinvoicepaid != null && dynamicsApplication.AdoxioLicencefeeinvoicepaid == true),
-
-                // set a couple of read-only flags to indicate status
-                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved != null && (bool)dynamicsApplication.AdoxioPaymentrecieved),
-
-                IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
-                PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
-
-                //get parcel id
-                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
-
-                //get additional property info
-                AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
-                InvoiceId = dynamicsApplication._adoxioInvoiceValue,
-                SecondaryInvoiceId = dynamicsApplication._adoxioSecondaryapplicationinvoiceValue,
-
-                PaymentReceivedDate = dynamicsApplication.AdoxioPaymentreceiveddate,
-                Description1 = dynamicsApplication.AdoxioDescription1,
-                Description2 = dynamicsApplication.AdoxioDescription2,
-                Description3 = dynamicsApplication.AdoxioDescription3,
-                TempDateFrom = dynamicsApplication.AdoxioTempdatefrom,
-                TempDateTo = dynamicsApplication.AdoxioTempdateto,
-
-                IsMonth01 = dynamicsApplication.AdoxioM01,
-                IsMonth02 = dynamicsApplication.AdoxioM02,
-                IsMonth03 = dynamicsApplication.AdoxioM03,
-                IsMonth04 = dynamicsApplication.AdoxioM04,
-                IsMonth05 = dynamicsApplication.AdoxioM05,
-                IsMonth06 = dynamicsApplication.AdoxioM06,
-                IsMonth07 = dynamicsApplication.AdoxioM07,
-                IsMonth08 = dynamicsApplication.AdoxioM08,
-                IsMonth09 = dynamicsApplication.AdoxioM09,
-                IsMonth10 = dynamicsApplication.AdoxioM10,
-                IsMonth11 = dynamicsApplication.AdoxioM11,
-                IsMonth12 = dynamicsApplication.AdoxioM12,
-
-                //get contact details
-                ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
-                ContactPersonLastName = dynamicsApplication.AdoxioContactpersonlastname,
-                ContactPersonRole = dynamicsApplication.AdoxioRole,
-                ContactPersonEmail = dynamicsApplication.AdoxioEmail,
-                ContactPersonPhone = dynamicsApplication.AdoxioContactpersonphone,
-
-                //get record audit info
-                CreatedOn = dynamicsApplication.Createdon,
-                ModifiedOn = dynamicsApplication.Modifiedon,
-
-                //store opening 
-                IsReadyWorkers = dynamicsApplication.AdoxioIsreadyworkers,
-                IsReadyNameBranding = dynamicsApplication.AdoxioIsreadynamebranding,
-                IsReadyDisplays = dynamicsApplication.AdoxioIsreadydisplays,
-                IsReadyIntruderAlarm = dynamicsApplication.AdoxioIsreadyintruderalarm,
-                IsReadyFireAlarm = dynamicsApplication.AdoxioIsreadyfirealarm,
-                IsReadyLockedCases = dynamicsApplication.AdoxioIsreadylockedcases,
-                IsReadyLockedStorage = dynamicsApplication.AdoxioIsreadylockedstorage,
-                IsReadyPerimeter = dynamicsApplication.AdoxioIsreadyperimeter,
-                IsReadyRetailArea = dynamicsApplication.AdoxioIsreadyretailarea,
-                IsReadyStorage = dynamicsApplication.AdoxioIsreadystorage,
-                IsReadyExtranceExit = dynamicsApplication.AdoxioIsreadyentranceexit,
-                IsReadySurveillanceNotice = dynamicsApplication.AdoxioIsreadysurveillancenotice,
-                IsReadyProductNotVisibleOutside = dynamicsApplication.AdoxioIsreadyproductnotvisibleoutside,
-                IsLocatedInGroceryStore = dynamicsApplication.AdoxioIslocatedingrocerystore,
-                Establishmentopeningdate = dynamicsApplication.AdoxioEstablishmentopeningdate,
-                IsReadyValidInterest = dynamicsApplication.AdoxioIsreadyvalidinterest,
-
-                IsHasPatio = dynamicsApplication.AdoxioIshaspatio,
-
-                LgNoObjection = dynamicsApplication.AdoxioLgnoobjection,
-                // LgInName
-                LGNameOfOfficial = dynamicsApplication.AdoxioLgnameofofficial,
-                LGTitlePosition = dynamicsApplication.AdoxioLgtitleposition,
-                LGContactPhone = dynamicsApplication.AdoxioLgcontactphone,
-                LGContactEmail = dynamicsApplication.AdoxioLgcontactemail,
-                LGDecisionSubmissionDate = dynamicsApplication.AdoxioLgdecisionsubmissiondate,
-                LgInName = dynamicsApplication?.AdoxioLocalgovindigenousnationid?.AdoxioName,
-                LGApprovalDecision = (LGDecision?)dynamicsApplication.AdoxioLgapprovaldecision,
-                LgZoning = (Zoning?)dynamicsApplication.AdoxioLgzoning,
-                LGDecisionComments = dynamicsApplication.AdoxioLgdecisioncomments,
-                DateApplicantSentToLG = dynamicsApplication.AdoxioDatesentlgin,
-
-                // Catering fields.
-
-                PreviousApplicationDetails = dynamicsApplication.AdoxioPreviouslicenceapplicationdetails,
-
-                LiquorIndustryConnectionsDetails = dynamicsApplication.AdoxioLiquorindustryconnectionsdetails,
-
-                OtherBusinessesDetails = dynamicsApplication.AdoxioOtherbusinesssamelocationdetails,
+                PreviousApplicationDetails = app.adoxio_PreviousLicenceApplicationDetails,
+                LiquorIndustryConnectionsDetails = app.adoxio_LiquorIndustryConnectionsDetails,
+                OtherBusinessesDetails = app.adoxio_OtherBusinessSameLocationDetails,
                 ServiceAreas = new List<CapacityArea>(),
                 OutsideAreas = new List<CapacityArea>(),
                 CapacityArea = new List<CapacityArea>(),
 
-                // Manufacturing fields
+                IsPackaging = app.adoxio_IsPackaging,
 
-                IsPackaging = dynamicsApplication.AdoxioIspackaging,
+                MfgAcresOfFruit = app.adoxio_MFGAcresOfFruit,
+                MfgAcresOfGrapes = app.adoxio_MFGAcresOfGrapes,
+                MfgAcresOfHoney = app.adoxio_MFGAcresOfHoney,
+                MfgMeetsProductionMinimum = app.adoxio_MFGMeetsProductionMinimum,
+                MfgStepBlending = app.adoxio_MFGStepBlending,
+                MfgStepCrushing = app.adoxio_MFGStepCrushing,
+                MfgStepFiltering = app.adoxio_MFGStepFiltering,
+                MfgStepSecFermOrCarb = app.adoxio_MFGStepSecFermOrCarb,
+                IsOwnerBusiness = app.adoxio_IsOwnerBusiness,
+                HasValidInterest = app.adoxio_IsOwnerHasValidInterest,
+                WillHaveValidInterest = app.adoxio_IsOwnerWillHaveValidInterest,
+                ZoningStatus = (int?)app.adoxio_ZoningStatus,
 
-                MfgAcresOfFruit = dynamicsApplication.AdoxioMfgacresoffruit,
-                MfgAcresOfGrapes = dynamicsApplication.AdoxioMfgacresofgrapes,
-                MfgAcresOfHoney = dynamicsApplication.AdoxioMfgacresofhoney,
-                MfgMeetsProductionMinimum = dynamicsApplication.AdoxioMfgmeetsproductionminimum,
-                MfgStepBlending = dynamicsApplication.AdoxioMfgstepblending,
-                MfgStepCrushing = dynamicsApplication.AdoxioMfgstepcrushing,
-                MfgStepFiltering = dynamicsApplication.AdoxioMfgstepfiltering,
-                MfgStepSecFermOrCarb = dynamicsApplication.AdoxioMfgstepsecfermorcarb,
-                IsOwnerBusiness = dynamicsApplication.AdoxioIsownerbusiness,
-                HasValidInterest = dynamicsApplication.AdoxioIsownerhasvalidinterest,
-                WillHaveValidInterest = dynamicsApplication.AdoxioIsownerwillhavevalidinterest,
-                ZoningStatus = dynamicsApplication.AdoxioZoningstatus,
+                PidList = app.adoxio_PIDList,
+                IsPermittedInZoning = app.adoxio_IsPermittedInZoning,
 
+                PatioCompDescription = app.adoxio_PatioCompDescription,
+                PatioLocationDescription = app.adoxio_PatioLocationDescription,
+                PatioAccessDescription = app.adoxio_PatioAccessDescription,
+                PatioIsLiquorCarried = app.adoxio_PatioIsLiquorCarried,
+                PatioLiquorCarriedDescription = app.adoxio_PatioLiquorCarriedDescription,
+                PatioAccessControlDescription = app.adoxio_PatioAccessControlDescription,
+                IsAlr = app.adoxio_proposedestablishmentisALR == true,
+                HasCoolerAccess = app.adoxio_HasCoolerAccess == true,
 
-                PidList = dynamicsApplication.AdoxioPidlist,
-                IsPermittedInZoning = dynamicsApplication.AdoxioIspermittedinzoning,
+                FirstNameOld = app.adoxio_FirstNameOld,
+                FirstNameNew = app.adoxio_FirstNameNew,
+                LastNameOld = app.adoxio_LastNameOld,
+                LastNameNew = app.adoxio_LastNameNew,
+                CsInternalTransferOfShares = app.adoxio_CSInternalTransferofShares,
+                CsExternalTransferOfShares = app.adoxio_CSExternalTransferofShares,
+                CsChangeOfDirectorsOrOfficers = app.adoxio_CSChangeofDirectorsorOfficers,
+                CsNameChangeLicenseeCorporation = app.adoxio_CSNameChangeLicenseeCorporation,
+                CsNameChangeLicenseePartnership = app.adoxio_CSNameChangeLicenseePartnership,
+                CsNameChangeLicenseeSociety = app.adoxio_CSNameChangeLicenseeSociety,
+                CsNameChangeLicenseePerson = app.adoxio_CSNameChangePerson,
+                CsAdditionalReceiverOrExecutor = app.adoxio_CSAdditionofReceiverorExecutor,
+                CsTiedHouseDeclaration = app.adoxio_CSChangeToTiedHouse,
+                PrimaryInvoicePaid = app.adoxio_PrimaryApplicationInvoicePaid == adoxio_generalyesno.Yes,
+                SecondaryInvoicePaid = app.adoxio_SecondaryApplicationInvoicePaid == adoxio_generalyesno.Yes,
+                IsOnINLand = ConvertYesNoLookupToBool((int?)app.adoxio_IsonINLand),
 
-                // Manufacturing structural change fields
+                LocatedAboveOther = app.adoxio_LocatedAboveOther,
 
-                PatioCompDescription = dynamicsApplication.AdoxioPatiocompdescription,
-                PatioLocationDescription = dynamicsApplication.AdoxioPatiolocationdescription,
-                PatioAccessDescription = dynamicsApplication.AdoxioPatioaccessdescription,
-                PatioIsLiquorCarried = dynamicsApplication.AdoxioPatioisliquorcarried,
-                PatioLiquorCarriedDescription = dynamicsApplication.AdoxioPatioliquorcarrieddescription,
-                PatioAccessControlDescription = dynamicsApplication.AdoxioPatioaccesscontroldescription,
-                IsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr.HasValue && (bool)dynamicsApplication.AdoxioProposedestablishmentisalr,
-                HasCoolerAccess = dynamicsApplication.AdoxioHascooleraccess.HasValue && (bool)dynamicsApplication.AdoxioHascooleraccess,
+                IsRlrsLocatedInRuralCommunityAlone = (int?)app.adoxio_IsRLRSLocatedinRuralCommunityAlone,
+                IsRlrsLocatedAtTouristDestinationAlone = (int?)app.adoxio_IsRLRSLocatedAtTouristDestinationAlone,
+                RlrsResortCommunityDescription = app.adoxio_DescribeRLRSResortCommunity,
+                HasYearRoundAllWeatherRoadAccess = (int?)app.adoxio_HasYearRoundAllWeatherRoadAccess,
+                DoesGeneralStoreOperateSeasonally = (int?)app.adoxio_DoesGeneralStoreOperateSeasonally,
+                SurroundingResidentsOfRlrs = app.adoxio_SurroundingResidentsOfRLRS,
+                IsRlrsAtLeast10kmFromAnotherStore = (int?)app.adoxio_IsRLRSAtLeast10KMFromAnotherStore,
+                IsApplicantOwnerOfStore = (int?)app.adoxio_IsApplicantOwnerofStore,
+                LegalAndBeneficialOwnersOfStore = app.adoxio_LegalandBeneficialOwnersofStore,
+                IsApplicantFranchiseOrAffiliated = (int?)app.adoxio_IsApplicantFranchiseorAffiliated,
+                FranchiseOrAffiliatedBusiness = app.adoxio_FranchiseOrAffiliatedBusiness,
 
-                // Permanent Change to a Licensee
-                FirstNameOld = dynamicsApplication.AdoxioFirstnameold,
-                FirstNameNew = dynamicsApplication.AdoxioFirstnamenew,
-                LastNameOld = dynamicsApplication.AdoxioLastnameold,
-                LastNameNew = dynamicsApplication.AdoxioLastnamenew,
-                CsInternalTransferOfShares = dynamicsApplication.AdoxioCsinternaltransferofshares,
-                CsExternalTransferOfShares = dynamicsApplication.AdoxioCsexternaltransferofshares,
-                CsChangeOfDirectorsOrOfficers = dynamicsApplication.AdoxioCschangeofdirectorsorofficers,
-                CsNameChangeLicenseeCorporation = dynamicsApplication.AdoxioCsnamechangelicenseecorporation,
-                CsNameChangeLicenseePartnership = dynamicsApplication.AdoxioCsnamechangelicenseepartnership,
-                CsNameChangeLicenseeSociety = dynamicsApplication.AdoxioCsnamechangelicenseesociety,
-                CsNameChangeLicenseePerson = dynamicsApplication.AdoxioCsnamechangeperson,
-                CsAdditionalReceiverOrExecutor = dynamicsApplication.AdoxioCsadditionofreceiverorexecutor,
-                CsTiedHouseDeclaration = dynamicsApplication.AdoxioCschangetotiedhouse,
-                PrimaryInvoicePaid = dynamicsApplication.AdoxioPrimaryapplicationinvoicepaid == 1,
-                SecondaryInvoicePaid = dynamicsApplication.AdoxioSecondaryapplicationinvoicepaid == 1,
-                IsOnINLand = ConvertYesNoLookupToBool(dynamicsApplication.AdoxioIsoninland),
+                HasSufficientRangeOfProducts = (int?)app.adoxio_HasSufficientRangeofProducts,
+                HasOtherProducts = (int?)app.adoxio_HasOtherProducts,
+                HasAdditionalServices = (int?)app.adoxio_HasAdditionalServices,
+                StoreOpenDate = app.adoxio_StoreOpenDate,
+                ConfirmLiquorSalesIsNotPrimaryBusiness = (int?)app.adoxio_ConfirmLiquorSalesIsNotPrimaryBusiness,
+                ManufacturerProductionAmountForPrevYear = app.adoxio_manufacturerproductionamountforprevyear,
+                ManufacturerProductionAmountUnit = (int?)app.adoxio_manufacturerproductionamountunit,
+                PicnicConfirmLGFNCapacity = (int?)app.adoxio_PicnicConfirmsLGFNSupportsCapacity,
+                PicnicConfirmZoning = (int?)app.adoxio_PicnicConfirmsZoning,
+                PicnicReadAndAccept = (int?)app.adoxio_PicnicReadandAcceptTermsandConditions,
+                FederalLicenceNumber = app.adoxio_FederalLicenceNumber,
+                FederalLicenceName = app.adoxio_FederalLicenceName,
+                FPAddressCity = app.adoxio_FPAddressCity,
+                FPAddressPostalCode = app.adoxio_FPAddressPostalCode,
+                FPAddressStreet = app.adoxio_FPAddressStreet,
 
-                LocatedAboveOther = dynamicsApplication.AdoxioLocatedaboveother,
+                UploadDeclarations = app.adoxio_uploaddeclarations,
+                ProductsListAndDescription = app.adoxio_productslistanddescription,
+                MfrSupInfoReadUnderstand = app.adoxio_MfrSupInfoReadUnderstand,
+                MfrSupInfoIntendProduce = app.adoxio_MfrSupInfoIntendProduce,
+                MfrSupInfoOwnRent = app.adoxio_MfrSupInfoOwnRent,
+                MfrSupInfoProductionEquipment = app.adoxio_MfrSupInfoProductionEquipment,
 
-                // Eligibility fields
+                VolumeProduced = app.adoxio_volumeproduced ?? 0,
+                VolumeDestroyed = app.adoxio_volumedestroyed ?? 0,
+                LdbOrderTotals = app.adoxio_ldbordertotals ?? 0,
 
-                IsRlrsLocatedInRuralCommunityAlone = dynamicsApplication.AdoxioIsrlrslocatedinruralcommunityalone,
-                IsRlrsLocatedAtTouristDestinationAlone = dynamicsApplication.AdoxioIsrlrslocatedattouristdestinationalone,
-                RlrsResortCommunityDescription = dynamicsApplication.AdoxioDescriberlrsresortcommunity,
-                HasYearRoundAllWeatherRoadAccess = dynamicsApplication.AdoxioHasyearroundallweatherroadaccess,
-                DoesGeneralStoreOperateSeasonally = dynamicsApplication.AdoxioDoesgeneralstoreoperateseasonally,
-                SurroundingResidentsOfRlrs = dynamicsApplication.AdoxioSurroundingresidentsofrlrs,
-                IsRlrsAtLeast10kmFromAnotherStore = dynamicsApplication.AdoxioIsrlrsatleast10kmfromanotherstore,
-                IsApplicantOwnerOfStore = dynamicsApplication.AdoxioIsapplicantownerofstore,
-                LegalAndBeneficialOwnersOfStore = dynamicsApplication.AdoxioLegalandbeneficialownersofstore,
-                IsApplicantFranchiseOrAffiliated = dynamicsApplication.AdoxioIsapplicantfranchiseoraffiliated,
-                FranchiseOrAffiliatedBusiness = dynamicsApplication.AdoxioFranchiseoraffiliatedbusiness,
+                WillHaveTiedHouseExemption = app.adoxio_TiedHouseExemption,
+                TempSuspensionOrPatronParticipationStart = app.adoxio_tempsuspensionorpatronparticipationstart,
+                TempSuspensionOrPatronParticipationEnd = app.adoxio_tempsuspensionorpatronparticipationend,
 
-                HasSufficientRangeOfProducts = dynamicsApplication.AdoxioHassufficientrangeofproducts,
-                HasOtherProducts = dynamicsApplication.AdoxioHasotherproducts,
-                HasAdditionalServices = dynamicsApplication.AdoxioHasadditionalservices,
-                StoreOpenDate = dynamicsApplication.AdoxioStoreopendate,
-                ConfirmLiquorSalesIsNotPrimaryBusiness = dynamicsApplication.AdoxioConfirmliquorsalesisnotprimarybusiness,
-                Pin = dynamicsApplication.AdoxioPin,
-                ManufacturerProductionAmountForPrevYear = dynamicsApplication.AdoxioManufacturerproductionamountforprevyear,
-                ManufacturerProductionAmountUnit = dynamicsApplication.AdoxioManufacturerproductionamountunit,
-                //LCSD-6304
-                PicnicConfirmLGFNCapacity = dynamicsApplication.AdoxioPicnicconfirmslgfnsupportscapacity,
-                PicnicConfirmZoning = dynamicsApplication.AdoxioPicnicconfirmszoning,
-                PicnicReadAndAccept = dynamicsApplication.AdoxioPicnicreadandaccepttermsandconditions,
-                //LCSD-6406
-                FederalLicenceNumber = dynamicsApplication.AdoxioFederallicencenumber,
-                FederalLicenceName = dynamicsApplication.AdoxioFederallicencename,
-                FPAddressCity = dynamicsApplication.AdoxioFpaddresscity,
-                FPAddressPostalCode = dynamicsApplication.AdoxioFpaddresspostalcode,
-                FPAddressStreet = dynamicsApplication.AdoxioFpaddressstreet,
+                ConfirmrelocatePicnicAreaEndorsement = app.adoxio_confirmrelocatePicnicAreaEndorsement == adoxio_generalyesno.Yes,
+                RelocatePicnicAreaEndorsement = app.adoxio_relocatePicnicAreaEndorsement == adoxio_generalyesno.Yes,
+                ConfirmPermitsRetailSales = app.adoxio_confirmPermitsRetailSales == adoxio_generalyesno.Yes,
+                RelocateOnSiteStore = app.adoxio_relocateOnSiteStore == adoxio_generalyesno.Yes,
+                RelocateWinaryLicence = app.adoxio_RelocateWineryLicence == adoxio_generalyesno.Yes,
+                ConfirmRelocateWinaryLicence = app.adoxio_confirmUnderstandingWineryLicence == adoxio_generalyesno.Yes,
+                DormancyStartDate = app.adoxio_DormancyStartDate,
+                DormancyEndDate = app.adoxio_DormancyEndDate,
+                DormancyNotes = app.adoxio_DormancyNotes,
+                DormancyReasons = (int?)app.adoxio_DormancyReasons,
+                EstablishmentStatus = (int?)app.adoxio_EstablishmentStatus,
+                DormancyIntentionForReopening = (int?)app.adoxio_DormancyIntentionforReopening,
 
-                UploadDeclarations = dynamicsApplication.AdoxioUploaddeclarations,
-                ProductsListAndDescription = dynamicsApplication.AdoxioProductslistanddescription,
-                MfrSupInfoReadUnderstand = dynamicsApplication.AdoxioMfrsupinforeadunderstand,
-                MfrSupInfoIntendProduce = dynamicsApplication.AdoxioMfrsupinfointendproduce,
-                MfrSupInfoOwnRent = dynamicsApplication.AdoxioMfrsupinfoownrent,
-                MfrSupInfoProductionEquipment = dynamicsApplication.AdoxioMfrsupinfoproductionequipment,
+                isBoundingSufficientForControl = app.adoxio_IsPatioBoundingSufficientForControl,
+                isBoundingSufficientToDefine = app.adoxio_IsPatioBoundingSufficientToDefineArea,
+                isAdequateCare = app.adoxio_IsAdequateCareandControlOverthePatio,
+                isInCompliance = app.adoxio_IsPatioInCompliance,
 
-                VolumeProduced = dynamicsApplication.AdoxioVolumeproduced.HasValue ? dynamicsApplication.AdoxioVolumeproduced.Value : 0,
-                VolumeDestroyed = dynamicsApplication.AdoxioVolumedestroyed.HasValue ? dynamicsApplication.AdoxioVolumedestroyed.Value : 0,
-                LdbOrderTotals = dynamicsApplication.AdoxioLdbordertotals.HasValue ? dynamicsApplication.AdoxioLdbordertotals.Value : 0,
-                //LCSD-5779
-                WillHaveTiedHouseExemption = dynamicsApplication.AdoxioTiedhouseexemption,
-                TempSuspensionOrPatronParticipationStart = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationstart,
-                TempSuspensionOrPatronParticipationEnd = dynamicsApplication.AdoxioTempsuspensionorpatronparticipationend,
+                statusOfConstruction = (int?)app.adoxio_StatusOfConstruction,
 
-                ConfirmrelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioConfirmrelocatepicnicareaendorsement.Value == 1 ? true : false : false,
-                RelocatePicnicAreaEndorsement = dynamicsApplication.AdoxioRelocatepicnicareaendorsement.HasValue ? dynamicsApplication.AdoxioRelocatepicnicareaendorsement.Value == 1 ? true : false : false,
-                ConfirmPermitsRetailSales = dynamicsApplication.AdoxioConfirmpermitsretailsales.HasValue ? dynamicsApplication.AdoxioConfirmpermitsretailsales.Value == 1 ? true : false : false,
-                RelocateOnSiteStore = dynamicsApplication.AdoxioRelocateonsitestore.HasValue ? dynamicsApplication.AdoxioRelocateonsitestore.Value == 1 ? true : false : false,
-                RelocateWinaryLicence = dynamicsApplication.AdoxioRelocatewinerylicence.HasValue ? dynamicsApplication.AdoxioRelocatewinerylicence.Value == 1 ? true : false : false,
-                ConfirmRelocateWinaryLicence = dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.HasValue ? dynamicsApplication.AdoxioConfirmunderstandingwinerylicence.Value == 1 ? true : false : false,
-                DormancyStartDate = dynamicsApplication.AdoxioDormancystartdate,
-                DormancyEndDate = dynamicsApplication.AdoxioDormancyenddate,
-                DormancyNotes = dynamicsApplication.AdoxioDormancynotes,
-                DormancyReasons = dynamicsApplication.AdoxioDormancyreasons,
-                EstablishmentStatus = dynamicsApplication.AdoxioEstablishmentstatus,
-                DormancyIntentionForReopening = dynamicsApplication.AdoxioDormancyintentionforreopening,
+                validInterestDormancyPeriod = app.adoxio_ValidInterestDormancyPeriod == adoxio_generalyesno.Yes,
+                affirmInformationProividedTrueAndComplete = app.adoxio_AffirmInformationProividedTrueAndComplete == adoxio_generalyesno.Yes,
+                validInterestEstablishmentLocation = app.adoxio_ValidInterestEstablishmentLocation == adoxio_generalyesno.Yes,
+                EstablishmentReopeningDate = app.adoxio_EstablishmentReopeningDate,
 
-                // LCSD-6170: 2024-02-02 waynezen
-                isBoundingSufficientForControl = dynamicsApplication.AdoxioIspatioboundingsufficientforcontrol,
-                isBoundingSufficientToDefine = dynamicsApplication.AdoxioIspatioboundingsufficienttodefinearea,
-                isAdequateCare = dynamicsApplication.AdoxioIsadequatecareandcontroloverthepatio,
-                isInCompliance = dynamicsApplication.AdoxioIspatioincompliance,
+                temporaryRelocationCriteria = (int?)app.adoxio_ChecklistDrivingRecordComplete,
 
-                // LCSD-6959: 2024-02-12 waynezen
-                statusOfConstruction = dynamicsApplication.AdoxioStatusofconstruction,
-
-                validInterestDormancyPeriod = dynamicsApplication.AdoxioValidinterestdormancyperiod.HasValue ? dynamicsApplication.AdoxioValidinterestdormancyperiod.Value == 1 ? true : false : false,
-                affirmInformationProividedTrueAndComplete = dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.HasValue ? dynamicsApplication.AdoxioAffirminformationproividedtrueandcomplete.Value == 1 ? true : false : false,
-                validInterestEstablishmentLocation = dynamicsApplication.AdoxioValidinterestestablishmentlocation.HasValue ? dynamicsApplication.AdoxioValidinterestestablishmentlocation.Value == 1 ? true : false : false,
-                EstablishmentReopeningDate = dynamicsApplication.AdoxioEstablishmentreopeningdate,
-
-                // Temporary Relocations - removed 2024-08-14
-                temporaryRelocationCriteria = dynamicsApplication.AdoxioChecklistdrivingrecordcomplete,
-
-                ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel()
+                ApplicationExtension = extension?.ToViewModel()
             };
-
 
             // mfg fields
+            if (app.adoxio_MFGPipedInProduct != null)
+                vm.MfgPipedInProduct = (YesNoNotApplicable?)(int?)app.adoxio_MFGPipedInProduct;
+            if (app.adoxio_MFGBrewpubOnSite != null)
+                vm.MfgBrewPubOnSite = (YesNoNotApplicable?)(int?)app.adoxio_MFGBrewpubOnSite;
+            if (app.adoxio_MFGUsesNeutralGrainSpirits != null)
+                vm.MfgUsesNeutralGrainSpirits = (YesNoNotApplicable)(int)app.adoxio_MFGUsesNeutralGrainSpirits;
 
-            if (dynamicsApplication.AdoxioMfgpipedinproduct != null)
+            if (app.adoxio_LocatedAboveDescription != null)
+                vm.LocatedAboveDescription = (int?)app.adoxio_LocatedAboveDescription;
+            if (app.adoxio_PatioServiceBar != null)
+                vm.PatioServiceBar = (int?)app.adoxio_PatioServiceBar;
+            if (app.adoxio_PreviousLicenceApplication != null)
+                vm.PreviousApplication = (int?)app.adoxio_PreviousLicenceApplication;
+            if (app.adoxio_RuralAgencyStoreAppointment != null)
+                vm.RuralAgencyStoreAppointment = (int?)app.adoxio_RuralAgencyStoreAppointment;
+            if (app.adoxio_LiquorIndustryConnections != null)
+                vm.LiquorIndustryConnections = (int?)app.adoxio_LiquorIndustryConnections;
+            if (app.adoxio_Otherbusinessesatthesamelocation != null)
+                vm.OtherBusinesses = (int?)app.adoxio_Otherbusinessesatthesamelocation;
+
+            if (app.statuscode != null)
+                vm.ApplicationStatus = (AdoxioApplicationStatusCodes)(int)app.statuscode;
+            if (app.adoxio_ApplicantType != null)
+                vm.ApplicantType = (AdoxioApplicantTypeCodes)(int)app.adoxio_ApplicantType;
+
+            vm.InvoiceTrigger = (GeneralYesNo?)(int?)app.adoxio_InvoiceTrigger;
+            vm.IsSubmitted = app.adoxio_InvoiceTrigger == adoxio_generalyesno.Yes;
+            vm.PrevPaymentFailed = app.adoxio_Invoice != null && !vm.IsSubmitted;
+
+            // applying person
+            if (applyingPerson != null)
+                vm.ApplyingPerson = applyingPerson.FullName;
+
+            // applicant account
+            if (applicant != null)
+                vm.Applicant = applicant.ToViewModel();
+
+            // licence type
+            if (licenceType != null)
+                vm.LicenseType = licenceType.adoxio_name;
+
+            // licence sub-category
+            if (licenceSubCategory != null)
+                vm.LicenceSubCategory = licenceSubCategory.adoxio_name;
+
+            // assigned licence (populated by GetApplicationByIdWithChildrenAsync via N:1 nav property)
+            var assignedLicence = app.adoxio_adoxio_licences_adoxio_application_AssignedLicence;
+
+            // Round 1: launch all independent Dataverse lookups in parallel
+            var invoiceTask         = app.adoxio_LicenceFeeInvoice != null
+                                        ? dataverse.GetInvoiceByIdAsync(app.adoxio_LicenceFeeInvoice.Id.ToString())
+                                        : null;
+            var appTypeTask         = app.adoxio_ApplicationTypeId != null
+                                        ? dataverse.GetApplicationTypeByIdAsync(app.adoxio_ApplicationTypeId.Id.ToString())
+                                        : null;
+            var assignedLicenceTask = assignedLicence != null
+                                        ? assignedLicence.ToViewModelAsync(dataverse)
+                                        : null;
+            var lginTask            = app.adoxio_localgovindigenousnationid != null
+                                        ? dataverse.GetLginByIdAsync(app.adoxio_localgovindigenousnationid.Id.ToString())
+                                        : null;
+
+            var round1 = new List<Task>();
+            if (invoiceTask != null)         round1.Add(invoiceTask);
+            if (appTypeTask != null)         round1.Add(appTypeTask);
+            if (assignedLicenceTask != null) round1.Add(assignedLicenceTask);
+            if (lginTask != null)            round1.Add(lginTask);
+            if (round1.Count > 0) await Task.WhenAll(round1);
+
+            var feeInvoice = invoiceTask != null ? await invoiceTask : null;
+            var appType    = appTypeTask != null ? await appTypeTask : null;
+            vm.AssignedLicence = assignedLicenceTask != null ? await assignedLicenceTask : null;
+            var lgin       = lginTask != null ? await lginTask : null;
+
+            // Map round-1 results before launching round-2 (needed to determine sub-task conditions)
+            if (feeInvoice != null)
+                vm.LicenceFeeInvoice = feeInvoice.ToViewModel();
+
+            // application type
+            if (appType != null)
+                vm.ApplicationType = appType.ToViewModel();
+
+            // LGIN
+            if (lgin != null)
+                vm.IndigenousNation = lgin.ToViewModel();
+
+            // Round 2: sub-lookups that depend on round-1 results — also in parallel
+            var formTask        = vm.ApplicationType != null && !string.IsNullOrEmpty(vm.ApplicationType.FormReference)
+                                    ? dataverse.GetSystemformViewModelAsync(cache, logger, vm.ApplicationType.FormReference)
+                                    : null;
+            // only fetch content types if not already loaded via nav property
+            var contentsTask    = vm.ApplicationType != null && vm.ApplicationType.ContentTypes == null
+                                    ? dataverse.GetApplicationTypeContentsByTypeIdAsync(app.adoxio_ApplicationTypeId.Id.ToString())
+                                    : null;
+            var lginAccountTask = lgin != null
+                                    ? dataverse.GetAccountByLginLinkIdAsync(lgin.adoxio_localgovindigenousnationId?.ToString())
+                                    : null;
+
+            var round2 = new List<Task>();
+            if (formTask != null)        round2.Add(formTask);
+            if (contentsTask != null)    round2.Add(contentsTask);
+            if (lginAccountTask != null) round2.Add(lginAccountTask);
+            if (round2.Count > 0) await Task.WhenAll(round2);
+
+            // Assign round-2 results
+            if (formTask != null)
+                vm.ApplicationType.DynamicsForm = await formTask;
+
+            if (contentsTask != null)
             {
-                applicationVM.MfgPipedInProduct = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgpipedinproduct;
-            }
-            if (dynamicsApplication.AdoxioMfgbrewpubonsite != null)
-            {
-                applicationVM.MfgBrewPubOnSite = (YesNoNotApplicable?)dynamicsApplication.AdoxioMfgbrewpubonsite;
-            }
-            if (dynamicsApplication.AdoxioMfgusesneutralgrainspirits != null)
-            {
-                applicationVM.MfgUsesNeutralGrainSpirits = (YesNoNotApplicable)dynamicsApplication.AdoxioMfgusesneutralgrainspirits;
-            }
-
-
-            if (dynamicsApplication.AdoxioLocatedabovedescription != null)
-            {
-                applicationVM.LocatedAboveDescription = dynamicsApplication.AdoxioLocatedabovedescription;
-            }
-
-            if (dynamicsApplication.AdoxioPatioservicebar != null)
-            {
-                applicationVM.PatioServiceBar = dynamicsApplication.AdoxioPatioservicebar;
-            }
-
-            // Catering yes / no fields
-            if (dynamicsApplication.AdoxioPreviouslicenceapplication != null)
-            {
-                applicationVM.PreviousApplication = dynamicsApplication.AdoxioPreviouslicenceapplication;
-            }
-
-            if (dynamicsApplication.AdoxioRuralagencystoreappointment != null)
-            {
-                applicationVM.RuralAgencyStoreAppointment = dynamicsApplication.AdoxioRuralagencystoreappointment;
-            }
-
-            if (dynamicsApplication.AdoxioLiquorindustryconnections != null)
-            {
-                applicationVM.LiquorIndustryConnections = dynamicsApplication.AdoxioLiquorindustryconnections;
-            }
-
-            if (dynamicsApplication.AdoxioOtherbusinessesatthesamelocation != null)
-            {
-                applicationVM.OtherBusinesses = dynamicsApplication.AdoxioOtherbusinessesatthesamelocation;
-            }
-
-
-            // id
-            if (dynamicsApplication.AdoxioApplicationid != null)
-            {
-                applicationVM.Id = dynamicsApplication.AdoxioApplicationid;
-
-                // service areas
-                var filter = $"_adoxio_applicationid_value eq {dynamicsApplication.AdoxioApplicationid}";
-                try
-                {
-                    IList<MicrosoftDynamicsCRMadoxioServicearea> areas = dynamicsClient.Serviceareas.Get(filter: filter).Value;
-                    foreach (MicrosoftDynamicsCRMadoxioServicearea area in areas)
-                    {
-                        if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Service)
-                        {
-                            applicationVM.ServiceAreas.Add(area.ToViewModel());
-                        }
-                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.OutdoorArea)
-                        {
-                            applicationVM.OutsideAreas.Add(area.ToViewModel());
-                        }
-                        else if (area.AdoxioAreacategory == (int?)AdoxioAreaCategories.Capacity)
-                        {
-                            applicationVM.CapacityArea.Add(area.ToViewModel());
-                        }
-                    }
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    logger.LogError(httpOperationException, "Error getting service areas.");
-                }
-
-                // service hours
-                try
-                {
-                    var appFilter = $"_adoxio_application_value eq {dynamicsApplication.AdoxioApplicationid}";
-                    IList<MicrosoftDynamicsCRMadoxioHoursofservice> hours = dynamicsClient.Hoursofservices.Get(filter: appFilter).Value;
-                    if (hours.Count > 0)
-                    {
-                        MicrosoftDynamicsCRMadoxioHoursofservice hourEntity = hours[0];
-                        applicationVM.ServiceHoursSundayOpen = (ServiceHours?)hourEntity.AdoxioSundayopen;
-                        applicationVM.ServiceHoursSundayClose = (ServiceHours?)hourEntity.AdoxioSundayclose;
-                        applicationVM.ServiceHoursMondayOpen = (ServiceHours?)hourEntity.AdoxioMondayopen;
-                        applicationVM.ServiceHoursMondayClose = (ServiceHours?)hourEntity.AdoxioMondayclose;
-                        applicationVM.ServiceHoursTuesdayOpen = (ServiceHours?)hourEntity.AdoxioTuesdayopen;
-                        applicationVM.ServiceHoursTuesdayClose = (ServiceHours?)hourEntity.AdoxioTuesdayclose;
-                        applicationVM.ServiceHoursWednesdayOpen = (ServiceHours?)hourEntity.AdoxioWednesdayopen;
-                        applicationVM.ServiceHoursWednesdayClose = (ServiceHours?)hourEntity.AdoxioWednesdayclose;
-                        applicationVM.ServiceHoursThursdayOpen = (ServiceHours?)hourEntity.AdoxioThursdayopen;
-                        applicationVM.ServiceHoursThursdayClose = (ServiceHours?)hourEntity.AdoxioThursdayclose;
-                        applicationVM.ServiceHoursFridayOpen = (ServiceHours?)hourEntity.AdoxioFridayopen;
-                        applicationVM.ServiceHoursFridayClose = (ServiceHours?)hourEntity.AdoxioFridayclose;
-                        applicationVM.ServiceHoursSaturdayOpen = (ServiceHours?)hourEntity.AdoxioSaturdayopen;
-                        applicationVM.ServiceHoursSaturdayClose = (ServiceHours?)hourEntity.AdoxioSaturdayclose;
-                        applicationVM.RequestOutsideServiceHours = hourEntity.AdoxioRequestoutsideservicehours;
-                    }
-                }
-                catch (HttpOperationException httpOperationException)
-                {
-                    logger.LogError(httpOperationException, "Error getting service hours.");
-                }
-
-            }
-
-            if (dynamicsApplication.Statuscode != null)
-            {
-                applicationVM.ApplicationStatus = (AdoxioApplicationStatusCodes)dynamicsApplication.Statuscode;
-            }
-
-            if (dynamicsApplication.AdoxioApplicanttype != null)
-            {
-                applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
+                var contents = await contentsTask;
+                if (contents.Count > 0)
+                    vm.ApplicationType.ContentTypes = contents.Select(c => c.ToViewModel()).ToList();
             }
 
-
-            //get applying person from Contact entity
-            if (dynamicsApplication._adoxioApplyingpersonValue != null)
+            if (lginAccountTask != null)
             {
-                Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
-                var contact = await dynamicsClient.GetContactById(applyingPersonId);
-                applicationVM.ApplyingPerson = contact.Fullname;
+                var linkedAccount = await lginAccountTask;
+                if (linkedAccount?.WebSiteURL != null)
+                    vm.IndigenousNation.WebsiteUrl = linkedAccount.WebSiteURL;
             }
 
-            if (dynamicsApplication._adoxioApplicantValue != null)
+            // police jurisdiction
+            if (app.adoxio_PoliceJurisdictionId != null)
             {
-                var applicant = await dynamicsClient.GetAccountByIdAsync(Guid.Parse(dynamicsApplication._adoxioApplicantValue));
-                applicationVM.Applicant = applicant.ToViewModel();
+                var pj = app.adoxio_PoliceJurisdictionId;
+                vm.PoliceJurisdiction = new ViewModels.PoliceJurisdiction { id = pj.Id.ToString(), name = pj.Name };
             }
 
-            //get license type from Adoxio_licencetype entity
-            if (dynamicsApplication._adoxioLicencetypeValue != null)
+            // service areas
+            foreach (var area in serviceAreas)
             {
-                Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-                var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                applicationVM.LicenseType = adoxio_licencetype.AdoxioName;
+                var areaVm = area.ToViewModel();
+                if ((int?)area.adoxio_areacategory == (int)AdoxioAreaCategories.Service)
+                    vm.ServiceAreas.Add(areaVm);
+                else if ((int?)area.adoxio_areacategory == (int)AdoxioAreaCategories.OutdoorArea)
+                    vm.OutsideAreas.Add(areaVm);
+                else if ((int?)area.adoxio_areacategory == (int)AdoxioAreaCategories.Capacity)
+                    vm.CapacityArea.Add(areaVm);
             }
 
-            // get the license sub type.
-
-            if (dynamicsApplication._adoxioLicencesubcategoryidValue != null)
+            // hours of service
+            if (hours != null)
             {
-                try
-                {
-                    var adoxioLicencesubcategory = dynamicsClient.Licencesubcategories.GetByKey(dynamicsApplication._adoxioLicencesubcategoryidValue);
-                    applicationVM.LicenceSubCategory = adoxioLicencesubcategory.AdoxioName;
-                }
-                catch (Exception e)
-                {
-                    logger.LogError(e, $"Problem getting licence sub category {dynamicsApplication._adoxioLicencesubcategoryidValue}");
-                }
+                vm.ServiceHoursSundayOpen = (ServiceHours?)(int?)hours.adoxio_SundayOpen;
+                vm.ServiceHoursSundayClose = (ServiceHours?)(int?)hours.adoxio_SundayClose;
+                vm.ServiceHoursMondayOpen = (ServiceHours?)(int?)hours.adoxio_MondayOpen;
+                vm.ServiceHoursMondayClose = (ServiceHours?)(int?)hours.adoxio_MondayClose;
+                vm.ServiceHoursTuesdayOpen = (ServiceHours?)(int?)hours.adoxio_TuesdayOpen;
+                vm.ServiceHoursTuesdayClose = (ServiceHours?)(int?)hours.adoxio_TuesdayClose;
+                vm.ServiceHoursWednesdayOpen = (ServiceHours?)(int?)hours.adoxio_WednesdayOpen;
+                vm.ServiceHoursWednesdayClose = (ServiceHours?)(int?)hours.adoxio_WednesdayClose;
+                vm.ServiceHoursThursdayOpen = (ServiceHours?)(int?)hours.adoxio_ThursdayOpen;
+                vm.ServiceHoursThursdayClose = (ServiceHours?)(int?)hours.adoxio_ThursdayClose;
+                vm.ServiceHoursFridayOpen = (ServiceHours?)(int?)hours.adoxio_FridayOpen;
+                vm.ServiceHoursFridayClose = (ServiceHours?)(int?)hours.adoxio_FridayClose;
+                vm.ServiceHoursSaturdayOpen = (ServiceHours?)(int?)hours.adoxio_SaturdayOpen;
+                vm.ServiceHoursSaturdayClose = (ServiceHours?)(int?)hours.adoxio_SaturdayClose;
+                vm.RequestOutsideServiceHours = hours.adoxio_RequestOutsideServiceHours;
             }
 
-            if (dynamicsApplication.AdoxioAppchecklistfinaldecision != null)
-            {
-                applicationVM.AppChecklistFinalDecision = (AdoxioFinalDecisionCodes)dynamicsApplication.AdoxioAppchecklistfinaldecision;
-            }
-
-            //get payment info
-            applicationVM.InvoiceTrigger = (GeneralYesNo?)dynamicsApplication.AdoxioInvoicetrigger;
-            applicationVM.IsSubmitted = (dynamicsApplication.AdoxioInvoicetrigger == 1);
-
-
-            if (dynamicsApplication.AdoxioLicenceFeeInvoice != null)
-            {
-                applicationVM.LicenceFeeInvoice = dynamicsApplication.AdoxioLicenceFeeInvoice.ToViewModel();
-            }
-
-            if (dynamicsApplication.AdoxioAssignedLicence != null)
-            {
-                applicationVM.AssignedLicence = dynamicsApplication.AdoxioAssignedLicence.ToViewModel(dynamicsClient);
-            }
-
-            if (dynamicsApplication.AdoxioApplicationTypeId != null)
-            {
-                applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
-
-                if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
-                {
-                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
-                }
-            }
-
-            if (dynamicsApplication.AdoxioPoliceJurisdictionId != null)
-            {
-                applicationVM.PoliceJurisdiction = dynamicsApplication.AdoxioPoliceJurisdictionId.ToViewModel();
-            }
-
-            if (dynamicsApplication.AdoxioLocalgovindigenousnationid != null)
-            {
-                var filter = $"_adoxio_lginlinkid_value eq {dynamicsApplication.AdoxioLocalgovindigenousnationid.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
-                var linkedAccount = (await dynamicsClient.Accounts.GetAsync(filter: filter)).Value.FirstOrDefault();
-                applicationVM.IndigenousNation = dynamicsApplication.AdoxioLocalgovindigenousnationid.ToViewModel();
-
-                if (linkedAccount != null)
-                {
-                    applicationVM.IndigenousNation.WebsiteUrl = linkedAccount.Websiteurl;
-                }
-            }
-
-            applicationVM.PrevPaymentFailed = (dynamicsApplication._adoxioInvoiceValue != null) && (!applicationVM.IsSubmitted);
-
-
-            if (dynamicsApplication.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication !=
-                null && dynamicsApplication.AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.Count > 0)
-            {
-                // add the related term info.
-                var term = dynamicsApplication
-                    .AdoxioAdoxioApplicationAdoxioApplicationtermsconditionslimitationApplication.First();
-                applicationVM.TermConditionId = term.AdoxioApplicationtermsconditionslimitationid;
-                applicationVM.TermConditionOriginalText = term.AdoxioTermsandconditions;
-
-            }
-
-            if(dynamicsApplication.AdoxioRelatedLicence != null)
-            {
-                applicationVM.RelatedLicenceNumber = dynamicsApplication.AdoxioRelatedLicence.AdoxioLicencenumber;
-            }
-
-            if(dynamicsApplication.AdoxioApplicationExtension != null)
-            {
-                applicationVM.ApplicationExtension = dynamicsApplication.AdoxioApplicationExtension.ToViewModel();
-            }
-
-            return applicationVM;
+            return vm;
         }
 
-
-        public async static Task<CovidApplication> ToCovidViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication, IDynamicsClient dynamicsClient, IMemoryCache cache, ILogger logger)
+        public static async Task<CovidApplication> ToCovidViewModelAsync(
+            this adoxio_application app,
+            IDataverseClient dataverse,
+            IMemoryCache cache,
+            ILogger logger)
         {
-            CovidApplication applicationVM = new CovidApplication
+            var vm = new CovidApplication
             {
-                Name = dynamicsApplication.AdoxioName,
-                JobNumber = dynamicsApplication.AdoxioJobnumber,
-                //get establishment name and address
-                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
-                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
-                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
-                                                    + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
-                                                    + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
-                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
-                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
-
-                AddressStreet = dynamicsApplication.AdoxioAddressstreet,
-                AddressCity = dynamicsApplication.AdoxioAddresscity,
-                AddressPostalCode = dynamicsApplication.AdoxioAddresspostalcode,
-
-                NameOfApplicant = dynamicsApplication.AdoxioNameofapplicant,
-
-
-
-                AuthorizedToSubmit = dynamicsApplication.AdoxioAuthorizedtosubmit,
-
-                //get parcel id
-                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
-
-                //get additional property info
-                AdditionalPropertyInformation = dynamicsApplication.AdoxioAdditionalpropertyinformation,
-                InvoiceId = dynamicsApplication._adoxioInvoiceValue,
-
-                Description1 = dynamicsApplication.AdoxioDescription1,
-
-                //get contact details
-                ContactPersonFirstName = dynamicsApplication.AdoxioContactpersonfirstname,
-                ContactPersonLastName = dynamicsApplication.AdoxioContactpersonlastname,
-                ContactPersonRole = dynamicsApplication.AdoxioRole,
-                ContactPersonEmail = dynamicsApplication.AdoxioEmail,
-                ContactPersonPhone = dynamicsApplication.AdoxioContactpersonphone,
-
-                //get record audit info
-                CreatedOn = dynamicsApplication.Createdon,
-                ModifiedOn = dynamicsApplication.Modifiedon,
-
-
-                ProposedEstablishmentIsAlr = dynamicsApplication.AdoxioProposedestablishmentisalr
-                //store opening 
-
-                // Catering fields.
-
+                Id = app.adoxio_applicationId?.ToString(),
+                Name = app.adoxio_name,
+                JobNumber = app.adoxio_JobNumber,
+                EstablishmentName = app.adoxio_EstablishmentPropsedName,
+                EstablishmentAddressStreet = app.adoxio_EstablishmentAddressStreet,
+                EstablishmentAddressCity = app.adoxio_EstablishmentAddressCity,
+                EstablishmentAddressPostalCode = app.adoxio_EstablishmentAddressPostalCode,
+                EstablishmentAddress = $"{app.adoxio_EstablishmentAddressStreet}, {app.adoxio_EstablishmentAddressCity} {app.adoxio_EstablishmentAddressPostalCode}",
+                EstablishmentPhone = app.adoxio_EstablishmentPhone,
+                EstablishmentEmail = app.adoxio_EstablishmentEmail,
+                IsApplicationComplete = (GeneralYesNo?)(int?)app.adoxio_IsApplicationComplete,
+                AddressStreet = app.adoxio_AddressStreet,
+                AddressCity = app.adoxio_AddressCity,
+                AddressPostalCode = app.adoxio_AddressPostalCode,
+                NameOfApplicant = app.adoxio_NameofApplicant,
+                AuthorizedToSubmit = app.adoxio_AuthorizedtoSubmit,
+                EstablishmentParcelId = app.adoxio_EstablishmentParcelID,
+                AdditionalPropertyInformation = app.adoxio_AdditionalPropertyInformation,
+                InvoiceId = app.adoxio_Invoice?.Id.ToString(),
+                Description1 = app.adoxio_Description1,
+                ContactPersonFirstName = app.adoxio_ContactPersonFirstName,
+                ContactPersonLastName = app.adoxio_ContactPersonLastName,
+                ContactPersonRole = app.adoxio_Role,
+                ContactPersonEmail = app.adoxio_Email,
+                ContactPersonPhone = app.adoxio_ContactPersonPhone,
+                CreatedOn = app.CreatedOn,
+                ModifiedOn = app.ModifiedOn,
+                ProposedEstablishmentIsAlr = app.adoxio_proposedestablishmentisALR
             };
 
+            if (app.adoxio_ApplicantType != null)
+                vm.ApplicantType = (AdoxioApplicantTypeCodes)(int)app.adoxio_ApplicantType;
 
-
-            // id
-            if (dynamicsApplication.AdoxioApplicationid != null)
+            if (app.adoxio_ApplyingPerson != null)
             {
-                applicationVM.Id = dynamicsApplication.AdoxioApplicationid;
+                var contact = await dataverse.GetContactByIdAsync(app.adoxio_ApplyingPerson.Id.ToString());
+                vm.ApplyingPerson = contact?.FullName;
             }
 
-
-            if (dynamicsApplication.AdoxioApplicanttype != null)
+            if (app.adoxio_LicenceType != null)
             {
-                applicationVM.ApplicantType = (AdoxioApplicantTypeCodes)dynamicsApplication.AdoxioApplicanttype;
+                var lt = await dataverse.GetLicenceTypeByIdAsync(app.adoxio_LicenceType.Id.ToString());
+                vm.LicenceType = lt?.adoxio_name;
             }
 
-            //get applying person from Contact entity
-            if (dynamicsApplication._adoxioApplyingpersonValue != null)
+            if (app.adoxio_ApplicationTypeId != null)
             {
-                Guid applyingPersonId = Guid.Parse(dynamicsApplication._adoxioApplyingpersonValue);
-                var contact = await dynamicsClient.GetContactById(applyingPersonId);
-                applicationVM.ApplyingPerson = contact.Fullname;
-            }
-
-
-            //get license type from Adoxio_licencetype entity
-            if (dynamicsApplication._adoxioLicencetypeValue != null)
-            {
-                Guid adoxio_licencetypeId = Guid.Parse(dynamicsApplication._adoxioLicencetypeValue);
-                var adoxio_licencetype = dynamicsClient.GetAdoxioLicencetypeById(adoxio_licencetypeId);
-                applicationVM.LicenceType = adoxio_licencetype.AdoxioName;
-            }
-
-
-
-
-            if (dynamicsApplication.AdoxioApplicationTypeId != null)
-            {
-                applicationVM.ApplicationType = dynamicsApplication.AdoxioApplicationTypeId.ToViewModel();
-
-                if (!string.IsNullOrEmpty(applicationVM.ApplicationType.FormReference))
+                var appType = await dataverse.GetApplicationTypeByIdAsync(app.adoxio_ApplicationTypeId.Id.ToString());
+                if (appType != null)
                 {
-                    applicationVM.ApplicationType.DynamicsForm = dynamicsClient.GetSystemformViewModel(cache, logger, applicationVM.ApplicationType.FormReference);
+                    vm.ApplicationType = appType.ToViewModel();
+                    if (!string.IsNullOrEmpty(vm.ApplicationType.FormReference))
+                        vm.ApplicationType.DynamicsForm = await dataverse.GetSystemformViewModelAsync(cache, logger, vm.ApplicationType.FormReference);
                 }
             }
 
-            return applicationVM;
-        }
-
-
-        public static ApplicationSummary ToSummaryViewModel(this MicrosoftDynamicsCRMadoxioApplication dynamicsApplication)
-        {
-            ApplicationSummary applicationSummary = new ApplicationSummary
-            {
-                Name = dynamicsApplication.AdoxioName,
-                JobNumber = dynamicsApplication.AdoxioJobnumber,
-                //get establishment name and address
-                EstablishmentName = dynamicsApplication.AdoxioEstablishmentpropsedname,
-                LicenceId = dynamicsApplication._adoxioAssignedlicenceValue,
-                IsPaid = (dynamicsApplication.AdoxioPaymentrecieved == true),
-                EstablishmentAddressStreet = dynamicsApplication.AdoxioEstablishmentaddressstreet,
-                EstablishmentAddressCity = dynamicsApplication.AdoxioEstablishmentaddresscity,
-                EstablishmentAddressPostalCode = dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentAddress = dynamicsApplication.AdoxioEstablishmentaddressstreet
-                                        + ", " + dynamicsApplication.AdoxioEstablishmentaddresscity
-                                        + " " + dynamicsApplication.AdoxioEstablishmentaddresspostalcode,
-                EstablishmentPhone = dynamicsApplication.AdoxioEstablishmentphone,
-                EstablishmentEmail = dynamicsApplication.AdoxioEstablishmentemail,
-                EstablishmentParcelId = dynamicsApplication.AdoxioEstablishmentparcelid,
-                IndigenousNationId = dynamicsApplication._adoxioLocalgovindigenousnationidValue,
-                PoliceJurisdictionId = dynamicsApplication._adoxioPolicejurisdictionidValue,
-                IsApplicationComplete = (GeneralYesNo?)dynamicsApplication.AdoxioIsapplicationcomplete,
-                IsStructuralChange = (dynamicsApplication?.AdoxioApplicationTypeId?.AdoxioIsstructuralchange == true),
-                DateApplicationSubmitted = dynamicsApplication?.AdoxioDateapplicationsubmitted,
-                DateApplicantSentToLG = dynamicsApplication?.AdoxioDateapplicantsenttolg,
-                ApplicationExtension = dynamicsApplication?.AdoxioApplicationExtension?.ToViewModel(),
-            };
-
-            // id
-            if (dynamicsApplication.AdoxioApplicationid != null)
-            {
-                applicationSummary.Id = dynamicsApplication.AdoxioApplicationid;
-            }
-
-            if (dynamicsApplication.Statuscode != null)
-            {
-                applicationSummary.ApplicationStatus = StatusUtility.GetTranslatedApplicationStatusV2(dynamicsApplication);
-            }
-
-            if (dynamicsApplication.AdoxioApplicationTypeId != null)
-            {
-                applicationSummary.ApplicationTypeName = dynamicsApplication.AdoxioApplicationTypeId.AdoxioName;
-                applicationSummary.IsForLicence = dynamicsApplication.AdoxioApplicationTypeId._adoxioLicencetypeValue != null;
-                applicationSummary.Portallabel = dynamicsApplication.AdoxioApplicationTypeId.AdoxioPortallabel;
-                applicationSummary.ApplicationTypeCategory = (ApplicationTypeCategory?)dynamicsApplication.AdoxioApplicationTypeId.AdoxioCategory;
-            }
-
-            applicationSummary.LGHasApproved = (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.Approved)
-                    || (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.OptOut)
-                    || (dynamicsApplication.AdoxioLgapprovaldecision == (int?)LGDecision.Pending)
-                    || (dynamicsApplication.AdoxioLgzoning == (int?)Zoning.Allows);
-
-            applicationSummary.IsIndigenousNation = (dynamicsApplication.AdoxioApplicanttype == (int)AdoxioApplicantTypeCodes.IndigenousNation);
-
-            return applicationSummary;
+            return vm;
         }
     }
 }

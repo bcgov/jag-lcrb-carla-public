@@ -1,26 +1,16 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Utility;
+using Gov.Lclb.Cllb.Public.ViewModels;
 using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class PaymentIsLiquorTest 
+    public class PaymentIsLiquorTest
     {
 		[Fact]
         public void IsLiquorTrueOneRecord()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory =(int?) ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?> { ApplicationTypeCategory.Liquor };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.True(result);
@@ -29,24 +19,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorTrueTwoRecord()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?> { ApplicationTypeCategory.Liquor, ApplicationTypeCategory.Liquor };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.True(result);
@@ -56,8 +29,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorFalseNoRecord()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
+            var x = new List<ApplicationTypeCategory?>();
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.False(result);
@@ -66,16 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorFalseOneRecord()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Cannabis
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?> { ApplicationTypeCategory.Cannabis };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.False(result);
@@ -85,32 +48,12 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorFalseOneThird()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Cannabis
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Cannabis
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?>
+            {
+                ApplicationTypeCategory.Cannabis,
+                ApplicationTypeCategory.Liquor,
+                ApplicationTypeCategory.Cannabis,
+            };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.False(result);
@@ -119,24 +62,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorTrueHalf()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Cannabis
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?> { ApplicationTypeCategory.Liquor, ApplicationTypeCategory.Cannabis };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.True(result);
@@ -146,32 +72,12 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void IsLiquorTrueTwoThirds()
         {
-            // setup a scenario where liquor is true.
-            var x = new List<MicrosoftDynamicsCRMadoxioLicences>();
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Cannabis
-                    }
-                }
-            );
-            x.Add(new MicrosoftDynamicsCRMadoxioLicences()
-                {
-                    AdoxioLicenceType = new MicrosoftDynamicsCRMadoxioLicencetype()
-                    {
-                        AdoxioCategory = (int?)ViewModels.ApplicationTypeCategory.Liquor
-                    }
-                }
-            );
+            var x = new List<ApplicationTypeCategory?>
+            {
+                ApplicationTypeCategory.Liquor,
+                ApplicationTypeCategory.Cannabis,
+                ApplicationTypeCategory.Liquor,
+            };
             bool result = DynamicsExtensions.IsMostlyLiquor(x);
 
             Assert.True(result);

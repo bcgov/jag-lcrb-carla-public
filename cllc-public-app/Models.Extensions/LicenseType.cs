@@ -1,5 +1,6 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using DvLicenceType = DV::Gov.Lclb.Cllb.Interfaces.adoxio_licencetype;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -9,18 +10,15 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class LicenseTypeExtensions
     {
 
-        public static LicenseType ToViewModel(this MicrosoftDynamicsCRMadoxioLicencetype dynamicsLicenseType)
+        public static LicenseType ToViewModel(this DvLicenceType licenceType)
         {
-            LicenseType result = new LicenseType();
-
-            if (dynamicsLicenseType.AdoxioLicencetypeid != null)
+            if (licenceType == null) return null;
+            return new LicenseType
             {
-                result.id = dynamicsLicenseType.AdoxioLicencetypeid;
-            }
-            result.code = dynamicsLicenseType.AdoxioCode;
-            result.name = dynamicsLicenseType.AdoxioName;
-
-            return result;
+                id = licenceType.adoxio_licencetypeId?.ToString(),
+                code = licenceType.adoxio_Code,
+                name = licenceType.adoxio_name
+            };
         }
     }
 }

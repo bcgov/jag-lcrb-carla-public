@@ -1,7 +1,7 @@
+using Gov.Lclb.Cllb.Interfaces;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -31,7 +31,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -39,14 +38,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         public FeedbackController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IBCEPService bcep,
+            ILoggerFactory loggerFactory, IBCEPService bcep,
             IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
+            _logger = loggerFactory.CreateLogger(typeof(FeedbackController));
             _env = env;
             _bcep = bcep;
         }

@@ -2,6 +2,9 @@
 #undef USE_MSSQL
 #undef USE_GEOCODER_CHECK
 
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
@@ -26,7 +29,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using Microsoft.Net.Http.Headers;
 using Newtonsoft.Json;
 using NWebsec.AspNetCore.Mvc;
@@ -155,10 +157,40 @@ namespace Gov.Lclb.Cllb.Public
 
             });
             services.RegisterPermissionHandler();
-            if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
+
+            // Build the Redis connection string once — reused for the Data Protection
+            // key ring and the distributed cache below.
+            string redisConfiguration = null;
+            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            {
+                redisConfiguration = _configuration["REDIS_SERVER"];
+                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
+                {
+                    redisConfiguration += $",password={_configuration["REDIS_PASSWORD"]}";
+                }
+                // For cloud installs (e.g. Azure) abortConnect should be false.
+                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
+                {
+                    redisConfiguration += ",abortConnect=false";
+                }
+            }
+
+            // Data Protection key ring MUST be shared across replicas so a session
+            // cookie encrypted by one pod can be decrypted by another. Prefer Redis
+            // (shared); fall back to the file system for single-pod / local runs.
+            if (redisConfiguration != null)
+            {
+                var dataProtectionRedis = StackExchange.Redis.ConnectionMultiplexer.Connect(redisConfiguration);
+                services.AddDataProtection()
+                    .PersistKeysToStackExchangeRedis(dataProtectionRedis, "DataProtection-Keys")
+                    .SetApplicationName("carla-public");
+            }
+            else if (!string.IsNullOrEmpty(_configuration["KEY_RING_DIRECTORY"]))
             {
                 // setup key ring to persist in storage.
-                services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]));
+                services.AddDataProtection()
+                    .PersistKeysToFileSystem(new DirectoryInfo(_configuration["KEY_RING_DIRECTORY"]))
+                    .SetApplicationName("carla-public");
             }
 
             // In production, the Angular files will be served from this directory
@@ -178,22 +210,11 @@ namespace Gov.Lclb.Cllb.Public
             services.AddTransient(_ => (IOrgBookClient)orgBook);
 
 
-            if (!string.IsNullOrEmpty(_configuration["REDIS_SERVER"]))
+            if (redisConfiguration != null)
             {
-                string config = _configuration["REDIS_SERVER"];
-                if (!string.IsNullOrEmpty(_configuration["REDIS_PASSWORD"]))
-                {
-                    string redisPassword = _configuration["REDIS_PASSWORD"];
-                    config += $",password={redisPassword}";
-                }
-                // Abort Connect is a setting that controls if Redis will try a connection if it thinks the service is not available.
-                // For cloud installations such as Azure it should be set to false.
-                if (!string.IsNullOrEmpty(_configuration["REDIS_DISABLE_ABORT_CONNECT"]))
-                {
-                    config += ",abortConnect=false";
-                }
+                string config = redisConfiguration;
 
-                services.AddDistributedRedisCache(o =>
+                services.AddStackExchangeRedisCache(o =>
                 {
                     o.Configuration = config;
                 });
@@ -271,8 +292,6 @@ namespace Gov.Lclb.Cllb.Public
         private void SetupServices(IServiceCollection services)
         {
 
-            AuthenticationResult authenticationResult = null;
-
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -289,7 +308,8 @@ namespace Gov.Lclb.Cllb.Public
                 });
             });
 
-            services.AddHttpClient<IDynamicsClient, DynamicsClient>();
+            services.AddSingleton<IDataverseClient, DataverseClient>();
+            services.AddSingleton(sp => (DataverseClient)sp.GetRequiredService<IDataverseClient>());
 
             // add BCeID Web Services
 
@@ -321,13 +341,15 @@ namespace Gov.Lclb.Cllb.Public
             {
                 var httpClientHandler = new HttpClientHandler();
 
-                if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.
-                                          // This allows you to use OpenShift self-signed certificates for testing.
-                {
-                    // Return `true` to allow certificates that are untrusted/invalid
-                    httpClientHandler.ServerCertificateCustomValidationCallback =
+                // file-manager-service always presents an OpenShift auto-generated,
+                // cluster-internal self-signed certificate (service-serving-signer),
+                // in every tier including Production, so this must not depend on
+                // ASPNETCORE_ENVIRONMENT (which is hardcoded to "Production" in all
+                // deployed tiers for an unrelated DI startup fix). The connection
+                // never leaves the cluster, so bypassing chain/name validation here
+                // is safe.
+                httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
-                }
 
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
@@ -365,46 +387,6 @@ namespace Gov.Lclb.Cllb.Public
 
             string connectionString = "unknown.";
 
-#if (USE_MSSQL)
-
-            if (!string.IsNullOrEmpty(Configuration["DB_PASSWORD"]))
-            {
-
-                try
-                {
-                    using (IServiceScope serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
-                    {
-                        log.LogDebug("Fetching the application's database context ...");
-                        AppDbContext context = serviceScope.ServiceProvider.GetService<AppDbContext>();
-                        IDynamicsClient dynamicsClient = serviceScope.ServiceProvider.GetService<IDynamicsClient>();
-
-                        connectionString = context.Database.GetDbConnection().ConnectionString;
-
-                        log.LogDebug("Migrating the database ...");
-                        context.Database.Migrate();
-                        log.LogDebug("The database migration complete.");
-
-                        // run the database seeders
-                        log.LogDebug("Adding/Updating seed data ...");
-
-                        Seeders.SeedFactory<AppDbContext> seederFactory = new Seeders.SeedFactory<AppDbContext>(Configuration, env, loggerFactory, dynamicsClient);
-                        seederFactory.Seed((AppDbContext)context);
-                        log.LogDebug("Seeding operations are complete.");
-                    }
-                }
-                catch (Exception e)
-                {
-                    StringBuilder msg = new StringBuilder();
-                    msg.AppendLine("The database migration failed!");
-                    msg.AppendLine("The database may not be available and the application will not function as expected.");
-                    msg.AppendLine("Please ensure a database is available and the connection string is correct.");
-                    msg.AppendLine("If you are running in a development environment, ensure your test database and server configuration match the project's default connection string.");
-                    msg.AppendLine("Which is: " + connectionString);
-                    log.LogCritical(new EventId(-1, "Database Migration Failed"), e, msg.ToString());
-                }
-
-            }
-#endif
 
 
             string pathBase = _configuration["BASE_PATH"];

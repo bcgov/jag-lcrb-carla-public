@@ -1,4 +1,8 @@
-﻿using Hangfire;
+﻿extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
@@ -31,11 +35,8 @@ namespace Gov.Lclb.Cllb.Geocoder
 {
     public class Startup
     {
-        private readonly ILoggerFactory _loggerFactory;
-
-        public Startup(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public Startup(IConfiguration configuration)
         {
-            _loggerFactory = loggerFactory;
             Configuration = configuration;
         }
 
@@ -45,7 +46,8 @@ namespace Gov.Lclb.Cllb.Geocoder
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(_loggerFactory.CreateLogger("Geocoder"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(sp =>
+                sp.GetRequiredService<ILoggerFactory>().CreateLogger("Geocoder"));
 
             services.AddMvc(config =>
             {
@@ -101,6 +103,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             // health checks. 
             services.AddHealthChecks()
                  .AddCheck("geocoder-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -222,12 +225,13 @@ namespace Gov.Lclb.Cllb.Geocoder
                 {
                     log.LogInformation("Creating Hangfire jobs for License issuance check ...");
 
+                    var dataverse = serviceScope.ServiceProvider.GetRequiredService<IDataverseClient>();
                     Microsoft.Extensions.Logging.ILogger geocodeLog = loggerFactory.CreateLogger(typeof(GeocodeUtils));
                     // Job for each day - updates establishments with a blank lat / long
-                    RecurringJob.AddOrUpdate("daily-geocode-establishments",() => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
+                    RecurringJob.AddOrUpdate("daily-geocode-establishments",() => new GeocodeUtils(Configuration, dataverse, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
 
                     // Job for each week - update all establishments
-                    RecurringJob.AddOrUpdate("weekly-geocode-establishments", () => new GeocodeUtils(Configuration, geocodeLog).GeocodeEstablishments(null, true), "0 0 * * 6"); // every Saturday
+                    RecurringJob.AddOrUpdate("weekly-geocode-establishments", () => new GeocodeUtils(Configuration, dataverse, geocodeLog).GeocodeEstablishments(null, true), "0 0 * * 6"); // every Saturday
 
                     log.LogInformation("Hangfire geocode jobs setup.");
                 }

@@ -206,7 +206,9 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
             entry.size = Math.ceil(entry.size / 1024);
             entry.downloadUrl =
               `api/file/${this.entityId}/${this.actionPrefix}download-file/${this.entityName}/${entry.name}`;
-            entry.downloadUrl += `?serverRelativeUrl=${encodeURIComponent(entry.serverrelativeurl)}&documentType=${this
+            // serverrelativeurl is already URL-encoded by the backend — encoding
+            // it again here double-encodes it (e.g. %20 -> %2520), breaking the download.
+            entry.downloadUrl += `?serverRelativeUrl=${entry.serverrelativeurl}&documentType=${this
               .documentType}`;
           });
           this.files = data;
@@ -226,7 +228,9 @@ export class FileUploaderComponent implements OnInit, OnDestroy {
     const headers = new HttpHeaders({
       'Content-Type': "application/json"
     });
-    const queryParams = `?serverRelativeUrl=${encodeURIComponent(relativeUrl)}&documentType=${this.documentType}`;
+    // relativeUrl is already URL-encoded by the backend — encoding it again
+    // here double-encodes it (e.g. %20 -> %2520), breaking the delete lookup.
+    const queryParams = `?serverRelativeUrl=${relativeUrl}&documentType=${this.documentType}`;
     const sub = this.http.delete(this.attachmentURL + queryParams, { headers: headers }).subscribe(result => {
         this.getUploadedFileData();
       },

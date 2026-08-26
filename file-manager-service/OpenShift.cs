@@ -23,7 +23,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
 {
     public static class PlatformEnvironment
     {
-        public static bool IsOpenShift => !string.IsNullOrEmpty(OpenShiftEnvironment.BuildName);
+        public static bool IsOpenShift => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("KUBERNETES_SERVICE_HOST"));
     }
 
     public static class OpenShiftEnvironment

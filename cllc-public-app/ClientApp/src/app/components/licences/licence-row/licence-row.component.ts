@@ -34,7 +34,6 @@ import {
   faBan
 } from "@fortawesome/free-solid-svg-icons";
 import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
-import { OutstandingPriorBalanceInvoice } from "@models/outstanding-prior-balance-invoce.model";
 import { LicenceTypeNames } from "../../../models/license-type.model";
 import { FeatureFlagService } from "@services/feature-flag.service";
 
@@ -83,8 +82,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   licenceType: string;
   @Input()
   licences: ApplicationLicenseSummary[];
-  isOutstandingPriorBalanceInvoiceDue: boolean;
-  hasOutstandingPriorBalance: boolean;
+  @Input()
+  hasOutstandingPriorBalance = false;
+  @Input()
+  isOutstandingPriorBalanceInvoiceDue = false;
   constructor(
     private licenceDataService: LicenseDataService,
     private router: Router,
@@ -109,29 +110,25 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         phone: [licence.establishmentPhoneNumber],
         email: [licence.establishmentEmail]
       });
-      licence.termsAndConditionsBusy = this.termsAndConditionsService.getTermsAndCondtions(licence.licenseId)
-        .subscribe((terms) => {
+    });
+
+    // Fetch terms and conditions for every licence in this type group in a single batched
+    // request instead of one HTTP call per licence.
+    const licenceIds = this.licences.map((licence) => licence.licenseId);
+    const termsBusy = this.termsAndConditionsService.getTermsAndCondtionsBatch(licenceIds)
+      .subscribe((allTerms) => {
+        this.licences.forEach((licence) => {
+          const terms = allTerms.filter((term) => term.licenceId === licence.licenseId);
           licence.termsAndConditions = terms;
           if (terms.length > 0) {
             licence.headerRowSpan += 1;
           }
         });
+      });
+    this.licences.forEach((licence) => {
+      licence.termsAndConditionsBusy = termsBusy;
     });
 
-    this.licenceDataService.getOutstandingBalancePriorInvoices()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data) => {
-        data.forEach((item: OutstandingPriorBalanceInvoice) => {
-          if (!this.hasOutstandingPriorBalance) {
-            this.hasOutstandingPriorBalance = true;
-          }
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
-            const toDay = new Date(new Date().toISOString().split("T")[0]);
-            let tmpDueDate = new Date(item.invoice.duedate.toString().split("T")[0]);
-            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
-          }
-        });
-      });
 
     // Set the disableLicenceRenewalDate based on the "DisableLicenceRenewalDate" feature flag.
     this.featureFlagService.featureValue("DisableLicenceRenewalDate").subscribe(feature => {

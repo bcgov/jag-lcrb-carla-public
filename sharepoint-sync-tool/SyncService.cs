@@ -1,3 +1,4 @@
+extern alias DV;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -6,26 +7,27 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using SharePointDocumentLocation = DV::Gov.Lclb.Cllb.Interfaces.SharePointDocumentLocation;
+using EntityReference = Microsoft.Xrm.Sdk.EntityReference;
 
 namespace SharePointSyncTool
 {
   public class SyncService
   {
     private readonly ISharePointFileManager _sharePointManager;
-    private readonly IDynamicsClient _dynamicsClient;
+    private readonly IDataverseClient _dataverse;
     private readonly ILogger _logger;
 
     // Regex pattern to extract GUID from folder name
     // Format: SomeName_GUIDWITHOUTDASHES where GUID is 32 hex characters
     private static readonly Regex GuidPattern = new Regex(@"_([A-F0-9]{32})$", RegexOptions.IgnoreCase);
 
-    public SyncService(ISharePointFileManager sharePointManager, IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
+    public SyncService(ISharePointFileManager sharePointManager, IDataverseClient dataverse, ILoggerFactory loggerFactory)
     {
       _sharePointManager = sharePointManager;
-      _dynamicsClient = dynamicsClient;
+      _dataverse = dataverse;
       _logger = loggerFactory.CreateLogger<SyncService>();
     }
 
@@ -380,22 +382,6 @@ namespace SharePointSyncTool
       }
     }
 
-    private List<FolderItem> FilterFoldersByDate(List<FolderItem> folders, DateTime? modifiedAfter)
-    {
-      if (modifiedAfter == null)
-      {
-        return folders;
-      }
-
-      // Note: FolderItem doesn't have a TimeCreated property in the current model
-      // You might need to fetch additional metadata for filtering by date
-      // For now, we'll return all folders and log a warning
-      _logger.LogWarning("Filtering by creation date is not implemented. Processing all folders.");
-      _logger.LogWarning("To implement date filtering, the FolderItem class needs to include TimeCreated property.");
-
-      return folders;
-    }
-
     private Dictionary<string, List<FolderItem>> AnalyzeFolderDistribution(List<FolderItem> folders)
     {
       var foldersByGuid = new Dictionary<string, List<FolderItem>>();
@@ -556,55 +542,46 @@ namespace SharePointSyncTool
     {
       try
       {
-        var sanitizedUrl = relativeUrl.Replace("'", "''");
-        var filter = $"relativeurl eq '{sanitizedUrl}'";
+        var locations = await _dataverse.GetSharePointDocLocsByRelativeUrlAsync(relativeUrl);
 
-        var locations = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Get(filter: filter));
-
-        if (locations?.Value == null || !locations.Value.Any())
+        if (locations == null || !locations.Any())
         {
           return null;
         }
 
-        // Process each found location
-        string validLocationId = null;
+        string? validLocationId = null;
 
-        foreach (var location in locations.Value)
+        foreach (var location in locations)
         {
           // Check if this location has a regarding object (entity link)
-          if (string.IsNullOrEmpty(location._regardingobjectidValue))
+          if (location.RegardingObjectId == null)
           {
             _logger.LogWarning(
               "Orphan document location found (no entity link): {LocationId} for relativeUrl {RelativeUrl}. Skipping to avoid duplicates.",
-              location.Sharepointdocumentlocationid,
+              location.Id.ToString(),
               relativeUrl
             );
-            // Don't delete orphans in this tool - just skip them
-            // The existing document location can be cleaned up separately
             continue;
           }
 
-          // Validate the regarding object matches our expected GUID
-          var locationEntityGuid = location._regardingobjectidValue?.ToLower();
+          var locationEntityGuid = location.RegardingObjectId.Id.ToString().ToLower();
           var expectedGuid = entityGuid.ToLower();
 
           if (locationEntityGuid == expectedGuid)
           {
-            // Perfect match - document location exists and points to correct entity
             _logger.LogDebug(
               "Valid document location found: {LocationId} for relativeUrl {RelativeUrl}, linked to entity {Guid}",
-              location.Sharepointdocumentlocationid,
+              location.Id.ToString(),
               relativeUrl,
               entityGuid
             );
-            validLocationId = location.Sharepointdocumentlocationid;
+            validLocationId = location.Id.ToString();
           }
           else
           {
-            // Document location exists but points to different entity
             _logger.LogWarning(
               "Document location {LocationId} for relativeUrl {RelativeUrl} exists but is linked to different entity. Expected: {ExpectedGuid}, Found: {FoundGuid}. Skipping to avoid duplicates.",
-              location.Sharepointdocumentlocationid,
+              location.Id.ToString(),
               relativeUrl,
               expectedGuid,
               locationEntityGuid
@@ -612,7 +589,7 @@ namespace SharePointSyncTool
           }
         }
 
-        if (validLocationId != null && locations.Value.Count > 1)
+        if (validLocationId != null && locations.Count > 1)
         {
           _logger.LogWarning(
             "Multiple document locations found for relativeUrl {RelativeUrl}. This may indicate data inconsistency.",
@@ -622,7 +599,7 @@ namespace SharePointSyncTool
 
         return validLocationId;
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
         _logger.LogError(ex, "Error checking if document location exists for relativeUrl: {RelativeUrl}", relativeUrl);
         return null;
@@ -633,37 +610,28 @@ namespace SharePointSyncTool
     {
       try
       {
-        // Get parent document library location
-        var parentDocumentLibraryReference = GetDocumentLocationReferenceByRelativeURL(documentLibrary);
+        var parentDocumentLibraryId = await GetDocumentLocationReferenceByRelativeUrlAsync(documentLibrary);
 
-        if (parentDocumentLibraryReference == null)
+        if (parentDocumentLibraryId == null)
         {
           _logger.LogError("Parent document library not found: {DocumentLibrary}", documentLibrary);
           return false;
         }
 
-        // Create the SharePointDocumentLocation entity
-        var documentLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation
+        var regardingRef = GetRegardingObjectReference(entityName, entityGuid);
+        var documentLocation = new SharePointDocumentLocation
         {
-          Relativeurl = relativeUrl,
+          RelativeUrl = relativeUrl,
           Description = GetDescriptionForEntity(entityName),
-          Name = relativeUrl, // Use relative URL as name for nested entities
+          Name = relativeUrl,
+          ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, Guid.Parse(parentDocumentLibraryId)),
+          RegardingObjectId = regardingRef
         };
 
-        // Set the parent document library reference
-        documentLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI(
-          "sharepointdocumentlocations",
-          parentDocumentLibraryReference
-        );
-
-        // Set the regarding object based on entity type
-        SetRegardingObject(documentLocation, entityName, entityGuid);
-
-        // Log what we're about to create for debugging
         _logger.LogDebug(
           "Creating document location - Name: {Name}, RelativeUrl: {RelativeUrl}, Description: {Description}, Parent: {Parent}, RegardingEntity: {EntityName}, EntityGuid: {Guid}",
           documentLocation.Name,
-          documentLocation.Relativeurl,
+          documentLocation.RelativeUrl,
           documentLocation.Description,
           documentLibrary,
           entityName,
@@ -675,133 +643,76 @@ namespace SharePointSyncTool
         if (finalCheck != null)
         {
           _logger.LogInformation("Document location was created by another process for {RelativeUrl}. Skipping creation.", relativeUrl);
-          return true; // Consider this a success since the record exists
+          return true;
         }
 
-        // Create the document location
-        var result = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Create(documentLocation));
+        var createdId = await _dataverse.CreateSharePointDocLocAsync(documentLocation);
 
-        if (result != null && !string.IsNullOrEmpty(result.Sharepointdocumentlocationid))
+        if (createdId != Guid.Empty)
         {
           _logger.LogDebug(
             "Created document location {LocationId} - RelativeUrl: {RelativeUrl}, RegardingEntity: {EntityName}, GUID: {Guid}",
-            result.Sharepointdocumentlocationid,
+            createdId.ToString(),
             relativeUrl,
             entityName,
             entityGuid
           );
-
-          // Add reference to the entity
-          // Note: If multiple folders share the same GUID, each will create its own
-          // document location and all will be linked to the same entity
-          await AddReferenceToEntity(entityName, entityGuid, result.Sharepointdocumentlocationid);
           return true;
         }
 
         return false;
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
-        // Log the response content to see what Dynamics is complaining about
-        var errorContent = ex.Response?.Content;
-        var statusCode = ex.Response?.StatusCode;
-
-        _logger.LogError(
-          "HTTP error creating document location - StatusCode: {StatusCode}, EntityName: {EntityName}, GUID: {Guid}, RelativeUrl: {RelativeUrl}",
-          statusCode,
-          entityName,
-          entityGuid,
-          relativeUrl
-        );
-
-        if (!string.IsNullOrEmpty(errorContent))
-        {
-          _logger.LogError("Error response from Dynamics: {ErrorContent}", errorContent);
-        }
-
-        // Check if this is a duplicate key error
-        if (
-          errorContent != null
-          && (errorContent.Contains("duplicate") || errorContent.Contains("already exists") || errorContent.Contains("duplicate key"))
-        )
+        if (ex.Message.Contains("duplicate") || ex.Message.Contains("already exists") || ex.Message.Contains("duplicate key"))
         {
           _logger.LogWarning(
             "Document location for {RelativeUrl} already exists (detected during creation). This may be a race condition.",
             relativeUrl
           );
 
-          // Verify it exists now
           var verification = await GetExistingDocumentLocationAsync(relativeUrl, entityGuid);
           if (verification != null)
           {
             _logger.LogInformation("Verified existing document location: {LocationId}", verification);
-            return true; // Record exists, so this is effectively successful
+            return true;
           }
         }
 
         _logger.LogError(ex, "Error creating document location for entity {EntityName}, GUID: {Guid}", entityName, entityGuid);
         return false;
       }
-      catch (Exception ex)
-      {
-        _logger.LogError(ex, "Unexpected error creating document location for entity {EntityName}, GUID: {Guid}", entityName, entityGuid);
-        return false;
-      }
     }
 
-    private string? GetDocumentLocationReferenceByRelativeURL(string relativeUrl)
+    private async Task<string?> GetDocumentLocationReferenceByRelativeUrlAsync(string relativeUrl)
     {
       try
       {
-        var sanitized = relativeUrl.Replace("'", "''");
-        var filter = $"relativeurl eq '{sanitized}'";
-
         _logger.LogDebug("Looking up parent document library with relativeurl: {RelativeUrl}", relativeUrl);
 
-        var locations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: filter);
-
-        var location = locations?.Value?.FirstOrDefault();
+        var locations = await _dataverse.GetSharePointDocLocsByRelativeUrlAsync(relativeUrl);
+        var location = locations?.FirstOrDefault();
 
         if (location == null)
         {
           _logger.LogError(
             "Parent document library location not found with relativeurl '{RelativeUrl}'. "
-              + "The parent document library must exist in Dynamics before syncing folders. "
+              + "The parent document library must exist in Dataverse before syncing folders. "
               + "Please ensure SharePoint integration is properly configured and the document library location exists.",
             relativeUrl
           );
-
-          // Try to list available document libraries to help with troubleshooting
-          try
-          {
-            var allLocations = _dynamicsClient.Sharepointdocumentlocations.Get(filter: "regardingobjectid eq null", top: 10);
-
-            if (allLocations?.Value?.Any() == true)
-            {
-              _logger.LogInformation("Available document library locations:");
-              foreach (var loc in allLocations.Value.Take(10))
-              {
-                _logger.LogInformation("  - RelativeUrl: '{RelativeUrl}', Name: '{Name}'", loc.Relativeurl, loc.Name);
-              }
-            }
-          }
-          catch
-          {
-            // Ignore errors when trying to list available locations
-          }
-
           return null;
         }
 
         _logger.LogDebug(
           "Found parent document library location: ID={LocationId}, Name={Name}",
-          location.Sharepointdocumentlocationid,
+          location.Id.ToString(),
           location.Name
         );
 
-        return location.Sharepointdocumentlocationid;
+        return location.Id.ToString();
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
         _logger.LogError(ex, "Error getting document location reference for: {RelativeUrl}", relativeUrl);
         return null;
@@ -936,7 +847,6 @@ namespace SharePointSyncTool
     {
       // Check if account document location already exists
       var existingLocationId = await GetExistingDocumentLocationAsync(accountFolderName, accountGuid);
-
       if (existingLocationId != null)
       {
         _logger.LogDebug(
@@ -947,38 +857,14 @@ namespace SharePointSyncTool
         return (existingLocationId, false);
       }
 
-      // Get the parent Account document library reference
-      var accountLibraryReference = GetDocumentLocationReferenceByRelativeURL(SharePointConstants.AccountFolderInternalName);
-
-      if (accountLibraryReference == null)
+      var accountLibraryId = await GetDocumentLocationReferenceByRelativeUrlAsync(SharePointConstants.AccountFolderInternalName);
+      if (accountLibraryId == null)
       {
         _logger.LogError("Account document library not found. Cannot create account document location.");
         return (null, false);
       }
 
-      // Create the Account document location
-      var accountDocLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation
-      {
-        Relativeurl = accountFolderName,
-        Description = "Account Files",
-        Name = accountFolderName,
-      };
-
-      accountDocLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI(
-        "sharepointdocumentlocations",
-        accountLibraryReference
-      );
-
-      // Set regarding to the account entity
-      var accountEntityUri = _dynamicsClient.GetEntityURI("accounts", accountGuid);
-      accountDocLocation.RegardingobjectIdAccountODataBind = accountEntityUri;
-
-      _logger.LogDebug(
-        "Creating account document location - Name: {Name}, RelativeUrl: {RelativeUrl}, AccountGuid: {Guid}",
-        accountDocLocation.Name,
-        accountDocLocation.Relativeurl,
-        accountGuid
-      );
+      if (!Guid.TryParse(accountGuid, out var accountGuidParsed)) return (null, false);
 
       // Double-check before creating
       var finalCheck = await GetExistingDocumentLocationAsync(accountFolderName, accountGuid);
@@ -990,30 +876,38 @@ namespace SharePointSyncTool
 
       try
       {
-        var result = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Create(accountDocLocation));
+        var accountDocLocation = new SharePointDocumentLocation
+        {
+          RelativeUrl = accountFolderName,
+          Description = "Account Files",
+          Name = accountFolderName,
+          ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, Guid.Parse(accountLibraryId)),
+          RegardingObjectId = new EntityReference("account", accountGuidParsed)
+        };
 
-        if (result != null && !string.IsNullOrEmpty(result.Sharepointdocumentlocationid))
+        _logger.LogDebug(
+          "Creating account document location - Name: {Name}, RelativeUrl: {RelativeUrl}, AccountGuid: {Guid}",
+          accountDocLocation.Name,
+          accountDocLocation.RelativeUrl,
+          accountGuid
+        );
+
+        var createdId = await _dataverse.CreateSharePointDocLocAsync(accountDocLocation);
+        if (createdId != Guid.Empty)
         {
           _logger.LogDebug(
             "Created account document location: {LocationId} for account {AccountGuid}",
-            result.Sharepointdocumentlocationid,
+            createdId.ToString(),
             accountGuid
           );
-          return (result.Sharepointdocumentlocationid, true);
+          return (createdId.ToString(), true);
         }
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
-        var errorContent = ex.Response?.Content;
-
-        // Check if this is a duplicate key error
-        if (
-          errorContent != null
-          && (errorContent.Contains("duplicate") || errorContent.Contains("already exists") || errorContent.Contains("duplicate key"))
-        )
+        if (ex.Message.Contains("duplicate") || ex.Message.Contains("already exists") || ex.Message.Contains("duplicate key"))
         {
           _logger.LogWarning("Account document location already exists (detected during creation). Retrieving existing record.");
-
           var verification = await GetExistingDocumentLocationAsync(accountFolderName, accountGuid);
           if (verification != null)
           {
@@ -1036,27 +930,24 @@ namespace SharePointSyncTool
       string parentAccountDocLocationId
     )
     {
-      // For entity type folders, we don't have a regarding entity, so we search by relativeUrl and parent
-      // We need to find a document location with this relativeUrl AND this specific parent
       try
       {
-        var sanitizedUrl = entityTypeFolderName.Replace("'", "''");
-        var filter = $"relativeurl eq '{sanitizedUrl}' and _parentsiteorlocation_value eq {parentAccountDocLocationId}";
+        var locations = await _dataverse.GetSharePointDocLocsByRelativeUrlAsync(entityTypeFolderName);
+        var match = locations?.FirstOrDefault(l =>
+          l.ParentSiteOrLocation?.Id.ToString().ToLower() == parentAccountDocLocationId.ToLower()
+        );
 
-        var locations = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Get(filter: filter));
-
-        if (locations?.Value != null && locations.Value.Any())
+        if (match != null)
         {
-          var location = locations.Value.First();
           _logger.LogDebug(
             "Entity type folder document location already exists: {LocationId} for {EntityTypeFolder}",
-            location.Sharepointdocumentlocationid,
+            match.Id.ToString(),
             entityTypeFolderName
           );
-          return (location.Sharepointdocumentlocationid, false);
+          return (match.Id.ToString(), false);
         }
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
         _logger.LogWarning(
           ex,
@@ -1065,62 +956,46 @@ namespace SharePointSyncTool
         );
       }
 
-      // Create the Entity Type folder document location
-      var entityTypeDocLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation
-      {
-        Relativeurl = entityTypeFolderName,
-        Description = string.Empty, // Blank description as specified
-        Name = "Documents on Default Site 1",
-      };
-
-      entityTypeDocLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI(
-        "sharepointdocumentlocations",
-        parentAccountDocLocationId
-      );
-
-      // No regarding object for entity type folders
-
-      _logger.LogDebug(
-        "Creating entity type folder document location - Name: {Name}, RelativeUrl: {RelativeUrl}, ParentId: {ParentId}",
-        entityTypeDocLocation.Name,
-        entityTypeDocLocation.Relativeurl,
-        parentAccountDocLocationId
-      );
-
       try
       {
-        var result = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Create(entityTypeDocLocation));
+        var entityTypeDocLocation = new SharePointDocumentLocation
+        {
+          RelativeUrl = entityTypeFolderName,
+          Description = string.Empty,
+          Name = "Documents on Default Site 1",
+          ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, Guid.Parse(parentAccountDocLocationId))
+        };
 
-        if (result != null && !string.IsNullOrEmpty(result.Sharepointdocumentlocationid))
+        _logger.LogDebug(
+          "Creating entity type folder document location - Name: {Name}, RelativeUrl: {RelativeUrl}, ParentId: {ParentId}",
+          entityTypeDocLocation.Name,
+          entityTypeDocLocation.RelativeUrl,
+          parentAccountDocLocationId
+        );
+
+        var createdId = await _dataverse.CreateSharePointDocLocAsync(entityTypeDocLocation);
+        if (createdId != Guid.Empty)
         {
           _logger.LogDebug(
             "Created entity type folder document location: {LocationId} for {EntityTypeFolder}",
-            result.Sharepointdocumentlocationid,
+            createdId.ToString(),
             entityTypeFolderName
           );
-          return (result.Sharepointdocumentlocationid, true);
+          return (createdId.ToString(), true);
         }
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
-        var errorContent = ex.Response?.Content;
-
-        // Check if this is a duplicate key error
-        if (
-          errorContent != null
-          && (errorContent.Contains("duplicate") || errorContent.Contains("already exists") || errorContent.Contains("duplicate key"))
-        )
+        if (ex.Message.Contains("duplicate") || ex.Message.Contains("already exists") || ex.Message.Contains("duplicate key"))
         {
           _logger.LogWarning("Entity type folder document location already exists (detected during creation). Retrieving existing record.");
-
-          // Try to retrieve it again
-          var sanitizedUrl = entityTypeFolderName.Replace("'", "''");
-          var filter = $"relativeurl eq '{sanitizedUrl}' and _parentsiteorlocation_value eq {parentAccountDocLocationId}";
-          var locations = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Get(filter: filter));
-
-          if (locations?.Value != null && locations.Value.Any())
+          var retryLocations = await _dataverse.GetSharePointDocLocsByRelativeUrlAsync(entityTypeFolderName);
+          var retryMatch = retryLocations?.FirstOrDefault(l =>
+            l.ParentSiteOrLocation?.Id.ToString().ToLower() == parentAccountDocLocationId.ToLower()
+          );
+          if (retryMatch != null)
           {
-            return (locations.Value.First().Sharepointdocumentlocationid, false);
+            return (retryMatch.Id.ToString(), false);
           }
         }
 
@@ -1142,37 +1017,11 @@ namespace SharePointSyncTool
     {
       // Check if entity document location already exists
       var existingLocationId = await GetExistingDocumentLocationAsync(entityFolderName, entityGuid);
-
       if (existingLocationId != null)
       {
         _logger.LogDebug("Entity document location already exists: {LocationId} for entity {EntityGuid}", existingLocationId, entityGuid);
         return true;
       }
-
-      // Create the Entity document location
-      var entityDocLocation = new MicrosoftDynamicsCRMsharepointdocumentlocation
-      {
-        Relativeurl = entityFolderName,
-        Description = GetDescriptionForEntity(entityName),
-        Name = entityFolderName,
-      };
-
-      entityDocLocation.ParentsiteorlocationSharepointdocumentlocationODataBind = _dynamicsClient.GetEntityURI(
-        "sharepointdocumentlocations",
-        parentEntityTypeDocLocationId
-      );
-
-      // Set the regarding object based on entity type
-      SetRegardingObject(entityDocLocation, entityName, entityGuid);
-
-      _logger.LogDebug(
-        "Creating entity document location - Name: {Name}, RelativeUrl: {RelativeUrl}, EntityName: {EntityName}, EntityGuid: {Guid}, ParentId: {ParentId}",
-        entityDocLocation.Name,
-        entityDocLocation.Relativeurl,
-        entityName,
-        entityGuid,
-        parentEntityTypeDocLocationId
-      );
 
       // Double-check before creating
       var finalCheck = await GetExistingDocumentLocationAsync(entityFolderName, entityGuid);
@@ -1184,35 +1033,42 @@ namespace SharePointSyncTool
 
       try
       {
-        var result = await Task.Run(() => _dynamicsClient.Sharepointdocumentlocations.Create(entityDocLocation));
+        var entityDocLocation = new SharePointDocumentLocation
+        {
+          RelativeUrl = entityFolderName,
+          Description = GetDescriptionForEntity(entityName),
+          Name = entityFolderName,
+          ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, Guid.Parse(parentEntityTypeDocLocationId)),
+          RegardingObjectId = GetRegardingObjectReference(entityName, entityGuid)
+        };
 
-        if (result != null && !string.IsNullOrEmpty(result.Sharepointdocumentlocationid))
+        _logger.LogDebug(
+          "Creating entity document location - Name: {Name}, RelativeUrl: {RelativeUrl}, EntityName: {EntityName}, EntityGuid: {Guid}, ParentId: {ParentId}",
+          entityDocLocation.Name,
+          entityDocLocation.RelativeUrl,
+          entityName,
+          entityGuid,
+          parentEntityTypeDocLocationId
+        );
+
+        var createdId = await _dataverse.CreateSharePointDocLocAsync(entityDocLocation);
+        if (createdId != Guid.Empty)
         {
           _logger.LogDebug(
             "Created entity document location: {LocationId} for entity {EntityGuid}",
-            result.Sharepointdocumentlocationid,
+            createdId.ToString(),
             entityGuid
           );
-
-          // Add reference to the entity
-          await AddReferenceToEntity(entityName, entityGuid, result.Sharepointdocumentlocationid);
           return true;
         }
 
         return false;
       }
-      catch (HttpOperationException ex)
+      catch (Exception ex)
       {
-        var errorContent = ex.Response?.Content;
-
-        // Check if this is a duplicate key error
-        if (
-          errorContent != null
-          && (errorContent.Contains("duplicate") || errorContent.Contains("already exists") || errorContent.Contains("duplicate key"))
-        )
+        if (ex.Message.Contains("duplicate") || ex.Message.Contains("already exists") || ex.Message.Contains("duplicate key"))
         {
           _logger.LogWarning("Entity document location already exists (detected during creation).");
-
           var verification = await GetExistingDocumentLocationAsync(entityFolderName, entityGuid);
           if (verification != null)
           {
@@ -1225,63 +1081,33 @@ namespace SharePointSyncTool
       }
     }
 
-    private void SetRegardingObject(MicrosoftDynamicsCRMsharepointdocumentlocation documentLocation, string entityName, string entityGuid)
+    private EntityReference? GetRegardingObjectReference(string entityName, string entityGuid)
     {
-      var entityUri = _dynamicsClient.GetEntityURI(GetEntityPluralName(entityName), entityGuid);
+      if (!Guid.TryParse(entityGuid, out var guid)) return null;
 
-      switch (entityName.ToLower())
+      var logicalName = entityName.ToLower() switch
       {
-        case "account":
-          documentLocation.RegardingobjectIdAccountODataBind = entityUri;
-          break;
-        case "application":
-          documentLocation.RegardingobjectidAdoxioApplicationODataBind = entityUri;
-          break;
-        case "contact":
-          documentLocation.RegardingobjectIdContactODataBind = entityUri;
-          break;
-        case "worker":
-          documentLocation.RegardingobjectidWorkerApplicationODataBind = entityUri;
-          break;
-        case "event":
-          documentLocation.RegardingobjectIdEventODataBind = entityUri;
-          break;
-        case "licence":
-          documentLocation.RegardingobjectIdLicenceODataBind = entityUri;
-          break;
-        case "contravention":
-          documentLocation.RegardingobjectidAdoxioContraventionODataBind = entityUri;
-          break;
-        case "enforcement action":
-          documentLocation.RegardingobjectidAdoxioEnforcementactionODataBind = entityUri;
-          break;
-        case "special event":
-          documentLocation.RegardingobjectidAdoxioSpecialeventODataBind = entityUri;
-          break;
-        case "incident":
-          documentLocation.RegardingobjectIdIncidentODataBind = entityUri;
-          break;
-        case "complaint":
-          documentLocation.RegardingobjectidAdoxioComplaintODataBind = entityUri;
-          break;
-        default:
-          _logger.LogWarning("Unknown entity type: {EntityName}. Document location may not be properly linked.", entityName);
-          break;
-      }
-    }
+        "account" => "account",
+        "application" => "adoxio_application",
+        "contact" => "contact",
+        "worker" => "adoxio_worker",
+        "event" => "adoxio_event",
+        "licence" => "adoxio_licences",
+        "contravention" => "adoxio_contravention",
+        "enforcement action" => "adoxio_enforcementaction",
+        "special event" => "adoxio_specialevent",
+        "incident" => "incident",
+        "complaint" => "adoxio_complaint",
+        _ => null
+      };
 
-    private async Task AddReferenceToEntity(string entityName, string entityGuid, string documentLocationId)
-    {
-      // The relationship is already established via RegardingObject set in CreateDocumentLocationAsync
-      // Setting the lookup field creates the bidirectional relationship automatically in Dynamics
-      // AddReference is redundant and not needed for any entity type
-      _logger.LogDebug(
-        "Relationship between {EntityName} entity {Guid} and document location {LocationId} established via RegardingObject",
-        entityName,
-        entityGuid,
-        documentLocationId
-      );
-      await Task.CompletedTask; // Maintain async signature for compatibility
+      if (logicalName == null)
+      {
+        _logger.LogWarning("Unknown entity type: {EntityName}. Document location may not be properly linked.", entityName);
+        return null;
+      }
+
+      return new EntityReference(logicalName, guid);
     }
 
     private string GetDescriptionForEntity(string entityName)

@@ -9,9 +9,6 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Net;
 using Microsoft.Extensions.Hosting;
-using Gov.Lclb.Cllb.Interfaces;
-using Microsoft.Rest;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 using System.Globalization;
@@ -28,16 +25,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         private readonly IWebHostEnvironment _env;
         private readonly SiteMinderAuthOptions _options = new SiteMinderAuthOptions();
         private readonly string _encryptionKey;
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly ILogger _logger;
 
-        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env, IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory)
+        public BCServiceController(IConfiguration configuration, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             _configuration = configuration;
             _env = env;
             _encryptionKey = _configuration["ENCRYPTION_KEY"];
             _logger = loggerFactory.CreateLogger(typeof(BCServiceController));
-            _dynamicsClient = dynamicsClient;
         }
 
         [HttpGet]

@@ -1,11 +1,9 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Rest;
 using Serilog;
 using System;
 using System.Collections.Generic;
@@ -13,9 +11,14 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 using Gov.Jag.Lcrb.OneStopService.OneStop;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ILogger = Serilog.ILogger;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DV::Gov.Lclb.Cllb.Interfaces;
+using OneStopHubStatusChange = DV::Gov.Lclb.Cllb.Interfaces.OneStopHubStatusChange;
+using OneStopMessageStatus = DV::Gov.Lclb.Cllb.Interfaces.OneStopMessageStatus;
+using IOneStopRestClient = Gov.Lclb.Cllb.Interfaces.IOneStopRestClient;
+using OneStopRestClient = Gov.Lclb.Cllb.Interfaces.OneStopRestClient;
 
 namespace Gov.Jag.Lcrb.OneStopService
 {
@@ -67,7 +70,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string OPERATING_NAME_SEQUENCE_NUMBER = "1";
         public const string UPDATE_REASON_CODE = "01";
         public const string UPDATE_REASON_CODE_ADDRESS = "03";
-        
+
 
 
         /// <summary>
@@ -81,10 +84,13 @@ namespace Gov.Jag.Lcrb.OneStopService
 
         private IMemoryCache _cache;
 
-        public OneStopUtils(IConfiguration configuration, IMemoryCache cache)
+        private readonly IDataverseClient _dataverse;
+
+        public OneStopUtils(IConfiguration configuration, IMemoryCache cache, IDataverseClient dataverse)
         {
             _configuration = configuration;
             _cache = cache;
+            _dataverse = dataverse;
             _onestopRestClient = SetupOneStopClient(configuration, Log.Logger);
 
             if (!string.IsNullOrEmpty(_configuration["maxLicencesPerInterval"]))
@@ -100,29 +106,96 @@ namespace Gov.Jag.Lcrb.OneStopService
             }
         }
 
-        private void UpdateQueueItemForSend(IDynamicsClient dynamicsClient, PerformContext hangfireContext, string queueItemId, string payload, string response)
+        private async Task<OneStopLicenceData?> FetchLicenceForOneStop(string licenceId)
         {
-            if (!string.IsNullOrEmpty(queueItemId))
+            var dvLicence = await _dataverse.GetLicenceByIdAsync(licenceId);
+            if (dvLicence == null) return null;
+
+            OneStopAccount licencee = null;
+            if (dvLicence.adoxio_Licencee?.Id is Guid licenceeId && licenceeId != Guid.Empty)
             {
-                MicrosoftDynamicsCRMadoxioOnestopmessageitem patchRecord =
-                    new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                var dvAccount = await _dataverse.GetAccountByIdAsync(licenceeId.ToString());
+                if (dvAccount != null)
+                {
+                    licencee = new OneStopAccount
                     {
-                        AdoxioDatetimesent = DateTime.Now,
-                        AdoxioPayload = payload,
-                        AdoxioMessagestatus = response,
-                        AdoxioMessagesendstatus= (int)OneStopMessageStatus.Sent
+                        AccountNumber = dvAccount.AccountNumber,
+                        Name = dvAccount.Name ?? dvLicence.adoxio_Licencee?.Name,
+                        Email = dvAccount.EMailAddress1,
+                        Phone = dvAccount.Address1_Telephone1,
+                        Address1Line1 = dvAccount.Address1_Line1,
+                        Address1City = dvAccount.Address1_City,
+                        Address1PostalCode = dvAccount.Address1_PostalCode
                     };
+                }
+            }
+
+            OneStopEstablishment est = null;
+            if (dvLicence.adoxio_establishment?.Id is Guid estId && estId != Guid.Empty)
+            {
+                var dvEst = await _dataverse.GetEstablishmentByIdAsync(estId.ToString());
+                if (dvEst != null)
+                {
+                    est = new OneStopEstablishment
+                    {
+                        Name = dvEst.adoxio_name,
+                        AddressStreet = dvEst.adoxio_AddressStreet,
+                        AddressCity = dvEst.adoxio_AddressCity,
+                        AddressPostalCode = dvEst.adoxio_AddressPostalCode
+                    };
+                }
+            }
+
+            OneStopLicenceType licenceType = null;
+            if (dvLicence.adoxio_LicenceType?.Id is Guid ltId && ltId != Guid.Empty)
+            {
+                var dvLt = await _dataverse.GetLicenceTypeByIdAsync(ltId.ToString());
+                if (dvLt != null)
+                {
+                    licenceType = new OneStopLicenceType
+                    {
+                        LicenceTypeId = dvLt.Id.ToString(),
+                        Name = dvLt.adoxio_name,
+                        OneStopProgramAccountType = dvLt.adoxio_OneStopProgramAccountType
+                    };
+                }
+            }
+
+            return new OneStopLicenceData
+            {
+                LicenceId = dvLicence.Id.ToString(),
+                LicenceNumber = dvLicence.adoxio_LicenceNumber,
+                BusinessProgramAccountReferenceNumber = dvLicence.adoxio_BusinessProgramAccountReferenceNumber,
+                OneStopSent = dvLicence.adoxio_onestopsent,
+                ExpiryDate = dvLicence.adoxio_ExpiryDate.HasValue
+                    ? new DateTimeOffset(dvLicence.adoxio_ExpiryDate.Value)
+                    : (DateTimeOffset?)null,
+                LicenceType = licenceType,
+                Establishment = est,
+                Licencee = licencee
+            };
+        }
+
+        private async Task UpdateQueueItemForSend(PerformContext hangfireContext, string queueItemId, string payload, string response)
+        {
+            if (!string.IsNullOrEmpty(queueItemId) && Guid.TryParse(queueItemId, out var queueGuid))
+            {
+                var patchRecord = new adoxio_onestopmessageitem
+                {
+                    Id = queueGuid,
+                    adoxio_DateTimeSent = DateTime.Now,
+                    adoxio_Payload = payload,
+                    adoxio_MessageStatus = response,
+                    adoxio_MessageSendStatus = (adoxio_messagestatus)OneStopMessageStatus.Sent
+                };
                 try
                 {
-                    dynamicsClient.Onestopmessageitems.Update(queueItemId, patchRecord);
+                    await _dataverse.UpdateOneStopMessageItemAsync(patchRecord);
                 }
                 catch (Exception e)
                 {
                     Log.Logger.Error(e, $"Error while updating OneStop queue item {queueItemId} {e.Message}");
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine($"Error while updating OneStop queue item {queueItemId} {e.Message}");
-                    }
+                    hangfireContext?.WriteLine($"Error while updating OneStop queue item {queueItemId} {e.Message}");
                 }
             }
         }
@@ -132,138 +205,85 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// </summary>
         public async Task SendChangeAddressRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting OneStop REST ChangeAddress Job.");
-            }
+            hangfireContext?.WriteLine("Starting OneStop REST ChangeAddress Job.");
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
             //prepare soap content
             var req = new ChangeAddress();
-            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = await FetchLicenceForOneStop(licenceGuid);
 
             if (hangfireContext != null && licence != null)
-            {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
-            }
 
-            if (licence == null || licence.AdoxioEstablishment == null)
+            if (licence == null || licence.Establishment == null)
             {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine($"Unable to get licence,SendChangeAddressRest,hangfireContext {licenceGuid}.");
-                }
-
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Error($"Unable to get licence,SendChangeAddressRest {licenceGuid}.");
-                }
+                hangfireContext?.WriteLine($"Unable to get licence,SendChangeAddressRest,hangfireContext {licenceGuid}.");
+                Log.Logger?.Error($"Unable to get licence,SendChangeAddressRest {licenceGuid}.");
                 var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
-                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
             }
             else
             {
                 var innerXml = req.CreateXML(licence);
                 innerXml = _onestopRestClient.CleanXML(innerXml);
-
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Information(innerXml);
-                }
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(innerXml);
-                }
-
-                //send message to Onestop hub
+                Log.Logger?.Information(innerXml);
+                hangfireContext?.WriteLine(innerXml);
 
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
+                await UpdateQueueItemForSend(hangfireContext, queueItemId, innerXml, outputXML);
 
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End of OneStop REST ChangeAddress  Job.");
-                }
+                hangfireContext?.WriteLine(outputXML);
+                hangfireContext?.WriteLine("End of OneStop REST ChangeAddress  Job.");
             }
         }
 
         /// <summary>
-        /// Hangfire job to send Change Status message to One stop.
+        /// Hangfire job to send Change Name message to One stop.
         /// </summary>
         public async Task SendChangeNameRest(PerformContext hangfireContext, string licenceGuidRaw, string queueItemId, bool isTransfer, ChangeNameType changeNameType)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting OneStop REST ChangeName Job.");
-            }
+            hangfireContext?.WriteLine("Starting OneStop REST ChangeName Job.");
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
-            //prepare soap content
             var req = new ChangeName();
-            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = await FetchLicenceForOneStop(licenceGuid);
 
             if (hangfireContext != null && licence != null)
-            {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
-            }
 
-            if (licence == null || licence.AdoxioEstablishment == null)
+            if (licence == null || licence.Establishment == null)
             {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine($"Unable to get licence,SendChangeNameRest,hangfireContext {licenceGuid}.");
-                }
-
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Error($"Unable to get licence,SendChangeNameRest {licenceGuid}.");
-                }
+                hangfireContext?.WriteLine($"Unable to get licence,SendChangeNameRest,hangfireContext {licenceGuid}.");
+                Log.Logger?.Error($"Unable to get licence,SendChangeNameRest {licenceGuid}.");
                 var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
-                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
             }
             else
             {
                 string targetBusinessNumber = null;
-                
                 if (changeNameType == ChangeNameType.Transfer)
                 {
-                    var targetOwner = dynamicsClient.GetAccountById(licence._adoxioProposedownerValue);
-                    if (targetOwner != null)
+                    var dvLicence = await _dataverse.GetLicenceByIdAsync(licenceGuid);
+                    if (dvLicence?.adoxio_ProposedOwner?.Id is Guid proposedOwnerId && proposedOwnerId != Guid.Empty)
                     {
-                        targetBusinessNumber = targetOwner.Accountnumber;
+                        var targetOwner = await _dataverse.GetAccountByIdAsync(proposedOwnerId.ToString());
+                        if (targetOwner != null)
+                            targetBusinessNumber = targetOwner.AccountNumber;
                     }
                 }
 
                 var innerXml = req.CreateXML(licence, changeNameType, targetBusinessNumber);
-
                 innerXml = _onestopRestClient.CleanXML(innerXml);
+                Log.Logger?.Information(innerXml);
+                hangfireContext?.WriteLine(innerXml);
 
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Information(innerXml);
-                }
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(innerXml);
-                }
-
-                //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
+                await UpdateQueueItemForSend(hangfireContext, queueItemId, innerXml, outputXML);
 
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End of OneStop REST ChangeName  Job.");
-                }
+                hangfireContext?.WriteLine(outputXML);
+                hangfireContext?.WriteLine("End of OneStop REST ChangeName  Job.");
             }
         }
 
@@ -272,64 +292,35 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// </summary>
         public async Task SendChangeStatusRest(PerformContext hangfireContext, string licenceGuidRaw, OneStopHubStatusChange statusChange, string queueItemId)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting OneStop REST ChangeStatus Job.");
-            }
+            hangfireContext?.WriteLine("Starting OneStop REST ChangeStatus Job.");
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
-            //prepare soap content
             var req = new ChangeStatus();
-            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = await FetchLicenceForOneStop(licenceGuid);
 
             if (hangfireContext != null && licence != null)
-            {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
-            }
 
-            if ( licence == null )
+            if (licence == null)
             {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine($"Unable to get licence,SendChangeStatusRest,hangfireContext {licenceGuid}.");
-                }
-
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Error($"Unable to get licence,SendChangeStatusRest {licenceGuid}.");
-                }
+                hangfireContext?.WriteLine($"Unable to get licence,SendChangeStatusRest,hangfireContext {licenceGuid}.");
+                Log.Logger?.Error($"Unable to get licence,SendChangeStatusRest {licenceGuid}.");
                 var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
-                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
             }
             else
             {
-
-
                 var innerXml = req.CreateXML(licence, statusChange);
                 innerXml = _onestopRestClient.CleanXML(innerXml);
+                Log.Logger?.Information(innerXml);
+                hangfireContext?.WriteLine(innerXml);
 
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Information(innerXml);
-                }
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(innerXml);
-                }
-
-                //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
+                await UpdateQueueItemForSend(hangfireContext, queueItemId, innerXml, outputXML);
 
-                UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXML);
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
-                }
+                hangfireContext?.WriteLine(outputXML);
+                hangfireContext?.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
             }
         }
 
@@ -340,127 +331,78 @@ namespace Gov.Jag.Lcrb.OneStopService
         public async Task SendProgramAccountRequestREST(PerformContext hangfireContext, string licenceGuidRaw, string suffix, string queueItemId)
         {
             hangfireContext?.WriteLine("Starting OneStop ProgramAccountRequest Job.");
-            
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
-            // prepare soap message
             var req = new ProgramAccountRequest();
-
             hangfireContext?.WriteLine($"Getting Licence {licenceGuid}");
-            
 
-            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = await FetchLicenceForOneStop(licenceGuid);
 
             if (hangfireContext != null && licence != null)
-            {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
-            }
 
             if (licence == null)
             {
                 hangfireContext?.WriteLine($"Unable to get licence {licenceGuid}.");
                 Log.Logger?.Error($"Unable to get licence {licenceGuid}.");
                 var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
-                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
             }
             else
             {
-                // only send the request if Dynamics says the licence is not sent yet.
-                if (licence.AdoxioOnestopsent == null || licence.AdoxioOnestopsent == false)
+                if (licence.OneStopSent == null || licence.OneStopSent == false)
                 {
-
                     var innerXml = req.CreateXML(licence, suffix);
-
                     innerXml = _onestopRestClient.CleanXML(innerXml);
-
                     Log.Logger?.Information(innerXml);
-                    // send message to Onestop hub
+
                     var outputXml = await _onestopRestClient.ReceiveFromPartner(innerXml);
-
-                    UpdateQueueItemForSend(dynamicsClient, hangfireContext, queueItemId, innerXml, outputXml);
-
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine(outputXml);
-                    }
+                    await UpdateQueueItemForSend(hangfireContext, queueItemId, innerXml, outputXml);
+                    hangfireContext?.WriteLine(outputXml);
                 }
                 else
                 {
-                    hangfireContext?.WriteLine($"Skipping ProgramAccountRequest for Licence {licence.AdoxioName} {licenceGuid} as the record is marked as sent to OneStop.");
-                    Log.Logger?.Error($"Skipping ProgramAccountRequest for Licence {licence.AdoxioName} {licenceGuid} as the record is marked as sent to OneStop.");
-                    var msg = $"Failed updating OneStop queue item {queueItemId}, licence.AdoxioOnestopsent is True ";
-                    UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItemId, msg);
+                    hangfireContext?.WriteLine($"Skipping ProgramAccountRequest for Licence {licence.LicenceNumber} {licenceGuid} as the record is marked as sent to OneStop.");
+                    Log.Logger?.Error($"Skipping ProgramAccountRequest for Licence {licence.LicenceNumber} {licenceGuid} as the record is marked as sent to OneStop.");
+                    var msg = $"Failed updating OneStop queue item {queueItemId}, licence.OneStopSent is True ";
+                    await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
                 }
-
             }
 
-
             hangfireContext?.WriteLine("End of OneStop ProgramAccountRequest  Job.");
-            
         }
-
-
 
         /// <summary>
         /// Hangfire job to send LicenceDetailsMessage to One stop.
         /// </summary>
         public async Task SendProgramAccountDetailsBroadcastMessageRest(PerformContext hangfireContext, string licenceGuidRaw)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting OneStop REST ProgramAccountDetailsBroadcast Job.");
-            }
+            hangfireContext?.WriteLine("Starting OneStop REST ProgramAccountDetailsBroadcast Job.");
 
             string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
 
-            //prepare soap content
             var req = new ProgramAccountDetailsBroadcast();
-            var licence = dynamicsClient.GetLicenceByIdWithChildren(licenceGuid);
+            var licence = await FetchLicenceForOneStop(licenceGuid);
 
             if (hangfireContext != null && licence != null)
-            {
                 hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
-            }
 
             if (licence == null)
             {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine($"Unable to get licence,SendProgramAccountDetails,hangfireContext {licenceGuid}.");
-                }
-
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Error($"Unable to get licence,SendProgramAccountDetails {licenceGuid}.");
-                }
+                hangfireContext?.WriteLine($"Unable to get licence,SendProgramAccountDetails,hangfireContext {licenceGuid}.");
+                Log.Logger?.Error($"Unable to get licence,SendProgramAccountDetails {licenceGuid}.");
             }
             else
             {
                 var innerXml = req.CreateXML(licence);
-
                 innerXml = _onestopRestClient.CleanXML(innerXml);
+                Log.Logger?.Information(innerXml);
+                hangfireContext?.WriteLine(innerXml);
 
-                if (Log.Logger != null)
-                {
-                    Log.Logger.Information(innerXml);
-                }
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(innerXml);
-                }
-
-                //send message to Onestop hub
                 var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
-
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine(outputXML);
-                    hangfireContext.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
-                }
+                hangfireContext?.WriteLine(outputXML);
+                hangfireContext?.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
             }
         }
 
@@ -471,146 +413,111 @@ namespace Gov.Jag.Lcrb.OneStopService
         [AutomaticRetry(Attempts = 0)]
         public async Task CheckForNewLicences(PerformContext hangfireContext)
         {
-            IDynamicsClient dynamicsClient = DynamicsSetupUtil.SetupDynamics(_configuration);
-            if (hangfireContext != null)
-            {
-                hangfireContext.WriteLine("Starting check for new OneStop queue items job.");
-            }
-            IList<MicrosoftDynamicsCRMadoxioOnestopmessageitem> result;
+            hangfireContext?.WriteLine("Starting check for new OneStop queue items job.");
 
+            IList<adoxio_onestopmessageitem> result;
             try
             {
-                string filter = "adoxio_messagesendstatus eq 845280002";
-                List<string> _orderby = new List<String>() { "createdon" };
-                result = dynamicsClient.Onestopmessageitems.Get(filter: filter, orderby: _orderby).Value;
+                result = await _dataverse.GetPendingOneStopMessagesAsync();
             }
-            catch (HttpOperationException odee)
+            catch (Exception odee)
             {
-                if (hangfireContext != null)
-                {
-                    hangfireContext.WriteLine("Error getting Licences");
-                    hangfireContext.WriteLine("Request:");
-                    hangfireContext.WriteLine(odee.Request.Content);
-                    hangfireContext.WriteLine("Response:");
-                    hangfireContext.WriteLine(odee.Response.Content);
-                }
-
-                // fail if we can't get results.
-                throw (odee);
+                hangfireContext?.WriteLine("Error getting OneStop queue items");
+                throw;
             }
 
             int currentItem = 0;
-            // now for each one process it.
             foreach (var queueItem in result)
             {
-                if (!string.IsNullOrEmpty(queueItem._adoxioLicenceValue))
+                string licenceId = queueItem.adoxio_Licence?.Id.ToString();
+                if (!string.IsNullOrEmpty(licenceId))
                 {
-                    var item = dynamicsClient.GetLicenceByIdWithChildren(queueItem._adoxioLicenceValue);
-                    
-                    string licenceId = item.AdoxioLicencesid;
+                    var item = await FetchLicenceForOneStop(licenceId);
+                    string queueItemId = queueItem.Id.ToString();
+
                     try
                     {
-
-                        var msg = $"Processing One stop message item id {queueItem.AdoxioOnestopmessageitemid}";
-                        switch ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription)
+                        var msg = $"Processing One stop message item id {queueItemId}";
+                        if (queueItem.adoxio_StatusChangeDescription == null)
                         {
-                            case OneStopHubStatusChange.Issued:
-                            case OneStopHubStatusChange.TransferComplete:
-                            case OneStopHubStatusChange.LicenseeBn9Changed:
-                            case OneStopHubStatusChange.LicenseeBn9Added:
-                            case OneStopHubStatusChange.LicenseeBn9Removed:
-                                if ((OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription ==
-                                    OneStopHubStatusChange.TransferComplete)
-                                {
-                                    // send a change status to the old licensee
-                                    await SendChangeStatusRest(hangfireContext, licenceId,
-                                        (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
-                                        queueItem.AdoxioOnestopmessageitemid);
-                                }
-
-
-                                // determine if it is an Agent licence type.
-                                bool isAgentLicenceType = false;
-                                var agentLicenceType = dynamicsClient.GetAdoxioLicencetypeByName("Agent");
-                                if (agentLicenceType != null && item._adoxioLicencetypeValue == agentLicenceType.AdoxioLicencetypeid)
-                                {
-                                    isAgentLicenceType = true;
-                                }
-
-                                // Do not attempt to send licence records that have no establishment (for example, Marketer Licence records)
-                                if (item.AdoxioEstablishment != null || isAgentLicenceType)
-                                {
-
-                                    string programAccountCode = "001";
-                                    if (item.AdoxioBusinessprogramaccountreferencenumber != null)
+                            msg = $"Failed updating OneStop queue item {queueItemId}, OneStopHubStatusChange is null";
+                            await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                        }
+                        else
+                        {
+                            switch ((OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value)
+                            {
+                                case OneStopHubStatusChange.Issued:
+                                case OneStopHubStatusChange.TransferComplete:
+                                case OneStopHubStatusChange.LicenseeBn9Changed:
+                                case OneStopHubStatusChange.LicenseeBn9Added:
+                                case OneStopHubStatusChange.LicenseeBn9Removed:
+                                    if ((OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value == OneStopHubStatusChange.TransferComplete)
                                     {
-                                        programAccountCode = item.AdoxioBusinessprogramaccountreferencenumber;
+                                        await SendChangeStatusRest(hangfireContext, licenceId,
+                                            (OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
                                     }
 
-                                    // set the maximum code.
-                                    string cacheKey = "_BPAR_" + item.AdoxioLicencesid;
-                                    string suffix = programAccountCode.TrimStart('0');
-                                    if (int.TryParse(suffix, out int newNumber))
+                                    bool isAgentLicenceType = false;
+                                    var agentLicenceType = await _dataverse.GetLicenceTypeByNameAsync("Agent");
+                                    if (agentLicenceType != null && item?.LicenceType?.LicenceTypeId == agentLicenceType.Id.ToString())
+                                        isAgentLicenceType = true;
+
+                                    if (item?.Establishment != null || isAgentLicenceType)
                                     {
-                                        newNumber += 10; // 10 tries.                           
+                                        string programAccountCode = "001";
+                                        if (item?.BusinessProgramAccountReferenceNumber != null)
+                                            programAccountCode = item.BusinessProgramAccountReferenceNumber;
+
+                                        string cacheKey = "_BPAR_" + licenceId;
+                                        string suffix = programAccountCode.TrimStart('0');
+                                        if (int.TryParse(suffix, out int newNumber))
+                                            newNumber += 10;
+                                        else
+                                            newNumber = 10;
+
+                                        _cache.Set(cacheKey, newNumber);
+                                        hangfireContext?.WriteLine($"SET key {cacheKey} to {newNumber}");
+
+                                        await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix, queueItemId);
                                     }
                                     else
                                     {
-                                        newNumber = 10;
+                                        msg = $"Failed updating OneStop queue item {queueItemId}, Establishment is Null or isAgentLicenceType is False Value is {isAgentLicenceType}";
+                                        await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
                                     }
 
-                                    _cache.Set(cacheKey, newNumber);
+                                    break;
+                                case OneStopHubStatusChange.Cancelled:
+                                case OneStopHubStatusChange.EnteredDormancy:
+                                case OneStopHubStatusChange.DormancyEnded:
+                                case OneStopHubStatusChange.Expired:
+                                case OneStopHubStatusChange.CancellationRemoved:
+                                case OneStopHubStatusChange.Renewed:
+                                case OneStopHubStatusChange.Suspended:
+                                case OneStopHubStatusChange.SuspensionEnded:
+                                case OneStopHubStatusChange.EndorsementApproved:
+                                    await SendChangeStatusRest(hangfireContext, licenceId,
+                                        (OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
+                                    break;
 
-                                    if (hangfireContext != null)
-                                    {
-                                        hangfireContext.WriteLine($"SET key {cacheKey} to {newNumber}");
-                                    }
-
-                                    await SendProgramAccountRequestREST(hangfireContext, licenceId, suffix,
-                                        queueItem.AdoxioOnestopmessageitemid);
-
-                                }else
-                                {
-                                    msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, Establishment is Null or  isAgentLicenceType is False Value is {isAgentLicenceType}";
-                                    UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
-                                }
-
-                                break;
-                            case OneStopHubStatusChange.Cancelled:
-                            case OneStopHubStatusChange.EnteredDormancy:
-                            case OneStopHubStatusChange.DormancyEnded:
-                            case OneStopHubStatusChange.Expired:
-                            case OneStopHubStatusChange.CancellationRemoved:
-                            case OneStopHubStatusChange.Renewed:
-                            case OneStopHubStatusChange.Suspended:
-                            case OneStopHubStatusChange.SuspensionEnded:
-                            case OneStopHubStatusChange.EndorsementApproved:
-
-                                await SendChangeStatusRest(hangfireContext, licenceId,
-                                    (OneStopHubStatusChange) queueItem.AdoxioStatuschangedescription,
-                                    queueItem.AdoxioOnestopmessageitemid);
-                                break;
-
-                            case OneStopHubStatusChange.ChangeOfAddress:
-                                await SendChangeAddressRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid);
-                                break;
-                            case OneStopHubStatusChange.ChangeOfName:
-                                await SendChangeNameRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid, false, ChangeNameType.ChangeName);
-                                break;
-                            case OneStopHubStatusChange.ChangeOfNameThirdPartyOperator:
-                                await SendChangeNameRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid, false, ChangeNameType.ThirdPartyOperator);
-                                break;
-                            case OneStopHubStatusChange.LicenceDeemedAtTransfer:
-                                await SendChangeNameRest(hangfireContext, licenceId,
-                                    queueItem.AdoxioOnestopmessageitemid, true, ChangeNameType.Transfer);
-                                break;
-                            default:
-                                msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, OneStopHubStatusChange is {queueItem.AdoxioStatuschangedescription} ";
-                                UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
-                                break;
+                                case OneStopHubStatusChange.ChangeOfAddress:
+                                    await SendChangeAddressRest(hangfireContext, licenceId, queueItemId);
+                                    break;
+                                case OneStopHubStatusChange.ChangeOfName:
+                                    await SendChangeNameRest(hangfireContext, licenceId, queueItemId, false, ChangeNameType.ChangeName);
+                                    break;
+                                case OneStopHubStatusChange.ChangeOfNameThirdPartyOperator:
+                                    await SendChangeNameRest(hangfireContext, licenceId, queueItemId, false, ChangeNameType.ThirdPartyOperator);
+                                    break;
+                                case OneStopHubStatusChange.LicenceDeemedAtTransfer:
+                                    await SendChangeNameRest(hangfireContext, licenceId, queueItemId, true, ChangeNameType.Transfer);
+                                    break;
+                                default:
+                                    msg = $"Failed updating OneStop queue item {queueItemId}, OneStopHubStatusChange is {queueItem.adoxio_StatusChangeDescription.Value} ";
+                                    await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                                    break;
+                            }
                         }
 
                         currentItem++;
@@ -618,62 +525,52 @@ namespace Gov.Jag.Lcrb.OneStopService
                     catch (Exception e)
                     {
                         Log.Logger.Error(e, "Unexpected Error while processing item.");
-                        var msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, Error is {e.Message} ";
-                        UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
-
+                        var msg = $"Failed updating OneStop queue item {queueItemId}, Error is {e.Message} ";
+                        await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
                     }
 
                     if (currentItem > maxLicencesPerInterval)
-                    {
-                        break; // exit foreach    
-                    }
-
+                        break;
                 }
                 else
                 {
-                    var msg = $"Failed updating OneStop queue item {queueItem.AdoxioOnestopmessageitemid}, queueItem._adoxioLicenceValue is null, there's no licence associated";
-                    UpdateOneStopMessageStatus(hangfireContext, dynamicsClient, queueItem.AdoxioOnestopmessageitemid, msg);
+                    var queueItemId = queueItem.Id.ToString();
+                    var msg = $"Failed updating OneStop queue item {queueItemId}, queueItem.adoxio_Licence is null, there's no licence associated";
+                    await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
                 }
             }
-            
 
-
-            hangfireContext.WriteLine("End of check for new OneStop queue items");
+            hangfireContext?.WriteLine("End of check for new OneStop queue items");
         }
 
-        private void UpdateOneStopMessageStatus(PerformContext hangfireContext, IDynamicsClient dynamicsClient, string onestopmessageitemid , string msg)
+        private async Task UpdateOneStopMessageStatus(PerformContext hangfireContext, string onestopmessageitemid, string msg)
         {
-            if (!string.IsNullOrEmpty(onestopmessageitemid))
+            if (!string.IsNullOrEmpty(onestopmessageitemid) && Guid.TryParse(onestopmessageitemid, out var itemGuid))
             {
                 Log.Logger.Information(msg);
 
-                MicrosoftDynamicsCRMadoxioOnestopmessageitem patchRecord = new MicrosoftDynamicsCRMadoxioOnestopmessageitem()
+                var patchRecord = new adoxio_onestopmessageitem
                 {
-                    AdoxioMessagestatusreason = msg,
-                    AdoxioMessagesendstatus = (int)OneStopMessageStatus.Failed
+                    Id = itemGuid,
+                    adoxio_MessageStatusReason = msg,
+                    adoxio_MessageSendStatus = (adoxio_messagestatus)OneStopMessageStatus.Failed
                 };
                 try
                 {
-                    dynamicsClient.Onestopmessageitems.Update(onestopmessageitemid, patchRecord);
+                    await _dataverse.UpdateOneStopMessageItemAsync(patchRecord);
                 }
                 catch (Exception e)
                 {
                     Log.Logger.Error(e, $"Error while updating OneStop queue item {onestopmessageitemid} {e.Message}");
-                    if (hangfireContext != null)
-                    {
-                        hangfireContext.WriteLine($"Error while updating OneStop queue item {onestopmessageitemid} {e.Message}");
-                    }
+                    hangfireContext?.WriteLine($"Error while updating OneStop queue item {onestopmessageitemid} {e.Message}");
                 }
             }
         }
 
         public static IOneStopRestClient SetupOneStopClient(IConfiguration Configuration, ILogger logger)
         {
-            //create authorization header 
             var byteArray = Encoding.ASCII.GetBytes($"{Configuration["ONESTOP_HUB_USERNAME"]}:{Configuration["ONESTOP_HUB_PASSWORD"]}");
             string authorization = "Basic " + Convert.ToBase64String(byteArray);
-
-            //create client
             var client = new OneStopRestClient(new Uri(Configuration["ONESTOP_HUB_REST_URI"]), authorization, logger);
             return client;
         }
@@ -681,22 +578,16 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// <summary>
         /// Extract a guid from a partnerNote.
         /// </summary>
-        /// <param name="partnerNote"></param>
-        /// <returns></returns>
         public static string GetGuidFromPartnerNote(string partnerNote)
         {
             string[] parts = partnerNote.Split(",");
             string result = parts[0];
-
             return result;
         }
 
         /// <summary>
         /// Extract a suffix from a partnerNote
         /// </summary>
-        /// <param name="partnerNote"></param>
-        /// <param name="logger"></param>
-        /// <returns></returns>
         public static int GetSuffixFromPartnerNote(string partnerNote, ILogger logger)
         {
             int result = 0;
@@ -704,22 +595,16 @@ namespace Gov.Jag.Lcrb.OneStopService
             if (strPos > -1)
             {
                 string suffix = partnerNote.Substring(strPos + 1);
-
                 suffix = suffix.TrimStart('0');
                 if (!int.TryParse(suffix, out result))
-                {
                     logger.Error($"ERROR - unable to parse suffix of {suffix} in partner note {partnerNote}");
-                }
             }
-
             return result;
         }
 
         /// <summary>
         /// Extract a Licence Number from a partnerNote.
         /// </summary>
-        /// <param name="partnerNote"></param>
-        /// <returns></returns>
         public static string GetLicenceNumberFromPartnerNote(string partnerNote)
         {
             string result = null;

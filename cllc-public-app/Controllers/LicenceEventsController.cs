@@ -1,21 +1,20 @@
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
 using Gov.Lclb.Cllb.Public.Authentication;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Microsoft.Rest;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Extensions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Xrm.Sdk;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using System.Globalization;
+using System.Threading.Tasks;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -27,384 +26,285 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly ILogger _logger;
         private readonly IPdfService _pdfClient;
         private readonly FileManagerClient _fileManagerClient;
 
-        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IPdfService pdfClient, FileManagerClient fileClient)
+        public LicenceEventsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDataverseClient dataverse, IPdfService pdfClient, FileManagerClient fileClient)
         {
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(LicenceEventsController));
             _pdfClient = pdfClient;
             _fileManagerClient = fileClient;
         }
 
-
-        /// <summary>
-        /// Create an event
-        /// </summary>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateLicenceEvent([FromBody] LicenceEvent item)
         {
-            MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = new MicrosoftDynamicsCRMadoxioEvent();
             if (item?.Status == LicenceEventStatus.Submitted)
             {
                 bool alwaysAuthorization;
                 try
                 {
-                    var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                    alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
+                    var licence = await _dataverse.GetLicenceByIdAsync(item.LicenceId);
+                    if (licence == null) return BadRequest();
+                    alwaysAuthorization = licence.adoxio_IsEventApprovalAlwaysRequired ?? false;
                 }
-                catch (HttpOperationException ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error creating event");
                     return BadRequest();
                 }
                 item.EventClass = item.DetermineEventClass(alwaysAuthorization);
                 if (item.EventClass != EventClass.Authorization || item.EventCategory == EventCategory.Market)
-                {
                     item.Status = LicenceEventStatus.Approved;
-                }
                 else
-                {
                     item.Status = LicenceEventStatus.InReview;
-                }
             }
 
+            var dynamicsEvent = new adoxio_event();
             dynamicsEvent.CopyValues(item);
 
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            dynamicsEvent.AccountODataBind = _dynamicsClient.GetEntityURI("accounts", userSettings.AccountId);
+            dynamicsEvent.adoxio_Account = new EntityReference(DV::Gov.Lclb.Cllb.Interfaces.Account.EntityLogicalName, Guid.Parse(userSettings.AccountId));
 
             if (!string.IsNullOrEmpty(item.LicenceId))
-            {
-                dynamicsEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", item.LicenceId);
-            }
+                dynamicsEvent.adoxio_Licence = new EntityReference(adoxio_licences.EntityLogicalName, Guid.Parse(item.LicenceId));
 
+            Guid eventId;
             try
             {
-                dynamicsEvent = _dynamicsClient.Events.Create(dynamicsEvent);
+                eventId = await _dataverse.CreateEventAsync(dynamicsEvent);
             }
-            catch (HttpOperationException ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Error creating event");
                 return BadRequest();
             }
 
-            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
-            // create event schedules - if any
-            viewModelEvent.Schedules = CreateEventSchedules(item, dynamicsEvent);
-            // create TUA event locations - if any
-            viewModelEvent.EventLocations = CreateEventLocations(item, dynamicsEvent);
+            await CreateEventSchedulesAsync(item, eventId);
+            await CreateEventLocationsAsync(item, eventId);
 
-            return new JsonResult(viewModelEvent);
+            var createdEvent = await _dataverse.GetEventByIdAsync(eventId.ToString());
+            var createdSchedules = await _dataverse.GetEventSchedulesByEventIdAsync(eventId.ToString());
+            var createdLocations = await _dataverse.GetEventLocationsByEventIdAsync(eventId.ToString());
+
+            return new JsonResult(createdEvent?.ToViewModel(createdSchedules, createdLocations));
         }
 
-        /// <summary>
-        /// Get an event if the user has access
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<IActionResult> GetLicenceEvent(string id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest();
-            }
+            if (string.IsNullOrEmpty(id)) return BadRequest();
 
-            MicrosoftDynamicsCRMadoxioEvent dynamicsEvent;
-            MicrosoftDynamicsCRMadoxioEventscheduleCollection dynamicsEventScheduleCollection;
+            adoxio_event dynamicsEvent;
             try
             {
-                dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
-                // dynamicsEventScheduleCollection = _dynamicsClient.GetEventSchedulesByEventId(id);
+                dynamicsEvent = await _dataverse.GetEventByIdAsync(id);
             }
-            catch (HttpOperationException ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Error retrieving Event");
                 return NotFound();
             }
 
-            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
-            {
+            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.adoxio_Account?.Id.ToString()))
                 return NotFound();
-            }
 
-            LicenceEvent result = dynamicsEvent.ToViewModel(_dynamicsClient);
+            var schedules = await _dataverse.GetEventSchedulesByEventIdAsync(id);
+            var locations = await _dataverse.GetEventLocationsByEventIdAsync(id);
+            var result = dynamicsEvent.ToViewModel(schedules, locations);
 
             return new JsonResult(result);
         }
 
-        /// <summary>
-        /// Update an event if the user has access
-        /// </summary>
-        /// <returns></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateLicenceEvent([FromBody] LicenceEvent item, string id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return BadRequest();
-            }
+            if (string.IsNullOrEmpty(id)) return BadRequest();
 
-            MicrosoftDynamicsCRMadoxioEvent dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
-            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
-            {
+            var dynamicsEvent = await _dataverse.GetEventByIdAsync(id);
+            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.adoxio_Account?.Id.ToString()))
                 return NotFound();
-            }
 
-            // not updating security plan
             if (item?.SecurityPlanSubmitted == null && item?.Status == LicenceEventStatus.Submitted)
             {
-                // determine event class
                 bool alwaysAuthorization;
                 try
                 {
-                    var licence = _dynamicsClient.Licenceses.GetByKey(item.LicenceId);
-                    alwaysAuthorization = licence.AdoxioIseventapprovalalwaysrequired == null ? false : (bool)licence.AdoxioIseventapprovalalwaysrequired;
+                    var licence = await _dataverse.GetLicenceByIdAsync(item.LicenceId);
+                    if (licence == null) return BadRequest();
+                    alwaysAuthorization = licence.adoxio_IsEventApprovalAlwaysRequired ?? false;
                 }
-                catch (HttpOperationException ex)
+                catch (Exception ex)
                 {
                     _logger.LogError(ex, "Error updating event");
                     return BadRequest();
                 }
                 item.EventClass = item.DetermineEventClass(alwaysAuthorization);
                 if (item.EventClass != EventClass.Authorization)
-                {
                     item.Status = LicenceEventStatus.Approved;
-                }
                 else
-                {
                     item.Status = LicenceEventStatus.InReview;
-                }
             }
 
-            MicrosoftDynamicsCRMadoxioEvent patchEvent = new MicrosoftDynamicsCRMadoxioEvent();
+            var patchEvent = new adoxio_event { Id = Guid.Parse(id) };
             patchEvent.CopyValues(item);
-            if (!string.IsNullOrEmpty(item.LicenceId) && item.LicenceId != dynamicsEvent._adoxioLicenceValue)
-            {
-                patchEvent.LicenceODataBind = _dynamicsClient.GetEntityURI("adoxio_licenceses", item.LicenceId);
-            }
+            if (!string.IsNullOrEmpty(item.LicenceId) && item.LicenceId != dynamicsEvent.adoxio_Licence?.Id.ToString())
+                patchEvent.adoxio_Licence = new EntityReference(adoxio_licences.EntityLogicalName, Guid.Parse(item.LicenceId));
+
             try
             {
-                _dynamicsClient.Events.Update(id, patchEvent);
+                await _dataverse.UpdateEventAsync(patchEvent);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error updating event");
+                _logger.LogError(ex, "Error updating event");
             }
 
-            // Re-fetch event information from Dynamics to bring in updated properties
-            dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
-            if (dynamicsEvent == null)
-            {
-                return NotFound();
-            }
+            var currentSchedules = await _dataverse.GetEventSchedulesByEventIdAsync(id);
+            await DeleteEventSchedulesAsync(currentSchedules);
+            await CreateEventSchedulesAsync(item, Guid.Parse(id));
 
-            /* Get current event schedules and delete */
-            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
-            DeleteEventSchedules(viewModelEvent.Schedules);
+            var currentLocations = await _dataverse.GetEventLocationsByEventIdAsync(id);
+            await DeleteEventLocationsAsync(currentLocations);
+            await CreateEventLocationsAsync(item, Guid.Parse(id));
 
-            /* Create new event schedules */
-            viewModelEvent.Schedules = CreateEventSchedules(item, dynamicsEvent);
+            var updatedEvent = await _dataverse.GetEventByIdAsync(id);
+            if (updatedEvent == null) return NotFound();
 
-            /* Delete current event locations (TUA events only) */
-            DeleteEventLocations(viewModelEvent.EventLocations);
-
-            /* Create new event locations (TUA events only) */
-            viewModelEvent.EventLocations = CreateEventLocations(item, dynamicsEvent);
-
-            return new JsonResult(dynamicsEvent.ToViewModel(_dynamicsClient));
+            var freshSchedules = await _dataverse.GetEventSchedulesByEventIdAsync(id);
+            var freshLocations = await _dataverse.GetEventLocationsByEventIdAsync(id);
+            return new JsonResult(updatedEvent.ToViewModel(freshSchedules, freshLocations));
         }
 
-        private void DeleteEventSchedules(List<LicenceEventSchedule> schedules)
-        {
-            if (schedules != null && schedules.Count > 0)
-            {
-                foreach (var eventSchedule in schedules)
-                {
-                    _dynamicsClient.Eventschedules.Delete(eventSchedule.Id);
-                }
-            }
-        }
-
-        private List<LicenceEventSchedule> CreateEventSchedules(LicenceEvent payload, MicrosoftDynamicsCRMadoxioEvent dynamicsEvent)
-        {
-            var schedules = new List<LicenceEventSchedule>();
-            if (payload.Schedules != null && payload.Schedules.Count > 0 && dynamicsEvent != null)
-            {
-                foreach (var eventSchedule in payload.Schedules)
-                {
-                    var patchObject = new MicrosoftDynamicsCRMadoxioEventschedule();
-                    patchObject.CopyValues(eventSchedule);
-                    patchObject.EventODataBind = _dynamicsClient.GetEntityURI("adoxio_events", dynamicsEvent.AdoxioEventid);
-                    var newEventSchedule = _dynamicsClient.Eventschedules.Create(patchObject);
-                    schedules.Add(newEventSchedule.ToViewModel());
-                }
-            }
-            return schedules;
-        }
-
-        private void DeleteEventLocations(List<LicenceEventLocation> locations)
-        {
-            if (locations != null && locations.Count > 0)
-            {
-                foreach (var loc in locations)
-                {
-                    _dynamicsClient.Eventlocations.Delete(loc.Id);
-                }
-            }
-        }
-
-        private List<LicenceEventLocation> CreateEventLocations(LicenceEvent payload, MicrosoftDynamicsCRMadoxioEvent dynamicsEvent)
-        {
-            var locations = new List<LicenceEventLocation>();
-            if (payload.EventLocations != null && payload.EventLocations.Count > 0 && dynamicsEvent != null)
-            {
-                foreach (var eventLocation in payload.EventLocations)
-                {
-                    var patchObject = new MicrosoftDynamicsCRMadoxioEventlocation();
-                    patchObject.CopyValues(eventLocation);
-                    patchObject.EventODataBind = _dynamicsClient.GetEntityURI("adoxio_events", dynamicsEvent.AdoxioEventid);
-                    patchObject.ServiceAreaODataBind = _dynamicsClient.GetEntityURI("adoxio_serviceareas", eventLocation.ServiceAreaId);
-                    var newLocation = _dynamicsClient.Eventlocations.Create(patchObject);
-                    locations.Add(newLocation.ToViewModel());
-                }
-            }
-            return locations;
-        }
-
-        /// <summary>
-        /// Delete an event if the user has access
-        /// </summary>
-        /// <returns></returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteLicenceEvent(string id)
         {
-            if (string.IsNullOrEmpty(id))
-            {
-                return new BadRequestResult();
-            }
+            if (string.IsNullOrEmpty(id)) return new BadRequestResult();
 
-            MicrosoftDynamicsCRMadoxioEvent dynamicsEvent;
+            adoxio_event dynamicsEvent;
             try
             {
-                dynamicsEvent = _dynamicsClient.GetEventByIdWithChildren(id);
+                dynamicsEvent = await _dataverse.GetEventByIdAsync(id);
             }
-            catch (HttpOperationException ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Failed to delete event");
                 return new NotFoundResult();
             }
-            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.AdoxioAccount.Accountid))
-            {
+
+            if (dynamicsEvent == null || !CurrentUserHasAccessToEventOwnedBy(dynamicsEvent.adoxio_Account?.Id.ToString()))
                 return new NotFoundResult();
-            }
 
-            /* Get current event schedules and delete */
-            LicenceEvent viewModelEvent = dynamicsEvent.ToViewModel(_dynamicsClient);
+            var schedules = await _dataverse.GetEventSchedulesByEventIdAsync(id);
+            await DeleteEventSchedulesAsync(schedules);
 
-            if (viewModelEvent.Schedules != null && viewModelEvent.Schedules.Count > 0)
-            {
-                foreach (LicenceEventSchedule eventSchedule in viewModelEvent.Schedules)
-                {
-                    _dynamicsClient.Eventschedules.Delete(eventSchedule.Id);
-                }
-            }
-
-
-
-            _dynamicsClient.Events.Delete(id);
-
+            await _dataverse.DeleteEventAsync(id);
             return NoContent();
         }
 
-        /// <summary>
-        /// Get events that the user has access to
-        /// </summary>
-        /// <returns></returns>
         [HttpGet("list/{licenceId}/{num}")]
         public async Task<IActionResult> GetLicenceEventsList(string licenceId, int num)
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            MicrosoftDynamicsCRMadoxioEventCollection dynamicsEvents;
-            List<LicenceEvent> responseEvents = new List<LicenceEvent>();
-
-            string filter = $"_adoxio_account_value eq {userSettings.AccountId} and _adoxio_licence_value eq {licenceId}";
+            IList<adoxio_event> dynamicsEvents;
             try
             {
-                dynamicsEvents = _dynamicsClient.Events.Get(filter: filter, top: num, orderby: new List<string> { "modifiedon desc" });
+                dynamicsEvents = await _dataverse.GetEventsByAccountAndLicenceAsync(userSettings.AccountId, licenceId, num);
             }
-            catch (HttpOperationException ex)
+            catch (Exception ex)
             {
                 _logger.LogError(ex, "Error retrieving Events");
                 return new NotFoundResult();
             }
 
-            if (dynamicsEvents.Value.Count > 0)
+            var responseEventTasks = dynamicsEvents.Select(async evt =>
             {
-                foreach (MicrosoftDynamicsCRMadoxioEvent evt in dynamicsEvents.Value)
-                {
-                    responseEvents.Add(evt.ToViewModel(_dynamicsClient));
-                }
-            }
+                var evtId = evt.adoxio_eventId?.ToString();
+                var schedulesTask = evtId != null ? _dataverse.GetEventSchedulesByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventschedule>>(new List<adoxio_eventschedule>());
+                var locationsTask = evtId != null ? _dataverse.GetEventLocationsByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventlocation>>(new List<adoxio_eventlocation>());
+                await Task.WhenAll(schedulesTask, locationsTask);
+                return evt.ToViewModel(schedulesTask.Result, locationsTask.Result);
+            });
 
-            return new JsonResult(responseEvents);
+            return new JsonResult(await Task.WhenAll(responseEventTasks));
         }
 
-        private bool CurrentUserHasAccessToEventOwnedBy(string accountId)
+        [HttpPost("list/batch/{num}")]
+        public async Task<IActionResult> GetLicenceEventsListBatch(int num, [FromBody] List<string> licenceIds)
         {
-            // get the current user.
+            if (licenceIds == null || licenceIds.Count == 0) return new JsonResult(new List<LicenceEvent>());
+
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
 
-            // For now, check if the account id matches the user's account.
-            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+            IList<adoxio_event> dynamicsEvents;
+            try
             {
-                return userSettings.AccountId == accountId;
+                dynamicsEvents = await _dataverse.GetEventsByAccountAndLicencesAsync(userSettings.AccountId, licenceIds);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error retrieving Events");
+                return new NotFoundResult();
             }
 
-            // if current user doesn't have an account they are probably not logged in
-            return false;
+            // cap at `num` most-recent events per licence, matching the per-licence endpoint's behaviour
+            var trimmedEvents = dynamicsEvents
+                .GroupBy(evt => evt.adoxio_Licence?.Id)
+                .SelectMany(g => g.OrderByDescending(evt => evt.ModifiedOn).Take(num));
+
+            var responseEventTasks = trimmedEvents.Select(async evt =>
+            {
+                var evtId = evt.adoxio_eventId?.ToString();
+                var schedulesTask = evtId != null ? _dataverse.GetEventSchedulesByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventschedule>>(new List<adoxio_eventschedule>());
+                var locationsTask = evtId != null ? _dataverse.GetEventLocationsByEventIdAsync(evtId) : Task.FromResult<IList<adoxio_eventlocation>>(new List<adoxio_eventlocation>());
+                await Task.WhenAll(schedulesTask, locationsTask);
+                return evt.ToViewModel(schedulesTask.Result, locationsTask.Result);
+            });
+
+            return new JsonResult(await Task.WhenAll(responseEventTasks));
         }
 
-        /// GET an authorization as PDF.
         [HttpGet("{eventId}/authorization.pdf")]
         public async Task<IActionResult> GetAuthorizationPdf(string eventId)
         {
-            MicrosoftDynamicsCRMadoxioEvent licenceEvent;
+            adoxio_event licenceEvent;
             LicenceEvent licenceEventVM;
-            MicrosoftDynamicsCRMadoxioLicences licence;
-            MicrosoftDynamicsCRMaccount account;
+            adoxio_licences licence;
+            DV::Gov.Lclb.Cllb.Interfaces.Account account;
             Dictionary<string, string> serviceAreas;
 
             try
             {
-                licenceEvent = _dynamicsClient.Events.GetByKey(eventId, expand: new List<string> { "adoxio_adoxio_event_adoxio_applicationtermscondi" });
-                licenceEventVM = licenceEvent.ToViewModel(_dynamicsClient);
-                licence = _dynamicsClient.Licenceses.GetByKey(
-                    licenceEventVM.LicenceId,
-                    expand: new List<string> { "adoxio_adoxio_licences_adoxio_applicationtermsconditionslimitation_Licence" });
-                account = _dynamicsClient.Accounts.GetByKey(licence._adoxioLicenceeValue);
-                var areas = LicenseExtensions.GetServiceAreas(licence.AdoxioLicencesid, _dynamicsClient);
-                // Create lookup dictionary with service areas to speed up lookup times (vs an array)
+                licenceEvent = await _dataverse.GetEventByIdAsync(eventId);
+                if (licenceEvent == null) return new NotFoundResult();
+
+                var schedules = await _dataverse.GetEventSchedulesByEventIdAsync(eventId);
+                var locations = await _dataverse.GetEventLocationsByEventIdAsync(eventId);
+                licenceEventVM = licenceEvent.ToViewModel(schedules, locations);
+
+                licence = await _dataverse.GetLicenceByIdAsync(licenceEventVM.LicenceId);
+                if (licence == null) return new NotFoundResult();
+
+                var licenceeId = licence.adoxio_Licencee?.Id.ToString();
+                account = await _dataverse.GetAccountByIdAsync(licenceeId);
+                if (account == null) return new NotFoundResult();
+
+                var areas = await LicenseExtensions.GetServiceAreasAsync(licence.adoxio_licencesId?.ToString(), _dataverse);
                 serviceAreas = areas.ToDictionary(x => x.Id, x => x.AreaLocation);
             }
-            catch (HttpOperationException)
+            catch (Exception)
             {
                 return new NotFoundResult();
             }
 
-            if (!CurrentUserHasAccessToEventOwnedBy(licence._adoxioLicenceeValue))
-            {
+            if (!CurrentUserHasAccessToEventOwnedBy(licence.adoxio_Licencee?.Id.ToString()))
                 return new NotFoundResult();
-            }
 
             string eventTimings = "";
             TimeZoneInfo hwZone;
@@ -419,17 +319,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             foreach (var schedule in licenceEventVM.Schedules)
             {
-                // Event times are stored in UTC but we want the printed PDF to reflect times and dates in Pacific Standard Time (PST)
                 DateTime? pstStart = schedule.EventStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
                 DateTime? pstEnd = schedule.EventEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
-                DateTime? pstLiquorStart = schedule.ServiceStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
-                DateTime? pstLiquorEnd = schedule.ServiceEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
 
                 string eventDate = pstStart.HasValue ? pstStart.Value.ToString("MMMM dd, yyyy") : "";
                 string startTime = pstStart.HasValue ? pstStart.Value.ToString("h:mm tt") : "";
                 string endTime = pstEnd.HasValue ? pstEnd.Value.ToString("h:mm tt") : "";
-                string liquorStartTime = pstLiquorStart.HasValue ? pstLiquorStart.Value.ToString("h:mm tt") : "";
-                string liquorEndTime = pstLiquorEnd.HasValue ? pstLiquorEnd.Value.ToString("h:mm tt") : "";
                 eventTimings += $@"<tr class='hide-border'>
                         <td style='width: 50%; text-align: left;'>{eventDate} - Event Hours: {startTime} to {endTime}</td>
                     </tr>";
@@ -459,41 +354,33 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var termsAndConditions = "";
-            //LCSD6247 - Market and Catering Event authorizations use event limitation preset
             if (licenceEventVM.EventCategory == EventCategory.Catering || licenceEventVM.EventCategory == EventCategory.Market)
             {
-                if (licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi != null)
+                var eventTCs = await _dataverse.GetTermsConditionsByEventIdAsync(eventId);
+                foreach (var item in eventTCs)
                 {
-                    foreach (var item in licenceEvent.AdoxioAdoxioEventAdoxioApplicationtermscondi)
+                    if (item.adoxio_TermsConditionsPreset?.Id != null)
                     {
-                        //Get the preset id value and fetch preset from Dynamics
-                        //Dynamics does not allow multi layer expand so needs to be an extra call.
-                        if(item._adoxioTermsconditionspresetValue != null)
-                        {
-                            MicrosoftDynamicsCRMadoxioTermsconditionslimitationspreset tcpreset = _dynamicsClient.Termsconditionslimitationspresets.GetByKey(item._adoxioTermsconditionspresetValue);
-                            if(tcpreset != null)
-                            {
-                                termsAndConditions += $"<li>{tcpreset.AdoxioContents.Replace("\n","<br/>")}</li>";
-                            } 
-                        }
+                        var tcpreset = await _dataverse.GetTermsConditionsPresetByIdAsync(item.adoxio_TermsConditionsPreset.Id.ToString());
+                        if (tcpreset != null)
+                            termsAndConditions += $"<li>{tcpreset.adoxio_Contents?.Replace("\n", "<br/>")}</li>";
                     }
                 }
             }
             else
             {
-                foreach (var item in licence.AdoxioAdoxioLicencesAdoxioApplicationtermsconditionslimitationLicence)
-                {
-                    termsAndConditions += $"<li>{item.AdoxioTermsandconditions}</li>";
-                }
+                var licenceTCs = await _dataverse.GetTermsConditionsByLicenceIdAsync(licence.adoxio_licencesId?.ToString());
+                foreach (var item in licenceTCs)
+                    termsAndConditions += $"<li>{item.adoxio_TermsandConditions}</li>";
             }
 
             var parameters = new Dictionary<string, string>
             {
                 { "licensee", account.Name },
-                { "licenceNumber", licence.AdoxioLicencenumber },
-                { "licenceExpiryDate", licence.AdoxioExpirydate?.ToString("MMMM dd, yyyy") },
+                { "licenceNumber", licence.adoxio_LicenceNumber },
+                { "licenceExpiryDate", licence.adoxio_ExpiryDate?.ToString("MMMM dd, yyyy") },
                 { "licenseePhone", account.Telephone1 },
-                { "licenseeEmail", account.Emailaddress1 },
+                { "licenseeEmail", account.EMailAddress1 },
                 { "contactName", licenceEventVM.ContactName },
                 { "contactEmail", licenceEventVM.ContactEmail },
                 { "contactPhone", licenceEventVM.ContactPhone },
@@ -503,7 +390,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "eventName", licenceEventVM.EventName },
                 { "eventTimings", eventTimings },
                 { "eventNumber", licenceEventVM.EventNumber },
-                { "eventType", licenceEvent.AdoxioTuaeventtype.HasValue ? EnumExtensions.GetEnumMemberValue((TuaEventType?)licenceEvent.AdoxioTuaeventtype) : ""},
+                { "eventType", licenceEvent.adoxio_TUAEventType.HasValue ? EnumExtensions.GetEnumMemberValue((TuaEventType?)(int)licenceEvent.adoxio_TUAEventType.Value) : ""},
                 { "eventDescription", licenceEventVM.EventTypeDescription },
                 { "foodService", licenceEventVM.FoodService.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.FoodService) : "" },
                 { "entertainment", licenceEventVM.Entertainment.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.Entertainment) : "" },
@@ -513,14 +400,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "addressLine1", licenceEventVM.Street1 },
                 { "addressLine2", licenceEventVM.Street2 },
                 { "addressLine3", $"{licenceEventVM.City}, BC {licenceEventVM.PostalCode}" },
-                { "inspectorName", licenceEvent.AdoxioEventinspectorname },
-                { "inspectorPhone", licenceEvent.AdoxioEventinspectorphone },
-                { "inspectorEmail", licenceEvent.AdoxioEventinspectoremail },
+                { "inspectorName", licenceEvent.adoxio_EventInspectorName },
+                { "inspectorPhone", licenceEvent.adoxio_EventInspectorPhone },
+                { "inspectorEmail", licenceEvent.adoxio_EventInspectorEmail },
                 { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
-                { "marketDuration",  licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
+                { "marketDuration", licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
                 { "restrictionsText", termsAndConditions },
-                // TUA-specific fields
                 { "tuaEventType", licenceEventVM.TuaEventType.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.TuaEventType) : ""},
                 { "isClosedToPublic", licenceEventVM.IsClosedToPublic ?? false ? "Yes" : "No" },
                 { "isWedding", licenceEventVM.IsWedding ?? false ? "1" : null},
@@ -541,30 +427,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 string pdfType = null;
                 if (licenceEventVM.EventCategory == EventCategory.Market)
-                {
                     pdfType = "market_event_authorization";
-                }
                 else if (licenceEventVM.EventCategory == EventCategory.Catering)
-                {
                     pdfType = "catering_event_authorization";
-                }
                 else if (licenceEventVM.EventCategory == EventCategory.TemporaryUseArea)
-                {
                     pdfType = "tua_event_authorization";
-                }
+
                 if (pdfType != null)
                 {
                     data = await _pdfClient.GetPdf(parameters, pdfType).ConfigureAwait(true);
 
-                    // Save copy of generated licence PDF for auditing/logging purposes
                     try
                     {
                         var hash = await _pdfClient.GetPdfHash(parameters, pdfType);
                         var entityName = "event";
-                        var entityId = eventId;
-                        var folderName = await _dynamicsClient.GetFolderName(entityName, entityId).ConfigureAwait(true);
+                        var folderName = await _dataverse.GetFolderNameAsync(entityName, eventId);
                         var documentType = "EventAuthorization";
-                        _fileManagerClient.UploadPdfIfChanged(_logger, entityName, entityId, folderName, documentType, data, hash);
+                        _fileManagerClient.UploadPdfIfChanged(_logger, entityName, eventId, folderName, documentType, data, hash);
                     }
                     catch (Exception e)
                     {
@@ -579,6 +458,64 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 return new NotFoundResult();
             }
+        }
+
+        private bool CurrentUserHasAccessToEventOwnedBy(string accountId)
+        {
+            UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
+            if (userSettings.AccountId != null && userSettings.AccountId.Length > 0)
+                return userSettings.AccountId == accountId;
+            return false;
+        }
+
+        private async Task DeleteEventSchedulesAsync(IList<adoxio_eventschedule> schedules)
+        {
+            if (schedules == null) return;
+            foreach (var s in schedules)
+                await _dataverse.DeleteEventScheduleAsync(s.adoxio_eventscheduleId?.ToString());
+        }
+
+        private async Task<List<LicenceEventSchedule>> CreateEventSchedulesAsync(LicenceEvent payload, Guid eventId)
+        {
+            var result = new List<LicenceEventSchedule>();
+            if (payload.Schedules == null || payload.Schedules.Count == 0) return result;
+
+            foreach (var schedule in payload.Schedules)
+            {
+                var entity = new adoxio_eventschedule();
+                entity.CopyValues(schedule);
+                entity.adoxio_EventId = new EntityReference(adoxio_event.EntityLogicalName, eventId);
+                var newId = await _dataverse.CreateEventScheduleAsync(entity);
+                entity.adoxio_eventscheduleId = newId;
+                result.Add(entity.ToViewModel());
+            }
+            return result;
+        }
+
+        private async Task DeleteEventLocationsAsync(IList<adoxio_eventlocation> locations)
+        {
+            if (locations == null) return;
+            foreach (var l in locations)
+                await _dataverse.DeleteEventLocationAsync(l.adoxio_eventlocationId?.ToString());
+        }
+
+        private async Task<List<LicenceEventLocation>> CreateEventLocationsAsync(LicenceEvent payload, Guid eventId)
+        {
+            var result = new List<LicenceEventLocation>();
+            if (payload.EventLocations == null || payload.EventLocations.Count == 0) return result;
+
+            foreach (var location in payload.EventLocations)
+            {
+                var entity = new adoxio_eventlocation();
+                entity.CopyValues(location);
+                entity.adoxio_EventId = new EntityReference(adoxio_event.EntityLogicalName, eventId);
+                if (!string.IsNullOrEmpty(location.ServiceAreaId))
+                    entity.adoxio_ServiceAreaId = new EntityReference(adoxio_servicearea.EntityLogicalName, Guid.Parse(location.ServiceAreaId));
+                var newId = await _dataverse.CreateEventLocationAsync(entity);
+                entity.adoxio_eventlocationId = newId;
+                result.Add(entity.ToViewModel());
+            }
+            return result;
         }
     }
 }

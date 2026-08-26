@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using System;
 using System.Net;
@@ -47,15 +46,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+            ViewModels.Account viewmodel_account = new ViewModels.Account
             {
-                Name = initialName,
-                AdoxioExternalid = Guid.NewGuid().ToString()
+                name = initialName,
+                externalId = Guid.NewGuid().ToString(),
+                businessType = "PublicCorporation"
             };
-
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-            
-            viewmodel_account.businessType = "PublicCorporation";
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_account);
 
@@ -65,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            // parse as JSON.            
+            // parse as JSON.
             ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
@@ -84,8 +80,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
 
-            account.Accountid = id.ToString();
-
             // get legal entity record for account
             request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             response = await _client.SendAsync(request);
@@ -95,13 +89,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
-            // U - Update            
-            account.Name = changedName;
-
-
+            // U - Update
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(new ViewModels.Account { id = id.ToString(), name = changedName }), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
@@ -161,14 +152,12 @@ namespace Gov.Lclb.Cllb.Public.Test
                 // C - Create
                 var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-                MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+                ViewModels.Account viewmodel_account = new ViewModels.Account
                 {
-                    Name = initialName,
-                    AdoxioExternalid = Guid.NewGuid().ToString()
+                    name = initialName,
+                    externalId = Guid.NewGuid().ToString(),
+                    businessType = "PublicCorporation"
                 };
-
-                ViewModels.Account viewmodel_account = account.ToViewModel();
-                viewmodel_account.businessType = "PublicCorporation";
 
                 string jsonString = JsonConvert.SerializeObject(viewmodel_account);
 
@@ -178,7 +167,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 jsonString = await response.Content.ReadAsStringAsync();
                 response.EnsureSuccessStatusCode();
 
-                // parse as JSON.            
+                // parse as JSON.
                 ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
                 // name should match.
@@ -197,8 +186,6 @@ namespace Gov.Lclb.Cllb.Public.Test
                 responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
                 Assert.Equal(initialName, responseViewModel.name);
 
-                account.Accountid = id.ToString();
-
                 // get legal entity record for account
                 request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
                 response = await _client.SendAsync(request);
@@ -208,13 +195,10 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
                 Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
-                // U - Update            
-                account.Name = changedName;
-
-
+                // U - Update
                 request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
                 {
-                    Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+                    Content = new StringContent(JsonConvert.SerializeObject(new ViewModels.Account { id = id.ToString(), name = changedName }), Encoding.UTF8, "application/json")
                 };
                 response = await _client.SendAsync(request);
                 jsonString = await response.Content.ReadAsStringAsync();
@@ -268,14 +252,12 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
 
-            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+            ViewModels.Account viewmodel_account = new ViewModels.Account
             {
-                Name = initialName,
-                AdoxioExternalid = Guid.NewGuid().ToString()
+                name = initialName,
+                externalId = Guid.NewGuid().ToString(),
+                businessType = "PublicCorporation"
             };
-
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-            viewmodel_account.businessType = "PublicCorporation";
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_account);
 
@@ -285,7 +267,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-            // parse as JSON.            
+            // parse as JSON.
             ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
@@ -304,8 +286,6 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
 
-            account.Accountid = id.ToString();
-
             // get legal entity record for account
             request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             response = await _client.SendAsync(request);
@@ -315,13 +295,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.LegalEntity legalentityViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(id.ToString(), legalentityViewModel.account.id);
 
-            // U - Update            
-            account.Name = changedName;
-
-
+            // U - Update
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
-                Content = new StringContent(JsonConvert.SerializeObject(account.ToViewModel()), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(new ViewModels.Account { id = id.ToString(), name = changedName }), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();

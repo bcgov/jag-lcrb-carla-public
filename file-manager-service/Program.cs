@@ -1,7 +1,7 @@
 using System.Reflection;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -11,12 +11,12 @@ namespace Gov.Lclb.Cllb.Services.FileManager
     {
         public static void Main(string[] args)
         {
-            CreateWebHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static IWebHostBuilder CreateWebHostBuilder(string[] args)
+        public static IHostBuilder CreateHostBuilder(string[] args)
         {
-            return WebHost
+            return Host
                 .CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration(
                     (hostingContext, config) =>
@@ -35,15 +35,19 @@ namespace Gov.Lclb.Cllb.Services.FileManager
                     }
                 )
                 .UseSerilog()
-                .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
-                .UseStartup<Startup>()
-                .UseKestrel(options =>
+                .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
-                    // for macOS local dev but don't have env
-                    // options.ListenLocalhost(5001, o => {
-                    //     o.Protocols = HttpProtocols.Http2;
-                    // });
+                    webBuilder
+                        .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
+                        .UseStartup<Startup>()
+                        .UseKestrel(options =>
+                        {
+                            options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
+                            // for macOS local dev but don't have env
+                            // options.ListenLocalhost(5001, o => {
+                            //     o.Protocols = HttpProtocols.Http2;
+                            // });
+                        });
                 });
         }
     }

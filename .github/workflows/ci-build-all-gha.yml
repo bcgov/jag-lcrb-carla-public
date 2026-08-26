@@ -1,0 +1,50 @@
+name: Build and Deploy All GHA Services
+run-name: "Build all GHA services → ${{ inputs.ref || 'dv-migration' }}"
+
+on:
+  push:
+    branches: [dv-migration]
+    paths:
+      - '.github/workflows/ci-build-all-gha.yml'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Branch to build (defaults to dv-migration)'
+        required: false
+        default: dv-migration
+
+jobs:
+  trigger-all:
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+
+    steps:
+      - name: Trigger all CI workflows
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REF: ${{ inputs.ref || 'dv-migration' }}
+        run: |
+          WORKFLOWS=(
+            ci-geocoder-service-gha.yml
+            ci-pdf-service-gha.yml
+            ci-federal-reporting-service-gha.yml
+            ci-file-manager-service-gha.yml
+            ci-one-stop-service-gha.yml
+            ci-orgbook-service-gha.yml
+            ci-carla-spice-sync-service-gha.yml
+            ci-cllc-public-api-gha.yml
+            ci-cllc-public-frontend-gha.yml
+          )
+
+          for workflow in "${WORKFLOWS[@]}"; do
+            echo "Triggering $workflow on $REF ..."
+            gh workflow run "$workflow" \
+              --repo "${{ github.repository }}" \
+              --ref "$REF"
+            sleep 2  # avoid GitHub API rate limit
+          done
+
+          echo ""
+          echo "All 9 workflows triggered on branch: $REF"
+          echo "Monitor runs at: https://github.com/${{ github.repository }}/actions"

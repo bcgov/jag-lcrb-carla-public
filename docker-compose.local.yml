@@ -1,0 +1,25 @@
+services:
+
+  backend:
+    image: cllc-public-api-gha:local
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+    networks:
+      - app
+
+  frontend:
+    image: cllc-public-frontend-gha:local
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./cllc-public-app/nginx.conf.local:/etc/nginx/nginx.conf:ro
+    networks:
+      - app
+    depends_on:
+      - backend
+
+networks:
+  app:
+    driver: bridge

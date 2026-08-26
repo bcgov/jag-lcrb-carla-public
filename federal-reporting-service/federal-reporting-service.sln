@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "federal-reporting-service",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2A6C1847-C9A8-4350-B0B6-27E951FE6D91}.Release|Any CPU.Build.0 = Release|Any CPU
-		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{108B2CB1-0A07-4C7C-9F83-9068E5D59C81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

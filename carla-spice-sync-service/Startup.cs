@@ -1,4 +1,7 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Spice;
 using Hangfire;
 using Hangfire.Console;
@@ -112,6 +115,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             // health checks.
             services.AddHealthChecks()
                 .AddCheck("carla-spice-sync", () => HealthCheckResult.Healthy());
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         private void SetupSharePoint(IServiceCollection services)

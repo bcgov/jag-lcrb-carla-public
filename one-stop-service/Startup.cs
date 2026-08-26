@@ -1,4 +1,8 @@
-﻿using Hangfire;
+﻿extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
+using Gov.Lclb.Cllb.Interfaces;
+using Hangfire;
 using Hangfire.Console;
 using Hangfire.MemoryStorage;
 using HealthChecks.UI.Client;
@@ -38,13 +42,11 @@ namespace Gov.Jag.Lcrb.OneStopService
 
     public class Startup
     {
-        private readonly ILoggerFactory _loggerFactory;
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment Env { get; }
 
-        public Startup(IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public Startup(IWebHostEnvironment env)
         {
-            _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -65,8 +67,6 @@ namespace Gov.Jag.Lcrb.OneStopService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddLogging(configure => configure.AddSerilog(dispose: true));
-
             // Adjust Kestrel options to allow sync IO
             services.Configure<KestrelServerOptions>(options =>
             {
@@ -77,10 +77,13 @@ namespace Gov.Jag.Lcrb.OneStopService
             services.AddMemoryCache();
 
             services.AddSoapCore();
-            services.AddSingleton<IReceiveFromHubService>(new ReceiveFromHubService(Configuration, Env));
+            services.AddSingleton<IReceiveFromHubService>(sp =>
+                new ReceiveFromHubService(Configuration, Env, sp.GetRequiredService<IDataverseClient>()));
 
 
-            services.AddSingleton(_loggerFactory.CreateLogger("OneStopUtils"));
+            services.AddSingleton<Microsoft.Extensions.Logging.ILogger>(sp =>
+                sp.GetService<Microsoft.Extensions.Logging.ILoggerFactory>()?.CreateLogger("OneStopUtils")
+                ?? Microsoft.Extensions.Logging.Abstractions.NullLogger.Instance);
             services.AddSingleton(Log.Logger);
 
             services.AddControllers(config =>
@@ -167,7 +170,8 @@ namespace Gov.Jag.Lcrb.OneStopService
             // health checks. 
             services.AddHealthChecks()
                 .AddCheck("one-stop-service", () => HealthCheckResult.Healthy("OK"));
-
+            services.AddSingleton<IDataverseClient, DataverseClient>();
+            services.AddTransient<OneStopUtils>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -302,9 +306,8 @@ namespace Gov.Jag.Lcrb.OneStopService
             // by positioning this after the health check, no need to filter out health checks from request logging.
             app.UseSerilogRequestLogging();
 
-            app.UseMvc();
-
             app.UseRouting();
+            app.UseMvc();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.UseSoapEndpoint<IReceiveFromHubService>("/receiveFromHub", new BasicHttpBinding(), SoapSerializer.XmlSerializer);
@@ -343,7 +346,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                         interval = (Configuration["QUEUE_CHECK_INTERVAL"]);
                     }
 
-                    RecurringJob.AddOrUpdate(() => new OneStopUtils(Configuration, cache).CheckForNewLicences(null), interval);
+                    RecurringJob.AddOrUpdate<OneStopUtils>(utils => utils.CheckForNewLicences(null), interval);
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }

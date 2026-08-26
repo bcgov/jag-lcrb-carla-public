@@ -21,4 +21,13 @@ export class TermsAndConditionsDataService extends DataService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * Get terms and conditions from Dynamics for multiple licences in a single request
+   */
+  getTermsAndCondtionsBatch(licenceIds: string[]) {
+    const apiPath = `api/termsandconditions/batch`;
+    return this.http.post<TermsAndConditions[]>(apiPath, licenceIds, { headers: this.headers })
+      .pipe(catchError(this.handleError));
+  }
+
 }

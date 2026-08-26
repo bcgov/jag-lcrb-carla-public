@@ -70,7 +70,7 @@ export class SepApplicationComponent implements OnInit {
           const value = JSON.parse(JSON.stringify(app));
           delete value.totalMaximumNumberOfGuests;
           this.application = Object.assign(new SepApplication(), value);
-          this.isFormEditable = this.application.eventStatus.toLowerCase() === "draft";     
+          this.isFormEditable = this.application.eventStatus?.toLowerCase() === "draft";
         }, err => {
           console.error(err);
         });

@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+extern alias DV;
+
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using Gov.Lclb.Cllb.Interfaces;
+using System.Threading.Tasks;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 using Serilog;
 
@@ -31,32 +34,32 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         /// </summary>
         /// <returns><c>true</c>, if associate consent was validated, <c>false</c> otherwise.</returns>
         /// <param name="associates">Associates.</param>
-        public static bool ValidateAssociateConsent(IDynamicsClient dynamicsClient, List<LegalEntity> associates)
+        public static async Task<bool> ValidateAssociateConsentAsync(IDataverseClient dataverse, List<LegalEntity> associates)
         {
-            /* Validate consent for all associates */
             bool consentValidated = true;
             foreach (var entity in associates)
             {
                 if ((bool)entity.IsIndividual)
                 {
                     var id = entity.Contact.ContactId;
-                    var contact = dynamicsClient.Contacts.Get(filter: "contactid eq " + id).Value[0];
-                    if (1 == contact.Statuscode && contact.AdoxioConsentvalidated == null)
+                    var contact = await dataverse.GetContactByIdAsync(id);
+                    if (contact == null || contact.StatusCode == contact_statuscode.Active && contact.adoxio_ConsentValidated == null)
                     {
-                        Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
+                        Log.Logger.Error($"Consent not validated for associate: {id}");
                         consentValidated = false;
                         continue;
                     }
 
-                    if (1 == contact.Statuscode && contact.AdoxioConsentvalidated.HasValue && (ConsentValidated)contact.AdoxioConsentvalidated != ConsentValidated.YES)
+                    if (contact.StatusCode == contact_statuscode.Active &&
+                        contact.adoxio_ConsentValidated != adoxio_contact_adoxio_consentvalidated.Yes)
                     {
-                        Log.Logger.Error($"Consent not validated for associate: {contact.Contactid}");
+                        Log.Logger.Error($"Consent not validated for associate: {id}");
                         consentValidated = false;
                     }
                 }
                 else
                 {
-                    if (!ValidateAssociateConsent(dynamicsClient, (List<LegalEntity>)entity.Account.Associates))
+                    if (!await ValidateAssociateConsentAsync(dataverse, (List<LegalEntity>)entity.Account.Associates))
                     {
                         consentValidated = false;
                     }

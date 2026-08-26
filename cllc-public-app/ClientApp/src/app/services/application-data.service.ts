@@ -270,8 +270,11 @@ export class ApplicationDataService extends DataService {
 
   downloadFile(serverRelativeUrl: string, applicationId: string) {
     const headers = new HttpHeaders({});
+    // serverRelativeUrl is already URL-encoded by the backend when it's
+    // returned in the file list — encodeURIComponent()'ing it again here
+    // double-encodes it (e.g. %20 -> %2520), breaking the download.
     const attachmentURL =
-      `api/file/${applicationId}/download-file/application?serverRelativeUrl=${encodeURIComponent(serverRelativeUrl)}`;
+      `api/file/${applicationId}/download-file/application?serverRelativeUrl=${serverRelativeUrl}`;
     return this.http.get(attachmentURL, { headers: headers, responseType: "blob" })
       .pipe(catchError(this.handleError));
 

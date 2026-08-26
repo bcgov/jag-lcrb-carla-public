@@ -582,7 +582,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((account) => {
         this.account = account;
-        this.busy = this.applicationDataService
+        this.applicationDataService
           .getApplicationById(this.applicationId)
           .pipe(takeWhile(() => this.componentActive))
           .subscribe(

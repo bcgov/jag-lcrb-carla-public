@@ -8,18 +8,18 @@ Technology Stack
 | Layer   | Technology | 
 | ------- | ------------ |
 | Presentation | Angular 11 |
-| Business Logic | C Sharp - Dotnet Core 5.0 |
-| Microservices | C Sharp - Dotnet Core 5.0 |
+| Business Logic | C Sharp - Dotnet 6.0 |
+| Microservices | C Sharp - Dotnet 6.0 |
 | Job Scheduling | [Hangfire](http://hangfire.io) |
 | Front End Web Server | Nginx |
 | Application Server | Kestrel |
-| Data Storage | MS Dynamics On Premise V9 |
-| Authentication | ADFS, BCeID, BC Services Card |
-| Document Storage    | MS SharePoint 2016 |
+| Data Storage | MS Dynamics 365 / Dataverse (cloud) |
+| Authentication | Azure AD (AAD), BCeID, BC Services Card |
+| Document Storage    | MS SharePoint |
 | Container Platform | OpenShift 4 |
 | Zero Trust Security Policy Type | Kubernetes |
 | Logging | Splunk, Console, MS Teams and Kibana |
-| CI/CD Pipeline | Jenkins, Github Actions |
+| CI/CD Pipeline | Github Actions |
 
 System Architecture
 --------------
@@ -53,10 +53,10 @@ Developer Prerequisites
 -----------------------
 
 **Public Application**
-- .Net Core SDK (5.0)
-- Node.js version 10.21 
-- .NET Core IDE such as Visual Studio or VS Code
-- JAG VPN with access to MS Dynamics
+- .NET SDK (6.0)
+- Node.js version 10.21 or later
+- IDE such as Visual Studio or VS Code
+- JAG VPN with access to the Dataverse environment
 
 **DevOps**
 - RedHat OpenShift tools
@@ -71,7 +71,7 @@ To use this feature, first create a new Application Form in MS Dynamics.  You ma
 
 If you add new fields to MS Dynamics, the following steps will need to be done in order for the new fields to appear in the portal:
 
-1.  Update Dynamics Models to contain the new fields.  This should be done by running the code generation script.  Do not edit the model by hand.
+1.  Update Dataverse entity models to contain the new fields. Run `.\generate-entities.ps1` from the repo root (requires Power Platform CLI — see `docs/adding-new-entities.md`). Do not edit generated files by hand.
 2.  Add view model fields for each new field.  Be sure to use the same datatype; for example, if Dynamics uses a lookup with integer values, use a nullable int (int?). If Dynamics uses a nullable bool (bool?), use a nullable bool in the view model.  
 3.  Add code to "copy values" and "to view model" routines for the application extension class.  Since the data types match this should be trivial, just add code to copy from the Dynamics field to the view model and vice versa.
 4.  Add rows to the ApplicationMapping class to denote the new fields.  This should contain the Dynamics field name (actual field name not the display name) and the name of the view model field, as it will be sent to the client.  Note that the first character of the model will be lowercase.
@@ -80,22 +80,33 @@ If you add new fields to MS Dynamics, the following steps will need to be done i
 
 Be sure to test a round trip (save and load) before considering the field mapping done.
 
+Adding New Dynamics Entities
+---------------------------
+
+To add a new Dataverse entity to the codebase:
+
+1. Add the entity logical name (lowercase) to the `--entities` list in `generate-entities.ps1`
+2. Run `.\generate-entities.ps1` from the repo root
+3. The new entity class will appear in `cllc-interfaces/Dynamics-Dataverse/Generated/`
+4. Add the corresponding method signatures to `IDataverseClient.cs`
+5. Implement the methods in `DataverseClient.cs`
+6. Commit the generated files
+
+Prerequisites: Power Platform CLI installed (`winget install Microsoft.PowerPlatformCLI`) and authenticated (`pac auth create --url https://<org>.crm.dynamics.com ...`). See `docs/adding-new-entities.md` for the full step-by-step guide.
+
 Microsoft Dynamics, SharePoint
 ---------------------------
 A MS Dynamics instance containing the necessary solution files is required.  A SharePoint connection is optional.  If no SharePoint connection is available then file operations will not be executed.
 
 Define the following secrets in your development environment (secrets or environment variables):
-1. DYNAMICS_NATIVE_ODATA_URI: The URI to the Dynamics Web API endpoint.  Example:  `https://<hostname>/<tenant name>/api/data/v9.0/`.  This URI can be a proxy.
-2. DYNAMICS_NATIVE_ODATA_URI: The native URI to the Dynamics Web API endpoint, in other words as the server identifies itself in responses to WebAPI requests.  Do not put a proxy URI here.
-3. SSG_USERNAME: API gateway username, if using an API gateway
-4. SSG_PASSWORD: API gateway password, if using an API gateway
-5. DYNAMICS_AAD_TENANT_ID: ADFS Tenant ID, if using ADFS authentication.  Leave blank if using an API gateway
-6. DYNAMICS_SERVER_APP_ID_URI: ADFS Server App ID URI. Leave blank if using an API gateway
-7. DYNAMICS_CLIENT_ID: Public Key for the ADFS Enterprise Application app registration. Leave blank if using an API gateway
-8. SHAREPOINT_ODATA_URI: Endpoint to be used for SharePoint, exclusive of _api.  Can be a proxy.  Leave blank if not using SharePoint.
-9. SHAREPOINT_NATIVE_BASE_URI:  The SharePoint URI as configured in SharePoint.  Do not set to a proxy.
-10. SHAREPOINT_SSG_USERNAME, SHAREPOINT_SSG_PASSWORD - optional API Gateway credentials for SharePoint
-11. SharePoint may also use the same ADFS credentials as Dynamics.  If that is to be used, leave all SSG parameters empty or undefined.
+1. DYNAMICS_ODATA_URI: The URI to the Dynamics Web API endpoint.  Example:  `https://<hostname>/<tenant name>/api/data/v9.0/`.
+2. DYNAMICS_NATIVE_ODATA_URI: The native URI to the Dynamics Web API endpoint, as the server identifies itself in responses.  Do not set to a proxy URI.
+3. DYNAMICS_AAD_TENANT_ID: Azure AD tenant ID for the Dataverse environment.
+4. DYNAMICS_APP_REG_CLIENT_ID: App registration client ID (Azure AD).
+5. DYNAMICS_APP_REG_CLIENT_KEY: App registration client secret (Azure AD).
+6. SHAREPOINT_ODATA_URI: Endpoint to be used for SharePoint, exclusive of _api.  Can be a proxy.  Leave blank if not using SharePoint.
+7. SHAREPOINT_NATIVE_BASE_URI: The SharePoint URI as configured in SharePoint.  Do not set to a proxy.
+8. SHAREPOINT_SSG_USERNAME, SHAREPOINT_SSG_PASSWORD — optional API Gateway credentials for on-prem SharePoint only.
 
 Mac Environment
 ---------------

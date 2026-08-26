@@ -1,3 +1,6 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
@@ -67,7 +70,8 @@ namespace Watchdog
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddHealthChecks();
+            services.AddHealthChecks()
+                .AddCheck<DataverseClient>("dataverse");
             
             // Registers required services for health checks
             services.AddHealthChecksUI(setupSettings: setup =>
@@ -101,7 +105,7 @@ namespace Watchdog
                     // ReferenceLoopHandling is set to Ignore to prevent JSON parser issues with the user / roles model.
                     opts.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
-            
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

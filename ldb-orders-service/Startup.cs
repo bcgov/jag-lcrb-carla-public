@@ -1,3 +1,6 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -56,6 +59,8 @@ namespace LdbOrdersService
             // health checks. 
             services.AddHealthChecks()
                 .AddCheck("one-stop-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
+            services.AddTransient<LdbOrdersUtils>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -180,7 +185,7 @@ namespace LdbOrdersService
                 {
                     Log.Logger.Information("Creating Hangfire jobs for LDB Sales Reports");
 
-                    RecurringJob.AddOrUpdate(() => new LdbOrdersUtils(Configuration).CheckForLdbSales(null), Cron.Daily());
+                    RecurringJob.AddOrUpdate<LdbOrdersUtils>(utils => utils.CheckForLdbSales(null), Cron.Daily());
 
                     Log.Logger.Information("Hangfire License issuance check jobs setup.");
                 }
