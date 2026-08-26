@@ -24,6 +24,8 @@ on:
 jobs:
   cleanup:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     strategy:
       matrix:
         image:
