@@ -1,15 +1,15 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChildren, QueryList } from "@angular/core";
-import { LicenseeChangeLog } from "@models/licensee-change-log.model";
-import { Account } from "@models/account.model";
-import { FormBuilder, Validators, FormGroup } from "@angular/forms";
-import { AssociateListComponent } from "../associate-list/associate-list.component";
-import { forkJoin, of } from "rxjs";
-import { mergeMap } from "rxjs/operators";
+import { Component, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Account } from '@models/account.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { forkJoin, of } from 'rxjs';
+import { mergeMap } from 'rxjs/operators';
+import { AssociateListComponent } from '../associate-list/associate-list.component';
 
 @Component({
-  selector: "app-org-structure",
-  templateUrl: "./org-structure.component.html",
-  styleUrls: ["./org-structure.component.scss"]
+  selector: 'app-org-structure',
+  templateUrl: './org-structure.component.html',
+  styleUrls: ['./org-structure.component.scss']
 })
 export class OrgStructureComponent implements OnInit {
   private _node: LicenseeChangeLog;
@@ -41,10 +41,9 @@ export class OrgStructureComponent implements OnInit {
   @Output()
   reportAdditionalChanges = new EventEmitter<boolean>();
 
-  @ViewChildren("associateList")
+  @ViewChildren('associateList')
   associateList: QueryList<AssociateListComponent>;
   fileUploads: any = {};
-
 
   Account = Account;
   form: FormGroup;
@@ -62,24 +61,24 @@ export class OrgStructureComponent implements OnInit {
       totalShares = this.node.totalSharesOld;
     }
 
-
     this.form = this.fb.group({
       numberOfMembers: [numberOfMembers, [Validators.required]],
       annualMembershipFee: [annualMembershipFee, [Validators.required]],
       totalShares: [totalShares, [Validators.required]]
     });
 
-    this.form.valueChanges
-      .subscribe(value => {
-        if (this.node) {
-          this.node.numberOfMembers = value.numberOfMembers;
-          this.node.annualMembershipFee = value.annualMembershipFee;
-          this.node.totalSharesNew = value.totalShares;
-        }
-      });
+    this.form.valueChanges.subscribe((value) => {
+      if (this.node) {
+        this.node.numberOfMembers = value.numberOfMembers;
+        this.node.annualMembershipFee = value.annualMembershipFee;
+        this.node.totalSharesNew = value.totalShares;
+      }
+    });
   }
 
-  asLicenseeChangeLog(val): LicenseeChangeLog { return val; }
+  asLicenseeChangeLog(val): LicenseeChangeLog {
+    return val;
+  }
 
   updateNumberOfFiles(numberOfFiles: number, docType: string) {
     if (!this.fileUploads) {
@@ -93,22 +92,23 @@ export class OrgStructureComponent implements OnInit {
   }
 
   /**
-  * saves all open associate list items
-  * returns an Observable<boolean>. False means there is validation errors
-  */
+   * saves all open associate list items
+   * returns an Observable<boolean>. False means there is validation errors
+   */
   saveAll() {
     const saveResults = [];
 
     // save all open associate list
-    this.associateList.forEach(org => {
+    this.associateList.forEach((org) => {
       saveResults.push(org.saveAll());
     });
 
     if (saveResults.length > 0) {
-      return forkJoin(...saveResults)
-        .pipe(mergeMap(results => {
+      return forkJoin(...saveResults).pipe(
+        mergeMap((results) => {
           return of(results.indexOf(false) === -1);
-        }));
+        })
+      );
     } else {
       // return true if there is nothing to save
       return of(true);
@@ -119,7 +119,7 @@ export class OrgStructureComponent implements OnInit {
     const res = this.node;
     res.fileUploads = this.fileUploads;
     res.children = [];
-    this.associateList.forEach(item => {
+    this.associateList.forEach((item) => {
       res.children = res.children.concat(item.getData());
     });
     return res;

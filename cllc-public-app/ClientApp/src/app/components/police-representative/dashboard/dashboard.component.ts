@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
-import { User } from '@models/user.model';
-import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { Account } from '@models/account.model';
 import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
 import { Application } from '@models/application.model';
+import { User } from '@models/user.model';
+import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
 
 @Component({
   selector: 'app-police-dashboard',
@@ -27,15 +27,17 @@ export class DashboardComponent implements OnInit {
   terminatedApplicationExists: boolean;
   nonTerminatedApplicationExists: boolean;
 
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private applicationDataService: ApplicationDataService,
-    private sepDataService: SpecialEventsDataService,) { }
+    private sepDataService: SpecialEventsDataService
+  ) {}
 
   ngOnInit() {
-    this.store.select(state => state.currentUserState.currentUser)
-      .subscribe(user => this.loadUser(user));
-    this.store.select(state => state.currentAccountState.currentAccount)
-      .subscribe(account => this.account = account);
+    this.store.select((state) => state.currentUserState.currentUser).subscribe((user) => this.loadUser(user));
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
+      .subscribe((account) => (this.account = account));
     this.loadData();
   }
 
@@ -46,34 +48,29 @@ export class DashboardComponent implements OnInit {
   }
 
   loadData() {
-    this.sepDataService.getPoliceHome()
-      .subscribe(data => {
+    this.sepDataService.getPoliceHome().subscribe(
+      (data) => {
         this.assignedJobsInProgress = data.assignedJobsInProgress;
         this.assignedJobsInProgressWithExceptions = data.assignedJobsInProgressWithExceptions;
         this.assignedApplicationsIssued = data.assignedApplicationsIssued;
         this.dataLoaded = true;
         this.hasLinkedPoliceAccount = true;
       },
-        error => {
-          this.hasLinkedPoliceAccount = false;
-          this.dataLoaded = true;
-        }
-      );
+      (error) => {
+        this.hasLinkedPoliceAccount = false;
+        this.dataLoaded = true;
+      }
+    );
 
-      this.applicationDataService.getApplicationsByType(ApplicationTypeNames.PoliceClaim)
-      .subscribe(applications => {
-        // check whether there is an application that is not terminated
-        this.nonTerminatedApplicationExists =
-          applications.filter(app => app.applicationStatus !== "Terminated")
-          .length >
-          0;
+    this.applicationDataService.getApplicationsByType(ApplicationTypeNames.PoliceClaim).subscribe((applications) => {
+      // check whether there is an application that is not terminated
+      this.nonTerminatedApplicationExists =
+        applications.filter((app) => app.applicationStatus !== 'Terminated').length > 0;
 
-        // check whether there is an application that is terminated
-        this.terminatedApplicationExists =
-          applications.filter(app => app.applicationStatus === "Terminated")
-          .length >
-          0;
-      });
+      // check whether there is an application that is terminated
+      this.terminatedApplicationExists =
+        applications.filter((app) => app.applicationStatus === 'Terminated').length > 0;
+    });
   }
 
   requestClaimApproval() {
@@ -81,12 +78,10 @@ export class DashboardComponent implements OnInit {
       applicantType: this.account.businessType,
       applicationType: { name: ApplicationTypeNames.PoliceClaim } as ApplicationType,
       account: this.account,
-      isApplicationComplete: "Yes"
+      isApplicationComplete: 'Yes'
     } as Application;
-    this.applicationDataService.createApplication(application)
-      .subscribe(result => {
-        this.loadData();
-      });
+    this.applicationDataService.createApplication(application).subscribe((result) => {
+      this.loadData();
+    });
   }
-
 }

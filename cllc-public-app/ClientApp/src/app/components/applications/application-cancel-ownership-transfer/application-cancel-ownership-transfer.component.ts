@@ -1,30 +1,30 @@
-import { Component, OnInit } from "@angular/core";
-import { FormBase, ApplicationHTMLContent } from "@shared/form-base";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { Subscription, Observable, of } from "rxjs";
-import { ApplicationTypeNames, FormControlState } from "@models/application-type.model";
-import { Store } from "@ngrx/store";
-import { AppState } from "@app/app-state/models/app-state";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Router, ActivatedRoute } from "@angular/router";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { EstablishmentWatchWordsService } from "@services/establishment-watch-words.service";
-import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
-import { Account, TransferAccount } from "@models/account.model";
-import { LicenseDataService } from "@services/license-data.service";
-import { License } from "@models/license.model";
-import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { faSave } from "@fortawesome/free-regular-svg-icons";
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Account, TransferAccount } from '@models/account.model';
+import { ApplicationTypeNames, FormControlState } from '@models/application-type.model';
+import { License } from '@models/license.model';
+import { Store } from '@ngrx/store';
+import { EstablishmentWatchWordsService } from '@services/establishment-watch-words.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
+import { Observable, of, Subscription } from 'rxjs';
+import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 const ValidationErrorMap = {
-  transferConsent: "Please consent to the transfer"
+  transferConsent: 'Please consent to the transfer'
 };
 
 @Component({
-  selector: "app-application-cancel-ownership-transfer",
-  templateUrl: "./application-cancel-ownership-transfer.component.html",
-  styleUrls: ["./application-cancel-ownership-transfer.component.scss"]
+  selector: 'app-application-cancel-ownership-transfer',
+  templateUrl: './application-cancel-ownership-transfer.component.html',
+  styleUrls: ['./application-cancel-ownership-transfer.component.scss']
 })
 export class ApplicationCancelOwnershipTransferComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -41,8 +41,8 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
   account: Account;
   minDate = new Date();
 
-
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     public snackBar: MatSnackBar,
     public router: Router,
     private licenseDataService: LicenseDataService,
@@ -50,68 +50,77 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
     private route: ActivatedRoute,
     private fb: FormBuilder,
     public dialog: MatDialog,
-    public establishmentWatchWordsService: EstablishmentWatchWordsService) {
+    public establishmentWatchWordsService: EstablishmentWatchWordsService
+  ) {
     super();
-    this.route.paramMap.subscribe(pmap => this.licenceId = pmap.get("licenceId"));
+    this.route.paramMap.subscribe((pmap) => (this.licenceId = pmap.get('licenceId')));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      establishmentName: [""],
-      establishmentAddressStreet: [""],
-      establishmentAddressCity: [""],
-      establishmentAddressPostalCode: [""],
-      establishmentParcelId: [""],
-      transferConsent: ["", [this.customRequiredCheckboxValidator()]]
+      establishmentName: [''],
+      establishmentAddressStreet: [''],
+      establishmentAddressCity: [''],
+      establishmentAddressPostalCode: [''],
+      establishmentParcelId: [''],
+      transferConsent: ['', [this.customRequiredCheckboxValidator()]]
     });
 
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
+      .pipe(filter((account) => !!account))
       .subscribe((account) => {
         this.account = account;
       });
 
-
-    this.busy = this.licenseDataService.getLicenceById(this.licenceId)
+    this.busy = this.licenseDataService
+      .getLicenceById(this.licenceId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: License) => {
+      .subscribe(
+        (data: License) => {
           this.licence = data;
           this.form.patchValue(data);
         },
         () => {
-          console.log("Error occured");
+          console.log('Error occured');
         }
       );
   }
-
 
   /**
    * Save form data
    * @param showProgress
    */
   save(showProgress: boolean = false): Observable<boolean> {
-    return this.licenseDataService.cancelTransfer(this.licence.id, this.account.id)
+    return this.licenseDataService
+      .cancelTransfer(this.licence.id, this.account.id)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(() => {
-        this.snackBar.open("Error submitting cancel transfer",
-          "Fail",
-          { duration: 3500, panelClass: ["red-snackbar"] });
-        return of(false);
-      }))
-      .pipe(mergeMap(() => {
-        if (showProgress === true) {
-          this.snackBar.open("Transfer has been cancelled",
-            "Success",
-            { duration: 2500, panelClass: ["green-snackbar"] });
-        }
-        return of(true);
-      }));
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error submitting cancel transfer', 'Fail', {
+            duration: 3500,
+            panelClass: ['red-snackbar']
+          });
+          return of(false);
+        })
+      )
+      .pipe(
+        mergeMap(() => {
+          if (showProgress === true) {
+            this.snackBar.open('Transfer has been cancelled', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+          }
+          return of(true);
+        })
+      );
   }
 
   /**
-  * Initiate licence transfer
-  * */
+   * Initiate licence transfer
+   * */
   cancelTransfer() {
     if (!this.isValid()) {
       this.showValidationMessages = true;
@@ -120,7 +129,7 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((result: boolean) => {
           if (result) {
-            this.router.navigate(["/dashboard"]);
+            this.router.navigate(['/dashboard']);
           }
         });
     }
@@ -136,34 +145,28 @@ export class ApplicationCancelOwnershipTransferComponent extends FormBase implem
   }
 
   businessTypeIsPartnership(): boolean {
-    return this.account &&
-      [
-        "GeneralPartnership",
-        "LimitedPartnership",
-        "LimitedLiabilityPartnership",
-        "Partnership"
-      ].indexOf(this.account.businessType) !==
-      -1;
+    return (
+      this.account &&
+      ['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
   }
 
   businessTypeIsPrivateCorporation(): boolean {
-    return this.account &&
-      [
-        "PrivateCorporation",
-        "UnlimitedLiabilityCorporation",
-        "LimitedLiabilityCorporation"
-      ].indexOf(this.account.businessType) !==
-      -1;
+    return (
+      this.account &&
+      ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+        this.account.businessType
+      ) !== -1
+    );
   }
 
   showFormControl(state: string): boolean {
-    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()]
-      .indexOf(state) !==
-      -1;
+    return [FormControlState.Show.toString(), FormControlState.ReadOnly.toString()].indexOf(state) !== -1;
   }
 
   onAccountSelect(proposedAccount: TransferAccount) {
-    this.form.get("proposedOwner").patchValue(proposedAccount);
+    this.form.get('proposedOwner').patchValue(proposedAccount);
   }
-
 }

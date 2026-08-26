@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { SepClaimComponent } from './sep-claim.component';
 
 describe('SepClaimComponent', () => {
@@ -8,9 +7,8 @@ describe('SepClaimComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SepClaimComponent ]
-    })
-    .compileComponents();
+      declarations: [SepClaimComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

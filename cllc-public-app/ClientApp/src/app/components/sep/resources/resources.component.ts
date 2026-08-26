@@ -1,10 +1,18 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { StarterChecklistComponent } from '@components/sep/starter-checklist/starter-checklist.component';
-import { faCocktail, faCalculator, faCheck, faQuestion, faShoppingCart, faPencilAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCalculator,
+  faCheck,
+  faCocktail,
+  faPencilAlt,
+  faQuestion,
+  faShoppingCart,
+  faUserCircle
+} from '@fortawesome/free-solid-svg-icons';
 import { User } from '@models/user.model';
 import { DrinkPlannerDialog } from '../drink-planner/drink-planner.dialog';
-import { LiquorTastingDialog} from '../liquor-tasting/liquor-tasting.dialog';
+import { LiquorTastingDialog } from '../liquor-tasting/liquor-tasting.dialog';
 
 @Component({
   selector: 'app-resources',
@@ -23,10 +31,9 @@ export class ResourcesComponent implements OnInit {
   @Input()
   currentUser: User;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openChecklist() {
     const dialogConfig = {
@@ -40,10 +47,7 @@ export class ResourcesComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(StarterChecklistComponent, dialogConfig);
-    dialogRef.afterClosed()
-      .subscribe(cancelApplication => {
-
-      });
+    dialogRef.afterClosed().subscribe((cancelApplication) => {});
   }
 
   openDrinkPlanner() {
@@ -56,7 +60,7 @@ export class ResourcesComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DrinkPlannerDialog, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => { });
+    dialogRef.afterClosed().subscribe(() => {});
   }
 
   openTastingPlanner() {
@@ -68,7 +72,6 @@ export class ResourcesComponent implements OnInit {
     };
 
     const dialogRef = this.dialog.open(LiquorTastingDialog, dialogConfig);
-    dialogRef.afterClosed().subscribe(() => { });
-
+    dialogRef.afterClosed().subscribe(() => {});
   }
 }

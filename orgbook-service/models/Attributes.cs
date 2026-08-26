@@ -10,15 +10,15 @@ namespace Gov.Lclb.Cllb.OrgbookService
         public DateTimeOffset? effective_date { get; set; }
         public DateTimeOffset? expiry_date { get; set; }
     }
-  public class CRSAttributes : Attributes
-  {
-     
-      public string establishment_name { get; set; }
-      
-      public string civic_address { get; set; }
-      public string city { get; set; }
-      public string province { get; set; }
-      public string postal_code { get; set; }
-      public string country { get; set; }
-  }
+    public class CRSAttributes : Attributes
+    {
+
+        public string establishment_name { get; set; }
+
+        public string civic_address { get; set; }
+        public string city { get; set; }
+        public string province { get; set; }
+        public string postal_code { get; set; }
+        public string country { get; set; }
+    }
 }

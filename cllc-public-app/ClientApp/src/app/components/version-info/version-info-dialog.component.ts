@@ -1,22 +1,21 @@
-
-import { Component, Inject } from "@angular/core";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { VersionInfo } from "@models/version-info.model";
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { VersionInfo } from '@models/version-info.model';
 
 /***************************************
  * Version Info Dialog
  ***************************************/
 @Component({
-  selector: "version-info-dialog",
-  templateUrl: "./version-info-dialog.component.html",
+  selector: 'version-info-dialog',
+  templateUrl: './version-info-dialog.component.html'
 })
 export class VersionInfoDialogComponent {
   versionInfo: VersionInfo;
 
   constructor(
     private dialogRef: MatDialogRef<VersionInfoDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     if (data) {
       this.versionInfo = data;
     }

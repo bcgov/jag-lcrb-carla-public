@@ -1,16 +1,15 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { Account } from "@models/account.model";
-import { ApplicationDataService } from "@services/application-data.service";
-import { Application } from "@models/application.model";
-import { ApplicationType, ApplicationTypeNames } from "@models/application-type.model";
+import { Component, Input, OnInit } from '@angular/core';
+import { Account } from '@models/account.model';
+import { ApplicationType, ApplicationTypeNames } from '@models/application-type.model';
+import { Application } from '@models/application.model';
+import { ApplicationDataService } from '@services/application-data.service';
 
 @Component({
-  selector: "app-liquor-approvals-callout",
-  templateUrl: "./liquor-approvals-callout.component.html",
-  styleUrls: ["./liquor-approvals-callout.component.scss"]
+  selector: 'app-liquor-approvals-callout',
+  templateUrl: './liquor-approvals-callout.component.html',
+  styleUrls: ['./liquor-approvals-callout.component.scss']
 })
 export class LiquorApprovalsCalloutComponent implements OnInit {
-
   @Input()
   account: Account;
 
@@ -26,21 +25,18 @@ export class LiquorApprovalsCalloutComponent implements OnInit {
   }
 
   loadData() {
-    this.busy = this.applicationDataService.getApplicationsByType(ApplicationTypeNames.LGINClaim)
-      .subscribe(applications => {
+    this.busy = this.applicationDataService
+      .getApplicationsByType(ApplicationTypeNames.LGINClaim)
+      .subscribe((applications) => {
         this.applications = applications;
 
         // check whether there is an application that is not terminated
         this.nonTerminatedApplicationExists =
-          applications.filter(app => app.applicationStatus !== "Terminated")
-          .length >
-          0;
+          applications.filter((app) => app.applicationStatus !== 'Terminated').length > 0;
 
         // check whether there is an application that is terminated
         this.terminatedApplicationExists =
-          applications.filter(app => app.applicationStatus === "Terminated")
-          .length >
-          0;
+          applications.filter((app) => app.applicationStatus === 'Terminated').length > 0;
       });
   }
 
@@ -49,12 +45,10 @@ export class LiquorApprovalsCalloutComponent implements OnInit {
       applicantType: this.account.businessType,
       applicationType: { name: ApplicationTypeNames.LGINClaim } as ApplicationType,
       account: this.account,
-      isApplicationComplete: "Yes",
+      isApplicationComplete: 'Yes'
     } as Application;
-    this.applicationDataService.createApplication(application)
-      .subscribe(result => {
-        this.loadData();
-      });
+    this.applicationDataService.createApplication(application).subscribe((result) => {
+      this.loadData();
+    });
   }
-
 }

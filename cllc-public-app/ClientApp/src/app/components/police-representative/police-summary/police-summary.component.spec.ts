@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PoliceSummaryComponent } from './police-summary.component';
 
 describe('PoliceSummaryComponent', () => {
@@ -8,9 +7,8 @@ describe('PoliceSummaryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PoliceSummaryComponent ]
-    })
-    .compileComponents();
+      declarations: [PoliceSummaryComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

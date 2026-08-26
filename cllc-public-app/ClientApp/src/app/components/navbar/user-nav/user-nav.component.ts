@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import { Account } from "@models/account.model";
+import { Account } from '@models/account.model';
 import { User } from '@models/user.model';
 
 @Component({
@@ -18,6 +18,6 @@ export class UserNavComponent implements OnInit {
   @Input() showMessageCenterBadge = false;
   @Output() messageCenterClick = new EventEmitter<void>();
 
-  constructor() { }
-  ngOnInit() { }
+  constructor() {}
+  ngOnInit() {}
 }

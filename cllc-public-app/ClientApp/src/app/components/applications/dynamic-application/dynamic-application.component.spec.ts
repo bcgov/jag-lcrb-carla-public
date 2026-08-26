@@ -1,27 +1,27 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { ActivatedRoute } from "@angular/router";
-import { DynamicApplicationComponent } from "./dynamic-application.component";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { StoreModule } from "@ngrx/store";
-import { reducers, metaReducers } from "@app/app-state/reducers/reducers";
-import { PaymentDataService } from "@services/payment-data.service";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { RouterTestingModule } from "@angular/router/testing";
-import { HttpClientTestingModule } from "@angular/common/http/testing";
-import { ApplicationDataService } from "@services/application-data.service";
-import { DynamicsDataService } from "@services/dynamics-data.service";
-import { FormBuilder } from "@angular/forms";
-import { TiedHouseConnectionsDataService } from "@services/tied-house-connections-data.service";
-import { of } from "rxjs";
-import { Application } from "@models/application.model";
-import { provideMockStore } from "@ngrx/store/testing";
-import { AppState } from "@app/app-state/models/app-state";
-import { ActivatedRouteStub } from "@app/testing/activated-route-stub";
-import { Account } from "@models/account.model";
-import { FileUploaderComponent } from "@shared/components/file-uploader/file-uploader.component";
-import { FieldComponent } from "@shared/components/field/field.component";
-import { DynamicsFormDataService } from "@services/dynamics-form-data.service";
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppState } from '@app/app-state/models/app-state';
+import { metaReducers, reducers } from '@app/app-state/reducers/reducers';
+import { ActivatedRouteStub } from '@app/testing/activated-route-stub';
+import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { StoreModule } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import { ApplicationDataService } from '@services/application-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
+import { DynamicsFormDataService } from '@services/dynamics-form-data.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { TiedHouseConnectionsDataService } from '@services/tied-house-connections-data.service';
+import { FieldComponent } from '@shared/components/field/field.component';
+import { FileUploaderComponent } from '@shared/components/file-uploader/file-uploader.component';
+import { of } from 'rxjs';
+import { DynamicApplicationComponent } from './dynamic-application.component';
 
 let paymentDataServiceStub: Partial<PaymentDataService>;
 let applicationDataServiceStub: Partial<ApplicationDataService>;
@@ -31,75 +31,70 @@ let matDialogStub: Partial<MatDialog>;
 let matSnackBarStub: Partial<MatSnackBar>;
 let activatedRouteStub: ActivatedRouteStub;
 
-describe("DynamicApplicationComponent",
-  () => {
-    let component: DynamicApplicationComponent;
-    let fixture: ComponentFixture<DynamicApplicationComponent>;
-    let applicationService: ApplicationDataService;
+describe('DynamicApplicationComponent', () => {
+  let component: DynamicApplicationComponent;
+  let fixture: ComponentFixture<DynamicApplicationComponent>;
+  let applicationService: ApplicationDataService;
 
-    const account = new Account();
-    account.businessType = "PublicCorporation";
-    const initialState = {
-      currentAccountState: { currentAccount: account },
-      currentUserState: { currentUser: {} }
-    } as AppState;
+  const account = new Account();
+  account.businessType = 'PublicCorporation';
+  const initialState = {
+    currentAccountState: { currentAccount: account },
+    currentUserState: { currentUser: {} }
+  } as AppState;
 
-    beforeEach(waitForAsync(() => {
-      paymentDataServiceStub = {};
-      applicationDataServiceStub = {
-        getSubmittedCannabisRetailStoreApplicationCount: () => of(0),
-        cancelApplication: () => of(null),
-        updateApplication: () => of(null),
-        getApplicationById: () => of({
+  beforeEach(waitForAsync(() => {
+    paymentDataServiceStub = {};
+    applicationDataServiceStub = {
+      getSubmittedCannabisRetailStoreApplicationCount: () => of(0),
+      cancelApplication: () => of(null),
+      updateApplication: () => of(null),
+      getApplicationById: () =>
+        of({
           applicationType: {
             contentTypes: []
           } as any
-        } as Application),
+        } as Application)
+    };
+    dynamicsDataServiceStub = { getRecord: () => of([]) };
+    tiedHouseConnectionsDataServiceStub = {
+      updateTiedHouse: () => of(null)
+    };
+    matDialogStub = {};
+    matSnackBarStub = {};
+    activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
+    TestBed.configureTestingModule({
+      declarations: [DynamicApplicationComponent, FileUploaderComponent, FieldComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, StoreModule.forRoot(reducers, { metaReducers })],
+      providers: [
+        provideMockStore({ initialState }),
+        FormBuilder,
+        { provide: PaymentDataService, useValue: paymentDataServiceStub },
+        { provide: DynamicsFormDataService, useValue: { getDynamicsForm: () => of({}) } },
+        { provide: ApplicationDataService, useValue: applicationDataServiceStub },
+        { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
+        { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },
+        { provide: MatDialog, useValue: matDialogStub },
+        { provide: ActivatedRoute, useValue: activatedRouteStub },
+        { provide: MatSnackBar, useValue: matSnackBarStub }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
 
-      };
-      dynamicsDataServiceStub = { getRecord: () => of([]) };
-      tiedHouseConnectionsDataServiceStub = {
-        updateTiedHouse: () => of(null)
-      };
-      matDialogStub = {};
-      matSnackBarStub = {};
-      activatedRouteStub = new ActivatedRouteStub({ applicationId: 1 });
-      TestBed.configureTestingModule({
-          declarations: [DynamicApplicationComponent, FileUploaderComponent, FieldComponent],
-          imports: [
-            RouterTestingModule,
-            HttpClientTestingModule,
-            StoreModule.forRoot(reducers, { metaReducers }),
-          ],
-          providers: [
-            provideMockStore({ initialState }),
-            FormBuilder,
-            { provide: PaymentDataService, useValue: paymentDataServiceStub },
-            { provide: DynamicsFormDataService, useValue: { getDynamicsForm: () => of({}) } },
-            { provide: ApplicationDataService, useValue: applicationDataServiceStub },
-            { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
-            { provide: TiedHouseConnectionsDataService, useValue: tiedHouseConnectionsDataServiceStub },
-            { provide: MatDialog, useValue: matDialogStub },
-            { provide: ActivatedRoute, useValue: activatedRouteStub },
-            { provide: MatSnackBar, useValue: matSnackBarStub },
-          ],
-          schemas: [NO_ERRORS_SCHEMA]
-        })
-        .compileComponents();
+    applicationService = TestBed.get(ApplicationDataService);
+  }));
 
-      applicationService = TestBed.get(ApplicationDataService);
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(DynamicApplicationComponent);
-      component = fixture.debugElement.componentInstance;
-      fixture.detectChanges();
-    });
-
-    afterEach(() => { fixture.destroy(); });
-
-    it("should create",
-      () => {
-        expect(component).toBeTruthy();
-      });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(DynamicApplicationComponent);
+    component = fixture.debugElement.componentInstance;
+    fixture.detectChanges();
   });
+
+  afterEach(() => {
+    fixture.destroy();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

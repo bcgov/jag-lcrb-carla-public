@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { faDownload } from "@fortawesome/free-solid-svg-icons"
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-servicecard-user-terms-and-conditions',
@@ -14,8 +14,7 @@ export class ServicecardUserTermsAndConditionsComponent implements OnInit {
     agreement: false
   });
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

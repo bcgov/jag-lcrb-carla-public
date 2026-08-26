@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 /**
  * Interface representing a SEP payment record.
@@ -28,7 +28,7 @@ export interface SepPayment {
 export class SepPaymentService {
   private readonly apiUrl = 'api/SepPayment';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Fetches a SEP payment by its SEPId.
@@ -37,9 +37,7 @@ export class SepPaymentService {
    */
   getPaymentById(sepId: string, txnId: string): Observable<SepPayment> {
     const url = `${this.apiUrl}?sepId=${encodeURIComponent(sepId)}&txnId=${encodeURIComponent(txnId)}`;
-    return this.http.get<SepPayment>(url).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<SepPayment>(url).pipe(catchError(this.handleError));
   }
 
   /**
@@ -47,9 +45,7 @@ export class SepPaymentService {
    * @returns Observable of an array of SepPayment
    */
   getAllPayments(): Observable<SepPayment[]> {
-    return this.http.get<SepPayment[]>(this.apiUrl).pipe(
-      catchError(this.handleError)
-    );
+    return this.http.get<SepPayment[]>(this.apiUrl).pipe(catchError(this.handleError));
   }
 
   /**

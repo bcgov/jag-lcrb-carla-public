@@ -4,8 +4,12 @@
   <app-police-nav *ngIf="isPoliceRepresentative; else elseBlock" [currentUser]="currentUser" [account]="account">
   </app-police-nav>
   <ng-template #elseBlock>
-    <app-user-nav [currentUser]="currentUser" [account]="account" [showNoticesBadge]="showNoticesBadge"
-      [showMessageCenterBadge]="showMessageCenterBadge" (messageCenterClick)="messageCenterClick.emit()">
+    <app-user-nav
+      [currentUser]="currentUser"
+      [account]="account"
+      [showNoticesBadge]="showNoticesBadge"
+      [showMessageCenterBadge]="showMessageCenterBadge"
+      (messageCenterClick)="messageCenterClick.emit()">
     </app-user-nav>
   </ng-template>
 </ng-container>

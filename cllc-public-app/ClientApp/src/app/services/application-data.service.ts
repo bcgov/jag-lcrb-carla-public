@@ -1,21 +1,19 @@
-import { Injectable } from "@angular/core";
-import { FileSystemItem } from "@models/file-system-item.model";
-import { Application } from "@models/application.model";
-import { ApplicationSummary } from "@models/application-summary.model";
-import { catchError } from "rxjs/operators";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { DataService } from "./data.service";
-import { CovidApplication } from "@models/covid-application.model";
-import { OngoingLicenseeData } from "../models/ongoing-licensee-data";
-import { PagingResult } from "@models/paging-result.model";
-import { RelatedLicence } from "../models/related-licence";
-import { ApplicationType } from "@models/application-type.model";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { ApplicationSummary } from '@models/application-summary.model';
+import { ApplicationType } from '@models/application-type.model';
+import { Application } from '@models/application.model';
+import { CovidApplication } from '@models/covid-application.model';
+import { FileSystemItem } from '@models/file-system-item.model';
+import { PagingResult } from '@models/paging-result.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { OngoingLicenseeData } from '../models/ongoing-licensee-data';
+import { DataService } from './data.service';
 
 @Injectable()
 export class ApplicationDataService extends DataService {
-
-  apiPath = "api/applications/";
+  apiPath = 'api/applications/';
 
   files: FileSystemItem[] = [];
 
@@ -41,7 +39,8 @@ export class ApplicationDataService extends DataService {
    * Get all Dynamics Applications for the current user
    * */
   getAdoxioApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + "current", { headers: this.headers })
+    return this.http
+      .get<Application[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -50,8 +49,9 @@ export class ApplicationDataService extends DataService {
    * */
   getApplicationsByType(applicationType: string): Observable<Application[]> {
     return this.http
-      .get<Application[]>(`${this.apiPath}current/by-type?applicationType=${encodeURIComponent(applicationType)}`,
-        { headers: this.headers })
+      .get<
+        Application[]
+      >(`${this.apiPath}current/by-type?applicationType=${encodeURIComponent(applicationType)}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -78,42 +78,49 @@ export class ApplicationDataService extends DataService {
   }
 
   getAllCurrentApplications(): Observable<ApplicationSummary[]> {
-    return this.http.get<ApplicationSummary[]>(this.apiPath + "current", { headers: this.headers })
+    return this.http
+      .get<ApplicationSummary[]>(this.apiPath + 'current', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   //LCSD-6357 Split getLGApprovalApplications into 3 parts
   getLGApprovalApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(this.apiPath + "current/lg-approvals", { headers: this.headers })
+    return this.http
+      .get<Application[]>(this.apiPath + 'current/lg-approvals', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   //LCSD-6357 part 1:
-  getLGApprovalApplicationsDecisionNotMade(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
+  getLGApprovalApplicationsDecisionNotMade(
+    pageIndex: number = 0,
+    pageSize: number = 10
+  ): Observable<PagingResult<Application>> {
     const url = `${this.apiPath}current/lg-approvals-decision-not-made?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
   //LCSD-6357 part 2:
-  getLGApprovalApplicationsForZoning(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
+  getLGApprovalApplicationsForZoning(
+    pageIndex: number = 0,
+    pageSize: number = 10
+  ): Observable<PagingResult<Application>> {
     const url = `${this.apiPath}current/lg-approvals-for-zoning?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
   //LCSD-6357 part 3:
-  getLGApprovalApplicationsDicisionMadeButNoDocs(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
+  getLGApprovalApplicationsDicisionMadeButNoDocs(
+    pageIndex: number = 0,
+    pageSize: number = 10
+  ): Observable<PagingResult<Application>> {
     const url = `${this.apiPath}current/lg-approvals-dicision-made-but-no-docs?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
-
   getResolvedLGApplications(pageIndex: number = 0, pageSize: number = 10): Observable<PagingResult<Application>> {
-    const url =`${this.apiPath}current/resolved-lg-applications?pageIndex=${pageIndex}&pageSize=${pageSize}`;
-    return this.http.get<PagingResult<Application>>(url, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    const url = `${this.apiPath}current/resolved-lg-applications?pageIndex=${pageIndex}&pageSize=${pageSize}`;
+    return this.http.get<PagingResult<Application>>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   getOngoingLicenseeChangeApplicationId(): Observable<string> {
-    return this.http.get<string>(this.apiPath + "ongoing-licensee-application-id", { headers: this.headers })
+    return this.http
+      .get<string>(this.apiPath + 'ongoing-licensee-application-id', { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -168,8 +175,9 @@ export class ApplicationDataService extends DataService {
     return this.http.get<any>(url, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
-  getOngoingLicenseeData(type: "on-going" | "create"): Observable<OngoingLicenseeData> {
-    return this.http.get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
+  getOngoingLicenseeData(type: 'on-going' | 'create'): Observable<OngoingLicenseeData> {
+    return this.http
+      .get<OngoingLicenseeData>(`${this.apiPath}licensee-data/${type}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -179,7 +187,8 @@ export class ApplicationDataService extends DataService {
    * @return {*}  {Observable<Application[]>}
    */
   getInProgressLegalEntityReviewApplications(): Observable<Application[]> {
-    return this.http.get<Application[]>(`${this.apiPath}get-in-progress-legal-entity-review`, { headers: this.headers })
+    return this.http
+      .get<Application[]>(`${this.apiPath}get-in-progress-legal-entity-review`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -188,10 +197,10 @@ export class ApplicationDataService extends DataService {
    * @param applicationId
    */
   getApplicationById(applicationId: string): Observable<Application> {
-    return this.http.get<Application>(this.apiPath + applicationId, { headers: this.headers })
+    return this.http
+      .get<Application>(this.apiPath + applicationId, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
 
   /**
    * Cancel the Dynamics Application
@@ -199,8 +208,7 @@ export class ApplicationDataService extends DataService {
    */
   cancelApplication(id: string) {
     // call API
-    return this.http.post(this.apiPath + id + "/cancel", { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.post(this.apiPath + id + '/cancel', { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -209,10 +217,8 @@ export class ApplicationDataService extends DataService {
    */
   deleteApplication(id: string) {
     // call API
-    return this.http.post(this.apiPath + id + "/delete", { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.post(this.apiPath + id + '/delete', { headers: this.headers }).pipe(catchError(this.handleError));
   }
-
 
   /**
    * Update the Dynamics Application
@@ -221,18 +227,20 @@ export class ApplicationDataService extends DataService {
   updateApplication(applicationData: Application): Observable<Application> {
     // call API
     // console.log("===== AdoxioApplicationDataService.updateApplication: ", applicationData);
-    return this.http.put<Application>(this.apiPath + applicationData.id, applicationData, { headers: this.headers })
+    return this.http
+      .put<Application>(this.apiPath + applicationData.id, applicationData, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
-    /**
+  /**
    * Update the Dynamics Application
    * @param applicationData
    */
   submitLegalEntityApplication(applicationData: Application): Observable<Application> {
     // call API
     // console.log("===== AdoxioApplicationDataService.SubmitLegalEntityApplication: ", applicationData);
-    return this.http.put<Application>(this.apiPath +"legal_entity/" + applicationData.id, applicationData, { headers: this.headers })
+    return this.http
+      .put<Application>(this.apiPath + 'legal_entity/' + applicationData.id, applicationData, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -252,9 +260,8 @@ export class ApplicationDataService extends DataService {
    */
   createCovidApplication(applicationData: CovidApplication): Observable<CovidApplication> {
     // call API
-    return this.http.post<CovidApplication>(this.apiPath + "covid", applicationData, { headers: this.headers });
+    return this.http.post<CovidApplication>(this.apiPath + 'covid', applicationData, { headers: this.headers });
   }
-
 
   /**
    * Get a file list of documents attached to the application by ID and document type
@@ -264,7 +271,7 @@ export class ApplicationDataService extends DataService {
   getFileListAttachedToApplication(applicationId: string, documentType: string): Observable<FileSystemItem[]> {
     const headers = new HttpHeaders({});
     const attachmentURL = `api/adoxioapplication/${applicationId}/attachments`;
-    const getFileURL = attachmentURL + "/" + documentType;
+    const getFileURL = attachmentURL + '/' + documentType;
     return this.http.get<FileSystemItem[]>(getFileURL, { headers: headers });
   }
 
@@ -273,19 +280,14 @@ export class ApplicationDataService extends DataService {
     // serverRelativeUrl is already URL-encoded by the backend when it's
     // returned in the file list — encodeURIComponent()'ing it again here
     // double-encodes it (e.g. %20 -> %2520), breaking the download.
-    const attachmentURL =
-      `api/file/${applicationId}/download-file/application?serverRelativeUrl=${serverRelativeUrl}`;
-    return this.http.get(attachmentURL, { headers: headers, responseType: "blob" })
-      .pipe(catchError(this.handleError));
-
+    const attachmentURL = `api/file/${applicationId}/download-file/application?serverRelativeUrl=${serverRelativeUrl}`;
+    return this.http.get(attachmentURL, { headers: headers, responseType: 'blob' }).pipe(catchError(this.handleError));
   }
 
   // 20245-03-20 LCSD-6368 waynezen
   getAutocomplete(search: string): Observable<any[]> {
-
-    return this.http.get<any[]>(this.apiPath + `autocomplete?jobnumber=${search}`, { headers: this.headers })
+    return this.http
+      .get<any[]>(this.apiPath + `autocomplete?jobnumber=${search}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
-
 }

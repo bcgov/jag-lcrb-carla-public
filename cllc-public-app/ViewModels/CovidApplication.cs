@@ -5,7 +5,7 @@ using System.Runtime.Serialization;
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    
+
     public class CovidApplication
     {
         public string Id { get; set; } //adoxio_applicationid
@@ -14,10 +14,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public AdoxioApplicantTypeCodes ApplicantType { get; set; } //adoxio_applicanttype
 
         public string JobNumber { get; set; } //adoxio_jobnumber
-        public string NameOfApplicant { get; set; } 
+        public string NameOfApplicant { get; set; }
 
         public string AdditionalPropertyInformation { get; set; } //adoxio_additionalpropertyinformation
-        public string InvoiceId  { get; set; }
+        public string InvoiceId { get; set; }
         public string ApplyingPerson { get; set; } //_adoxio_applyingperson_value
         public bool? AuthorizedToSubmit { get; set; } //adoxio_authorizedtosubmit        
 
@@ -40,13 +40,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string EstablishmentEmail { get; set; }
         public string EstablishmentParcelId { get; set; } //adoxio_establishmentparcelid
         public string EstablishmentPhone { get; set; }
-                
+
         public string LicenceType { get; set; } //_adoxio_licencetype_value		
-        
+
         public DateTimeOffset? ModifiedOn { get; set; }
 
         public string Name { get; set; } //adoxio_name
-     
+
         public ApplicationType ApplicationType { get; set; }
 
         public string Description1 { get; set; }

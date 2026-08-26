@@ -34,7 +34,7 @@ namespace Gov.Lclb.Cllb.Geocoder
             _geocoder = GeocoderSetupUtil.SetupGeocoder(Configuration);
         }
 
-        public string SanitizeStreetAddress (string address)
+        public string SanitizeStreetAddress(string address)
         {
             string result = null;
             if (address != null)

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FinalConfirmationComponent } from './final-confirmation.component';
 
 describe('FinalConfirmationComponent', () => {
@@ -8,9 +7,8 @@ describe('FinalConfirmationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FinalConfirmationComponent ]
-    })
-    .compileComponents();
+      declarations: [FinalConfirmationComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

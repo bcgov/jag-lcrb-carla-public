@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 {
     public class PaymentIsLiquorTest
     {
-		[Fact]
+        [Fact]
         public void IsLiquorTrueOneRecord()
         {
             var x = new List<ApplicationTypeCategory?> { ApplicationTypeCategory.Liquor };

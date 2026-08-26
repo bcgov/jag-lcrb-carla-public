@@ -1,4 +1,4 @@
-import { DynamicsFormField } from "./dynamics-form-field.model";
+import { DynamicsFormField } from './dynamics-form-field.model';
 
 export class DynamicsFormSection {
   id: string;
@@ -8,5 +8,5 @@ export class DynamicsFormSection {
   showlabel: boolean;
   fields: DynamicsFormField[];
 
-  constructor() { }
+  constructor() {}
 }

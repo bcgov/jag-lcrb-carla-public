@@ -1,27 +1,37 @@
 <h3 class="blue-header">
-  LOCAL GOVERNMENT/INDIGENOUS NATION <span *ngIf="application?.applicationType?.showLgNoObjection">COMMENTS</span><span *ngIf="!application?.applicationType?.showLgNoObjection">CONFIRMATION OF RECEIPT OF APPLICATION</span>
+  LOCAL GOVERNMENT/INDIGENOUS NATION <span *ngIf="application?.applicationType?.showLgNoObjection">COMMENTS</span
+  ><span *ngIf="!application?.applicationType?.showLgNoObjection">CONFIRMATION OF RECEIPT OF APPLICATION</span>
 </h3>
 <div class="padded-section content-bottom" [formGroup]="form">
   <app-field label="LG/IN">
-    <input class="form-control" formControlName="lgInName" readonly type="text">
+    <input class="form-control" formControlName="lgInName" readonly type="text" />
   </app-field>
-  <app-field label="Name of Official" [valid]="!isTouchedAndInvalid('lGNameOfOfficial')"
-             errorMessage="Please enter the name of the official">
-    <input class="form-control" type="text" formControlName="lGNameOfOfficial">
+  <app-field
+    label="Name of Official"
+    [valid]="!isTouchedAndInvalid('lGNameOfOfficial')"
+    errorMessage="Please enter the name of the official">
+    <input class="form-control" type="text" formControlName="lGNameOfOfficial" />
   </app-field>
-  <app-field label="Title/Position" [valid]="!isTouchedAndInvalid('lGTitlePosition')"
-             errorMessage="Please enter the Title/Position">
-    <input class="form-control" type="text" formControlName="lGTitlePosition">
+  <app-field
+    label="Title/Position"
+    [valid]="!isTouchedAndInvalid('lGTitlePosition')"
+    errorMessage="Please enter the Title/Position">
+    <input class="form-control" type="text" formControlName="lGTitlePosition" />
   </app-field>
-  <app-field label="Phone" [valid]="!isTouchedAndInvalid('lGContactPhone')"
-             errorMessage="Please enter the phone number">
-    <input class="form-control" type="text" formControlName="lGContactPhone" mask="(000) 000-0000"
-           placeholder="(000) 000-0000">
+  <app-field
+    label="Phone"
+    [valid]="!isTouchedAndInvalid('lGContactPhone')"
+    errorMessage="Please enter the phone number">
+    <input
+      class="form-control"
+      type="text"
+      formControlName="lGContactPhone"
+      mask="(000) 000-0000"
+      placeholder="(000) 000-0000" />
   </app-field>
   <app-field label="Email" [valid]="!isTouchedAndInvalid('lGContactEmail')" errorMessage="Please enter the email">
-    <input class="form-control" type="text" formControlName="lGContactEmail">
+    <input class="form-control" type="text" formControlName="lGContactEmail" />
   </app-field>
-
 
   <section>
     <section class="ngtest-lg-instructions" [innerHTML]="htmlContent?.LocalGovernmentApproval"></section>
@@ -32,8 +42,8 @@
         <li>The impact on the community if the application is approved</li>
         <li>The views of residents and a description of the method used to gather views</li>
         <li>
-          The LG/In recommendations (including whether or not the application is approved) and the reasons on
-          which they are based
+          The LG/In recommendations (including whether or not the application is approved) and the reasons on which they
+          are based
         </li>
       </ul>
     </section>
@@ -41,18 +51,22 @@
     <section *ngIf="application?.applicationType?.showLgNoObjection">
       <mat-checkbox formControlName="lgNoObjection">
         <span class="error-states">*</span>
-        <span class="ml-2 question-label">
-          No objection to this application
-        </span>
+        <span class="ml-2 question-label"> No objection to this application </span>
       </mat-checkbox>
-
     </section>
 
-    <app-file-uploader *ngIf="application?.id && !application?.applicationType?.showLgNoObjection" documentType="LGIN Resolution"
-                       [disableUploads]="!isOpenedByLGForApproval" [enableFileDeletion]="isOpenedByLGForApproval && !lgHasApproved"
-                       (numberOfUploadedFiles)="uploadedResolutionDocuments = $event" [maxNumberOfFiles]="200"
-                       fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT." entityName="application" [entityId]="application?.id"
-                       [extensions]="['pdf', 'jpg', 'jpeg', 'png']" #LGINResolutionDocuments>
+    <app-file-uploader
+      *ngIf="application?.id && !application?.applicationType?.showLgNoObjection"
+      documentType="LGIN Resolution"
+      [disableUploads]="!isOpenedByLGForApproval"
+      [enableFileDeletion]="isOpenedByLGForApproval && !lgHasApproved"
+      (numberOfUploadedFiles)="uploadedResolutionDocuments = $event"
+      [maxNumberOfFiles]="200"
+      fileTypes="FILES MUST BE IN PDF, JPEG, OR PNG FORMAT."
+      entityName="application"
+      [entityId]="application?.id"
+      [extensions]="['pdf', 'jpg', 'jpeg', 'png']"
+      #LGINResolutionDocuments>
     </app-file-uploader>
 
     <!--ng-container *ngIf="showFormControl(application?.applicationType?.floorPlan)">
@@ -81,14 +95,19 @@
 <section class="error mt-3" *ngIf="showValidationMessages">
   <p *ngFor="let message of validationMessages">
     <span class="app-cancel">
-      <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-      {{message}}
+      <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+      {{ message }}
     </span>
   </p>
 </section>
 
 <section *ngIf="!lgHasApproved" class="position-relative d-flex justify-content-between p-3">
-  <button mat-raised-button color="secondary" [disabled]="optingOutOfComment" (click)="OptOutOfComment()" *ngIf="resolutionRequired">
+  <button
+    mat-raised-button
+    color="secondary"
+    [disabled]="optingOutOfComment"
+    (click)="OptOutOfComment()"
+    *ngIf="resolutionRequired">
     <span>Opt Out of Comment</span>
     <mat-progress-bar *ngIf="optingOutOfComment" mode="indeterminate"></mat-progress-bar>
   </button>
@@ -98,14 +117,22 @@
     <mat-progress-bar *ngIf="rejectingApp" mode="indeterminate"></mat-progress-bar>
   </button>
 
-  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  !== 'Pending' && resolutionRequired"
-          [disabled]="approvingApplication" (click)="ApproveApplication()">
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="application?.lGApprovalDecision !== 'Pending' && resolutionRequired"
+    [disabled]="approvingApplication"
+    (click)="ApproveApplication()">
     <span>Accept Application</span>
     <mat-progress-bar *ngIf="approvingApplication" mode="indeterminate"></mat-progress-bar>
   </button>
 
-  <button mat-raised-button color="primary" *ngIf="application?.lGApprovalDecision  === 'Pending' || !resolutionRequired"
-          [disabled]="providingResolution" (click)="ProvideResolution()">
+  <button
+    mat-raised-button
+    color="primary"
+    *ngIf="application?.lGApprovalDecision === 'Pending' || !resolutionRequired"
+    [disabled]="providingResolution"
+    (click)="ProvideResolution()">
     <span *ngIf="resolutionRequired">Provide Resolution</span>
     <span *ngIf="!resolutionRequired">Accept Application</span>
     <mat-progress-bar *ngIf="providingResolution" mode="indeterminate"></mat-progress-bar>

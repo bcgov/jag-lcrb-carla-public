@@ -18,14 +18,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
 
 
-    public class FeedbackModel {
+    public class FeedbackModel
+    {
 
         public string feedback { get; set; }
     }
 
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class FeedbackController : ControllerBase
     {
 
@@ -62,10 +63,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 string email = _configuration["FEEDBACK_EMAIL"];
-                 
+
 
                 /* send the user an email confirmation. */
-               
+
                 // send the email.
                 SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
@@ -73,18 +74,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
                 message.Subject = "CARLA Feedback";
                 string sanitizedBody = HttpUtility.HtmlEncode(feedbackModel.feedback);
-                if(sanitizedBody.Trim().Length < 5){
-                   return StatusCode(StatusCodes.Status500InternalServerError, "Feedback too short");
+                if (sanitizedBody.Trim().Length < 5)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Feedback too short");
                 }
                 message.Body = "<p>Feedback from CARLA\n: " + sanitizedBody + "</p>";
-                  
+
                 message.IsBodyHtml = true;
 
                 try
                 {
                     client.Send(message);
-                     
-                     return Ok(new {message = "success"});
+
+                    return Ok(new { message = "success" });
 
                 }
                 catch (Exception ex)
@@ -101,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
         }
- 
+
     }
 }
 

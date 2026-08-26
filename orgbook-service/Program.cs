@@ -40,9 +40,9 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     webBuilder
                         .UseOpenShiftIntegration(_ => _.CertificateMountPoint = "/var/run/secrets/service-cert")
                         .UseStartup<Startup>();
-                        //.UseKestrel(options => {
-                        //    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
-                        //});
+                    //.UseKestrel(options => {
+                    //    options.Limits.MaxRequestBodySize = 512 * 1024 * 1024; // allow large transfers
+                    //});
                 });
     }
 }

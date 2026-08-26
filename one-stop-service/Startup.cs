@@ -98,10 +98,10 @@ namespace Gov.Jag.Lcrb.OneStopService
                 }
 
             });
-            
+
             // Note that we do not introduce a default JsonOptions here because we want enums to be presented as numeric values
             // in the API for ease of testing.
-        
+
             // Other ConfigureServices() code...
             services.AddSwaggerGen(c =>
             {
@@ -109,7 +109,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "JAG OneStop Service", Version = "v1" });
                 c.ParameterFilter<AutoRestParameterFilter>();
                 // This is only required because Swashbuckle does not present enums correctly
-                c.AddEnumsWithValuesFixFilters(); 
+                c.AddEnumsWithValuesFixFilters();
                 string baseUri = Configuration["BASE_URI"];
                 if (baseUri != null)
                 {

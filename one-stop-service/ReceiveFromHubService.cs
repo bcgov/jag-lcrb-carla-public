@@ -241,7 +241,7 @@ namespace Gov.Jag.Lcrb.OneStopService
         public string receiveFromHub(string inputXML)
         {
             string result = "200";
-            Log.Logger.Information($">>>> Reached receiveFromHub method: { DateTime.Now.ToString() }");
+            Log.Logger.Information($">>>> Reached receiveFromHub method: {DateTime.Now.ToString()}");
 
             if (string.IsNullOrEmpty(inputXML))
             {

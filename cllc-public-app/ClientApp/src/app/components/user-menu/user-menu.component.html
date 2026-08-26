@@ -2,18 +2,19 @@
   <button class="user-button" mat-button disableRipple="true" [matMenuTriggerFor]="userMenu" #t="matMenuTrigger">
     <fa-icon [icon]="userIcon" size="2x" transform="down-3"></fa-icon>
     <div class="user-name pl-3 pr-4">
-      <span class="strong">{{currentUser?.name}}</span>
-      <i *ngIf="currentUser.userType == 'Business'">{{currentUser.businessname}}</i>
+      <span class="strong">{{ currentUser?.name }}</span>
+      <i *ngIf="currentUser.userType == 'Business'">{{ currentUser.businessname }}</i>
     </div>
     <fa-icon *ngIf="!t.menuOpen" [icon]="faChevronDown"></fa-icon>
     <fa-icon *ngIf="t.menuOpen" [icon]="faChevronUp"></fa-icon>
   </button>
 </div>
 <mat-menu #userMenu="matMenu" backdropClass="custom__menu">
-  <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile">
-    Manage account
-  </a>
-  <a mat-menu-item appRemoveIfFeatureOff="Sep" *ngIf="currentUser?.userType == 'VerifiedIndividual' || currentUser?.userType != 'Business'"
+  <a mat-menu-item *ngIf="currentUser?.userType == 'Business'" routerLink="/account-profile"> Manage account </a>
+  <a
+    mat-menu-item
+    appRemoveIfFeatureOff="Sep"
+    *ngIf="currentUser?.userType == 'VerifiedIndividual' || currentUser?.userType != 'Business'"
     routerLink="/servicecard-profile">
     Manage account
   </a>

@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
-import { faPencilAlt } from "@fortawesome/free-solid-svg-icons";
-import { ApplicationDataService } from '@services/application-data.service';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { Application } from '@models/application.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { merge, of } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 @Component({
   selector: 'app-for-zoning-applications',
   templateUrl: './for-zoning-applications.component.html',
   styleUrls: ['./for-zoning-applications.component.scss']
 })
-export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
+export class ForZoningApplicationsComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['number', 'application', 'applyingBusiness', 'establishmentAddress', 'action'];
 
   faPencilAlt = faPencilAlt;
@@ -22,14 +22,12 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  data: TableElement[]; 
+  data: TableElement[];
 
   constructor(private applicationDataService: ApplicationDataService) {}
 
-  ngOnInit(): void {   
-  }
+  ngOnInit(): void {}
   ngAfterViewInit() {
-    
     //this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     merge(this.paginator.page)
       .pipe(
@@ -37,9 +35,12 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
         switchMap(() => {
           this.isLoadingResults = true;
           this.dataLoaded = false;
-          return this.applicationDataService.getLGApprovalApplicationsForZoning(this.paginator.pageIndex, this.paginator.pageSize);
+          return this.applicationDataService.getLGApprovalApplicationsForZoning(
+            this.paginator.pageIndex,
+            this.paginator.pageSize
+          );
         }),
-        map(result => {
+        map((result) => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.dataLoaded = true;
@@ -47,7 +48,7 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
           //this.resultsLength = data.total_count;
           this.resultsLength = result.count;
 
-          return result.value;          
+          return result.value;
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -55,12 +56,16 @@ export class ForZoningApplicationsComponent implements OnInit, AfterViewInit  {
           this.isRateLimitReached = true;
           return of([] as Application[]);
         })
-    ).subscribe(data => this.data = data.map((el, i) => {
-        return {
-          ...el,
-          index: 1 + i + this.paginator.pageIndex*this.paginator.pageSize
-        };
-      }));
+      )
+      .subscribe(
+        (data) =>
+          (this.data = data.map((el, i) => {
+            return {
+              ...el,
+              index: 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            };
+          }))
+      );
   }
 }
 

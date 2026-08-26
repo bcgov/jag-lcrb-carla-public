@@ -121,7 +121,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
         private void SetupSharePoint(IServiceCollection services)
         {
             // add SharePoint.
-            services.AddTransient<ISharePointFileManager>(sp => 
+            services.AddTransient<ISharePointFileManager>(sp =>
             {
                 var loggerFactory = sp.GetRequiredService<ILoggerFactory>();
                 return SharePointFileManager.Create(_configuration, loggerFactory);
@@ -144,15 +144,15 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 try
                 {
                     Console.WriteLine($"[Request] {context.Request.Method} {context.Request.Path} from {context.Connection.RemoteIpAddress}");
-                    logger.LogInformation("[Request] {Method} {Path} from {RemoteIp}", 
-                        context.Request.Method, 
-                        context.Request.Path, 
+                    logger.LogInformation("[Request] {Method} {Path} from {RemoteIp}",
+                        context.Request.Method,
+                        context.Request.Path,
                         context.Connection.RemoteIpAddress);
                     await next();
                     Console.WriteLine($"[Response] {context.Request.Method} {context.Request.Path} returned {context.Response.StatusCode}");
-                    logger.LogInformation("[Response] {Method} {Path} returned {StatusCode}", 
-                        context.Request.Method, 
-                        context.Request.Path, 
+                    logger.LogInformation("[Response] {Method} {Path} returned {StatusCode}",
+                        context.Request.Method,
+                        context.Request.Path,
                         context.Response.StatusCode);
                 }
                 catch (Exception ex)
@@ -263,8 +263,8 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
                 {
                     log.LogInformation("Creating Hangfire jobs for SPD Export ...");
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundApplicationsV2(null), Cron.MinuteInterval(15));
-                    
-                    
+
+
                     RecurringJob.AddOrUpdate(() => new SpiceUtils(_configuration, loggerFactory).SendFoundWorkers(null), Cron.MinuteInterval(15));
                     log.LogInformation("Hangfire Send Export job done.");
                 }

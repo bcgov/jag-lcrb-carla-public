@@ -469,10 +469,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return File(data, "application/pdf", $"SEP Summary.pdf");
         }
 
-        private string getPermitCategoryLabel(ViewModels.SEPPublicOrPrivate? value) {
+        private string getPermitCategoryLabel(ViewModels.SEPPublicOrPrivate? value)
+        {
             string test = value?.ToString();
             var res = "";
-            switch (test) {
+            switch (test)
+            {
                 case "Members":
                     res = "Private – An organization's members or staff, invited guests and ticket holders";
                     break;
@@ -1371,12 +1373,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private String transformColumnNametoSchemaName(String colName)
         {
-            if(colName != null && colName.Length > 0)
+            if (colName != null && colName.Length > 0)
             {
-                if(colName == "eventStartDate")
+                if (colName == "eventStartDate")
                 {
                     return "adoxio_eventstartdate";
-                }else if(colName == "dateSubmitted")
+                }
+                else if (colName == "dateSubmitted")
                 {
                     return "adoxio_datesubmitted";
                 }
@@ -1848,7 +1851,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     throw;
                 }
                 return Ok();
-            }else{
+            }
+            else
+            {
                 return BadRequest();
             }
         }
@@ -1862,6 +1867,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
     public class SepPoliceReviewReason
     {
-        public string Reason {get; set; }
+        public string Reason { get; set; }
     }
 }

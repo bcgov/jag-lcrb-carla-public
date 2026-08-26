@@ -1,22 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { forkJoin, Subscription } from "rxjs";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { LicenseDataService } from "@app/services/license-data.service";
-import { Router } from "@angular/router";
-import { ApplicationTypeNames } from "@models/application-type.model";
-import { ApplicationStatuses } from "@models/application-type.model";
-import { FormBase } from "@shared/form-base";
-import { takeWhile } from "rxjs/operators";
-import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
-import { PaymentDataService } from "@services/payment-data.service";
-import { EstablishmentDataService } from "@services/establishment-data.service";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { Establishment } from "@models/establishment.model";
-import { LicenceEventsService } from "@services/licence-events.service";
-import { EventStatus, LicenceEvent, EventCategory } from "@models/licence-event.model";
-import { License } from "@models/license.model";
-import { TermsAndConditionsDataService } from "@services/terms-and-condtions-data.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
+import { LicenseDataService } from '@app/services/license-data.service';
 import {
+  faBan,
   faBolt,
   faBusinessTime,
   faCalendarAlt,
@@ -29,27 +17,35 @@ import {
   faQuestionCircle,
   faShoppingCart,
   faTrashAlt
-} from "@fortawesome/free-solid-svg-icons";
-import {
-  faBan
-} from "@fortawesome/free-solid-svg-icons";
-import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from "date-fns";
-import { LicenceTypeNames } from "../../../models/license-type.model";
-import { FeatureFlagService } from "@services/feature-flag.service";
+} from '@fortawesome/free-solid-svg-icons';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { ApplicationStatuses, ApplicationTypeNames } from '@models/application-type.model';
+import { Establishment } from '@models/establishment.model';
+import { EventCategory, EventStatus, LicenceEvent } from '@models/licence-event.model';
+import { License } from '@models/license.model';
+import { EstablishmentDataService } from '@services/establishment-data.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { LicenceEventsService } from '@services/licence-events.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
+import { FormBase } from '@shared/form-base';
+import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from 'date-fns';
+import { forkJoin, Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
+import { LicenceTypeNames } from '../../../models/license-type.model';
 
-export const UPLOAD_FILES_MODE = "UploadFilesMode";
-export const CRS_RENEWAL_LICENCE_TYPE_NAME = "crs";
-export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = "liquor";
+export const UPLOAD_FILES_MODE = 'UploadFilesMode';
+export const CRS_RENEWAL_LICENCE_TYPE_NAME = 'crs';
+export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
-
-const ACTIVE = "Active";
-const RENEWAL_DUE = "Renewal Due";
+const ACTIVE = 'Active';
+const RENEWAL_DUE = 'Renewal Due';
 const NOW = startOfToday();
 
 @Component({
-  selector: "app-licence-row",
-  templateUrl: "./licence-row.component.html",
-  styleUrls: ["./licence-row.component.scss"]
+  selector: 'app-licence-row',
+  templateUrl: './licence-row.component.html',
+  styleUrls: ['./licence-row.component.scss']
 })
 export class LicenceRowComponent extends FormBase implements OnInit {
   faDownLoad = faDownload;
@@ -95,14 +91,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     private licenceEventsService: LicenceEventsService,
     private termsAndConditionsService: TermsAndConditionsDataService,
     private featureFlagService: FeatureFlagService,
-    public fb: FormBuilder) {
+    public fb: FormBuilder
+  ) {
     super();
     this.mainForm = new FormGroup({});
   }
 
   ngOnInit() {
-
-
     this.requestStarted = false;
     this.requestID = -1;
     this.licences.forEach((licence) => {
@@ -115,23 +110,21 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // Fetch terms and conditions for every licence in this type group in a single batched
     // request instead of one HTTP call per licence.
     const licenceIds = this.licences.map((licence) => licence.licenseId);
-    const termsBusy = this.termsAndConditionsService.getTermsAndCondtionsBatch(licenceIds)
-      .subscribe((allTerms) => {
-        this.licences.forEach((licence) => {
-          const terms = allTerms.filter((term) => term.licenceId === licence.licenseId);
-          licence.termsAndConditions = terms;
-          if (terms.length > 0) {
-            licence.headerRowSpan += 1;
-          }
-        });
+    const termsBusy = this.termsAndConditionsService.getTermsAndCondtionsBatch(licenceIds).subscribe((allTerms) => {
+      this.licences.forEach((licence) => {
+        const terms = allTerms.filter((term) => term.licenceId === licence.licenseId);
+        licence.termsAndConditions = terms;
+        if (terms.length > 0) {
+          licence.headerRowSpan += 1;
+        }
       });
+    });
     this.licences.forEach((licence) => {
       licence.termsAndConditionsBusy = termsBusy;
     });
 
-
     // Set the disableLicenceRenewalDate based on the "DisableLicenceRenewalDate" feature flag.
-    this.featureFlagService.featureValue("DisableLicenceRenewalDate").subscribe(feature => {
+    this.featureFlagService.featureValue('DisableLicenceRenewalDate').subscribe((feature) => {
       const renewalDateString = feature;
 
       if (!renewalDateString) {
@@ -181,22 +174,21 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       isOpen: null
     };
 
-    const licence = Object.assign(new ApplicationLicenseSummary(),
-      {
-        licenseId: licenceId,
-        establishmentEmail: event.target.value
-      });
+    const licence = Object.assign(new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentEmail: event.target.value
+    });
 
     this.updateEstablishment(establishment);
     this.sendUpdateLicence(licence);
   }
 
   updatePhone(licenceId: string, establishmentId: string, event: any) {
-    if (event.target.value === null || typeof this.licenceForms[licenceId] === "undefined") {
+    if (event.target.value === null || typeof this.licenceForms[licenceId] === 'undefined') {
       return false;
     }
 
-    const phone = this.licenceForms[licenceId].controls["phone"].value;
+    const phone = this.licenceForms[licenceId].controls['phone'].value;
 
     const establishment = {
       id: establishmentId,
@@ -205,37 +197,32 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       isOpen: null
     };
 
-    const licence = Object.assign(new ApplicationLicenseSummary(),
-      {
-        licenseId: licenceId,
-        establishmentPhoneNumber: phone
-      });
+    const licence = Object.assign(new ApplicationLicenseSummary(), {
+      licenseId: licenceId,
+      establishmentPhoneNumber: phone
+    });
 
     this.updateEstablishment(establishment);
     this.sendUpdateLicence(licence);
   }
 
   sendUpdateLicence(licence: ApplicationLicenseSummary) {
-    this.busy = forkJoin([
-      this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)
-    ])
-      .subscribe(([licenceResp]) => {
+    this.busy = forkJoin([this.licenceDataService.updateLicenceEstablishment(licence.licenseId, licence)]).subscribe(
+      ([licenceResp]) => {
         if (this.licenceTypeHasEvents(licence.licenceTypeName)) {
-          forkJoin([
-            this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 20)
-          ])
-            .subscribe(data => {
-              licenceResp.events = data[0];
-              this.updateLicence(licenceResp);
-            });
+          forkJoin([this.licenceEventsService.getLicenceEventsList(licenceResp.licenseId, 20)]).subscribe((data) => {
+            licenceResp.events = data[0];
+            this.updateLicence(licenceResp);
+          });
         } else {
           this.updateLicence(licenceResp);
         }
-      });
+      }
+    );
   }
 
   updateLicence(licence: ApplicationLicenseSummary) {
-    const licenceIndex = this.licences.findIndex(l => l.licenseId === licence.licenseId);
+    const licenceIndex = this.licences.findIndex((l) => l.licenseId === licence.licenseId);
     if (licenceIndex >= 0) {
       this.licences[licenceIndex] = licence;
     }
@@ -246,9 +233,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   actionsVisible(licence: ApplicationLicenseSummary) {
-    if (licence.licenceTypeCategory === "Liquor" &&
-      (licence.transferRequested && !licence.licenceTypeName.toLowerCase().includes("deemed - ")) ||
-      this.isExpired(licence)) {
+    if (
+      (licence.licenceTypeCategory === 'Liquor' &&
+        licence.transferRequested &&
+        !licence.licenceTypeName.toLowerCase().includes('deemed - ')) ||
+      this.isExpired(licence)
+    ) {
       return false;
     }
     return true;
@@ -262,10 +252,15 @@ export class LicenceRowComponent extends FormBase implements OnInit {
    * It should not be available for any Cannabis licence type.
    */
   showManageOffsiteStorage(item: ApplicationLicenseSummary) {
-    const exclusions = [ApplicationTypeNames.Catering, ApplicationTypeNames.UBV, ApplicationTypeNames.Agent] as string[];
-    const result = this.isActive(item) &&
+    const exclusions = [
+      ApplicationTypeNames.Catering,
+      ApplicationTypeNames.UBV,
+      ApplicationTypeNames.Agent
+    ] as string[];
+    const result =
+      this.isActive(item) &&
       this.actionsVisible(item) &&
-      item.licenceTypeCategory === "Liquor" &&
+      item.licenceTypeCategory === 'Liquor' &&
       !exclusions.includes(item.licenceTypeName) &&
       !item.isOperated;
     return result;
@@ -274,9 +269,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   // Take Home Sampling event is only available to Agents and Manufacturers
   showTakeHomeSampling(item: ApplicationLicenseSummary) {
     const whitelist = [ApplicationTypeNames.Agent, ApplicationTypeNames.MFG] as string[];
-    const result = this.isActive(item) &&
+    const result =
+      this.isActive(item) &&
       this.actionsVisible(item) &&
-      item.licenceTypeCategory === "Liquor" &&
+      item.licenceTypeCategory === 'Liquor' &&
       whitelist.includes(item.licenceTypeName);
     return result;
   }
@@ -284,7 +280,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   isFederalReportLicenceType(item: ApplicationLicenseSummary) {
     const licenceType = item?.licenceTypeName;
 
-    if (licenceType && (licenceType === ApplicationTypeNames.CannabisRetailStore || licenceType === ApplicationTypeNames.ProductionRetailStore)) {
+    if (
+      licenceType &&
+      (licenceType === ApplicationTypeNames.CannabisRetailStore ||
+        licenceType === ApplicationTypeNames.ProductionRetailStore)
+    ) {
       return true;
     }
 
@@ -292,11 +292,12 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   showLicenceTransferAction(item: ApplicationLicenseSummary) {
-    const result = this.isActive(item) &&
+    const result =
+      this.isActive(item) &&
       !item.transferRequested &&
       this.actionsVisible(item) &&
       item.licenceTypeName !== LicenceTypeNames.S119 &&
-      item.licenceTypeName !== "Marketing" &&
+      item.licenceTypeName !== 'Marketing' &&
       item.licenceTypeName !== LicenceTypeNames.S119CRS &&
       item.licenceTypeName !== LicenceTypeNames.S119PRS &&
       item.licenceTypeName !== LicenceTypeNames.PRS;
@@ -304,18 +305,17 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   showTiedHouseExemption(item: ApplicationLicenseSummary) {
-    const result = this.isActive(item) &&
-      this.actionsVisible(item) &&
-      item.licenceTypeName === "Manufacturer";
+    const result = this.isActive(item) && this.actionsVisible(item) && item.licenceTypeName === 'Manufacturer';
     return result;
   }
 
   showAddOrChangeThirdPartyOperator(item: ApplicationLicenseSummary): boolean {
-    const result = this.isActive(item) &&
+    const result =
+      this.isActive(item) &&
       this.actionsVisible(item) &&
       !item.tpoRequested &&
-      this.licenceType !== "Agent" &&
-      item.licenceTypeCategory === "Liquor";
+      this.licenceType !== 'Agent' &&
+      item.licenceTypeCategory === 'Liquor';
     return result;
   }
 
@@ -325,32 +325,36 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   payLicenceFee(licence: ApplicationLicenseSummary) {
     // locate the application associated with the issuance of this licence
-    const application = licence.actionApplications.find(app => app.applicationTypeName === licence.licenceTypeName);
+    const application = licence.actionApplications.find((app) => app.applicationTypeName === licence.licenceTypeName);
     if (application) {
-      this.busy = this.paymentService.getInvoiceFeePaymentSubmissionUrl(application.applicationId)
+      this.busy = this.paymentService
+        .getInvoiceFeePaymentSubmissionUrl(application.applicationId)
         .pipe(takeWhile(() => this.componentActive))
-        .subscribe(res => {
-          const data = res as any;
-          window.location.href = data.url;
-        },
-          err => {
-            if (err === "Payment already made") {
-              this.snackBar.open("Licence Fee payment has already been made, please refresh the page.",
-                "Fail",
-                { duration: 3500, panelClass: ["red-snackbar"] });
+        .subscribe(
+          (res) => {
+            const data = res as any;
+            window.location.href = data.url;
+          },
+          (err) => {
+            if (err === 'Payment already made') {
+              this.snackBar.open('Licence Fee payment has already been made, please refresh the page.', 'Fail', {
+                duration: 3500,
+                panelClass: ['red-snackbar']
+              });
             }
-          });
+          }
+        );
     }
   }
 
   planStoreOpening(licence: ApplicationLicenseSummary) {
-    const application = licence.actionApplications.find(app => app.applicationTypeName === licence.applicationTypeName);
+    const application = licence.actionApplications.find(
+      (app) => app.applicationTypeName === licence.applicationTypeName
+    );
     if (application) {
       this.router.navigate([`/store-opening/${application.applicationId}`]);
     } else {
-      this.snackBar.open("Unable to find Application",
-        "Fail",
-        { duration: 3500, panelClass: ["red-snackbar"] });
+      this.snackBar.open('Unable to find Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
     }
   }
 
@@ -362,18 +366,17 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       email: null
     };
 
-    this.busy = forkJoin([
-      this.establishmentService.upEstablishment(establishment)
-    ])
-      .subscribe(([establishmentResp]) => {
+    this.busy = forkJoin([this.establishmentService.upEstablishment(establishment)]).subscribe(
+      ([establishmentResp]) => {
         this.licences[index].establishmentIsOpen = establishmentResp.isOpen;
-      });
+      }
+    );
   }
 
   isExpired(licence: ApplicationLicenseSummary) {
     // if NOW is after licence.expiryDate then expired is true
     const expired = isAfter(NOW, startOfDay(new Date(licence.expiryDate)));
-    return expired && (licence.status === "Active" || licence.status === "Expired");
+    return expired && (licence.status === 'Active' || licence.status === 'Expired');
   }
 
   isExpiredOverOneYear(licence: ApplicationLicenseSummary) {
@@ -381,7 +384,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     let licenceExpredDate = startOfDay(new Date(licence.expiryDate));
     const oneYearOfStartDay = addYears(licenceExpredDate, 1);
     const expired = isAfter(NOW, oneYearOfStartDay);
-    return expired && (licence.status === "Active" || licence.status === "Expired");
+    return expired && (licence.status === 'Active' || licence.status === 'Expired');
   }
 
   isAboutToExpire(licence: ApplicationLicenseSummary) {
@@ -406,11 +409,11 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   isCancelled(licence: ApplicationLicenseSummary) {
     const expiry = startOfDay(new Date(licence.expiryDate));
     const diff = Math.abs(differenceInDays(expiry, NOW));
-    return diff >= 180 || licence.status === "Cancelled";
+    return diff >= 180 || licence.status === 'Cancelled';
   }
 
   isActive(licence: ApplicationLicenseSummary) {
-    let active = licence.status === "Active";
+    let active = licence.status === 'Active';
     if (licence.suspended) {
       active = false;
     }
@@ -421,9 +424,8 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     return this.isRecentlyExpired(licence) || this.isActive(licence);
   }
 
-
   isLiquorPrimaryOrLiquorPrimaryClub(licence: ApplicationLicenseSummary) {
-    return licence.licenceTypeName.includes("Liquor Primary");
+    return licence.licenceTypeName.includes('Liquor Primary');
   }
 
   /**
@@ -432,8 +434,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
    *   - Take Home Sampling events
    */
   hasAuthorizationLetter(event: LicenceEvent): boolean {
-    const exclusions = ["All Ages Liquor Free", "Take Home Sampling"];
-    const excludedValues: number[] = exclusions.map(label => this.getOptionFromLabel(this.eventCategory, label)?.value);
+    const exclusions = ['All Ages Liquor Free', 'Take Home Sampling'];
+    const excludedValues: number[] = exclusions.map(
+      (label) => this.getOptionFromLabel(this.eventCategory, label)?.value
+    );
     return !excludedValues.includes(event.eventCategory);
   }
 
@@ -442,18 +446,20 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   */
   doAction(licence: ApplicationLicenseSummary, actionName: string) {
     if (actionName === ApplicationTypeNames.LRSTransferofLocation) {
-      this.router.navigateByUrl(`/relocation-type/${licence.licenseId}`, { state: { licence: JSON.stringify(licence) } });
+      this.router.navigateByUrl(`/relocation-type/${licence.licenseId}`, {
+        state: { licence: JSON.stringify(licence) }
+      });
       return;
     }
 
     // Hefen.Zhou Note: LCSD-6229 Licensees should be able to submit more than one temporary change job at a time
     let tempApplications = [
-      "Temporary Change to Hours of Sale (FP1)",
-      "Temporary Change to Hours of Sale (FP2)",
-      "Temporary Change to Hours of Sale (LP & MFR)",
-      "Temporary Delicensing",
-      "Temporary Patron Participation Entertainment Endorsement",
-      "Temporary Use Area Endorsement"
+      'Temporary Change to Hours of Sale (FP1)',
+      'Temporary Change to Hours of Sale (FP2)',
+      'Temporary Change to Hours of Sale (LP & MFR)',
+      'Temporary Delicensing',
+      'Temporary Patron Participation Entertainment Endorsement',
+      'Temporary Use Area Endorsement'
     ];
 
     try {
@@ -462,13 +468,15 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       // 2024-01-12 LCSD-6459 waynezen: use new ApplicationStatuses instead of hard-coding
       // filter out Approved/Terminated.. Applications - which forces creation of a new Application
       const actionApplication = licence.actionApplications.find(
-        app => app.applicationTypeName === actionName
-          && !app.isStructuralChange                        // we allow multiple structurals
-          && app.applicationStatus !== ApplicationStatuses.Active
-          && app.applicationStatus !== ApplicationStatuses.Approved);
+        (app) =>
+          app.applicationTypeName === actionName &&
+          !app.isStructuralChange && // we allow multiple structurals
+          app.applicationStatus !== ApplicationStatuses.Active &&
+          app.applicationStatus !== ApplicationStatuses.Approved
+      );
 
       // if we found an action application
-      if (typeof (actionApplication) !== "undefined" && !isTemporaryApplication) {
+      if (typeof actionApplication !== 'undefined' && !isTemporaryApplication) {
         // and if it wasn't paid for
         if (actionApplication.isPaid === false) {
           // open it up so we can continue it
@@ -478,33 +486,35 @@ export class LicenceRowComponent extends FormBase implements OnInit {
           this.requestStarted = false;
           this.requestID = -1;
           // prevent a re-submission until the application status is no longer active
-          this.snackBar.open(`${actionName} has already been submitted and is under review`,
-            "Warning",
-            { duration: 3500, panelClass: ["red-snackbar"] });
+          this.snackBar.open(`${actionName} has already been submitted and is under review`, 'Warning', {
+            duration: 3500,
+            panelClass: ['red-snackbar']
+          });
         }
         // if we didn't find an action application
       } else {
         // create one
-        this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, actionName)
+        this.busy = this.licenceDataService
+          .createApplicationForActionType(licence.licenseId, actionName)
           .pipe(takeWhile(() => this.componentActive))
-          .subscribe(data => {
-            this.requestStarted = false;
-            this.requestID = -1;
-            this.router.navigateByUrl(`/account-profile/${data.id}`);
-          },
+          .subscribe(
+            (data) => {
+              this.requestStarted = false;
+              this.requestID = -1;
+              this.router.navigateByUrl(`/account-profile/${data.id}`);
+            },
             () => {
               this.requestStarted = false;
               this.requestID = -1;
-              this.snackBar.open(`Error running licence action for ${actionName}`,
-                "Fail",
-                { duration: 3500, panelClass: ["red-snackbar"] });
+              this.snackBar.open(`Error running licence action for ${actionName}`, 'Fail', {
+                duration: 3500,
+                panelClass: ['red-snackbar']
+              });
             }
           );
       }
-    }
-    catch (err) {
+    } catch (err) {
       console.error(err);
-
     }
   }
 
@@ -515,31 +525,36 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     // Liquor Renewals
     this.renewalStarted = true;
     // use a renewal type to direct to the right renewal application form (crs or liquor)
-    let renewalType: "crs" | "liquor";
+    let renewalType: 'crs' | 'liquor';
     // used to find an existing renewal application of that type, or create a new one
     let renewalApplication;
     // used to specify the type of renewal application to create
-    let renewalApplicationTypeName: ApplicationTypeNames.MarketingRenewal |
-      ApplicationTypeNames.CRSRenewal |
-      ApplicationTypeNames.LiquorRenewal;
+    let renewalApplicationTypeName:
+      | ApplicationTypeNames.MarketingRenewal
+      | ApplicationTypeNames.CRSRenewal
+      | ApplicationTypeNames.LiquorRenewal;
 
     // if it's a cannabis related licence
-    if (licence.licenceTypeCategory === "Cannabis") {
+    if (licence.licenceTypeCategory === 'Cannabis') {
       renewalType = CRS_RENEWAL_LICENCE_TYPE_NAME;
 
-      if (licence.licenceTypeName === "Marketing") {
+      if (licence.licenceTypeName === 'Marketing') {
         // see if there is an existing Marketing renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.MarketingRenewal;
-        renewalApplication = licence.actionApplications.find(app =>
-          app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal && app.applicationStatus !== "Approved");
+        renewalApplication = licence.actionApplications.find(
+          (app) =>
+            app.applicationTypeName === this.ApplicationTypeNames.MarketingRenewal &&
+            app.applicationStatus !== 'Approved'
+        );
       } else {
         // if it's a CRS Licence
         // see if there is an existing CRS renewal application for this licence
         renewalApplicationTypeName = this.ApplicationTypeNames.CRSRenewal;
-        renewalApplication = licence.actionApplications.find(app =>
-          app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== "Approved");
+        renewalApplication = licence.actionApplications.find(
+          (app) =>
+            app.applicationTypeName === this.ApplicationTypeNames.CRSRenewal && app.applicationStatus !== 'Approved'
+        );
       }
-
     } else {
       // otherwise it's a liquor licence
       // set the renewal type to liquor
@@ -547,9 +562,10 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       renewalApplicationTypeName = this.ApplicationTypeNames.LiquorRenewal;
 
       // look for a liquor renewal application
-      renewalApplication = licence.actionApplications.find(app =>
-        app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== "Approved");
-
+      renewalApplication = licence.actionApplications.find(
+        (app) =>
+          app.applicationTypeName === this.ApplicationTypeNames.LiquorRenewal && app.applicationStatus !== 'Approved'
+      );
     }
 
     // if we found a renewal application that hasn't been paid for
@@ -561,29 +577,31 @@ export class LicenceRowComponent extends FormBase implements OnInit {
     } else if (renewalApplication && renewalApplication.isPaid) {
       // that shouldn't have happened]
       this.renewalStarted = false;
-      this.snackBar.open("Renewal application already submitted",
-        "Fail",
-        { duration: 3500, panelClass: ["red-snackbar"] });
+      this.snackBar.open('Renewal application already submitted', 'Fail', {
+        duration: 3500,
+        panelClass: ['red-snackbar']
+      });
       // otherwise
     } else {
-
       // create a renewal application of the specified type
-      this.busy = this.licenceDataService.createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
+      this.busy = this.licenceDataService
+        .createApplicationForActionType(licence.licenseId, renewalApplicationTypeName)
         .pipe(takeWhile(() => this.componentActive))
-        .subscribe(data => {
-          this.renewalStarted = false;
-          this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${data.id}`);
-        },
+        .subscribe(
+          (data) => {
+            this.renewalStarted = false;
+            this.router.navigateByUrl(`/account-profile/renewal/${renewalType}/${data.id}`);
+          },
           () => {
             this.renewalStarted = false;
-            this.snackBar.open(`Error running licence action for ${renewalType}`,
-              "Fail",
-              { duration: 3500, panelClass: ["red-snackbar"] });
-            console.log("Error starting a Change Licence Location Application");
+            this.snackBar.open(`Error running licence action for ${renewalType}`, 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
+            console.log('Error starting a Change Licence Location Application');
           }
         );
     }
-
   }
 
   startRequest(index: number) {
@@ -592,77 +610,80 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   hasEndorsement(licence: License, endorsementId: string) {
-    return typeof licence.endorsements.find(endorsement => endorsement.endorsementId === endorsementId) !== "undefined";
+    return (
+      typeof licence.endorsements.find((endorsement) => endorsement.endorsementId === endorsementId) !== 'undefined'
+    );
   }
 
   hasEndorsementByName(licence: License, endorsementName: string) {
-    return typeof licence.endorsements.find(endorsement => endorsement.endorsementName === endorsementName) !==
-      "undefined";
+    return (
+      typeof licence.endorsements.find((endorsement) => endorsement.endorsementName === endorsementName) !== 'undefined'
+    );
   }
 
   getHandbookLink(licenceType: string) {
     const pdfRoot =
-      "https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals";
+      'https://www2.gov.bc.ca/assets/gov/employment-business-and-economic-development/business-management/liquor-regulation-licensing/guides-and-manuals';
     switch (licenceType) {
-      case "Cannabis Retail Store":
-      case "Section 119 Authorization":
+      case 'Cannabis Retail Store':
+      case 'Section 119 Authorization':
         return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
-      case "S119 CRS Authorization":
+      case 'S119 CRS Authorization':
         return `https://www2.gov.bc.ca/gov/content?id=FFBF300FC24C4B4C92F13DBB73040523`;
-      case "Marketing":
+      case 'Marketing':
         return `${pdfRoot}/marketing-handbook.pdf`;
-      case "Operated - Catering":
-      case "Catering":
-      case "Transfer in Progress - Catering":
+      case 'Operated - Catering':
+      case 'Catering':
+      case 'Transfer in Progress - Catering':
         return `${pdfRoot}/catering-handbook.pdf`;
-      case "Wine Store":
-      case "Transfer in Progress - Wine Store":
-      case "Operated - Wine Store":
+      case 'Wine Store':
+      case 'Transfer in Progress - Wine Store':
+      case 'Operated - Wine Store':
         return `${pdfRoot}/winestore-handbook.pdf`;
-      case "Licensee Retail Store":
-      case "Operated - Licensee Retail Store":
+      case 'Licensee Retail Store':
+      case 'Operated - Licensee Retail Store':
         return `${pdfRoot}/licenseeretailstore-handbook.pdf`;
-      case "Manufacturer":
+      case 'Manufacturer':
         return `${pdfRoot}/manufacturer-handbook.pdf`;
-      case "UBrew and UVin":
+      case 'UBrew and UVin':
         return `${pdfRoot}/ubrewanduvin-handbook.pdf`;
-      case "RLRS":
+      case 'RLRS':
         return `${pdfRoot}/rlrs-handbook.pdf`;
       default:
-        return "404";
+        return '404';
     }
   }
 
   getSubCategory(subcategory: string) {
-    let label = "";
+    let label = '';
 
     switch (subcategory) {
-      case "GroceryStore":
-        label = "Grocery Store";
+      case 'GroceryStore':
+        label = 'Grocery Store';
         break;
-      case "IndependentWineStore":
-        label = "Independent Wine Store";
+      case 'IndependentWineStore':
+        label = 'Independent Wine Store';
         break;
-      case "OffSiteWineStore":
-        label = "Off-Site Wine Store";
+      case 'OffSiteWineStore':
+        label = 'Off-Site Wine Store';
         break;
-      case "OnSiteWineStore":
-        label = "On-Site Wine Store";
+      case 'OnSiteWineStore':
+        label = 'On-Site Wine Store';
         break;
-      case "SacramentalWineStore":
-        label = "Sacramental Wine Store";
+      case 'SacramentalWineStore':
+        label = 'Sacramental Wine Store';
         break;
-      case "SpecialWineStore":
-        label = "Special Wine Store";
+      case 'SpecialWineStore':
+        label = 'Special Wine Store';
         break;
-      case "TouristWineStore":
-        label = "Tourist Wine Store";
+      case 'TouristWineStore':
+        label = 'Tourist Wine Store';
         break;
-      case "WineOnShelf":
-        label = "Wine on Shelf";
+      case 'WineOnShelf':
+        label = 'Wine on Shelf';
         break;
-      case "BCVQA":
-        label = "BC VQA Store";
+      case 'BCVQA':
+        label = 'BC VQA Store';
         break;
       default:
         label = subcategory;
@@ -671,22 +692,22 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
+    const idx = options.findIndex((opt) => opt.value === value);
     if (idx >= 0) {
       return options[idx];
     }
     return {
       value: null,
-      label: ""
+      label: ''
     };
   }
 
   getLicenceStatusText(status: string) {
     switch (status) {
-      case "PreInspection":
-        return "Pre-Inspection";
-      case "PendingLicenceFee":
-        return "Pending First Year Fee";
+      case 'PreInspection':
+        return 'Pre-Inspection';
+      case 'PendingLicenceFee':
+        return 'Pending First Year Fee';
       default:
         return status;
     }
@@ -702,43 +723,46 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   getEventPath(event: LicenceEvent) {
-    if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Catering").value) {
-      return "/event/";
-    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Off-Site Sale").value) {
-      return "/temporary-offsite/";
-    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Market").value) {
-      return "/market-event/";
-    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Temporary Use Area").value) {
-      return "/tua-event/";
-    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "All Ages Liquor Free").value) {
-      return "/liquor-free-event/";
-    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, "Take Home Sampling").value) {
-      return "/take-home-event/";
+    if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Catering').value) {
+      return '/event/';
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Temporary Off-Site Sale').value) {
+      return '/temporary-offsite/';
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Market').value) {
+      return '/market-event/';
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value) {
+      return '/tua-event/';
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'All Ages Liquor Free').value) {
+      return '/liquor-free-event/';
+    } else if (event.eventCategory === this.getOptionFromLabel(this.eventCategory, 'Take Home Sampling').value) {
+      return '/take-home-event/';
     }
-    return "/event/";
+    return '/event/';
   }
 
   getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
+    const idx = options.findIndex((opt) => opt.label === label);
     if (idx >= 0) {
       return options[idx];
     }
     return {
       value: null,
-      label: ""
+      label: ''
     };
   }
 
   // TO DO: re-write this
   licenceTypeHasEvents(licenceType: string) {
-    return licenceType && (licenceType.indexOf("Catering") >= 0 ||
-      licenceType.indexOf("Wine Store") >= 0 ||
-      licenceType.indexOf("Manufacturer") >= 0 ||
-      licenceType.indexOf("Liquor Primary") >= 0 ||
-      licenceType.indexOf("Food Primary") >= 0);
+    return (
+      licenceType &&
+      (licenceType.indexOf('Catering') >= 0 ||
+        licenceType.indexOf('Wine Store') >= 0 ||
+        licenceType.indexOf('Manufacturer') >= 0 ||
+        licenceType.indexOf('Liquor Primary') >= 0 ||
+        licenceType.indexOf('Food Primary') >= 0)
+    );
   }
 
   licenceTypeHasTerms(licenceType: string) {
-    return licenceType && licenceType.indexOf("Cannabis") < 0;
+    return licenceType && licenceType.indexOf('Cannabis') < 0;
   }
 }

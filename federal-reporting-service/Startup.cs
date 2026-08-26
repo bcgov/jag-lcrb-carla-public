@@ -74,28 +74,28 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             services.AddHealthChecks()
                 .AddCheck("Federal Reporting Service", () => HealthCheckResult.Healthy());
 
-                // add the file manager.
+            // add the file manager.
             string fileManagerURI = Configuration["FILE_MANAGER_URI"];
             if (!_env.IsProduction()) // needed for macOS TLS being turned off
             {
                 AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true);
             }
-            if (!string.IsNullOrEmpty (fileManagerURI))
+            if (!string.IsNullOrEmpty(fileManagerURI))
             {
                 var httpClientHandler = new HttpClientHandler();
 
                 if (!_env.IsProduction()) // Ignore certificate errors in non-production modes.  
-                                         // This allows you to use OpenShift self-signed certificates for testing.
+                                          // This allows you to use OpenShift self-signed certificates for testing.
                 {
                     // Return `true` to allow certificates that are untrusted/invalid                    
                     httpClientHandler.ServerCertificateCustomValidationCallback =
                     HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
                 }
-                
+
                 var httpClient = new HttpClient(httpClientHandler);
                 // set default request version to HTTP 2.  Note that Dotnet Core does not currently respect this setting for all requests.
                 httpClient.DefaultRequestVersion = HttpVersion.Version20;
-              
+
                 var initialChannel = GrpcChannel.ForAddress(fileManagerURI, new GrpcChannelOptions { HttpClient = httpClient });
 
                 var initialClient = new FileManagerClient(initialChannel);
@@ -129,7 +129,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
-        {            
+        {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -181,8 +181,8 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
-                    .WriteTo.EventCollector( splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                    .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -190,7 +190,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                            ServerCertificateCustomValidationCallback = (message, cert, chain, errors) => { return true; }
                        }
 #pragma warning restore CA2000 // Dispose objects before losing scope
-                     )                    
+                     )
                     .CreateLogger();
 
                 Serilog.Debugging.SelfLog.Enable(Console.Error);

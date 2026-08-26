@@ -1069,7 +1069,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // Run view model build and SharePoint doc check in parallel — neither depends on the other
             var viewModelTask = dvApplication.ToViewModelAsync(_dataverse, _cache, _logger);
-            var spDocsTask    = _dataverse.GetSharePointDocLocsByObjectIdAsync(id);
+            var spDocsTask = _dataverse.GetSharePointDocLocsByObjectIdAsync(id);
             await Task.WhenAll(viewModelTask, spDocsTask);
 
             Application result = await viewModelTask;

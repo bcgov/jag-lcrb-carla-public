@@ -30,7 +30,7 @@ export class ApplicantComponent extends FormBase implements OnInit {
     this._app = value;
     if (this.form) {
       this.form.patchValue(value);
-      if(this.disableForm){
+      if (this.disableForm) {
         this.form.disable();
       }
     }
@@ -43,25 +43,23 @@ export class ApplicantComponent extends FormBase implements OnInit {
       return;
     }
     // get the last saved application
-    this.db.getSepApplication(value)
-      .then(app => {
-        this._app = app;
-        if (this.form && app) {
-          this.form.patchValue(this.sepApplication);
-          if(this.disableForm){
-            this.form.disable();
-          }
+    this.db.getSepApplication(value).then((app) => {
+      this._app = app;
+      if (this.form && app) {
+        this.form.patchValue(this.sepApplication);
+        if (this.disableForm) {
+          this.form.disable();
         }
-      });
+      }
+    });
   }
 
   get disableForm(): boolean {
-    if(this.sepApplication){
-      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
+    if (this.sepApplication) {
+      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== 'Draft';
     }
     return false;
   }
-
 
   get sepApplication() {
     return this._app;
@@ -70,21 +68,23 @@ export class ApplicantComponent extends FormBase implements OnInit {
   saveComplete = new EventEmitter<SepApplication>();
   form: FormGroup;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private store: Store<AppState>,
     private contactDataService: ContactDataService,
-    private db: IndexedDBService) {
+    private db: IndexedDBService
+  ) {
     super();
-    store.select(state => state.currentUserState.currentUser)
-      .subscribe(user => {
-        contactDataService.getContact(user.contactid)
-          .subscribe(contact => {
-            this.contact = contact;
-            if (this.form) {
-              this.form.get('telephone1').patchValue(contact.telephone1);
-              this.form.get('emailaddress1').patchValue(contact.emailaddress1);
-            }
-          });
+    store
+      .select((state) => state.currentUserState.currentUser)
+      .subscribe((user) => {
+        contactDataService.getContact(user.contactid).subscribe((contact) => {
+          this.contact = contact;
+          if (this.form) {
+            this.form.get('telephone1').patchValue(contact.telephone1);
+            this.form.get('emailaddress1').patchValue(contact.emailaddress1);
+          }
+        });
       });
   }
 
@@ -95,19 +95,18 @@ export class ApplicantComponent extends FormBase implements OnInit {
       isAgreeTsAndCs: [this?.sepApplication?.isAgreeTsAndCs, [this.customRequiredCheckboxValidator()]],
       dateAgreedToTsAndCs: [this?.sepApplication?.dateAgreedToTsAndCs],
       telephone1: [this?.contact?.telephone1, [Validators.required]],
-      emailaddress1: [this?.contact?.emailaddress1, [Validators.required, Validators.email]],
+      emailaddress1: [this?.contact?.emailaddress1, [Validators.required, Validators.email]]
     });
 
-    this.form.get('isAgreeTsAndCs').valueChanges
-      .subscribe((agree: boolean) => {
-        if (agree) {
-          this.form.get('dateAgreedToTsAndCs').setValue(new Date());
-        }
-      });
-
-      if(this.disableForm){
-        this.form.disable();
+    this.form.get('isAgreeTsAndCs').valueChanges.subscribe((agree: boolean) => {
+      if (agree) {
+        this.form.get('dateAgreedToTsAndCs').setValue(new Date());
       }
+    });
+
+    if (this.disableForm) {
+      this.form.disable();
+    }
 
     this.policyDocs.setSlug(this.policySlug);
   }
@@ -117,7 +116,7 @@ export class ApplicantComponent extends FormBase implements OnInit {
       if (control.value === true) {
         return null;
       } else {
-        return { 'shouldBeTrue': 'But value is false' };
+        return { shouldBeTrue: 'But value is false' };
       }
     };
   }
@@ -146,10 +145,9 @@ export class ApplicantComponent extends FormBase implements OnInit {
       ...this.form.value
     } as SepApplication;
     if (this.isValid()) {
-      this.saveContactInfo()
-        .subscribe(result => {
-          this.saveComplete.emit(data);
-        });
+      this.saveContactInfo().subscribe((result) => {
+        this.saveComplete.emit(data);
+      });
     }
   }
 
@@ -157,10 +155,8 @@ export class ApplicantComponent extends FormBase implements OnInit {
     const patchContact = {
       ...this.contact,
       telephone1: this.form.get('telephone1').value,
-      emailaddress1: this.form.get('emailaddress1').value,
+      emailaddress1: this.form.get('emailaddress1').value
     };
     return this.contactDataService.updateContact(patchContact);
   }
-
-
 }

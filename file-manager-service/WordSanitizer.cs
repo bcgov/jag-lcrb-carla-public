@@ -24,7 +24,7 @@ namespace Gov.Lclb.Cllb.Services.FileManager
             return Regex.Replace(
                 rawData,
                 @"[a-zA-Z]+",
-                delegate(Match match)
+                delegate (Match match)
                 {
                     var v = match.ToString();
                     // result will start with the first character

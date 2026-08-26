@@ -107,7 +107,7 @@ export class ConnectionToProducersComponent implements OnInit, OnChanges, OnDest
     private tiedHouseService: TiedHouseConnectionsDataService,
     public snackBar: MatSnackBar,
     public matDialog: MatDialog
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initForm();

@@ -1,16 +1,16 @@
-import { Component, OnInit } from "@angular/core";
-import { PaymentDataService } from "@services/payment-data.service";
-import { User } from "@models/user.model";
-import { UserDataService } from "@services/user-data.service";
-import { Worker } from "@models/worker.model";
-import { ActivatedRoute } from "@angular/router";
-import { faSave } from "@fortawesome/free-regular-svg-icons";
-import { WorkerDataService } from "@services/worker-data.service";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { User } from '@models/user.model';
+import { Worker } from '@models/worker.model';
+import { PaymentDataService } from '@services/payment-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { WorkerDataService } from '@services/worker-data.service';
 
 @Component({
-  selector: "app-pre-payment",
-  templateUrl: "./pre-payment.component.html",
-  styleUrls: ["./pre-payment.component.scss"]
+  selector: 'app-pre-payment',
+  templateUrl: './pre-payment.component.html',
+  styleUrls: ['./pre-payment.component.scss']
 })
 export class PrePaymentComponent implements OnInit {
   faSave = faSave;
@@ -22,9 +22,10 @@ export class PrePaymentComponent implements OnInit {
     private paymentDataService: PaymentDataService,
     private workerDataService: WorkerDataService,
     private userDataService: UserDataService,
-    private route: ActivatedRoute) {
-    this.route.paramMap.subscribe(params => {
-      this.workerId = params.get("id");
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe((params) => {
+      this.workerId = params.get('id');
     });
   }
 
@@ -33,20 +34,19 @@ export class PrePaymentComponent implements OnInit {
   }
 
   reloadUser() {
-    this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.currentUser = data;
-        if (this.currentUser && this.currentUser.contactid) {
-          this.workerDataService.getWorker(this.workerId).subscribe(res => {
-            this.worker = res;
-          });
-        }
-      });
+    this.userDataService.getCurrentUser().subscribe((data: User) => {
+      this.currentUser = data;
+      if (this.currentUser && this.currentUser.contactid) {
+        this.workerDataService.getWorker(this.workerId).subscribe((res) => {
+          this.worker = res;
+        });
+      }
+    });
   }
 
   /**
-  * Submit the application for payment
-  * */
+   * Submit the application for payment
+   * */
   submit_application() {
     // if (!this.isValid()) {
     //   this.showValidationMessages = true;
@@ -62,19 +62,19 @@ export class PrePaymentComponent implements OnInit {
     // }
   }
 
-
   /**
    * Redirect to payment processing page (Express Pay / Bambora service)
    * */
   private submitPayment() {
-    this.paymentDataService.getWorkerPaymentSubmissionUrl(this.worker.id).subscribe(res => {
+    this.paymentDataService.getWorkerPaymentSubmissionUrl(this.worker.id).subscribe(
+      (res) => {
         const jsonUrl = res;
-        window.location.href = jsonUrl["url"];
-        return jsonUrl["url"];
+        window.location.href = jsonUrl['url'];
+        return jsonUrl['url'];
       },
-      err => {
-        console.log("Error occured");
-      });
+      (err) => {
+        console.log('Error occured');
+      }
+    );
   }
-
 }

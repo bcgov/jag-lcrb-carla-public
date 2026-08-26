@@ -13,7 +13,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
     {
         public static bool ValidatePostalCode(string postalCode)
         {
-            if(postalCode == null)
+            if (postalCode == null)
             {
                 return false;
             }

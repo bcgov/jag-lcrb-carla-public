@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ApplicationTiedHouseExemptionComponent } from './application-tied-house-exemption.component';
 
 describe('ApplicationTiedHouseExemptionComponent', () => {
@@ -8,9 +7,8 @@ describe('ApplicationTiedHouseExemptionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ApplicationTiedHouseExemptionComponent ]
-    })
-    .compileComponents();
+      declarations: [ApplicationTiedHouseExemptionComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

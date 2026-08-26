@@ -1,14 +1,12 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Form, FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { SepApplication } from "@models/sep-application.model";
-import { SepSchedule } from "@models/sep-schedule.model";
-import { SepServiceArea } from "@models/sep-service-area.model";
-import { Options } from "@angular-slider/ngx-slider";
+import { Options } from '@angular-slider/ngx-slider';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { SepApplication } from '@models/sep-application.model';
 
 @Component({
-  selector: "app-total-servings",
-  templateUrl: "./total-servings.component.html",
-  styleUrls: ["./total-servings.component.scss"]
+  selector: 'app-total-servings',
+  templateUrl: './total-servings.component.html',
+  styleUrls: ['./total-servings.component.scss']
 })
 export class TotalServingsComponent implements OnInit {
   options: Options = null;
@@ -28,8 +26,8 @@ export class TotalServingsComponent implements OnInit {
   }
 
   get disableForm(): boolean {
-    if(this.application){
-      return this.application?.eventStatus && this.application?.eventStatus !== "Draft";
+    if (this.application) {
+      return this.application?.eventStatus && this.application?.eventStatus !== 'Draft';
     }
     return false;
   }
@@ -46,10 +44,9 @@ export class TotalServingsComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   setServings(app: SepApplication) {
     if (!app) {
@@ -72,7 +69,6 @@ export class TotalServingsComponent implements OnInit {
       ceil: this.max_servings,
       disabled: this.disableForm
     };
-
   }
 
   totalServingsChange(value: number) {
@@ -83,9 +79,8 @@ export class TotalServingsComponent implements OnInit {
       // disable slider
       this.options.disabled = true;
     }
-    this.options = {...this.options};
+    this.options = { ...this.options };
   }
-
 
   formatLabel(value: number) {
     return value;
@@ -98,5 +93,4 @@ export class TotalServingsComponent implements OnInit {
   next() {
     this.saved.next({ totalServings: this.total_servings });
   }
-
 }

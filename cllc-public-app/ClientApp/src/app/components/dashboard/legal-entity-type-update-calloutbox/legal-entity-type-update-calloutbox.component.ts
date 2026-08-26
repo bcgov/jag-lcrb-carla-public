@@ -27,10 +27,12 @@ export class LegalEntityTypeUpdateCalloutboxComponent implements OnInit {
   }
 
   loadData() {
-    this.applicationsService.getInProgressLegalEntityReviewApplications().subscribe((inProgressLeReviewApplications) => {
-      this.canCreatePCLApplication = !inProgressLeReviewApplications || inProgressLeReviewApplications.length === 0;
+    this.applicationsService
+      .getInProgressLegalEntityReviewApplications()
+      .subscribe((inProgressLeReviewApplications) => {
+        this.canCreatePCLApplication = !inProgressLeReviewApplications || inProgressLeReviewApplications.length === 0;
 
-      this.hasLoadedData = true;
-    });
+        this.hasLoadedData = true;
+      });
   }
 }

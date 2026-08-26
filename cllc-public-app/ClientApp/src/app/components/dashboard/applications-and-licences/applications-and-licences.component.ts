@@ -154,7 +154,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     this.inProgressApplications = [];
 
     // Applications: show "In Progress Applications" tab as soon as this call returns
-    const appsSub = this.applicationDataService.getAllCurrentApplications()
+    const appsSub = this.applicationDataService
+      .getAllCurrentApplications()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((applications) => {
         this._loadedApplications = applications;
@@ -173,7 +174,8 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
       });
 
     // Licences: fires in parallel; updates marketer flags and emits hasLicence when ready
-    const licSub = this.licenceDataService.getAllCurrentLicenses()
+    const licSub = this.licenceDataService
+      .getAllCurrentLicenses()
       .pipe(takeWhile(() => this.componentActive))
       .subscribe((licenses) => {
         const applications = this._loadedApplications;

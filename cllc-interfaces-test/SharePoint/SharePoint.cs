@@ -44,20 +44,20 @@ namespace SharePoint.Tests
         public async void UploadRemoveFilesTest()
         {
             Random rnd = new Random(Guid.NewGuid().GetHashCode());
-            string name = "test-name" + rnd.Next() +".txt";
+            string name = "test-name" + rnd.Next() + ".txt";
             string testFolder = "test-folder" + rnd.Next();
             string listTitle = "Shared Documents";
             string url = serverAppIdUri + "/cannabisdev/Shared Documents/" + testFolder + "/" + name;
-            
+
             string contentType = "text/plain";
-            
+
             string testData = "This is just a test.";
 
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
 
             await sharePointFileManager.CreateFolder(listTitle, testFolder);
 
-            await sharePointFileManager.UploadFile(name, "Shared Documents",testFolder, fileData, contentType);
+            await sharePointFileManager.UploadFile(name, "Shared Documents", testFolder, fileData, contentType);
 
             // now delete it.
 
@@ -104,7 +104,7 @@ namespace SharePoint.Tests
             string fileName = documentType + "__" + "test-file-name" + rnd.Next() + ".txt";
             string folderName = "test-folder-name" + rnd.Next();
             string path = "/";
-            if (! string.IsNullOrEmpty (sharePointFileManager.WebName) )
+            if (!string.IsNullOrEmpty(sharePointFileManager.WebName))
             {
                 path += $"{sharePointFileManager.WebName}/";
             }
@@ -129,7 +129,7 @@ namespace SharePoint.Tests
                 Assert.Equal(fileName, fileDetails.Name);
                 serverRelativeUrl = fileDetails.ServerRelativeUrl;
             }
-            
+
             // verify that we can download the same file.
 
             byte[] data = await sharePointFileManager.DownloadFile(path);
@@ -156,13 +156,13 @@ namespace SharePoint.Tests
 
             int maxLen = 255 - 4; // Windows allows for a maximum of 255 characters for a given file; subtract 4 for the extension.
 
-            string fileName = documentType + "__" + "test-file-name"; 
+            string fileName = documentType + "__" + "test-file-name";
             maxLen -= fileName.Length;
             for (int i = 0; i < maxLen; i++)
             {
                 string r = rnd.Next().ToString();
                 fileName += r[0];
-            }                
+            }
 
             fileName += ".txt";
 
@@ -172,7 +172,7 @@ namespace SharePoint.Tests
             {
                 path += $"{sharePointFileManager.WebName}/";
             }
-            
+
             string contentType = "text/plain";
             string testData = "This is just a test.";
             MemoryStream fileData = new MemoryStream(System.Text.Encoding.ASCII.GetBytes(testData));
@@ -268,7 +268,7 @@ namespace SharePoint.Tests
             string documentLocation = "Account";
             string folderName = "Test Folder" + rnd.Next() + "---" + rnd.Next();
 
-            
+
             bool exists = await sharePointFileManager.FolderExists(documentLocation, folderName);
 
             Assert.False(exists);
@@ -306,11 +306,11 @@ namespace SharePoint.Tests
             string folderName = "Test Folder" + rnd.Next();
             string documentType = "Corporate Information";
             await sharePointFileManager.CreateFolder(SharePointConstants.AccountFolderDisplayName, folderName);
-            
+
             var files = await sharePointFileManager.GetFileDetailsListInFolder(SharePointConstants.AccountFolderDisplayName, folderName, documentType);
             Assert.True(files != null);
             Assert.True(files.Count == 0);
-            await sharePointFileManager.DeleteFolder(SharePointConstants.AccountFolderDisplayName, folderName);            
+            await sharePointFileManager.DeleteFolder(SharePointConstants.AccountFolderDisplayName, folderName);
         }
 
         [Fact]
@@ -340,7 +340,7 @@ namespace SharePoint.Tests
             foreach (var fileDetails in fileDetailsList)
             {
                 Assert.Equal(fileName, fileDetails.Name);
-            }                        
+            }
 
             // delete file from SP
 

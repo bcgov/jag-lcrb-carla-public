@@ -1,79 +1,79 @@
 h2 {
-    margin-top: 0;
-    color: #ffffff;
+  margin-top: 0;
+  color: #ffffff;
 }
 
 h3 {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 p {
-    padding-top: 10px;
+  padding-top: 10px;
 }
 
 .globalButton {
-    background-color: #ffffff;
-    margin-left: 0;
-    margin-right: 0;
-    color: #000;
-    font-size: 14px;
-    display: inline-block;
-    padding: 10px 24px;
-    margin-bottom: 0;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 1px solid transparent;
-    border-radius: 0px;
-    box-shadow: 0px 0px 0px 0px;
-    margin-top: 10px;
+  background-color: #ffffff;
+  margin-left: 0;
+  margin-right: 0;
+  color: #000;
+  font-size: 14px;
+  display: inline-block;
+  padding: 10px 24px;
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  box-shadow: 0px 0px 0px 0px;
+  margin-top: 10px;
 }
 
 .globalButton:hover {
-    background-color: rgba(0, 51, 102, 1);
-    color: #ffffff;
-    border-color: #204d74;
-    text-decoration: none;
-    box-shadow: 0px 0px 0px 0px;
-    margin-top: 10px;
+  background-color: rgba(0, 51, 102, 1);
+  color: #ffffff;
+  border-color: #204d74;
+  text-decoration: none;
+  box-shadow: 0px 0px 0px 0px;
+  margin-top: 10px;
 }
 
 .btn-primary {
-    background-color: rgba(0, 51, 102, 1);
-    font-family: 'myriad-pro', 'sans serif';
-    font-weight: 700;
-    font-style: normal;
-    font-size: 14px;
+  background-color: rgba(0, 51, 102, 1);
+  font-family: 'myriad-pro', 'sans serif';
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
 }
 
 .email-field {
-    display: flex;
-    margin-top: 20px;
+  display: flex;
+  margin-top: 20px;
 }
 
 .fab-button {
-    background-color: #7596C8;
-    margin-right: 20px;
-    cursor: default;
+  background-color: #7596c8;
+  margin-right: 20px;
+  cursor: default;
 }
 
 .icon {
-    font-size: 30px;
-    color: #fff;
-    margin-left: -5px;
-    margin-top: -5px;
+  font-size: 30px;
+  color: #fff;
+  margin-left: -5px;
+  margin-top: -5px;
 }
 
 .green-snackbar {
-    background: #00ff21;
+  background: #00ff21;
 }

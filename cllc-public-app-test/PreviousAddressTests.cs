@@ -47,8 +47,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             //First create the contact
             var request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/worker");
-            ViewModels.Contact contactVM = new ViewModels.Contact() {
-                firstname  = "TestFirst",
+            ViewModels.Contact contactVM = new ViewModels.Contact()
+            {
+                firstname = "TestFirst",
                 middlename = "TestMiddle",
                 lastname = "TestLst"
             };
@@ -59,7 +60,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-          
+
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
             // Get the worker
@@ -96,7 +97,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             // U - Update            
-           address2.streetaddress = changedAddress;
+            address2.streetaddress = changedAddress;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/PreviousAddress/" + address2.id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(address2), Encoding.UTF8, "application/json")

@@ -11,30 +11,30 @@ using Xunit;
 namespace Gov.Lclb.Cllb.Public.Test
 {
     public class SecurityHelper
-	{
-		public static async Task<ViewModels.Account> GetAccountRecord(HttpClient _client, string id, bool expectSuccess)
-		{
+    {
+        public static async Task<ViewModels.Account> GetAccountRecord(HttpClient _client, string id, bool expectSuccess)
+        {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/" + id);
             var response = await _client.SendAsync(request);
-			if (expectSuccess)
-			{
-				response.EnsureSuccessStatusCode();
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
                 ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
-				return responseViewModel;
-			}
-			else
-			{
-				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-				var _discard = await response.Content.ReadAsStringAsync();
-				return null;
-			}
-		}
+                return responseViewModel;
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                var _discard = await response.Content.ReadAsStringAsync();
+                return null;
+            }
+        }
 
-		public static async Task<ViewModels.Account> UpdateAccountRecord(HttpClient _client, string id, ViewModels.Account account, bool expectSuccess)
+        public static async Task<ViewModels.Account> UpdateAccountRecord(HttpClient _client, string id, ViewModels.Account account, bool expectSuccess)
         {
             var request = new HttpRequestMessage(HttpMethod.Put, "/api/accounts/" + id)
-			{
+            {
                 Content = new StringContent(JsonConvert.SerializeObject(account), Encoding.UTF8, "application/json")
             };
             var response = await _client.SendAsync(request);
@@ -53,9 +53,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<ViewModels.LegalEntity> GetLegalEntityRecordForCurrent(HttpClient _client)
+        public static async Task<ViewModels.LegalEntity> GetLegalEntityRecordForCurrent(HttpClient _client)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/applicant");
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var jsonString = await response.Content.ReadAsStringAsync();
@@ -63,15 +63,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             return responseViewModel;
         }
 
-		public static async Task<ViewModels.LegalEntity> GetLegalEntityRecord(HttpClient _client, string id, bool expectSuccess)
+        public static async Task<ViewModels.LegalEntity> GetLegalEntityRecord(HttpClient _client, string id, bool expectSuccess)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id);
             var response = await _client.SendAsync(request);
             if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
+                ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
                 return responseViewModel;
             }
             else
@@ -82,15 +82,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<List<ViewModels.LegalEntity>> GetLegalEntitiesByPosition(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
+        public static async Task<List<ViewModels.LegalEntity>> GetLegalEntitiesByPosition(HttpClient _client, string parentAccountId, string positionType, bool expectSuccess)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/position/" + parentAccountId + "/" + positionType);
             var response = await _client.SendAsync(request);
-			if (expectSuccess)
+            if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				List<ViewModels.LegalEntity> responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
+                List<ViewModels.LegalEntity> responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
                 return responseViewModel;
             }
             else
@@ -101,10 +101,10 @@ namespace Gov.Lclb.Cllb.Public.Test
             }
         }
 
-		public static async Task<ViewModels.LegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
-		                                                                                  bool isDirectorFlag, bool isOfficerFlag, bool isShareholderFlag) 
-		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
+        public static async Task<ViewModels.LegalEntity> CreateDirectorOrShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId,
+                                                                                          bool isDirectorFlag, bool isOfficerFlag, bool isShareholderFlag)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
             var vmAccount = new ViewModels.Account
             {
                 id = user.accountid
@@ -118,43 +118,11 @@ namespace Gov.Lclb.Cllb.Public.Test
                 name = "Test Directororshareholder",
                 dateofbirth = DateTime.Now,
                 isindividual = true,
-				isDirector = isDirectorFlag,
-				isOfficer = isOfficerFlag,
-				isShareholder = isShareholderFlag,
+                isDirector = isDirectorFlag,
+                isOfficer = isOfficerFlag,
+                isShareholder = isShareholderFlag,
                 account = vmAccount,
-				parentLegalEntityId = accountLegalEntityId
-            };
-            var jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
-            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
-            var response = await _client.SendAsync(request);
-            jsonString = await response.Content.ReadAsStringAsync();
-            response.EnsureSuccessStatusCode();
-            ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
-
-			var responseViewModel = await GetLegalEntityRecord(_client, responseDirector.id, true);
-            Assert.Equal(responseDirector.name, responseViewModel.name);
-			return responseViewModel;
-		}
-
-		public static async Task<ViewModels.LegalEntity> CreateOrganizationalShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId)
-        {
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
-            var vmAccount = new ViewModels.Account
-            {
-                id = user.accountid
-            };
-            var vmAdoxioLegalEntity = new ViewModels.LegalEntity
-            {
-                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
-                firstname = "Test",
-                middlename = "The",
-                lastname = "Orgshareholder",
-                name = "Test Orgshareholder",
-                dateofbirth = DateTime.Now,
-				isShareholder = true,
-                isindividual = false,
-                account = vmAccount,
-				parentLegalEntityId = accountLegalEntityId
+                parentLegalEntityId = accountLegalEntityId
             };
             var jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -168,18 +136,50 @@ namespace Gov.Lclb.Cllb.Public.Test
             return responseViewModel;
         }
 
-		public static async Task<string> DeleteLegalEntityRecord(HttpClient _client, string id)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/" + id + "/delete");
+        public static async Task<ViewModels.LegalEntity> CreateOrganizationalShareholder(HttpClient _client, ViewModels.User user, string accountLegalEntityId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/child-legal-entity");
+            var vmAccount = new ViewModels.Account
+            {
+                id = user.accountid
+            };
+            var vmAdoxioLegalEntity = new ViewModels.LegalEntity
+            {
+                legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
+                firstname = "Test",
+                middlename = "The",
+                lastname = "Orgshareholder",
+                name = "Test Orgshareholder",
+                dateofbirth = DateTime.Now,
+                isShareholder = true,
+                isindividual = false,
+                account = vmAccount,
+                parentLegalEntityId = accountLegalEntityId
+            };
+            var jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
+            request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
+            var response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
+
+            var responseViewModel = await GetLegalEntityRecord(_client, responseDirector.id, true);
+            Assert.Equal(responseDirector.name, responseViewModel.name);
+            return responseViewModel;
+        }
+
+        public static async Task<string> DeleteLegalEntityRecord(HttpClient _client, string id)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/legalentities/" + id + "/delete");
             var response = await _client.SendAsync(request);
             var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-			return id;
-		}
+            return id;
+        }
 
         public static async Task<string> UploadFileToLegalEntity(HttpClient _client, string legalentityid, string docType)
-		{
-			// Attach a file
+        {
+            // Attach a file
             string testData = "This is just a test.";
             byte[] bytes = Encoding.ASCII.GetBytes(testData);
             string documentType = docType;
@@ -209,28 +209,28 @@ namespace Gov.Lclb.Cllb.Public.Test
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
-            
 
-			return filename;
-		}
 
-		public static async Task<List<ViewModels.FileSystemItem>> GetFileListForAccount(HttpClient _client, string id, string docType, bool expectSuccess)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id + "/attachments/" + docType);
-			var response = await _client.SendAsync(request);
+            return filename;
+        }
+
+        public static async Task<List<ViewModels.FileSystemItem>> GetFileListForAccount(HttpClient _client, string id, string docType, bool expectSuccess)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/legalentities/" + id + "/attachments/" + docType);
+            var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
-			if (expectSuccess)
-			{
-				response.EnsureSuccessStatusCode();
-				List<ViewModels.FileSystemItem> files = JsonConvert.DeserializeObject<List<ViewModels.FileSystemItem>>(jsonString);
-				return files;
-			}
-			else
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                List<ViewModels.FileSystemItem> files = JsonConvert.DeserializeObject<List<ViewModels.FileSystemItem>>(jsonString);
+                return files;
+            }
+            else
             {
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                 return null;
             }
-		}
+        }
 
         public static string DownloadFileForAccount(HttpClient _client, string id, string fileId, bool expectSuccess)
         {
@@ -263,8 +263,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         public static async Task<ViewModels.Application> CreateLicenceApplication(HttpClient _client, ViewModels.Account currentAccount)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/Application");
 
             ViewModels.Application viewmodel_application = new ViewModels.Application()
             {
@@ -294,18 +294,18 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("Victoria, BC", responseViewModel.EstablishmentAddressCity);
             Assert.Equal("V1X1X1", responseViewModel.EstablishmentAddressPostalCode); // postal code now has spaces removed by system
 
-			return responseViewModel;
-		}
+            return responseViewModel;
+        }
 
-		public static async Task<ViewModels.Application> GetLicenceApplication(HttpClient _client, string applicationId, bool expectSuccess)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + applicationId);
+        public static async Task<ViewModels.Application> GetLicenceApplication(HttpClient _client, string applicationId, bool expectSuccess)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/Application/" + applicationId);
             var response = await _client.SendAsync(request);
-			if (expectSuccess)
+            if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 var jsonString = await response.Content.ReadAsStringAsync();
-				ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
+                ViewModels.Application responseViewModel = JsonConvert.DeserializeObject<ViewModels.Application>(jsonString);
                 return responseViewModel;
             }
             else
@@ -314,51 +314,51 @@ namespace Gov.Lclb.Cllb.Public.Test
                 var _discard = await response.Content.ReadAsStringAsync();
                 return null;
             }
-		}
+        }
 
-		public static async Task<Dictionary<string, string>> PayLicenceApplicationFee(HttpClient _client, string applicationId, bool accepted, bool expectSuccess)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/submit/" + applicationId);
+        public static async Task<Dictionary<string, string>> PayLicenceApplicationFee(HttpClient _client, string applicationId, bool accepted, bool expectSuccess)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/submit/" + applicationId);
             var response = await _client.SendAsync(request);
-			if (expectSuccess)
-			{
-				response.EnsureSuccessStatusCode();
-				string json = await response.Content.ReadAsStringAsync();
+            if (expectSuccess)
+            {
+                response.EnsureSuccessStatusCode();
+                string json = await response.Content.ReadAsStringAsync();
                 Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-			}
-			else
-			{
-				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-				string _discard = await response.Content.ReadAsStringAsync();
-			}
+            }
+            else
+            {
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                string _discard = await response.Content.ReadAsStringAsync();
+            }
 
-			string accept = accepted ? "/ACCEPT" : "/DECLINE";
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/verify/" + applicationId + accept);
+            string accept = accepted ? "/ACCEPT" : "/DECLINE";
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/payments/verify/" + applicationId + accept);
             response = await _client.SendAsync(request);
             if (expectSuccess)
             {
                 response.EnsureSuccessStatusCode();
                 string json = await response.Content.ReadAsStringAsync();
                 Dictionary<string, string> values = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
-				return values;
+                return values;
             }
             else
             {
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                 string _discard = await response.Content.ReadAsStringAsync();
-				return null;
+                return null;
             }
-		}
+        }
 
-		public static async Task<string> DeleteLicenceApplication(HttpClient _client, string applicationId)
-		{
-			var request = new HttpRequestMessage(HttpMethod.Post, "/api/applications/" + applicationId + "/delete");
+        public static async Task<string> DeleteLicenceApplication(HttpClient _client, string applicationId)
+        {
+            var request = new HttpRequestMessage(HttpMethod.Post, "/api/applications/" + applicationId + "/delete");
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
-			return applicationId;
-		}
-        
-		public static async Task<string> UploadFileToApplication(HttpClient _client, string id, string docType)
+            return applicationId;
+        }
+
+        public static async Task<string> UploadFileToApplication(HttpClient _client, string id, string docType)
         {
             // Attach a file
             string testData = "This is just a test.";
@@ -397,7 +397,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
         public static async Task<List<ViewModels.FileSystemItem>> GetFileListForApplication(HttpClient _client, string id, string docType, bool expectSuccess)
         {
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/applications/" + id + "/attachments/" + docType);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/applications/" + id + "/attachments/" + docType);
             var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
             if (expectSuccess)

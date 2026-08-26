@@ -4,28 +4,18 @@
 </h2>
 <mat-dialog-content>
   <form [formGroup]="directorOfficerForm" class="form-horizontal">
-
     <div class="form-group row">
       <div class="col-md-12">
         <fieldset *ngIf="businessType !== 'SoleProprietorship'">
           <label>Position</label>
-          <br>
+          <br />
           <section>
-            <input type="checkbox" formControlName="isDirector">
-            <label style="padding-right: 10px;"
-                   for="">
-              Director
-            </label>
-            <input type="checkbox" formControlName="isOfficer">
-            <label style="padding-right: 10px;"
-                   for="">
-              Officer
-            </label>
-            <input type="checkbox" formControlName="isSeniorManagement">
-            <label style="padding-right: 10px;"
-                   for="">
-              Senior Manager
-            </label>
+            <input type="checkbox" formControlName="isDirector" />
+            <label style="padding-right: 10px" for=""> Director </label>
+            <input type="checkbox" formControlName="isOfficer" />
+            <label style="padding-right: 10px" for=""> Officer </label>
+            <input type="checkbox" formControlName="isSeniorManagement" />
+            <label style="padding-right: 10px" for=""> Senior Manager </label>
           </section>
         </fieldset>
       </div>
@@ -33,23 +23,30 @@
 
     <div class="row">
       <app-field class="col-md-6" label="First Name" [valid]="true" errorMessage="This is required">
-        <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First Name">
+        <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="First Name" />
       </app-field>
 
       <app-field class="col-md-6" label="Last Name" [valid]="true" errorMessage="This is required">
-        <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name">
+        <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="Last Name" />
       </app-field>
     </div>
 
     <div class="row">
       <app-field class="col-md-6" label="Email" [valid]="true" errorMessage="Email is invalid">
-        <input type="text" class="form-control" id="email" formControlName="email">
+        <input type="text" class="form-control" id="email" formControlName="email" />
       </app-field>
 
       <app-field class="col-md-6" label="Date of Appointment" [valid]="true" errorMessage="This is required">
-        <input type="text" formControlName="dateofappointment" style="background-color: #fff; width: 200px;"
-               autocomplete="false" placeholder="yyyy-mm-dd" class="form-control" [matDatepicker]="picker"
-               (focus)="picker.open()" (click)="picker.open()">
+        <input
+          type="text"
+          formControlName="dateofappointment"
+          style="background-color: #fff; width: 200px"
+          autocomplete="false"
+          placeholder="yyyy-mm-dd"
+          class="form-control"
+          [matDatepicker]="picker"
+          (focus)="picker.open()"
+          (click)="picker.open()" />
         <mat-datepicker #picker></mat-datepicker>
       </app-field>
     </div>
@@ -63,14 +60,16 @@
 
 <style>
   ::ng-deep .mat-calendar-body-selected {
-    background-color: #337AB7;
+    background-color: #337ab7;
     color: #000 !important;
   }
 
-  ::ng-deep .mat-calendar-body-cell-content { color: #54708b; }
+  ::ng-deep .mat-calendar-body-cell-content {
+    color: #54708b;
+  }
 
   ::ng-deep .mat-calendar-header {
-    background-color: #337AB7;
+    background-color: #337ab7;
     color: #fff;
   }
 </style>

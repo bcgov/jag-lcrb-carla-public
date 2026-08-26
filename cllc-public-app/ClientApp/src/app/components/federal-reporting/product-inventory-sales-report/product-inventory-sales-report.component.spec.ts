@@ -1,40 +1,33 @@
 /* tslint:disable:no-unused-variable */
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { Component, NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormGroup } from '@angular/forms';
+import { MonthlyReportDataService } from '@services/monthly-report.service';
+import { of } from 'rxjs';
+import { ProductInventorySalesReportComponent } from './product-inventory-sales-report.component';
 
-import { ProductInventorySalesReportComponent } from "./product-inventory-sales-report.component";
-import { NO_ERRORS_SCHEMA, Component } from "@angular/core";
-import { MonthlyReportDataService } from "@services/monthly-report.service";
-import { of } from "rxjs";
-import { FormGroup } from "@angular/forms";
+describe('ProductInventorySalesReportComponent', () => {
+  let component: TestHostComponent;
+  let fixture: ComponentFixture<TestHostComponent>;
 
-describe("ProductInventorySalesReportComponent",
-  () => {
-    let component: TestHostComponent;
-    let fixture: ComponentFixture<TestHostComponent>;
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [ProductInventorySalesReportComponent, TestHostComponent],
+      schemas: [NO_ERRORS_SCHEMA],
+      providers: [{ provide: MonthlyReportDataService, useValue: { getMonthlyReportsByLicence: () => of([]) } }]
+    }).compileComponents();
+  }));
 
-    beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-          declarations: [ProductInventorySalesReportComponent, TestHostComponent],
-          schemas: [NO_ERRORS_SCHEMA],
-          providers: [
-            { provide: MonthlyReportDataService, useValue: { getMonthlyReportsByLicence: () => of([]) } },
-          ]
-        })
-        .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(TestHostComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it("should create",
-      () => {
-        expect(component).toBeTruthy();
-      });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TestHostComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});
 
 //Create test component to pass input to the ProductInventorySalesReportComponent component
 @Component({

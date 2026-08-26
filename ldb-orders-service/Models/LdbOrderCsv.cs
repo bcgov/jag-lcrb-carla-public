@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LdbOrdersService .Models
+namespace LdbOrdersService.Models
 {
     public class LdbOrderCsv
     {

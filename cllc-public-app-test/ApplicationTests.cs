@@ -21,7 +21,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            
+
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -48,7 +48,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             User user = await GetCurrentUser();
             Account currentAccount = await GetAccountForCurrentUser();
-            
+
 
             // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
@@ -61,8 +61,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
-                                                                     //,name = initialName
-                                                                     //,applyingPerson = "Applying Person" //contact
+                                                          //,name = initialName
+                                                          //,applyingPerson = "Applying Person" //contact
                 ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
@@ -89,7 +89,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             response.EnsureSuccessStatusCode();
 
-            
+
             Application responseViewModel = JsonConvert.DeserializeObject<Application>(jsonString);
 
             //Assert.Equal("Applying Person", responseViewModel.applyingPerson);
@@ -158,7 +158,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             string initialName = randomNewUserName("First InitialName", 6);
             string changedName = randomNewUserName("First ChangedName", 6);
-  
+
             // Login as default user
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -178,8 +178,8 @@ namespace Gov.Lclb.Cllb.Public.Test
                 ,
                 ApplicationType = await GetDefaultCannabisApplicationType(),
                 RegisteredEstablishment = GeneralYesNo.No //*Mandatory (Yes=1, No=0)
-                                                                     //,name = initialName
-                                                                     //,applyingPerson = "Applying Person" //contact
+                                                          //,name = initialName
+                                                          //,applyingPerson = "Applying Person" //contact
                 ,
                 Applicant = currentAccount //account
                                            //,jobNumber = "123"
@@ -242,7 +242,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             string accountId = user.accountid;
 
             // create a new request object for the upload, as we will be using multipart form submission.
-            var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"/api/file/{ id }/attachments/application");
+            var requestMessage = new HttpRequestMessage(HttpMethod.Post, $"/api/file/{id}/attachments/application");
             requestMessage.Content = multiPartContent;
 
             var uploadResponse = await _client.SendAsync(requestMessage);
@@ -261,13 +261,13 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        
+
 
         [Fact]
         public async System.Threading.Tasks.Task TestUserCanAccessApplicationForTheirAccount()
         {
             string initialName = randomNewUserName("Application Shared ", 6);
-    
+
 
             // login as default and get account for current user
             string loginUser1 = randomNewUserName("TestAppUser", 6);
@@ -377,7 +377,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
             string changedName = randomNewUserName("Application Changed Name ", 6);
- 
+
 
             // login as default and get account for current user
             string loginUser = randomNewUserName("TestAppUser_", 6);

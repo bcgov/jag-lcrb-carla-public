@@ -8,12 +8,13 @@ using adoxio_servicearea_adoxio_areacategory = DV::Gov.Lclb.Cllb.Interfaces.adox
 
 namespace Gov.Lclb.Cllb.Public.ViewModels
 {
-    public enum EndorsementStatus {
+    public enum EndorsementStatus
+    {
         Active = 1,
         Cancelled = 845280000,
         Suspended = 845280001,
     }
-    
+
     public class Endorsement
     {
         public string EndorsementId { get; set; }

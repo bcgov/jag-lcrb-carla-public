@@ -486,7 +486,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 LicenseType = "Cannabis Retail Store"
                 ,
                 ApplicantType = AdoxioApplicantTypeCodes.PrivateCorporation
-                ,                
+                ,
                 RegisteredEstablishment = GeneralYesNo.No
                 ,
                 Applicant = currentAccount
@@ -572,7 +572,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await LogoutAndCleanupTestUser(strId);
         }
 
-        private async Task FileSizeTest (int size)
+        private async Task FileSizeTest(int size)
         {
             // Create application
             string initialName = randomNewUserName("Application Initial Name ", 6);
@@ -697,7 +697,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // First create a Legal Entity
 
             string initialName = randomNewUserName("LETest InitialName", 6);
-            
+
             const string fileService = "file";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -867,7 +867,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // Create bad file name
 
 
-            Random rnd = new Random(Guid.NewGuid().GetHashCode());            
+            Random rnd = new Random(Guid.NewGuid().GetHashCode());
 
             int maxLen = 255 - 4; // Windows allows for a maximum of 255 characters for a given file; subtract 4 for the extension.
 
@@ -879,7 +879,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 fileName += r[0];
             }
 
-            fileName += ".txt";            
+            fileName += ".txt";
 
             MultipartFormDataContent multiPartContent = new MultipartFormDataContent("----TestBoundary");
             var fileContent = new MultipartContent { new ByteArrayContent(bytes) };
@@ -912,11 +912,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             string serverrelativeurl = files[0].serverrelativeurl;
-            fileName = files[0].name;            
+            fileName = files[0].name;
 
             // Verify that the file can be downloaded and the contents match
             // {entityId}/download-file/{entityName}"
-            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl=" + Uri.EscapeDataString (serverrelativeurl) + "&documentType=" + Uri.EscapeDataString(documentType));
+            request = new HttpRequestMessage(HttpMethod.Get, $"/api/{fileService}/{id}/download-file/application/{fileName}?serverRelativeUrl=" + Uri.EscapeDataString(serverrelativeurl) + "&documentType=" + Uri.EscapeDataString(documentType));
             response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 

@@ -16,7 +16,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         SPECIAL_EVENT
     };
 
-    public class BCEPService: IBCEPService
+    public class BCEPService : IBCEPService
     {
 
 
@@ -115,7 +115,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             bcep_hashkey = ut_hash_key;
         }
 
-        private string GetMerchId (PaymentType paymentType)
+        private string GetMerchId(PaymentType paymentType)
         {
             string merchid = null;
             switch (paymentType)
@@ -350,7 +350,7 @@ namespace Gov.Lclb.Cllb.Interfaces
             }
             else
             {
-                 if (pcir_enabled)
+                if (pcir_enabled)
                 {
                     query_url = bcep_pcir_verify_url;
                 }
@@ -371,13 +371,14 @@ namespace Gov.Lclb.Cllb.Interfaces
         // @param keyString
         // @return
         // @throws BeanstreamException
-        private string getHash(string message, string type="MD5")
+        private string getHash(string message, string type = "MD5")
         {
             byte[] bytemessage = Encoding.UTF8.GetBytes(message);
             byte[] byteHashedMessage;
 
             // TG: SEP uses SHA-1 hashing.
-            switch(type) {
+            switch (type)
+            {
                 case "SHA-1":
                     using (SHA1 sha1 = SHA1.Create())
                     {

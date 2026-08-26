@@ -1,4 +1,4 @@
-<div class="form-wrapper" style="position: relative;">
+<div class="form-wrapper" style="position: relative">
   <div [ngBusy]="[busy]"></div>
   <form [formGroup]="form" class="col-lg-7 col-sm-12">
     <div class="padded-section">
@@ -7,8 +7,8 @@
 
     <!-- Preamble -->
     <section class="d-flex">
-      <div class="flex-grow-0" style="background-color: #E1E8F2; width: 50px;"></div>
-      <div class="flex-grow-1 p-3" style="background-color: #F1F4FA; padding: 20px;">
+      <div class="flex-grow-0" style="background-color: #e1e8f2; width: 50px"></div>
+      <div class="flex-grow-1 p-3" style="background-color: #f1f4fa; padding: 20px">
         <section class="ngtest-preamble-content">
           <ul>
             <li>
@@ -17,7 +17,9 @@
               location.
             </li>
             <li>Complete all applicable fields then submit this notification form.</li>
-            <li>Off-site liquor storage is not permitted for caterers and UBrew/UVin (Ferment-on-Premises) establishments.</li>
+            <li>
+              Off-site liquor storage is not permitted for caterers and UBrew/UVin (Ferment-on-Premises) establishments.
+            </li>
           </ul>
         </section>
       </div>
@@ -26,8 +28,14 @@
     <!-- Offsite Storage Locations -->
     <h3 class="blue-header">Off-Site Storage Locations</h3>
     <section class="padded-section content-bottom">
-      <p>Please provide the following information for each of your off-site storage facilities, including storage unit numbers if applicable:</p>
-      <app-offsite-table formControlName="offsiteStorageLocations" [enabled]="true" [shouldValidate]="showValidationMessages"></app-offsite-table>
+      <p>
+        Please provide the following information for each of your off-site storage facilities, including storage unit
+        numbers if applicable:
+      </p>
+      <app-offsite-table
+        formControlName="offsiteStorageLocations"
+        [enabled]="true"
+        [shouldValidate]="showValidationMessages"></app-offsite-table>
     </section>
 
     <h3 class="blue-header">DECLARATIONS</h3>
@@ -35,27 +43,40 @@
       <p>
         <strong>Section 57(1)(c)</strong> of the <strong>Liquor Control and Licensing Act</strong> states:
         <i>
-          “A person commits an offence if the person (c)
-          provides false or misleading information in the following circumstances: (i) when making an application referred to in section 12; (ii) when
-          making a report or when required and as specified by the general manager under section 59.
+          “A person commits an offence if the person (c) provides false or misleading information in the following
+          circumstances: (i) when making an application referred to in section 12; (ii) when making a report or when
+          required and as specified by the general manager under section 59.
         </i>
       </p>
       <div>
-        <app-field [valid]="!showValidationMessages || form.get('agreement').valid"
-                   errorMessage="Please affirm that all of the information provided is true and complete." [showChevrons]="false">
-          <mat-checkbox formControlName="agreement">I understand and affirm that all of the information provided is true and complete.</mat-checkbox>
+        <app-field
+          [valid]="!showValidationMessages || form.get('agreement').valid"
+          errorMessage="Please affirm that all of the information provided is true and complete."
+          [showChevrons]="false">
+          <mat-checkbox formControlName="agreement"
+            >I understand and affirm that all of the information provided is true and complete.</mat-checkbox
+          >
         </app-field>
       </div>
     </section>
 
     <section class="p-3 attention-section">
-      <p>The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections 26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the purpose of liquor and cannabis licensing and compliance and enforcement matters in accordance with the Liquor Control and Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect personal information under section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should you have any questions about the collection, use, or disclosure of personal information, please contact the Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at 1-866-209-2111.</p>
+      <p>
+        The information requested on this form is collected by the Liquor and Cannabis Regulation Branch under Sections
+        26 (a), (b) and (c) of the Freedom of Information and Protection of Privacy Act (FOIPPA) for the purpose of
+        liquor and cannabis licensing and compliance and enforcement matters in accordance with the Liquor Control and
+        Licensing Act and Cannabis Control and Licensing Act. Additionally, LCRB may collect personal information under
+        section 26(e) of FOIPPA for the purpose of evaluating LCRB programs and activities to better serve you. Should
+        you have any questions about the collection, use, or disclosure of personal information, please contact the
+        Freedom of Information Officer at PO Box 9292 STN PROV GVT, Victoria, BC, V8W 9J8 or by phone toll free at
+        1-866-209-2111.
+      </p>
     </section>
 
     <div class="p-4 button-row">
-      <button type="button" class="btn btn-secondary" style="margin-right: 10px;" (click)="cancel();">
+      <button type="button" class="btn btn-secondary" style="margin-right: 10px" (click)="cancel()">
         <span>
-          <fa-icon [icon]="faTrash" style="color: #003366;"></fa-icon>
+          <fa-icon [icon]="faTrash" style="color: #003366"></fa-icon>
           CANCEL
         </span>
       </button>

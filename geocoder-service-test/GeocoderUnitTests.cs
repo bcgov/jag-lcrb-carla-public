@@ -28,10 +28,10 @@ namespace geocoder_tests
             var conf = new Dictionary<string, string>
              {
                 {"DYNAMICS_ODATA_URI", "http://localhost"},
-                {"GEOCODER_API_URI", "http://localhost"},                
+                {"GEOCODER_API_URI", "http://localhost"},
                 {"SSG_USERNAME", "test"},
                 {"SSG_PASSWORD", "test"},
-                
+
             };
             var loggerFactory = new LoggerFactory();
             _logger = loggerFactory.CreateLogger("GeocoderUnitTests");

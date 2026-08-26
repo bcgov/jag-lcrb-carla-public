@@ -15,23 +15,24 @@ using System;
 
 namespace Watchdog
 {
-    public static class HCUIextensions {
-        public static void AddHealthCheckEndpointIfExists(this HealthChecks.UI.Configuration.Settings setup, string name, string uri)
+    public static class HCUIextensions
     {
-        if (!string.IsNullOrEmpty(uri))
+        public static void AddHealthCheckEndpointIfExists(this HealthChecks.UI.Configuration.Settings setup, string name, string uri)
         {
-            try
+            if (!string.IsNullOrEmpty(uri))
             {
+                try
+                {
 
-                setup.AddHealthCheckEndpoint(name, uri);
+                    setup.AddHealthCheckEndpoint(name, uri);
+                }
+                catch (Exception)
+                {
+
+                }
+
             }
-            catch (Exception)
-            {
-                
-            }
-            
         }
-    }
 
         public static void AddWebHookIfExists(this HealthChecks.UI.Configuration.Settings setup, string name, string uri, string watchdogUri)
         {
@@ -43,8 +44,8 @@ namespace Watchdog
                         "{\r\n  \"@context\": \"http://schema.org/extensions\",\r\n  \"@type\": \"MessageCard\",\r\n  \"themeColor\": \"0072C6\",\r\n  \"title\": \"Watchdog Alert: [[LIVENESS]] has failed!\",\r\n  \"text\": \"[[FAILURE]] Click **Learn More** to go to the Watchdog Service\",\r\n  \"potentialAction\": [\r\n    {\r\n      \"@type\": \"OpenUri\",\r\n      \"name\": \"Learn More\",\r\n      \"targets\": [\r\n        { \"os\": \"default\", \"uri\": \"" + watchdogUri + "\" }\r\n      ]\r\n    }\r\n  ]\r\n}",
                         "{\"text\":\"Watchdog Alert: The HealthCheck [[LIVENESS]] is recovered. All is up and running\",\"channel\":\"#general\",\"link_names\": 1,\"username\":\"monkey-bot\",\"icon_emoji\":\":monkey_face\" }"
                         );
-                    
-                    
+
+
                 }
                 catch (Exception)
                 {
@@ -65,14 +66,14 @@ namespace Watchdog
 
         public IConfiguration Configuration { get; }
 
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
 
             services.AddHealthChecks()
                 .AddCheck<DataverseClient>("dataverse");
-            
+
             // Registers required services for health checks
             services.AddHealthChecksUI(setupSettings: setup =>
             {
@@ -94,7 +95,7 @@ namespace Watchdog
 
             });
 
-           
+
             services.AddRazorPages()
                 .AddNewtonsoftJson(opts =>
                 {

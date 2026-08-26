@@ -1,4 +1,3 @@
-
 export class EventLocation {
   id: string;
   eventId: string;

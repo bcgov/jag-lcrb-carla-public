@@ -26,7 +26,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using HealthChecks.UI.Client;
 using Serilog.Exceptions;
 
-namespace LdbOrdersService 
+namespace LdbOrdersService
 {
     public class Startup
     {
@@ -82,7 +82,7 @@ namespace LdbOrdersService
                 {
                     fields.CustomFieldList.Add(new Serilog.Sinks.Splunk.CustomField("channel", Configuration["SPLUNK_CHANNEL"]));
                 }
-                
+
                 // Fix for bad SSL issues 
 
                 Log.Logger = new LoggerConfiguration()

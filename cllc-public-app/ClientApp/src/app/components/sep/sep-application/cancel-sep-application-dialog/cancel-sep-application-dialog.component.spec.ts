@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CancelSepApplicationDialogComponent } from './cancel-sep-application-dialog.component';
 
 describe('CancelSepApplicationDialogComponent', () => {
@@ -8,9 +7,8 @@ describe('CancelSepApplicationDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CancelSepApplicationDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [CancelSepApplicationDialogComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

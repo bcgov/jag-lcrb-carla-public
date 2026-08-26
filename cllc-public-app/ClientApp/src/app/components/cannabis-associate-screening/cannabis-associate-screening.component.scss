@@ -1,5 +1,5 @@
 .border-around {
-  border: 1px solid #D7D7D7;
+  border: 1px solid #d7d7d7;
   margin-top: -10px;
   padding-top: 10px;
   padding-right: 20px;
@@ -18,11 +18,11 @@
 }
 
 .fa-trash-alt {
-    color: #1a5a96;
-  }
+  color: #1a5a96;
+}
 
 .field-label {
-    display: block;
+  display: block;
 }
 
 .bold {
@@ -30,25 +30,25 @@
 }
 
 .app-field {
-  margin-bottom:0px;
+  margin-bottom: 0px;
 }
 
 .signature {
   padding: 20px 15px 20px 0;
   .app-field {
-      display: flex;
-      align-items: end;
-      justify-content: stretch;
-      label {
-          min-width: 65px;
-      }
-      input {
-          flex-grow: 1;
-      }
+    display: flex;
+    align-items: end;
+    justify-content: stretch;
+    label {
+      min-width: 65px;
+    }
+    input {
+      flex-grow: 1;
+    }
   }
   label {
-      font-weight: normal;
-      margin-right: 15px;
+    font-weight: normal;
+    margin-right: 15px;
   }
 }
 
@@ -64,12 +64,12 @@ h3 {
 ::ng-deep .mat-radio-group .mat-radio-button {
   padding: 20px 20px 20px 0;
   &.mat-radio-checked {
-      .mat-radio-outer-circle {
-          border-color: #38598a;
-      }
-      .mat-radio-inner-circle {
-          background-color: #38598a;
-      }
+    .mat-radio-outer-circle {
+      border-color: #38598a;
+    }
+    .mat-radio-inner-circle {
+      background-color: #38598a;
+    }
   }
 }
 
@@ -84,4 +84,3 @@ h3 {
   line-height: 14px;
   padding: 0 20px 0 10px;
 }
-

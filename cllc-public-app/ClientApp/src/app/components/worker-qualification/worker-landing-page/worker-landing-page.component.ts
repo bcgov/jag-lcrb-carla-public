@@ -7,15 +7,12 @@ import { FeatureFlagService } from '@services/feature-flag.service';
   styleUrls: ['./worker-landing-page.component.scss']
 })
 export class WorkerLandingPageComponent implements OnInit {
-
   // This Observable will track the FEATURE_DISABLE_WORKER_QUALIFICATION feature flag as sent by the API
   disableQualification$ = this.featureFlagService.featureOn('DisableWorkerQualification');
 
   policySlug = 'worker-qualification-no-longer-required';
 
-  constructor(private featureFlagService: FeatureFlagService) {
-  }
+  constructor(private featureFlagService: FeatureFlagService) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

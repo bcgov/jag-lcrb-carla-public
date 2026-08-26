@@ -1,31 +1,31 @@
-import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material/dialog";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AppState } from "@app/app-state/models/app-state";
-import { faSave } from "@fortawesome/free-regular-svg-icons";
-import { faInfoCircle, faPencilAlt, faPlus, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
-import { Account } from "@models/account.model";
-import { ApplicationLicenseSummary } from "@models/application-license-summary.model";
-import { Application } from "@models/application.model";
-import { LegalEntity } from "@models/legal-entity.model";
-import { LicenseeChangeLog } from "@models/licensee-change-log.model";
-import { Store } from "@ngrx/store";
-import { ApplicationDataService } from "@services/application-data.service";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { LegalEntityDataService } from "@services/legal-entity-data.service";
-import { LicenseDataService } from "@services/license-data.service";
-import { PaymentDataService } from "@services/payment-data.service";
-import { OrgStructureComponent } from "@shared/components/org-structure/org-structure.component";
-import { FormBase } from "@shared/form-base";
-import { Observable, of, Subject } from "rxjs";
-import { filter, mergeMap, takeWhile } from "rxjs/operators";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faInfoCircle, faPencilAlt, faPlus, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { Account } from '@models/account.model';
+import { ApplicationLicenseSummary } from '@models/application-license-summary.model';
+import { Application } from '@models/application.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { Store } from '@ngrx/store';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { LicenseDataService } from '@services/license-data.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { OrgStructureComponent } from '@shared/components/org-structure/org-structure.component';
+import { FormBase } from '@shared/form-base';
+import { Observable, of, Subject } from 'rxjs';
+import { filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: "app-application-licensee-changes",
-  templateUrl: "./application-licensee-changes.component.html",
-  styleUrls: ["./application-licensee-changes.component.scss"]
+  selector: 'app-application-licensee-changes',
+  templateUrl: './application-licensee-changes.component.html',
+  styleUrls: ['./application-licensee-changes.component.scss']
 })
 export class ApplicationLicenseeChangesComponent extends FormBase implements OnInit {
   faInfoCircle = faInfoCircle;
@@ -42,7 +42,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   application: Application;
   currentChangeLogs: LicenseeChangeLog[];
   currentLegalEntities: LegalEntity;
-  @ViewChild("orgStructure")
+  @ViewChild('orgStructure')
   orgStructure: OrgStructureComponent;
   @Output()
   saveComplete = new EventEmitter<boolean>();
@@ -66,7 +66,8 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   licenseeApplicationLoaded: boolean;
   loadedValue: LicenseeChangeLog;
 
-  constructor(public dialog: MatDialog,
+  constructor(
+    public dialog: MatDialog,
     public snackBar: MatSnackBar,
     private fb: FormBuilder,
     public cd: ChangeDetectorRef,
@@ -77,78 +78,77 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     private paymentDataService: PaymentDataService,
     private applicationDataService: ApplicationDataService,
     private legalEntityDataService: LegalEntityDataService,
-    private featureFlagService: FeatureFlagService) {
+    private featureFlagService: FeatureFlagService
+  ) {
     super();
 
-    featureFlagService.featureOn("SecurityScreening")
-      .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
-
-
+    featureFlagService
+      .featureOn('SecurityScreening')
+      .subscribe((featureOn) => (this.securityScreeningEnabled = featureOn));
   }
-
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [""],
-      contactPersonFirstName: ["", Validators.required],
-      contactPersonLastName: ["", Validators.required],
-      contactPersonRole: [""],
-      amalgamationDone: [""],
-      contactPersonEmail: ["", Validators.required],
-      contactPersonPhone: ["", Validators.required],
-      authorizedToSubmit: ["", [this.customRequiredCheckboxValidator()]],
-      signatureAgreement: ["", [this.customRequiredCheckboxValidator()]],
+      id: [''],
+      contactPersonFirstName: ['', Validators.required],
+      contactPersonLastName: ['', Validators.required],
+      contactPersonRole: [''],
+      amalgamationDone: [''],
+      contactPersonEmail: ['', Validators.required],
+      contactPersonPhone: ['', Validators.required],
+      authorizedToSubmit: ['', [this.customRequiredCheckboxValidator()]],
+      signatureAgreement: ['', [this.customRequiredCheckboxValidator()]]
     });
 
-    this.loadData("on-going");
+    this.loadData('on-going');
 
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(account => !!account))
+      .pipe(filter((account) => !!account))
       .subscribe((account) => {
         this.account = account;
-
       });
   }
 
-  loadData(type: "on-going" | "create") {
-    this.busy = this.applicationDataService.getOngoingLicenseeData(type)
-      .subscribe(data => {
+  loadData(type: 'on-going' | 'create') {
+    this.busy = this.applicationDataService.getOngoingLicenseeData(type).subscribe((data) => {
+      this.application = data.application;
+      this.applicationId = this.application.id;
 
-        this.application = data.application;
-        this.applicationId = this.application.id;
+      this.form.patchValue(this.application);
 
-        this.form.patchValue(this.application);
+      this.licenses = data.licenses || [];
+      // to do: cannabis licences & liquor licences
+      this.licencesOnFile = this.licenses.length > 0;
 
-        this.licenses = data.licenses || [];
-        // to do: cannabis licences & liquor licences
-        this.licencesOnFile = this.licenses.length > 0;
+      this.numberOfCannabisLicences = this.licenses.filter(
+        (lic) => lic.licenceTypeCategory == 'Cannabis' && lic.status == 'Active'
+      ).length;
+      this.numberOfLiquorLicences = this.licenses.filter(
+        (lic) => lic.licenceTypeCategory == 'Liquor' && lic.status == 'Active'
+      ).length;
 
-        this.numberOfCannabisLicences = this.licenses
-          .filter(lic => lic.licenceTypeCategory == "Cannabis" && lic.status == "Active").length;
-        this.numberOfLiquorLicences =
-          this.licenses.filter(lic => lic.licenceTypeCategory == "Liquor" && lic.status == "Active").length;
+      this.currentLegalEntities = data.currentHierarchy;
+      this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
+      this.thereIsExistingOrgStructure =
+        this.currentLegalEntities &&
+        this.currentLegalEntities.children &&
+        this.currentLegalEntities.children.length > 0;
 
+      this.treeRoot = new LicenseeChangeLog(data.treeRoot);
+      // apply some formatting to the treeRoot.
 
-        this.currentLegalEntities = data.currentHierarchy;
-        this.numberOfNonTerminatedApplications = data.nonTerminatedApplications;
-        this.thereIsExistingOrgStructure = this.currentLegalEntities &&
-          this.currentLegalEntities.children &&
-          this.currentLegalEntities.children.length > 0;
+      this.treeRoot.fileUploads = {}; // This is only used on the client side
 
-        this.treeRoot = new LicenseeChangeLog(data.treeRoot);
-        // apply some formatting to the treeRoot.
+      this.treeRoot.isRoot = true;
 
-        this.treeRoot.fileUploads = {}; // This is only used on the client side
+      this.loadedValue = this.cleanSaveData(this.treeRoot);
 
-        this.treeRoot.isRoot = true;
+      this.addDynamicContent();
 
-        this.loadedValue = this.cleanSaveData(this.treeRoot);
-
-        this.addDynamicContent();
-
-        this.licenseeApplicationLoaded = true;
-      });
+      this.licenseeApplicationLoaded = true;
+    });
   }
 
   updateData() {
@@ -156,15 +156,15 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
   }
 
   getSaveLabel(): string {
-    let label = "Continue to Application";
+    let label = 'Continue to Application';
 
     // if No Organizational Information on File  OR changes made
     if (!this.thereIsExistingOrgStructure || (this.treeRoot && LicenseeChangeLog.HasChanges(this.treeRoot))) {
-      label = "Submit Organization Information";
+      label = 'Submit Organization Information';
     }
     // if Organization Information on File  AND no changes
-    else if (this.thereIsExistingOrgStructure && (this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot))) {
-      label = "Confirm Organization Information Is Complete";
+    else if (this.thereIsExistingOrgStructure && this.treeRoot && !LicenseeChangeLog.HasChanges(this.treeRoot)) {
+      label = 'Confirm Organization Information Is Complete';
     }
     return label.toUpperCase();
   }
@@ -189,10 +189,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
       fileErrors = this.validateFileUploads(data);
     }
     if (data) {
-      errors = [
-        ...this.validateNonIndividauls(data),
-        ...fileErrors
-      ];
+      errors = [...this.validateNonIndividauls(data), ...fileErrors];
     }
     return errors;
   }
@@ -204,13 +201,12 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     errors = errors.concat(node.getFileUploadValidationErrors());
 
     node.children = node.children || [];
-    node.children.forEach(child => {
+    node.children.forEach((child) => {
       errors = errors.concat(this.validateFileUploads(child));
     });
 
     return errors;
   }
-
 
   validateNonIndividauls(node: LicenseeChangeLog): string[] {
     node = Object.assign(new LicenseeChangeLog(), node);
@@ -229,30 +225,31 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   cancel() {
-
     // delete the application.
-    this.busy = this.applicationDataService.cancelApplication(this.applicationId)
+    this.busy = this.applicationDataService
+      .cancelApplication(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
       .toPromise()
-      .then(app => {
-        this.snackBar.open("Licensee Changes has been cancelled",
-          "Success",
-          { duration: 2500, panelClass: ["green-snackbar"] });
-        this.router.navigateByUrl("/dashboard");
+      .then((app) => {
+        this.snackBar.open('Licensee Changes has been cancelled', 'Success', {
+          duration: 2500,
+          panelClass: ['green-snackbar']
+        });
+        this.router.navigateByUrl('/dashboard');
         return of(app);
       })
       .catch(() => {
-        this.snackBar.open("Error cancelling Licensee Changes",
-          "Error",
-          { duration: 2500, panelClass: ["red-snackbar"] });
+        this.snackBar.open('Error cancelling Licensee Changes', 'Error', {
+          duration: 2500,
+          panelClass: ['red-snackbar']
+        });
       });
-
   }
 
   saveReadOnly() {
     this.saveComplete.emit(true);
     if (this.redirectToDashboardOnSave) {
-      this.router.navigateByUrl("/dashboard");
+      this.router.navigateByUrl('/dashboard');
     }
   }
 
@@ -260,127 +257,136 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
    * Sends data to dynamics
    */
   save() {
-    const noChanges = (this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot));
+    const noChanges = this.thereIsExistingOrgStructure && !LicenseeChangeLog.HasChanges(this.treeRoot);
     let validateResult = this.orgStructure.saveAll();
 
     if (noChanges) {
       validateResult = of(true);
     }
 
-    validateResult.subscribe(result => {
+    validateResult.subscribe((result) => {
       this.validationErrors = this.validateFormData();
       if (!result) {
-        this.validationErrors = ["There are incomplete fields on the page", ...this.validationErrors];
+        this.validationErrors = ['There are incomplete fields on the page', ...this.validationErrors];
       }
-
 
       if (this.validationErrors.length === 0 || noChanges) {
         // set value to cause invoice generationP
         this.busyPromise = this.prepareSaveRequest()
-          .pipe(mergeMap(results => {
-            const saveOverrideValue = { invoiceTrigger: 1 };
+          .pipe(
+            mergeMap((results) => {
+              const saveOverrideValue = { invoiceTrigger: 1 };
 
-            return this.applicationDataService
-              .updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
-              .pipe(takeWhile(() => this.componentActive))
-              .toPromise()
-              .then(app => {
-                // payment is required
-                if (app && app.invoiceId) {
-                  this.submitPayment();
-                } else if (app) { // go to the application page
-                  // mark application as complete
-                  const saveData = { ...this.application, ...this.form.value };
-                  if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
-                    saveData.isApplicationComplete = "Yes";
-                  }
+              return this.applicationDataService
+                .updateApplication({ ...this.application, ...this.form.value, ...saveOverrideValue })
+                .pipe(takeWhile(() => this.componentActive))
+                .toPromise()
+                .then((app) => {
+                  // payment is required
+                  if (app && app.invoiceId) {
+                    this.submitPayment();
+                  } else if (app) {
+                    // go to the application page
+                    // mark application as complete
+                    const saveData = { ...this.application, ...this.form.value };
+                    if (LicenseeChangeLog.HasChanges(this.treeRoot)) {
+                      saveData.isApplicationComplete = 'Yes';
+                    }
 
-                  this.applicationDataService.updateApplication(saveData)
-                    .subscribe(res => {
-                      this.loadedValue =
-                        this.cleanSaveData(this.treeRoot); // Update loadedValue to prevent double saving
+                    this.applicationDataService.updateApplication(saveData).subscribe((res) => {
+                      this.loadedValue = this.cleanSaveData(this.treeRoot); // Update loadedValue to prevent double saving
                       this.saveComplete.emit(true);
                       if (this.redirectToDashboardOnSave) {
-                        this.router.navigateByUrl("/dashboard");
+                        this.router.navigateByUrl('/dashboard');
                       }
                     });
-                }
-                return of(app);
-              });
-          }))
+                  }
+                  return of(app);
+                });
+            })
+          )
           .toPromise()
           .then(() => {
-            this.snackBar.open("Application has been saved",
-              "Success",
-              { duration: 2500, panelClass: ["green-snackbar"] });
-
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
           })
           .catch(() => {
-            this.snackBar.open("Error saving application", "Error", { duration: 2500, panelClass: ["red-snackbar"] });
+            this.snackBar.open('Error saving application', 'Error', { duration: 2500, panelClass: ['red-snackbar'] });
           });
       }
     });
   }
 
   /**
- * Redirect to payment processing page (Express Pay / Bambora service)
- * */
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
   private submitPayment() {
-    this.busy = this.paymentDataService.getPaymentSubmissionUrl(this.applicationId)
+    this.busy = this.paymentDataService
+      .getPaymentSubmissionUrl(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(jsonUrl => {
-          window.location.href = jsonUrl["url"];
-          return jsonUrl["url"];
+      .subscribe(
+        (jsonUrl) => {
+          window.location.href = jsonUrl['url'];
+          return jsonUrl['url'];
         },
-        err => {
-          if (err === "Payment already made") {
-            this.snackBar.open("Application payment has already been made, please refresh the page.",
-              "Fail",
-              { duration: 3500, panelClass: ["red-snackbar"] });
+        (err) => {
+          if (err === 'Payment already made') {
+            this.snackBar.open('Application payment has already been made, please refresh the page.', 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
           }
-        });
+        }
+      );
   }
 
   private prepareSaveRequest() {
     this.validationErrors = [];
 
     const data = this.cleanSaveData(this.treeRoot);
-    return this.legalEntityDataService.updateLegalEntity({
+    return this.legalEntityDataService
+      .updateLegalEntity(
+        {
           ...this.currentLegalEntities,
           numberOfMembers: data.numberOfMembers,
           annualMembershipFee: data.annualMembershipFee
         },
-        this.currentLegalEntities.id)
-      .pipe(mergeMap(result => {
-        // do something with result
-        return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
-      }));
+        this.currentLegalEntities.id
+      )
+      .pipe(
+        mergeMap((result) => {
+          // do something with result
+          return this.legalEntityDataService.saveLicenseeChanges(data, this.applicationId);
+        })
+      );
   }
 
   saveForLater(navigateAfterSaving: boolean = true): Observable<boolean> {
     const subject = new Subject<boolean>();
-    this.orgStructure.saveAll()
-      .subscribe(result => {
-        this.validationErrors = [];
-        if (!result) {
-          this.validationErrors = ["There are incomplete fields on the page"];
-          subject.next(false);
-        }
-        if (this.validationErrors.length === 0) {
-          this.busyPromise = this.prepareSaveRequest()
-            .toPromise()
-            .then(() => {
-              this.snackBar.open("Application has been saved",
-                "Success",
-                { duration: 2500, panelClass: ["green-snackbar"] });
-              this.loadedValue = this.cleanSaveData(this.treeRoot); // Update loadedValue to prevent double saving
-              if (navigateAfterSaving) {
-                this.router.navigateByUrl("/dashboard");
-              }
-              subject.next(true);
+    this.orgStructure.saveAll().subscribe((result) => {
+      this.validationErrors = [];
+      if (!result) {
+        this.validationErrors = ['There are incomplete fields on the page'];
+        subject.next(false);
+      }
+      if (this.validationErrors.length === 0) {
+        this.busyPromise = this.prepareSaveRequest()
+          .toPromise()
+          .then(() => {
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
             });
-        }
-      });
+            this.loadedValue = this.cleanSaveData(this.treeRoot); // Update loadedValue to prevent double saving
+            if (navigateAfterSaving) {
+              this.router.navigateByUrl('/dashboard');
+            }
+            subject.next(true);
+          });
+      }
+    });
     return subject;
   }
 
@@ -388,19 +394,18 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     this.cancelledLicenseeChanges.push(change);
   }
 
-  cancelApplication() {
-  }
+  cancelApplication() {}
 
   canDeactivate(): Observable<boolean> {
     const data = this.cleanSaveData(this.treeRoot);
-    if (JSON.stringify(data) === JSON.stringify(this.loadedValue)) { //no change made. Skip save
+    if (JSON.stringify(data) === JSON.stringify(this.loadedValue)) {
+      //no change made. Skip save
       return of(true);
     }
     return this.saveForLater(false);
   }
 
   calculateSubTotal(can, liq): string {
-
     const cannabis = can * this.numberOfCannabisLicences;
     const liquor = liq * this.numberOfLiquorLicences;
     const total = cannabis + liquor;
@@ -430,7 +435,7 @@ export class ApplicationLicenseeChangesComponent extends FormBase implements OnI
     node.parentLicenseeChangeLog = undefined;
 
     if (node.children && node.children.length) {
-      node.children.forEach(child => {
+      node.children.forEach((child) => {
         this.removeParentReferences(child);
       });
     }

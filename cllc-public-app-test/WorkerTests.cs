@@ -55,7 +55,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             var request = new HttpRequestMessage(HttpMethod.Post, $"/api/contact");
 
-            
+
 
             ViewModels.Contact contactVM = new ViewModels.Contact()
             {
@@ -111,7 +111,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             workerVM = JsonConvert.DeserializeObject<ViewModels.Worker>(jsonString);
             Assert.NotNull(workerVM?.id);
-            
+
             Assert.Equal(birthDate, workerVM.contact.Birthdate);
 
             Assert.Equal(birthDate, workerVM.dateofbirth.Value);
@@ -154,8 +154,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             //First create the contact
             var request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/worker");
-            ViewModels.Contact contactVM = new ViewModels.Contact() {
-                firstname  = initialName,
+            ViewModels.Contact contactVM = new ViewModels.Contact()
+            {
+                firstname = initialName,
                 middlename = "TestMiddle",
                 lastname = "TestLst",
                 emailaddress1 = "testEmail@gov.bc.ca"
@@ -167,7 +168,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-          
+
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
             // R -Read
@@ -177,7 +178,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             var workerVM = JsonConvert.DeserializeObject<List<ViewModels.Worker>>(jsonString).FirstOrDefault();
             Assert.NotNull(workerVM?.id);
-            
+
             // U - Update            
             workerVM.firstname = changedName;
             workerVM.email = changedEmail;

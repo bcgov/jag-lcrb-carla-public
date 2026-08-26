@@ -80,7 +80,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         [Route("token/{userid}")]
         [AllowAnonymous]
-        public virtual IActionResult GetDevAuthenticationCookie(string userId, [FromQuery]string source)
+        public virtual IActionResult GetDevAuthenticationCookie(string userId, [FromQuery] string source)
         {
             if (_env.IsProduction()) return BadRequest("This API is not available outside a development environment.");
 

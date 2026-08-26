@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { RelatedJobnumberPickerComponent } from './related-jobnumber-picker.component';
 
 describe('RelatedJobnumberPickerComponent', () => {
@@ -8,9 +7,8 @@ describe('RelatedJobnumberPickerComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RelatedJobnumberPickerComponent ]
-    })
-    .compileComponents();
+      declarations: [RelatedJobnumberPickerComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -49,9 +49,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             var guid = Guid.NewGuid();
-            var folderName ="ConvertFiles";
-            var docFilName= $@"{folderName}\{guid}.docx";
-            var pdfFilName= $@"{folderName}\{guid}-pdf.pdf";
+            var folderName = "ConvertFiles";
+            var docFilName = $@"{folderName}\{guid}.docx";
+            var pdfFilName = $@"{folderName}\{guid}-pdf.pdf";
             try
             {
 
@@ -78,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private  void DeleteFile(string fileName)
+        private void DeleteFile(string fileName)
         {
             if (System.IO.File.Exists(fileName))
             {
@@ -87,4 +87,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
     }
-    }
+}

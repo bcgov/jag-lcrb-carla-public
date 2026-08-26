@@ -29,7 +29,7 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
 
         // Geocode a given establishment.
         [HttpGet("GeocodeEstablishment/{establishmentId}")]
-        public ActionResult GeocodeEstablishment( string establishmentId )
+        public ActionResult GeocodeEstablishment(string establishmentId)
         {
             _logger.LogInformation($"Geocoding establishment. EstablishmentId: {establishmentId}");
             BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _dataverse, _logger).GeocodeEstablishment(null, establishmentId));

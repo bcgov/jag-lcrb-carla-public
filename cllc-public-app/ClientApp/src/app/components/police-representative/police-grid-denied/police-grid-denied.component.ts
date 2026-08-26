@@ -1,18 +1,17 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild  } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { PoliceTableElement } from '../police-table-element';
-import { Subscription } from "rxjs";
-import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Contact } from '@models/contact.model';
 import { User } from '@models/user.model';
-import { Router } from '@angular/router';
-import { merge, of } from 'rxjs';
-import { startWith, switchMap, map, catchError } from 'rxjs/operators';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { merge, of, Subscription } from 'rxjs';
+import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { SepApplicationSummary } from '../../../models/sep-application-summary.model';
+import { PoliceTableElement } from '../police-table-element';
 
 @Component({
   selector: 'app-police-grid-denied',
@@ -40,8 +39,15 @@ export class PoliceGridDeniedComponent implements OnInit {
 
   // angular material table columns to display
   columnsToDisplay = [
-    'select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel',
-    'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'
+    'select',
+    'dateSubmitted',
+    'eventName',
+    'eventStartDate',
+    'eventStatusLabel',
+    'policeDecisionByLabel',
+    'maximumNumberOfGuests',
+    'typeOfEventLabel',
+    'actions'
   ];
 
   // table state
@@ -60,18 +66,18 @@ export class PoliceGridDeniedComponent implements OnInit {
   @Input()
   set currentUser(value: User) {
     this._currentUser = value;
-  };
+  }
   get currentUser() {
     return this._currentUser;
   }
 
-
-  constructor(    private sepDataService: SpecialEventsDataService,
+  constructor(
+    private sepDataService: SpecialEventsDataService,
     private cd: ChangeDetectorRef,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
-
-  ngOnInit(): void { }
+  ngOnInit(): void {}
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.sortingDataAccessor = (data: any, sortHeaderId: string): string => {
@@ -92,9 +98,14 @@ export class PoliceGridDeniedComponent implements OnInit {
         switchMap(() => {
           this.isLoadingResults = true;
           this.dataLoaded = false;
-          return this.sepDataService.getPoliceDeniedSepApplications(this.paginator.pageIndex, this.paginator.pageSize, this.dataSource.sort.active, this.dataSource.sort.direction);
+          return this.sepDataService.getPoliceDeniedSepApplications(
+            this.paginator.pageIndex,
+            this.paginator.pageSize,
+            this.dataSource.sort.active,
+            this.dataSource.sort.direction
+          );
         }),
-        map(result => {
+        map((result) => {
           // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.dataLoaded = true;
@@ -109,12 +120,16 @@ export class PoliceGridDeniedComponent implements OnInit {
           this.isRateLimitReached = true;
           return of([] as SepApplicationSummary[]);
         })
-      ).subscribe((data) => this.dataSource.data = data.map((el, i) => {
-        return {
-          ...el,
-          index: 1 + i + this.paginator.pageIndex * this.paginator.pageSize
-        };
-      }));
+      )
+      .subscribe(
+        (data) =>
+          (this.dataSource.data = data.map((el, i) => {
+            return {
+              ...el,
+              index: 1 + i + this.paginator.pageIndex * this.paginator.pageSize
+            };
+          }))
+      );
   }
 
   isAssigned(sepData: PoliceTableElement): boolean {
@@ -125,12 +140,11 @@ export class PoliceGridDeniedComponent implements OnInit {
   assign(row: PoliceTableElement) {
     const assignee = this.currentValueMap['assignee_' + row.specialEventId];
 
-    this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
-      .subscribe(data => {
-        row.policeDecisionBy = data;
-        // ensure the grid refreshes.
-        this.cd.detectChanges();      
-      });
+    this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee).subscribe((data) => {
+      row.policeDecisionBy = data;
+      // ensure the grid refreshes.
+      this.cd.detectChanges();
+    });
   }
 
   batchAssign() {
@@ -138,7 +152,7 @@ export class PoliceGridDeniedComponent implements OnInit {
     //Seems to be unused at this time
     const selected = this.selection.selected;
     console.log(`Call API to batch assign SEP applications:`);
-    selected.forEach(x => console.log(`${x.specialEventId}`));
+    selected.forEach((x) => console.log(`${x.specialEventId}`));
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -150,14 +164,11 @@ export class PoliceGridDeniedComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 
   updateValue(event: MatSelectChange) {
     this.currentValueMap[event.source.id] = event.value;
-
   }
 
   /**
@@ -174,8 +185,6 @@ export class PoliceGridDeniedComponent implements OnInit {
     console.log(e);  
     this.getData(e.pageIndex, e.pageSize);
   }*/
-
-
 }
 
 interface TableElement extends SepApplicationSummary {

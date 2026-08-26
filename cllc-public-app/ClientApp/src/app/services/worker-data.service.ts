@@ -1,13 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
-import { Worker } from "@models/worker.model";
-import { Observable } from "rxjs";
-import { DataService } from "./data.service";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Worker } from '@models/worker.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class WorkerDataService extends DataService {
-
   constructor(private http: HttpClient) {
     super();
   }
@@ -18,8 +17,7 @@ export class WorkerDataService extends DataService {
    */
   getWorkerByContactId(accountId: string): Observable<Worker[]> {
     const apiPath = `api/worker/contact/${accountId}`;
-    return this.http.get<Worker[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<Worker[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -28,8 +26,7 @@ export class WorkerDataService extends DataService {
    */
   getWorker(id: string): Observable<Worker> {
     const apiPath = `api/worker/${id}`;
-    return this.http.get<Worker>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<Worker>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -37,8 +34,7 @@ export class WorkerDataService extends DataService {
    * @param data - worker data
    */
   createWorker(data: Worker) {
-    return this.http.post<Worker>("api/worker/", data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.post<Worker>('api/worker/', data, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -46,7 +42,8 @@ export class WorkerDataService extends DataService {
    * @param data - worker data
    */
   updateWorker(data: Worker, id: string) {
-    return this.http.put<Worker>(`api/worker/${id}`, data, { headers: this.headers })
+    return this.http
+      .put<Worker>(`api/worker/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -55,7 +52,8 @@ export class WorkerDataService extends DataService {
    * @param data - worker data
    */
   deleteWorker(id: string) {
-    return this.http.post<Worker>(`api/worker/${id}/delete`, {}, { headers: this.headers })
+    return this.http
+      .post<Worker>(`api/worker/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }

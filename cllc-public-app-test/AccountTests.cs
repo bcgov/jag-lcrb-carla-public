@@ -18,7 +18,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-    
+
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -143,7 +143,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 string initialName = "InitialName";
                 string changedName = "ChangedName";
-                
+
 
                 // register and login as our first user
                 var loginUser1 = randomNewUserName("TestAccountUser", 6);
@@ -243,7 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string initialName = randomNewUserName("Test", 246);
             string changedName = randomNewUserName("Test", 246);
-     
+
 
             // register and login as our first user
             var loginUser1 = randomNewUserName("TestAccountUser", 6);

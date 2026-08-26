@@ -1,13 +1,12 @@
-import { License } from "./license.model";
-import { ApplicationType } from "./application-type.model";
-import { LicenceEvent } from "./licence-event.model";
-import { TermsAndConditions } from "./terms-and-conditions.model";
-import { ServiceArea } from "./service-area.model";
-import { Subscription } from "rxjs";
-import { OffsiteStorage } from "./offsite-storage.model";
+import { Subscription } from 'rxjs';
+import { ApplicationType } from './application-type.model';
+import { LicenceEvent } from './licence-event.model';
+import { License } from './license.model';
+import { OffsiteStorage } from './offsite-storage.model';
+import { ServiceArea } from './service-area.model';
+import { TermsAndConditions } from './terms-and-conditions.model';
 
 export class ApplicationLicenseSummary {
-
   establishmentId: string;
   establishmentName: string;
   establishmentAddressStreet: string;

@@ -160,7 +160,8 @@ namespace Gov.Lclb.Cllb.Geocoder
                        new
                        {
                            checks = r.Entries.Select(e =>
-                      new {
+                      new
+                      {
                           description = e.Key,
                           status = e.Value.Status.ToString(),
                           responseTime = e.Value.Duration.TotalMilliseconds
@@ -169,7 +170,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                        });
                     await c.Response.WriteAsync(result);
                 }
-            };            
+            };
 
             app.UseHealthChecks("/hc/ready", new HealthCheckOptions
             {
@@ -228,7 +229,7 @@ namespace Gov.Lclb.Cllb.Geocoder
                     var dataverse = serviceScope.ServiceProvider.GetRequiredService<IDataverseClient>();
                     Microsoft.Extensions.Logging.ILogger geocodeLog = loggerFactory.CreateLogger(typeof(GeocodeUtils));
                     // Job for each day - updates establishments with a blank lat / long
-                    RecurringJob.AddOrUpdate("daily-geocode-establishments",() => new GeocodeUtils(Configuration, dataverse, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
+                    RecurringJob.AddOrUpdate("daily-geocode-establishments", () => new GeocodeUtils(Configuration, dataverse, geocodeLog).GeocodeEstablishments(null, false), "0 0 * * *"); // every Day
 
                     // Job for each week - update all establishments
                     RecurringJob.AddOrUpdate("weekly-geocode-establishments", () => new GeocodeUtils(Configuration, dataverse, geocodeLog).GeocodeEstablishments(null, true), "0 0 * * 6"); // every Saturday

@@ -1588,13 +1588,13 @@ public class DataverseClient : IDataverseClient, IHealthCheck
 
         var (logicalName, nameAttr) = entityName.ToLower() switch
         {
-            "account"     => (Account.EntityLogicalName,            "name"),
-            "contact"     => (Contact.EntityLogicalName,            "fullname"),
+            "account" => (Account.EntityLogicalName, "name"),
+            "contact" => (Contact.EntityLogicalName, "fullname"),
             "application" => (adoxio_application.EntityLogicalName, "adoxio_name"),
-            "worker"      => (adoxio_worker.EntityLogicalName,      "adoxio_name"),
-            "licence"     => (adoxio_licences.EntityLogicalName,    "adoxio_name"),
-            "event"       => (adoxio_event.EntityLogicalName,       "adoxio_name"),
-            _             => (null, null)
+            "worker" => (adoxio_worker.EntityLogicalName, "adoxio_name"),
+            "licence" => (adoxio_licences.EntityLogicalName, "adoxio_name"),
+            "event" => (adoxio_event.EntityLogicalName, "adoxio_name"),
+            _ => (null, null)
         };
         if (logicalName == null) return null;
 
@@ -1619,13 +1619,13 @@ public class DataverseClient : IDataverseClient, IHealthCheck
 
         var (parentLibraryUrl, entityLogicalName) = entityName.ToLower() switch
         {
-            "account"     => ("account",             Account.EntityLogicalName),
-            "application" => ("adoxio_application",  adoxio_application.EntityLogicalName),
-            "contact"     => ("contact",              Contact.EntityLogicalName),
-            "worker"      => ("adoxio_worker",        adoxio_worker.EntityLogicalName),
-            "event"       => ("adoxio_event",         adoxio_event.EntityLogicalName),
-            "licence"     => ("adoxio_licences",      adoxio_licences.EntityLogicalName),
-            _             => (null, null)
+            "account" => ("account", Account.EntityLogicalName),
+            "application" => ("adoxio_application", adoxio_application.EntityLogicalName),
+            "contact" => ("contact", Contact.EntityLogicalName),
+            "worker" => ("adoxio_worker", adoxio_worker.EntityLogicalName),
+            "event" => ("adoxio_event", adoxio_event.EntityLogicalName),
+            "licence" => ("adoxio_licences", adoxio_licences.EntityLogicalName),
+            _ => (null, null)
         };
         if (parentLibraryUrl == null) return;
 

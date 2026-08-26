@@ -1,4 +1,4 @@
-import { faBeer, faGlassMartini, faWineBottle, faWineGlass, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+import { faBeer, faGlassMartini, faWineBottle, faWineGlass, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 export const HOURS_OF_LIQUOR_SERVICE = 3;
 export const SERVINGS_PER_PERSON = 4;
@@ -40,7 +40,7 @@ const configuration: Array<DrinkConfig> = [
     faIcon: faBeer,
     storageFaIcon: faBeer,
     servingImageUrl: 'assets/sep/small-beer.png',
-    storageImageUrl: 'assets/sep/big-beer.png',
+    storageImageUrl: 'assets/sep/big-beer.png'
   },
   {
     id: 2,
@@ -58,7 +58,7 @@ const configuration: Array<DrinkConfig> = [
     faIcon: faWineGlass,
     storageFaIcon: faWineBottle,
     servingImageUrl: 'assets/sep/small-wine.png',
-    storageImageUrl: 'assets/sep/big-wine.png',
+    storageImageUrl: 'assets/sep/big-wine.png'
   },
   {
     id: 3,
@@ -76,7 +76,7 @@ const configuration: Array<DrinkConfig> = [
     faIcon: faGlassMartini,
     storageFaIcon: faWineBottle,
     servingImageUrl: 'assets/sep/small-spirits.png',
-    storageImageUrl: 'assets/sep/big-spirits.png',
+    storageImageUrl: 'assets/sep/big-spirits.png'
   }
 ];
 

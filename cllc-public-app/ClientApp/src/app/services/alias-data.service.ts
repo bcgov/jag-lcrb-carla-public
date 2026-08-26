@@ -1,13 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
-import { Alias } from "@models/alias.model";
-import { Observable } from "rxjs";
-import { DataService } from "./data.service";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Alias } from '@models/alias.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class AliasDataService extends DataService {
-
   constructor(private http: HttpClient) {
     super();
   }
@@ -18,8 +17,7 @@ export class AliasDataService extends DataService {
    */
   getAliases(contactId: string): Observable<Alias[]> {
     const apiPath = `api/alias/by-contactid/${contactId}`;
-    return this.http.get<Alias[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<Alias[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -27,8 +25,7 @@ export class AliasDataService extends DataService {
    * @param data - alias data
    */
   createAlias(data: Alias) {
-    return this.http.post<Alias>("api/alias/", data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.post<Alias>('api/alias/', data, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -36,8 +33,7 @@ export class AliasDataService extends DataService {
    * @param data - alias data
    */
   updateAlias(data: Alias, id: string) {
-    return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.put<Alias>(`api/alias/${id}`, data, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -45,9 +41,8 @@ export class AliasDataService extends DataService {
    * @param data - alias data
    */
   deleteAlias(id: string) {
-    return this.http.post<Alias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
+    return this.http
+      .post<Alias>(`api/alias/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
-
-
 }

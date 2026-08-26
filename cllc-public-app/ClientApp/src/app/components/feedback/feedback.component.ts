@@ -1,15 +1,15 @@
-import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { MatDialogRef } from "@angular/material/dialog";
-import { FeedbackService } from "@services/feedback.service";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FeedbackService } from '@services/feedback.service';
 
 @Component({
-  selector: "app-feedback",
-  templateUrl: "./feedback.component.html",
-  styleUrls: ["./feedback.component.scss"],
+  selector: 'app-feedback',
+  templateUrl: './feedback.component.html',
+  styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent {
-  feedbackText: string = "";
+  feedbackText: string = '';
 
   isSubmitted: boolean = false;
   isError: boolean = false;
@@ -26,9 +26,10 @@ export class FeedbackComponent {
 
   submitFeedback() {
     if (this.feedbackText.trim().length < 5) {
-      this.snackBar.open(`Please enter at least 5 characters.`,
-        "Required",
-        { duration: 3500, panelClass: ["red-snackbar"] });
+      this.snackBar.open(`Please enter at least 5 characters.`, 'Required', {
+        duration: 3500,
+        panelClass: ['red-snackbar']
+      });
       return;
     }
 
@@ -43,7 +44,7 @@ export class FeedbackComponent {
         this.cd.detectChanges();
       },
       (error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         this.isLoading = false;
         this.isError = true;
         this.cd.detectChanges();
@@ -54,5 +55,4 @@ export class FeedbackComponent {
   closeFeedbackDialog() {
     this.dialogRef.close();
   }
-
 }

@@ -10,14 +10,14 @@ using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class LicenceEventsTests :  ApiIntegrationTestBaseWithLogin
+    public class LicenceEventsTests : ApiIntegrationTestBaseWithLogin
     {
         public LicenceEventsTests(CustomWebApplicationFactory<Startup> factory)
-          : base(factory) 
+          : base(factory)
         { }
 
         const string service = "LicenceEvents";
-        
+
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
@@ -51,7 +51,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 VenueDescription = venue
             };
-            
+
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_event);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -81,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 Id = id.ToString(),
                 VenueDescription = changedVenue
-            };            
+            };
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
@@ -90,7 +90,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            
+
             // verify that the update persisted.
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
@@ -171,7 +171,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Month, endDate.Month);
             Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Day, endDate.Day);
             Assert.Equal(((DateTimeOffset)viewmodel_adoxio_event.EndDate).Year, endDate.Year);
-            
+
 
 
             // R -Read
@@ -181,7 +181,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             jsonString = await response.Content.ReadAsStringAsync();
             viewmodel_adoxio_event = JsonConvert.DeserializeObject<ViewModels.LicenceEvent>(jsonString);
             Assert.NotNull(viewmodel_adoxio_event?.Id);
-            
+
             Assert.Equal(startDate.Month, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Month);
             Assert.Equal(startDate.Year, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Year);
             Assert.Equal(startDate.Day, ((DateTimeOffset)viewmodel_adoxio_event.StartDate).Day);

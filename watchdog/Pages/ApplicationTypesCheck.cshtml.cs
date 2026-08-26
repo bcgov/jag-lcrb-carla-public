@@ -64,9 +64,9 @@ namespace Watchdog.Pages
             prdAppTypes = new Dictionary<string, adoxio_applicationtype>();
 
             Parallel.Invoke(
-                delegate() { GetAppTypes("DEV", Configuration, devAppTypes, devFieldNames, allKeys); },
-                delegate() { GetAppTypes("TST", Configuration, tstAppTypes, tstFieldNames, allKeys); },
-                delegate() { GetAppTypes("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys); }
+                delegate () { GetAppTypes("DEV", Configuration, devAppTypes, devFieldNames, allKeys); },
+                delegate () { GetAppTypes("TST", Configuration, tstAppTypes, tstFieldNames, allKeys); },
+                delegate () { GetAppTypes("PRD", Configuration, prdAppTypes, prdFieldNames, allKeys); }
             );
 
             foreach (var item in allFieldNames.Keys)
@@ -99,7 +99,7 @@ namespace Watchdog.Pages
         public Dictionary<string, Dictionary<string, string>> allFieldClasses;
 
         // true if there is a difference
-        public bool IsDifferent (string dev, string test, string prod)
+        public bool IsDifferent(string dev, string test, string prod)
         {
             bool result = true;
             if (dev == test && test == prod)
@@ -109,7 +109,7 @@ namespace Watchdog.Pages
             return result;
         }
 
-        public string GetRowClass (string dev, string test, string prod)
+        public string GetRowClass(string dev, string test, string prod)
         {
             string result;
             if (IsDifferent(dev, test, prod))
@@ -123,7 +123,7 @@ namespace Watchdog.Pages
             return result;
         }
 
-        private void GetAppTypes (string prefix, IConfigurationRoot configuration, Dictionary<string, adoxio_applicationtype> appTypesDict, Dictionary<string, List<string>> envFields, List<string> allKeys)
+        private void GetAppTypes(string prefix, IConfigurationRoot configuration, Dictionary<string, adoxio_applicationtype> appTypesDict, Dictionary<string, List<string>> envFields, List<string> allKeys)
         {
             IConfigurationRoot config = CreateConfig(prefix, configuration);
             var client = new DataverseClient(config);
@@ -133,12 +133,12 @@ namespace Watchdog.Pages
             foreach (var item in appTypes)
             {
                 appTypesDict.Add(item.adoxio_name, item);
-                if (! allKeys.Contains (item.adoxio_name))
+                if (!allKeys.Contains(item.adoxio_name))
                 {
                     allKeys.Add(item.adoxio_name);
                 }
 
-                if (! string.IsNullOrEmpty (item.adoxio_FormReference))
+                if (!string.IsNullOrEmpty(item.adoxio_FormReference))
                 {
                     List<string> fields = new List<string>();
 
@@ -195,11 +195,11 @@ namespace Watchdog.Pages
                                                 string datafieldname = control.Attribute("datafieldname").Value;
                                             }
 
-                                            if (! allFieldNames.ContainsKey(item.adoxio_name))
+                                            if (!allFieldNames.ContainsKey(item.adoxio_name))
                                             {
                                                 allFieldNames.Add(item.adoxio_name, new List<string>());
                                             }
-                                            if (! allFieldNames[item.adoxio_name].Contains (fieldName))
+                                            if (!allFieldNames[item.adoxio_name].Contains(fieldName))
                                             {
                                                 allFieldNames[item.adoxio_name].Add(fieldName);
                                             }
@@ -252,7 +252,7 @@ namespace Watchdog.Pages
 
         }
 
-        private IConfigurationRoot CreateConfig (string prefix, IConfigurationRoot input)
+        private IConfigurationRoot CreateConfig(string prefix, IConfigurationRoot input)
         {
             var strings = new Dictionary<string, string>();
 
@@ -264,7 +264,7 @@ namespace Watchdog.Pages
             ConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
             // Add defaultConfigurationStrings
             configurationBuilder.AddInMemoryCollection(strings);
-            return (IConfigurationRoot) configurationBuilder.Build();
+            return (IConfigurationRoot)configurationBuilder.Build();
         }
 
         public void OnGet()

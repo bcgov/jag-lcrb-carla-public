@@ -13,7 +13,7 @@ namespace BCRegWrapper
     {
         private static readonly HttpClient client = new HttpClient();
 
-        public static async Task<Company> ProcessCompanyQuery(string user, string password, string url) 
+        public static async Task<Company> ProcessCompanyQuery(string user, string password, string url)
         {
             var serializer = new DataContractJsonSerializer(typeof(Company));
 
@@ -24,13 +24,13 @@ namespace BCRegWrapper
                 new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Add("User-Agent", "CaRLA");
 
-            try 
+            try
             {
                 var streamTask = client.GetStreamAsync(url);
                 var company = serializer.ReadObject(await streamTask) as Company;
                 return company;
-            } 
-            catch (System.Net.Http.HttpRequestException e) 
+            }
+            catch (System.Net.Http.HttpRequestException e)
             {
                 return null;
             }

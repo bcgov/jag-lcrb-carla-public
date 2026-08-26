@@ -1,14 +1,13 @@
-import { Component, Input, forwardRef } from "@angular/core";
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS } from "@angular/forms";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { ServiceArea, AreaCategory } from "@models/service-area.model";
-import { BaseControlValueAccessor } from "./BaseControlValueAccessor";
-
+import { Component, forwardRef, Input } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup, NG_VALIDATORS, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { AreaCategory, ServiceArea } from '@models/service-area.model';
+import { BaseControlValueAccessor } from './BaseControlValueAccessor';
 
 @Component({
-  selector: "app-capacity-table",
-  templateUrl: "./capacity-table.component.html",
-  styleUrls: ["./capacity-table.component.scss"],
+  selector: 'app-capacity-table',
+  templateUrl: './capacity-table.component.html',
+  styleUrls: ['./capacity-table.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,11 +33,17 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
   formGroup: FormGroup;
 
-  get areasArr(): FormArray { return this.formGroup.get("areas") as FormArray; }
+  get areasArr(): FormArray {
+    return this.formGroup.get('areas') as FormArray;
+  }
 
-  registerOnChange(fn: any) { this.onChange = fn; }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
 
-  registerOnTouched(fn: any) { this.onTouched = fn; }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 
   constructor(private fb: FormBuilder) {
     super();
@@ -47,7 +52,7 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
       areas: fb.array([])
     });
 
-    this.formGroup.valueChanges.subscribe(val => {
+    this.formGroup.valueChanges.subscribe((val) => {
       this.onChange(val);
       this.value = val.areas;
     });
@@ -61,7 +66,9 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         this.areasArr.removeAt(0);
       }
       if (serviceAreas.length > 0) {
-        serviceAreas.forEach(area => { this.areasArr.push(this.fb.control(area)); });
+        serviceAreas.forEach((area) => {
+          this.areasArr.push(this.fb.control(area));
+        });
         this.updateTotal();
       }
     } else {
@@ -71,11 +78,11 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
   updateTotal() {
     this.total = 0;
-    this.areasArr.value.forEach(area => {
-      if (typeof area["capacity"] === "number") {
-        this.total += area["capacity"];
+    this.areasArr.value.forEach((area) => {
+      if (typeof area['capacity'] === 'number') {
+        this.total += area['capacity'];
       } else {
-        const num = parseInt(area["capacity"], 10);
+        const num = parseInt(area['capacity'], 10);
         if (num > 0) {
           this.total += num;
         }
@@ -85,11 +92,12 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
 
   addRow() {
     this.writeValue([
-      ...this.areasArr.value, {
+      ...this.areasArr.value,
+      {
         areaCategory: this.areaCategory,
         areaNumber: this.areasArr.controls.length + 1,
-        areaLocation: "",
-        capacity: "",
+        areaLocation: '',
+        capacity: '',
         isIndoor: this.areaCategory === AreaCategory.Service,
         isOutdoor: this.areaCategory === AreaCategory.OutsideArea,
         isPatio: false
@@ -118,10 +126,11 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
         isValid = false;
       }
     });
-    return !isValid &&
-    {
-      invalid: true
-    };
+    return (
+      !isValid && {
+        invalid: true
+      }
+    );
   }
 
   isService(): boolean {
@@ -133,6 +142,6 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
   }
 
   get areaLocationHeading(): string {
-    return this.isOutsideArea() ? "Size (in m<sup>2</sup>)" : "Area/Floor Level";
+    return this.isOutsideArea() ? 'Size (in m<sup>2</sup>)' : 'Area/Floor Level';
   }
 }

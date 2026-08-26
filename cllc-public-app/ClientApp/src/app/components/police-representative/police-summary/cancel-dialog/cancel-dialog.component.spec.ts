@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CancelDialogComponent } from './cancel-dialog.component';
 
 describe('CancelDialogComponent', () => {
@@ -8,9 +7,8 @@ describe('CancelDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CancelDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [CancelDialogComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

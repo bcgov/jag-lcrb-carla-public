@@ -53,7 +53,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
         {
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
-            
+
             if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
             {
                 services.AddAuthentication(o =>
@@ -73,7 +73,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     };
                 });
             }
-            
+
             services.AddAuthorization();
             services.AddGrpc(options =>
             {
@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 options.MaxSendMessageSize = 256 * 1024 * 1024; // 256 MB
             });
 
-            services.AddHangfire(config => 
+            services.AddHangfire(config =>
             {
                 config.UseMemoryStorage();
                 config.UseConsole();
@@ -114,7 +114,8 @@ namespace Gov.Lclb.Cllb.OrgbookService
                        new
                        {
                            checks = r.Entries.Select(e =>
-                      new {
+                      new
+                      {
                           description = e.Key,
                           status = e.Value.Status.ToString(),
                           responseTime = e.Value.Duration.TotalMilliseconds
@@ -160,7 +161,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 SetupHangfireJobs(app, loggerFactory);
             }
 
-            app.UseEndpoints(endpoints => 
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<OrgBookController>();
                 endpoints.MapGet("/", async context =>
@@ -177,7 +178,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
                     .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -208,7 +209,8 @@ namespace Gov.Lclb.Cllb.OrgbookService
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    GenericRequest id = new GenericRequest() {
+                    GenericRequest id = new GenericRequest()
+                    {
                         Id = Guid.NewGuid().ToString()
                     };
                     RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, loggerFactory).SyncLicencesToOrgbook(id, null), Cron.Hourly());

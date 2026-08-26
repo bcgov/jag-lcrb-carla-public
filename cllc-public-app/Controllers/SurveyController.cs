@@ -50,7 +50,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
         [HttpPost("changeJson")]
-        public string ChangeJson([FromBody]ViewModels.Survey model)
+        public string ChangeJson([FromBody] ViewModels.Survey model)
         {
             db.StoreSurvey(model.Id, model.Json);
             return db.GetSurvey(model.Id);
@@ -65,7 +65,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         [HttpPost("post")]
         [AllowAnonymous]
-        public JsonResult PostResult([FromBody]ViewModels.PostSurveyResult model)
+        public JsonResult PostResult([FromBody] ViewModels.PostSurveyResult model)
         {
             db.PostResults(model.postId, model.clientId, model.surveyResult);
             return new JsonResult("Ok");

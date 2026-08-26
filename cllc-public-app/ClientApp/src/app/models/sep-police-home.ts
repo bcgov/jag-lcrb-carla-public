@@ -1,8 +1,5 @@
-
-
 export class SepPoliceHome {
-    assignedJobsInProgress: number; 
-    assignedJobsInProgressWithExceptions : number;
-    assignedApplicationsIssued : number;
-
+  assignedJobsInProgress: number;
+  assignedJobsInProgressWithExceptions: number;
+  assignedApplicationsIssued: number;
 }

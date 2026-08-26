@@ -41,10 +41,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class SepPaymentController : ControllerBase
     {
         private readonly string _Password;
- 
-        private  string _encryptedJson;
+
+        private string _encryptedJson;
         private readonly IConfiguration _configuration;
-        
+
         private readonly IWebHostEnvironment _env;
 
         public SepPaymentController(IConfiguration configuration, IWebHostEnvironment env)
@@ -71,7 +71,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         public IActionResult Get([FromQuery] string sepId = null, [FromQuery] string txnId = null)
         {
-            
+
             if (string.IsNullOrWhiteSpace(txnId))
                 return NotFound(new { message = "Required paramter is missing." });
 
@@ -81,7 +81,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // var encPath = Path.Combine(_env.ContentRootPath, "permitdata");
             // if (!System.IO.File.Exists(encPath))
             //     throw new FileNotFoundException($"Could not find encrypted data.");
-           // _encryptedJson = System.IO.File.ReadAllText(encPath).Trim();
+            // _encryptedJson = System.IO.File.ReadAllText(encPath).Trim();
             var plainJson = CryptoHelper.Decrypt(PermitCache.PermitData, _Password);
 
             var payments = JsonConvert.DeserializeObject<List<SepPayment>>(plainJson)
@@ -92,58 +92,58 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (match == null)
                 return NotFound(new { message = $"No data found." });
-              string email = _configuration["SEP_TRANSACTION_EMAIL"];
-                 
+            string email = _configuration["SEP_TRANSACTION_EMAIL"];
 
-                /* send the user an email confirmation. */
-               
-                // send the email.
-                SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
-                // Specify the message content.
-                MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
-                message.Subject = "Payment Information for SEP Permit number" + match.PermitNumber;
-                message.Body = "<p>A payment has been made for SEP Permit number " +  match.PermitNumber + "</p>  " +
-                               "<p>Contact Name: " + match.ContactName + "</p>" +
-                               "<p>Contact Email: " + match.ContactEmail + "</p>" +
-                               "<p>Contact Phone: " + match.ContactPhone + "</p>" +
-                               "<p>Event Name: " + match.EventName + "</p>" +
-                               "<p>Additional PST paid: " + match.DrinkCostPSTDiff + "</p>" +
-                               "<p>Transaction ID: " + txnId + "</p>";
-                  
-                message.IsBodyHtml = true;
+            /* send the user an email confirmation. */
 
-                try
-                {
-                    client.Send(message);
-                    
+            // send the email.
+            SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
-                }
-                catch (Exception ex)
-                {
-                   
+            // Specify the message content.
+            MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
+            message.Subject = "Payment Information for SEP Permit number" + match.PermitNumber;
+            message.Body = "<p>A payment has been made for SEP Permit number " + match.PermitNumber + "</p>  " +
+                           "<p>Contact Name: " + match.ContactName + "</p>" +
+                           "<p>Contact Email: " + match.ContactEmail + "</p>" +
+                           "<p>Contact Phone: " + match.ContactPhone + "</p>" +
+                           "<p>Event Name: " + match.EventName + "</p>" +
+                           "<p>Additional PST paid: " + match.DrinkCostPSTDiff + "</p>" +
+                           "<p>Transaction ID: " + txnId + "</p>";
 
-                }
+            message.IsBodyHtml = true;
+
+            try
+            {
+                client.Send(message);
+
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
             return Ok(match);
         }
 
-              private static class CryptoHelper
+        private static class CryptoHelper
         {
             public static string Encrypt(string plainText, string password)
             {
                 var salt = RandomNumberGenerator.GetBytes(16);
-                var key  = new Rfc2898DeriveBytes(password, salt, 100_000,
+                var key = new Rfc2898DeriveBytes(password, salt, 100_000,
                               HashAlgorithmName.SHA256).GetBytes(32);
 
                 using var aes = Aes.Create();
                 aes.KeySize = 256;
-                aes.Key     = key;
-                aes.Mode    = CipherMode.CBC;
+                aes.Key = key;
+                aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
                 aes.GenerateIV();
 
                 using var enc = aes.CreateEncryptor();
-                var plainBytes  = Encoding.UTF8.GetBytes(plainText);
+                var plainBytes = Encoding.UTF8.GetBytes(plainText);
                 var cipherBytes = enc.TransformFinalBlock(plainBytes, 0, plainBytes.Length);
 
                 var packed = salt                  // 16
@@ -158,8 +158,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var packed = Convert.FromBase64String(cipherText);
 
-                var salt   = packed.AsSpan(0, 16).ToArray();
-                var iv     = packed.AsSpan(16, 16).ToArray();
+                var salt = packed.AsSpan(0, 16).ToArray();
+                var iv = packed.AsSpan(16, 16).ToArray();
                 var cipher = packed.AsSpan(32).ToArray();
 
                 var key = new Rfc2898DeriveBytes(password, salt, 100_000,
@@ -167,10 +167,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 using var aes = Aes.Create();
                 aes.KeySize = 256;
-                aes.Key     = key;
-                aes.Mode    = CipherMode.CBC;
+                aes.Key = key;
+                aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
-                aes.IV      = iv;
+                aes.IV = iv;
 
                 using var dec = aes.CreateDecryptor();
                 var plainBytes = dec.TransformFinalBlock(cipher, 0, cipher.Length);

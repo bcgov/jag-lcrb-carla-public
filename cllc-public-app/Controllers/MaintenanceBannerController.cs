@@ -33,15 +33,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpGet]
         public ActionResult GetMaintenanceBanner()
         {
-            try 
+            try
             {
-            MaintenanceBannerModel banner = new MaintenanceBannerModel{
-                bannerEnabled = _configuration.GetValue<bool>("BANNER_ENABLED", false),
-                bannerText = _configuration.GetValue<string>("BANNER_TEXT", ""),
-                bannerStartDate = _configuration.GetValue<string>("BANNER_START_DATE", ""),
-                bannerEndDate = _configuration.GetValue<string>("BANNER_END_DATE", "")
-            };
-            return Ok(banner);
+                MaintenanceBannerModel banner = new MaintenanceBannerModel
+                {
+                    bannerEnabled = _configuration.GetValue<bool>("BANNER_ENABLED", false),
+                    bannerText = _configuration.GetValue<string>("BANNER_TEXT", ""),
+                    bannerStartDate = _configuration.GetValue<string>("BANNER_START_DATE", ""),
+                    bannerEndDate = _configuration.GetValue<string>("BANNER_END_DATE", "")
+                };
+                return Ok(banner);
 
             }
             catch (Exception e)

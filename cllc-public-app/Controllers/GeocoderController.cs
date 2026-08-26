@@ -40,12 +40,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _bcep = bcep;
         }
         [HttpGet("get-civic-address")]
-        public async Task<IActionResult>GetExternalData([FromQuery] string queryParam){
+        public async Task<IActionResult> GetExternalData([FromQuery] string queryParam)
+        {
             var baseUrl = $"{_configuration["GEOCODER_BASE_URL"]}/addresses.json?addressString={Uri.EscapeDataString(queryParam)}&locationDescriptor=any&maxResults=3&interpolation=adaptive&echo=true&brief=false&autoComplete=true&exactSpelling=false&setBack=0&outputSRS=4326&minScore=1&provinceCode=BC";
             using var httpClient = new HttpClient();
             try
             {
-                string apikey =  _configuration["GEOCODER_API_KEY"];
+                string apikey = _configuration["GEOCODER_API_KEY"];
                 var request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
                 request.Headers.Add("apikey", apikey);
                 var response = await httpClient.SendAsync(request);
@@ -62,14 +63,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         [HttpGet("get-pid")]
-        public async Task<IActionResult>GetPID([FromQuery] string siteId){
+        public async Task<IActionResult> GetPID([FromQuery] string siteId)
+        {
             var baseUrl = $"{_configuration["GEOCODER_BASE_URL"]}/parcels/pids/{Uri.EscapeDataString(siteId)}.json";
             using var httpClient = new HttpClient();
             try
             {
-               string apikey =  _configuration["GEOCODER_API_KEY"];
+                string apikey = _configuration["GEOCODER_API_KEY"];
                 var request = new HttpRequestMessage(HttpMethod.Get, baseUrl);
-                request.Headers.Add("apikey",apikey);
+                request.Headers.Add("apikey", apikey);
                 var response = await httpClient.SendAsync(request);
 
                 var jsonData = await response.Content.ReadAsStringAsync();
