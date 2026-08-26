@@ -3,7 +3,7 @@ run-name: "CI cllc-public-api-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - 'cllc-public-app/**'
       - 'cllc-interfaces/**'

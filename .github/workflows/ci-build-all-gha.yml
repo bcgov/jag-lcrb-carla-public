@@ -1,17 +1,17 @@
 name: Build and Deploy All GHA Services
-run-name: "Build all GHA services → ${{ inputs.ref || 'dv-migration' }}"
+run-name: "Build all GHA services → ${{ inputs.ref || 'develop' }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - '.github/workflows/ci-build-all-gha.yml'
   workflow_dispatch:
     inputs:
       ref:
-        description: 'Branch to build (defaults to dv-migration)'
+        description: 'Branch to build (defaults to develop)'
         required: false
-        default: dv-migration
+        default: develop
 
 jobs:
   trigger-all:
@@ -23,7 +23,7 @@ jobs:
       - name: Trigger all CI workflows
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REF: ${{ inputs.ref || 'dv-migration' }}
+          REF: ${{ inputs.ref || 'develop' }}
         run: |
           WORKFLOWS=(
             ci-geocoder-service-gha.yml

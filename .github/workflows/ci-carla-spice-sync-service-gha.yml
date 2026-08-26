@@ -3,7 +3,7 @@ run-name: "CI carla-spice-sync-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - 'carla-spice-sync-service/**'
       - 'cllc-interfaces/SharePoint/**'

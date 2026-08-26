@@ -3,7 +3,7 @@ run-name: "CI file-manager-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - 'file-manager-service/**'
       - 'cllc-interfaces/SharePoint/**'

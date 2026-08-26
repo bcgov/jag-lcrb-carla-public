@@ -3,7 +3,7 @@ run-name: "CI cllc-public-frontend-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - 'cllc-public-app/ClientApp/**'
       - 'cllc-public-app/Dockerfile.frontend.gha'

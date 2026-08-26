@@ -3,7 +3,7 @@ run-name: "CI geocoder-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [dv-migration]
+    branches: [develop]
     paths:
       - 'geocoder-service/**'
       - 'cllc-interfaces/**'
