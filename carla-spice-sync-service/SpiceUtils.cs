@@ -691,7 +691,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync
             }
             catch (Exception hoe)
             {
-                _logger.LogError(hoe, $"Exception in CreateAssociatesForAccountV2 for accountId: {accountId}");
+                _logger.LogError(hoe, "Exception in CreateAssociatesForAccountV2");
                 throw;
             }
         }
