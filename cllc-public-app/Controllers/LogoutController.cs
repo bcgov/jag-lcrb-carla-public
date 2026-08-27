@@ -76,7 +76,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            if (!_env.IsProduction())
+            // Only the real Production tier does a SiteMinder global sign-out.
+            // ASPNETCORE_ENVIRONMENT can't be used to tell tiers apart: it is
+            // pinned to "Production" in EVERY deployed environment (Development
+            // mode trips DI ValidateOnBuild and crashes one-stop), so keying off
+            // it sent dev/test to the SiteMinder logout for the first time — and
+            // logontest.gov.bc.ca doesn't answer for those hostnames, leaving the
+            // user on a browser error page. DEPLOYMENT_TIER carries the actual
+            // tier. Falls back to the hosting environment when it isn't set.
+            var deploymentTier = Configuration["DEPLOYMENT_TIER"];
+            var isProductionTier = string.IsNullOrEmpty(deploymentTier)
+                ? _env.IsProduction()
+                : string.Equals(deploymentTier, "Production", StringComparison.OrdinalIgnoreCase);
+
+            if (!isProductionTier)
             {
                 return Redirect($"{Configuration["BASE_PATH"]}");
             }
