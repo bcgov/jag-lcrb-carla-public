@@ -3,7 +3,7 @@ run-name: "CI one-stop-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, test]
     paths:
       - 'one-stop-service/**'
       - 'cllc-interfaces/OneStopRestClient/**'

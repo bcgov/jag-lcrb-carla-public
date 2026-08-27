@@ -3,7 +3,7 @@ run-name: "CI federal-reporting-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, test]
     paths:
       - 'federal-reporting-service/**'
       - 'cllc-interfaces/Dynamics-Dataverse/**'

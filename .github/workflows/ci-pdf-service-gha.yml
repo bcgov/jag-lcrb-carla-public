@@ -3,7 +3,7 @@ run-name: "CI pdf-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, test]
     paths:
       - 'pdf-service/**'
       - '.github/workflows/ci-pdf-service-gha.yml'

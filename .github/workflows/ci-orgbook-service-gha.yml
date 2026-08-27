@@ -3,7 +3,7 @@ run-name: "CI orgbook-service-gha → ${{ github.ref_name }}"
 
 on:
   push:
-    branches: [develop]
+    branches: [develop, test]
     paths:
       - 'orgbook-service/**'
       - 'cllc-interfaces/Dynamics-Dataverse/**'
