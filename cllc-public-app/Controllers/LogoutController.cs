@@ -76,26 +76,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
-            // Only the real Production tier does a SiteMinder global sign-out.
-            // ASPNETCORE_ENVIRONMENT can't be used to tell tiers apart: it is
-            // pinned to "Production" in EVERY deployed environment (Development
-            // mode trips DI ValidateOnBuild and crashes one-stop), so keying off
-            // it sent dev/test to the SiteMinder logout for the first time — and
-            // logontest.gov.bc.ca doesn't answer for those hostnames, leaving the
-            // user on a browser error page. DEPLOYMENT_TIER carries the actual
-            // tier. Falls back to the hosting environment when it isn't set.
-            var deploymentTier = Configuration["DEPLOYMENT_TIER"];
-            var isProductionTier = string.IsNullOrEmpty(deploymentTier)
-                ? _env.IsProduction()
-                : string.Equals(deploymentTier, "Production", StringComparison.OrdinalIgnoreCase);
-
-            if (!isProductionTier)
-            {
-                return Redirect($"{Configuration["BASE_PATH"]}");
-            }
-
-            string logoutPath = string.IsNullOrEmpty(Configuration["SITEMINDER_LOGOUT_URL"]) ? "/" : Configuration["SITEMINDER_LOGOUT_URL"];
-            return Redirect(logoutPath + $"?returl={Configuration["BASE_URI"]}{Configuration["BASE_PATH"]}&retnow=1");
+            // Every tier returns to the app's own landing page after clearing the
+            // session, rather than redirecting to SiteMinder's logoff endpoint.
+            // Those hosts are not reachable from a user's browser — logontest
+            // .gov.bc.ca times out for dev/test and logon.gov.bc.ca refuses the
+            // connection for prod — so that redirect only ever produced a browser
+            // error page. Previously this was gated on the tier, which just moved
+            // the failure from one environment to another.
+            //
+            // The teardown above is what actually signs the user out: the
+            // server-side session is cleared and every cookie the browser sent is
+            // expired, including SMSESSION at the .gov.bc.ca SSO scope. What is
+            // given up is SiteMinder's own global sign-out, so a user holding a
+            // live SMSESSION for a DIFFERENT .gov.bc.ca application may remain
+            // signed in over there.
+            //
+            // To restore the global sign-out once a reachable logoff endpoint is
+            // confirmed, redirect to SITEMINDER_LOGOUT_URL with
+            //   ?returl={BASE_URI}{BASE_PATH}&retnow=1
+            return Redirect($"{Configuration["BASE_PATH"]}");
         }
 
         /// <summary>
