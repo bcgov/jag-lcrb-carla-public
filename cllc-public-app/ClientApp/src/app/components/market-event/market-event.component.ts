@@ -1,28 +1,27 @@
-import { Component, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
-import { FormBuilder, Validators } from "@angular/forms";
-import {
-  LicenceEvent,
-  EventStatus,
-  MarketDuration,
-  SpecificLocation,
-  EventCategory,
-  MarketEventType
-} from '../../models/licence-event.model';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
 import { getWeekOfMonth } from 'date-fns';
-import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
-import { LicenceEventSchedule } from '@models/licence-event-schedule';
-
+import { Subscription } from 'rxjs';
+import {
+  EventCategory,
+  EventStatus,
+  LicenceEvent,
+  MarketDuration,
+  MarketEventType,
+  SpecificLocation
+} from '../../models/licence-event.model';
+import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
 
 @Component({
-  selector: "app-market-event",
-  templateUrl: "./market-event.component.html",
-  styleUrls: ["./market-event.component.scss"],
+  selector: 'app-market-event',
+  templateUrl: './market-event.component.html',
+  styleUrls: ['./market-event.component.scss']
 })
 export class MarketEventComponent extends FormBase implements OnInit {
   faSave = faSave;
@@ -56,42 +55,42 @@ export class MarketEventComponent extends FormBase implements OnInit {
     liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
   });
   eventForm = this.fb.group({
-    status: ["", [Validators.required]],
-    id: ["", []],
-    isNoPreventingSaleofLiquor: ["", [Validators.required]],
-    isMarketManagedorCarried: ["", [Validators.required]],
-    isMarketOnlyVendors: ["", [Validators.required]],
-    isMarketHostsSixVendors: ["", [Validators.required]],
-    isMarketMaxAmountorDuration: ["", [Validators.required]],
-    isAllStaffServingitRight: ["", [Validators.required]],
-    isSampleSizeCompliant: ["", [Validators.required]],
-    name: ["", []],
-    licenceId: ["", []],
-    accountId: ["", []],
-    contactName: ["", [Validators.required]],
-    contactPhone: ["", [Validators.required]],
-    contactEmail: ["", [Validators.required]],
-    marketEventType: ["", [Validators.required]],
-    eventTypeDescription: ["", []],
-    mktOrganizerContactName: ["", []],
-    mktOrganizerContactPhone: ["", []],
-    businessNumber: ["", []],
-    registrationNumber: ["", []],
-    marketName: ["", [Validators.required]],
-    marketWebsite: ["", []],
-    marketDuration: ["", [Validators.required]],
-    clientHostname: ["", [Validators.required]],
-    venueDescription: ["", []],
-    specificLocation: ["", []],
-    additionalLocationInformation: ["", []],
-    street1: ["", [Validators.required]],
-    street2: ["", []],
-    city: ["", [Validators.required]],
-    province: ["BC", [Validators.required]],
-    postalCode: ["", [Validators.required]],
-    startDate: ["", [Validators.required]],
-    endDate: ["", [Validators.required]],
-    agreement: ["", [Validators.required]],
+    status: ['', [Validators.required]],
+    id: ['', []],
+    isNoPreventingSaleofLiquor: ['', [Validators.required]],
+    isMarketManagedorCarried: ['', [Validators.required]],
+    isMarketOnlyVendors: ['', [Validators.required]],
+    isMarketHostsSixVendors: ['', [Validators.required]],
+    isMarketMaxAmountorDuration: ['', [Validators.required]],
+    isAllStaffServingitRight: ['', [Validators.required]],
+    isSampleSizeCompliant: ['', [Validators.required]],
+    name: ['', []],
+    licenceId: ['', []],
+    accountId: ['', []],
+    contactName: ['', [Validators.required]],
+    contactPhone: ['', [Validators.required]],
+    contactEmail: ['', [Validators.required]],
+    marketEventType: ['', [Validators.required]],
+    eventTypeDescription: ['', []],
+    mktOrganizerContactName: ['', []],
+    mktOrganizerContactPhone: ['', []],
+    businessNumber: ['', []],
+    registrationNumber: ['', []],
+    marketName: ['', [Validators.required]],
+    marketWebsite: ['', []],
+    marketDuration: ['', [Validators.required]],
+    clientHostname: ['', [Validators.required]],
+    venueDescription: ['', []],
+    specificLocation: ['', []],
+    additionalLocationInformation: ['', []],
+    street1: ['', [Validators.required]],
+    street2: ['', []],
+    city: ['', [Validators.required]],
+    province: ['BC', [Validators.required]],
+    postalCode: ['', [Validators.required]],
+    startDate: ['', [Validators.required]],
+    endDate: ['', [Validators.required]],
+    agreement: ['', [Validators.required]],
     sunday: [false, []],
     monday: [false, []],
     tuesday: [false, []],
@@ -99,8 +98,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
     thursday: [false, []],
     friday: [false, []],
     saturday: [false, []],
-    eventCategory: [this.getOptionFromLabel(this.eventCategory, "Market").value, []],
-    weekOfMonth: ["", []]
+    eventCategory: [this.getOptionFromLabel(this.eventCategory, 'Market').value, []],
+    weekOfMonth: ['', []]
   });
 
   constructor(
@@ -110,14 +109,14 @@ export class MarketEventComponent extends FormBase implements OnInit {
     private route: ActivatedRoute
   ) {
     super();
-    this.route.paramMap.subscribe(params => {
-      this.eventForm.controls["licenceId"].setValue(params.get("licenceId"));
-      if (params.get("eventId")) {
+    this.route.paramMap.subscribe((params) => {
+      this.eventForm.controls['licenceId'].setValue(params.get('licenceId'));
+      if (params.get('eventId')) {
         this.isEditMode = true;
-        this.retrieveSavedEvent(params.get("eventId"));
+        this.retrieveSavedEvent(params.get('eventId'));
       } else {
         this.resetDateFormsToDefault();
-        this.eventForm.controls["status"].setValue(this.getOptionFromLabel(this.eventStatus, "Draft").value);
+        this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
       }
     });
     this.startDateMinimum = new Date();
@@ -126,71 +125,69 @@ export class MarketEventComponent extends FormBase implements OnInit {
     this.endDateMinimum.setDate(this.endDateMinimum.getDate());
   }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   get isWeekly() {
-    return this.getOptionFromValue(this.marketDuration, this.eventForm.get("marketDuration").value).label === "Weekly";
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Weekly';
   }
 
   get isBiWeekly() {
-    return this.getOptionFromValue(this.marketDuration, this.eventForm.get("marketDuration").value).label ===
-      "Bi-Weekly";
+    return (
+      this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Bi-Weekly'
+    );
   }
 
   get isMonthly() {
-    return this.getOptionFromValue(this.marketDuration, this.eventForm.get("marketDuration").value).label === "Monthly";
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Monthly';
   }
 
   get isOnce() {
-    return this.getOptionFromValue(this.marketDuration, this.eventForm.get("marketDuration").value).label === "Once";
+    return this.getOptionFromValue(this.marketDuration, this.eventForm.get('marketDuration').value).label === 'Once';
   }
 
   get selectedDaysOfWeekArray() {
     const arr = [];
-    if (this.eventForm.get("sunday").value) {
-      arr.push("sunday");
+    if (this.eventForm.get('sunday').value) {
+      arr.push('sunday');
     }
-    if (this.eventForm.get("monday").value) {
-      arr.push("monday");
+    if (this.eventForm.get('monday').value) {
+      arr.push('monday');
     }
-    if (this.eventForm.get("tuesday").value) {
-      arr.push("tuesday");
+    if (this.eventForm.get('tuesday').value) {
+      arr.push('tuesday');
     }
-    if (this.eventForm.get("wednesday").value) {
-      arr.push("wednesday");
+    if (this.eventForm.get('wednesday').value) {
+      arr.push('wednesday');
     }
-    if (this.eventForm.get("thursday").value) {
-      arr.push("thursday");
+    if (this.eventForm.get('thursday').value) {
+      arr.push('thursday');
     }
-    if (this.eventForm.get("friday").value) {
-      arr.push("friday");
+    if (this.eventForm.get('friday').value) {
+      arr.push('friday');
     }
-    if (this.eventForm.get("saturday").value) {
-      arr.push("saturday");
+    if (this.eventForm.get('saturday').value) {
+      arr.push('saturday');
     }
     return arr;
   }
 
   get selectedWeekOfMonth() {
-    return this.eventForm.get("weekOfMonth").value;
+    return this.eventForm.get('weekOfMonth').value;
   }
 
   retrieveSavedEvent(eventId: string) {
-    this.busy = this.licenceEvents.getLicenceEvent(eventId)
-      .subscribe((licenceEvent) => {
-        this.licenceEvent = licenceEvent;
-        this.setFormToLicenceEvent(licenceEvent);
-      });
+    this.busy = this.licenceEvents.getLicenceEvent(eventId).subscribe((licenceEvent) => {
+      this.licenceEvent = licenceEvent;
+      this.setFormToLicenceEvent(licenceEvent);
+    });
   }
 
   setFormToLicenceEvent(licenceEvent: LicenceEvent) {
-    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, "Approved").value) {
+    if (licenceEvent.status === this.getOptionFromLabel(this.eventStatus, 'Approved').value) {
       this.isReadOnly = true;
     }
 
-    const schedules = licenceEvent["schedules"];
+    const schedules = licenceEvent['schedules'];
     this.eventForm.setValue({
       status: licenceEvent.status,
       id: licenceEvent.id,
@@ -236,7 +233,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       thursday: false,
       friday: false,
       saturday: false,
-      weekOfMonth: ""
+      weekOfMonth: ''
     });
 
     if (this.isReadOnly) {
@@ -259,19 +256,19 @@ export class MarketEventComponent extends FormBase implements OnInit {
       this.setWeekOfMonthFromEventSchedule(schedules);
     }
 
-    schedules.forEach(sched => {
-      const startDate = (new Date(sched["eventStartDateTime"]));
-      const endDate = (new Date(sched["eventEndDateTime"]));
-      const liquorStart = (new Date(sched["serviceStartDateTime"]));
-      const liquorEnd = (new Date(sched["serviceEndDateTime"]));
+    schedules.forEach((sched) => {
+      const startDate = new Date(sched['eventStartDateTime']);
+      const endDate = new Date(sched['eventEndDateTime']);
+      const liquorStart = new Date(sched['serviceStartDateTime']);
+      const liquorEnd = new Date(sched['serviceEndDateTime']);
 
-      const isDefault = ((endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24)) > 1;
+      const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
         this.scheduleIsInconsistent = true;
       }
 
       const timeForm = this.fb.group({
-        dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ", " + startDate.toLocaleDateString("en-US"), []],
+        dateTitle: [isDefault ? null : DAYS[startDate.getDay()] + ', ' + startDate.toLocaleDateString('en-US'), []],
         date: [isDefault ? null : startDate, []],
         startTime: [{ hour: startDate.getHours(), minute: startDate.getMinutes() }, [Validators.required]],
         endTime: [{ hour: endDate.getHours(), minute: endDate.getMinutes() }, [Validators.required]],
@@ -290,27 +287,27 @@ export class MarketEventComponent extends FormBase implements OnInit {
   /* Restores the state of the week checkboxes when showing the form in read-only mode */
   setWeekdaysFromEventSchedule(schedules: any[] = []) {
     // these match the form properties that drive the week checkboxes
-    const weekdays = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
+    const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     let state = {};
     for (const sched of schedules) {
-      const d = new Date(sched["eventStartDateTime"]);
+      const d = new Date(sched['eventStartDateTime']);
       const index = d.getDay();
       const day = weekdays[index];
       state = {
         ...state,
-        [day]: true,
+        [day]: true
       };
     }
     // update form values
     this.eventForm.patchValue(state);
     // manually run the on-change logic (as we are updating the form fields directly)
-    Object.keys(state).forEach(day => this.weekDateChanged(day, false));
+    Object.keys(state).forEach((day) => this.weekDateChanged(day, false));
   }
 
   /* Restores the state of the week of month (1st Monday of the month, etc) when showing the form in read-only mode */
   setWeekOfMonthFromEventSchedule(schedules: any[] = []) {
     const first = schedules.length > 0 ? schedules[0] : null;
-    const d = new Date(first["eventStartDateTime"]);
+    const d = new Date(first['eventStartDateTime']);
     const week = getWeekOfMonth(d);
     this.eventForm.patchValue({ weekOfMonth: week });
   }
@@ -321,16 +318,16 @@ export class MarketEventComponent extends FormBase implements OnInit {
       return;
     }
     const sched = schedules[0];
-    const eventBegin = new Date(sched["eventStartDateTime"]);
-    const eventEnd = new Date(sched["eventEndDateTime"]);
-    const serviceBegin = new Date(sched["serviceStartDateTime"]);
-    const serviceEnd = new Date(sched["serviceEndDateTime"]);
+    const eventBegin = new Date(sched['eventStartDateTime']);
+    const eventEnd = new Date(sched['eventEndDateTime']);
+    const serviceBegin = new Date(sched['serviceStartDateTime']);
+    const serviceEnd = new Date(sched['serviceEndDateTime']);
 
     this.defaultTimeForm.patchValue({
       startTime: { hour: eventBegin.getHours(), minute: eventBegin.getMinutes() },
       endTime: { hour: eventEnd.getHours(), minute: eventEnd.getMinutes() },
       liquorStartTime: { hour: serviceBegin.getHours(), minute: serviceBegin.getMinutes() },
-      liquorEndTime: { hour: serviceEnd.getHours(), minute: serviceEnd.getMinutes() },
+      liquorEndTime: { hour: serviceEnd.getHours(), minute: serviceEnd.getMinutes() }
     });
   }
 
@@ -340,7 +337,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
       return;
     }
     if (submit) {
-      this.eventForm.controls["status"].setValue(this.getOptionFromLabel(this.eventStatus, "Submitted").value);
+      this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Submitted').value);
     }
 
     const schedules = this.packageUpTimeForms();
@@ -359,34 +356,34 @@ export class MarketEventComponent extends FormBase implements OnInit {
       if (this.timeForms.controls[i].invalid) {
         return new Array();
       }
-      const date = this.timeForms.controls[i]["controls"]["date"].value;
+      const date = this.timeForms.controls[i]['controls']['date'].value;
       const eventBegin = new Date(date);
       const eventEnd = new Date(date);
       const serviceBegin = new Date(date);
       const serviceEnd = new Date(date);
 
-      eventBegin.setHours(this.defaultTimeForm.get("startTime").value["hour"]);
-      eventBegin.setMinutes(this.defaultTimeForm.get("startTime").value["minute"]);
-      eventEnd.setHours(this.defaultTimeForm.get("endTime").value["hour"]);
-      eventEnd.setMinutes(this.defaultTimeForm.get("endTime").value["minute"]);
-      serviceBegin.setHours(this.defaultTimeForm.get("liquorStartTime").value["hour"]);
-      serviceBegin.setMinutes(this.defaultTimeForm.get("liquorStartTime").value["minute"]);
-      serviceEnd.setHours(this.defaultTimeForm.get("liquorEndTime").value["hour"]);
-      serviceEnd.setMinutes(this.defaultTimeForm.get("liquorEndTime").value["minute"]);
+      eventBegin.setHours(this.defaultTimeForm.get('startTime').value['hour']);
+      eventBegin.setMinutes(this.defaultTimeForm.get('startTime').value['minute']);
+      eventEnd.setHours(this.defaultTimeForm.get('endTime').value['hour']);
+      eventEnd.setMinutes(this.defaultTimeForm.get('endTime').value['minute']);
+      serviceBegin.setHours(this.defaultTimeForm.get('liquorStartTime').value['hour']);
+      serviceBegin.setMinutes(this.defaultTimeForm.get('liquorStartTime').value['minute']);
+      serviceEnd.setHours(this.defaultTimeForm.get('liquorEndTime').value['hour']);
+      serviceEnd.setMinutes(this.defaultTimeForm.get('liquorEndTime').value['minute']);
 
-      if ((eventEnd.getTime() - eventBegin.getTime()) < 0) {
+      if (eventEnd.getTime() - eventBegin.getTime() < 0) {
         eventEnd.setDate(eventEnd.getDate() + 1);
       }
 
-      if ((serviceEnd.getTime() - serviceBegin.getTime()) < 0) {
+      if (serviceEnd.getTime() - serviceBegin.getTime() < 0) {
         serviceEnd.setDate(serviceEnd.getDate() + 1);
       }
 
       dateArray.push({
-        'eventStartDateTime': eventBegin,
-        'eventEndDateTime': eventEnd,
-        'serviceStartDateTime': serviceBegin,
-        'serviceEndDateTime': serviceEnd
+        eventStartDateTime: eventBegin,
+        eventEndDateTime: eventEnd,
+        serviceStartDateTime: serviceBegin,
+        serviceEndDateTime: serviceEnd
       });
     }
 
@@ -395,17 +392,18 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   updateLicence(schedules) {
     this.busy = this.licenceEvents
-      .updateLicenceEvent(this.eventForm.get("id").value, { ...this.eventForm.value, schedules })
+      .updateLicenceEvent(this.eventForm.get('id').value, { ...this.eventForm.value, schedules })
       .subscribe((licenceEvent) => {
-        this.router.navigate(["/licences"]);
+        this.router.navigate(['/licences']);
       });
   }
 
   createLicence(schedules) {
-    this.eventForm.removeControl("id");
-    this.busy = this.licenceEvents.createLicenceEvent({ ...this.eventForm.value, schedules: schedules })
+    this.eventForm.removeControl('id');
+    this.busy = this.licenceEvents
+      .createLicenceEvent({ ...this.eventForm.value, schedules: schedules })
       .subscribe((licenceEvent) => {
-        this.router.navigate(["/licences"]);
+        this.router.navigate(['/licences']);
       });
   }
 
@@ -414,24 +412,24 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   getOptionFromValue(options: any, value: number) {
-    const idx = options.findIndex(opt => opt.value === value);
+    const idx = options.findIndex((opt) => opt.value === value);
     if (idx >= 0) {
       return options[idx];
     }
     return {
       value: null,
-      label: ""
+      label: ''
     };
   }
 
   getOptionFromLabel(options: any, label: string) {
-    const idx = options.findIndex(opt => opt.label === label);
+    const idx = options.findIndex((opt) => opt.label === label);
     if (idx >= 0) {
       return options[idx];
     }
     return {
       value: null,
-      label: ""
+      label: ''
     };
   }
 
@@ -441,8 +439,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
   }
 
   refreshTimeDays() {
-    const days = this.getDaysArray(this.eventForm.controls["startDate"].value,
-      this.eventForm.controls["endDate"].value);
+    const days = this.getDaysArray(
+      this.eventForm.controls['startDate'].value,
+      this.eventForm.controls['endDate'].value
+    );
     this.resetDateFormsToArray(days);
   }
 
@@ -460,26 +460,29 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   resetDateFormsToArray(datesArray) {
     this.timeForms = this.fb.array([]);
-    datesArray.forEach(element => {
-      this.timeForms.push(this.fb.group({
-        dateTitle: [DAYS[element.getDay()] + ", " + element.toLocaleDateString("en-US"), []],
-        date: [element, []],
-        startTime: [DEFAULT_START_TIME, [Validators.required]],
-        endTime: [DEFAULT_END_TIME, [Validators.required]],
-        liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
-        liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
-      }));
+    datesArray.forEach((element) => {
+      this.timeForms.push(
+        this.fb.group({
+          dateTitle: [DAYS[element.getDay()] + ', ' + element.toLocaleDateString('en-US'), []],
+          date: [element, []],
+          startTime: [DEFAULT_START_TIME, [Validators.required]],
+          endTime: [DEFAULT_END_TIME, [Validators.required]],
+          liquorStartTime: [DEFAULT_START_TIME, [Validators.required]],
+          liquorEndTime: [DEFAULT_END_TIME, [Validators.required]]
+        })
+      );
     });
   }
 
   formIsValid() {
     this.validationMessages = [...new Set(this.listControlsWithErrors(this.eventForm, this.getValidationErrorMap()))];
-    if (this.eventForm.get("registrationNumber").value === "" && this.eventForm.get("businessNumber").value === "") {
+    if (this.eventForm.get('registrationNumber').value === '' && this.eventForm.get('businessNumber').value === '') {
       this.validationMessages.push(
-        `Please enter either the 'Market Business Number' or the 'Incorporation/Registration Number'`);
+        `Please enter either the 'Market Business Number' or the 'Incorporation/Registration Number'`
+      );
     }
     if (this.timeForms.controls.length < 1) {
-      this.validationMessages.push("No market dates selected");
+      this.validationMessages.push('No market dates selected');
     }
 
     if (this.validationMessages.length > 0) {
@@ -492,49 +495,49 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   getValidationErrorMap() {
     const errorMap = {
-      contactName: "Please enter the contact name",
-      contactPhone: "Please enter the contact phone number",
-      contactEmail: "Please enter the contact email address",
-      marketEventType: "Please enter the market type",
-      marketName: "Please enter the market name",
-      marketDuration: "Please enter the market frequency",
-      clientHostname: "Please enter the market business legal name",
-      city: "Please enter the city",
-      postalCode: "Please enter the postal code",
-      startDate: "Please enter the start date",
-      endDate: "Please enter the end date",
-      isNoPreventingSaleofLiquor: "Please agree to all terms",
-      isMarketManagedorCarried: "Please agree to all terms",
-      isMarketOnlyVendors: "Please agree to all terms",
-      isMarketHostsSixVendors: "Please agree to all terms",
-      isMarketMaxAmountorDuration: "Please agree to all terms",
-      isAllStaffServingitRight: "Please agree to all terms",
-      isSampleSizeCompliant: "Please agree to all terms",
-      agreement: "Please agree to all terms"
+      contactName: 'Please enter the contact name',
+      contactPhone: 'Please enter the contact phone number',
+      contactEmail: 'Please enter the contact email address',
+      marketEventType: 'Please enter the market type',
+      marketName: 'Please enter the market name',
+      marketDuration: 'Please enter the market frequency',
+      clientHostname: 'Please enter the market business legal name',
+      city: 'Please enter the city',
+      postalCode: 'Please enter the postal code',
+      startDate: 'Please enter the start date',
+      endDate: 'Please enter the end date',
+      isNoPreventingSaleofLiquor: 'Please agree to all terms',
+      isMarketManagedorCarried: 'Please agree to all terms',
+      isMarketOnlyVendors: 'Please agree to all terms',
+      isMarketHostsSixVendors: 'Please agree to all terms',
+      isMarketMaxAmountorDuration: 'Please agree to all terms',
+      isAllStaffServingitRight: 'Please agree to all terms',
+      isSampleSizeCompliant: 'Please agree to all terms',
+      agreement: 'Please agree to all terms'
     };
     return errorMap;
   }
 
   isOnSelectedDayOfWeek(d: Date): boolean {
-    if (this.eventForm.get("sunday").value && d.getDay() === 0) {
+    if (this.eventForm.get('sunday').value && d.getDay() === 0) {
       return true;
     }
-    if (this.eventForm.get("monday").value && d.getDay() === 1) {
+    if (this.eventForm.get('monday').value && d.getDay() === 1) {
       return true;
     }
-    if (this.eventForm.get("tuesday").value && d.getDay() === 2) {
+    if (this.eventForm.get('tuesday').value && d.getDay() === 2) {
       return true;
     }
-    if (this.eventForm.get("wednesday").value && d.getDay() === 3) {
+    if (this.eventForm.get('wednesday').value && d.getDay() === 3) {
       return true;
     }
-    if (this.eventForm.get("thursday").value && d.getDay() === 4) {
+    if (this.eventForm.get('thursday').value && d.getDay() === 4) {
       return true;
     }
-    if (this.eventForm.get("friday").value && d.getDay() === 5) {
+    if (this.eventForm.get('friday').value && d.getDay() === 5) {
       return true;
     }
-    if (this.eventForm.get("saturday").value && d.getDay() === 6) {
+    if (this.eventForm.get('saturday').value && d.getDay() === 6) {
       return true;
     }
     return false;
@@ -545,11 +548,13 @@ export class MarketEventComponent extends FormBase implements OnInit {
     if (!this.selectedWeekOfMonth) {
       return retVal;
     }
-    this.selectedDaysOfWeekArray.forEach(element => {
-      const date = getMonthlyWeekday(this.selectedWeekOfMonth,
+    this.selectedDaysOfWeekArray.forEach((element) => {
+      const date = getMonthlyWeekday(
+        this.selectedWeekOfMonth,
         element,
-        d.toLocaleString("default", { month: "long" }),
-        d.getFullYear());
+        d.toLocaleString('default', { month: 'long' }),
+        d.getFullYear()
+      );
 
       if (date === d.getDate()) {
         retVal = true;
@@ -564,7 +569,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     end = new Date(end);
     for (var arr = [], dt = start; dt <= end; dt.setDate(dt.getDate() + 1)) {
       const d = new Date(dt);
-      if ((this.isWeekly || this.isBiWeekly)) {
+      if (this.isWeekly || this.isBiWeekly) {
         if (this.isOnSelectedDayOfWeek(d) && ((this.isBiWeekly && dayNum % 14 < 7) || !this.isBiWeekly)) {
           arr.push(d);
         }
@@ -582,16 +587,19 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   cancel() {
     if (this.isEditMode) {
-      const id = this.eventForm.get("id").value;
-      const status = this.getOptionFromLabel(this.eventStatus, "Cancelled").value;
+      const id = this.eventForm.get('id').value;
+      const status = this.getOptionFromLabel(this.eventStatus, 'Cancelled').value;
       this.busy = this.licenceEvents
-        .updateLicenceEvent(id,
-          { ...this.eventForm.value, status: status, licenceId: this.eventForm.get("licenceId").value })
+        .updateLicenceEvent(id, {
+          ...this.eventForm.value,
+          status: status,
+          licenceId: this.eventForm.get('licenceId').value
+        })
         .subscribe((licenceEvent) => {
-          this.router.navigate(["/licences"]);
+          this.router.navigate(['/licences']);
         });
     } else {
-      this.router.navigate(["/licences"]);
+      this.router.navigate(['/licences']);
     }
   }
 
@@ -629,17 +637,17 @@ export class MarketEventComponent extends FormBase implements OnInit {
 
   clearWeeklyChecks() {
     this.daysChecked = 0;
-    this.eventForm.get("sunday").setValue(false);
-    this.eventForm.get("monday").setValue(false);
-    this.eventForm.get("tuesday").setValue(false);
-    this.eventForm.get("wednesday").setValue(false);
-    this.eventForm.get("thursday").setValue(false);
-    this.eventForm.get("friday").setValue(false);
+    this.eventForm.get('sunday').setValue(false);
+    this.eventForm.get('monday').setValue(false);
+    this.eventForm.get('tuesday').setValue(false);
+    this.eventForm.get('wednesday').setValue(false);
+    this.eventForm.get('thursday').setValue(false);
+    this.eventForm.get('friday').setValue(false);
   }
 
   capitalize(val: string) {
-    if (typeof val !== "string") {
-      return "";
+    if (typeof val !== 'string') {
+      return '';
     }
     return val.charAt(0).toUpperCase() + val.slice(1);
   }

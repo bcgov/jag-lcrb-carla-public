@@ -1,12 +1,11 @@
-
-import { TestBed, ComponentFixture, ComponentFixtureAutoDetect, waitForAsync } from "@angular/core/testing";
-import { BrowserModule } from "@angular/platform-browser";
-import { BceidConfirmationComponent } from "./bceid-confirmation.component";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
-import { DynamicsDataService } from "@services/dynamics-data.service";
-import { UserDataService } from "@services/user-data.service";
-import { provideMockStore } from "@ngrx/store/testing";
-import { AccountDataService } from "@services/account-data.service";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, ComponentFixtureAutoDetect, TestBed, waitForAsync } from '@angular/core/testing';
+import { BrowserModule } from '@angular/platform-browser';
+import { provideMockStore } from '@ngrx/store/testing';
+import { AccountDataService } from '@services/account-data.service';
+import { DynamicsDataService } from '@services/dynamics-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { BceidConfirmationComponent } from './bceid-confirmation.component';
 
 let component: BceidConfirmationComponent;
 let fixture: ComponentFixture<BceidConfirmationComponent>;
@@ -14,32 +13,32 @@ let dynamicsDataServiceStub: Partial<DynamicsDataService>;
 let userDataServiceStub: Partial<UserDataService>;
 let accountDataServiceStub: Partial<AccountDataService>;
 
-describe("bceid-confirmation component",
-  () => {
-    dynamicsDataServiceStub = {};
-    userDataServiceStub = {};
-    accountDataServiceStub = {};
-    beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [BceidConfirmationComponent],
-        imports: [BrowserModule],
-        providers: [
-          provideMockStore({}),
-          { provide: AccountDataService, useValue: accountDataServiceStub },
-          { provide: UserDataService, useValue: userDataServiceStub },
-          { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
-          { provide: ComponentFixtureAutoDetect, useValue: true }
-        ],
-        schemas: [NO_ERRORS_SCHEMA]
-      });
-      fixture = TestBed.createComponent(BceidConfirmationComponent);
-      component = fixture.componentInstance;
-    }));
+describe('bceid-confirmation component', () => {
+  dynamicsDataServiceStub = {};
+  userDataServiceStub = {};
+  accountDataServiceStub = {};
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [BceidConfirmationComponent],
+      imports: [BrowserModule],
+      providers: [
+        provideMockStore({}),
+        { provide: AccountDataService, useValue: accountDataServiceStub },
+        { provide: UserDataService, useValue: userDataServiceStub },
+        { provide: DynamicsDataService, useValue: dynamicsDataServiceStub },
+        { provide: ComponentFixtureAutoDetect, useValue: true }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    });
+    fixture = TestBed.createComponent(BceidConfirmationComponent);
+    component = fixture.componentInstance;
+  }));
 
-    afterEach(() => { fixture.destroy(); });
-
-    it("should do something",
-      waitForAsync(() => {
-        expect(true).toEqual(true);
-      }));
+  afterEach(() => {
+    fixture.destroy();
   });
+
+  it('should do something', waitForAsync(() => {
+    expect(true).toEqual(true);
+  }));
+});

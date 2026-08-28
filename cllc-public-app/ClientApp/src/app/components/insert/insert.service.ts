@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { ActivatedRoute, NavigationEnd, Router } from "@angular/router";
-import { InsertComponent } from "./insert.component";
+import { Injectable } from '@angular/core';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { InsertComponent } from './insert.component';
 
 @Injectable()
 export class InsertService {
@@ -8,7 +8,8 @@ export class InsertService {
 
   constructor(
     private router: Router,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute
+  ) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         let route = this.activatedRoute;
@@ -16,12 +17,12 @@ export class InsertService {
         while (route.firstChild) {
           route = route.firstChild;
         }
-        if (route.outlet === "primary") {
+        if (route.outlet === 'primary') {
           const data = route.snapshot.data;
           const updates = {};
           // tslint:disable-next-line:forin
           for (const k in this.inserts) {
-            updates[k] = data && data[k] || null;
+            updates[k] = (data && data[k]) || null;
           }
           // tslint:disable-next-line:forin
           for (const k in updates) {
@@ -40,7 +41,7 @@ export class InsertService {
     this.updateInsert(id, null);
   }
 
-  updateInsert(id: string, spec: { type: string, inputs?: any, options?: any }) {
+  updateInsert(id: string, spec: { type: string; inputs?: any; options?: any }) {
     if (this.inserts[id]) {
       // may be blank, in which case the component is hidden
       this.inserts[id].componentSpec = spec;

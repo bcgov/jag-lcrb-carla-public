@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -35,7 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-            
+
             string changedName = "ChangedName";
             string service = "contact";
 
@@ -47,8 +46,9 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             //First create the contact
             var request = new HttpRequestMessage(HttpMethod.Post, $"/api/{service}/worker");
-            ViewModels.Contact contactVM = new ViewModels.Contact() {
-                firstname  = "TestFirst",
+            ViewModels.Contact contactVM = new ViewModels.Contact()
+            {
+                firstname = "TestFirst",
                 middlename = "TestMiddle",
                 lastname = "TestLst"
             };
@@ -59,7 +59,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             var response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-          
+
             contactVM = JsonConvert.DeserializeObject<ViewModels.Contact>(jsonString);
 
             // Get the worker
@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             // U - Update            
-           alias2.firstname = changedName;
+            alias2.firstname = changedName;
             request = new HttpRequestMessage(HttpMethod.Put, "/api/alias/" + alias2.id)
             {
                 Content = new StringContent(JsonConvert.SerializeObject(alias2), Encoding.UTF8, "application/json")

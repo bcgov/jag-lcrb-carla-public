@@ -1,14 +1,13 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
-import { trigger, state, style, animate, transition } from '@angular/animations';
 import { IndexedDBService } from '@services/indexed-db.service';
-import { faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
-import { Router } from '@angular/router';
 import { FormBase } from '@shared/form-base';
-import { differenceInCalendarDays, differenceInBusinessDays } from 'date-fns';
-import { distinct, distinctUntilChanged } from 'rxjs/operators';
+import { differenceInBusinessDays, differenceInCalendarDays } from 'date-fns';
+import { distinctUntilChanged } from 'rxjs/operators';
 @Component({
   selector: 'app-eligibility',
   templateUrl: './eligibility.component.html',
@@ -35,28 +34,29 @@ export class EligibilityComponent extends FormBase implements OnInit {
       return;
     }
     // get the last saved application
-    this.db.getSepApplication(value)
-      .then(app => {
-        this.sepApplication = app;
-        if (this.form && app) {
-          this.form.patchValue(this.sepApplication);
-          if(this.disableForm){
-            this.form.disable();
-          }
+    this.db.getSepApplication(value).then((app) => {
+      this.sepApplication = app;
+      if (this.form && app) {
+        this.form.patchValue(this.sepApplication);
+        if (this.disableForm) {
+          this.form.disable();
         }
-      });
+      }
+    });
   }
 
   get disableForm(): boolean {
-    if(this.sepApplication){
-      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== "Draft";
+    if (this.sepApplication) {
+      return this.sepApplication?.eventStatus && this.sepApplication?.eventStatus !== 'Draft';
     }
     return false;
   }
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private router: Router,
-    private db: IndexedDBService) {
+    private db: IndexedDBService
+  ) {
     super();
   }
 
@@ -78,16 +78,17 @@ export class EligibilityComponent extends FormBase implements OnInit {
       isLocationLicensed: [null, [Validators.required]],
       hostOrganizationName: [''],
       hostOrganizationAddress: [''],
-      hostOrganizationCategory: [''],
+      hostOrganizationCategory: ['']
     });
 
-    if(this.disableForm){
+    if (this.disableForm) {
       this.form.disable();
     }
 
-    this.form.get('privateOrPublic').valueChanges
-      .pipe(distinctUntilChanged())
-      .subscribe(selectedValue => {
+    this.form
+      .get('privateOrPublic')
+      .valueChanges.pipe(distinctUntilChanged())
+      .subscribe((selectedValue) => {
         // if not Private – Family and invited friends only
         if (selectedValue && selectedValue !== 'Family') {
           this.form.get('hostOrganizationName').setValidators([Validators.required]);
@@ -103,8 +104,9 @@ export class EligibilityComponent extends FormBase implements OnInit {
         }
       });
 
-    this.form.get('isMajorSignificance').valueChanges
-      .pipe(distinctUntilChanged())
+    this.form
+      .get('isMajorSignificance')
+      .valueChanges.pipe(distinctUntilChanged())
       .subscribe((hasMajorSignificance: boolean) => {
         if (hasMajorSignificance) {
           this.form.get('majorSignificanceRationale').setValidators([Validators.required]);
@@ -117,15 +119,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
     if (this.sepApplication) {
       this.form.patchValue(this.sepApplication);
     }
-
   }
 
   isSoon(): boolean {
-    return differenceInCalendarDays(new Date(this.form.get('eventStartDate').value), new Date() ) < 15;
+    return differenceInCalendarDays(new Date(this.form.get('eventStartDate').value), new Date()) < 15;
   }
 
   isTooSoon(): boolean {
-    return differenceInBusinessDays(new Date(this.form.get('eventStartDate').value), new Date() ) < 2;
+    return differenceInBusinessDays(new Date(this.form.get('eventStartDate').value), new Date()) < 2;
   }
 
   isValid() {
@@ -145,16 +146,14 @@ export class EligibilityComponent extends FormBase implements OnInit {
       isLocationLicensed: 'Is there currently a liquor licence at your event location?',
       hostOrganizationName: 'What is the name of the organization hosting the event? ',
       hostOrganizationAddress: 'What is the address of the organization?',
-      hostOrganizationCategory: 'Select a category that best describes the organization hosting the event',
+      hostOrganizationCategory: 'Select a category that best describes the organization hosting the event'
     });
     const bevMsg = this.bevNumberValidationMessage();
     if (bevMsg !== null) {
       this.validationMessages.push(bevMsg);
     }
 
-    const valid = this.form.valid
-      && !this.form.get('isPrivateResidence').value === true
-      && bevMsg === null;
+    const valid = this.form.valid && !this.form.get('isPrivateResidence').value === true && bevMsg === null;
     return valid;
   }
 

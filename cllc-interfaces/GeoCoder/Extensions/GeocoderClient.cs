@@ -7,9 +7,9 @@ using Newtonsoft.Json;
 
 namespace Gov.Lclb.Cllb.Interfaces.GeoCoder
 {
-    public partial class GeocoderClient 
+    public partial class GeocoderClient
     {
 
-        
+
     }
 }

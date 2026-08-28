@@ -1,14 +1,13 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
-import { catchError } from "rxjs/operators";
-import { DataService } from "./data.service";
-import { MonthlyReport } from "@models/monthly-report.model";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { MonthlyReport } from '@models/monthly-report.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class MonthlyReportDataService extends DataService {
-
-  apiPath = "api/monthlyreports/";
+  apiPath = 'api/monthlyreports/';
 
   constructor(private http: HttpClient) {
     super();
@@ -20,32 +19,33 @@ export class MonthlyReportDataService extends DataService {
   }
 
   getMonthlyReportsByLicence(licenceId: string): Observable<MonthlyReport[]> {
-    return this.http.get<MonthlyReport[]>(this.apiPath + "licence/" + licenceId,
-        {
-          headers: this.headers
-        })
-      .pipe(catchError(this.handleError));
-  }
-  getMonthlyReportByLicenceYearMonth(licenceId: string,year:string,month:string): Observable<MonthlyReport> {
-    return this.http.get<MonthlyReport>(this.apiPath + "licenceYearMonth?licenceId="+licenceId+"&year="+year+"&month="+month,
-      {
+    return this.http
+      .get<MonthlyReport[]>(this.apiPath + 'licence/' + licenceId, {
         headers: this.headers
       })
       .pipe(catchError(this.handleError));
   }
-  getAllCurrentMonthlyReports(expandInventoryReports: boolean): Observable<MonthlyReport[]> {
-    return this.http.get<MonthlyReport[]>(this.apiPath + `current?expandInventoryReports=${expandInventoryReports}`,
+  getMonthlyReportByLicenceYearMonth(licenceId: string, year: string, month: string): Observable<MonthlyReport> {
+    return this.http
+      .get<MonthlyReport>(
+        this.apiPath + 'licenceYearMonth?licenceId=' + licenceId + '&year=' + year + '&month=' + month,
         {
           headers: this.headers
-        })
+        }
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getAllCurrentMonthlyReports(expandInventoryReports: boolean): Observable<MonthlyReport[]> {
+    return this.http
+      .get<MonthlyReport[]>(this.apiPath + `current?expandInventoryReports=${expandInventoryReports}`, {
+        headers: this.headers
+      })
       .pipe(catchError(this.handleError));
   }
 
   updateMonthlyReport(monthlyReport: MonthlyReport) {
-    return this.http.put<MonthlyReport>(
-        this.apiPath + monthlyReport.monthlyReportId,
-        monthlyReport,
-        { headers: this.headers })
+    return this.http
+      .put<MonthlyReport>(this.apiPath + monthlyReport.monthlyReportId, monthlyReport, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }

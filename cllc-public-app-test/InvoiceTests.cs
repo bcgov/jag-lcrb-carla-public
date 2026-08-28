@@ -17,7 +17,7 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestNoAccessToAnonymousUser()
         {
-            
+
             string id = "SomeRandomId";
 
             // first confirm we are not logged in
@@ -34,27 +34,27 @@ namespace Gov.Lclb.Cllb.Public.Test
         public async System.Threading.Tasks.Task TestCRUD()
         {
             string initialName = "InitialName";
-            string changedName = "ChangedName";			
+            string changedName = "ChangedName";
 
-			// first confirm we are not logged in
+            // first confirm we are not logged in
             await GetCurrentUserIsUnauthorized();
 
-			// register and login as our first user
+            // register and login as our first user
             var loginUser1 = randomNewUserName("TestInvoiceUser", 6);
-			var strId = await LoginAndRegisterAsNewUser(loginUser1);
+            var strId = await LoginAndRegisterAsNewUser(loginUser1);
 
-			// C - Create
+            // C - Create
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-			ViewModels.Invoice viewmodel_invoice = new ViewModels.Invoice()
-			{
-				name = initialName,
+            ViewModels.Invoice viewmodel_invoice = new ViewModels.Invoice()
+            {
+                name = initialName,
                 invoicenumber = "12345",
                 statecode = (int?)Adoxio_invoicestates.New,
                 statuscode = (int?)Adoxio_invoicestatuses.New,
                 totalamount = 7500.00M
-			};
+            };
 
-			string jsonString = JsonConvert.SerializeObject(viewmodel_invoice);
+            string jsonString = JsonConvert.SerializeObject(viewmodel_invoice);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
 
@@ -68,8 +68,8 @@ namespace Gov.Lclb.Cllb.Public.Test
             // name should match.
             Assert.Equal(initialName, responseViewModel.name);
             Guid id = new Guid(responseViewModel.id);
-			//String strid = responseViewModel.externalId;
-			//Assert.Equal(strid, viewmodel_account.externalId);
+            //String strid = responseViewModel.externalId;
+            //Assert.Equal(strid, viewmodel_account.externalId);
 
             // R - Read
 
@@ -81,14 +81,14 @@ namespace Gov.Lclb.Cllb.Public.Test
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.Invoice>(jsonString);
             Assert.Equal(initialName, responseViewModel.name);
 
-			viewmodel_invoice.id = id.ToString();
+            viewmodel_invoice.id = id.ToString();
 
             // U - Update            
-			viewmodel_invoice.name = changedName;
+            viewmodel_invoice.name = changedName;
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
-				Content = new StringContent(JsonConvert.SerializeObject(viewmodel_invoice), Encoding.UTF8, "application/json")
+                Content = new StringContent(JsonConvert.SerializeObject(viewmodel_invoice), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
@@ -107,22 +107,22 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // D - Delete
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             string responseText = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			await LogoutAndCleanupTestUser(strId);
+            await LogoutAndCleanupTestUser(strId);
         }
     }
 }

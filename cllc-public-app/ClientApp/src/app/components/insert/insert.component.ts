@@ -5,38 +5,38 @@ import {
   Input,
   OnInit,
   ReflectiveInjector,
-  ViewContainerRef,
-  ViewChild
-} from "@angular/core";
-import { InsertService } from "./insert.service";
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 // each component which will be dynamically inserted must be imported here
-import { StaticComponent } from "../static/static.component";
-import { SurveySidebarComponent } from "../survey/sidebar.component";
+import { StaticComponent } from '../static/static.component';
+import { SurveySidebarComponent } from '../survey/sidebar.component';
+import { InsertService } from './insert.service';
 
 export const INSERT_TYPES = {
-  'html': StaticComponent,
+  html: StaticComponent,
   'survey-sidebar': SurveySidebarComponent
 };
 
 // based on http://blog.rangle.io/dynamically-creating-components-with-angular-2/
 @Component({
-    selector: "app-insert",
-    template: `<div #container></div>`
+  selector: 'app-insert',
+  template: `<div #container></div>`
 })
 export class InsertComponent implements OnInit {
-  @ViewChild("container", { read: ViewContainerRef, static: true })
+  @ViewChild('container', { read: ViewContainerRef, static: true })
   container: ViewContainerRef;
   currentInsert: any = null;
 
   @Input()
   id: string;
-  @HostBinding("class.insert-hidden")
+  @HostBinding('class.insert-hidden')
   hidden = true;
 
   constructor(
     private resolver: ComponentFactoryResolver,
-    private insertService: InsertService) {
-  }
+    private insertService: InsertService
+  ) {}
 
   ngOnInit() {
     if (this.id) {
@@ -46,7 +46,7 @@ export class InsertComponent implements OnInit {
   }
 
   @Input()
-  set componentSpec(spec: { type: string, inputs?: any, options?: any }) {
+  set componentSpec(spec: { type: string; inputs?: any; options?: any }) {
     const compCls = spec && INSERT_TYPES[spec.type];
     if (!compCls) {
       this.hidden = true;
@@ -60,9 +60,7 @@ export class InsertComponent implements OnInit {
     const resolvedInputs = ReflectiveInjector.resolve(inputProviders);
 
     // We create an injector out of the data we want to pass down and this components injector
-    const injector = ReflectiveInjector.fromResolvedProviders(
-      resolvedInputs,
-      this.container.parentInjector);
+    const injector = ReflectiveInjector.fromResolvedProviders(resolvedInputs, this.container.parentInjector);
 
     // We create a factory out of the component we want to create
     const factory = this.resolver.resolveComponentFactory(compCls);

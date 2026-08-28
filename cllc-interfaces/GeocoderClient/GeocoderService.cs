@@ -60,7 +60,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         public async Task GeocodeEstablishment(string establishmentId, ILogger logger)
         {
 
-            if (String.IsNullOrEmpty (BaseUri))
+            if (String.IsNullOrEmpty(BaseUri))
             {
                 logger.Error($"Unable to gecode establishment {establishmentId} because geocoder service is not configured.");
             }
@@ -82,7 +82,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                     logger.Error("Unable to gecode establishment " + establishmentId);
 
                 }
-            }            
+            }
         }
 
 
@@ -104,7 +104,7 @@ namespace Gov.Lclb.Cllb.Interfaces
                 var response = await _client.SendAsync(endpointRequest);
                 HttpStatusCode _statusCode = response.StatusCode;
 
-                
+
                 if (_statusCode == HttpStatusCode.OK)
                 {
                     result = true;

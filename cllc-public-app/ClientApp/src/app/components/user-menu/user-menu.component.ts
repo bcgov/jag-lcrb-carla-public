@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { faBuilding, faUserCircle } from '@fortawesome/free-regular-svg-icons';
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import { User } from '@models/user.model';
-import { faUserCircle, faBuilding } from "@fortawesome/free-regular-svg-icons";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 
 @Component({
   selector: 'app-user-menu',
@@ -25,9 +25,7 @@ export class UserMenuComponent implements OnInit {
     return this.faUserCircle;
   }
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

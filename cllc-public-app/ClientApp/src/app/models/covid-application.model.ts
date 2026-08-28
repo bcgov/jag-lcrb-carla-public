@@ -1,5 +1,4 @@
-
-import { ApplicationType } from "./application-type.model";
+import { ApplicationType } from './application-type.model';
 
 export class CovidApplication {
   id: string;

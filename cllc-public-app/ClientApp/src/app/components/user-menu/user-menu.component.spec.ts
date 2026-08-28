@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { UserMenuComponent } from './user-menu.component';
 
 describe('UserMenuComponent', () => {
@@ -11,9 +8,8 @@ describe('UserMenuComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ UserMenuComponent ]
-    })
-    .compileComponents();
+      declarations: [UserMenuComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

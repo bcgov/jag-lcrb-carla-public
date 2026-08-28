@@ -237,7 +237,14 @@ public partial class FileManagerService : FileManager.FileManagerBase
                 .GetResult();
             if (fileDetailsList != null)
             {
-                var hasFile = fileDetailsList.Any(f => f.ServerRelativeUrl == request.ServerRelativeUrl);
+                // f.ServerRelativeUrl comes from Uri.AbsolutePath on Graph's webUrl, which is
+                // URL-encoded (spaces as %20, etc). request.ServerRelativeUrl arrives as the raw,
+                // already-decoded path. An exact string comparison between an encoded and a
+                // decoded value never matches once the path has spaces or special characters —
+                // decode both sides before comparing so encoding differences don't matter.
+                var requestedUrl = Uri.UnescapeDataString(request.ServerRelativeUrl ?? string.Empty);
+                var hasFile = fileDetailsList.Any(f =>
+                    Uri.UnescapeDataString(f.ServerRelativeUrl ?? string.Empty) == requestedUrl);
 
                 if (hasFile)
                 {

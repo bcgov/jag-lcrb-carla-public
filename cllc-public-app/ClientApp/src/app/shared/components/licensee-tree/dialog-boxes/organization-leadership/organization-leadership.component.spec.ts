@@ -1,37 +1,33 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { OrganizationLeadershipComponent } from './organization-leadership.component';
 
-import { OrganizationLeadershipComponent } from "./organization-leadership.component";
-import { FormBuilder } from "@angular/forms";
-import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from "@angular/material/dialog";
+describe('OrganizationLeadershipComponent', () => {
+  let component: OrganizationLeadershipComponent;
+  let fixture: ComponentFixture<OrganizationLeadershipComponent>;
 
-describe("OrganizationLeadershipComponent",
-  () => {
-    let component: OrganizationLeadershipComponent;
-    let fixture: ComponentFixture<OrganizationLeadershipComponent>;
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [OrganizationLeadershipComponent],
+      providers: [
+        FormBuilder,
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialog, useValue: {} }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
-    beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-          declarations: [OrganizationLeadershipComponent],
-          providers: [
-            FormBuilder,
-            { provide: MatDialogRef, useValue: {} },
-            { provide: MAT_DIALOG_DATA, useValue: {} },
-            { provide: MatDialog, useValue: {} }
-          ],
-          schemas: [NO_ERRORS_SCHEMA]
-        })
-        .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(OrganizationLeadershipComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it("should create",
-      () => {
-        expect(component).toBeTruthy();
-      });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(OrganizationLeadershipComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

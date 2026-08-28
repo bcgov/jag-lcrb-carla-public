@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { TakeHomeEventComponent } from './take-home-event.component';
 
 describe('TakeHomeEventComponent', () => {
@@ -11,9 +8,8 @@ describe('TakeHomeEventComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TakeHomeEventComponent ]
-    })
-    .compileComponents();
+      declarations: [TakeHomeEventComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

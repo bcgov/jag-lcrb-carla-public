@@ -1,4 +1,3 @@
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using System;
@@ -9,10 +8,10 @@ using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class EstablishmentTests :  ApiIntegrationTestBaseWithLogin
+    public class EstablishmentTests : ApiIntegrationTestBaseWithLogin
     {
         public EstablishmentTests(CustomWebApplicationFactory<Startup> factory)
-          : base(factory) 
+          : base(factory)
         { }
 
         const string service = "establishments";
@@ -47,7 +46,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             {
                 Name = initialName
             };
-            
+
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_establishment);
 
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -77,7 +76,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             ViewModels.Establishment patchModel = new ViewModels.Establishment()
             {
                 Name = changedName
-            };            
+            };
 
             request = new HttpRequestMessage(HttpMethod.Put, "/api/" + service + "/" + id)
             {
@@ -86,7 +85,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-            
+
             // verify that the update persisted.
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);

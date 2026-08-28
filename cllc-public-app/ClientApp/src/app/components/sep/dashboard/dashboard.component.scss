@@ -1,25 +1,25 @@
-.border{
-    border: 1px solid;
-    border-radius: 0px;
-    padding: 16px;
+.border {
+  border: 1px solid;
+  border-radius: 0px;
+  padding: 16px;
 }
 
 .app-button {
-    text-align: center;
-    background-color: transparent;
-    box-shadow:none;
-    width: 500px;
+  text-align: center;
+  background-color: transparent;
+  box-shadow: none;
+  width: 500px;
 }
 
 .header-wrap {
-    background-color: #F1F4FA;
+  background-color: #f1f4fa;
 }
 
 .linewrapper {
   position: relative;
   width: 250px;
   height: 150px;
-  border: 0px dashed #F1F4FA;
+  border: 0px dashed #f1f4fa;
   margin: 10px;
 }
 
@@ -49,8 +49,10 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 3px;
-  font: bold 12px arial,sans-serif;
-  background: #F1F4FA;
+  font:
+    bold 12px arial,
+    sans-serif;
+  background: #f1f4fa;
 }
 .multiple-event-date {
   display: flex;

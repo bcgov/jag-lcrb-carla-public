@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
-import { Account } from "@models/account.model";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Account } from '@models/account.model';
 import { User } from '@models/user.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { combineLatest } from 'rxjs';
@@ -28,14 +28,14 @@ export class NavbarComponent implements OnInit {
     return this.currentUser && !this.isAssociate;
   }
   get isPoliceRepresentative() {
-    return this.isAuthenticated && this.account?.businessType == "Police";
+    return this.isAuthenticated && this.account?.businessType == 'Police';
   }
 
-  constructor(public featureFlagService: FeatureFlagService) { }
+  constructor(public featureFlagService: FeatureFlagService) {}
 
   ngOnInit() {
-    const flag1 = this.featureFlagService.featureOn("Maps");
-    const flag2 = this.featureFlagService.featureOn("Sep");
+    const flag1 = this.featureFlagService.featureOn('Maps');
+    const flag2 = this.featureFlagService.featureOn('Sep');
     combineLatest([flag1, flag2]).subscribe(([maps, sep]) => {
       this.showMapLink = maps;
       this.sepFeatureOn = sep;

@@ -1,20 +1,20 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from "@angular/core";
-import { EstablishmentDataService } from "@app/services/establishment-data.service";
-import { FormBuilder } from "@angular/forms";
-import { Subscription } from "rxjs";
-import { takeWhile } from "rxjs/operators";
-import { FormBase } from "@shared/form-base";
-import { Meta, Title } from "@angular/platform-browser";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { MatPaginator, PageEvent } from "@angular/material/paginator";
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Meta, Title } from '@angular/platform-browser';
+import { EstablishmentDataService } from '@app/services/establishment-data.service';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
+import { takeWhile } from 'rxjs/operators';
 
 declare var EstablishmentsMap: any;
 declare var searchMapOptions: any;
 
 @Component({
-  selector: "app-map",
-  templateUrl: "./map.component.html",
-  styleUrls: ["./map.component.scss"]
+  selector: 'app-map',
+  templateUrl: './map.component.html',
+  styleUrls: ['./map.component.scss']
 })
 export class MapComponent extends FormBase implements OnInit, AfterViewInit {
   faSearch = faSearch;
@@ -42,7 +42,9 @@ export class MapComponent extends FormBase implements OnInit, AfterViewInit {
   pageIndex = 0;
 
   get pagedData(): any[] {
-    if (!this.mapData) { return []; }
+    if (!this.mapData) {
+      return [];
+    }
     const start = this.pageIndex * this.pageSize;
     return this.mapData.slice(start, start + this.pageSize);
   }
@@ -54,21 +56,21 @@ export class MapComponent extends FormBase implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.meta.addTag({
-      name: "viewport",
-      content: "width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no"
+      name: 'viewport',
+      content: 'width=device-width, initial-scale=1,  maximum-scale=1.0, user-scalable=no'
     });
-    this.titleService.setTitle("Map of Cannabis Retail Stores in B.C.");
+    this.titleService.setTitle('Map of Cannabis Retail Stores in B.C.');
     this.form = this.fb.group({
-      name: [""]
+      name: ['']
     });
   }
 
   ngAfterViewInit() {
     // Load data after the view (and #search-map div) is rendered.
-    this.busy =
-      this.establishmentDataService.getEstablishmentsMap()
+    this.busy = this.establishmentDataService
+      .getEstablishmentsMap()
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => {
+      .subscribe((value) => {
         this.mapData = value;
         this.initMap();
         this.hasData = true;
@@ -76,10 +78,10 @@ export class MapComponent extends FormBase implements OnInit, AfterViewInit {
   }
 
   searchMap() {
-    this.busy =
-      this.establishmentDataService.getEstablishmentsMapSearch(this.search)
+    this.busy = this.establishmentDataService
+      .getEstablishmentsMapSearch(this.search)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => {
+      .subscribe((value) => {
         this.mapData = value;
         this.pageIndex = 0;
         this.initMap();
@@ -88,10 +90,10 @@ export class MapComponent extends FormBase implements OnInit, AfterViewInit {
   }
 
   resetMap() {
-    this.busy =
-      this.establishmentDataService.getEstablishmentsMapSearch("")
+    this.busy = this.establishmentDataService
+      .getEstablishmentsMapSearch('')
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(value => {
+      .subscribe((value) => {
         this.mapData = value;
         this.pageIndex = 0;
         this.initMap();
@@ -107,7 +109,7 @@ export class MapComponent extends FormBase implements OnInit, AfterViewInit {
       }
       this.establishmentMap.drawAndFitBounds(this.mapData);
     } catch (e) {
-      console.error("Failed to initialize map:", e);
+      console.error('Failed to initialize map:', e);
     }
   }
 }

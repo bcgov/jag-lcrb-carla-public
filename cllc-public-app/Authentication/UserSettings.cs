@@ -136,7 +136,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     userSettings = null;
                 }
             }
-            
+
             return userSettings;
         }
 

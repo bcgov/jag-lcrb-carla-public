@@ -1,10 +1,10 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { faChevronLeft } from "@fortawesome/free-solid-svg-icons";
+import { Component, Input, OnInit } from '@angular/core';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "app-field",
-  templateUrl: "./field.component.html",
-  styleUrls: ["./field.component.scss"]
+  selector: 'app-field',
+  templateUrl: './field.component.html',
+  styleUrls: ['./field.component.scss']
 })
 export class FieldComponent implements OnInit {
   faChevronLeft = faChevronLeft;
@@ -27,7 +27,5 @@ export class FieldComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

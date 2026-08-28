@@ -61,7 +61,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 Code = NewUserRegistration,
                 Name = "New User Registration",
                 Description = "Only permission given to new users.  Removed when they complete registration."
-            },            
+            },
             new Permission
             {
                 Code = ExistingUser,

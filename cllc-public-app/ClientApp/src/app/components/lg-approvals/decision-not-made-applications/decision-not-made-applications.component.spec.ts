@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { DecisionNotMadeApplicationsComponent } from './decision-not-made-applications.component';
 
 describe('DecisionNotMadeApplicationsComponent', () => {
@@ -8,9 +7,8 @@ describe('DecisionNotMadeApplicationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [DecisionNotMadeApplicationsComponent ]
-    })
-    .compileComponents();
+      declarations: [DecisionNotMadeApplicationsComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

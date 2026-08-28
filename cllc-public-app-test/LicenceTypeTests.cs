@@ -6,10 +6,10 @@ using Xunit;
 
 namespace Gov.Lclb.Cllb.Public.Test
 {
-    public class LicenceTypeTests :  ApiIntegrationTestBaseWithLogin
+    public class LicenceTypeTests : ApiIntegrationTestBaseWithLogin
     {
         public LicenceTypeTests(CustomWebApplicationFactory<Startup> factory)
-          : base(factory) 
+          : base(factory)
         { }
 
         const string service = "adoxiolicencetype";
@@ -22,7 +22,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             await GetCurrentUserIsUnauthorized();
 
             // try a random GET, should return unauthorized
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service );
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service);
             var response = await _client.SendAsync(request);
             Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
@@ -46,20 +46,20 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public async System.Threading.Tasks.Task TestRead()
         {
-            
+
             var loginUser = randomNewUserName("NewLoginUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
-            
+
             // R - Read all
 
-            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service );
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service);
             var response = await _client.SendAsync(request);
             response.EnsureSuccessStatusCode();
 
             string jsonString = await response.Content.ReadAsStringAsync();
             var licenceTypes = JsonConvert.DeserializeObject<List<ViewModels.LicenseType>>(jsonString);
-            
+
             foreach (var licenceType in licenceTypes)
             {
                 request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + licenceType.id);

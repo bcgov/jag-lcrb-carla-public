@@ -1,11 +1,11 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from "@angular/core";
-import { PolicyDocumentDataService } from "@services/policy-document-data.service";
-import { PolicyDocumentSummary } from "@models/policy-document-summary.model";
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PolicyDocumentSummary } from '@models/policy-document-summary.model';
+import { PolicyDocumentDataService } from '@services/policy-document-data.service';
 
 @Component({
-  selector: "app-policy-document-sidebar",
-  templateUrl: "./policy-document-sidebar.component.html",
-  styleUrls: ["./policy-document-sidebar.component.scss"]
+  selector: 'app-policy-document-sidebar',
+  templateUrl: './policy-document-sidebar.component.html',
+  styleUrls: ['./policy-document-sidebar.component.scss']
 })
 /** PolicyDocumentSidebar component*/
 export class PolicyDocumentSidebarComponent implements OnInit {
@@ -15,11 +15,12 @@ export class PolicyDocumentSidebarComponent implements OnInit {
     return this._category;
   }
 
-  @Input("category")
+  @Input('category')
   set category(cat: string) {
     this._category = cat;
     if (cat && cat.length) {
-      this.policyDocumentDataService.getPolicyDocuments(cat)
+      this.policyDocumentDataService
+        .getPolicyDocuments(cat)
         .toPromise()
         .then((data) => {
           this.policyDocumentSummaries = data;
@@ -33,12 +34,12 @@ export class PolicyDocumentSidebarComponent implements OnInit {
   policyDocumentSummaries: PolicyDocumentSummary[];
 
   /** PolicyDocumentSidebar ctor */
-  constructor(private policyDocumentDataService: PolicyDocumentDataService,
-    private cd: ChangeDetectorRef) {
-  }
+  constructor(
+    private policyDocumentDataService: PolicyDocumentDataService,
+    private cd: ChangeDetectorRef
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   onSlugChange(slug: string) {
     this.slugChange.emit(slug);

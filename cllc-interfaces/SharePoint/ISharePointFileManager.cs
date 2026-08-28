@@ -75,6 +75,8 @@ namespace Gov.Lclb.Cllb.Interfaces
 
         Task<bool> DeleteFile(string listTitle, string folderName, string fileName);
 
+        Task<bool> DeleteFolder(string listTitle, string folderName);
+
         Task<List<SharePointFileDetailsList>> GetFileDetailsListInFolder(
             string listTitle,
             string folderName,

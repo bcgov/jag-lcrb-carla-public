@@ -1,18 +1,19 @@
-﻿
+
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using CsvHelper;
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -28,70 +29,62 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class EstablishmentsController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly ILogger _logger;
         private readonly IMemoryCache _cache;
         private readonly IWebHostEnvironment _env;
 
         private const string LDB_ACCOUNT_NAME = "Liquor Distribution Branch";
 
-        public EstablishmentsController(IDynamicsClient dynamicsClient, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
+        public EstablishmentsController(IDataverseClient dataverse, ILoggerFactory loggerFactory, IMemoryCache memoryCache, IWebHostEnvironment env)
         {
             _cache = memoryCache;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(EstablishmentsController));
             _env = env;
         }
 
-        private string GetLicenceTypeId(string name)
+        private async Task<string> GetLicenceTypeId(string name)
         {
             string sanitized = name.Replace(" ", "_");
             string cacheKey = $"LTI_CODE_{sanitized}";
-            string result;
-            if (!_cache.TryGetValue(cacheKey, out result))
-            {
-                try
-                {
-                    result = _dynamicsClient.GetAdoxioLicencetypeByName(name)?.AdoxioLicencetypeid;
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Set the cache to expire in an hour.                   
-                        .SetAbsoluteExpiration(TimeSpan.FromDays(7));
+            if (_cache.TryGetValue(cacheKey, out string result))
+                return result;
 
-                    // Save data in cache.
-                    _cache.Set(cacheKey, result, cacheEntryOptions);
-                }
-                catch (Exception)
-                {
-                    result = null;
-                }
-                
+            try
+            {
+                var licenceType = await _dataverse.GetLicenceTypeByNameAsync(name);
+                result = licenceType?.Id == Guid.Empty ? null : licenceType?.Id.ToString();
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromDays(7));
+                _cache.Set(cacheKey, result, cacheEntryOptions);
+            }
+            catch (Exception)
+            {
+                result = null;
             }
 
             return result;
         }
 
-        private string GetApplicationTypeId(string name)
+        private async Task<string> GetApplicationTypeId(string name)
         {
             string sanitized = name.Replace(" ", "_");
-            string cacheKey = $"LTI_CODE_{sanitized}";
-            string result;
-            if (!_cache.TryGetValue(cacheKey, out result))
+            string cacheKey = $"ATI_CODE_{sanitized}";
+            if (_cache.TryGetValue(cacheKey, out string result))
+                return result;
+
+            try
             {
-                try
-                {
-                    result = _dynamicsClient.GetApplicationTypeByName(name)?.AdoxioApplicationtypeid;
-                    var cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Set the cache to expire in an hour.                   
-                        .SetAbsoluteExpiration(TimeSpan.FromDays(7));
-
-                    // Save data in cache.
-                    _cache.Set(cacheKey, result, cacheEntryOptions);
-                }
-                catch (Exception)
-                {
-                    result = null;
-                }
-
+                var appType = await _dataverse.GetApplicationTypeByNameAsync(name);
+                result = appType?.Id == Guid.Empty ? null : appType?.Id.ToString();
+                var cacheEntryOptions = new MemoryCacheEntryOptions()
+                    .SetAbsoluteExpiration(TimeSpan.FromDays(7));
+                _cache.Set(cacheKey, result, cacheEntryOptions);
+            }
+            catch (Exception)
+            {
+                result = null;
             }
 
             return result;
@@ -103,30 +96,26 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public IActionResult GetEstablishment(string id)
+        public async Task<IActionResult> GetEstablishment(string id)
         {
-
-            Guid adoxio_establishment_id;
-            if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out adoxio_establishment_id))
+            if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out _))
             {
                 return new NotFoundResult();
             }
 
-            // get the establishment
-            var establishment = _dynamicsClient.GetEstablishmentById(adoxio_establishment_id);
+            var establishment = await _dataverse.GetEstablishmentByIdAsync(id);
             if (establishment == null)
             {
                 return new NotFoundResult();
             }
 
             return new JsonResult(establishment.ToViewModel());
-
         }
 
         private IActionResult GetCSV(List<EstablishmentMapData> data, string filename)
         {
             StringWriter csvString = new StringWriter();
-            using (var csv = new CsvWriter(csvString))
+            using (var csv = new CsvWriter(csvString, CultureInfo.InvariantCulture))
             {
                 // headers
                 csv.WriteField("Licence");
@@ -171,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             string jsonData = JsonConvert.SerializeObject(dataForJson);
-            return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", filename );
+            return File(new System.Text.UTF8Encoding().GetBytes(jsonData), "application/json", filename);
         }
 
 
@@ -181,29 +170,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("lrs")]
         [AllowAnonymous]
-        public IActionResult GetLrs(string search)
+        public async Task<IActionResult> GetLrs(string search)
         {
-            var result = GetLrsData(search);
+            var result = await GetLrsData(search);
             return new JsonResult(result);
         }
 
         [HttpGet("lrs-csv")]
         [AllowAnonymous]
-        public IActionResult GetLrsCSV(string search)
+        public async Task<IActionResult> GetLrsCSV(string search)
         {
-            var data = GetLrsData(search);
+            var data = await GetLrsData(search);
             return GetCSV(data, "BC-Licensee-Retail-Stores.csv");
         }
 
         [HttpGet("lrs-json")]
         [AllowAnonymous]
-        public IActionResult GetLrsJson(string search)
+        public async Task<IActionResult> GetLrsJson(string search)
         {
-            var data = GetLrsData(search);
+            var data = await GetLrsData(search);
             return GetJson(data, "BC-Licensee-Retail-Stores.json");
         }
 
-        private List<EstablishmentMapData> GetLrsData(string search)
+        private async Task<List<EstablishmentMapData>> GetLrsData(string search)
         {
             string cacheKey;
             if (string.IsNullOrEmpty(search))
@@ -221,7 +210,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             if (!_env.IsProduction() || !_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
-                string licenceTypeId = GetLicenceTypeId("Licensee Retail Store");
+                string licenceTypeId = await GetLicenceTypeId("Licensee Retail Store");
                 if (licenceTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for Licensee Retail Store");
@@ -231,63 +220,49 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        // get establishments                                  
-                        string licenseFilter = $"statuscode eq 1 and _adoxio_licencetype_value eq {licenceTypeId}"; // only active licenses of the certain type.
-                        string[] licenseExpand = { "adoxio_LicenceType", "adoxio_establishment" };
-
-                        // get licenses
-                        IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
-
+                        IList<adoxio_licences> licences = null;
                         try
                         {
-                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand).Value;
+                            licences = await _dataverse.GetActiveLicencesByTypeIdsAsync(new[] { licenceTypeId });
                         }
-                        catch (HttpOperationException httpOperationException)
+                        catch (Exception httpOperationException)
                         {
                             _logger.LogError(httpOperationException, "Error getting licenses");
                             throw new Exception("Unable to get licences");
-                        }
-                        catch (Exception e)
-                        {
-                            _logger.LogError(e, "Unexpected error getting establishment map data.");
                         }
 
                         establishmentMapData = new List<EstablishmentMapData>();
                         if (licences != null)
                         {
-                            foreach (var license in licences)
+                            foreach (var licence in licences)
                             {
-                                if (license._adoxioEstablishmentValue != null && (
-                                    search == null || (license.AdoxioEstablishment.AdoxioAddresscity != null &&
-                                                       license.AdoxioEstablishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
-                                ))
-                                {
-                                    var establishment = license.AdoxioEstablishment;
+                                if (licence.adoxio_establishment == null) continue;
 
+                                var establishment = await _dataverse.GetEstablishmentByIdAsync(licence.adoxio_establishment.Id.ToString());
+                                if (establishment == null) continue;
+
+                                if (search == null || (establishment.adoxio_AddressCity != null &&
+                                    establishment.adoxio_AddressCity.ToUpper().Contains(search.ToUpper())))
+                                {
                                     establishmentMapData.Add(new EstablishmentMapData
                                     {
-                                            id = establishment.AdoxioEstablishmentid,
-                                            Name = establishment.AdoxioName,
-                                            License = license.AdoxioLicencenumber,
-                                            Phone = establishment.AdoxioPhone,
-                                            AddressCity = establishment.AdoxioAddresscity,
-                                            AddressPostal = establishment.AdoxioAddresspostalcode,
-                                            AddressStreet = establishment.AdoxioAddressstreet,
-                                            IsOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value
+                                        id = establishment.Id.ToString(),
+                                        Name = establishment.adoxio_name,
+                                        License = licence.adoxio_LicenceNumber,
+                                        Phone = establishment.adoxio_Phone,
+                                        AddressCity = establishment.adoxio_AddressCity,
+                                        AddressPostal = establishment.adoxio_AddressPostalCode,
+                                        AddressStreet = establishment.adoxio_AddressStreet,
+                                        IsOpen = establishment.adoxio_IsOpen == true
                                     });
                                 }
                             }
                         }
                         var cacheEntryOptions = new MemoryCacheEntryOptions()
-                                   // Set the cache to expire in an hour.                   
                                    .SetAbsoluteExpiration(TimeSpan.FromDays(1));
-
-                        // Save data in cache.
                         _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
                         cacheEntryOptions = new MemoryCacheEntryOptions()
-                                   // Set the cache to expire in an hour.                   
                                    .SetAbsoluteExpiration(TimeSpan.FromDays(2));
-                        // long term cache
                         _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
                     }
                     catch (Exception e)
@@ -307,8 +282,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // make a copy of the results to guard against accidental cache pollution.
             List<EstablishmentMapData> result = establishmentMapData.ToList();
-            
-            // sort the establishment list by the city alphabetically 
+
+            // sort the establishment list by the city alphabetically
             result = result.OrderBy(o => o.AddressCity).ToList();
 
             return result;
@@ -320,30 +295,30 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("map")]
         [AllowAnonymous]
-        public IActionResult GetMap(string search)
+        public async Task<IActionResult> GetMap(string search)
         {
-            var result = GetMapData(search);
+            var result = await GetMapData(search);
             return new JsonResult(result);
         }
 
         [HttpGet("map-csv")]
         [AllowAnonymous]
-        public IActionResult GetMapCSV(string search)
+        public async Task<IActionResult> GetMapCSV(string search)
         {
-            var data = GetMapData(search);
+            var data = await GetMapData(search);
             return GetCSV(data, "BC-Retail-Cannabis-Stores.csv");
         }
 
         [HttpGet("map-json")]
         [AllowAnonymous]
-        public IActionResult GetMapJson(string search)
+        public async Task<IActionResult> GetMapJson(string search)
         {
-            var data = GetMapData(search);
+            var data = await GetMapData(search);
             return GetJson(data, "BC-Retail-Cannabis-Stores.json");
         }
 
-        private List<EstablishmentMapData> GetMapData(string search)
-        {            
+        private async Task<List<EstablishmentMapData>> GetMapData(string search)
+        {
             string cacheKey;
             if (string.IsNullOrEmpty(search))
             {
@@ -358,14 +333,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<EstablishmentMapData> establishmentMapData;
             if (!_env.IsProduction() || !_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
-                string licenceTypeId = GetLicenceTypeId("Cannabis Retail Store");
-                string alternateLicenceTypeId = GetLicenceTypeId("S119 CRS Authorization");
+                string licenceTypeId = await GetLicenceTypeId("Cannabis Retail Store");
+                string alternateLicenceTypeId = await GetLicenceTypeId("S119 CRS Authorization");
                 if (string.IsNullOrEmpty(alternateLicenceTypeId))
                 {
-                    alternateLicenceTypeId = GetLicenceTypeId("Section 119 Authorization");
+                    alternateLicenceTypeId = await GetLicenceTypeId("Section 119 Authorization");
                 }
-                string prsTypeId = GetLicenceTypeId("Producer Retail Store");
-                string s119PrsTypeId = GetLicenceTypeId("S119 PRS Authorization");
+                string prsTypeId = await GetLicenceTypeId("Producer Retail Store");
+                string s119PrsTypeId = await GetLicenceTypeId("S119 PRS Authorization");
+
                 if (licenceTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for Cannabis Retail Store");
@@ -375,104 +351,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        // get establishments
-                        string licenseFilter = $"statuscode eq 1 and (_adoxio_licencetype_value eq {licenceTypeId}";
+                        // Collect all relevant licence type IDs
+                        var typeIds = new List<string> { licenceTypeId };
+                        if (alternateLicenceTypeId != null) typeIds.Add(alternateLicenceTypeId);
+                        if (prsTypeId != null) typeIds.Add(prsTypeId);
+                        if (s119PrsTypeId != null) typeIds.Add(s119PrsTypeId);
 
-                        if (alternateLicenceTypeId != null)
-                        {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {alternateLicenceTypeId}";
-                        }
+                        // Look up LDB account ID once for exclusion check.
+                        var ldbAccount = await _dataverse.GetAccountByNameAsync(LDB_ACCOUNT_NAME);
+                        string ldbAccountId = ldbAccount?.Id == Guid.Empty ? null : ldbAccount?.Id.ToString();
 
-                        if (prsTypeId != null)
-                        {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {prsTypeId}";
-                        }
-
-                        if (s119PrsTypeId != null)
-                        {
-                            licenseFilter += $" or _adoxio_licencetype_value eq {s119PrsTypeId}";
-                        }
-
-                        licenseFilter += ")";
-
-                        string[] licenseExpand = { "adoxio_LicenceType", "adoxio_establishment" };
-
-                        // Look up LDB account ID once for exclusion check (no need to expand Licencee on every license).
-                        var ldbAccount = _dynamicsClient.GetAccountByNameWithEstablishments(LDB_ACCOUNT_NAME);
-                        string ldbAccountId = ldbAccount?.Accountid;
-
-                        // get licenses
-                        IList<MicrosoftDynamicsCRMadoxioLicences> licences = null;
-
+                        IList<adoxio_licences> licences = null;
                         try
                         {
-                            licences = _dynamicsClient.Licenceses.Get(filter: licenseFilter, expand: licenseExpand)
-                                .Value;
+                            licences = await _dataverse.GetActiveLicencesByTypeIdsAsync(typeIds);
                         }
-                        catch (HttpOperationException httpOperationException)
+                        catch (Exception httpOperationException)
                         {
                             _logger.LogError(httpOperationException, "Error getting licenses");
                             throw new Exception("Unable to get licences");
-                        }
-                        catch (Exception e)
-                        {
-                            _logger.LogError(e, "Unexpected error getting establishment map data.");
                         }
 
                         establishmentMapData = new List<EstablishmentMapData>();
                         if (licences != null)
                         {
-                            foreach (var license in licences)
+                            foreach (var licence in licences)
                             {
-                            
-                                // Change 2019-10-24 - default to add, as we no longer check to see if the establishment has had the final inspection.
+                                // Change 2019-10-24 - default to add, as we no longer check for final inspection.
                                 bool add = true;
 
-                                // only consider the item if the inspection is complete.
-
-                                // note that the Linq query is required because the License does not contain accurate data to show the related applications.
-
-                                //var relatedApplications = applications.Where(app => app._adoxioAssignedlicenceValue == license.AdoxioLicencesid).ToList();
-
-                                // Change 2019-10-24 - no longer filter out establishments that have not passed the final inspection.
-                                /*
-                                if (relatedApplications != null)
+                                if (add && licence.adoxio_establishment != null)
                                 {
-                                    foreach (var item in relatedApplications)
-                                    {
-                                        // with the new business flow, we check for a pass (845280000) in AdoxioAppchecklistinspectionresults
-                                        if (item.AdoxioAppchecklistinspectionresults != null && item.AdoxioAppchecklistinspectionresults == 845280000)
-                                        {
-                                            add = true;
-                                        }
-                                    }
-                                }
-                                */
-                                // Use the establishment expanded inline with the license query (no separate API call).
-                                if (add && license._adoxioEstablishmentValue != null)
-                                {
-                                    var establishment = license.AdoxioEstablishment;
+                                    var establishment = await _dataverse.GetEstablishmentByIdAsync(licence.adoxio_establishment.Id.ToString());
+                                    if (establishment == null) continue;
 
                                     // Do not add LDB stores here — they are added separately via GetLDBStores().
                                     // Only include establishments that are open.
-                                    bool isOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
-                                    if (establishment != null &&
-                                        isOpen &&
-                                        // Uncomment the line below to include "Coming Soon" establishments:
-                                        // if (establishment != null &&
-                                        (ldbAccountId == null ||
-                                         license._adoxioLicenceeValue != ldbAccountId) &&
-                                        establishment.AdoxioLatitude != null &&
-                                        establishment.AdoxioLongitude != null)
+                                    bool isOpen = establishment.adoxio_IsOpen == true;
+                                    string licenceeId = licence.adoxio_Licencee?.Id.ToString();
+                                    if (isOpen &&
+                                        (ldbAccountId == null || licenceeId != ldbAccountId) &&
+                                        establishment.adoxio_Latitude != null &&
+                                        establishment.adoxio_Longitude != null)
                                     {
-
                                         if (add && !string.IsNullOrEmpty(search))
                                         {
                                             var upperSearch = search.ToUpper();
-                                            bool matchesName = establishment.AdoxioName != null &&
-                                                establishment.AdoxioName.ToUpper().StartsWith(upperSearch);
-                                            bool matchesCity = establishment.AdoxioAddresscity != null &&
-                                                establishment.AdoxioAddresscity.ToUpper().StartsWith(upperSearch);
+                                            bool matchesName = establishment.adoxio_name != null &&
+                                                establishment.adoxio_name.ToUpper().StartsWith(upperSearch);
+                                            bool matchesCity = establishment.adoxio_AddressCity != null &&
+                                                establishment.adoxio_AddressCity.ToUpper().StartsWith(upperSearch);
 
                                             if (!matchesName && !matchesCity)
                                             {
@@ -484,15 +412,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                         {
                                             establishmentMapData.Add(new EstablishmentMapData
                                             {
-                                                id = establishment.AdoxioEstablishmentid,
-                                                Name = establishment.AdoxioName,
-                                                License = license.AdoxioLicencenumber,
-                                                Phone = establishment.AdoxioPhone,
-                                                AddressCity = establishment.AdoxioAddresscity,
-                                                AddressPostal = establishment.AdoxioAddresspostalcode,
-                                                AddressStreet = establishment.AdoxioAddressstreet,
-                                                Latitude = (decimal) establishment.AdoxioLatitude,
-                                                Longitude = (decimal) establishment.AdoxioLongitude,
+                                                id = establishment.Id.ToString(),
+                                                Name = establishment.adoxio_name,
+                                                License = licence.adoxio_LicenceNumber,
+                                                Phone = establishment.adoxio_Phone,
+                                                AddressCity = establishment.adoxio_AddressCity,
+                                                AddressPostal = establishment.adoxio_AddressPostalCode,
+                                                AddressStreet = establishment.adoxio_AddressStreet,
+                                                Latitude = establishment.adoxio_Latitude.HasValue ? (decimal)establishment.adoxio_Latitude.Value : 0m,
+                                                Longitude = establishment.adoxio_Longitude.HasValue ? (decimal)establishment.adoxio_Longitude.Value : 0m,
                                                 IsOpen = isOpen
                                             });
                                         }
@@ -515,30 +443,22 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     }
 
                     var cacheEntryOptions = new MemoryCacheEntryOptions()
-                               // Set the cache to expire in an hour.                   
                                .SetAbsoluteExpiration(TimeSpan.FromDays(1));
-
-                    // Save data in cache.
                     _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
 
                     cacheEntryOptions = new MemoryCacheEntryOptions()
-                        // Set the cache to expire in an hour.                   
                         .SetAbsoluteExpiration(TimeSpan.FromDays(2));
-                    // long term cache
                     _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
-
                 }
-                
-
             }
 
             // make a copy of the results to guard against accidental cache pollution.
             List<EstablishmentMapData> result = establishmentMapData.ToList();
 
             // add LDB stores
-            result.AddRange(GetLDBStores(search));
+            result.AddRange(await GetLDBStores(search));
 
-            // sort the establishment list by the city alphabetically 
+            // sort the establishment list by the city alphabetically
             result = result.OrderBy(o => o.AddressCity).ToList();
 
             return result;
@@ -550,29 +470,29 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <returns>Establishment map data, or the empty set</returns>
         [HttpGet("proposed-lrs")]
         [AllowAnonymous]
-        public IActionResult GetProposedLrs(string search)
+        public async Task<IActionResult> GetProposedLrs(string search)
         {
-            var result = GetProposedLrsData(search);
+            var result = await GetProposedLrsData(search);
             return new JsonResult(result);
         }
 
         [HttpGet("proposed-lrs-csv")]
         [AllowAnonymous]
-        public IActionResult GetProposedLrsCSV(string search)
+        public async Task<IActionResult> GetProposedLrsCSV(string search)
         {
-            var data = GetProposedLrsData(search);
+            var data = await GetProposedLrsData(search);
             return GetCSV(data, "BC-Proposed-Licensee-Retail-Stores.csv");
         }
 
         [HttpGet("proposed-lrs-json")]
         [AllowAnonymous]
-        public IActionResult GetProposedLrsJson(string search)
+        public async Task<IActionResult> GetProposedLrsJson(string search)
         {
-            var data = GetProposedLrsData(search);
+            var data = await GetProposedLrsData(search);
             return GetJson(data, "BC-Proposed-Licensee-Retail-Stores.json");
         }
 
-        private List<EstablishmentMapData> GetProposedLrsData(string search)
+        private async Task<List<EstablishmentMapData>> GetProposedLrsData(string search)
         {
             string cacheKey;
             if (string.IsNullOrEmpty(search))
@@ -588,7 +508,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             List<EstablishmentMapData> establishmentMapData;
             if (!_env.IsProduction() || !_cache.TryGetValue("S_" + cacheKey, out establishmentMapData))
             {
-                string applicationTypeId = GetApplicationTypeId("LRS Transfer of Location");
+                string applicationTypeId = await GetApplicationTypeId("LRS Transfer of Location");
                 if (applicationTypeId == null)
                 {
                     Log.Logger.Error("ERROR - Unable to get licence type ID for LRS Transfer of Location");
@@ -598,66 +518,52 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     try
                     {
-                        string filter = $"adoxio_checklistpsalettersent eq 845280000 and _adoxio_applicationtypeid_value eq {applicationTypeId}";
-                        filter += $" and statuscode ne { (int)Public.ViewModels.AdoxioApplicationStatusCodes.Terminated}";
-                        // Approved applications need to be passed to the client app
-                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Refused}";
-                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Cancelled}";
-                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.Approved}";
-                        filter += $" and statuscode ne {(int)Public.ViewModels.AdoxioApplicationStatusCodes.TerminatedAndRefunded}";
+                        var excludeStatuses = new[]
+                        {
+                            (int)AdoxioApplicationStatusCodes.Terminated,
+                            (int)AdoxioApplicationStatusCodes.Refused,
+                            (int)AdoxioApplicationStatusCodes.Cancelled,
+                            (int)AdoxioApplicationStatusCodes.Approved,
+                            (int)AdoxioApplicationStatusCodes.TerminatedAndRefunded
+                        };
 
-                        // get establishments                                  
-                        string[] expand = { "adoxio_ApplicationTypeId" };
-
-                        // we need to get applications so we can see if the inspection is complete.
-
-                        IList<MicrosoftDynamicsCRMadoxioApplication> applications = null;
+                        IList<adoxio_application> applications = null;
                         try
                         {
-                            applications = _dynamicsClient.Applications.Get(filter: filter, expand: expand).Value;
+                            applications = await _dataverse.GetProposedLrsApplicationsAsync(applicationTypeId, excludeStatuses);
                         }
-                        catch (HttpOperationException httpOperationException)
+                        catch (Exception httpOperationException)
                         {
                             _logger.LogError(httpOperationException, "Error getting applications");
                             throw new Exception("Unable to get applications");
                         }
-                        catch (Exception e)
-                        {
-                            _logger.LogError(e, "Unexpected error getting applications");
-                        }
-
 
                         establishmentMapData = new List<EstablishmentMapData>();
                         if (applications != null)
                         {
                             foreach (var application in applications)
                             {
-                                if (search == null || (application.AdoxioAddresscity != null &&
-                                    application.AdoxioAddresscity.ToUpper().Contains(search.ToUpper())))
+                                if (search == null || (application.adoxio_EstablishmentAddressCity != null &&
+                                    application.adoxio_EstablishmentAddressCity.ToUpper().Contains(search.ToUpper())))
                                 {
                                     establishmentMapData.Add(new EstablishmentMapData
                                     {
-                                        id = application.AdoxioApplicationid,
-                                        Name = application.AdoxioEstablishmentpropsedname,
+                                        id = application.Id.ToString(),
+                                        Name = application.adoxio_EstablishmentPropsedName,
                                         License = "",
-                                        Phone = application.AdoxioPhone,
-                                        AddressCity = application.AdoxioEstablishmentaddresscity,
-                                        AddressPostal = application.AdoxioEstablishmentaddresspostalcode,
-                                        AddressStreet = application.AdoxioEstablishmentaddressstreet
+                                        Phone = application.adoxio_Phone,
+                                        AddressCity = application.adoxio_EstablishmentAddressCity,
+                                        AddressPostal = application.adoxio_EstablishmentAddressPostalCode,
+                                        AddressStreet = application.adoxio_EstablishmentAddressStreet
                                     });
                                 }
                             }
                         }
                         var cacheEntryOptions = new MemoryCacheEntryOptions()
-                                   // Set the cache to expire in an hour.                   
                                    .SetAbsoluteExpiration(TimeSpan.FromHours(1));
-
-                        // Save data in cache.
                         _cache.Set("S_" + cacheKey, establishmentMapData, cacheEntryOptions);
                         cacheEntryOptions = new MemoryCacheEntryOptions()
-                                   // Set the cache to expire in an hour.                   
                                    .SetAbsoluteExpiration(TimeSpan.FromDays(1));
-                        // long term cache
                         _cache.Set(cacheKey, establishmentMapData, cacheEntryOptions);
                     }
                     catch (Exception e)
@@ -672,16 +578,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                             _logger.LogError(e, "Error getting map data, showing long term cache data");
                         }
                     }
-
-
                 }
-
             }
 
             // make a copy of the results to guard against accidental cache pollution.
             List<EstablishmentMapData> result = establishmentMapData.ToList();
 
-            // sort the establishment list by the city alphabetically 
+            // sort the establishment list by the city alphabetically
             result = result.OrderBy(o => o.AddressCity).ToList();
 
             return result;
@@ -690,42 +593,35 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         /// Get the list of LDB stores.
         /// </summary>
-        /// <returns></returns>
-        private List<EstablishmentMapData> GetLDBStores(string search)
+        private async Task<List<EstablishmentMapData>> GetLDBStores(string search)
         {
             List<EstablishmentMapData> result = new List<EstablishmentMapData>();
-            // find master account.
-            var account = _dynamicsClient.GetAccountByNameWithEstablishments(LDB_ACCOUNT_NAME);
-            if (account != null && account.AdoxioAccountAdoxioEstablishmentLicencee != null)
+            var account = await _dataverse.GetAccountByNameAsync(LDB_ACCOUNT_NAME);
+            if (account == null) return result;
+
+            var establishments = await _dataverse.GetEstablishmentsByAccountIdAsync(account.Id.ToString());
+            foreach (var establishment in establishments)
             {
-                foreach (var establishment in account.AdoxioAccountAdoxioEstablishmentLicencee)
+                bool isLdbOpen = establishment.adoxio_IsOpen == true;
+                bool isActive = establishment.statecode == adoxio_establishment_statecode.Active;
+                if (isActive
+                    && isLdbOpen
+                    && establishment.adoxio_Latitude != null && establishment.adoxio_Longitude != null
+                    && (search == null || (establishment.adoxio_AddressCity != null &&
+                                           establishment.adoxio_AddressCity.ToUpper().Contains(search.ToUpper()))))
                 {
-                    // Only include establishments that are open.
-                    bool isLdbOpen = establishment.AdoxioIsopen.HasValue && establishment.AdoxioIsopen.Value;
-                    if (establishment.Statuscode != null && establishment.Statuscode.Value == 845280000
-                     && isLdbOpen
-                     // Uncomment the line below (and remove isLdbOpen check) to include "Coming Soon" LDB stores:
-                     // && true
-                     && establishment.AdoxioLatitude != null && establishment.AdoxioLongitude != null
-                     &&   (
-                            search == null || (establishment.AdoxioAddresscity != null &&
-                                               establishment.AdoxioAddresscity.ToUpper().Contains(search.ToUpper()))
-                        )
-                    ) // Licensed and Open
+                    result.Add(new EstablishmentMapData
                     {
-                        result.Add(new EstablishmentMapData
-                            {
-                                id = establishment.AdoxioEstablishmentid,
-                                Name = "BC Cannabis Store",
-                                IsOpen = isLdbOpen,
-                                License = "Public Store",
-                                AddressStreet = establishment.AdoxioAddressstreet,
-                                AddressCity = establishment.AdoxioAddresscity,
-                                AddressPostal = establishment.AdoxioAddresspostalcode,
-                                Latitude = establishment.AdoxioLatitude.Value,
-                                Longitude = establishment.AdoxioLongitude.Value
-                            });
-                    }
+                        id = establishment.Id.ToString(),
+                        Name = "BC Cannabis Store",
+                        IsOpen = isLdbOpen,
+                        License = "Public Store",
+                        AddressStreet = establishment.adoxio_AddressStreet,
+                        AddressCity = establishment.adoxio_AddressCity,
+                        AddressPostal = establishment.adoxio_AddressPostalCode,
+                        Latitude = (decimal)establishment.adoxio_Latitude.Value,
+                        Longitude = (decimal)establishment.adoxio_Longitude.Value
+                    });
                 }
             }
 
@@ -740,24 +636,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEstablishment([FromBody] ViewModels.Establishment item)
         {
-            // create a new legal entity.
-            MicrosoftDynamicsCRMadoxioEstablishment adoxio_establishment = new MicrosoftDynamicsCRMadoxioEstablishment();
-
-            // copy received values to Dynamics LegalEntity
-            adoxio_establishment.CopyValues(item);
+            var dvEstablishment = new adoxio_establishment();
+            dvEstablishment.CopyValues(item);
             try
             {
-                adoxio_establishment = await _dynamicsClient.Establishments.CreateAsync(adoxio_establishment);
+                var newId = await _dataverse.CreateEstablishmentAsync(dvEstablishment);
+                var created = await _dataverse.GetEstablishmentByIdAsync(newId.ToString());
+                return new JsonResult(created.ToViewModel());
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error creating establishment");
                 throw new Exception("Unable to create establishment");
             }
-
-            ViewModels.Establishment result = adoxio_establishment.ToViewModel();
-
-            return new JsonResult(result);
         }
 
         /// <summary>
@@ -774,42 +665,31 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return BadRequest();
             }
 
-            // get the legal entity.
             Guid adoxio_establishmentid = GuidUtility.SafeGuidConvert(id);
 
-            MicrosoftDynamicsCRMadoxioEstablishment adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
-            if (adoxioEstablishment == null)
+            var existing = await _dataverse.GetEstablishmentByIdAsync(id);
+            if (existing == null)
             {
                 return new NotFoundResult();
             }
 
-            // we are doing a patch, so wipe out the record.
-            adoxioEstablishment = new MicrosoftDynamicsCRMadoxioEstablishment();
-
-            // copy values over from the data provided
-            adoxioEstablishment.CopyValues(item);
+            // patch only the allowed fields
+            var patch = new adoxio_establishment();
+            patch.Id = adoxio_establishmentid;
+            patch.CopyValues(item);
 
             try
             {
-                await _dynamicsClient.Establishments.UpdateAsync(adoxio_establishmentid.ToString(), adoxioEstablishment);
+                await _dataverse.UpdateEstablishmentAsync(patch);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error updating establishment");
                 throw new Exception("Unable to update establishment");
             }
 
-            try
-            {
-                adoxioEstablishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
-            }
-            catch (HttpOperationException httpOperationException)
-            {
-                _logger.LogError(httpOperationException, "Error getting establishment");
-                throw new Exception("Unable to get establishment after update");
-            }
-
-            return new JsonResult(adoxioEstablishment.ToViewModel());
+            var updated = await _dataverse.GetEstablishmentByIdAsync(id);
+            return new JsonResult(updated.ToViewModel());
         }
 
         /// <summary>
@@ -820,9 +700,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPost("{id}/delete")]
         public async Task<IActionResult> DeleteEstablishment(string id)
         {
-            // get the legal entity.
-            Guid adoxio_establishmentid = new Guid(id);
-            MicrosoftDynamicsCRMadoxioEstablishment establishment = _dynamicsClient.GetEstablishmentById(adoxio_establishmentid);
+            var establishment = await _dataverse.GetEstablishmentByIdAsync(id);
             if (establishment == null)
             {
                 return new NotFoundResult();
@@ -830,9 +708,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             try
             {
-                await _dynamicsClient.Establishments.DeleteAsync(adoxio_establishmentid.ToString());
+                await _dataverse.DeleteEstablishmentAsync(id);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (Exception httpOperationException)
             {
                 _logger.LogError(httpOperationException, "Error delete establishment");
                 throw new Exception("Unable to delete establishment");

@@ -4,8 +4,6 @@ VisualStudioVersion = 16.0.28803.352
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarlaSpiceSync", "CarlaSpiceSync.csproj", "{853AEF1A-6BA4-4996-83E7-51C396E3AE32}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicsAutorest", "..\cllc-interfaces\Dynamics-Autorest\DynamicsAutorest.csproj", "{309D775B-CF5B-4194-9E63-3410A95D20F4}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SharePoint", "..\cllc-interfaces\SharePoint\SharePoint.csproj", "{119DD60D-7160-4500-8BA1-E79FCEB40FFC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SpiceClient", "..\cllc-interfaces\SPICE\SpiceClient.csproj", "{8766C58F-8616-4D94-A9A8-CDF8E2187AD4}"
@@ -20,10 +18,6 @@ Global
 		{853AEF1A-6BA4-4996-83E7-51C396E3AE32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{853AEF1A-6BA4-4996-83E7-51C396E3AE32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{853AEF1A-6BA4-4996-83E7-51C396E3AE32}.Release|Any CPU.Build.0 = Release|Any CPU
-		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{309D775B-CF5B-4194-9E63-3410A95D20F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{119DD60D-7160-4500-8BA1-E79FCEB40FFC}.Release|Any CPU.ActiveCfg = Release|Any CPU

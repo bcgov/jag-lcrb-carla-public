@@ -1,17 +1,17 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from "@angular/core";
-import { FormBuilder, Validators } from "@angular/forms";
-import { FormBase } from "@shared/form-base";
-import { Subscription } from "rxjs";
-import { faLightbulb } from "@fortawesome/free-regular-svg-icons";
-import configuration, { DrinkConfig, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON, GST_MULTIPLIER } from "./config";
-import { SepApplication } from "@models/sep-application.model";
-import { faQuestionCircle, faExclamationTriangle, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { SpecialEventsDataService } from "@services/special-events-data.service";
-import { SepDrinkType } from "@models/sep-drink-type.model";
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle, faExclamationTriangle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { SepApplication } from '@models/sep-application.model';
+import { SepDrinkType } from '@models/sep-drink-type.model';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
+import configuration, { DrinkConfig, GST_MULTIPLIER, HOURS_OF_LIQUOR_SERVICE, SERVINGS_PER_PERSON } from './config';
 @Component({
-  selector: "app-drink-planner",
-  templateUrl: "./drink-planner.component.html",
-  styleUrls: ["./drink-planner.component.scss"],
+  selector: 'app-drink-planner',
+  templateUrl: './drink-planner.component.html',
+  styleUrls: ['./drink-planner.component.scss']
 })
 export class DrinkPlannerComponent extends FormBase implements OnInit {
   @Output() validChange: EventEmitter<boolean> = new EventEmitter<boolean>();
@@ -24,12 +24,10 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   totalServings = 0;
   _app: SepApplication;
   drinkTypes: {
-    "Beer/Cider/Cooler": SepDrinkType,
-    "Wine": SepDrinkType,
-    "Spirits": SepDrinkType
+    'Beer/Cider/Cooler': SepDrinkType;
+    Wine: SepDrinkType;
+    Spirits: SepDrinkType;
   };
-
-
 
   @Input() set sepApplication(value: SepApplication) {
     if (value) {
@@ -37,7 +35,6 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this.totalServings = this._app.totalServings;
       this.form.patchValue(this._app);
       this.updateFormValidation();
-
     }
   }
 
@@ -64,17 +61,20 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     spirits_free: [0],
     averageBeerPrice: [null],
     averageWinePrice: [null],
-    averageSpiritsPrice: [null],
+    averageSpiritsPrice: [null]
   });
 
   // Some of the drinks are provided free
   get someFree(): boolean {
-    return this.sepApplication?.chargingForLiquorReason === "Combination" ||  this.sepApplication?.chargingForLiquorReason === "RaiseMoney";
+    return (
+      this.sepApplication?.chargingForLiquorReason === 'Combination' ||
+      this.sepApplication?.chargingForLiquorReason === 'RaiseMoney'
+    );
   }
 
   getTotalServings(): number {
     const { hours, totalMaximumNumberOfGuests } = this.form.value;
-    return (hours / HOURS_OF_LIQUOR_SERVICE * totalMaximumNumberOfGuests * SERVINGS_PER_PERSON);
+    return (hours / HOURS_OF_LIQUOR_SERVICE) * totalMaximumNumberOfGuests * SERVINGS_PER_PERSON;
   }
 
   get totalPercentage(): number {
@@ -82,22 +82,29 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       const { beer, wine, spirits } = this.form.value as { beer: number; wine: number; spirits: number };
       return beer + wine + spirits;
     } else {
-      const { beer, beer_free, wine, wine_free, spirits, spirits_free } = this.form.value as { beer: number; beer_free: number, wine: number, wine_free: number, spirits: number, spirits_free: number };
+      const { beer, beer_free, wine, wine_free, spirits, spirits_free } = this.form.value as {
+        beer: number;
+        beer_free: number;
+        wine: number;
+        wine_free: number;
+        spirits: number;
+        spirits_free: number;
+      };
       return beer + beer_free + wine + wine_free + spirits + spirits_free;
     }
   }
 
   getAVControlName(groupName: string): string {
-    let controlName = "";
+    let controlName = '';
     switch (groupName) {
-      case "beer":
-        controlName = "averageBeerPrice";
+      case 'beer':
+        controlName = 'averageBeerPrice';
         break;
-      case "wine":
-        controlName = "averageWinePrice";
+      case 'wine':
+        controlName = 'averageWinePrice';
         break;
-      case "spirits":
-        controlName = "averageSpiritsPrice";
+      case 'spirits':
+        controlName = 'averageSpiritsPrice';
         break;
     }
     return controlName;
@@ -124,15 +131,19 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
   isValid(): boolean {
     const isRaiseMoney = this.canRaisePrice();
-    const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
+    const notCharging = this.sepApplication?.chargingForLiquorReason === 'LiquorIsFree';
     //const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;  // Add GST for GST Registered Organizations
     const multiplier = 1; // Don't use the GST multiplier until LCSD-8637 has the goahead.
 
     if (isRaiseMoney != true && notCharging != true) {
-      if ((this.form.value.averageBeerPrice && (this.drinkTypes?.["Beer/Cider/Cooler"]?.pricePerServing * multiplier) < this.form.value.averageBeerPrice) ||
-        (this.form.value.averageWinePrice && (this.drinkTypes?.["Wine"]?.pricePerServing * multiplier) < this.form.value.averageWinePrice) ||
-        (this.form.value.averageSpiritsPrice && (this.drinkTypes?.["Spirits"]?.pricePerServing * multiplier) < this.form.value.averageSpiritsPrice))
-      {
+      if (
+        (this.form.value.averageBeerPrice &&
+          this.drinkTypes?.['Beer/Cider/Cooler']?.pricePerServing * multiplier < this.form.value.averageBeerPrice) ||
+        (this.form.value.averageWinePrice &&
+          this.drinkTypes?.['Wine']?.pricePerServing * multiplier < this.form.value.averageWinePrice) ||
+        (this.form.value.averageSpiritsPrice &&
+          this.drinkTypes?.['Spirits']?.pricePerServing * multiplier < this.form.value.averageSpiritsPrice)
+      ) {
         return false;
       }
     }
@@ -160,26 +171,21 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   private initForm(): void {
+    this.form.valueChanges.subscribe((_) => {
+      this.validChange.emit(this.isValid());
+    });
 
-    this.form.valueChanges
-      .subscribe(_ => {
-        this.validChange.emit(this.isValid());
-      });
+    this.form.get('hours').valueChanges.subscribe((_) => {
+      if (!this.hideGuestsAndHours) {
+        this.totalServings = this.getTotalServings();
+      }
+    });
 
-    this.form.get("hours").valueChanges
-      .subscribe(_ => {
-        if (!this.hideGuestsAndHours) {
-          this.totalServings = this.getTotalServings();
-        }
-      });
-
-    this.form.get("totalMaximumNumberOfGuests").valueChanges
-      .subscribe(_ => {
-        if (!this.hideGuestsAndHours) {
-          this.totalServings = this.getTotalServings();
-        }
-      });
-
+    this.form.get('totalMaximumNumberOfGuests').valueChanges.subscribe((_) => {
+      if (!this.hideGuestsAndHours) {
+        this.totalServings = this.getTotalServings();
+      }
+    });
   }
 
   servings(config: DrinkConfig): number {
@@ -190,25 +196,25 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   servingPercent(config: DrinkConfig): string {
     const servings: number = this.form.get(config.group).value || 0;
     if (servings === 0 || this.totalServings === 0) {
-      return "0";
+      return '0';
     }
-    return (servings / this.totalServings * 100).toFixed(1);
+    return ((servings / this.totalServings) * 100).toFixed(1);
   }
 
   servingPercentFree(config: DrinkConfig): string {
-    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;
+    const servings: number = this.form.get(config.group).value + this.form.get(config.group_free).value || 0;
     if (servings === 0 || this.totalServings === 0) {
-      return "0";
+      return '0';
     }
-    return (servings / this.totalServings * 100).toFixed(1);
+    return ((servings / this.totalServings) * 100).toFixed(1);
   }
 
   storageUnits(config: DrinkConfig): number {
     //calculate free and paid servings
-    const servings: number = (this.form.get(config.group).value + this.form.get(config.group_free).value) || 0;
+    const servings: number = this.form.get(config.group).value + this.form.get(config.group_free).value || 0;
     const servingSizemL = this.drinkTypes[config.drinkTypeName]?.servingSizeMl || 0;
     const storageSizemL = this.drinkTypes[config.drinkTypeName]?.storageSizeMl || 0;
-    const storageUnits = (storageSizemL > 0) ? servings * servingSizemL / storageSizemL : 0; // div by zero check
+    const storageUnits = storageSizemL > 0 ? (servings * servingSizemL) / storageSizemL : 0; // div by zero check
     return storageUnits > 0 && storageUnits < 1 ? 1 : storageUnits;
   }
 
@@ -222,15 +228,18 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   canRaisePrice(): boolean {
-    return this.sepApplication?.chargingForLiquorReason === "RaiseMoney" ||
-    this.sepApplication?.isLocalSignificance ||
-    this.sepApplication?.isMajorSignificance;
+    return (
+      this.sepApplication?.chargingForLiquorReason === 'RaiseMoney' ||
+      this.sepApplication?.isLocalSignificance ||
+      this.sepApplication?.isMajorSignificance
+    );
   }
 
   storageMethodDescription(config: DrinkConfig): string {
     const curDrinkType = this.drinkTypes[config.drinkTypeName];
 
-    if (curDrinkType) { // drinkTypes may not have been initialized yet, so check for null before accessing properties
+    if (curDrinkType) {
+      // drinkTypes may not have been initialized yet, so check for null before accessing properties
       if (curDrinkType.storageMethod === 'kegs') {
         return `${curDrinkType.storageMethod} of ${curDrinkType.group}`;
       } else {
@@ -246,7 +255,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // applicants can change drink prices when operating certain types of charitable/significant events
     const isRaiseMoney = this.canRaisePrice();
-    const notCharging = this.sepApplication?.chargingForLiquorReason === "LiquorIsFree";
+    const notCharging = this.sepApplication?.chargingForLiquorReason === 'LiquorIsFree';
 
     // GST Registered Organizations can add GST to the sell price;
     // otherwise the max price is the price set by LCRB
@@ -257,76 +266,71 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     let maxSpiritsPrice = 0;
 
     // calculate the default/max price using the multiplier
-    if(!notCharging){
-      maxBeerPrice = (this.drinkTypes["Beer/Cider/Cooler"]?.pricePerServing || 0) * multiplier;
-      maxWinePrice = (this.drinkTypes["Wine"]?.pricePerServing || 0) * multiplier;
-      maxSpiritsPrice = (this.drinkTypes["Spirits"]?.pricePerServing || 0) * multiplier;
+    if (!notCharging) {
+      maxBeerPrice = (this.drinkTypes['Beer/Cider/Cooler']?.pricePerServing || 0) * multiplier;
+      maxWinePrice = (this.drinkTypes['Wine']?.pricePerServing || 0) * multiplier;
+      maxSpiritsPrice = (this.drinkTypes['Spirits']?.pricePerServing || 0) * multiplier;
     }
 
     if (this.someFree) {
       const values = {};
-      for (const item of this.sepApplication.drinksSalesForecasts.filter(k => k.isCharging == false)) {
-        if (item.name.indexOf("Wine") > -1) {
-          values["wine_free"] = item.estimatedServings;
-        } else if (item.name.indexOf("Spirits") > -1) {
-          values["spirits_free"] = item.estimatedServings;
-        } else if (item.name.indexOf("Beer/Cider/Cooler") > -1) {
-          values["beer_free"] = item.estimatedServings;
+      for (const item of this.sepApplication.drinksSalesForecasts.filter((k) => k.isCharging == false)) {
+        if (item.name.indexOf('Wine') > -1) {
+          values['wine_free'] = item.estimatedServings;
+        } else if (item.name.indexOf('Spirits') > -1) {
+          values['spirits_free'] = item.estimatedServings;
+        } else if (item.name.indexOf('Beer/Cider/Cooler') > -1) {
+          values['beer_free'] = item.estimatedServings;
         }
       }
       this.form.patchValue(values);
     }
 
-    const minBeerPrice =0;
+    const minBeerPrice = 0;
     const minWinePrice = 0;
     const minSpiritsPrice = 0;
 
     if (this.sepApplication && this.drinkTypes) {
-      this.form.get("averageBeerPrice").clearValidators();
-      this.form.get("averageWinePrice").clearValidators();
-      this.form.get("averageSpiritsPrice").clearValidators();
+      this.form.get('averageBeerPrice').clearValidators();
+      this.form.get('averageWinePrice').clearValidators();
+      this.form.get('averageSpiritsPrice').clearValidators();
 
       // if they aren't raising the price, set the maximum
-      if(!isRaiseMoney){
-
-        this.form.get("averageBeerPrice").setValidators([Validators.max(maxBeerPrice),Validators.min(0) ]);
-        this.form.get("averageWinePrice").setValidators([Validators.max(maxWinePrice),Validators.min(0)]);
-        this.form.get("averageSpiritsPrice").setValidators([Validators.max(maxSpiritsPrice),Validators.min(0)]);
+      if (!isRaiseMoney) {
+        this.form.get('averageBeerPrice').setValidators([Validators.max(maxBeerPrice), Validators.min(0)]);
+        this.form.get('averageWinePrice').setValidators([Validators.max(maxWinePrice), Validators.min(0)]);
+        this.form.get('averageSpiritsPrice').setValidators([Validators.max(maxSpiritsPrice), Validators.min(0)]);
       } else {
-
-      this.form.get("averageBeerPrice").setValidators([Validators.min(minBeerPrice)]);
-      this.form.get("averageWinePrice").setValidators([Validators.min(minWinePrice)]);
-      this.form.get("averageSpiritsPrice").setValidators([Validators.min(minSpiritsPrice)]);
-
-    }
-
+        this.form.get('averageBeerPrice').setValidators([Validators.min(minBeerPrice)]);
+        this.form.get('averageWinePrice').setValidators([Validators.min(minWinePrice)]);
+        this.form.get('averageSpiritsPrice').setValidators([Validators.min(minSpiritsPrice)]);
+      }
 
       // if there is no price; or if the price is greater than the max, set it to the max
       // if they've entered a different value, they will need to change it back if they're navigating back and forth
-    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice > maxBeerPrice) {
-      this.form.get("averageBeerPrice").setValue(maxBeerPrice);
-    }
-    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice > maxWinePrice) {
-      this.form.get("averageWinePrice").setValue(maxWinePrice);
-    }
-    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice > maxSpiritsPrice) {
-      this.form.get("averageSpiritsPrice").setValue(maxSpiritsPrice);
-    }
+      if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice > maxBeerPrice) {
+        this.form.get('averageBeerPrice').setValue(maxBeerPrice);
+      }
+      if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice > maxWinePrice) {
+        this.form.get('averageWinePrice').setValue(maxWinePrice);
+      }
+      if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice > maxSpiritsPrice) {
+        this.form.get('averageSpiritsPrice').setValue(maxSpiritsPrice);
+      }
 
-    this.form.get("averageBeerPrice").updateValueAndValidity();
-    this.form.get("averageWinePrice").updateValueAndValidity();
-    this.form.get("averageSpiritsPrice").updateValueAndValidity();
-
+      this.form.get('averageBeerPrice').updateValueAndValidity();
+      this.form.get('averageWinePrice').updateValueAndValidity();
+      this.form.get('averageSpiritsPrice').updateValueAndValidity();
     }
   }
 
   greaterThanMax(field, max): boolean {
-    return (field > max) && this.canRaisePrice();
+    return field > max && this.canRaisePrice();
   }
 
   getErrorMessage(controlName) {
     const control = this.form.get(controlName);
-    let error = "Invalid input";
+    let error = 'Invalid input';
 
     if (control?.errors?.min) {
       error = `Please enter a value greater or equal to ${control.errors.min.min}`;
@@ -336,11 +340,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return error;
   }
 
-
   //validate input should only accept numbers
-  validateInput(event:Event):void{
-   const input = event.target as HTMLInputElement;
-   input.value = input.value.replace(/-/g,'');
-
+  validateInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    input.value = input.value.replace(/-/g, '');
   }
 }

@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { StarterChecklistComponent } from './starter-checklist.component';
 
 describe('StarterChecklistComponent', () => {
@@ -8,9 +7,8 @@ describe('StarterChecklistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StarterChecklistComponent ]
-    })
-    .compileComponents();
+      declarations: [StarterChecklistComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

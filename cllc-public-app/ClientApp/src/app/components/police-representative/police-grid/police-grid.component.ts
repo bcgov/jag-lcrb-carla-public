@@ -1,15 +1,15 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewChild  } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { PoliceTableElement } from '../police-table-element';
-import { Subscription } from "rxjs";
-import { SpecialEventsDataService } from '@services/special-events-data.service';
 import { SelectionModel } from '@angular/cdk/collections';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSelectChange } from '@angular/material/select';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Contact } from '@models/contact.model';
 import { User } from '@models/user.model';
-import { Router } from '@angular/router';
+import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { Subscription } from 'rxjs';
+import { PoliceTableElement } from '../police-table-element';
 
 @Component({
   selector: 'app-police-grid',
@@ -27,15 +27,21 @@ export class PoliceGridComponent implements OnInit {
 
   // angular material table columns to display
   columnsToDisplay = [
-    'select', 'dateSubmitted', 'eventName', 'eventStartDate', 'eventStatusLabel',
-    'policeDecisionByLabel', 'maximumNumberOfGuests', 'typeOfEventLabel', 'actions'
+    'select',
+    'dateSubmitted',
+    'eventName',
+    'eventStartDate',
+    'eventStatusLabel',
+    'policeDecisionByLabel',
+    'maximumNumberOfGuests',
+    'typeOfEventLabel',
+    'actions'
   ];
 
   // table state
   initialSelection = [];
   allowMultiSelect = true;
   selection = new SelectionModel<PoliceTableElement>(this.allowMultiSelect, this.initialSelection);
-
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -59,7 +65,7 @@ export class PoliceGridComponent implements OnInit {
   @Input()
   set currentUser(value: User) {
     this._currentUser = value;
-  };
+  }
   get currentUser() {
     return this._currentUser;
   }
@@ -67,7 +73,7 @@ export class PoliceGridComponent implements OnInit {
   @Input()
   set resultsLength(value: number) {
     this._resultsLength = value;
-  };
+  }
   get resultsLength() {
     return this._resultsLength;
   }
@@ -75,9 +81,11 @@ export class PoliceGridComponent implements OnInit {
   @Input()
   getData: (pageIndex: number, pageSize: number) => void;
 
-  constructor(    private sepDataService: SpecialEventsDataService,
+  constructor(
+    private sepDataService: SpecialEventsDataService,
     private cd: ChangeDetectorRef,
-    private router: Router) { }
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -92,19 +100,18 @@ export class PoliceGridComponent implements OnInit {
   assign(row: PoliceTableElement) {
     const assignee = this.currentValueMap['assignee_' + row.specialEventId];
 
-    this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee)
-      .subscribe(data => {
-        row.policeDecisionBy = data;
-        // ensure the grid refreshes.
-        this.cd.detectChanges();      
-      });
+    this.busy = this.sepDataService.policeAssignSepApplication(row.specialEventId, assignee).subscribe((data) => {
+      row.policeDecisionBy = data;
+      // ensure the grid refreshes.
+      this.cd.detectChanges();
+    });
   }
 
   batchAssign() {
     // TODO: Call backend endpoint for batch updates/assignments
     const selected = this.selection.selected;
     console.log(`Call API to batch assign SEP applications:`);
-    selected.forEach(x => console.log(`${x.specialEventId}`));
+    selected.forEach((x) => console.log(`${x.specialEventId}`));
   }
 
   /** Whether the number of selected elements matches the total number of rows. */
@@ -116,14 +123,11 @@ export class PoliceGridComponent implements OnInit {
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
-    this.isAllSelected() ?
-      this.selection.clear() :
-      this.dataSource.data.forEach(row => this.selection.select(row));
+    this.isAllSelected() ? this.selection.clear() : this.dataSource.data.forEach((row) => this.selection.select(row));
   }
 
   updateValue(event: MatSelectChange) {
     this.currentValueMap[event.source.id] = event.value;
-
   }
 
   /**
@@ -137,8 +141,7 @@ export class PoliceGridComponent implements OnInit {
   }
 
   handlePage(e: any) {
-    console.log(e);  
+    console.log(e);
     this.getData(e.pageIndex, e.pageSize);
   }
-
 }

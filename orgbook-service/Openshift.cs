@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using RedHat.OpenShift.Utils;
@@ -18,172 +19,177 @@ using RedHat.OpenShift.Utils;
 
 namespace Gov.Lclb.Cllb.OrgbookService
 {
-    
 
 
-public static class PlatformEnvironment
-{
-    public static bool IsOpenShift => !string.IsNullOrEmpty(OpenShiftEnvironment.BuildName);
-}
 
-public static class OpenShiftEnvironment
-{
-    private static string _buildCommit;
-    private static string _buildName;
-    private static string _buildSource;
-    private static string _buildNamespace;
-    private static string _buildReference;
-
-    public static string BuildCommit => GetFromEnvironmentVariable("OPENSHIFT_BUILD_COMMIT", ref _buildCommit);
-    public static string BuildName => GetFromEnvironmentVariable("OPENSHIFT_BUILD_NAME", ref _buildName);
-    public static string BuildSource => GetFromEnvironmentVariable("OPENSHIFT_BUILD_SOURCE", ref _buildSource);
-    public static string BuildNamespace => GetFromEnvironmentVariable("OPENSHIFT_BUILD_NAMESPACE", ref _buildNamespace);
-    public static string BuildReference => GetFromEnvironmentVariable("OPENSHIFT_BUILD_REFERENCE", ref _buildReference);
-
-    private static string GetFromEnvironmentVariable(string name, ref string cached)
+    public static class PlatformEnvironment
     {
-        if (cached == null)
+        // KUBERNETES_SERVICE_HOST is present in every pod at runtime on any k8s/OpenShift cluster.
+        // OPENSHIFT_BUILD_NAME is only set during S2I builds, never at pod runtime — don't use it.
+        public static bool IsOpenShift => !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("KUBERNETES_SERVICE_HOST"));
+    }
+
+    public static class OpenShiftEnvironment
+    {
+        private static string _buildCommit;
+        private static string _buildName;
+        private static string _buildSource;
+        private static string _buildNamespace;
+        private static string _buildReference;
+
+        public static string BuildCommit => GetFromEnvironmentVariable("OPENSHIFT_BUILD_COMMIT", ref _buildCommit);
+        public static string BuildName => GetFromEnvironmentVariable("OPENSHIFT_BUILD_NAME", ref _buildName);
+        public static string BuildSource => GetFromEnvironmentVariable("OPENSHIFT_BUILD_SOURCE", ref _buildSource);
+        public static string BuildNamespace => GetFromEnvironmentVariable("OPENSHIFT_BUILD_NAMESPACE", ref _buildNamespace);
+        public static string BuildReference => GetFromEnvironmentVariable("OPENSHIFT_BUILD_REFERENCE", ref _buildReference);
+
+        private static string GetFromEnvironmentVariable(string name, ref string cached)
         {
-            cached = Environment.GetEnvironmentVariable(name) ?? string.Empty;
+            if (cached == null)
+            {
+                cached = Environment.GetEnvironmentVariable(name) ?? string.Empty;
+            }
+            return cached;
         }
-        return cached;
-    }
-}
-
-public class OpenShiftIntegrationOptions
-{
-    public string CertificateMountPoint { get; set; }
-
-    internal bool UseHttps => !string.IsNullOrEmpty(CertificateMountPoint);
-}
-
-internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
-{
-    private readonly IOptions<OpenShiftIntegrationOptions> _options;
-    private readonly OpenShiftCertificateLoader _certificateLoader;
-
-    public KestrelOptionsSetup(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader)
-    {
-        _options = options;
-        _certificateLoader = certificateLoader;
     }
 
-    public void Configure(KestrelServerOptions options)
+    public class OpenShiftIntegrationOptions
     {
-        if (_options.Value.UseHttps)
-        {                
-            options.ListenAnyIP(8080, configureListen => {
+        public string CertificateMountPoint { get; set; }
+
+        internal bool UseHttps => !string.IsNullOrEmpty(CertificateMountPoint);
+    }
+
+    internal class KestrelOptionsSetup : IConfigureOptions<KestrelServerOptions>
+    {
+        private readonly IOptions<OpenShiftIntegrationOptions> _options;
+        private readonly OpenShiftCertificateLoader _certificateLoader;
+
+        public KestrelOptionsSetup(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader)
+        {
+            _options = options;
+            _certificateLoader = certificateLoader;
+        }
+
+        public void Configure(KestrelServerOptions options)
+        {
+            if (_options.Value.UseHttps)
+            {
+                options.ListenAnyIP(8080, configureListen =>
+                {
                     configureListen.UseHttps(_certificateLoader.ServiceCertificate);
                     // enable Http2, for gRPC
                     configureListen.Protocols = HttpProtocols.Http2;
                     configureListen.UseConnectionLogging();
-                });           
-        }
-        else
-        {
-            options.ListenAnyIP(8080, configureListen => {                
-                // enable Http2, for gRPC
-                configureListen.Protocols = HttpProtocols.Http2;
-                configureListen.UseConnectionLogging();
-            });                
-        }
-
-        // Also listen on port 8088 for health checks. Note that you won't be able to do gRPC calls on this port; 
-        // it is only required because the OpenShift 3.11 health check system does not seem to be compatible with HTTP2.
-        options.ListenAnyIP(8088, configureListen => {
-            configureListen.Protocols = HttpProtocols.Http1;
-        });
-    }
-}
-
-internal class OpenShiftCertificateExpiration : Microsoft.Extensions.Hosting.BackgroundService
-{
-    private static TimeSpan RestartSpan => TimeSpan.FromMinutes(15);
-    private static TimeSpan NotAfterMargin => TimeSpan.FromMinutes(15);
-    private readonly IOptions<OpenShiftIntegrationOptions> _options;
-    private readonly OpenShiftCertificateLoader _certificateLoader;
-    private readonly IApplicationLifetime _applicationLifetime;
-    private readonly ILogger<OpenShiftCertificateExpiration> _logger;
-
-    public OpenShiftCertificateExpiration(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader, IApplicationLifetime applicationLifetime, ILogger<OpenShiftCertificateExpiration> logger)
-    {
-        _options = options;
-        _certificateLoader = certificateLoader;
-        _applicationLifetime = applicationLifetime;
-        _logger = logger;
-    }
-
-    protected override async Task ExecuteAsync(CancellationToken token)
-    {
-        if (_options.Value.UseHttps)
-        {
-            try
+                });
+            }
+            else
             {
-                X509Certificate2 certificate = _certificateLoader.ServiceCertificate;
-                bool loop;
+                options.ListenAnyIP(8080, configureListen =>
                 {
-                    loop = false;
-                    DateTime expiresAt = certificate.NotAfter - NotAfterMargin; // NotAfter is in local time.
-                    DateTime now = DateTime.Now;
-                    TimeSpan tillExpires = expiresAt - now;
-                    if (tillExpires > TimeSpan.Zero)
+                    // enable Http2, for gRPC
+                    configureListen.Protocols = HttpProtocols.Http2;
+                    configureListen.UseConnectionLogging();
+                });
+            }
+
+            // Also listen on port 8088 for health checks. Note that you won't be able to do gRPC calls on this port; 
+            // it is only required because the OpenShift 3.11 health check system does not seem to be compatible with HTTP2.
+            options.ListenAnyIP(8088, configureListen =>
+            {
+                configureListen.Protocols = HttpProtocols.Http1;
+            });
+        }
+    }
+
+    internal class OpenShiftCertificateExpiration : Microsoft.Extensions.Hosting.BackgroundService
+    {
+        private static TimeSpan RestartSpan => TimeSpan.FromMinutes(15);
+        private static TimeSpan NotAfterMargin => TimeSpan.FromMinutes(15);
+        private readonly IOptions<OpenShiftIntegrationOptions> _options;
+        private readonly OpenShiftCertificateLoader _certificateLoader;
+        private readonly IHostApplicationLifetime _applicationLifetime;
+        private readonly ILogger<OpenShiftCertificateExpiration> _logger;
+
+        public OpenShiftCertificateExpiration(IOptions<OpenShiftIntegrationOptions> options, OpenShiftCertificateLoader certificateLoader, IHostApplicationLifetime applicationLifetime, ILogger<OpenShiftCertificateExpiration> logger)
+        {
+            _options = options;
+            _certificateLoader = certificateLoader;
+            _applicationLifetime = applicationLifetime;
+            _logger = logger;
+        }
+
+        protected override async Task ExecuteAsync(CancellationToken token)
+        {
+            if (_options.Value.UseHttps)
+            {
+                try
+                {
+                    X509Certificate2 certificate = _certificateLoader.ServiceCertificate;
+                    bool loop;
                     {
-                        if (tillExpires > RestartSpan)
+                        loop = false;
+                        DateTime expiresAt = certificate.NotAfter - NotAfterMargin; // NotAfter is in local time.
+                        DateTime now = DateTime.Now;
+                        TimeSpan tillExpires = expiresAt - now;
+                        if (tillExpires > TimeSpan.Zero)
                         {
-                            // Wait until we are in the RestartSpan.
-                            TimeSpan delay = tillExpires - RestartSpan
-                                + TimeSpan.FromSeconds(new Random().Next((int)RestartSpan.TotalSeconds));
-                            if (delay.TotalMilliseconds > int.MaxValue)
+                            if (tillExpires > RestartSpan)
                             {
-                                // Task.Delay is limited to int.MaxValue.
-                                await Task.Delay(int.MaxValue, token);
-                                loop = true;
-                            }
-                            else
-                            {
-                                await Task.Delay(delay, token);
+                                // Wait until we are in the RestartSpan.
+                                TimeSpan delay = tillExpires - RestartSpan
+                                    + TimeSpan.FromSeconds(new Random().Next((int)RestartSpan.TotalSeconds));
+                                if (delay.TotalMilliseconds > int.MaxValue)
+                                {
+                                    // Task.Delay is limited to int.MaxValue.
+                                    await Task.Delay(int.MaxValue, token);
+                                    loop = true;
+                                }
+                                else
+                                {
+                                    await Task.Delay(delay, token);
+                                }
                             }
                         }
-                    }
-                } while (loop) ;
-                // Our certificate expired, Stop the application.
-                _logger.LogInformation($"Certificate expires at {certificate.NotAfter.ToUniversalTime()}. Stopping application.");
-                _applicationLifetime.StopApplication();
-            }
-            catch (TaskCanceledException)
-            { }
-        }
-    }
-}
-
-internal class OpenShiftCertificateLoader
-{
-    private readonly IOptions<OpenShiftIntegrationOptions> _options;
-    private X509Certificate2 _certificate;
-
-    public OpenShiftCertificateLoader(IOptions<OpenShiftIntegrationOptions> options)
-    {
-        _options = options;
-    }
-
-    public X509Certificate2 ServiceCertificate
-    {
-        get
-        {
-            if (_certificate == null)
-            {
-                if (_options.Value.UseHttps)
-                {
-                    string certificateMountPoint = _options.Value.CertificateMountPoint;
-                    string certificateFile = Path.Combine(certificateMountPoint, "tls.crt");
-                    string keyFile = Path.Combine(certificateMountPoint, "tls.key");
-                    _certificate = CertificateLoader.LoadCertificateWithKey(certificateFile, keyFile);
+                    } while (loop) ;
+                    // Our certificate expired, Stop the application.
+                    _logger.LogInformation($"Certificate expires at {certificate.NotAfter.ToUniversalTime()}. Stopping application.");
+                    _applicationLifetime.StopApplication();
                 }
+                catch (TaskCanceledException)
+                { }
             }
-            return _certificate;
         }
     }
-}
+
+    internal class OpenShiftCertificateLoader
+    {
+        private readonly IOptions<OpenShiftIntegrationOptions> _options;
+        private X509Certificate2 _certificate;
+
+        public OpenShiftCertificateLoader(IOptions<OpenShiftIntegrationOptions> options)
+        {
+            _options = options;
+        }
+
+        public X509Certificate2 ServiceCertificate
+        {
+            get
+            {
+                if (_certificate == null)
+                {
+                    if (_options.Value.UseHttps)
+                    {
+                        string certificateMountPoint = _options.Value.CertificateMountPoint;
+                        string certificateFile = Path.Combine(certificateMountPoint, "tls.crt");
+                        string keyFile = Path.Combine(certificateMountPoint, "tls.key");
+                        _certificate = CertificateLoader.LoadCertificateWithKey(certificateFile, keyFile);
+                    }
+                }
+                return _certificate;
+            }
+        }
+    }
 }
 
 namespace RedHat.OpenShift.Utils

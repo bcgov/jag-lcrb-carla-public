@@ -1,12 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
 import { GeocoderModel } from '@models/geocoder.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Define the interface for the simplified response
 export interface Address {
-  fullAddress: String,
+  fullAddress: String;
   streetName: string;
   streetQualifier: string;
   localityName: string;
@@ -18,14 +18,14 @@ export interface Address {
   providedIn: 'root'
 })
 export class AddressService {
-  apiPath = "api/geocoder";
+  apiPath = 'api/geocoder';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getAddressData(query: string): Observable<Address[]> {
     return this.http.get<GeocoderModel>(`${this.apiPath}/get-civic-address?queryParam=${query}`).pipe(
-      map(response =>
-        response.features.map(feature => ({
+      map((response) =>
+        response.features.map((feature) => ({
           fullAddress: feature.properties.fullAddress,
           streetName: feature.properties.streetName,
           streetQualifier: feature.properties.streetQualifier,
@@ -40,5 +40,4 @@ export class AddressService {
   getPid(siteId?: String): Observable<string> {
     return this.http.get<string>(`${this.apiPath}/get-pid?siteId=${siteId}`);
   }
-
 }

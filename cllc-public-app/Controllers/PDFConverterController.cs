@@ -20,7 +20,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     {
         private readonly BCeIDBusinessQuery _bceid;
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly IOrgBookClient _orgBookclient;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -32,13 +31,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             IOrgBookClient orgBookClient,
             BCeIDBusinessQuery bceid,
             ILoggerFactory loggerFactory,
-            IDynamicsClient dynamicsClient,
             FileManagerClient fileManagerClient,
             IWebHostEnvironment env)
         {
             _configuration = configuration;
             _bceid = bceid;
-            _dynamicsClient = dynamicsClient;
             _env = env;
             _orgBookclient = orgBookClient;
             _httpContextAccessor = httpContextAccessor;
@@ -52,9 +49,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             _logger.LogDebug(LoggingEvents.HttpPost, "Begin method " + GetType().Name + "." + MethodBase.GetCurrentMethod().ReflectedType.Name);
 
             var guid = Guid.NewGuid();
-            var folderName ="ConvertFiles";
-            var docFilName= $@"{folderName}\{guid}.docx";
-            var pdfFilName= $@"{folderName}\{guid}-pdf.pdf";
+            var folderName = "ConvertFiles";
+            var docFilName = $@"{folderName}\{guid}.docx";
+            var pdfFilName = $@"{folderName}\{guid}-pdf.pdf";
             try
             {
 
@@ -81,7 +78,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
         }
 
-        private  void DeleteFile(string fileName)
+        private void DeleteFile(string fileName)
         {
             if (System.IO.File.Exists(fileName))
             {
@@ -90,4 +87,4 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         }
 
     }
-    }
+}

@@ -1,23 +1,23 @@
 .more {
-    height: auto;
+  height: auto;
 }
 
 .less {
-    max-height: 300px;
-    position: relative;
-    overflow: hidden;
+  max-height: 300px;
+  position: relative;
+  overflow: hidden;
 }
 
 .fade {
-    background-color: #fff;
-    opacity: 0.5;
-    height: 100px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
+  background-color: #fff;
+  opacity: 0.5;
+  height: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .content-insert div {
-    display: inline-block;
+  display: inline-block;
 }

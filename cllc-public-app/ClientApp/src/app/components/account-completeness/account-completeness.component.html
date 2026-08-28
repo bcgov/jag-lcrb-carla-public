@@ -1,13 +1,16 @@
 <div *ngIf="documentTypeStatusResult">
   <div *ngFor="let documentTypeStatus of documentTypeStatusResult">
     <a *ngIf="documentTypeStatus.routerLink" [routerLink]="documentTypeStatus.routerLink" class="completeness">
-      <div *ngIf="documentTypeStatus.valid; then documentsCompleteBlock else documentsIncompleteBlock"></div>
+      <div *ngIf="documentTypeStatus.valid; then documentsCompleteBlock; else documentsIncompleteBlock"></div>
       <ng-template #documentsCompleteBlock>
-        <i class="far fa-check-circle" style="color: green; margin-right: 10px;"></i>{{documentTypeStatus.name}} - Complete
+        <i class="far fa-check-circle" style="color: green; margin-right: 10px"></i>{{ documentTypeStatus.name }} -
+        Complete
       </ng-template>
       <ng-template #documentsIncompleteBlock>
-        <i class="far fa-times-circle" style="color: red; margin-right: 10px;"></i>{{documentTypeStatus.name}} - Missing
+        <i class="far fa-times-circle" style="color: red; margin-right: 10px"></i>{{ documentTypeStatus.name }} -
+        Missing
       </ng-template>
-    </a> <br>
+    </a>
+    <br />
   </div>
 </div>

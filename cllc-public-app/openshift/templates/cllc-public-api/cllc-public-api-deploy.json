@@ -68,42 +68,6 @@
                     "name": "ASPNETCORE_ENVIRONMENT",
                     "value": "${ASPNETCORE_ENVIRONMENT}"
                   },
-				  				  {
-                    "name": "ADFS_OAUTH2_URI",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "ADFS_OAUTH2_URI",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-				  {
-                    "name": "DYNAMICS_APP_GROUP_CLIENT_ID",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "DYNAMICS_APP_GROUP_CLIENT_ID",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DYNAMICS_APP_GROUP_RESOURCE",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "DYNAMICS_APP_GROUP_RESOURCE",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DYNAMICS_APP_GROUP_SECRET",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "DYNAMICS_APP_GROUP_SECRET",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
                   {
                     "name": "DYNAMICS_NATIVE_ODATA_URI",
                     "valueFrom": {
@@ -122,27 +86,7 @@
                       }
                     }
                   },
-                  
                   {
-                    "name": "DYNAMICS_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "DYNAMICS_PASSWORD",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "DYNAMICS_USERNAME",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "DYNAMICS_USERNAME",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  
-				  {
                     "name": "SPLUNK_COLLECTOR_URL",
 					"valueFrom": {
                       "secretKeyRef": {
@@ -220,24 +164,6 @@
                     "valueFrom": {
                       "secretKeyRef": {
                         "key": "smtp-host",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "SSG_USERNAME",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "ssg-username",
-                        "name": "${SECRET_RESOURCE_NAME}"
-                      }
-                    }
-                  },
-                  {
-                    "name": "SSG_PASSWORD",
-                    "valueFrom": {
-                      "secretKeyRef": {
-                        "key": "ssg-password",
                         "name": "${SECRET_RESOURCE_NAME}"
                       }
                     }

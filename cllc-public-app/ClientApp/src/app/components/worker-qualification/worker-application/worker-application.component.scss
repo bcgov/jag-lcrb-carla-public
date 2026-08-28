@@ -1,12 +1,12 @@
 .wrapper {
-    padding-left: 50px; 
-    position: relative;
+  padding-left: 50px;
+  position: relative;
 }
 
 .form-control {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
-  
+
 .label {
   font-size: 16px;
   font-weight: normal;
@@ -29,17 +29,17 @@
 }
 
 .red-snackbar {
-  background: #F44336;
+  background: #f44336;
 }
 
 .green-snackbar {
   background: #00ff21;
 }
 
-.blue-header{
-    background-color: #38598A;
-    color: #fff;
-    padding: 7px 7px 7px 15px;
+.blue-header {
+  background-color: #38598a;
+  color: #fff;
+  padding: 7px 7px 7px 15px;
 }
 
 hr {
@@ -48,11 +48,11 @@ hr {
   border: 0;
   border-top: 1px solid #ccc;
   margin: 1em 0;
-  padding: 0; 
+  padding: 0;
 }
 
 .step {
- border-bottom: 2px solid  #FCBA19;
+  border-bottom: 2px solid #fcba19;
 }
 
 .submitted-header {
@@ -78,14 +78,14 @@ hr {
 }
 
 .submit-container {
-  background-color: #38598A;
-  border-bottom: solid 4px #FFCC00;
+  background-color: #38598a;
+  border-bottom: solid 4px #ffcc00;
   color: #fff;
   margin-bottom: 20px;
   padding: 30px;
   padding-top: 20px;
   h2 {
-      color: #fff;
+    color: #fff;
   }
 }
 
@@ -96,13 +96,13 @@ hr {
 
 @media (max-width: 575.98px) {
   .dashboard-spacing {
-      padding-left: 10px;
-      padding-right: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
 }
 
 ::ng-deep .mat-calendar-body-selected {
-  background-color: #337AB7;
+  background-color: #337ab7;
   color: #000 !important;
 }
 
@@ -110,9 +110,7 @@ hr {
   color: #54708b;
 }
 
-::ng-deep .mat-calendar-header{
-  background-color: #337AB7;
+::ng-deep .mat-calendar-header {
+  background-color: #337ab7;
   color: #fff;
 }
-
-

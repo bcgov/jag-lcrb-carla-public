@@ -1,14 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { catchError } from "rxjs/operators";
-import { PreviousAddress } from "@models/previous-address.model";
-import { Observable } from "rxjs";
-import { DataService } from "./data.service";
-
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { PreviousAddress } from '@models/previous-address.model';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
 @Injectable()
 export class PreviousAddressDataService extends DataService {
-
   constructor(private http: HttpClient) {
     super();
   }
@@ -19,8 +17,7 @@ export class PreviousAddressDataService extends DataService {
    */
   getPreviousAdderesses(contactId: string): Observable<PreviousAddress[]> {
     const apiPath = `api/previousaddress/by-contactid/${contactId}`;
-    return this.http.get<PreviousAddress[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<PreviousAddress[]>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
   }
 
   /**
@@ -28,7 +25,8 @@ export class PreviousAddressDataService extends DataService {
    * @param data - address data
    */
   createPreviousAdderess(data: PreviousAddress) {
-    return this.http.post<PreviousAddress>("api/previousaddress/", data, { headers: this.headers })
+    return this.http
+      .post<PreviousAddress>('api/previousaddress/', data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -37,7 +35,8 @@ export class PreviousAddressDataService extends DataService {
    * @param data - address data
    */
   updatePreviousAdderess(data: PreviousAddress, id: string) {
-    return this.http.put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
+    return this.http
+      .put<PreviousAddress>(`api/previousaddress/${id}`, data, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
@@ -46,7 +45,8 @@ export class PreviousAddressDataService extends DataService {
    * @param data - address data
    */
   deletePreviousAddress(id: string) {
-    return this.http.post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
+    return this.http
+      .post<PreviousAddress>(`api/previousaddress/${id}/delete`, {}, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 }

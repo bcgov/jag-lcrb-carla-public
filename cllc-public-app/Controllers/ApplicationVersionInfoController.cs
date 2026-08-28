@@ -38,6 +38,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 BaseUri = _configuration["BASE_URI"],
                 BasePath = _configuration["BASE_PATH"],
                 Environment = _configuration["ASPNETCORE_ENVIRONMENT"],
+                DeploymentTier = _configuration["DEPLOYMENT_TIER"] ?? _configuration["ASPNETCORE_ENVIRONMENT"],
                 SourceCommit = _configuration["OPENSHIFT_BUILD_COMMIT"],
                 SourceRepository = _configuration["OPENSHIFT_BUILD_SOURCE"],
                 SourceReference = _configuration["OPENSHIFT_BUILD_REFERENCE"],

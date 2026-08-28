@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faChevronRight, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { filter, switchMap, takeWhile } from 'rxjs/operators';
-import { Store } from '@ngrx/store';
 import { AppState } from '@app/app-state/models/app-state';
+import { faChevronRight, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { User } from '@models/user.model';
+import { Store } from '@ngrx/store';
 import { AccountDataService } from '@services/account-data.service';
 import { FormBase } from '@shared/form-base';
+import { filter, switchMap, takeWhile } from 'rxjs/operators';
 
 @Component({
   selector: 'app-approval-settings',
@@ -31,14 +31,14 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
     isLateHoursApproval: [false],
     maxGuestsForPublicEvents: ['', Validators.required],
     maxGuestsForPrivateEvents: ['', Validators.required],
-    maxGuestsForFamilyEvents: ['', Validators.required],
+    maxGuestsForFamilyEvents: ['', Validators.required]
   });
 
   constructor(
     private store: Store<AppState>,
     private accountDataService: AccountDataService,
     private fb: FormBuilder,
-    private router: Router,
+    private router: Router
   ) {
     super();
   }
@@ -48,10 +48,11 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
   }
 
   private subscribeForData() {
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(s => !!s))
-      .subscribe(account => this.loadAccount(account));
+      .pipe(filter((s) => !!s))
+      .subscribe((account) => this.loadAccount(account));
   }
 
   private loadAccount(account: Account): void {
@@ -61,7 +62,7 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
       isLateHoursApproval: account.isLateHoursApproval,
       maxGuestsForPublicEvents: account.maxGuestsForPublicEvents,
       maxGuestsForPrivateEvents: account.maxGuestsForPrivateEvents,
-      maxGuestsForFamilyEvents: account.maxGuestsForFamilyEvents,
+      maxGuestsForFamilyEvents: account.maxGuestsForFamilyEvents
     });
   }
 
@@ -77,7 +78,8 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
 
     // Update Police account record
     const data = { ...this.form.value } as Account;
-    this.accountDataService.updateAccount(data)
+    this.accountDataService
+      .updateAccount(data)
       .pipe(switchMap(() => this.accountDataService.loadCurrentAccountToStore(this.account.id)))
       .subscribe(() => this.router.navigate(['/sep/dashboard']));
   }
@@ -91,9 +93,12 @@ export class ApprovalSettingsComponent extends FormBase implements OnInit {
 
   get validationErrorMap() {
     return {
-      'maxGuestsForPublicEvents': 'Please enter the maximum number of guests permitted before Police Approval is required for Public Events',
-      'maxGuestsForPrivateEvents': 'Please enter the maximum number of guests permitted before Police Approval is required for Private Events',
-      'maxGuestsForFamilyEvents': 'Please enter the maximum number of guests permitted before Police Approval is required for Family Events',
+      maxGuestsForPublicEvents:
+        'Please enter the maximum number of guests permitted before Police Approval is required for Public Events',
+      maxGuestsForPrivateEvents:
+        'Please enter the maximum number of guests permitted before Police Approval is required for Private Events',
+      maxGuestsForFamilyEvents:
+        'Please enter the maximum number of guests permitted before Police Approval is required for Family Events'
     };
   }
 }

@@ -10,5 +10,8 @@
 
         public static string LicenceTypeIDByNamePrefix { get { return "_LTIDN_"; } }
         public static string PicklistTypePrefix { get { return "_PL_"; } }
+        public static string EndorsementsByLicencePrefix { get { return "_ENDORSE_"; } }
+        public static string OffsiteStorageByLicencePrefix { get { return "_OFFSITE_"; } }
+        public static string ServiceAreasByLicencePrefix { get { return "_SVCAREA_"; } }
     }
 }

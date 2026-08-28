@@ -1,11 +1,11 @@
-import { Component } from "@angular/core";
-import { SurveyComponent } from "./survey.component";
+import { Component } from '@angular/core';
+import { SurveyComponent } from './survey.component';
 //import { SurveyModel } from 'survey-angular';
 
 @Component({
-  selector: "survey-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.scss"]
+  selector: 'survey-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SurveySidebarComponent {
   title: string;
@@ -38,5 +38,4 @@ export class SurveySidebarComponent {
   changePage(pageNo: number) {
     //this.survey.changePage(pageNo);
   }
-
 }

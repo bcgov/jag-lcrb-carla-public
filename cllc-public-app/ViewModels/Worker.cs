@@ -25,7 +25,8 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Expired = 845280001,
     }
 
-    public enum ConsentValidatedValue {
+    public enum ConsentValidatedValue
+    {
         Yes = 845280000,
         No = 845280001,
         Error = 845280002,

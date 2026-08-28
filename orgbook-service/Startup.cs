@@ -1,3 +1,6 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using System;
 using Hangfire;
 using Hangfire.Console;
@@ -29,11 +32,9 @@ namespace Gov.Lclb.Cllb.OrgbookService
     public class Startup
     {
         public IConfiguration Configuration { get; }
-        public ILoggerFactory _loggerFactory;
 
-        public Startup(IWebHostEnvironment environment, ILoggerFactory loggerFactory)
+        public Startup(IWebHostEnvironment environment)
         {
-            _loggerFactory = loggerFactory;
             var builder = new ConfigurationBuilder()
                 .SetBasePath(environment.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
@@ -52,7 +53,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
         {
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddDefaultTokenProviders();
-            
+
             if (!string.IsNullOrEmpty(Configuration["JWT_TOKEN_KEY"]))
             {
                 services.AddAuthentication(o =>
@@ -72,7 +73,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     };
                 });
             }
-            
+
             services.AddAuthorization();
             services.AddGrpc(options =>
             {
@@ -81,7 +82,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                 options.MaxSendMessageSize = 256 * 1024 * 1024; // 256 MB
             });
 
-            services.AddHangfire(config => 
+            services.AddHangfire(config =>
             {
                 config.UseMemoryStorage();
                 config.UseConsole();
@@ -89,10 +90,11 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
             services.AddHealthChecks()
                  .AddCheck("orgbook-service", () => HealthCheckResult.Healthy("OK"));
+            services.AddSingleton<IDataverseClient, DataverseClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -112,7 +114,8 @@ namespace Gov.Lclb.Cllb.OrgbookService
                        new
                        {
                            checks = r.Entries.Select(e =>
-                      new {
+                      new
+                      {
                           description = e.Key,
                           status = e.Value.Status.ToString(),
                           responseTime = e.Value.Duration.TotalMilliseconds
@@ -155,10 +158,10 @@ namespace Gov.Lclb.Cllb.OrgbookService
 
             if (!string.IsNullOrEmpty(Configuration["ENABLE_HANGFIRE_JOBS"]))
             {
-                SetupHangfireJobs(app);
+                SetupHangfireJobs(app, loggerFactory);
             }
 
-            app.UseEndpoints(endpoints => 
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGrpcService<OrgBookController>();
                 endpoints.MapGet("/", async context =>
@@ -175,7 +178,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
                     .Enrich.WithExceptionDetails()
                     .WriteTo.Console()
                     .WriteTo.EventCollector(splunkHost: Configuration["SPLUNK_COLLECTOR_URL"],
-                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"], 
+                       sourceType: "manual", eventCollectorToken: Configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
 #pragma warning disable CA2000 // Dispose objects before losing scope
                        messageHandler: new HttpClientHandler()
@@ -200,30 +203,25 @@ namespace Gov.Lclb.Cllb.OrgbookService
         /// Setup the Hangfire jobs.
         /// </summary>
         /// <param name="app"></param>
-        private void SetupHangfireJobs(IApplicationBuilder app)
+        private void SetupHangfireJobs(IApplicationBuilder app, ILoggerFactory loggerFactory)
         {
             try
             {
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
-                    // _logger.LogInformation("Creating Hangfire jobs for License issuance check ...");
-                    GenericRequest id = new GenericRequest() {
+                    GenericRequest id = new GenericRequest()
+                    {
                         Id = Guid.NewGuid().ToString()
                     };
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncLicencesToOrgbook(id, null), Cron.MinuteInterval(5));
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToLicences(id, null), Cron.MinuteInterval(5));
-                    //RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToAccounts(id, null), Cron.MinuteInterval(10));
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncLicencesToOrgbook(id, null), Cron.Hourly());
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToLicences(id, null), Cron.Hourly());
-                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, _loggerFactory).SyncOrgbookToAccounts(id, null), Cron.Daily());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, loggerFactory).SyncLicencesToOrgbook(id, null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, loggerFactory).SyncOrgbookToLicences(id, null), Cron.Hourly());
+                    RecurringJob.AddOrUpdate(() => new OrgBookController(Configuration, loggerFactory).SyncOrgbookToAccounts(id, null), Cron.Daily());
                 }
             }
             catch (Exception e)
             {
                 StringBuilder msg = new StringBuilder();
                 msg.AppendLine("Failed to setup Hangfire job.");
-
-                // _logger.LogCritical(new EventId(-1, "Hangfire job setup failed"), e, msg.ToString());
             }
         }
     }

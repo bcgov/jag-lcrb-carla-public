@@ -4,25 +4,22 @@ using Gov.Lclb.Cllb.Public;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
-using System.IO;
+using System.Net.Http;
 using Xunit;
 
 
 namespace PDF.Tests
 {
-    public class PDF 
+    public class PDF
     {
 
         IConfiguration Configuration;
 
-        PdfClient _pdfClient;
-
-        string baseUri;
-        string jwtToken;
+        IPdfService _pdfClient;
 
         /// <summary>
         /// Setup the test
-        /// </summary>        
+        /// </summary>
         public PDF()
         {
             Configuration = new ConfigurationBuilder()
@@ -32,11 +29,7 @@ namespace PDF.Tests
                 .AddEnvironmentVariables()
                 .Build();
 
-            baseUri = Configuration["PDF_SERVICE_BASE_URI"];
-            jwtToken = Configuration["PDF_JWT_TOKEN"];
-
-            _pdfClient = new PdfClient(baseUri, $"Bearer {jwtToken}");
-
+            _pdfClient = new PdfService(new HttpClient(), Configuration);
         }
 
 
@@ -65,7 +58,7 @@ namespace PDF.Tests
 
         }
 
-        
+
 
     }
 }

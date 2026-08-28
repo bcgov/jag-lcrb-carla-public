@@ -1,22 +1,18 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { DataService } from "./data.service";
-import { catchError } from "rxjs/operators";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { DataService } from './data.service';
 
-type PaymentType =
-'default' |
-'worker' |
-'licenceFee' |
-'primaryInvoice' |
-'secondaryInvoice' |
-'specialEventInvoice'
-;
+type PaymentType = 'default' | 'worker' | 'licenceFee' | 'primaryInvoice' | 'secondaryInvoice' | 'specialEventInvoice';
 
-type PaymentTypes = Record<PaymentType, {
-  getPaymentURI: (id: string) => string;
-  verifyPaymentURI: (id: string) => string;
-}>;
+type PaymentTypes = Record<
+  PaymentType,
+  {
+    getPaymentURI: (id: string) => string;
+    verifyPaymentURI: (id: string) => string;
+  }
+>;
 
 /**
  * Service for handling payment-related data operations.
@@ -27,9 +23,9 @@ type PaymentTypes = Record<PaymentType, {
  */
 @Injectable()
 export class PaymentDataService extends DataService {
-  apiPath = "api/payment/";
-  submitPath = "submit/";
-  verifyPath = "verify/";
+  apiPath = 'api/payment/';
+  submitPath = 'submit/';
+  verifyPath = 'verify/';
 
   readonly paymentTypes: PaymentTypes = {
     default: {
@@ -61,7 +57,6 @@ export class PaymentDataService extends DataService {
   constructor(private http: HttpClient) {
     super();
   }
-
 
   /**
    * Gets the payment URI for a permanent change application.
@@ -100,7 +95,8 @@ export class PaymentDataService extends DataService {
   getPaymentURI(paymentType: PaymentType, id: string, queryParams?: Record<string, string>): Observable<Object> {
     const payType = this.paymentTypes[paymentType];
 
-    return this.http.get(payType.getPaymentURI(id), { headers: this.headers, params: queryParams })
+    return this.http
+      .get(payType.getPaymentURI(id), { headers: this.headers, params: queryParams })
       .pipe(catchError(this.handleError));
   }
 
@@ -114,43 +110,50 @@ export class PaymentDataService extends DataService {
   verifyPaymentURI(paymentType: PaymentType, id: string) {
     const payType = this.paymentTypes[paymentType];
 
-    return this.http.get(payType.verifyPaymentURI(id), { headers: this.headers })
+    return this.http
+      .get(payType.verifyPaymentURI(id), { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
 
   getPaymentSubmissionUrl(id: string) {
-    return this.http.get(this.apiPath + this.submitPath + id, { headers: this.headers })
+    return this.http
+      .get(this.apiPath + this.submitPath + id, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   getInvoiceFeePaymentSubmissionUrl(id: string) {
-    const invoiceFeePath = "submit/licence-fee/";
-    return this.http.get(this.apiPath + invoiceFeePath + id, { headers: this.headers })
+    const invoiceFeePath = 'submit/licence-fee/';
+    return this.http
+      .get(this.apiPath + invoiceFeePath + id, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   payOutstandingPriorBalanceInvoicePaymentSubmissionUrl(id: string) {
-    const additionalFeePath = "submit/outstanding-prior-balance-invoice/";
-    return this.http.get(this.apiPath + additionalFeePath + id, { headers: this.headers })
+    const additionalFeePath = 'submit/outstanding-prior-balance-invoice/';
+    return this.http
+      .get(this.apiPath + additionalFeePath + id, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
   getWorkerPaymentSubmissionUrl(workerId: string) {
-    return this.http.get(`${this.apiPath}${this.submitPath}worker/${workerId}`, { headers: this.headers })
+    return this.http
+      .get(`${this.apiPath}${this.submitPath}worker/${workerId}`, { headers: this.headers })
       .pipe(catchError(this.handleError));
   }
 
   verifyPaymentSubmission(id: string) {
-    return this.http.get(this.apiPath + this.verifyPath + id, { headers: this.headers })
+    return this.http
+      .get(this.apiPath + this.verifyPath + id, { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
 
   verifyLicenceFeePaymentSubmission(id: string) {
-    return this.http.get(this.apiPath + this.verifyPath + "licence-fee/" + id, { headers: this.headers })
+    return this.http
+      .get(this.apiPath + this.verifyPath + 'licence-fee/' + id, { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
 
   verifyWorkerPaymentSubmission(id: string) {
-    return this.http.get(`${this.apiPath}${this.verifyPath}worker/${id}`, { headers: this.headers })
+    return this.http
+      .get(`${this.apiPath}${this.verifyPath}worker/${id}`, { headers: this.headers })
       .pipe(catchError(this.handleErrorWith503));
   }
-
 }

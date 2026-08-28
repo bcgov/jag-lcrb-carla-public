@@ -12,9 +12,18 @@
         public string BaseUri { get; set; }
 
         /// <summary>
-        /// Dotnet Environment (Development, Staging, Production...)
+        /// Dotnet Environment (Development, Staging, Production...) — this is the
+        /// ASP.NET Core hosting environment, kept fixed at "Production" in every
+        /// deployed tier to avoid a DI-validation crash; it does NOT indicate which
+        /// deployment tier (dev/test/prod) is actually running. Use DeploymentTier for that.
         /// </summary>
         public string Environment { get; set; }
+
+        /// <summary>
+        /// Which deployment tier this build is running in (Development, Test, Production),
+        /// set explicitly by the deploy/promote pipeline based on the target environment.
+        /// </summary>
+        public string DeploymentTier { get; set; }
 
         /// <summary>
         /// File creation time for the running assembly

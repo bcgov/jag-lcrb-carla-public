@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <StartupObject>Gov.Jag.Lcrb.PdfService.Program</StartupObject>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
     <UserSecretsId>e01b8a3f-2545-470e-84fc-ae1a3393b2f2</UserSecretsId>
@@ -14,19 +14,19 @@
 
   <ItemGroup>
 
-    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="5.0.1" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
 
     <PackageReference Include="Haukcode.WkHtmlToPdfDotNet" Version="1.5.59" />
 
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Stubble.Compilation" Version="1.9.3" />
     <PackageReference Include="Stubble.Core" Version="1.9.3" />
     <PackageReference Include="Stubble.Extensions.JsonNet" Version="1.2.3" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.1.1" />
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.1.1" />
-    <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.6.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.9.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="6.9.0" />
+    <PackageReference Include="Unchase.Swashbuckle.AspNetCore.Extensions" Version="2.7.2" />
   </ItemGroup>
 
   <ItemGroup>

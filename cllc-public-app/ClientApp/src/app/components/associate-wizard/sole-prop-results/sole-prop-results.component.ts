@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-sole-prop-results",
-  templateUrl: "./sole-prop-results.component.html",
-  styleUrls: ["./sole-prop-results.component.css"]
+  selector: 'app-sole-prop-results',
+  templateUrl: './sole-prop-results.component.html',
+  styleUrls: ['./sole-prop-results.component.css']
 })
 export class SolePropResultsComponent implements OnInit {
   @Input()
@@ -11,7 +11,5 @@ export class SolePropResultsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

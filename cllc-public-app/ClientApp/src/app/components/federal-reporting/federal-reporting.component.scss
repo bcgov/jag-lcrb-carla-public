@@ -30,10 +30,7 @@
   color: #fff;
 }
 
-::ng-deep
-  .mat-checkbox-checked.mat-accent
-  .mat-checkbox-ripple
-  .mat-ripple-element {
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
   background-color: #38598a !important;
 }
 

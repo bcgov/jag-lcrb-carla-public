@@ -16,5 +16,3 @@ export class HoursOfService {
   endTimeHour: number | undefined;
   endTimeMinute: number | undefined;
 }
-
-

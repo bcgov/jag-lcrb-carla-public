@@ -14,7 +14,7 @@ export class ConversionToolComponent implements OnInit {
   pricePerStandardDrink: number;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -34,21 +34,19 @@ export class ConversionToolComponent implements OnInit {
       const standardDrinkSize = LiquorTypes[this.toolType].standardDrinkSizeOz;
 
       if (tastingSize && numberOfTastings) {
-        this.numberOfStandardDrinks = Math.ceil((tastingSize * numberOfTastings) / standardDrinkSize)
+        this.numberOfStandardDrinks = Math.ceil((tastingSize * numberOfTastings) / standardDrinkSize);
       }
 
       if (pricePerTastingDrink) {
-        if(this.toolType === 'beer') {
-          this.pricePerStandardDrink = pricePerTastingDrink * (12/tastingSize);
+        if (this.toolType === 'beer') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (12 / tastingSize);
         }
-        if(this.toolType === 'wine') {
-          this.pricePerStandardDrink = pricePerTastingDrink * (5/tastingSize);
+        if (this.toolType === 'wine') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (5 / tastingSize);
         }
-        if(this.toolType === 'spirits') {
-          this.pricePerStandardDrink = pricePerTastingDrink * (1.5/tastingSize);
+        if (this.toolType === 'spirits') {
+          this.pricePerStandardDrink = pricePerTastingDrink * (1.5 / tastingSize);
         }
-
-
       }
     });
   }
@@ -56,13 +54,12 @@ export class ConversionToolComponent implements OnInit {
   resetValues() {
     this.pricePerStandardDrink = null;
     this.numberOfStandardDrinks = null;
-    this.form.get('numberOfTastings')?.reset()
-    this.form.get('pricePerTastingDrink')?.reset()
+    this.form.get('numberOfTastings')?.reset();
+    this.form.get('pricePerTastingDrink')?.reset();
     if (this.toolType !== 'spirits') {
       this.form.get('sizeOfTasting')?.reset();
     }
   }
-
 }
 
 const LiquorTypes = {
@@ -82,5 +79,5 @@ const LiquorTypes = {
     title: 'Spirits',
     standardDrinkSizeOz: 1.5,
     maxPrice: '$5.00'
-  },
-}
+  }
+};

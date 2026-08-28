@@ -1,30 +1,41 @@
 <div>
-    <h1>Liquor Overview</h1>
-    <span class="mat-title">{{sepApplication?.eventName}}</span>
-    <p>
-        Please provide the amount and type of drinks that will be served and/or sold at your
-        event. This information helps you estimate appropriate serving quantities for your event and,
-        if you are selling drinks, provides the most accurate calculation of Provincial Sales Tax (PST). The quantities you
-        provide are subject to review and approval and may be used by police and liquor inspectors during inspections.
-    </p>
-    <p>
-        <b>Many police jurisdictions limit drink quantities for a special event based on the hours of liquor service
-        and the number of patrons at the event. Please contact your local police detachment for this information,
-        before you enter the drink quantity on the application. Remember, you must take precautions to prevent
-        over-service and intoxication of patrons.</b>
-    </p>
+  <h1>Liquor Overview</h1>
+  <span class="mat-title">{{ sepApplication?.eventName }}</span>
+  <p>
+    Please provide the amount and type of drinks that will be served and/or sold at your event. This information helps
+    you estimate appropriate serving quantities for your event and, if you are selling drinks, provides the most
+    accurate calculation of Provincial Sales Tax (PST). The quantities you provide are subject to review and approval
+    and may be used by police and liquor inspectors during inspections.
+  </p>
+  <p>
+    <b
+      >Many police jurisdictions limit drink quantities for a special event based on the hours of liquor service and the
+      number of patrons at the event. Please contact your local police detachment for this information, before you enter
+      the drink quantity on the application. Remember, you must take precautions to prevent over-service and
+      intoxication of patrons.</b
+    >
+  </p>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start" >
-        <mat-tab label="Total Servings" [disabled]="true">
-            <app-total-servings [application]="sepApplication" (saved)="updateValue($event); selectedIndex = 1;"></app-total-servings>
-        </mat-tab>
-        <mat-tab label="Selling Drinks" [disabled]="true">
-            <app-selling-drinks [sepApplication]="sepApplication" (back)="selectedIndex = 0" (saved)="updateValue($event); selectedIndex = 2;"></app-selling-drinks>
-        </mat-tab>
-        <mat-tab label="Drink Amounts" [disabled]="true">
-            <app-drink-amounts [savingToAPI]="savingToAPI" [application]="sepApplication" (back)="selectedIndex = 1"  (saved)="updateValue($event); save();"></app-drink-amounts>
-        </mat-tab>
-    </mat-tab-group>
+  <mat-tab-group class="serving-slide" [selectedIndex]="selectedIndex" mat-align-tabs="start">
+    <mat-tab label="Total Servings" [disabled]="true">
+      <app-total-servings
+        [application]="sepApplication"
+        (saved)="updateValue($event); selectedIndex = 1"></app-total-servings>
+    </mat-tab>
+    <mat-tab label="Selling Drinks" [disabled]="true">
+      <app-selling-drinks
+        [sepApplication]="sepApplication"
+        (back)="selectedIndex = 0"
+        (saved)="updateValue($event); selectedIndex = 2"></app-selling-drinks>
+    </mat-tab>
+    <mat-tab label="Drink Amounts" [disabled]="true">
+      <app-drink-amounts
+        [savingToAPI]="savingToAPI"
+        [application]="sepApplication"
+        (back)="selectedIndex = 1"
+        (saved)="updateValue($event); save()"></app-drink-amounts>
+    </mat-tab>
+  </mat-tab-group>
 </div>

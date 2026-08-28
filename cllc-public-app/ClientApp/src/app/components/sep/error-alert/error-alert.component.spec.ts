@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ErrorAlertComponent } from './error-alert.component';
 
 describe('ErrorAlertComponent', () => {
@@ -8,9 +7,8 @@ describe('ErrorAlertComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ErrorAlertComponent ]
-    })
-    .compileComponents();
+      declarations: [ErrorAlertComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

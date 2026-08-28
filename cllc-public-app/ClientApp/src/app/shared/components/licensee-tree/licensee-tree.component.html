@@ -7,8 +7,12 @@
 </ng-container>
 
 <ng-template #treeTemplate>
-  <mat-tree [ngClass]="{'not-editable': !enableEditing}" [dataSource]="dataSource" [treeControl]="treeControl"
-            class="example-tree" #tree>
+  <mat-tree
+    [ngClass]="{ 'not-editable': !enableEditing }"
+    [dataSource]="dataSource"
+    [treeControl]="treeControl"
+    class="example-tree"
+    #tree>
     <!-- This is the tree node template for leaf nodes -->
     <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle>
       <li class="mat-tree-node">
@@ -24,7 +28,7 @@
         <div class="mat-tree-node">
           <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'toggle ' + node.name">
             <mat-icon class="mat-icon-rtl-mirror">
-              {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              {{ treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
             </mat-icon>
           </button>
           <ng-container *ngTemplateOutlet="treeNode; context: { node: node }"></ng-container>
@@ -45,66 +49,123 @@
         <i *ngIf="!node.isIndividual" class="fas fa-building"></i>
       </span>
       <span class="tree-label" *ngIf="!node.isShareholderNew && !node.isRoot" style="margin-right: 5px">
-        <i
-          class="fa fa-user" style="margin-right: 5px">
-        </i>
+        <i class="fa fa-user" style="margin-right: 5px"> </i>
         <!-- {{node.getNewLeadershipPosition()}}  -->
       </span>
 
-      <span *ngIf="node.isShareholderNew && node?.parentLinceseeChangeLog && Account.getBusinessTypeFromName(node?.parentLinceseeChangeLog?.businessType) === 'Partnership'">Partner,</span>
-      <span *ngIf="!(enableEditing && !node.isRemoveChangeType())" class="tree-label"
-            [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
-        {{node.businessNameNew}}
+      <span
+        *ngIf="
+          node.isShareholderNew &&
+          node?.parentLinceseeChangeLog &&
+          Account.getBusinessTypeFromName(node?.parentLinceseeChangeLog?.businessType) === 'Partnership'
+        "
+        >Partner,</span
+      >
+      <span
+        *ngIf="!(enableEditing && !node.isRemoveChangeType())"
+        class="tree-label"
+        [ngClass]="{
+          'added-node': node.isAddChangeType(),
+          'deleted-node': node.isRemoveChangeType(),
+          'edited-node': node.isUpdateChangeType()
+        }">
+        {{ node.businessNameNew }}
       </span>
-      <span *ngIf="enableEditing && !node.isRemoveChangeType()" class="tree-label"
-            [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}"
-            style="margin-right: 10px;">
-        {{node.businessNameNew}}
+      <span
+        *ngIf="enableEditing && !node.isRemoveChangeType()"
+        class="tree-label"
+        [ngClass]="{
+          'added-node': node.isAddChangeType(),
+          'deleted-node': node.isRemoveChangeType(),
+          'edited-node': node.isUpdateChangeType()
+        }"
+        style="margin-right: 10px">
+        {{ node.businessNameNew }}
       </span>
       <ng-container *ngIf="enableEditing && node.isRoot">
-        <span>({{Account.getBusinessTypeFromName(node.businessType)}})</span>
+        <span>({{ Account.getBusinessTypeFromName(node.businessType) }})</span>
         &nbsp;
-        <span *ngIf="node.totalSharesNew"> {{node.totalSharesNew}} total Shares </span>
-        <span *ngIf="node.totalSharesNew && (node.totalSharesNew - node.totalChildShares) > 0">({{node.totalSharesNew - node.totalChildShares}} Unallocated) </span>
+        <span *ngIf="node.totalSharesNew"> {{ node.totalSharesNew }} total Shares </span>
+        <span *ngIf="node.totalSharesNew && node.totalSharesNew - node.totalChildShares > 0"
+          >({{ node.totalSharesNew - node.totalChildShares }} Unallocated)
+        </span>
       </ng-container>
       <ng-container *ngIf="!node.isRoot">
-        <span *ngIf="!node.isRoot && node.percentageShares"
-              [ngClass]="{'added-node': node.isAddChangeType(), 'deleted-node': node.isRemoveChangeType(), 'edited-node': node.isUpdateChangeType()}">
-          {{node.percentageShares}} %&nbsp;
+        <span
+          *ngIf="!node.isRoot && node.percentageShares"
+          [ngClass]="{
+            'added-node': node.isAddChangeType(),
+            'deleted-node': node.isRemoveChangeType(),
+            'edited-node': node.isUpdateChangeType()
+          }">
+          {{ node.percentageShares }} %&nbsp;
         </span>
         <span *ngIf="!node.isRoot && node.percentageShares">
-          <span class="shares-label"> shareholder of {{node?.parentLinceseeChangeLog?.businessNameNew}} </span>
+          <span class="shares-label"> shareholder of {{ node?.parentLinceseeChangeLog?.businessNameNew }} </span>
         </span>
-        <span *ngIf="Account.getBusinessTypeFromName(treeRoot.businessType) === 'Partnership' && node.interestPercentageNew">({{node.interestPercentageNew}}% partner)&nbsp;&nbsp;</span>
+        <span
+          *ngIf="Account.getBusinessTypeFromName(treeRoot.businessType) === 'Partnership' && node.interestPercentageNew"
+          >({{ node.interestPercentageNew }}% partner)&nbsp;&nbsp;</span
+        >
       </ng-container>
 
-
-      <a *ngIf="enableEditing && (!node.isRoot || Account.getBusinessTypeFromName(node.businessType) !== 'Partnership') && !node.isRemoveChangeType()" href="javascript:void(0)" class="action-link" style="margin-right: 10px;"
-         (click)="!node.isRemoveChangeType() && editAssociate(node)">
+      <a
+        *ngIf="
+          enableEditing &&
+          (!node.isRoot || Account.getBusinessTypeFromName(node.businessType) !== 'Partnership') &&
+          !node.isRemoveChangeType()
+        "
+        href="javascript:void(0)"
+        class="action-link"
+        style="margin-right: 10px"
+        (click)="!node.isRemoveChangeType() && editAssociate(node)">
         <i class="fas fa-pencil-alt"></i>&nbsp;Edit
       </a>
-      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessType) !== 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()" class="action-link" href="javascript:void(0)"
-         style="margin-right: 10px;" [matMenuTriggerFor]="menu">
-        <i class="fas fa-plus"></i>&nbsp;
-        Add Associate
+      <a
+        *ngIf="
+          enableEditing &&
+          Account.getBusinessTypeFromName(node.businessType) !== 'Partnership' &&
+          !node.isIndividual &&
+          !node.isRemoveChangeType()
+        "
+        class="action-link"
+        href="javascript:void(0)"
+        style="margin-right: 10px"
+        [matMenuTriggerFor]="menu">
+        <i class="fas fa-plus"></i>&nbsp; Add Associate
       </a>
-      <a *ngIf="enableEditing && Account.getBusinessTypeFromName(node.businessType) === 'Partnership' && !node.isIndividual && !node.isRemoveChangeType()"
-         class="action-link" href="javascript:void(0)" (click)="!node.isRemoveChangeType() && addShareholder(node)"
-         style="margin-right: 10px;">
-        <i class="fas fa-plus"></i>&nbsp;
-        Add Partner
+      <a
+        *ngIf="
+          enableEditing &&
+          Account.getBusinessTypeFromName(node.businessType) === 'Partnership' &&
+          !node.isIndividual &&
+          !node.isRemoveChangeType()
+        "
+        class="action-link"
+        href="javascript:void(0)"
+        (click)="!node.isRemoveChangeType() && addShareholder(node)"
+        style="margin-right: 10px">
+        <i class="fas fa-plus"></i>&nbsp; Add Partner
       </a>
       <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node, 'shareholder')">Shareholder</button>
+        <button mat-menu-item (click)="!node.isRemoveChangeType() && addShareholder(node, 'shareholder')">
+          Shareholder
+        </button>
         <button mat-menu-item (click)="!node.isRemoveChangeType() && addLeadership(node, 'partner')">Leadership</button>
       </mat-menu>
     </section>
     <section>
       &nbsp; &nbsp;
-      <a href="javascript: void(0);" class="action-link" style="color: #ee220e"
-         (click)="!node.isRemoveChangeType() && deleteAssociate(node)">
-        <i *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()" style="margin-right: 5px;" class="fas fa-trash-alt"
-           (click)="cancelChange(item)">
+      <a
+        href="javascript: void(0);"
+        class="action-link"
+        style="color: #ee220e"
+        (click)="!node.isRemoveChangeType() && deleteAssociate(node)">
+        <i
+          *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()"
+          style="margin-right: 5px"
+          class="fas fa-trash-alt"
+          (click)="cancelChange(item)">
         </i>
         <span *ngIf="enableEditing && !node.isRoot && !node.isRemoveChangeType()">
           <span *ngIf="node.legalEntityId">Remove</span>
@@ -124,22 +185,24 @@
       <h3>Key:</h3>
       <span class="tree-label">
         <i class="fas fa-user"></i>
-      </span> -- Leadership (Directors, Officers and Senior Managers)<br>
+      </span>
+      -- Leadership (Directors, Officers and Senior Managers)<br />
       <span class="tree-label">
         <i class="fas fa-building"></i>
-      </span> -- Business Shareholder <br>
+      </span>
+      -- Business Shareholder <br />
       <span class="tree-label">
         <i class="fas fa-user-tie"></i>
-      </span> -- Individual Shareholder <br>
-      Edited Associate -- <span class="edited-node">Orange</span> <br>
-      Added Associate -- <span class="added-node">Green</span> <br>
-      Deleted Associate -- <span class="deleted-node">Red Strikethough</span> <br>
+      </span>
+      -- Individual Shareholder <br />
+      Edited Associate -- <span class="edited-node">Orange</span> <br />
+      Added Associate -- <span class="added-node">Green</span> <br />
+      Deleted Associate -- <span class="deleted-node">Red Strikethough</span> <br />
     </div>
   </div>
 
   <h3 class="blue-header" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">
-    BUSINESS
-    SHAREHOLDER CHANGES
+    BUSINESS SHAREHOLDER CHANGES
   </h3>
   <section class="padded-section" *ngIf="organizationShareholderChanges && organizationShareholderChanges.length">
     <table class="eq-table">
@@ -150,32 +213,48 @@
         <th class="shares-cell">Number of Shares</th>
         <th></th>
       </tr>
-      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of organizationShareholderChanges;  let i = index;">
+      <tr [ngClass]="{ 'alt-row': i % 2 === 0 }" *ngFor="let item of organizationShareholderChanges; let i = index">
         <td>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{getRenderChangeType(item)}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ getRenderChangeType(item) }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.nameOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.nameOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.businessNameNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.businessNameNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.emailOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.emailOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.emailNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.emailNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.numberofSharesOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.numberofSharesOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.numberofSharesNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.numberofSharesNew }}
           </span>
         </td>
         <td>
@@ -186,8 +265,7 @@
   </section>
 
   <h3 class="blue-header" *ngIf="individualShareholderChanges && individualShareholderChanges.length">
-    INDIVIDUAL
-    SHAREHOLDER CHANGES
+    INDIVIDUAL SHAREHOLDER CHANGES
   </h3>
   <section *ngIf="individualShareholderChanges && individualShareholderChanges.length" class="padded-section">
     <table class="eq-table">
@@ -198,32 +276,48 @@
         <th class="shares-cell">Number of Shares</th>
         <th></th>
       </tr>
-      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of individualShareholderChanges; let i = index;">
+      <tr [ngClass]="{ 'alt-row': i % 2 === 0 }" *ngFor="let item of individualShareholderChanges; let i = index">
         <td>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{getRenderChangeType(item)}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ getRenderChangeType(item) }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.nameOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.nameOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.businessNameNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.businessNameNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.emailOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.emailOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.emailNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.emailNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.numberofSharesOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.numberofSharesOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.numberofSharesNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.numberofSharesNew }}
           </span>
         </td>
         <td>
@@ -243,32 +337,48 @@
         <th>Position(s)</th>
         <th></th>
       </tr>
-      <tr [ngClass]="{'alt-row': i%2 === 0}" *ngFor="let item of leadershipChanges; let i = index;">
+      <tr [ngClass]="{ 'alt-row': i % 2 === 0 }" *ngFor="let item of leadershipChanges; let i = index">
         <td>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{getRenderChangeType(item)}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ getRenderChangeType(item) }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.nameOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.nameOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.businessNameNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.businessNameNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.emailOld}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.emailOld }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.emailNew}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.emailNew }}
           </span>
         </td>
         <td>
-          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{item.getOldLeadershipPosition()}}</div>
+          <div *ngIf="item.isUpdateChangeType()" class="old-value">{{ item.getOldLeadershipPosition() }}</div>
           <span
-            [ngClass]="{'added-node': item.isAddChangeType(), 'deleted-node': item.isRemoveChangeType(), 'edited-node': item.isUpdateChangeType()}">
-            {{item.getNewLeadershipPosition()}}
+            [ngClass]="{
+              'added-node': item.isAddChangeType(),
+              'deleted-node': item.isRemoveChangeType(),
+              'edited-node': item.isUpdateChangeType()
+            }">
+            {{ item.getNewLeadershipPosition() }}
           </span>
         </td>
         <td>

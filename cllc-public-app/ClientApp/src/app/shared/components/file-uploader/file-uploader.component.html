@@ -1,34 +1,43 @@
 <div class="upload-wrapper mt-2">
-  <ngx-file-drop *ngIf="dataLoaded" [hidden]="disableFileUpload()" [ngClass]="{'no-drop': disableFileUpload()}"
-                 (onFileDrop)="dropped($event)" customstype="filedrop" (onFileOver)="fileOver($event)"
-                 (onFileLeave)="fileLeave($event)">
+  <ngx-file-drop
+    *ngIf="dataLoaded"
+    [hidden]="disableFileUpload()"
+    [ngClass]="{ 'no-drop': disableFileUpload() }"
+    (onFileDrop)="dropped($event)"
+    customstype="filedrop"
+    (onFileOver)="fileOver($event)"
+    (onFileLeave)="fileLeave($event)">
     <ng-template ngx-file-drop-content-tmp>
       <div style="text-align: center">
-        <span>{{uploadHeader}} </span>
-        <a href="javascript:void(0)" [ngClass]="{'no-drop': disableFileUpload()}"
-           (click)="browseFiles(fileBrowserM, fileBrowser)">
-          BROWSE
-        </a>.
-        <br>
-        <span style="color: #A9A9A9">{{fileTypes}}</span>
-        <br>
-        <span style="color: #A9A9A9">MAX FILE SIZE: 25MB.</span>
-        <br>
-        <section style="height: 0; overflow: hidden; width: 0; ;">
-          <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple
-                 #fileBrowserM>
-          <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" #fileBrowser>
+        <span>{{ uploadHeader }} </span>
+        <a
+          href="javascript:void(0)"
+          [ngClass]="{ 'no-drop': disableFileUpload() }"
+          (click)="browseFiles(fileBrowserM, fileBrowser)">
+          BROWSE </a
+        >.
+        <br />
+        <span style="color: #a9a9a9">{{ fileTypes }}</span>
+        <br />
+        <span style="color: #a9a9a9">MAX FILE SIZE: 25MB.</span>
+        <br />
+        <section style="height: 0; overflow: hidden; width: 0">
+          <input (change)="onBrowserFileSelect($event, fileBrowserM)" type="file" multiple #fileBrowserM />
+          <input (change)="onBrowserFileSelect($event, fileBrowser)" type="file" #fileBrowser />
         </section>
       </div>
     </ng-template>
   </ngx-file-drop>
   <mat-progress-bar class="mt-1 mb-1" *ngIf="!dataLoaded || fileReqOngoing" mode="indeterminate"></mat-progress-bar>
-  <p *ngIf="uploadCaption" style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0;" [innerHTML]="uploadCaption"></p>
-  <div style="color: #2C679E; margin-top: 5px;">
-    <section *ngFor="let item of files; let i=index" class="file-list">
-      <a name="{{item.name}}" href="{{item.downloadUrl}}">{{ item.name }}</a>
+  <p
+    *ngIf="uploadCaption"
+    style="padding-top: 8px; padding-bottom: 8px; margin-bottom: 0"
+    [innerHTML]="uploadCaption"></p>
+  <div style="color: #2c679e; margin-top: 5px">
+    <section *ngFor="let item of files; let i = index" class="file-list">
+      <a name="{{ item.name }}" href="{{ item.downloadUrl }}">{{ item.name }}</a>
       <span>
-        <span style="color: #A9A9A9; margin-right: 20px;">{{item.size}} kb</span>
+        <span style="color: #a9a9a9; margin-right: 20px">{{ item.size }} kb</span>
         <a *ngIf="enableFileDeletion" href="javascript: void(0)" (click)="deleteFile(item.serverrelativeurl)">Delete</a>
       </span>
     </section>

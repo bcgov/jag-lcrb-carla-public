@@ -24,13 +24,13 @@ namespace Gov.Lclb.Cllb.Public.Test
                 .AddEnvironmentVariables()
                 .Build();
 
-            var builder = new WebHostBuilder()               
+            var builder = new WebHostBuilder()
                 .UseEnvironment("Staging")
                 .UseConfiguration(testConfig)
                 .UseStartup<Startup>();
 
             _server = new TestServer(builder);
-            
+
             string testUserName = "TMcTesterson";
             _client = _server.CreateClient();
             _client.DefaultRequestHeaders.Add("DEV-USER", testUserName);

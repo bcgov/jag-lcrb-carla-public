@@ -1,25 +1,38 @@
-<div class="row" style="padding:20px;">
+<div class="row" style="padding: 20px">
   <div class="col-md-8 col-sm-12">
-    <h1>{{title}}</h1>
-    <section class="m-3 mat-elevation-z0" [innerHtml]="body">
-    </section>
+    <h1>{{ title }}</h1>
+    <section class="m-3 mat-elevation-z0" [innerHtml]="body"></section>
 
     <section class="d-flex justify-content-around m-3">
-      <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+      <mat-card style="flex: 1" class="m-3 mat-elevation-z0">
         <mat-card-header>
           <mat-card-title>Option 1: BCeID</mat-card-title>
         </mat-card-header>
         <mat-card-content class="d-flex flex-column">
           <p>There are two types of BCeID you can use:</p>
-            <ul>
-              <li>A <a href="https://www.bceid.ca/register/basic/account_details.aspx?type=regular&eServiceType=basic" target="_blank">Basic BCeID account</a> is used to log in to services online. You must use a username and password. You just need to have an email address.</li>
-              <li>A <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank">Business BCeID account</a> is used to log in to services online when representing a business or organization. You must have:
-                <ul>
-                  <li>Documentation to prove the business or organization's identity</li>
-                  <li>An email address</li>
-                </ul>
-              </li>
-            </ul>
+          <ul>
+            <li>
+              A
+              <a
+                href="https://www.bceid.ca/register/basic/account_details.aspx?type=regular&eServiceType=basic"
+                target="_blank"
+                >Basic BCeID account</a
+              >
+              is used to log in to services online. You must use a username and password. You just need to have an email
+              address.
+            </li>
+            <li>
+              A
+              <a href="https://www.bceid.ca/register/business/getting_started/getting_started.aspx" target="_blank"
+                >Business BCeID account</a
+              >
+              is used to log in to services online when representing a business or organization. You must have:
+              <ul>
+                <li>Documentation to prove the business or organization's identity</li>
+                <li>An email address</li>
+              </ul>
+            </li>
+          </ul>
           <p>Learn more about <a href="https://www.bceid.ca/" target="_blank">BCeID</a>:</p>
           <ul>
             <li><a href="https://www.bceid.ca/aboutbceid/" target="_blank">Types of BCeID accounts</a></li>
@@ -27,17 +40,16 @@
           </ul>
         </mat-card-content>
         <mat-card-content class="d-flex flex-column align-items-center">
-          <img src="assets/bceid_default_logo.jpg" alt="BCeID logo">
+          <img src="assets/bceid_default_logo.jpg" alt="BCeID logo" />
           <div class="d-flex justify-content-around w-100">
-            <button [disabled]="disableLogin" mat-raised-button color="primary"
-                    (click)="sepBCeIDLogin()">
+            <button [disabled]="disableLogin" mat-raised-button color="primary" (click)="sepBCeIDLogin()">
               Login with Basic or Business BCeID
             </button>
           </div>
         </mat-card-content>
       </mat-card>
 
-      <mat-card style="flex: 1;" class="m-3 mat-elevation-z0">
+      <mat-card style="flex: 1" class="m-3 mat-elevation-z0">
         <mat-card-header>
           <mat-card-title>Option 2: BC Services Card</mat-card-title>
         </mat-card-header>
@@ -48,25 +60,42 @@
           </ul>
           or
           <ul>
-            <li>Live in Canada and have <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bcservicescardapp/id" target="_blank">ID issued within Canada</a></li>
+            <li>
+              Live in Canada and have
+              <a
+                href="https://www2.gov.bc.ca/gov/content/governments/government-id/bcservicescardapp/id"
+                target="_blank"
+                >ID issued within Canada</a
+              >
+            </li>
           </ul>
           <p>You can use either:</p>
           <ul>
-            <li>The <a href="https://id.gov.bc.ca/static/help/setup_app.html" target="_blank">BC Services Card app</a> on your mobile device</li>
+            <li>
+              The <a href="https://id.gov.bc.ca/static/help/setup_app.html" target="_blank">BC Services Card app</a> on
+              your mobile device
+            </li>
           </ul>
           or
           <ul>
-            <li><a href="https://id.gov.bc.ca/account/token-setup-instruction" target="_blank">A username, password and BC Token</a></li>
+            <li>
+              <a href="https://id.gov.bc.ca/account/token-setup-instruction" target="_blank"
+                >A username, password and BC Token</a
+              >
+            </li>
           </ul>
-          <p>Learn more about <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card" target="_blank">BC Services Card.</a></p>
+          <p>
+            Learn more about
+            <a href="https://www2.gov.bc.ca/gov/content/governments/government-id/bc-services-card" target="_blank"
+              >BC Services Card.</a
+            >
+          </p>
         </mat-card-content>
         <mat-card-content class="d-flex flex-column align-items-center">
-          <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo">
+          <img src="assets/bc-logo-white-bg.jpg" height="51" alt="BC logo" />
           <div class="d-flex justify-content-around w-100">
-            <button [disabled]="disableLogin" mat-raised-button color="primary"
-                    (click)="sepBCServiceLogin()">
-              Login with BC Services
-              Card
+            <button [disabled]="disableLogin" mat-raised-button color="primary" (click)="sepBCServiceLogin()">
+              Login with BC Services Card
             </button>
           </div>
         </mat-card-content>
@@ -78,38 +107,37 @@
           <div>
             <fa-icon [icon]="faExclamationCircle"></fa-icon>
           </div>
-          <div style="color: red;">
-            <p><strong>We are currently conducting work on our Liquor and Cannabis Licensing Portal – please check back again soon.</strong></p>
+          <div style="color: red">
+            <p>
+              <strong
+                >We are currently conducting work on our Liquor and Cannabis Licensing Portal – please check back again
+                soon.</strong
+              >
+            </p>
             <p><strong>We appreciate your patience while we resolve the issue.</strong></p>
           </div>
         </div>
       </div>
     </section>
-
-</div>
-
-<div style="padding-left: 0px;" class="col-md-4 col-sm-12">
-  <div class="side-box-wrapper">
-    <section class="side-box">
-      <section style="display: flex">
-        <table>
-          <tr>
-            <td>
-              <h2 style="margin: 10px; margin-bottom: 10px;">{{calloutTitle}}</h2>
-              <section [innerHtml]="callout" style="color: black;"></section>
-            </td>
-          </tr>
-        </table>
-      </section>
-      <p style="padding-top: 30px;">
-        <span>
-
-        </span>
-      </p>
-
-    </section>
-
-
   </div>
-</div>
+
+  <div style="padding-left: 0px" class="col-md-4 col-sm-12">
+    <div class="side-box-wrapper">
+      <section class="side-box">
+        <section style="display: flex">
+          <table>
+            <tr>
+              <td>
+                <h2 style="margin: 10px; margin-bottom: 10px">{{ calloutTitle }}</h2>
+                <section [innerHtml]="callout" style="color: black"></section>
+              </td>
+            </tr>
+          </table>
+        </section>
+        <p style="padding-top: 30px">
+          <span> </span>
+        </p>
+      </section>
+    </div>
+  </div>
 </div>

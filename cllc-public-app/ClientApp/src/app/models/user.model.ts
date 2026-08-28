@@ -15,5 +15,5 @@ export class User {
   isEligibilityRequired: boolean;
   isPoliceRepresentative: boolean;
 
-  constructor() { }
+  constructor() {}
 }

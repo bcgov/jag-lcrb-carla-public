@@ -1,6 +1,7 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Collections.Generic;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -10,100 +11,71 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class ApplicationTypeExtensions
     {
 
-        public static ApplicationType ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtype applicationType)
+        public static ApplicationType ToViewModel(this adoxio_applicationtype applicationType)
         {
-            ApplicationType result = null;
-            if (applicationType != null)
+            if (applicationType == null) return null;
+            var result = new ApplicationType
             {
-                result = new ApplicationType
-                {
-                    ActionText = applicationType.AdoxioActiontext,
-                    Category = (ApplicationTypeCategory?)applicationType.AdoxioCategory,
-                    ConnectedGroceryStore = (FormControlState?)applicationType.AdoxioConnectedgrocerystore,
-                    LGandPoliceSelectors = (FormControlState?)applicationType.AdoxioLgandpoliceselectors,
-                    CurrentEstablishmentAddress = (FormControlState?)applicationType.AdoxioCurrentestablishmentaddress,
-                    EstablishmentName = (FormControlState?)applicationType.AdoxioEstablishmentname,
-                    EstablishmetNameIsReadOnly = applicationType.AdoxioIslockestablishmentname,
-                    FloorPlan = (FormControlState?)applicationType.AdoxioFloorplan,
-                    FormReference = applicationType.AdoxioFormreference,
-                    Id = applicationType.AdoxioApplicationtypeid,
+                Id = applicationType.adoxio_applicationtypeId?.ToString(),
+                Name = applicationType.adoxio_name,
+                ActionText = applicationType.adoxio_ActionText,
+                Category = (ApplicationTypeCategory?)(int?)applicationType.adoxio_Category,
+                ConnectedGroceryStore = (FormControlState?)(int?)applicationType.adoxio_ConnectedGroceryStore,
+                LGandPoliceSelectors = (FormControlState?)(int?)applicationType.adoxio_LGandPoliceSelectors,
+                CurrentEstablishmentAddress = (FormControlState?)(int?)applicationType.adoxio_CurrentEstablishmentAddress,
+                EstablishmentName = (FormControlState?)(int?)applicationType.adoxio_EstablishmentName,
+                EstablishmetNameIsReadOnly = applicationType.adoxio_IsLockEstablishmentName,
+                FloorPlan = (FormControlState?)(int?)applicationType.adoxio_FloorPlan,
+                FormReference = applicationType.adoxio_FormReference,
+                LetterOfIntent = (FormControlState?)(int?)applicationType.adoxio_LetterofIntent,
+                HasLESection = applicationType.adoxio_HasLESection,
+                NewEstablishmentAddress = (FormControlState?)(int?)applicationType.adoxio_NewEstablishmentAddress,
+                ProofofZoning = (FormControlState?)(int?)applicationType.adoxio_ProofofZoning,
+                PublicCooler = (FormControlState?)(int?)applicationType.adoxio_PublicCoolerSpace,
+                ShowAssociatesFormUpload = applicationType.adoxio_IsShowAssociatesFormUpload,
+                ShowCurrentProperty = applicationType.adoxio_IsShowCurrentProperty,
+                ShowDeclarations = applicationType.adoxio_IsShowDeclarations,
+                ShowDescription1 = applicationType.adoxio_ShowDescription1,
+                IsShowLGINApproval = applicationType.adoxio_IsShowLGINApproval,
+                IsShowLGZoningConfirmation = applicationType.adoxio_isLGZoningConfirmation,
+                ShowFinancialIntegrityFormUpload = applicationType.adoxio_IsShowFinancialIntegrityFormUpload,
+                ShowPoliceInformationCheckUpload = applicationType.adoxio_IsShowPoliceInformationCheckUploaded,
+                ShowHoursOfSale = applicationType.adoxio_IsShowHoursOfSale,
+                ShowLiquorDeclarations = applicationType.adoxio_IsShowLiquorDeclarations,
+                ShowOwnershipDeclaration = applicationType.adoxio_IsOwnershipConfirmation,
+                ShowLgNoObjection = applicationType.adoxio_ShowLGNoObjection,
+                ShowLiquorSitePlan = (FormControlState?)(int?)applicationType.adoxio_LiquorSitePlan,
+                ShowPatio = applicationType.adoxio_ShowPatioSection,
+                HasPatio = applicationType.adoxio_ishaspatio,
+                ShowPropertyDetails = applicationType.adoxio_IsShowPropertyDetails,
+                ShowSupportingDocuments = applicationType.adoxio_IsShowSupportingDocuments,
+                Signage = (FormControlState?)(int?)applicationType.adoxio_Signage,
+                SitePhotos = (FormControlState?)(int?)applicationType.adoxio_sitephotographs,
+                SitePlan = (FormControlState?)(int?)applicationType.adoxio_SitePlan,
+                StoreContactInfo = (FormControlState?)(int?)applicationType.adoxio_StoreContactInfo,
+                Title = applicationType.adoxio_TitleText,
+                ValidInterest = (FormControlState?)(int?)applicationType.adoxio_ValidInterest,
+                RequiresSecurityScreening = applicationType.adoxio_RequiresSecurityScreening,
+                IsEndorsement = applicationType.adoxio_IsEndorsement,
+                IsRelocation = applicationType.adoxio_IsRelocation,
+                IsDefault = applicationType.adoxio_IsDefault,
+                IsStructural = applicationType.adoxio_IsStructuralChange,
+                ServiceAreas = applicationType.adoxio_ServiceAreas ?? false,
+                OutsideAreas = applicationType.adoxio_OutsideAreas ?? false,
+                CapacityArea = applicationType.adoxio_CapacityArea ?? false,
+                HasALRQuestion = applicationType.adoxio_HasALRQuestion ?? false,
+                ShowZoningDeclarations = applicationType.adoxio_ShowZoningDeclarations ?? false,
+                IsFree = applicationType.adoxio_isfree == adoxio_applicationtype_adoxio_isfree.Yes,
+                DiscretionRequest = applicationType.adoxio_discretionrequest == adoxio_yesnoandreadonly.Yes
+            };
 
-                    LetterOfIntent = (FormControlState?)applicationType.AdoxioLetterofintent,
-                    Name = applicationType.AdoxioName,
-                    HasLESection = applicationType.AdoxioHaslesection,
-                    NewEstablishmentAddress = (FormControlState?)applicationType.AdoxioNewestablishmentaddress,
-                    ProofofZoning = (FormControlState?)applicationType.AdoxioProofofzoning,
-                    PublicCooler = (FormControlState?)applicationType.AdoxioPubliccoolerspace,
-                    ShowAssociatesFormUpload = applicationType.AdoxioIsshowassociatesformupload,
-                    ShowCurrentProperty = applicationType.AdoxioIsshowcurrentproperty,
-                    ShowDeclarations = applicationType.AdoxioIsshowdeclarations,
-                    ShowDescription1 = applicationType.AdoxioShowdescription1,
-                    IsShowLGINApproval = applicationType.AdoxioIsshowlginapproval,
-                    IsShowLGZoningConfirmation = applicationType.AdoxioIslgzoningconfirmation,
-                    ShowFinancialIntegrityFormUpload = applicationType.AdoxioIsshowfinancialintegrityformupload,
-                    ShowPoliceInformationCheckUpload = applicationType.AdoxioIsshowpoliceinformationcheckuploaded,
-                    ShowHoursOfSale = applicationType.AdoxioIsshowhoursofsale,
-                    ShowLiquorDeclarations = applicationType.AdoxioIsshowliquordeclarations,
-                    ShowOwnershipDeclaration = applicationType.AdoxioIsownershipconfirmation,
-                    ShowLgNoObjection = applicationType.AdoxioShowlgnoobjection,
-                    ShowLiquorSitePlan = (FormControlState?)applicationType.AdoxioLiquorsiteplan,
-                    ShowPatio = applicationType.AdoxioShowpatiosection,
-                    HasPatio = applicationType.AdoxioIshaspatio,        // 2024-04-03 LCSD-6975 waynezen
-                    ShowPropertyDetails = applicationType.AdoxioIsshowpropertydetails,
-                    ShowSupportingDocuments = applicationType.AdoxioIsshowsupportingdocuments,
-                    Signage = (FormControlState?)applicationType.AdoxioSignage,
-                    SitePhotos = (FormControlState?)applicationType.AdoxioSitephotographs,
-                    SitePlan = (FormControlState?)applicationType.AdoxioSiteplan,
-                    StoreContactInfo = (FormControlState?)applicationType.AdoxioStorecontactinfo,
-                    Title = applicationType.AdoxioTitletext,
-                    ValidInterest = (FormControlState?)applicationType.AdoxioValidinterest,
-                    RequiresSecurityScreening = applicationType.AdoxioRequiressecurityscreening,
-                    IsEndorsement = applicationType.AdoxioIsendorsement,
-                    IsRelocation = applicationType.AdoxioIsrelocation,
-                    IsStructural = applicationType.AdoxioIsstructuralchange,
-                    IsDefault = applicationType.AdoxioIsdefault,
-                    ServiceAreas = applicationType.AdoxioServiceareas.HasValue && (bool)applicationType.AdoxioServiceareas,
-                    OutsideAreas = applicationType.AdoxioOutsideareas.HasValue && (bool)applicationType.AdoxioOutsideareas,
-                    CapacityArea = applicationType.AdoxioCapacityarea.HasValue && (bool)applicationType.AdoxioCapacityarea,
-                    HasALRQuestion = applicationType.AdoxioHasalrquestion.HasValue && (bool)applicationType.AdoxioHasalrquestion,
-                    ShowZoningDeclarations = applicationType.AdoxioShowzoningdeclarations.HasValue && (bool)applicationType.AdoxioShowzoningdeclarations,
-                    DiscretionRequest = applicationType.AdoxioDiscretionrequest.HasValue? 
-                    applicationType.AdoxioDiscretionrequest.Value== 1?true:false : false
-                };
-
-                if (applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType != null)
-                {
-                    result.ContentTypes = new List<ApplicationTypeContent>();
-                    foreach (var content in applicationType.AdoxioApplicationtypeAdoxioApplicationtypecontentApplicationType)
-                    {
-                        result.ContentTypes.Add(content.ToViewModel());
-                    }
-                }
-
-                // Normalize is free.
-                if (applicationType.AdoxioIsfree != null)
-                {
-                    if (applicationType.AdoxioIsfree == 845280000)
-                    {
-                        result.IsFree = true;
-                    }
-                    else
-                    {
-                        result.IsFree = false;
-                    }
-                }
-
-
-
-
-                /*
-                if (dynamicsApplicationType.AdoxioLicenceTypeId != null)
-                {
-                    result.LicenseType = dynamicsApplicationType.AdoxioLicenceTypeId.ToViewModel();
-                }
-                */
+            var contentNav = applicationType.adoxio_applicationtype_adoxio_applicationtypecontent_ApplicationType;
+            if (contentNav != null)
+            {
+                result.ContentTypes = new List<ApplicationTypeContent>();
+                foreach (var content in contentNav)
+                    result.ContentTypes.Add(content.ToViewModel());
             }
-
 
             return result;
         }

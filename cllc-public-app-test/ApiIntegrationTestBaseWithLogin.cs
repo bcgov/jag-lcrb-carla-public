@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using System;
@@ -27,26 +26,27 @@ namespace Gov.Lclb.Cllb.Public.Test
                 {
                     AllowAutoRedirect = false,
                 });
-            if (!string.IsNullOrEmpty(_factory.Configuration["TEST_BASE_URI"])) {
+            if (!string.IsNullOrEmpty(_factory.Configuration["TEST_BASE_URI"]))
+            {
                 _client = new HttpClient();
                 _client.BaseAddress = new Uri(_factory.Configuration["TEST_BASE_URI"]);
             }
         }
 
         public async System.Threading.Tasks.Task Login(string userid)
-		{
-			await Login(userid, userid);
-		}
+        {
+            await Login(userid, userid);
+        }
 
         public async System.Threading.Tasks.Task Login(string userid, string businessName)
         {
             string loginAs = userid + "::" + businessName;
-			_client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
-			var request = new HttpRequestMessage(HttpMethod.Get, "/lcrb/login/token/" + loginAs);
+            _client.DefaultRequestHeaders.Add("DEV-USER", loginAs);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/lcrb/login/token/" + loginAs);
             var response = await _client.SendAsync(request);
             string _discard = await response.Content.ReadAsStringAsync();
             Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
-            
+
         }
 
         public async System.Threading.Tasks.Task ServiceCardLogin(string userid, string businessName)
@@ -61,56 +61,53 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         public string randomNewUserName(string userid, int len)
-		{
-			return userid + TestUtilities.RandomANString(len);
-		}
+        {
+            return userid + TestUtilities.RandomANString(len);
+        }
 
         // this fellow returns the external id of the new account
-		public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser)
-		{
-			return await LoginAndRegisterAsNewUser(loginUser, loginUser);
-		}
+        public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser)
+        {
+            return await LoginAndRegisterAsNewUser(loginUser, loginUser);
+        }
 
         // this fellow returns the external id of the new account
         public async System.Threading.Tasks.Task<string> LoginAndRegisterAsNewUser(string loginUser, string businessName, string businessType = "PublicCorporation")
-		{
+        {
             string accountService = "accounts";
 
             await Login(loginUser + "::" + businessName);
 
-			ViewModels.User user = await GetCurrentUser();
+            ViewModels.User user = await GetCurrentUser();
             Assert.Equal(user.name, loginUser + " TestUser");
-			Assert.Equal(user.businessname, businessName + " TestBusiness");
+            Assert.Equal(user.businessname, businessName + " TestBusiness");
             Assert.True(user.isNewUser);
 
             // create a new account and contact in Dynamics
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService);
 
-            MicrosoftDynamicsCRMaccount account = new MicrosoftDynamicsCRMaccount()
+            ViewModels.Account viewmodel_account = new ViewModels.Account
             {
-                Name = user.businessname,
-                AdoxioExternalid = user.accountid
+                name = user.businessname,
+                externalId = user.accountid,
+                businessType = businessType
             };
 
-            ViewModels.Account viewmodel_account = account.ToViewModel();
-
-			viewmodel_account.businessType = businessType;
-
-            Assert.Equal(account.AdoxioExternalid, viewmodel_account.externalId);
+            Assert.Equal(user.accountid, viewmodel_account.externalId);
 
             string jsonString2 = JsonConvert.SerializeObject(viewmodel_account);
             request.Content = new StringContent(jsonString2, Encoding.UTF8, "application/json");
-			var response = await _client.SendAsync(request);
+            var response = await _client.SendAsync(request);
             var jsonString = await response.Content.ReadAsStringAsync();
-			response.EnsureSuccessStatusCode();
+            response.EnsureSuccessStatusCode();
 
-			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
             // name should match.
             Assert.Equal(user.businessname, responseViewModel.name);
             string strId = responseViewModel.externalId;
             string id = responseViewModel.id;
-			Assert.Equal(strId, responseViewModel.externalId);
+            Assert.Equal(strId, responseViewModel.externalId);
 
             // verify we can fetch the account via web service
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + id);
@@ -118,90 +115,90 @@ namespace Gov.Lclb.Cllb.Public.Test
             string _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-			// test that the current user is updated
-			user = await GetCurrentUser();
-			Assert.NotNull(user.accountid);
-			Assert.NotEmpty(user.accountid);
-			Assert.Equal(id, user.accountid);
+            // test that the current user is updated
+            user = await GetCurrentUser();
+            Assert.NotNull(user.accountid);
+            Assert.NotEmpty(user.accountid);
+            Assert.Equal(id, user.accountid);
 
-			return id;
-		}
+            return id;
+        }
 
-		public async System.Threading.Tasks.Task Logout() 
-		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/logout");
+        public async System.Threading.Tasks.Task Logout()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/logout");
             var response = await _client.SendAsync(request);
-			string _discard = await response.Content.ReadAsStringAsync();
-			Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
-			_client.DefaultRequestHeaders.Remove("DEV-USER");
-		}
+            string _discard = await response.Content.ReadAsStringAsync();
+            Assert.True(response.StatusCode == HttpStatusCode.Redirect || response.StatusCode == HttpStatusCode.OK);
+            _client.DefaultRequestHeaders.Remove("DEV-USER");
+        }
 
         public async System.Threading.Tasks.Task LogoutAndCleanupTestUser(string strId)
-		{
-			string accountService = "accounts";
+        {
+            string accountService = "accounts";
 
             // get the account and check if our current user is the primary contact
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
             var response = await _client.SendAsync(request);
-			string jsonString = await response.Content.ReadAsStringAsync();
+            string jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-			ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+            ViewModels.Account responseViewModel = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
 
-			ViewModels.User user = await GetCurrentUser();
+            ViewModels.User user = await GetCurrentUser();
 
-			// TODO once AccountController is cleaned up restore this test
-			Console.WriteLine(">>> responseViewModel.primarycontact.id=" + responseViewModel.primarycontact.id);
-			Console.WriteLine(">>>                      user.contactid=" + user.contactid);
-			Console.WriteLine(">>>                           user.name=" + user.name);
-			if (responseViewModel.primarycontact.id.Equals(user.contactid))
-			{
-				// cleanup - delete the account and contact when we are done
-				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
-				response = await _client.SendAsync(request);
-				var _discard = await response.Content.ReadAsStringAsync();
-				response.EnsureSuccessStatusCode();
+            // TODO once AccountController is cleaned up restore this test
+            Console.WriteLine(">>> responseViewModel.primarycontact.id=" + responseViewModel.primarycontact.id);
+            Console.WriteLine(">>>                      user.contactid=" + user.contactid);
+            Console.WriteLine(">>>                           user.name=" + user.name);
+            if (responseViewModel.primarycontact.id.Equals(user.contactid))
+            {
+                // cleanup - delete the account and contact when we are done
+                request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
+                response = await _client.SendAsync(request);
+                var _discard = await response.Content.ReadAsStringAsync();
+                response.EnsureSuccessStatusCode();
 
-				// second delete should return a 404.
-				request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
-				response = await _client.SendAsync(request);
-				_discard = await response.Content.ReadAsStringAsync();
-				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                // second delete should return a 404.
+                request = new HttpRequestMessage(HttpMethod.Post, "/api/" + accountService + "/" + strId + "/delete");
+                response = await _client.SendAsync(request);
+                _discard = await response.Content.ReadAsStringAsync();
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-				// should get a 404 if we try a get now.
-				request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
-				response = await _client.SendAsync(request);
-				_discard = await response.Content.ReadAsStringAsync();
-				Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-			}
-			else
-			{
-				// TODO delete the non-primary contact
-			}
+                // should get a 404 if we try a get now.
+                request = new HttpRequestMessage(HttpMethod.Get, "/api/" + accountService + "/" + strId);
+                response = await _client.SendAsync(request);
+                _discard = await response.Content.ReadAsStringAsync();
+                Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            }
+            else
+            {
+                // TODO delete the non-primary contact
+            }
 
             await Logout();
-		}
+        }
 
-		public async System.Threading.Tasks.Task<ViewModels.User> GetCurrentUser()
+        public async System.Threading.Tasks.Task<ViewModels.User> GetCurrentUser()
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
             string resp = await response.Content.ReadAsStringAsync();
-			response.EnsureSuccessStatusCode();
-			ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
+            response.EnsureSuccessStatusCode();
+            ViewModels.User user = JsonConvert.DeserializeObject<ViewModels.User>(resp);
 
-			return user;
+            return user;
         }
 
-		public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()
-		{
-			var request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/current");
-			var response = await _client.SendAsync(request);
-			var jsonString = await response.Content.ReadAsStringAsync();
-			response.EnsureSuccessStatusCode();
-			var currentAccount = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
-			return currentAccount;
-		}
+        public async System.Threading.Tasks.Task<ViewModels.Account> GetAccountForCurrentUser()
+        {
+            var request = new HttpRequestMessage(HttpMethod.Get, "/api/accounts/current");
+            var response = await _client.SendAsync(request);
+            var jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            var currentAccount = JsonConvert.DeserializeObject<ViewModels.Account>(jsonString);
+            return currentAccount;
+        }
 
         public async System.Threading.Tasks.Task<ViewModels.ApplicationType> GetDefaultCannabisApplicationType()
         {
@@ -217,8 +214,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         {
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
-			string _discard = await response.Content.ReadAsStringAsync();
-			Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
+            string _discard = await response.Content.ReadAsStringAsync();
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
         }
     }
 }

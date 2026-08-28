@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
-import { filter, takeWhile, map } from "rxjs/operators";
-import { Store } from "@ngrx/store";
-import { FormBase } from "@shared/form-base";
-import { AccountDataService } from "@services/account-data.service";
-import { Account } from "@models/account.model";
-import { AppState } from "@app/app-state/models/app-state";
-import { FileSystemItem } from "@models/file-system-item.model";
+import { Component, OnInit } from '@angular/core';
+import { AppState } from '@app/app-state/models/app-state';
+import { Account } from '@models/account.model';
+import { FileSystemItem } from '@models/file-system-item.model';
+import { Store } from '@ngrx/store';
+import { AccountDataService } from '@services/account-data.service';
+import { FormBase } from '@shared/form-base';
+import { Subscription } from 'rxjs';
+import { filter, map, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: "app-notices",
-  templateUrl: "./notices.component.html",
-  styleUrls: ["./notices.component.scss"],
+  selector: 'app-notices',
+  templateUrl: './notices.component.html',
+  styleUrls: ['./notices.component.scss']
 })
 export class NoticesComponent extends FormBase implements OnInit {
   isEditMode = true;
@@ -24,10 +24,9 @@ export class NoticesComponent extends FormBase implements OnInit {
   busy: Subscription;
   dataLoaded = false; // this is set to true when all page data is loaded
 
-
   constructor(
     private store: Store<AppState>,
-    private accountDataService: AccountDataService,
+    private accountDataService: AccountDataService
   ) {
     super();
   }
@@ -38,25 +37,24 @@ export class NoticesComponent extends FormBase implements OnInit {
 
   retrieveAccount() {
     this.store
-      .select(state => state.currentAccountState.currentAccount)
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(s => !!s))
-      .subscribe(account => this.fetchData(account));
+      .pipe(filter((s) => !!s))
+      .subscribe((account) => this.fetchData(account));
   }
 
   fetchData(account: Account) {
     this.account = account;
-    this.busy = this.retrieveNotices(account)
-      .subscribe(notices => {
-        this.notices = notices;
-        this.dataLoaded = true;
-      });
-
+    this.busy = this.retrieveNotices(account).subscribe((notices) => {
+      this.notices = notices;
+      this.dataLoaded = true;
+    });
   }
 
   retrieveNotices(account: Account) {
-    return this.accountDataService.getFilesAttachedToAccount(account.id, "Notice")
-      .pipe(map(files => this.orderByDate(files)));
+    return this.accountDataService
+      .getFilesAttachedToAccount(account.id, 'Notice')
+      .pipe(map((files) => this.orderByDate(files)));
   }
 
   orderByDate(files: FileSystemItem[]): FileSystemItem[] {

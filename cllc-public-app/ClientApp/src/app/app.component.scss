@@ -311,10 +311,10 @@ button:focus {
   width: 130px;
 }
 .feedback-button {
-  color: #3d598c;;
+  color: #3d598c;
   width: 130px;
 }
-.btn-outline-primary{
+.btn-outline-primary {
   border: 1px solid #3d598c;
   border-radius: 4px;
   background: white;
@@ -322,12 +322,12 @@ button:focus {
 }
 .btn-outline-primary:focus,
 .btn-outline-primary:active,
-.btn-outline-primary:hover{
-  background:#3d598c;
+.btn-outline-primary:hover {
+  background: #3d598c;
   color: white;
 }
 
-.app-widgets{
+.app-widgets {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -445,7 +445,7 @@ button:focus {
 .ai-quick-nav .mat-mdc-chip-option,
 .ai-quick-nav .mat-mdc-chip {
   border-radius: 999px;
-  background: #f2f6ff;          /* filled background */
+  background: #f2f6ff; /* filled background */
   border: 1px solid #cfe0ff;
   padding: 6px 12px;
   font-weight: 500;
@@ -455,7 +455,7 @@ button:focus {
 .ai-quick-nav .mat-mdc-chip:hover {
   background: #e8f0ff;
   border-color: #b8d2ff;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 .ai-quick-nav mat-icon {
   font-size: 18px;
@@ -467,8 +467,8 @@ button:focus {
 /* Messages area grows; input sticks to bottom */
 .messages {
   flex: 1 1 auto;
-  min-height: 0;          /* important for flex overflow */
-  max-height: none;       /* let flex control height */
+  min-height: 0; /* important for flex overflow */
+  max-height: none; /* let flex control height */
   overflow: auto;
   margin-bottom: 8px;
 }
@@ -495,7 +495,7 @@ button:focus {
 .chat-input {
   position: sticky;
   bottom: 0;
-  background: #fff;       /* mask content beneath when scrolling */
+  background: #fff; /* mask content beneath when scrolling */
   padding-top: 8px;
   padding-bottom: 8px;
   display: flex;
@@ -514,17 +514,19 @@ button:focus {
   flex-direction: column;
   align-items: stretch;
 }
-.required-text { color: #c62828 !important; font-weight: 700; }
-.ai-new-btn { 
+.required-text {
+  color: #c62828 !important;
+  font-weight: 700;
+}
+.ai-new-btn {
   background-color: #003366;
   color: #ffffff;
-  margin-bottom: 8px; 
+  margin-bottom: 8px;
 }
 .ai-resume-btn {
   background-color: #003366;
   color: #ffffff;
 }
-
 
 .ai-actions {
   display: flex;
@@ -558,8 +560,9 @@ button:focus {
   color: #546e7a;
 }
 
-.flex-1 { flex: 1; }
-
+.flex-1 {
+  flex: 1;
+}
 
 /* Optional: make the progress bar not jump content */
 mat-progress-bar {
@@ -567,8 +570,6 @@ mat-progress-bar {
   bottom: 0;
   z-index: 1;
 }
-
-
 
 ::ng-deep {
   .mat-calendar-body-selected {

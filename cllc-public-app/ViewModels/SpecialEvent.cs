@@ -47,13 +47,13 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         Issued = 845280003,
         Denied = 845280000
     }
-/*
-    public enum EventType
-    {
-        Family = 
+    /*
+        public enum EventType
+        {
+            Family = 
 
-    }
-*/
+        }
+    */
     public enum ApproverStatus
     {
         [EnumMember(Value = "Auto-Reviewed")]
@@ -186,11 +186,11 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public Invoice Invoice { get; set; }
 
         public decimal? AverageBeerPrice { get; set; }
-        public decimal? AverageBeerCost {get; set;}
+        public decimal? AverageBeerCost { get; set; }
         public decimal? AverageWinePrice { get; set; }
-        public decimal? AverageWineCost {get; set;}
+        public decimal? AverageWineCost { get; set; }
         public decimal? AverageSpiritsPrice { get; set; }
-        public decimal? AverageSpiritsCost {get; set;}
+        public decimal? AverageSpiritsCost { get; set; }
 
         public int? Beer { get; set; }
         public int? Wine { get; set; }

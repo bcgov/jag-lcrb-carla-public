@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { faDownload } from '@fortawesome/free-solid-svg-icons';
 import { Account } from '@models/account.model';
 import { Application } from '@models/application.model';
@@ -37,7 +37,10 @@ export class LegalEntityReviewOutcomeLetterComponent implements OnChanges {
 
   faDownload = faDownload;
 
-  constructor(private applicationDataService: ApplicationDataService, private accountDataService: AccountDataService) {}
+  constructor(
+    private applicationDataService: ApplicationDataService,
+    private accountDataService: AccountDataService
+  ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.account && changes.application) {
