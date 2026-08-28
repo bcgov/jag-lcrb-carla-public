@@ -462,17 +462,20 @@ export class TiedHouseDeclarationComponent extends FormBase implements OnInit {
   updateGroupedTiedHouseDeclarations() {
     const grouped = this.tiedHouseDeclarations
       .filter((item) => item.viewMode != TiedHouseViewMode.hidden)
-      ?.reduce((acc, declaration) => {
-        var key = this.getGroupedTiedHouseKey(declaration);
+      ?.reduce(
+        (acc, declaration) => {
+          var key = this.getGroupedTiedHouseKey(declaration);
 
-        if (!acc[key]) {
-          acc[key] = [];
-        }
+          if (!acc[key]) {
+            acc[key] = [];
+          }
 
-        acc[key].push(declaration);
+          acc[key].push(declaration);
 
-        return acc;
-      }, {} as Record<string, TiedHouseConnection[]>);
+          return acc;
+        },
+        {} as Record<string, TiedHouseConnection[]>
+      );
 
     this.groupedTiedHouseDeclarations = Object.entries(grouped);
   }

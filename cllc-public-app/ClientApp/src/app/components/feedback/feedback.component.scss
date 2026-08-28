@@ -5,20 +5,19 @@
   padding: 20px;
   background-color: #ffffff;
   border-radius: 5px;
-  
 }
 
 .dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  
-  h2{
+
+  h2 {
     margin: 0;
     font-weight: 600;
   }
 
-  .close-btn{
+  .close-btn {
     background: none;
     border: none;
     font-size: 3rem;
@@ -27,7 +26,7 @@
     line-height: 1;
     color: #666;
   }
-  &:hover{
+  &:hover {
     color: #000;
   }
 }
@@ -39,7 +38,7 @@
 }
 
 .feedback-input {
-    width: 100%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -50,22 +49,21 @@
   justify-content: center;
 }
 
-.thank-you-container{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
+.thank-you-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
 }
 
-.check-icon{
-    color: green;
-    font-size: 2rem;
-    margin-bottom: 10px;
+.check-icon {
+  color: green;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
 
-.error-icon{
-    color: red;
-    font-size: 2rem;
-    margin-bottom: 10px;
-
+.error-icon {
+  color: red;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }

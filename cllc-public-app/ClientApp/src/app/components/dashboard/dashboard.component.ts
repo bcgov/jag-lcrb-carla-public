@@ -57,12 +57,6 @@ export class DashboardComponent extends FormBase implements OnInit {
         this.account = account;
 
         if (this.account && this.account.id) {
-          let sub = this.licenseDataService.getAllCurrentLicenses().subscribe((licences) => {
-            this.hasLicence = licences.length > 0;
-          });
-
-          this.subscriptionList.push(sub);
-
           this.store
             .select((state) => state.indigenousNationState.indigenousNationModeActive)
             .pipe(takeWhile(() => this.componentActive))
@@ -70,7 +64,7 @@ export class DashboardComponent extends FormBase implements OnInit {
               this.indigenousNationModeActive = active;
             });
 
-          sub = this.legalEntityDataService
+          let sub = this.legalEntityDataService
             .getCurrentHierachy()
             .pipe(takeWhile(() => this.componentActive))
             .subscribe({

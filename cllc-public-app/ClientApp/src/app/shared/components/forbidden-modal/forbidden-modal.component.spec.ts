@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ForbiddenModalComponent } from './forbidden-modal.component';
 
 describe('ForbiddenModalComponent', () => {
@@ -8,9 +7,8 @@ describe('ForbiddenModalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ForbiddenModalComponent ]
-    })
-    .compileComponents();
+      declarations: [ForbiddenModalComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

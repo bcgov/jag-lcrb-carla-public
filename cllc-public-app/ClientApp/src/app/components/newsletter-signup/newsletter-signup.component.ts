@@ -1,13 +1,13 @@
-import { Component, Input, OnInit, ViewContainerRef } from "@angular/core";
-import { NewsletterDataService } from "@services/newsletter-data.service";
-import { FormControl, Validators, FormGroupDirective, NgForm } from "@angular/forms";
-import { ErrorStateMatcher } from "@angular/material/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
+import { Component, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { FormControl, FormGroupDirective, NgForm, Validators } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { NewsletterDataService } from '@services/newsletter-data.service';
 
 @Component({
-  selector: "app-newsletter-signup",
-  templateUrl: "./newsletter-signup.component.html",
-  styleUrls: ["./newsletter-signup.component.scss"]
+  selector: 'app-newsletter-signup',
+  templateUrl: './newsletter-signup.component.html',
+  styleUrls: ['./newsletter-signup.component.scss']
 })
 /** newsletter-signup component*/
 export class NewsletterSignupComponent implements OnInit {
@@ -19,37 +19,32 @@ export class NewsletterSignupComponent implements OnInit {
   email: string;
   signupSuccess = false;
 
-  emailFormControl = new FormControl("",
-    [
-      Validators.required,
-      Validators.email,
-    ]);
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
 
   matcher = new MyErrorStateMatcher();
 
   /** newsletter-signup ctor */
-  constructor(private newsletterDataService: NewsletterDataService,
+  constructor(
+    private newsletterDataService: NewsletterDataService,
     vcr: ViewContainerRef,
-    public snackBar: MatSnackBar,) {
-  }
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {
     if (this.slug != null) {
-      this.newsletterDataService.getNewsletter(this.slug)
-        .subscribe((newsletter) => {
-          this.description = newsletter.description;
-          this.title = newsletter.title;
-        });
+      this.newsletterDataService.getNewsletter(this.slug).subscribe((newsletter) => {
+        this.description = newsletter.description;
+        this.title = newsletter.title;
+      });
     }
   }
 
   signup() {
     // subscribe to the newsletter.
-    this.newsletterDataService.signup(this.slug, this.email)
-      .subscribe((results) => {
-        this.snackBar.open("Thanks for signing up!", "Success!", { duration: 3500, panelClass: ["green-snackbar"] });
-        this.signupSuccess = true;
-      });
+    this.newsletterDataService.signup(this.slug, this.email).subscribe((results) => {
+      this.snackBar.open('Thanks for signing up!', 'Success!', { duration: 3500, panelClass: ['green-snackbar'] });
+      this.signupSuccess = true;
+    });
   }
 }
 

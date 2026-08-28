@@ -73,14 +73,6 @@
                       "value": "${ASPNETCORE_ENVIRONMENT}"
                     },
                     {
-                      "name": "SSG_USERNAME",
-                      "value": "${SSG_USERNAME}"
-                    },
-                    {
-                      "name": "SSG_PASSWORD",
-                      "value": "${SSG_PASSWORD}"
-                    },                                   
-                    {
                       "name": "JWT_VALID_ISSUER",
                       "value": "${JWT_VALID_ISSUER}"
                     },

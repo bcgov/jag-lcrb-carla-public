@@ -1,15 +1,14 @@
-import { Component, OnInit } from "@angular/core";
-import { NewsletterDataService } from "@services/newsletter-data.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NewsletterDataService } from '@services/newsletter-data.service';
 
 @Component({
-  selector: "app-newsletter-confirmation",
-  templateUrl: "./newsletter-confirmation.component.html",
-  styleUrls: ["./newsletter-confirmation.component.scss"]
+  selector: 'app-newsletter-confirmation',
+  templateUrl: './newsletter-confirmation.component.html',
+  styleUrls: ['./newsletter-confirmation.component.scss']
 })
 /** newsletter-confirmation component*/
 export class NewsletterConfirmationComponent implements OnInit {
-
   slug: string;
   description: string;
   title: string;
@@ -18,21 +17,22 @@ export class NewsletterConfirmationComponent implements OnInit {
   verificationResult: string;
 
   /** newsletter-confirmation ctor */
-  constructor(private newsletterDataService: NewsletterDataService,
+  constructor(
+    private newsletterDataService: NewsletterDataService,
     private route: ActivatedRoute,
-    private router: Router) {
-    this.route.paramMap.subscribe(params => this.slug = params.get("slug"));
-    this.route.queryParamMap.subscribe(params => this.code = params.get("code"));
+    private router: Router
+  ) {
+    this.route.paramMap.subscribe((params) => (this.slug = params.get('slug')));
+    this.route.queryParamMap.subscribe((params) => (this.code = params.get('code')));
   }
 
   ngOnInit(): void {
     if (this.slug != null) {
       // validate the code.
-      this.newsletterDataService.verifyCode(this.slug, this.code)
-        .subscribe((verificationResult) => {
-          // alert(verificationResult);
-          this.verificationResult = verificationResult.toString();
-        });
+      this.newsletterDataService.verifyCode(this.slug, this.code).subscribe((verificationResult) => {
+        // alert(verificationResult);
+        this.verificationResult = verificationResult.toString();
+      });
     }
   }
 }

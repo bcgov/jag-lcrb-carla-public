@@ -1,14 +1,14 @@
+extern alias DV;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
+using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
 
 namespace SharePointSyncTool
 {
@@ -34,6 +34,8 @@ namespace SharePointSyncTool
           });
           builder.SetMinimumLevel(logLevel);
         })
+        .AddSingleton<IConfiguration>(configuration)
+        .AddSingleton<IDataverseClient, DataverseClient>()
         .BuildServiceProvider();
 
       var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
@@ -50,12 +52,12 @@ namespace SharePointSyncTool
           return 1;
         }
 
-        // Initialize SharePoint and Dynamics clients
+        // Initialize SharePoint client and resolve Dataverse client from DI
         var sharePointManager = SharePointFileManager.Create(configuration, loggerFactory);
-        var dynamicsClient = DynamicsSetupUtil.SetupDynamics(configuration);
+        var dataverseClient = serviceProvider.GetRequiredService<IDataverseClient>();
 
         // Run the sync
-        var syncService = new SyncService(sharePointManager, dynamicsClient, loggerFactory);
+        var syncService = new SyncService(sharePointManager, dataverseClient, loggerFactory);
         await syncService.SyncSharePointFoldersAsync(config);
 
         logger.LogInformation("Sync completed successfully");

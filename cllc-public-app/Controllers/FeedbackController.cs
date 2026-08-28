@@ -1,7 +1,7 @@
+using Gov.Lclb.Cllb.Interfaces;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,20 +18,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 {
 
 
-    public class FeedbackModel {
+    public class FeedbackModel
+    {
 
         public string feedback { get; set; }
     }
 
     [Route("api/[controller]")]
     [ApiController]
-    
+
     public class FeedbackController : ControllerBase
     {
 
         private readonly IMemoryCache _cache;
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
         private readonly IWebHostEnvironment _env;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
@@ -39,14 +39,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
 
         public FeedbackController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor,
-            ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IBCEPService bcep,
+            ILoggerFactory loggerFactory, IBCEPService bcep,
             IWebHostEnvironment env, IMemoryCache memoryCache)
         {
             _cache = memoryCache;
             _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            _dynamicsClient = dynamicsClient;
-            _logger = loggerFactory.CreateLogger(typeof(ApplicationsController));
+            _logger = loggerFactory.CreateLogger(typeof(FeedbackController));
             _env = env;
             _bcep = bcep;
         }
@@ -64,10 +63,10 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
 
                 string email = _configuration["FEEDBACK_EMAIL"];
-                 
+
 
                 /* send the user an email confirmation. */
-               
+
                 // send the email.
                 SmtpClient client = new SmtpClient(_configuration["SMTP_HOST"]);
 
@@ -75,18 +74,19 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 MailMessage message = new MailMessage("no-reply@gov.bc.ca", email);
                 message.Subject = "CARLA Feedback";
                 string sanitizedBody = HttpUtility.HtmlEncode(feedbackModel.feedback);
-                if(sanitizedBody.Trim().Length < 5){
-                   return StatusCode(StatusCodes.Status500InternalServerError, "Feedback too short");
+                if (sanitizedBody.Trim().Length < 5)
+                {
+                    return StatusCode(StatusCodes.Status500InternalServerError, "Feedback too short");
                 }
                 message.Body = "<p>Feedback from CARLA\n: " + sanitizedBody + "</p>";
-                  
+
                 message.IsBodyHtml = true;
 
                 try
                 {
                     client.Send(message);
-                     
-                     return Ok(new {message = "success"});
+
+                    return Ok(new { message = "success" });
 
                 }
                 catch (Exception ex)
@@ -103,7 +103,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
         }
- 
+
     }
 }
 

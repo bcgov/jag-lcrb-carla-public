@@ -1,4 +1,4 @@
-import { Contact } from "./contact.model";
+import { Contact } from './contact.model';
 
 export interface Worker {
   id: string;

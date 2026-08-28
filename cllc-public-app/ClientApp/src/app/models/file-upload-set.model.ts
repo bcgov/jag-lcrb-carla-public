@@ -1,4 +1,4 @@
-import { FileItem } from "./file-item.model";
+import { FileItem } from './file-item.model';
 
 export class FileUploadSet {
   id: string;

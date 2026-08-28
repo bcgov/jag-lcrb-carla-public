@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { LiquorFreeEventComponent } from './liquor-free-event.component';
 
 describe('LiquorFreeEventComponent', () => {
@@ -11,9 +8,8 @@ describe('LiquorFreeEventComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LiquorFreeEventComponent ]
-    })
-    .compileComponents();
+      declarations: [LiquorFreeEventComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

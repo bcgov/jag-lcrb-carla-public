@@ -1,6 +1,5 @@
-import { Account } from "./account.model";
-import { Contact } from "./contact.model";
-import { SepCity } from "./sep-city.model";
+import { Account } from './account.model';
+import { Contact } from './contact.model';
 
 export class SepApplicationSummary {
   localId: string; // local memory primary key

@@ -1,4 +1,4 @@
-import { ControlValueAccessor } from "@angular/forms";
+import { ControlValueAccessor } from '@angular/forms';
 
 export class BaseControlValueAccessor<T> implements ControlValueAccessor {
   disabled = false;
@@ -15,11 +15,19 @@ export class BaseControlValueAccessor<T> implements ControlValueAccessor {
   /**
    * Model -> View changes
    */
-  writeValue(obj: T): void { this.value = obj; }
+  writeValue(obj: T): void {
+    this.value = obj;
+  }
 
-  registerOnChange(fn: any): void { this.onChange = fn; }
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
 
-  registerOnTouched(fn: any): void { this.onTouched = fn; }
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
 
-  setDisabledState?(isDisabled: boolean): void { this.disabled = isDisabled; }
+  setDisabledState?(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

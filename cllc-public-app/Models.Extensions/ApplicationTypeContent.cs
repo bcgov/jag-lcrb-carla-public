@@ -1,5 +1,6 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
+﻿extern alias DV;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using DV::Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.Public.Models
 {
@@ -9,46 +10,32 @@ namespace Gov.Lclb.Cllb.Public.Models
     public static class ApplicationTypeContentExtensions
     {
 
-        public static ApplicationTypeContent ToViewModel(this MicrosoftDynamicsCRMadoxioApplicationtypecontent dynamicsApplicationTypeContent)
+        public static ApplicationTypeContent ToViewModel(this adoxio_applicationtypecontent content)
         {
-            ApplicationTypeContent result = null;
-            if (dynamicsApplicationTypeContent != null)
+            if (content == null) return null;
+            return new ApplicationTypeContent
             {
-                result = new ApplicationTypeContent
-                {
-                    Id = dynamicsApplicationTypeContent.AdoxioApplicationtypecontentid,
-
-                    Body = dynamicsApplicationTypeContent.AdoxioBody,
-                    Name = dynamicsApplicationTypeContent.AdoxioName,
-                    Category = (ContentCategory)dynamicsApplicationTypeContent.AdoxioCategory,
-                    Iscoop = dynamicsApplicationTypeContent.AdoxioIscoop,
-                    IsEstate = dynamicsApplicationTypeContent.AdoxioIsestate,
-                    IsGeneralPartnership = dynamicsApplicationTypeContent.AdoxioIsgeneralpartnership,
-                    IsIndigenousNation = dynamicsApplicationTypeContent.AdoxioIsindigenousnation,
-                    IsLimitedliabilityCorporation = dynamicsApplicationTypeContent.AdoxioIslimitedliabilitycorporation,
-                    IsLimitedliabilityPartnership = dynamicsApplicationTypeContent.AdoxioIslimitedliabilitypartnership,
-                    IsLimitedPartnership = dynamicsApplicationTypeContent.AdoxioIslimitedpartnership,
-                    IsLocalGovernment = dynamicsApplicationTypeContent.AdoxioIslocalgovernment,
-                    IsPartnership = dynamicsApplicationTypeContent.AdoxioIspartnership,
-                    IsPrivateCorporation = dynamicsApplicationTypeContent.AdoxioIsprivatecorporation,
-                    IsPublicCorporation = dynamicsApplicationTypeContent.AdoxioIspubliccorporation,
-                    IsSociety = dynamicsApplicationTypeContent.AdoxioIssociety,
-                    IsSoleProprietorship = dynamicsApplicationTypeContent.AdoxioIssoleproprietorship,
-                    IsTrust = dynamicsApplicationTypeContent.AdoxioIstrust,
-                    IsUniversity = dynamicsApplicationTypeContent.AdoxioIsuniversity,
-                    IsUnlimitedLiabilityCorporation = dynamicsApplicationTypeContent.AdoxioIsunlimitedliabilitycorporation
-                };
-
-                /*
-                if (dynamicsApplicationTypeContent.AdoxioLicenceTypeId != null)
-                {
-                    result.LicenseType = dynamicsApplicationTypeContent.AdoxioLicenceTypeId.ToViewModel();
-                }
-                */
-            }
-
-
-            return result;
+                Id = content.adoxio_applicationtypecontentId?.ToString(),
+                Body = content.adoxio_Body,
+                Name = content.adoxio_name,
+                Category = (ContentCategory)(int)(content.adoxio_Category ?? adoxio_applicationtypecontent_adoxio_category.Preamble),
+                Iscoop = content.adoxio_IsCoop,
+                IsEstate = content.adoxio_IsEstate,
+                IsGeneralPartnership = content.adoxio_IsGeneralPartnership,
+                IsIndigenousNation = content.adoxio_IsIndigenousNation,
+                IsLimitedliabilityCorporation = content.adoxio_IsLimitedLiabilityCorporation,
+                IsLimitedliabilityPartnership = content.adoxio_IsLimitedLiabilityPartnership,
+                IsLimitedPartnership = content.adoxio_IsLimitedPartnership,
+                IsLocalGovernment = content.adoxio_IsLocalGovernment,
+                IsPartnership = content.adoxio_IsPartnership,
+                IsPrivateCorporation = content.adoxio_IsPrivateCorporation,
+                IsPublicCorporation = content.adoxio_IsPublicCorporation,
+                IsSociety = content.adoxio_IsSociety,
+                IsSoleProprietorship = content.adoxio_IsSoleProprietorship,
+                IsTrust = content.adoxio_IsTrust,
+                IsUniversity = content.adoxio_IsUniversity,
+                IsUnlimitedLiabilityCorporation = content.adoxio_IsUnlimitedLiabilityCorporation
+            };
         }
     }
 }

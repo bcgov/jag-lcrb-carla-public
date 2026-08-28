@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ForZoningApplicationsComponent } from './for-zoning-applications.component';
 
 describe('ForZoningApplicationsComponent', () => {
@@ -8,9 +7,8 @@ describe('ForZoningApplicationsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ForZoningApplicationsComponent ]
-    })
-    .compileComponents();
+      declarations: [ForZoningApplicationsComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

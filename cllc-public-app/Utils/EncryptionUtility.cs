@@ -73,10 +73,10 @@ namespace Gov.Lclb.Cllb.Public.Utility
                         {
                             using (var swEncrypt = new StreamWriter(csEncrypt))
                             {
-                                swEncrypt.Write(text);                                
-                            }                            
+                                swEncrypt.Write(text);
+                            }
                         }
-                        
+
 
                         var iv = aes.IV;
 
@@ -87,7 +87,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
                         Buffer.BlockCopy(iv, 0, byteResult, 0, iv.Length);
                         Buffer.BlockCopy(data, 0, byteResult, iv.Length, data.Length);
 
-                        result = BitConverter.ToString(byteResult).Replace("-", ""); 
+                        result = BitConverter.ToString(byteResult).Replace("-", "");
                     }
                 }
             }
@@ -148,7 +148,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
 
         public static string DecryptStringHex(string cipherText, string keyString)
         {
-            
+
             string result = null;
             try
             {
@@ -157,7 +157,7 @@ namespace Gov.Lclb.Cllb.Public.Utility
                 byte[] fullCipher = new byte[NumberChars / 2];
                 for (int i = 0; i < NumberChars; i += 2)
                     fullCipher[i / 2] = Convert.ToByte(cipherText.Substring(i, 2), 16);
-                
+
                 var iv = new byte[16];
                 var cipher = new byte[fullCipher.Length - iv.Length];
 

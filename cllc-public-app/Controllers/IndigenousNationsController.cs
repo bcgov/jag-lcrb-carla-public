@@ -1,12 +1,10 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Public.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.Rest;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
@@ -17,11 +15,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class IndigenousNationsController : ControllerBase
     {
         private readonly ILogger _logger;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
 
-        public IndigenousNationsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public IndigenousNationsController(ILoggerFactory loggerFactory, IDataverseClient dataverse)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(IndigenousNationsController));
         }
 
@@ -30,30 +28,25 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             try
             {
-                var expand = new List<string> { "adoxio_LGIN_Accounts" };
-                var nations = await _dynamicsClient.Localgovindigenousnations.GetAsync(filter: "adoxio_isindigenousnation eq true", expand: expand);
+                var nations = await _dataverse.GetIndigenousNationsAsync();
                 var result = new List<IndigenousNation>();
-                foreach (var item in nations.Value)
+                foreach (var item in nations)
                 {
-                    var filter = $"_adoxio_lginlinkid_value eq {item.AdoxioLocalgovindigenousnationid} and websiteurl ne null";
-                    var linkedAccount = (await _dynamicsClient.Accounts.GetAsync(filter: filter)).Value.FirstOrDefault();
-                    var viewModel = item.ToViewModel();
-
-                    if (linkedAccount != null)
+                    var linkedAccount = await _dataverse.GetAccountByLginLinkIdAsync(item.Id.ToString());
+                    result.Add(new IndigenousNation
                     {
-                        viewModel.WebsiteUrl = linkedAccount.Websiteurl;
-                    }
-                    result.Add(viewModel);
+                        Id = item.Id.ToString(),
+                        Name = item.adoxio_name,
+                        WebsiteUrl = linkedAccount?.WebSiteURL
+                    });
                 }
                 return new JsonResult(result);
             }
-            catch (HttpOperationException httpOperationException)
+            catch (System.Exception ex)
             {
-                _logger.LogError(httpOperationException, "Error updating application");
-                // fail if we can't create.
-                throw (httpOperationException);
+                _logger.LogError(ex, "Error getting indigenous nations");
+                throw;
             }
         }
-
     }
 }

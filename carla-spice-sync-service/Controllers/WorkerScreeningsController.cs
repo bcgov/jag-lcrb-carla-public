@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces.Spice.Models;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
@@ -15,14 +16,16 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
     public class WorkerScreeningsController : Controller
     {
         private readonly IConfiguration Configuration;
-        private readonly ILogger _logger;
+        private readonly ILogger<WorkerScreeningsController> _logger;
+        private readonly ILoggerFactory _loggerFactory;
         private readonly SpiceUtils _spiceUtils;
 
         public WorkerScreeningsController(IConfiguration configuration, ILoggerFactory loggerFactory)
         {
             Configuration = configuration;
-            _logger = loggerFactory.CreateLogger(typeof(WorkerScreeningsController));
-            _spiceUtils = new SpiceUtils(Configuration);
+            _loggerFactory = loggerFactory;
+            _logger = loggerFactory.CreateLogger<WorkerScreeningsController>();
+            _spiceUtils = new SpiceUtils(Configuration, loggerFactory);
         }
 
         /// <summary>
@@ -35,7 +38,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         public ActionResult ReceiveWorkerScreeningResults([FromBody] List<CompletedWorkerScreening> completedScreenings)
         {
             // Process the updates received from the SPICE system.
-            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration).ReceiveWorkerImportJob(null, completedScreenings));
+            BackgroundJob.Enqueue(() => new SpiceUtils(Configuration, _loggerFactory).ReceiveWorkerImportJob(null, completedScreenings));
             _logger.LogInformation("Started receive completed worker screening job");
             return Ok();
         }
@@ -46,7 +49,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
         /// <returns></returns>
         [HttpPost("send/{workerIdString}")]
         [AllowAnonymous]
-        public ActionResult SendWorkerScreeningRequest(string workerIdString, string bearer)
+        public async Task<ActionResult> SendWorkerScreeningRequest(string workerIdString, string bearer)
         {
             if (JwtChecker.Check(bearer, Configuration))
             {
@@ -55,7 +58,7 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Controllers
                     var workerRequest = new IncompleteWorkerScreening();
                     try
                     {
-                        workerRequest = _spiceUtils.GenerateWorkerScreeningRequest(workerId);
+                        workerRequest = await _spiceUtils.GenerateWorkerScreeningRequest(workerId);
                     }
                     catch (System.ArgumentOutOfRangeException)
                     {

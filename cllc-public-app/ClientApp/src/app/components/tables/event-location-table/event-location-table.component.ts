@@ -1,9 +1,17 @@
-import { Component, Input, forwardRef } from "@angular/core";
-import { FormBuilder, FormArray, FormGroup, NG_VALUE_ACCESSOR, FormControl, NG_VALIDATORS, Validators } from "@angular/forms";
-import { faPlusCircle, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { EventLocation } from "@models/event-location.model";
-import { ServiceArea } from "@models/service-area.model";
-import { BaseControlValueAccessor } from "../BaseControlValueAccessor";
+import { Component, forwardRef, Input } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
+  Validators
+} from '@angular/forms';
+import { faPlusCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { EventLocation } from '@models/event-location.model';
+import { ServiceArea } from '@models/service-area.model';
+import { BaseControlValueAccessor } from '../BaseControlValueAccessor';
 
 @Component({
   selector: 'app-event-location-table',
@@ -43,12 +51,16 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   rows = new FormArray([]);
   validationMessages: string[] = [];
 
-  registerOnChange(fn: any) { this.onChange = fn; }
-  registerOnTouched(fn: any) { this.onTouched = fn; }
+  registerOnChange(fn: any) {
+    this.onChange = fn;
+  }
+  registerOnTouched(fn: any) {
+    this.onTouched = fn;
+  }
 
   constructor(private fb: FormBuilder) {
     super();
-    this.rows.valueChanges.subscribe(val => {
+    this.rows.valueChanges.subscribe((val) => {
       this.updateTotal();
       this.onChange(val);
       this.value = val;
@@ -62,7 +74,7 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
   updateTotal() {
     const eventLocations: EventLocation[] = this.rows.value;
     const result = eventLocations.reduce((acc, loc) => {
-      if (typeof loc.attendance === "number") {
+      if (typeof loc.attendance === 'number') {
         acc += loc.attendance;
       } else {
         const num = parseInt(loc.attendance, 10);
@@ -104,7 +116,7 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
       eventId: [value.eventId],
       serviceAreaId: [value.serviceAreaId, [Validators.required]],
       name: [value.name, [Validators.required]],
-      attendance: [value.attendance, [Validators.required]],
+      attendance: [value.attendance, [Validators.required]]
     });
 
     this.rows.push(group);
@@ -151,7 +163,7 @@ export class EventLocationTableComponent extends BaseControlValueAccessor<EventL
         const control = form.get(c);
 
         if (control.valid || control.status === 'DISABLED') {
-          continue;  // skip valid fields
+          continue; // skip valid fields
         }
 
         if (control instanceof FormGroup || control instanceof FormArray) {

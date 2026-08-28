@@ -1,10 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
-  selector: "app-terms-of-use",
-  templateUrl: "./terms-of-use.component.html",
-  styleUrls: ["./terms-of-use.component.scss"]
+  selector: 'app-terms-of-use',
+  templateUrl: './terms-of-use.component.html',
+  styleUrls: ['./terms-of-use.component.scss']
 })
 export class TermsOfUseComponent implements OnInit {
   faDownload = faDownload;
@@ -15,6 +15,5 @@ export class TermsOfUseComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

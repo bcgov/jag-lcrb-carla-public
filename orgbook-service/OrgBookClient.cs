@@ -14,7 +14,7 @@ namespace Gov.Lclb.Cllb.OrgbookService
         public readonly string ORGBOOK_API_SCHEMA_ENDPOINT = "/api/v2/schema";
         public readonly string ORGBOOK_API_CREDENTIAL_ENDPOINT = "/api/v2/search/credential/topic";
         public readonly string ORGBOOK_API_AUTOCOMPLETE_ENDPOINT = "/api/v2/search/autocomplete";
-        
+
         public OrgBookClient(HttpClient client, string BASE_URL)
         {
             ORGBOOK_BASE_URL = BASE_URL;
@@ -87,10 +87,10 @@ namespace Gov.Lclb.Cllb.OrgbookService
                         {
                             return new Name()
                             {
-                                id = (int) name["id"],
+                                id = (int)name["id"],
                                 text = name["text"].ToString(),
                                 language = name["language"].ToString(),
-                                credential_id = (int) name["credential_id"],
+                                credential_id = (int)name["credential_id"],
                                 type = name["type"].ToString()
                             };
                         }

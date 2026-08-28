@@ -24,8 +24,7 @@
         <tr
           *ngIf="
             form.get(item.formControlName).value === true &&
-            !(item.name == 'Internal Transfer of Shares' &&
-            form.get('csExternalTransferOfShares').value === true) &&
+            !(item.name == 'Internal Transfer of Shares' && form.get('csExternalTransferOfShares').value === true) &&
             item.CannabisFee > 0
           ">
           <td class="paymentSummary1">{{ item.name }}</td>

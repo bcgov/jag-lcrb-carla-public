@@ -1,0 +1,8 @@
+ClientApp/node_modules
+ClientApp/dist
+ClientApp/.angular
+ClientApp/coverage
+**/*.user
+**/*.suo
+**/bin
+**/obj

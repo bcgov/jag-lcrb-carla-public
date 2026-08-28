@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -17,41 +15,90 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class TermsAndConditionsController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly ILogger _logger;
 
-        public TermsAndConditionsController(ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient)
+        public TermsAndConditionsController(ILoggerFactory loggerFactory, IDataverseClient dataverse)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _logger = loggerFactory.CreateLogger(typeof(TermsAndConditionsController));
         }
 
         [HttpGet("{licenceId}")]
-        public JsonResult GetTermsAndConditionsForLicence(string licenceId)
+        public async Task<JsonResult> GetTermsAndConditionsForLicence(string licenceId)
         {
-            var result = new List<ViewModels.TermsAndConditions>();
-            IEnumerable<MicrosoftDynamicsCRMadoxioApplicationtermsconditionslimitation> terms = null;
-            string licenceFilter = "_adoxio_licence_value eq " + licenceId;
-            string[] expand = { "adoxio_TermsConditionsPreset" };
+            var terms = await _dataverse.GetTermsConditionsByLicenceIdAsync(licenceId);
 
-
-            terms = _dynamicsClient.Applicationtermsconditionslimitations.Get(filter: licenceFilter, expand: expand).Value;
-
-            foreach (var term in terms)
+            var resultTasks = terms.Select(async term =>
             {
-                result.Add(term.ToViewModel());
-            }
+                bool? isDefault = null;
+                if (term.adoxio_TermsConditionsPreset?.Id != null)
+                {
+                    var preset = await _dataverse.GetTermsConditionsPresetByIdAsync(
+                        term.adoxio_TermsConditionsPreset.Id.ToString());
+                    isDefault = preset?.adoxio_IsDefault;
+                }
+                return new TermsAndConditions
+                {
+                    Id = term.Id.ToString(),
+                    LicenceId = term.adoxio_Licence?.Id.ToString(),
+                    Content = term.adoxio_TermsandConditions,
+                    IsDefault = isDefault
+                };
+            });
 
-            return new JsonResult(result);
+            return new JsonResult(new List<TermsAndConditions>(await Task.WhenAll(resultTasks)));
+        }
+
+        [HttpPost("batch")]
+        public async Task<JsonResult> GetTermsAndConditionsForLicences([FromBody] List<string> licenceIds)
+        {
+            if (licenceIds == null || licenceIds.Count == 0) return new JsonResult(new List<TermsAndConditions>());
+
+            var terms = await _dataverse.GetTermsConditionsByLicenceIdsAsync(licenceIds);
+
+            var resultTasks = terms.Select(async term =>
+            {
+                bool? isDefault = null;
+                if (term.adoxio_TermsConditionsPreset?.Id != null)
+                {
+                    var preset = await _dataverse.GetTermsConditionsPresetByIdAsync(
+                        term.adoxio_TermsConditionsPreset.Id.ToString());
+                    isDefault = preset?.adoxio_IsDefault;
+                }
+                return new TermsAndConditions
+                {
+                    Id = term.Id.ToString(),
+                    LicenceId = term.adoxio_Licence?.Id.ToString(),
+                    Content = term.adoxio_TermsandConditions,
+                    IsDefault = isDefault
+                };
+            });
+
+            return new JsonResult(new List<TermsAndConditions>(await Task.WhenAll(resultTasks)));
         }
 
         [HttpGet("term/{termId}")]
-        public TermsAndConditions GetTermsAndCondition(string termId)
+        public async Task<TermsAndConditions> GetTermsAndCondition(string termId)
         {
-            var term =  _dynamicsClient.Applicationtermsconditionslimitations.GetByKey(termId);
+            var term = await _dataverse.GetTermsConditionsByIdAsync(termId);
+            if (term == null) return null;
 
-            return term.ToViewModel();
+            bool? isDefault = null;
+            if (term.adoxio_TermsConditionsPreset?.Id != null)
+            {
+                var preset = await _dataverse.GetTermsConditionsPresetByIdAsync(
+                    term.adoxio_TermsConditionsPreset.Id.ToString());
+                isDefault = preset?.adoxio_IsDefault;
+            }
+
+            return new TermsAndConditions
+            {
+                Id = term.Id.ToString(),
+                LicenceId = term.adoxio_Licence?.Id.ToString(),
+                Content = term.adoxio_TermsandConditions,
+                IsDefault = isDefault
+            };
         }
-
     }
 }

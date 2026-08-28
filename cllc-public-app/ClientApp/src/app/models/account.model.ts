@@ -1,12 +1,12 @@
-import { Contact } from "./contact.model";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { LegalEntity } from "@models/legal-entity.model";
+import { LegalEntity } from '@models/legal-entity.model';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Contact } from './contact.model';
 
 /**
  * This is a list of Business Type classified as other.
  * They influence the apperance/behavior of the account profile page, the application page and the application dashboard
  */
-const BUSINESS_TYPE_OTHER = ["Coop", "MilitaryMess", "Other", "University", "LocalGovernment"];
+const BUSINESS_TYPE_OTHER = ['Coop', 'MilitaryMess', 'Other', 'University', 'LocalGovernment'];
 
 export class Account {
   id: string;
@@ -57,23 +57,18 @@ export class Account {
   maxGuestsForFamilyEvents: number;
 
   isPartnership(): boolean {
-    const isPartnership = [
-      "GeneralPartnership",
-      "LimitedPartnership",
-      "LimitedLiabilityPartnership",
-      "Partnership"
-    ].indexOf(this.businessType) !==
-      -1;
+    const isPartnership =
+      ['GeneralPartnership', 'LimitedPartnership', 'LimitedLiabilityPartnership', 'Partnership'].indexOf(
+        this.businessType
+      ) !== -1;
     return isPartnership;
   }
 
   isPrivateCorporation(): boolean {
-    const isPrivateCorp = [
-      "PrivateCorporation",
-      "UnlimitedLiabilityCorporation",
-      "LimitedLiabilityCorporation"
-    ].indexOf(this.businessType) !==
-      -1;
+    const isPrivateCorp =
+      ['PrivateCorporation', 'UnlimitedLiabilityCorporation', 'LimitedLiabilityCorporation'].indexOf(
+        this.businessType
+      ) !== -1;
     return isPrivateCorp;
   }
 
@@ -90,7 +85,7 @@ export class Account {
   }
 
   isPublicCorporation(): boolean {
-    const isPublicCorp = ["PublicCorporation"].indexOf(this.businessType) !== -1;
+    const isPublicCorp = ['PublicCorporation'].indexOf(this.businessType) !== -1;
     return isPublicCorp;
   }
 
@@ -100,34 +95,34 @@ export class Account {
 
   static getBusinessTypeFromName(businessType: string): string {
     if (!businessType) {
-      return "";
+      return '';
     }
-    let name = "";
+    let name = '';
     switch (businessType) {
-      case "GeneralPartnership":
+      case 'GeneralPartnership':
       case 'LimitedPartnership"':
-      case "LimitedLiabilityPartnership":
-        name = "Partnership";
+      case 'LimitedLiabilityPartnership':
+        name = 'Partnership';
         break;
-      case "SoleProprietorship":
-        name = "Sole Proprietorship";
+      case 'SoleProprietorship':
+        name = 'Sole Proprietorship';
         break;
-      case "IndigenousNation":
-        name = "Indigenous Nation";
+      case 'IndigenousNation':
+        name = 'Indigenous Nation';
         break;
-      case "PublicCorporation":
-        name = "Public Corporation";
+      case 'PublicCorporation':
+        name = 'Public Corporation';
         break;
-      case "PrivateCorporation":
-      case "UnlimitedLiabilityCorporation":
-      case "LimitedLiabilityCorporation":
-        name = "Private Corporation";
+      case 'PrivateCorporation':
+      case 'UnlimitedLiabilityCorporation':
+      case 'LimitedLiabilityCorporation':
+        name = 'Private Corporation';
         break;
-      case "MilitaryMess":
-        name = "Military Mess";
+      case 'MilitaryMess':
+        name = 'Military Mess';
         break;
-      case "LocalGovernment":
-        name = "Local Government";
+      case 'LocalGovernment':
+        name = 'Local Government';
         break;
       default:
         name = businessType;
@@ -138,27 +133,26 @@ export class Account {
 }
 
 export const BUSINESS_TYPE_LIST = [
-  { value: "", name: "Choose the organization type" },
+  { value: '', name: 'Choose the organization type' },
   // { value: "Church", name: "Church"},
-  { value: "Coop", name: "Co-Op" },
-  { value: "GeneralPartnership", name: "General Partnership" },
-  { value: "IndigenousNation", name: "Indigenous Nation" },
-  { value: "LimitedLiabilityCorporation", name: "Limited Liability Corporation" },
-  { value: "LimitedLiabilityPartnership", name: "Limited Liability Partnership" },
-  { value: "LimitedPartnership", name: "Limited Partnership" },
-  { value: "LocalGovernment", name: "Local Government" },
-  { value: "Marketer", name: "Marketer" },
-  { value: "MilitaryMess", name: "Military Mess" },
-  { value: "Partnership", name: "Partnership" },
-  { value: "Police", name: "Police" },
-  { value: "PrivateCorporation", name: "Private Corporation" },
-  { value: "PublicCorporation", name: "Public Corporation" },
-  { value: "Society", name: "Society" },
-  { value: "SoleProprietorship", name: "Sole Proprietor" },
-  { value: "University", name: "University" },
-  { value: "UnlimitedLiabilityCorporation", name: "Unlimited Liability Corporation" },
+  { value: 'Coop', name: 'Co-Op' },
+  { value: 'GeneralPartnership', name: 'General Partnership' },
+  { value: 'IndigenousNation', name: 'Indigenous Nation' },
+  { value: 'LimitedLiabilityCorporation', name: 'Limited Liability Corporation' },
+  { value: 'LimitedLiabilityPartnership', name: 'Limited Liability Partnership' },
+  { value: 'LimitedPartnership', name: 'Limited Partnership' },
+  { value: 'LocalGovernment', name: 'Local Government' },
+  { value: 'Marketer', name: 'Marketer' },
+  { value: 'MilitaryMess', name: 'Military Mess' },
+  { value: 'Partnership', name: 'Partnership' },
+  { value: 'Police', name: 'Police' },
+  { value: 'PrivateCorporation', name: 'Private Corporation' },
+  { value: 'PublicCorporation', name: 'Public Corporation' },
+  { value: 'Society', name: 'Society' },
+  { value: 'SoleProprietorship', name: 'Sole Proprietor' },
+  { value: 'University', name: 'University' },
+  { value: 'UnlimitedLiabilityCorporation', name: 'Unlimited Liability Corporation' }
 ];
-
 
 export class TransferAccount {
   accountId: string;

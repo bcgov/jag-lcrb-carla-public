@@ -1,6 +1,8 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
+﻿extern alias DV;
+using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.ViewModels;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,11 +18,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [Authorize(Policy = "Business-User")]
     public class AdoxioLicenceTypeController : ControllerBase
     {
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverseClient;
 
-        public AdoxioLicenceTypeController(IDynamicsClient dynamicsClient)
+        public AdoxioLicenceTypeController(IDataverseClient dataverseClient)
         {
-            _dynamicsClient = dynamicsClient;
+            _dataverseClient = dataverseClient;
         }
 
         /// GET all licence types in Dynamics
@@ -29,9 +31,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             List<LicenseType> adoxioLiceseVMList = new List<LicenseType>();
             // get all licence types in Dynamics
-            var adoxioLicenceTypes = await _dynamicsClient.Licencetypes.GetAsync();
+            var adoxioLicenceTypes = await _dataverseClient.GetAllLicenceTypesAsync();
 
-            foreach (var licenceType in adoxioLicenceTypes.Value)
+            foreach (var licenceType in adoxioLicenceTypes)
             {
                 adoxioLiceseVMList.Add(licenceType.ToViewModel());
             }
@@ -41,16 +43,15 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         /// GET a specific licence type
         [HttpGet("{id}")]
-        public ActionResult GetDynamicsLicenseType(string id)
+        public async Task<ActionResult> GetDynamicsLicenseType(string id)
         {
-            Guid licenceTypeId;
-            if (string.IsNullOrEmpty(id) || !Guid.TryParse(id, out licenceTypeId))
+            if (string.IsNullOrEmpty(id))
             {
                 return new NotFoundResult();
             }
 
-            // get all licenses in Dynamics by Licencee Id
-            var adoxioLicenceType = _dynamicsClient.GetAdoxioLicencetypeById(licenceTypeId);
+            // get specific licence type in Dataverse by Id
+            var adoxioLicenceType = await _dataverseClient.GetLicenceTypeByIdAsync(id);
             if (adoxioLicenceType == null)
             {
                 return new NotFoundResult();

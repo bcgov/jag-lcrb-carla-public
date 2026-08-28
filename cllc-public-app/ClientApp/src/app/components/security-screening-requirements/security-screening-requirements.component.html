@@ -5,11 +5,11 @@
   <ng-container *ngIf="dataLoaded">
     <div class="row" *ngIf="!skipScreeningRequirements; else skipContent">
       <section class="col-md-12">
-        <mat-tab-group style="width:1000px;">
+        <mat-tab-group style="width: 1000px">
           <mat-tab label="LIQUOR REQUIREMENTS" *ngIf="showLiquorContent()">
             <div class="content">
               <section *ngIf="!data?.liquor?.outstandingItems?.length && !data?.liquor?.completedItems?.length">
-                <div class=" p-3" style="padding: 20px;">
+                <div class="p-3" style="padding: 20px">
                   <h3>No Information Required</h3>
                   <p>
                     LCRB has not requested any Personal History Summary forms for individuals associated with liquor
@@ -17,7 +17,6 @@
                   </p>
                 </div>
               </section>
-
 
               <ng-container *ngIf="data?.liquor?.outstandingItems?.length">
                 <h4 class="plain-header">OUTSTANDING PERSONAL HISTORY FORMS</h4>
@@ -27,9 +26,8 @@
                   police detachment.
                 </p>
                 <p>
-                  The following associates have not provided completed personal history summary forms.
-                  The forms can be completed using the provided link, which can be emailed or sent by SMS to associates
-                  as needed:
+                  The following associates have not provided completed personal history summary forms. The forms can be
+                  completed using the provided link, which can be emailed or sent by SMS to associates as needed:
                 </p>
                 <table class="greyGridTable">
                   <thead>
@@ -41,16 +39,17 @@
                       <th>Action</th>
                     </tr>
                   </thead>
-                  <tr [ngClass]="{'alt-row': i%2 === 0}"
-                    *ngFor="let item of data?.liquor?.outstandingItems; let i=index;">
-                    <td>{{item.firstName}}</td>
-                    <td>{{item.lastName}} </td>
+                  <tr
+                    [ngClass]="{ 'alt-row': i % 2 === 0 }"
+                    *ngFor="let item of data?.liquor?.outstandingItems; let i = index">
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
                     <!-- The portal API sends the Contact's birthdate in UTC so we need to use the GMT timezone to display it correctly -->
-                    <td>{{item.birthdate | date : 'dd/MM/yyyy' : 'GMT'}}</td>
-                    <td style="text-align: center;">
+                    <td>{{ item.birthdate | date: 'dd/MM/yyyy' : 'GMT' }}</td>
+                    <td style="text-align: center">
                       <p class="missing">Not Submitted</p>
                     </td>
-                    <td style="text-align: center;">
+                    <td style="text-align: center">
                       <a href="javascript: void(0)" (click)="copyMessage(item.phsLink)">
                         <fa-icon [icon]="faCopy"></fa-icon>
                         Copy Link
@@ -60,13 +59,12 @@
                 </table>
               </ng-container>
 
-
               <ng-container *ngIf="data?.liquor?.completedItems?.length">
-                <hr>
+                <hr />
                 <h4 class="plain-header">COMPLETED PERSONAL HISTORY FORMS</h4>
                 <p>
-                  The following associates have completed their personal history summary forms.
-                  No further information is required at this time.
+                  The following associates have completed their personal history summary forms. No further information
+                  is required at this time.
                 </p>
                 <table class="greyGridTable">
                   <thead>
@@ -77,13 +75,14 @@
                       <th>Date Submitted</th>
                     </tr>
                   </thead>
-                  <tr [ngClass]="{'alt-row': i%2 === 0}"
-                    *ngFor="let item of data?.liquor?.completedItems; let i=index;">
-                    <td>{{item.firstName}} </td>
-                    <td>{{item.lastName}} </td>
+                  <tr
+                    [ngClass]="{ 'alt-row': i % 2 === 0 }"
+                    *ngFor="let item of data?.liquor?.completedItems; let i = index">
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
                     <!-- The portal API sends the Contact's birthdate in UTC so we need to use the GMT timezone to display it correctly -->
-                    <td>{{item.birthdate | date : 'dd/MM/yyyy' : 'GMT'}} </td>
-                    <td style="text-align: center;">{{item.dateSubmitted | date : 'short'}}</td>
+                    <td>{{ item.birthdate | date: 'dd/MM/yyyy' : 'GMT' }}</td>
+                    <td style="text-align: center">{{ item.dateSubmitted | date: 'short' }}</td>
                   </tr>
                 </table>
                 <div *ngIf="!data?.liquor?.outstandingItems?.length">
@@ -95,11 +94,10 @@
             </div>
           </mat-tab>
 
-
           <mat-tab label="CANNABIS REQUIREMENTS" *ngIf="showCannabisContent()">
             <div class="content w-100">
               <section *ngIf="!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length">
-                <div class=" p-3" style="padding: 20px;">
+                <div class="p-3" style="padding: 20px">
                   <h3>No Information Required</h3>
                   <p>
                     LCRB has not requested any Cannabis Associate Security Screening forms for individuals or businesses
@@ -109,34 +107,33 @@
               </section>
 
               <section *ngIf="data?.cannabis?.outstandingItems?.length">
-                <hr>
+                <hr />
                 <p>
-                  When applying for <strong>a new cannabis licence</strong>, each licence associate must provide a completed Cannabis Associate Security
-                  Screening form along with the required documents.
+                  When applying for <strong>a new cannabis licence</strong>, each licence associate must provide a
+                  completed Cannabis Associate Security Screening form along with the required documents.
                 </p>
-                <p><strong>Note:</strong> Cannabis Associate Security Screening forms are not required for annual licence renewals.</p>
+                <p>
+                  <strong>Note:</strong> Cannabis Associate Security Screening forms are not required for annual licence
+                  renewals.
+                </p>
                 <p>
                   Sole proprietors and associates of applicants for a non-medical cannabis licence are required to
-                  submit documentation for security screenings and/or financial integrity checks.
-                  Cannabis retail store licence applications cannot be processed until all required materials have been
-                  received.
+                  submit documentation for security screenings and/or financial integrity checks. Cannabis retail store
+                  licence applications cannot be processed until all required materials have been received.
                 </p>
 
                 <p appRemoveIfFeatureOn="DisableWorkerQualification">
-                  Please note, the security screening for sole proprietors and associates differs from
-                  the
-                  <a href="policy-document/worker-qualification-training" target="_blank">
-                    security verification
-                  </a>
-                  for people seeking work in non-medical cannabis retail stores. The screening for
-                  associates considers the associate within the context of a larger organizational structure. The
-                  security verification for workers considers the worker as an individual apart from an organization. If
-                  a sole proprietor or associate seeks to work in a non-medical cannabis retail store, they must pass
-                  both.
+                  Please note, the security screening for sole proprietors and associates differs from the
+                  <a href="policy-document/worker-qualification-training" target="_blank"> security verification </a>
+                  for people seeking work in non-medical cannabis retail stores. The screening for associates considers
+                  the associate within the context of a larger organizational structure. The security verification for
+                  workers considers the worker as an individual apart from an organization. If a sole proprietor or
+                  associate seeks to work in a non-medical cannabis retail store, they must pass both.
                 </p>
                 <p>
                   See the
-                  <a href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
+                  <a
+                    href="https://www2.gov.bc.ca/gov/content/employment-business/business/liquor-regulation-licensing/cannabis-regulation/associate-forms"
                     target="_blank">
                     Forms for Sole Proprietors and Associates of Cannabis Licence Applicants
                   </a>
@@ -163,14 +160,15 @@
                       <th appRemoveIfFeatureOff="CASS">Action</th>
                     </tr>
                   </thead>
-                  <tr [ngClass]="{'alt-row': i%2 === 0}"
-                    *ngFor="let item of data?.cannabis?.outstandingItems; let i=index">
-                    <td>{{item.firstName}}</td>
-                    <td>{{item.lastName}} </td>
+                  <tr
+                    [ngClass]="{ 'alt-row': i % 2 === 0 }"
+                    *ngFor="let item of data?.cannabis?.outstandingItems; let i = index">
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
                     <!-- The portal API sends the Contact's birthdate in UTC so we need to use the GMT timezone to display it correctly -->
-                    <td>{{item.birthdate | date : 'dd/MM/yyyy' : 'GMT'}}</td>
-                    <td class="missing" style="text-align: center;">Not Submitted</td>
-                    <td style="text-align: center;" appRemoveIfFeatureOff="CASS">
+                    <td>{{ item.birthdate | date: 'dd/MM/yyyy' : 'GMT' }}</td>
+                    <td class="missing" style="text-align: center">Not Submitted</td>
+                    <td style="text-align: center" appRemoveIfFeatureOff="CASS">
                       <a href="javascript: void(0)" (click)="copyMessage(item.casLink)">
                         <fa-icon [icon]="faCopy"></fa-icon>Copy Link
                       </a>
@@ -182,8 +180,8 @@
               <div *ngIf="!(!data?.cannabis?.outstandingItems?.length && !data?.cannabis?.completedItems?.length)">
                 <h4 class="plain-header">Completed Cannabis Associate Security Screening Forms</h4>
                 <p>
-                  The following associates have completed their cannabis associate security screening forms.
-                  No further information is required at this time.
+                  The following associates have completed their cannabis associate security screening forms. No further
+                  information is required at this time.
                 </p>
                 <table *ngIf="data?.cannabis?.completedItems?.length" class="greyGridTable">
                   <thead>
@@ -193,13 +191,14 @@
                       <th>Date Submitted</th>
                     </tr>
                   </thead>
-                  <tr [ngClass]="{'alt-row': i%2 === 0}"
-                    *ngFor="let item of data?.cannabis?.completedItems; let i=index;">
-                    <td>{{item.firstName}}</td>
-                    <td>{{item.lastName}} </td>
+                  <tr
+                    [ngClass]="{ 'alt-row': i % 2 === 0 }"
+                    *ngFor="let item of data?.cannabis?.completedItems; let i = index">
+                    <td>{{ item.firstName }}</td>
+                    <td>{{ item.lastName }}</td>
                     <!-- The portal API sends the Contact's birthdate in UTC so we need to use the GMT timezone to display it correctly -->
-                    <td>{{item.birthdate | date : 'dd/MM/yyyy' : 'GMT'}}</td>
-                    <td style="text-align: center;">{{item.dateSubmitted | date : 'dd/MM/yyyy'}}</td>
+                    <td>{{ item.birthdate | date: 'dd/MM/yyyy' : 'GMT' }}</td>
+                    <td style="text-align: center">{{ item.dateSubmitted | date: 'dd/MM/yyyy' }}</td>
                   </tr>
                 </table>
 
@@ -209,7 +208,6 @@
                   </h3>
                 </div>
               </div>
-
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -218,9 +216,7 @@
     <ng-template #skipContent>
       <div class="row">
         <section class="col-md-8">
-          <p>
-            Security screening requirements for this application will be handled in coordination with LCRB.
-          </p>
+          <p>Security screening requirements for this application will be handled in coordination with LCRB.</p>
         </section>
       </div>
     </ng-template>
@@ -230,16 +226,14 @@
         <section class="error" *ngIf="errorMessages?.length">
           <p *ngFor="let message of errorMessages">
             <span class="app-cancel">
-              <mat-icon aria-label="error icon" style="font-size: 15px;">error</mat-icon>
-              {{message}}
+              <mat-icon aria-label="error icon" style="font-size: 15px">error</mat-icon>
+              {{ message }}
             </span>
           </p>
         </section>
         <section *ngIf="applicationId" class="d-flex justify-content-between">
           <!--button class="btn btn-primary">Back to Org Structure</button-->
-          <button class="btn btn-primary" (click)="isValid() && submitApplicationPayment()">
-            Pay for Application
-          </button>
+          <button class="btn btn-primary" (click)="isValid() && submitApplicationPayment()">Pay for Application</button>
         </section>
       </section>
     </div>

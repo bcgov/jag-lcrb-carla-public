@@ -1,6 +1,6 @@
-import { LicenseType } from "./license-type.model";
-import { ApplicationContentType } from "./application-content-type.model";
-import { DynamicsForm } from "./dynamics-form.model";
+import { ApplicationContentType } from './application-content-type.model';
+import { DynamicsForm } from './dynamics-form.model';
+import { LicenseType } from './license-type.model';
 
 export class ApplicationType {
   id: string;
@@ -31,7 +31,7 @@ export class ApplicationType {
   showDescription1: boolean;
   hasLESection: boolean;
   showPatio: boolean;
-  hasPatio: boolean;    // 2024-02-06 LCSD-6170 waynezen
+  hasPatio: boolean; // 2024-02-06 LCSD-6170 waynezen
 
   storeContactInfo: FormControlState;
   establishmentName: FormControlState;
@@ -68,90 +68,89 @@ export class ApplicationType {
 }
 
 export enum FormControlState {
-  Show = "Yes",
-  Hide = "No",
-  ReadOnly = "Readonly"
+  Show = 'Yes',
+  Hide = 'No',
+  ReadOnly = 'Readonly'
 }
 
 export enum ApplicationTypeNames {
-  Agent = "Agent",
-  Catering = "Catering",
-  CRSEstablishmentNameChange = "CRS Establishment Name Change",
-  CRSLocationChange = "CRS Location Change",
-  CRSRenewal = "CRS Renewal",
-  CRSRenewalLate30 = "CRS Late Renewal - 30 Day",
-  CRSRenewalLate6Months = "CRS Late Renewal - 30 Day to 6 Months",
-  CRSStructuralChange = "CRS Structural Change",
-  CRSTransferofOwnership = "CRS Transfer of Ownership",
-  CannabisRetailStore = "Cannabis Retail Store",
-  ProductionRetailStore = "Producer Retail Store",
-  ETHYL = "Ethyl Alcohol Permit",
-  FP = "Food Primary",
-  FPRelo = "Food Primary Relocation",
-  F2G = "Farm to Gate",
-  LicenseeChanges = "Licensee Changes",
-  LP = "Liquor Primary",
-  LPC = "Liquor Primary Club",
+  Agent = 'Agent',
+  Catering = 'Catering',
+  CRSEstablishmentNameChange = 'CRS Establishment Name Change',
+  CRSLocationChange = 'CRS Location Change',
+  CRSRenewal = 'CRS Renewal',
+  CRSRenewalLate30 = 'CRS Late Renewal - 30 Day',
+  CRSRenewalLate6Months = 'CRS Late Renewal - 30 Day to 6 Months',
+  CRSStructuralChange = 'CRS Structural Change',
+  CRSTransferofOwnership = 'CRS Transfer of Ownership',
+  CannabisRetailStore = 'Cannabis Retail Store',
+  ProductionRetailStore = 'Producer Retail Store',
+  ETHYL = 'Ethyl Alcohol Permit',
+  FP = 'Food Primary',
+  FPRelo = 'Food Primary Relocation',
+  F2G = 'Farm to Gate',
+  LicenseeChanges = 'Licensee Changes',
+  LP = 'Liquor Primary',
+  LPC = 'Liquor Primary Club',
   LPR = 'LP Relocation',
-  Marketer = "Marketing",
-  MarketingRenewal = "Marketing Renewal",
-  LGINClaim = "LG/IN Claim",
-  PoliceClaim = "Police Claim",
-  LRSTransferofLocation = "LRS Transfer of Location",
-  LRSTemporaryRelocation = "LRS - Temporary Relocation",
-  LiquorRenewal = "Liquor Licence Renewal",
-  LiquorLicenceTransfer = "Liquor Licence Transfer",
-  PermanentChangeToALicensee = "Permanent Change to a Licensee",
-  LegalEntityReview = "LE Review",
-  PermanentChangeToAnApplicant = "Permanent Change to an Applicant",
-  WineStore = "Wine Store",
-  RAS = "Rural Agency Store",
-  RLRS = "Rural Licensee Retail Store",
-  MFG = "Manufacturer",
-  UBV = "UBrew and UVin",
-  LoungeAreaEndorsment = "Lounge Area Endorsement",
-  SpecialEventAreaEndorsement = "Special Event Area Endorsement",
-  LRSStructuralChange = "LRS Structural Change",
-  RequestTermChange = "Non-Default T&C Change Application",
-  TiedHouseExemption = "Tied House Exemption",
-  OutstandingPriorBalanceInvoice = "Outstanding Prior Balance Invoice - LIQ",
-  TiedHouseExemptionRemoval = "Tied House Exemption Removal",
-  TiedHouseExemptionApplication = "Tied House Exemption Application",
-  TemporaryExtensionOfLicensedAreaLP = "Temporary Extension of Licensed Area (LP)",
-  ManufacturerLocationChange = "Manufacturer Location Change",
-  TemporaryChangetoaLiquorLicence_Other = "Temporary Change to a Liquor Licence - Other",
-  Dormancy = "Dormancy",
-  DormancyReinstatement = "Dormancy Reinstatement",
-  PicnicAreaEndorsement = "Picnic Area Endorsement",
-  ChangetoApprovedPicnicArea = "Change to Approved Picnic Area",
-  ChangeHoursOfService_Outside_Service_Hours = "Change to Hours of Liquor Service (outside Service Hours)",
-  ChangeHoursOfService_Lounge_Area = "Change to Hours of Liquor Service (LOUNGE - Outside Service Hours)",
-  ChangeHoursOfService_Special_Event_Area = "Change to Hours of Liquor Service (SEA - Within Service Hours)",
-  ApplicationToTransitionToLiquorPrimaryLicence ="Application to Transition to Liquor Primary Licence"
-
+  Marketer = 'Marketing',
+  MarketingRenewal = 'Marketing Renewal',
+  LGINClaim = 'LG/IN Claim',
+  PoliceClaim = 'Police Claim',
+  LRSTransferofLocation = 'LRS Transfer of Location',
+  LRSTemporaryRelocation = 'LRS - Temporary Relocation',
+  LiquorRenewal = 'Liquor Licence Renewal',
+  LiquorLicenceTransfer = 'Liquor Licence Transfer',
+  PermanentChangeToALicensee = 'Permanent Change to a Licensee',
+  LegalEntityReview = 'LE Review',
+  PermanentChangeToAnApplicant = 'Permanent Change to an Applicant',
+  WineStore = 'Wine Store',
+  RAS = 'Rural Agency Store',
+  RLRS = 'Rural Licensee Retail Store',
+  MFG = 'Manufacturer',
+  UBV = 'UBrew and UVin',
+  LoungeAreaEndorsment = 'Lounge Area Endorsement',
+  SpecialEventAreaEndorsement = 'Special Event Area Endorsement',
+  LRSStructuralChange = 'LRS Structural Change',
+  RequestTermChange = 'Non-Default T&C Change Application',
+  TiedHouseExemption = 'Tied House Exemption',
+  OutstandingPriorBalanceInvoice = 'Outstanding Prior Balance Invoice - LIQ',
+  TiedHouseExemptionRemoval = 'Tied House Exemption Removal',
+  TiedHouseExemptionApplication = 'Tied House Exemption Application',
+  TemporaryExtensionOfLicensedAreaLP = 'Temporary Extension of Licensed Area (LP)',
+  ManufacturerLocationChange = 'Manufacturer Location Change',
+  TemporaryChangetoaLiquorLicence_Other = 'Temporary Change to a Liquor Licence - Other',
+  Dormancy = 'Dormancy',
+  DormancyReinstatement = 'Dormancy Reinstatement',
+  PicnicAreaEndorsement = 'Picnic Area Endorsement',
+  ChangetoApprovedPicnicArea = 'Change to Approved Picnic Area',
+  ChangeHoursOfService_Outside_Service_Hours = 'Change to Hours of Liquor Service (outside Service Hours)',
+  ChangeHoursOfService_Lounge_Area = 'Change to Hours of Liquor Service (LOUNGE - Outside Service Hours)',
+  ChangeHoursOfService_Special_Event_Area = 'Change to Hours of Liquor Service (SEA - Within Service Hours)',
+  ApplicationToTransitionToLiquorPrimaryLicence = 'Application to Transition to Liquor Primary Licence'
 }
 
 // 2024-01-11 LCSD-6459 waynezen: instead of hard-coding Application Status, use these
 export enum ApplicationStatuses {
-  Active = "Active",
-  Intake = "Intake",
-  Submitted = "Submitted",
-  InProgress = "(Do Not Use) In Progress",
-  Incomplete = "Incomplete", //LCSD-6243: 2024-04-24 waynezen
-  PendingApproval = "Pending LG/IN Approval",
-  Review = "Under Review",
-  Assessment = "Application Assessment",
-  Issued = "AIP Issued",
-  Refused = "Refused",
-  PendingFinalInspection = "Pending Final Inspection",
-  ReviewingResults = "Reviewing Inspection Results",
-  PendingLicenseFee = "Pending Licence Fee",
-  Terminated = "Terminated",
-  TerminatedRefunded = "Terminated and Refunded",
-  Processed = "(Do not Use) Processed",
-  LicenseeActionRequired = "Licensee Action Required",
-  Approved = "Approved",
-  UnderReview ="Under Review",
-  ApplicationAssessment = "Application Assessment",
-  NotSubmitted = "Not Submitted"
+  Active = 'Active',
+  Intake = 'Intake',
+  Submitted = 'Submitted',
+  InProgress = '(Do Not Use) In Progress',
+  Incomplete = 'Incomplete', //LCSD-6243: 2024-04-24 waynezen
+  PendingApproval = 'Pending LG/IN Approval',
+  Review = 'Under Review',
+  Assessment = 'Application Assessment',
+  Issued = 'AIP Issued',
+  Refused = 'Refused',
+  PendingFinalInspection = 'Pending Final Inspection',
+  ReviewingResults = 'Reviewing Inspection Results',
+  PendingLicenseFee = 'Pending Licence Fee',
+  Terminated = 'Terminated',
+  TerminatedRefunded = 'Terminated and Refunded',
+  Processed = '(Do not Use) Processed',
+  LicenseeActionRequired = 'Licensee Action Required',
+  Approved = 'Approved',
+  UnderReview = 'Under Review',
+  ApplicationAssessment = 'Application Assessment',
+  NotSubmitted = 'Not Submitted'
 }

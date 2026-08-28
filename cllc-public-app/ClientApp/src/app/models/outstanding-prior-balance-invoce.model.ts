@@ -1,4 +1,4 @@
-import { Account } from "./account.model";
+import { Account } from './account.model';
 
 export class OutstandingPriorBalanceInvoice {
   applicationId: string;
@@ -15,8 +15,7 @@ export class OutstandingPriorBalanceInvoice {
     statecode: number;
     statuscode: number;
     description: string;
-    duedate: Date
+    duedate: Date;
   };
   overdue: boolean;
 }
-

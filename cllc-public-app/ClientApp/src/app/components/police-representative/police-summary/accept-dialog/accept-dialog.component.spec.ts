@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { AcceptDialogComponent } from './accept-dialog.component';
 
 describe('AcceptDialogComponent', () => {
@@ -8,9 +7,8 @@ describe('AcceptDialogComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AcceptDialogComponent ]
-    })
-    .compileComponents();
+      declarations: [AcceptDialogComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -28,7 +28,7 @@ export class PermanentChangeDirectorsOfficers implements OnInit {
 
   form: FormGroup;
 
-  constructor(public controlContainer: ControlContainer) { }
+  constructor(public controlContainer: ControlContainer) {}
 
   ngOnInit() {
     this.form = this.controlContainer.control as FormGroup;

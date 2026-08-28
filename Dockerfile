@@ -1,10 +1,10 @@
 #Orgbook service Dockerfile
-FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 ENV ASPNETCORE_URLS=http://*:8080
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 RUN dotnet tool install --tool-path /tools dotnet-trace
 RUN dotnet tool install --tool-path /tools dotnet-counters
@@ -12,7 +12,6 @@ RUN dotnet tool install --tool-path /tools dotnet-dump
 
 WORKDIR /src
 COPY ["orgbook-service/orgbook-service.csproj", "orgbook-service/"]
-COPY ["cllc-interfaces/Dynamics-Autorest/DynamicsAutorest.csproj", "cllc-interfaces/Dynamics-Autorest/"]
 RUN dotnet restore "orgbook-service/orgbook-service.csproj"
 COPY . .
 WORKDIR "/src/orgbook-service"

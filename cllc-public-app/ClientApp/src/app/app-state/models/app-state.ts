@@ -1,8 +1,8 @@
-import { LegalEntity } from "@models/legal-entity.model";
-import { Account } from "@models/account.model";
-import { Application } from "@models/application.model";
-import { User } from "@models/user.model";
-import { FileUploadSet } from "../../models/file-upload-set.model";
+import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { User } from '@models/user.model';
+import { FileUploadSet } from '../../models/file-upload-set.model';
 
 export interface AppState {
   legalEntitiesState: LegalEntitiesState;
@@ -42,7 +42,6 @@ export interface CurrentLegalEntityState {
 export interface OnGoingLicenseeChangesApplicationIdState {
   onGoingLicenseeChangesApplicationId: string;
 }
-
 
 export interface FileUploadsState {
   fileUploads: FileUploadSet[];

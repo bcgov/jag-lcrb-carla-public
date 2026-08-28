@@ -1,4 +1,5 @@
-﻿using System;
+﻿extern alias DV;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.ServiceModel;
 using Microsoft.Extensions.Configuration;
 using Hangfire;
 using Microsoft.Extensions.Logging;
+using IDataverseClient = DV::Gov.Lclb.Cllb.Interfaces.IDataverseClient;
 
 namespace Gov.Lclb.Cllb.Geocoder.Controllers
 {
@@ -16,19 +18,21 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
     {
         IConfiguration Configuration;
         private readonly ILogger _logger;
+        private readonly IDataverseClient _dataverse;
 
-        public GeocoderController(IConfiguration configuration, ILoggerFactory loggerFactory)
+        public GeocoderController(IConfiguration configuration, ILoggerFactory loggerFactory, IDataverseClient dataverse)
         {
             Configuration = configuration;
             this._logger = loggerFactory.CreateLogger(typeof(GeocoderController));
+            this._dataverse = dataverse;
         }
 
         // Geocode a given establishment.
         [HttpGet("GeocodeEstablishment/{establishmentId}")]
-        public ActionResult GeocodeEstablishment( string establishmentId )
+        public ActionResult GeocodeEstablishment(string establishmentId)
         {
             _logger.LogInformation($"Geocoding establishment. EstablishmentId: {establishmentId}");
-            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishment(null, establishmentId));
+            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _dataverse, _logger).GeocodeEstablishment(null, establishmentId));
             return Ok();
         }
 
@@ -37,7 +41,7 @@ namespace Gov.Lclb.Cllb.Geocoder.Controllers
         public ActionResult GeocodeEstablishments()
         {
             _logger.LogInformation($"Geocoding all establishments ");
-            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _logger).GeocodeEstablishments(null, true));
+            BackgroundJob.Enqueue(() => new GeocodeUtils(Configuration, _dataverse, _logger).GeocodeEstablishments(null, true));
             return Ok();
         }
 

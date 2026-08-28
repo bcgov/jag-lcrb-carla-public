@@ -1,29 +1,31 @@
-import { Component, OnInit, Inject } from "@angular/core";
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { LicenseeChangeLog } from "@models/licensee-change-log.model";
-import { FormBase } from "@shared/form-base";
-import { Account } from "@models/account.model";
-import { startOfToday, subDays } from "date-fns";
+import { Component, Inject, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Account } from '@models/account.model';
+import { LicenseeChangeLog } from '@models/licensee-change-log.model';
+import { FormBase } from '@shared/form-base';
+import { startOfToday, subDays } from 'date-fns';
 
 @Component({
-  selector: "app-shareholders-and-partners",
-  templateUrl: "./shareholders-and-partners.component.html",
-  styleUrls: ["./shareholders-and-partners.component.scss"]
+  selector: 'app-shareholders-and-partners',
+  templateUrl: './shareholders-and-partners.component.html',
+  styleUrls: ['./shareholders-and-partners.component.scss']
 })
 export class ShareholdersAndPartnersComponent extends FormBase implements OnInit {
   form: FormGroup;
   parentName: any;
   shareholder: any;
-  action = "add";
+  action = 'add';
   maxDate19: Date;
   availableParentShares: number = 0;
   Account = Account;
-  formType: "shareholder" | "partnership";
+  formType: 'shareholder' | 'partnership';
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<ShareholdersAndPartnersComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,) {
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
     super();
     this.shareholder = data.shareholder;
     this.action = data.action;
@@ -33,28 +35,28 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
     this.maxDate19 = subDays(startOfToday(), 19);
 
     if (this.shareholder && this.shareholder.parentLinceseeChangeLog) {
-      this.availableParentShares = this.shareholder.parentLinceseeChangeLog.totalSharesNew -
+      this.availableParentShares =
+        this.shareholder.parentLinceseeChangeLog.totalSharesNew -
         this.shareholder.parentLinceseeChangeLog.totalChildShares +
         (this.shareholder.numberofSharesNew || 0);
     }
-
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [""],
-      businessNameNew: [""],
-      firstNameNew: ["", Validators.required],
-      lastNameNew: ["", Validators.required],
-      dateofBirthNew: ["", Validators.required],
-      emailNew: ["", [Validators.email, Validators.required]],
-      numberofSharesNew: [""],
+      id: [''],
+      businessNameNew: [''],
+      firstNameNew: ['', Validators.required],
+      lastNameNew: ['', Validators.required],
+      dateofBirthNew: ['', Validators.required],
+      emailNew: ['', [Validators.email, Validators.required]],
+      numberofSharesNew: [''],
       totalSharesNew: [],
-      interestPercentageNew: [""],
+      interestPercentageNew: [''],
       isIndividual: [true],
       isShareholderNew: [true],
-      businessType: [""],
-      dateIssued: [""],
+      businessType: [''],
+      dateIssued: ['']
     });
 
     this.addFormValidation();
@@ -69,59 +71,60 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
    */
   addFormValidation() {
     // partnership vs shaholder validation
-    if (this.formType === "partnership") {
-      this.form.get("interestPercentageNew").setValidators([Validators.required]);
-    } else if (this.formType === "shareholder") {
-      this.form.get("numberofSharesNew")
+    if (this.formType === 'partnership') {
+      this.form.get('interestPercentageNew').setValidators([Validators.required]);
+    } else if (this.formType === 'shareholder') {
+      this.form
+        .get('numberofSharesNew')
         .setValidators([Validators.required, Validators.max(this.availableParentShares)]);
     }
 
-    this.form.get("businessType").valueChanges
-      .subscribe(value => {
-        if (value === "PublicCorporation" || value === "PrivateCorporation") {
-          this.form.get("totalSharesNew")
-            .setValidators([Validators.required, Validators.max(this.availableParentShares)]);
-        } else {
-          this.form.get("totalSharesNew").clearValidators();
-          this.form.get("totalSharesNew").reset();
-        }
-      });
+    this.form.get('businessType').valueChanges.subscribe((value) => {
+      if (value === 'PublicCorporation' || value === 'PrivateCorporation') {
+        this.form
+          .get('totalSharesNew')
+          .setValidators([Validators.required, Validators.max(this.availableParentShares)]);
+      } else {
+        this.form.get('totalSharesNew').clearValidators();
+        this.form.get('totalSharesNew').reset();
+      }
+    });
 
     // individual vs corporation/business validation
-    this.form.get("isIndividual").valueChanges
-      .subscribe(value => {
-        if (value) {
-          this.form.get("businessType").clearValidators();
-          this.form.get("businessType").reset();
-          this.form.get("businessNameNew").clearValidators();
-          this.form.get("businessNameNew").reset();
-          this.form.get("firstNameNew").setValidators([Validators.required]);
-          this.form.get("lastNameNew").setValidators([Validators.required]);
-          this.form.get("dateofBirthNew").setValidators([Validators.required]);
-        } else {
-          this.form.get("firstNameNew").clearValidators();
-          this.form.get("firstNameNew").reset();
-          this.form.get("lastNameNew").clearValidators();
-          this.form.get("lastNameNew").reset();
-          this.form.get("dateofBirthNew").clearValidators();
-          this.form.get("dateofBirthNew").reset();
-          this.form.get("businessType").setValidators([Validators.required]);
-          this.form.get("businessNameNew").setValidators([Validators.required]);
-        }
-      });
+    this.form.get('isIndividual').valueChanges.subscribe((value) => {
+      if (value) {
+        this.form.get('businessType').clearValidators();
+        this.form.get('businessType').reset();
+        this.form.get('businessNameNew').clearValidators();
+        this.form.get('businessNameNew').reset();
+        this.form.get('firstNameNew').setValidators([Validators.required]);
+        this.form.get('lastNameNew').setValidators([Validators.required]);
+        this.form.get('dateofBirthNew').setValidators([Validators.required]);
+      } else {
+        this.form.get('firstNameNew').clearValidators();
+        this.form.get('firstNameNew').reset();
+        this.form.get('lastNameNew').clearValidators();
+        this.form.get('lastNameNew').reset();
+        this.form.get('dateofBirthNew').clearValidators();
+        this.form.get('dateofBirthNew').reset();
+        this.form.get('businessType').setValidators([Validators.required]);
+        this.form.get('businessNameNew').setValidators([Validators.required]);
+      }
+    });
   }
 
   /**
    * returns true if the form is valid
    */
   isValid(): boolean {
-    let valid = (!this.shareholder.isRoot && this.form.valid) ||
-      (this.shareholder.isRoot && this.form.get("totalSharesNew").value);
+    let valid =
+      (!this.shareholder.isRoot && this.form.valid) ||
+      (this.shareholder.isRoot && this.form.get('totalSharesNew').value);
 
     const formData = this.data.shareholder || {};
     if (this.shareholder.parentLinceseeChangeLog) {
       const value = Object.assign(this.shareholder, new LicenseeChangeLog(), formData, this.form.value);
-      if (this.formType === "shareholder" && value.percentageShares > 100) {
+      if (this.formType === 'shareholder' && value.percentageShares > 100) {
         valid = false;
       }
     }
@@ -133,7 +136,7 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
    */
   save() {
     if (!this.isValid()) {
-      Object.keys(this.form.controls).forEach(field => {
+      Object.keys(this.form.controls).forEach((field) => {
         const control = this.form.get(field);
         control.markAsTouched({ onlySelf: true });
       });
@@ -161,5 +164,4 @@ export class ShareholdersAndPartnersComponent extends FormBase implements OnInit
   updateTotalShares() {
     this.dialogRef.close({ updateTotalShares: true });
   }
-
 }

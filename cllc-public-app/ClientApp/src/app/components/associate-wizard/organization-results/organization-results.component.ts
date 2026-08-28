@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: "app-organization-results",
-  templateUrl: "./organization-results.component.html",
-  styleUrls: ["./organization-results.component.css"]
+  selector: 'app-organization-results',
+  templateUrl: './organization-results.component.html',
+  styleUrls: ['./organization-results.component.css']
 })
 export class OrganizationResultsComponent implements OnInit {
   @Input()
@@ -11,7 +11,5 @@ export class OrganizationResultsComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

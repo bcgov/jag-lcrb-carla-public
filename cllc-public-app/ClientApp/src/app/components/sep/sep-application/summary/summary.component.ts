@@ -132,8 +132,8 @@ export class SummaryComponent implements OnInit {
       });
 
     this.route.queryParams.subscribe((params) => {
-      this.transactionId = params["trnId"];
-      this.appId = params["SessionKey"];
+      this.transactionId = params['trnId'];
+      this.appId = params['SessionKey'];
     });
 
     this.route.params.subscribe((params: Params) => {

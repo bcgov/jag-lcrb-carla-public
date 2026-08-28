@@ -492,7 +492,7 @@
                   <span>{{ message }}</span>
                 </div>
               </div>
-              <section style="position: relative" class="py-4 button-row">
+              <section style="position: relative" class="py-4 button-row" [ngBusy]="busy">
                 <button color="primary" mat-raised-button (click)="gotoReview()" class="save-cont" id="continueToApp">
                   <span *ngIf="!applicationId && !useInStepperMode">SAVE & CONTINUE</span>
                   <span *ngIf="applicationId && !useInStepperMode">CONTINUE TO APPLICATION</span>

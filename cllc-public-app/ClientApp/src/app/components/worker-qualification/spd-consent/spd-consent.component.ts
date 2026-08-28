@@ -1,27 +1,27 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { PaymentDataService } from "@services/payment-data.service";
-import { UserDataService } from "@services/user-data.service";
-import { User } from "@models/user.model";
-import { ActivatedRoute } from "@angular/router";
-import { FormBuilder, FormGroup, NgForm } from "@angular/forms";
-import { Subscription, Observable, Subject, forkJoin } from "rxjs";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { ContactDataService } from "@services/contact-data.service";
-import { Contact } from "@models/contact.model";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { faSave } from "@fortawesome/free-regular-svg-icons";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
-import { WorkerDataService } from "@services/worker-data.service";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { Contact } from '@models/contact.model';
+import { User } from '@models/user.model';
+import { ContactDataService } from '@services/contact-data.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { PaymentDataService } from '@services/payment-data.service';
+import { UserDataService } from '@services/user-data.service';
+import { WorkerDataService } from '@services/worker-data.service';
+import { forkJoin, Observable, Subject, Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-spd-consent",
-  templateUrl: "./spd-consent.component.html",
-  styleUrls: ["./spd-consent.component.scss"]
+  selector: 'app-spd-consent',
+  templateUrl: './spd-consent.component.html',
+  styleUrls: ['./spd-consent.component.scss']
 })
 export class SpdConsentComponent implements OnInit {
   faSave = faSave;
   faExclamationTriangle = faExclamationTriangle;
-  @ViewChild("name", { static: true })
+  @ViewChild('name', { static: true })
   nameInputRef: NgForm;
   currentUser: any;
   workerId: string;
@@ -47,38 +47,36 @@ export class SpdConsentComponent implements OnInit {
     private contactDataService: ContactDataService,
     private featureFlagService: FeatureFlagService,
     public snackBar: MatSnackBar,
-    private route: ActivatedRoute) {
-    this.route.paramMap.subscribe(params => {
-      this.workerId = params.get("id");
+    private route: ActivatedRoute
+  ) {
+    this.route.paramMap.subscribe((params) => {
+      this.workerId = params.get('id');
     });
   }
 
   ngOnInit() {
-    this.featureFlagService.featureOn("NoWetSignature")
-      .subscribe(x => this.noWetSignature = x);
+    this.featureFlagService.featureOn('NoWetSignature').subscribe((x) => (this.noWetSignature = x));
 
     this.form = this.fb.group({
       id: [],
       contact: this.fb.group({
         id: [],
-        selfDisclosure: [""],
+        selfDisclosure: ['']
       }),
       //consentToSecurityScreening: [],
       //certifyInformationIsCorrect: [],
       //electronicSignature: [],
-      consentToCollection: [false],
+      consentToCollection: [false]
     });
     this.reloadUser();
-
   }
 
   reloadUser() {
-    this.busy = this.userDataService.getCurrentUser()
-      .subscribe((data: User) => {
-        this.currentUser = data;
-      });
+    this.busy = this.userDataService.getCurrentUser().subscribe((data: User) => {
+      this.currentUser = data;
+    });
 
-    this.busy = this.workerDataService.getWorker(this.workerId).subscribe(res => {
+    this.busy = this.workerDataService.getWorker(this.workerId).subscribe((res) => {
       this.form.patchValue(res);
       this.contact = res.contact;
       this.workerStatus = res.status;
@@ -93,7 +91,7 @@ export class SpdConsentComponent implements OnInit {
 
   // TO DO: Remove
   isCriminalBackgroundValid(): boolean {
-    const valid = (this.form.value.contact.selfDisclosure === 1 || this.form.value.contact.selfDisclosure === 0);
+    const valid = this.form.value.contact.selfDisclosure === 1 || this.form.value.contact.selfDisclosure === 0;
     return valid;
   }
 
@@ -103,23 +101,27 @@ export class SpdConsentComponent implements OnInit {
     return valid;
   }
 
-// TO DO: Remove
+  // TO DO: Remove
   isFileUploadValid(): boolean {
-    return (this.uploadedDocuments === 1);
+    return this.uploadedDocuments === 1;
   }
 
-// TO DO: Remove
+  // TO DO: Remove
   formValid() {
-    return this.infoAccurate &&
-      (this.uploadedDocuments === 1) &&
+    return (
+      this.infoAccurate &&
+      this.uploadedDocuments === 1 &&
       this.signName &&
       this.consentToCollection &&
-      this.isCriminalBackgroundValid();
+      this.isCriminalBackgroundValid()
+    );
   }
 
   canDeactivate(): Observable<boolean> | boolean {
-    if (this.workerStatus !== "Application Incomplete" ||
-      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)) {
+    if (
+      this.workerStatus !== 'Application Incomplete' ||
+      JSON.stringify(this.saveFormData) === JSON.stringify(this.form.value)
+    ) {
       return true;
     } else {
       return this.save(true);
@@ -134,7 +136,8 @@ export class SpdConsentComponent implements OnInit {
     const busy = forkJoin(
       this.contactDataService.updateContact(this.form.value.contact),
       this.workerDataService.updateWorker(worker, worker.id)
-    ).subscribe(() => {
+    ).subscribe(
+      () => {
         subResult.next(true);
         this.reloadUser();
       },
@@ -156,26 +159,28 @@ export class SpdConsentComponent implements OnInit {
   }
 
   /**
-* Redirect to payment processing page (Express Pay / Bambora service)
-* */
+   * Redirect to payment processing page (Express Pay / Bambora service)
+   * */
   private submitPayment() {
     this.submitting = true;
     this.busy = this.save().subscribe(() => {
-      this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(res => {
+      this.busy = this.paymentDataService.getWorkerPaymentSubmissionUrl(this.workerId).subscribe(
+        (res) => {
           const jsonUrl = res;
-          window.location.href = jsonUrl["url"];
+          window.location.href = jsonUrl['url'];
           this.submitting = false;
-          return jsonUrl["url"];
+          return jsonUrl['url'];
         },
-        err => {
+        (err) => {
           this.submitting = false;
-          if (err === "Payment already made") {
-            this.snackBar.open("Application payment has already been made.",
-              "Fail",
-              { duration: 3500, panelClass: ["red-snackbar"] });
+          if (err === 'Payment already made') {
+            this.snackBar.open('Application payment has already been made.', 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
           }
-        });
+        }
+      );
     });
   }
-
 }

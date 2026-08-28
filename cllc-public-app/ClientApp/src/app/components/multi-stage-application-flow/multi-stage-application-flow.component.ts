@@ -1,23 +1,19 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { FeatureFlagService } from "@services/feature-flag.service";
-import { ActivatedRoute } from "@angular/router";
-import { of, Observable } from "rxjs";
-import { AccountProfileComponent } from "@components/account-profile/account-profile.component";
-import { ApplicationLicenseeChangesComponent } from
-  "@components/applications/application-licensee-changes/application-licensee-changes.component";
-import { ApplicationComponent } from "@components/applications/application/application.component";
-import { DynamicApplicationComponent } from
-  "@components/applications/dynamic-application/dynamic-application.component";
-import { ApplicationDataService } from "@services/application-data.service";
-import { Application } from "@models/application.model";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
-
-
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AccountProfileComponent } from '@components/account-profile/account-profile.component';
+import { ApplicationLicenseeChangesComponent } from '@components/applications/application-licensee-changes/application-licensee-changes.component';
+import { ApplicationComponent } from '@components/applications/application/application.component';
+import { DynamicApplicationComponent } from '@components/applications/dynamic-application/dynamic-application.component';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { Application } from '@models/application.model';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FeatureFlagService } from '@services/feature-flag.service';
+import { Observable, of } from 'rxjs';
 
 @Component({
-  selector: "app-multi-stage-application-flow",
-  templateUrl: "./multi-stage-application-flow.component.html",
-  styleUrls: ["./multi-stage-application-flow.component.scss"]
+  selector: 'app-multi-stage-application-flow',
+  templateUrl: './multi-stage-application-flow.component.html',
+  styleUrls: ['./multi-stage-application-flow.component.scss']
 })
 export class MultiStageApplicationFlowComponent implements OnInit {
   faCheck = faCheck;
@@ -26,69 +22,69 @@ export class MultiStageApplicationFlowComponent implements OnInit {
   isFree: boolean = false;
   hasLGApproval: boolean = false;
 
-  @ViewChild("accountProfile")
+  @ViewChild('accountProfile')
   accountProfileComponent: AccountProfileComponent;
-  @ViewChild("orgStructure")
+  @ViewChild('orgStructure')
   licenseeChangesComponent: ApplicationLicenseeChangesComponent;
-  @ViewChild("mainApplication")
+  @ViewChild('mainApplication')
   applicationComponent: ApplicationComponent;
-  @ViewChild("dynamicApplication")
+  @ViewChild('dynamicApplication')
   dynamicApplicationComponent: DynamicApplicationComponent;
-  stepType: "post-lg-decision";
+  stepType: 'post-lg-decision';
   application: Application;
-  allSteps = ["account-profile", "licensee-changes", "application", "security-screening", "payment"];
+  allSteps = ['account-profile', 'licensee-changes', 'application', 'security-screening', 'payment'];
   stepsForApplication = [];
 
-  constructor(public featureFlagService: FeatureFlagService,
+  constructor(
+    public featureFlagService: FeatureFlagService,
     private route: ActivatedRoute,
-    public applicationDataService: ApplicationDataService,
+    public applicationDataService: ApplicationDataService
   ) {
+    featureFlagService
+      .featureOn('SecurityScreening')
+      .subscribe((featureOn) => (this.securityScreeningEnabled = featureOn));
 
-    featureFlagService.featureOn("SecurityScreening")
-      .subscribe(featureOn => this.securityScreeningEnabled = featureOn);
-
-    this.route.paramMap.subscribe(params => {
-      this.applicationId = params.get("applicationId");
-      if (params.get("stepType") === "post-lg-decision") {
-        this.stepType = "post-lg-decision";
+    this.route.paramMap.subscribe((params) => {
+      this.applicationId = params.get('applicationId');
+      if (params.get('stepType') === 'post-lg-decision') {
+        this.stepType = 'post-lg-decision';
       }
     });
-
   }
 
   ngOnInit() {
-    this.applicationDataService.getApplicationById(this.applicationId)
-      .subscribe((data: Application) => {
-          this.application = data;
-          if (data.applicantType === "IndigenousNation") {
-            (data as any).applyAsIndigenousNation = true;
-          }
-          this.isFree = data.applicationType.isFree;
-          this.stepsForApplication = this.determineSteps();
-        },
-        () => {
-          console.log("Error occured");
+    this.applicationDataService.getApplicationById(this.applicationId).subscribe(
+      (data: Application) => {
+        this.application = data;
+        if (data.applicantType === 'IndigenousNation') {
+          (data as any).applyAsIndigenousNation = true;
         }
-      );
+        this.isFree = data.applicationType.isFree;
+        this.stepsForApplication = this.determineSteps();
+      },
+      () => {
+        console.log('Error occured');
+      }
+    );
   }
 
   // determine which steps to show or hide
   determineSteps(): string[] {
     const steps = [];
-    this.allSteps.forEach(step => {
+    this.allSteps.forEach((step) => {
       if (
-        (step === "account-profile" && this.stepType !== "post-lg-decision") ||
-          (step === "licensee-changes" &&
-            this.stepType !== "post-lg-decision" &&
-            this.securityScreeningEnabled &&
-            this.application &&
-            this.application.applicationType.requiresSecurityScreening) ||
-          (step === "application") ||
-          (step === "security-screening" &&
-            this.securityScreeningEnabled &&
-            this.application &&
-            this.application.applicationType.requiresSecurityScreening) ||
-          (step === "payment" && this.applicationId && !this.isFree)
+        (step === 'account-profile' && this.stepType !== 'post-lg-decision') ||
+        (step === 'licensee-changes' &&
+          this.stepType !== 'post-lg-decision' &&
+          this.securityScreeningEnabled &&
+          this.application &&
+          this.application.applicationType.requiresSecurityScreening) ||
+        step === 'application' ||
+        (step === 'security-screening' &&
+          this.securityScreeningEnabled &&
+          this.application &&
+          this.application.applicationType.requiresSecurityScreening) ||
+        (step === 'payment' && this.applicationId && !this.isFree)
       ) {
         steps.push(step);
       }
@@ -113,9 +109,5 @@ export class MultiStageApplicationFlowComponent implements OnInit {
     return result;
   }
 
-
-  selectionChange(event) {
-
-  }
-
+  selectionChange(event) {}
 }

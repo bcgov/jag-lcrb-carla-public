@@ -1,8 +1,5 @@
 /* tslint:disable:no-unused-variable */
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
 import { ServicecardUserConfirmationComponent } from './servicecard-user-confirmation.component';
 
 describe('ServicecardUserConfirmationComponent', () => {
@@ -11,9 +8,8 @@ describe('ServicecardUserConfirmationComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ServicecardUserConfirmationComponent ]
-    })
-    .compileComponents();
+      declarations: [ServicecardUserConfirmationComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

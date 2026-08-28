@@ -94,7 +94,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
 
         }
 
-        public LicenseeChangeLog (LicenseeChangeLog copy)
+        public LicenseeChangeLog(LicenseeChangeLog copy)
         {
             if (copy != null)
             {
@@ -145,8 +145,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
         }
 
-        public void UpdateValues(LicenseeChangeLog update){
-             if (update != null)
+        public void UpdateValues(LicenseeChangeLog update)
+        {
+            if (update != null)
             {
                 Id = update.Id;
                 ParentLicenseeChangeLogId = update.ParentLicenseeChangeLogId;
@@ -204,10 +205,10 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 BusinessType = legalEntity.legalentitytype;
                 IsIndividual = legalEntity.isindividual;
 
-            
+
                 ParentLegalEntityId = legalEntity.parentLegalEntityId;
                 ChangeType = LicenseeChangeType.unchanged;
-                
+
                 IsDirectorNew = legalEntity.isDirector;
                 IsDirectorOld = legalEntity.isDirector;
                 IsManagerNew = legalEntity.isSeniorManagement;
@@ -254,16 +255,21 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
                 InterestPercentageNew = legalEntity.interestpercentage;
             }
         }
-    
-        public LicenseeChangeLog FindNodeByLegalEntityId(string id){
+
+        public LicenseeChangeLog FindNodeByLegalEntityId(string id)
+        {
             LicenseeChangeLog result = null;
-            if(id == LegalEntityId){
+            if (id == LegalEntityId)
+            {
                 result = this;
-            } else if(Children != null && Children.Count > 0){
+            }
+            else if (Children != null && Children.Count > 0)
+            {
                 foreach (var item in Children)
                 {
                     var found = item.FindNodeByLegalEntityId(id);
-                    if(found != null){
+                    if (found != null)
+                    {
                         result = found;
                         break;
                     }
@@ -271,15 +277,20 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
             }
             return result;
         }
-        public LicenseeChangeLog FindNodeByParentChangeLogId(string id){
+        public LicenseeChangeLog FindNodeByParentChangeLogId(string id)
+        {
             LicenseeChangeLog result = null;
-            if(id == Id){
+            if (id == Id)
+            {
                 result = this;
-            } else if(Children != null && Children.Count > 0){
+            }
+            else if (Children != null && Children.Count > 0)
+            {
                 foreach (var item in Children)
                 {
                     var found = item.FindNodeByParentChangeLogId(id);
-                    if(found != null){
+                    if (found != null)
+                    {
                         result = found;
                         break;
                     }

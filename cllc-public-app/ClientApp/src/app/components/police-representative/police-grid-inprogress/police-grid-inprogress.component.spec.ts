@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PoliceGridInProgressComponent } from './police-grid-inprogress.component';
 
 describe('PoliceGridInProgressComponent', () => {
@@ -8,9 +7,8 @@ describe('PoliceGridInProgressComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PoliceGridInProgressComponent]
-    })
-    .compileComponents();
+      declarations: [PoliceGridInProgressComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {

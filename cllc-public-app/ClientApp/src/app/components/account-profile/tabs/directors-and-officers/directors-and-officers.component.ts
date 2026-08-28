@@ -1,23 +1,22 @@
-import { Component, OnInit, Input, Inject } from "@angular/core";
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { MatTableDataSource } from "@angular/material/table";
-
-import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { Subscription } from "rxjs";
-import { LegalEntityDataService } from "@services/legal-entity-data.service";
-import { Account } from "@models/account.model";
-import { DynamicsDataService } from "@services/dynamics-data.service";
-import { ActivatedRoute } from "@angular/router";
-import { Store } from "@ngrx/store";
-import { AppState } from "@app/app-state/models/app-state";
-import { LegalEntity } from "@models/legal-entity.model";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { Component, Inject, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { Account } from '@models/account.model';
+import { LegalEntity } from '@models/legal-entity.model';
+import { Store } from '@ngrx/store';
+import { DynamicsDataService } from '@services/dynamics-data.service';
+import { LegalEntityDataService } from '@services/legal-entity-data.service';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-directors-and-officers",
-  templateUrl: "./directors-and-officers.component.html",
-  styleUrls: ["./directors-and-officers.component.scss"]
+  selector: 'app-directors-and-officers',
+  templateUrl: './directors-and-officers.component.html',
+  styleUrls: ['./directors-and-officers.component.scss']
 })
 export class DirectorsAndOfficersComponent implements OnInit {
   faPlus = faPlus;
@@ -32,45 +31,46 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
   adoxioLegalEntityList: LegalEntity[] = [];
   dataSource = new MatTableDataSource<LegalEntity>();
-  displayedColumns = ["firstName", "lastName", "email", "position", "dateofappointment", "edit", "delete"];
+  displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment', 'edit', 'delete'];
   busy: Promise<any>;
   busyObsv: Subscription;
   subscriptions: Subscription[] = [];
 
-  constructor(private legalEntityDataservice: LegalEntityDataService,
+  constructor(
+    private legalEntityDataservice: LegalEntityDataService,
     public dialog: MatDialog,
     private store: Store<AppState>,
     private dynamicsDataService: DynamicsDataService,
     private route: ActivatedRoute,
-    public snackBar: MatSnackBar) {
-  }
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.getDirectorsAndOfficers();
     if (this.lockAssociates) {
-      this.displayedColumns = ["firstName", "lastName", "email", "position", "dateofappointment"];
+      this.displayedColumns = ['firstName', 'lastName', 'email', 'position', 'dateofappointment'];
     }
   }
 
   getDirectorsAndOfficers() {
     this.busyObsv = this.legalEntityDataservice
-      .getLegalEntitiesbyPosition(this.parentLegalEntityId, "directors-officers-management")
+      .getLegalEntitiesbyPosition(this.parentLegalEntityId, 'directors-officers-management')
       .subscribe((data) => {
-        data.forEach(d => {
+        data.forEach((d) => {
           const positionList: string[] = [];
           if (d.isDirector) {
-            positionList.push("Director");
+            positionList.push('Director');
           }
           if (d.isOfficer) {
-            positionList.push("Officer");
+            positionList.push('Officer');
           }
           if (d.isOwner) {
-            positionList.push("Owner");
+            positionList.push('Owner');
           }
           if (d.isSeniorManagement) {
-            positionList.push("Senior Manager");
+            positionList.push('Senior Manager');
           }
-          d.position = positionList.join(", ");
+          d.position = positionList.join(', ');
         });
         this.dataSource.data = data;
       });
@@ -84,11 +84,11 @@ export class DirectorsAndOfficersComponent implements OnInit {
     adoxioLegalEntity.isindividual = true;
     adoxioLegalEntity.firstname = formData.firstname;
     adoxioLegalEntity.lastname = formData.lastname;
-    adoxioLegalEntity.name = formData.firstname + " " + formData.lastname;
+    adoxioLegalEntity.name = formData.firstname + ' ' + formData.lastname;
     adoxioLegalEntity.email = formData.email;
     adoxioLegalEntity.dateofappointment = formData.dateofappointment; // adoxio_dateofappointment
     // adoxioLegalEntity.legalentitytype = "PrivateCorporation";
-    if (this.businessType === "SoleProprietorship") {
+    if (this.businessType === 'SoleProprietorship') {
       adoxioLegalEntity.isOwner = true;
     } else {
       adoxioLegalEntity.isOfficer = formData.isOfficer;
@@ -97,7 +97,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     }
     // the accountId is received as parameter from the business profile
     if (this.accountId) {
-      adoxioLegalEntity.account = ({} as Account);
+      adoxioLegalEntity.account = {} as Account;
       adoxioLegalEntity.account.id = this.accountId;
     }
     // adoxioLegalEntity.relatedentities = [];
@@ -110,7 +110,7 @@ export class DirectorsAndOfficersComponent implements OnInit {
     const dialogConfig = {
       disableClose: true,
       autoFocus: true,
-      width: "500px",
+      width: '500px',
       data: {
         person: person,
         businessType: this.businessType
@@ -119,36 +119,36 @@ export class DirectorsAndOfficersComponent implements OnInit {
 
     // open dialog, get reference and process returned data from dialog
     const dialogRef = this.dialog.open(DirectorAndOfficerPersonDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(
-      formData => {
-        if (formData) {
-          const adoxioLegalEntity = this.formDataToModelData(formData);
-          let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
-          if (formData.id) {
-            save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
-          }
-          this.busyObsv = save.subscribe(
-            res => {
-              this.snackBar.open("Director / Officer Details have been saved",
-                "Success",
-                { duration: 2500, panelClass: ["green-snackbar"] });
-              this.getDirectorsAndOfficers();
-            },
-            err => {
-              this.snackBar.open("Error saving Director / Officer Details",
-                "Fail",
-                { duration: 3500, panelClass: ["red-snackbar"] });
-              this.handleError(err);
-            });
+    dialogRef.afterClosed().subscribe((formData) => {
+      if (formData) {
+        const adoxioLegalEntity = this.formDataToModelData(formData);
+        let save = this.legalEntityDataservice.createChildLegalEntity(adoxioLegalEntity);
+        if (formData.id) {
+          save = this.legalEntityDataservice.updateLegalEntity(adoxioLegalEntity, formData.id);
         }
+        this.busyObsv = save.subscribe(
+          (res) => {
+            this.snackBar.open('Director / Officer Details have been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+            this.getDirectorsAndOfficers();
+          },
+          (err) => {
+            this.snackBar.open('Error saving Director / Officer Details', 'Fail', {
+              duration: 3500,
+              panelClass: ['red-snackbar']
+            });
+            this.handleError(err);
+          }
+        );
       }
-    );
-
+    });
   }
 
   deleteIndividual(person: LegalEntity) {
-    if (confirm("Delete person?")) {
-      this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe(data => {
+    if (confirm('Delete person?')) {
+      this.legalEntityDataservice.deleteLegalEntity(person.id).subscribe((data) => {
         this.getDirectorsAndOfficers();
       });
     }
@@ -157,42 +157,44 @@ export class DirectorsAndOfficersComponent implements OnInit {
   private handleError(error: Response | any) {
     let errMsg: string;
     if (error instanceof Response) {
-      const body = error || "";
+      const body = error || '';
       const err = body || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ""} ${err}`;
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
     console.error(errMsg);
   }
-
 }
 
 /***************************************
  * Director and Officer Person Dialog
  ***************************************/
 @Component({
-  selector: "app-director-and-officer-person-dialog",
-  templateUrl: "director-and-officer-person-dialog.html",
+  selector: 'app-director-and-officer-person-dialog',
+  templateUrl: 'director-and-officer-person-dialog.html'
 })
 export class DirectorAndOfficerPersonDialogComponent {
   directorOfficerForm: FormGroup;
   businessType: string;
 
-  constructor(private fb: FormBuilder,
+  constructor(
+    private fb: FormBuilder,
     private dialogRef: MatDialogRef<DirectorAndOfficerPersonDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.directorOfficerForm = fb.group({
-        id: [""],
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    this.directorOfficerForm = fb.group(
+      {
+        id: [''],
         isDirector: [false],
         isOfficer: [false],
         isSeniorManagement: [false],
-        firstname: ["", Validators.required],
-        lastname: ["", Validators.required],
-        email: ["", Validators.email],
-        dateofappointment: ["", Validators.required]
+        firstname: ['', Validators.required],
+        lastname: ['', Validators.required],
+        email: ['', Validators.email],
+        dateofappointment: ['', Validators.required]
       },
-      { validator: this.dateLessThanToday("dateofappointment") }
+      { validator: this.dateLessThanToday('dateofappointment') }
     );
 
     if (data && data.person) {
@@ -202,7 +204,7 @@ export class DirectorAndOfficerPersonDialogComponent {
   }
 
   dateLessThanToday(field1) {
-    return form => {
+    return (form) => {
       const d1 = form.controls[field1].value;
       if (!d1) {
         return {};
@@ -221,7 +223,7 @@ export class DirectorAndOfficerPersonDialogComponent {
     this.dialogRef.close(formData);
 
     if (!this.directorOfficerForm.valid) {
-      Object.keys(this.directorOfficerForm.controls).forEach(field => {
+      Object.keys(this.directorOfficerForm.controls).forEach((field) => {
         const control = this.directorOfficerForm.get(field);
         control.markAsTouched({ onlySelf: true });
       });
@@ -236,5 +238,4 @@ export class DirectorAndOfficerPersonDialogComponent {
     const isError = !this.directorOfficerForm.get(field).valid && this.directorOfficerForm.get(field).touched;
     return isError;
   }
-
 }

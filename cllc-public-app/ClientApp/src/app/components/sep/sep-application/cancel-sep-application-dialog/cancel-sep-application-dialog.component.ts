@@ -7,13 +7,10 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./cancel-sep-application-dialog.component.scss']
 })
 export class CancelSepApplicationDialogComponent implements OnInit {
+  reason: string = 'Withdrawn by Applicant';
 
-  reason: string = "Withdrawn by Applicant";
-
-  constructor(public dialogRef: MatDialogRef<CancelSepApplicationDialogComponent>) {
-  }
-  ngOnInit(): void {
-  }
+  constructor(public dialogRef: MatDialogRef<CancelSepApplicationDialogComponent>) {}
+  ngOnInit(): void {}
 
   close() {
     this.dialogRef.close([false]);
@@ -22,5 +19,4 @@ export class CancelSepApplicationDialogComponent implements OnInit {
   cancel() {
     this.dialogRef.close([true, this.reason]);
   }
-
 }

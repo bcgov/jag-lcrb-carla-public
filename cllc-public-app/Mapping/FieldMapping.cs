@@ -7,7 +7,7 @@ namespace Gov.Lclb.Cllb.Public.Mapping
 {
     public class FieldMapping
     {
-        public FieldMapping (string fieldName, bool isRequired)
+        public FieldMapping(string fieldName, bool isRequired)
         {
             FieldName = fieldName;
             IsRequired = isRequired;

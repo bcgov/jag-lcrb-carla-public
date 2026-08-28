@@ -1,39 +1,39 @@
 .field-changed {
-    border: 1px solid #9e9e9e;
-    border-radius: 5px;
-    padding: 5px;
+  border: 1px solid #9e9e9e;
+  border-radius: 5px;
+  padding: 5px;
 }
 
 .error {
-    background-color: #F2DEDE;
-    border-radius: 5px;
-    border: 2px solid #EBCCD1;
-    color: #A12622;
-    padding-top: 15px;
-    padding-left: 15px;
-    margin-bottom: 20px;
+  background-color: #f2dede;
+  border-radius: 5px;
+  border: 2px solid #ebccd1;
+  color: #a12622;
+  padding-top: 15px;
+  padding-left: 15px;
+  margin-bottom: 20px;
 }
 
 .light-blue-bg {
-    background-color: #E1E8F2;
-    padding: 5px;
+  background-color: #e1e8f2;
+  padding: 5px;
 }
 
 .question-label {
-    font-weight: 600;
+  font-weight: 600;
 }
 
 ::ng-deep {
-    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
-        line-height: 36px !important;
-    }
+  .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+    line-height: 36px !important;
+  }
 
-    .mat-button-toggle-checked {
-        background-color: #38598a !important;
-        color: #fff !important;
-    }
+  .mat-button-toggle-checked {
+    background-color: #38598a !important;
+    color: #fff !important;
+  }
 
-    .invalid {
-        border: 2px solid #d8292f !important;
-    }
+  .invalid {
+    border: 2px solid #d8292f !important;
+  }
 }

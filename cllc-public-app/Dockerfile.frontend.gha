@@ -1,0 +1,36 @@
+### Stage 1 — Build Angular app
+FROM node:18-alpine AS builder
+WORKDIR /app
+
+# build arg controls dev/test vs prod base-href
+# develop/test → build (base-href /lcrb/)
+# master       → buildprod (base-href /)
+ARG BUILD_SCRIPT=build
+
+COPY ClientApp/package*.json ./
+RUN npm ci --legacy-peer-deps
+
+COPY ClientApp/ .
+RUN npm run ${BUILD_SCRIPT}
+
+### Stage 2 — nginx to serve static files
+FROM nginx:1.25-alpine AS final
+
+# OpenShift runs containers as an arbitrary UID with GID=0 (root group).
+# chown to nginx:root so g+rw grants write to OpenShift's GID=0 process.
+RUN touch /tmp/nginx.pid && \
+    chown -R nginx:root /var/cache/nginx /var/log/nginx /usr/share/nginx/html && \
+    chmod -R g+rw /var/cache/nginx /var/log/nginx /usr/share/nginx/html && \
+    mkdir -p /tmp/client_body /tmp/proxy /tmp/fastcgi /tmp/uwsgi /tmp/scgi && \
+    chmod -R 777 /tmp
+
+COPY --from=builder /app/dist/ /usr/share/nginx/html/
+COPY nginx.conf.gha /etc/nginx/nginx.conf
+
+# Ensure copied files are also group-writable for OpenShift arbitrary UID
+RUN chown -R nginx:root /usr/share/nginx/html && chmod -R g+rw /usr/share/nginx/html
+
+EXPOSE 8080
+USER nginx
+
+CMD ["nginx", "-g", "daemon off;"]

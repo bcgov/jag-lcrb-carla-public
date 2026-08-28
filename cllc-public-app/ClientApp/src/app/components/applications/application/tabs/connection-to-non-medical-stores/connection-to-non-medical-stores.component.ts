@@ -1,13 +1,13 @@
-import { Component, OnInit, Input, OnDestroy, Output, EventEmitter } from "@angular/core";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { FormBuilder } from "@angular/forms";
-import { TiedHouseConnection } from "@models/tied-house-connection.model";
-import { Subscription } from "rxjs";
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { TiedHouseConnection } from '@models/tied-house-connection.model';
+import { Subscription } from 'rxjs';
 
 @Component({
-  selector: "app-connection-to-non-medical-stores",
-  templateUrl: "./connection-to-non-medical-stores.component.html",
-  styleUrls: ["./connection-to-non-medical-stores.component.css"]
+  selector: 'app-connection-to-non-medical-stores',
+  templateUrl: './connection-to-non-medical-stores.component.html',
+  styleUrls: ['./connection-to-non-medical-stores.component.css']
 })
 export class ConnectionToNonMedicalStoresComponent implements OnInit, OnDestroy {
   @Input()
@@ -15,11 +15,11 @@ export class ConnectionToNonMedicalStoresComponent implements OnInit, OnDestroy 
   @Input()
   businessType: string;
   @Input()
-  licensedProducerText = "federally licensed producer";
+  licensedProducerText = 'federally licensed producer';
   @Input()
-  federalProducerText = "federal producer";
+  federalProducerText = 'federal producer';
 
-  @Input("tiedHouse")
+  @Input('tiedHouse')
   set tiedHouse(value: TiedHouseConnection) {
     if (value && this.form) {
       this.form.patchValue(value);
@@ -40,26 +40,27 @@ export class ConnectionToNonMedicalStoresComponent implements OnInit, OnDestroy 
   @Output()
   value = new EventEmitter<TiedHouseConnection>();
 
-  constructor(private fb: FormBuilder,
-    public snackBar: MatSnackBar) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    public snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      crsConnectionToMarketer: [""],
-      crsConnectionToMarketerDetails: [""],
-      marketerConnectionToCrs: [""],
-      marketerConnectionToCrsDetails: [""],
+      crsConnectionToMarketer: [''],
+      crsConnectionToMarketerDetails: [''],
+      marketerConnectionToCrs: [''],
+      marketerConnectionToCrsDetails: ['']
     });
 
     if (this.tiedHouse) {
       this.form.patchValue(this.tiedHouse);
     }
-    this.form.valueChanges.subscribe(value => this.value.emit(Object.assign(this.tiedHouse, value)));
+    this.form.valueChanges.subscribe((value) => this.value.emit(Object.assign(this.tiedHouse, value)));
   }
 
   ngOnDestroy() {
-    this.subscriptions.forEach(sub => sub.unsubscribe());
+    this.subscriptions.forEach((sub) => sub.unsubscribe());
   }
 
   formHasChanged(): boolean {

@@ -1,21 +1,21 @@
-import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { takeWhile, filter, catchError, mergeMap } from "rxjs/operators";
-import { FormBase } from "@shared/form-base";
-import { Store } from "@ngrx/store";
-import { AppState } from "@app/app-state/models/app-state";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
-import { Account } from "@models/account.model";
-import { ApplicationDataService } from "@services/application-data.service";
-import { Application } from "@models/application.model";
-import { Observable, forkJoin, of } from "rxjs";
-import { MatSnackBar } from "@angular/material/snack-bar";
-import { faChevronRight, faExclamationCircle, faQuestionCircle } from "@fortawesome/free-solid-svg-icons";
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ActivatedRoute } from '@angular/router';
+import { AppState } from '@app/app-state/models/app-state';
+import { faChevronRight, faExclamationCircle, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { Account } from '@models/account.model';
+import { Application } from '@models/application.model';
+import { Store } from '@ngrx/store';
+import { ApplicationDataService } from '@services/application-data.service';
+import { FormBase } from '@shared/form-base';
+import { forkJoin, Observable, of } from 'rxjs';
+import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
 @Component({
-  selector: "app-associate-page",
-  templateUrl: "./associate-page.component.html",
-  styleUrls: ["./associate-page.component.scss"]
+  selector: 'app-associate-page',
+  templateUrl: './associate-page.component.html',
+  styleUrls: ['./associate-page.component.scss']
 })
 export class AssociatePageComponent extends FormBase implements OnInit {
   faExclamationCircle = faExclamationCircle;
@@ -32,77 +32,78 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   showValidationMessages: boolean;
   validationMessages: string[];
 
-
-  constructor(private store: Store<AppState>,
+  constructor(
+    private store: Store<AppState>,
     private fb: FormBuilder,
     private applicationDataService: ApplicationDataService,
     public snackBar: MatSnackBar,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute
+  ) {
     super();
-    this.route.paramMap.subscribe(pmap => this.applicationId = pmap.get("applicationId"));
+    this.route.paramMap.subscribe((pmap) => (this.applicationId = pmap.get('applicationId')));
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      id: [""],
-      renewalCriminalOffenceCheck: ["", Validators.required],
-      renewalUnreportedSaleOfBusiness: ["", Validators.required],
-      renewalBusinessType: ["", Validators.required],
-      renewalTiedhouse: ["", Validators.required],
-      tiedhouseFederalInterest: ["", Validators.required],
-      renewalOrgLeadership: ["", Validators.required],
-      renewalkeypersonnel: ["", Validators.required],
-      renewalShareholders: ["", Validators.required],
-      renewalOutstandingFines: ["", Validators.required],
+      id: [''],
+      renewalCriminalOffenceCheck: ['', Validators.required],
+      renewalUnreportedSaleOfBusiness: ['', Validators.required],
+      renewalBusinessType: ['', Validators.required],
+      renewalTiedhouse: ['', Validators.required],
+      tiedhouseFederalInterest: ['', Validators.required],
+      renewalOrgLeadership: ['', Validators.required],
+      renewalkeypersonnel: ['', Validators.required],
+      renewalShareholders: ['', Validators.required],
+      renewalOutstandingFines: ['', Validators.required]
     });
     this.subscribeForData();
   }
 
-
   reconfigureFormFields() {
     if (this.account.isPrivateCorporation() || this.account.isPublicCorporation()) {
-      this.form.get("renewalShareholders").setValidators([Validators.required]);
-      this.form.get("renewalShareholders").reset();
+      this.form.get('renewalShareholders').setValidators([Validators.required]);
+      this.form.get('renewalShareholders').reset();
     } else {
-      this.form.get("renewalShareholders").clearValidators();
-      this.form.get("renewalShareholders").reset();
+      this.form.get('renewalShareholders').clearValidators();
+      this.form.get('renewalShareholders').reset();
     }
   }
 
-
   subscribeForData() {
-    this.store.select(state => state.currentAccountState.currentAccount)
+    this.store
+      .select((state) => state.currentAccountState.currentAccount)
       .pipe(takeWhile(() => this.componentActive))
-      .pipe(filter(s => !!s))
-      .subscribe(account => {
+      .pipe(filter((s) => !!s))
+      .subscribe((account) => {
         this.account = account;
         this.reconfigureFormFields();
         this.legalEntityId = this.account.legalEntity.id;
       });
 
-    this.busy = this.applicationDataService.getApplicationById(this.applicationId)
+    this.busy = this.applicationDataService
+      .getApplicationById(this.applicationId)
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
+      .subscribe(
+        (data: Application) => {
           if (data.establishmentParcelId) {
-            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, "");
+            data.establishmentParcelId = data.establishmentParcelId.replace(/-/g, '');
           }
-          if (data.applicantType === "IndigenousNation") {
+          if (data.applicantType === 'IndigenousNation') {
             (data as any).applyAsIndigenousNation = true;
           }
           this.application = data;
 
           const noNulls = Object.keys(data)
-            .filter(e => data[e] !== null)
+            .filter((e) => data[e] !== null)
             .reduce((o, e) => {
-                o[e] = data[e];
-                return o;
-              },
-              {});
+              o[e] = data[e];
+              return o;
+            }, {});
 
           this.form.patchValue(noNulls);
         },
         () => {
-          console.log("Error occured");
+          console.log('Error occured');
         }
       );
   }
@@ -110,27 +111,31 @@ export class AssociatePageComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
-    return forkJoin(
-        this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
-      ).pipe(takeWhile(() => this.componentActive))
-      .pipe(catchError(() => {
-        this.snackBar.open("Error saving Application", "Fail", { duration: 3500, panelClass: ["red-snackbar"] });
-        return of(false);
-      }))
-      .pipe(mergeMap(() => {
-        if (showProgress === true) {
-          this.snackBar.open("Application has been saved",
-            "Success",
-            { duration: 2500, panelClass: ["green-snackbar"] });
-        }
-        return of(true);
-      }));
+    return forkJoin(this.applicationDataService.updateApplication({ ...this.application, ...this.form.value }))
+      .pipe(takeWhile(() => this.componentActive))
+      .pipe(
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
+        })
+      )
+      .pipe(
+        mergeMap(() => {
+          if (showProgress === true) {
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+          }
+          return of(true);
+        })
+      );
   }
 
   isValid(): boolean {
     // mark controls as touched
     for (const c in this.form.controls) {
-      if (typeof (this.form.get(c).markAsTouched) === "function") {
+      if (typeof this.form.get(c).markAsTouched === 'function') {
         this.form.get(c).markAsTouched();
       }
     }
@@ -138,7 +143,7 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     this.validationMessages = [];
 
     if (!this.form.valid) {
-      this.validationMessages.push("Some required fields have not been completed");
+      this.validationMessages.push('Some required fields have not been completed');
     }
     return this.form.valid;
   }
@@ -147,8 +152,9 @@ export class AssociatePageComponent extends FormBase implements OnInit {
     if (!this.isValid()) {
       this.showValidationMessages = true;
     } else {
-      this.busy = this.save().subscribe(_ => { this.saveComplete.emit(true); });
+      this.busy = this.save().subscribe((_) => {
+        this.saveComplete.emit(true);
+      });
     }
   }
-
 }

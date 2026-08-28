@@ -1,6 +1,7 @@
-﻿using Gov.Lclb.Cllb.Interfaces;
-using Gov.Lclb.Cllb.Interfaces.Models;
+extern alias DV;
+using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
+using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -10,7 +11,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.Caching.Memory;
+using System.Threading.Tasks;
+using System.Web;
+using Gov.Lclb.Cllb.Public.Utility;
 
 namespace Gov.Lclb.Cllb.Public.Controllers
 {
@@ -20,117 +23,134 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     public class LeConnectionsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
-        private readonly IDynamicsClient _dynamicsClient;
+        private readonly IDataverseClient _dataverse;
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ILogger _logger;
-        private readonly IMemoryCache _cache;
 
-        public LeConnectionsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDynamicsClient dynamicsClient, IMemoryCache memoryCache)
+        public LeConnectionsController(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILoggerFactory loggerFactory, IDataverseClient dataverse)
         {
-            _cache = memoryCache;
             _configuration = configuration;
-            _dynamicsClient = dynamicsClient;
+            _dataverse = dataverse;
             _httpContextAccessor = httpContextAccessor;
             _logger = loggerFactory.CreateLogger(typeof(LegalEntitiesController));
         }
 
-        private List<SecurityScreeningStatusItem> GetConnectionsScreeningData(List<MicrosoftDynamicsCRMcontact> contacts)
+        private List<SecurityScreeningStatusItem> GetConnectionsScreeningData(IList<DV::Gov.Lclb.Cllb.Interfaces.Contact> contacts)
         {
             var result = new List<SecurityScreeningStatusItem>();
             var addedContacts = new List<string>();
 
-
             foreach (var contact in contacts)
             {
-                DateTimeOffset? dateSubmitted = null;
-
-
-                if (contact?.Contactid != null && !addedContacts.Contains(contact.Contactid))
+                var contactId = contact.Id.ToString();
+                if (!addedContacts.Contains(contactId))
                 {
-                    // liquor
-                    if (contact.AdoxioPhscomplete == (int)YesNoOptions.Yes)
-                    {
-                        dateSubmitted = contact.AdoxioPhsdatesubmitted;
-                    }
+                    DateTimeOffset? dateSubmitted = null;
+                    bool phsComplete = contact.adoxio_PHSComplete == adoxio_contact_adoxio_phscomplete.Yes;
+                    bool casComplete = contact.adoxio_cascomplete == adoxio_contact_adoxio_cascomplete.Yes;
 
-                    // cannabis
-                    if (contact.AdoxioCascomplete == (int)YesNoOptions.Yes)
-                    {
-                        dateSubmitted = contact.AdoxioCasdatesubmitted;
-                    }
+                    if (phsComplete) dateSubmitted = contact.adoxio_PHSDateSubmitted.HasValue ? (DateTimeOffset?)contact.adoxio_PHSDateSubmitted.Value : null;
+                    if (casComplete) dateSubmitted = contact.adoxio_casdatesubmitted.HasValue ? (DateTimeOffset?)contact.adoxio_casdatesubmitted.Value : null;
 
-                    // 2021-03-31 ASR: changed the birthdate field to DateTime (from DateTimeOffset) to ignore the timezone on the birthdate field in Dynamics.
-                    // Accordingly the security screening Angular page has been modified to display this date in GMT to match the value set here.
-                    var newItem = new SecurityScreeningStatusItem
+                    result.Add(new SecurityScreeningStatusItem
                     {
-                        ContactId = contact.Contactid,
-                        Contact = contact,
-                        FirstName = contact.Firstname,
-                        MiddleName = contact.Middlename,
-                        LastName = contact.Lastname,
-                        Birthdate = contact.Birthdate?.Date, // LCSD-5366 ignore the timezone as it is not relevant to birth dates
-                        PhsLink = contact.PhsLink,
-                        CasLink = contact.CasLink,
+                        ContactId = contactId,
+                        FirstName = contact.FirstName,
+                        MiddleName = contact.MiddleName,
+                        LastName = contact.LastName,
+                        Birthdate = contact.BirthDate?.Date,
+                        PhsLink = GetPhsLink(contactId),
+                        CasLink = GetCasLink(contactId),
                         DateSubmitted = dateSubmitted,
-                    };
-                    result.Add(newItem);
-                    addedContacts.Add(contact.Contactid); // remember added contacts to avoid duplicates
+                        PhsIsCompleted = phsComplete,
+                        CasIsCompleted = casComplete,
+                    });
+                    addedContacts.Add(contactId);
                 }
-
             }
+            return result;
+        }
 
+        private string GetPhsLink(string contactId)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/personal-history-summary/";
+            string encryptionKey = _configuration["ENCRYPTION_KEY"];
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
+            return result;
+        }
+
+        private string GetCasLink(string contactId)
+        {
+            string result = _configuration["BASE_URI"] + _configuration["BASE_PATH"] + "/cannabis-associate-screening/";
+            string encryptionKey = _configuration["ENCRYPTION_KEY"];
+            result += HttpUtility.UrlEncode(EncryptionUtility.EncryptStringHex(contactId, encryptionKey));
             return result;
         }
 
         [HttpGet("current-security-summary")]
-        public JsonResult GetCurrentSecurityScreeningSummaryNew()
+        public async Task<JsonResult> GetCurrentSecurityScreeningSummaryNew()
         {
-            // get the current user.
             UserSettings userSettings = UserSettings.CreateFromHttpContext(_httpContextAccessor);
-            // check that the session is setup correctly.
             userSettings.Validate();
-
-            // get data for the current account.
             string currentAccountId = userSettings.AccountId;
 
-            var contacts = _dynamicsClient.GetLEConnectionsForAccount(currentAccountId, _logger, _configuration);
-            List<SecurityScreeningStatusItem> securityItems = GetConnectionsScreeningData(contacts);
+            var contacts = await _dataverse.GetLeConnectionContactsAsync(currentAccountId);
+            var securityItems = GetConnectionsScreeningData(contacts);
 
-            // get the current user's applications and licences
-            var licences = _dynamicsClient.GetLicensesByLicencee(_cache, currentAccountId);
-            var applications = _dynamicsClient.GetApplicationsForLicenceByApplicant(currentAccountId);
+            var licences = await _dataverse.GetLicencesByAccountIdAsync(currentAccountId);
+            var applications = await _dataverse.GetApplicationsForLicenceByApplicantAsync(currentAccountId);
 
-            SecurityScreeningSummary result = new SecurityScreeningSummary();
+            var result = new SecurityScreeningSummary();
 
-            // determine how many of each licence there are.
             int cannabisLicenceCount = 0;
             int liquorLicenceCount = 0;
-
-            if (licences != null && licences.Count() > 0)
+            foreach (var licence in licences)
             {
-                cannabisLicenceCount = licences.Count(x => x.AdoxioLicenceType.AdoxioName.ToUpper().Contains("CANNABIS"));
-                liquorLicenceCount = licences.Count() - cannabisLicenceCount;
+                if ((int?)licence.statuscode == (int)LicenceStatusCodes.Cancelled || (int?)licence.statuscode == (int)LicenceStatusCodes.Inactive)
+                    continue;
+                if (licence.adoxio_LicenceType?.Id != null)
+                {
+                    var licenceType = await _dataverse.GetLicenceTypeByIdAsync(licence.adoxio_LicenceType.Id.ToString());
+                    if (licenceType?.adoxio_name?.ToUpper().Contains("CANNABIS") == true)
+                        cannabisLicenceCount++;
+                    else
+                        liquorLicenceCount++;
+                }
+                else
+                {
+                    liquorLicenceCount++;
+                }
             }
 
-            // determine how many applications of each type there are.
             int cannabisApplicationCount = 0;
             int liquorApplicationCount = 0;
-
-            if (applications != null && applications.Count() > 0)
+            if (applications?.Count > 0)
             {
-                cannabisApplicationCount = applications.Count(x => x.AdoxioApplicationTypeId != null && x.AdoxioApplicationTypeId.AdoxioName != null && x.AdoxioApplicationTypeId.AdoxioName.ToUpper().Contains("CANNABIS"));
-                liquorApplicationCount = applications.Count() - cannabisApplicationCount;
+                foreach (var app in applications)
+                {
+                    if (app.adoxio_ApplicationTypeId?.Id != null)
+                    {
+                        var appType = await _dataverse.GetApplicationTypeByIdAsync(app.adoxio_ApplicationTypeId.Id.ToString());
+                        if (appType?.adoxio_name?.ToUpper().Contains("CANNABIS") == true)
+                            cannabisApplicationCount++;
+                        else
+                            liquorApplicationCount++;
+                    }
+                    else
+                    {
+                        liquorApplicationCount++;
+                    }
+                }
             }
-
 
             if (cannabisLicenceCount > 0 || cannabisApplicationCount > 0)
             {
                 var data = securityItems.Select(item =>
                 {
-                    item.IsComplete = (item.Contact?.AdoxioCascomplete == (int)YesNoOptions.Yes);
+                    item.IsComplete = item.CasIsCompleted;
                     return item;
                 });
-                result.Cannabis = new SecurityScreeningCategorySummary()
+                result.Cannabis = new SecurityScreeningCategorySummary
                 {
                     CompletedItems = data.Where(item => item.IsComplete).ToList(),
                     OutstandingItems = data.Where(item => !item.IsComplete).ToList()
@@ -141,15 +161,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             {
                 var data = securityItems.Select(item =>
                 {
-                    item.IsComplete = (item.Contact?.AdoxioPhscomplete == (int)YesNoOptions.Yes);
+                    item.IsComplete = item.PhsIsCompleted;
                     return item;
                 });
-                result.Liquor = new SecurityScreeningCategorySummary()
+                result.Liquor = new SecurityScreeningCategorySummary
                 {
                     CompletedItems = data.Where(item => item.IsComplete).ToList(),
                     OutstandingItems = data.Where(item => !item.IsComplete).ToList()
                 };
-
             }
 
             return new JsonResult(result);

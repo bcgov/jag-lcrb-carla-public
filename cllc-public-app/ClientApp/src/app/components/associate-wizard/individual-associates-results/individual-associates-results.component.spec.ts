@@ -1,29 +1,25 @@
-import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import { IndividualAssociatesResultsComponent } from './individual-associates-results.component';
 
-import { IndividualAssociatesResultsComponent } from "./individual-associates-results.component";
-import { NO_ERRORS_SCHEMA } from "@angular/core";
+describe('IndividualAssociatesResultsComponent', () => {
+  let component: IndividualAssociatesResultsComponent;
+  let fixture: ComponentFixture<IndividualAssociatesResultsComponent>;
 
-describe("IndividualAssociatesResultsComponent",
-  () => {
-    let component: IndividualAssociatesResultsComponent;
-    let fixture: ComponentFixture<IndividualAssociatesResultsComponent>;
+  beforeEach(waitForAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [IndividualAssociatesResultsComponent],
+      schemas: [NO_ERRORS_SCHEMA]
+    }).compileComponents();
+  }));
 
-    beforeEach(waitForAsync(() => {
-      TestBed.configureTestingModule({
-          declarations: [IndividualAssociatesResultsComponent],
-          schemas: [NO_ERRORS_SCHEMA]
-        })
-        .compileComponents();
-    }));
-
-    beforeEach(() => {
-      fixture = TestBed.createComponent(IndividualAssociatesResultsComponent);
-      component = fixture.componentInstance;
-      fixture.detectChanges();
-    });
-
-    it("should create",
-      () => {
-        expect(component).toBeTruthy();
-      });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(IndividualAssociatesResultsComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
   });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

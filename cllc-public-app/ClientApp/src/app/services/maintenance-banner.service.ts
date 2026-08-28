@@ -1,24 +1,23 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface MaintenanceBanner {
-    bannerEnabled: boolean;
-    bannerText: string;
-    bannerStartDate: string;
-    bannerEndDate: string;
+  bannerEnabled: boolean;
+  bannerText: string;
+  bannerStartDate: string;
+  bannerEndDate: string;
 }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
-
 export class MaintenanceBannerService {
-    apiPath = "api/banner";
+  apiPath = 'api/banner';
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-    getBanner(): Observable<MaintenanceBanner> {
-        return this.http.get<MaintenanceBanner>(`${this.apiPath}`);
-    }
+  getBanner(): Observable<MaintenanceBanner> {
+    return this.http.get<MaintenanceBanner>(`${this.apiPath}`);
+  }
 }

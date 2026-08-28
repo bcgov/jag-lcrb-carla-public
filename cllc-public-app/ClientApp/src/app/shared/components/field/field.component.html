@@ -1,20 +1,20 @@
 <section class="app-field">
   <span *ngIf="leadingText">
-    {{leadingText}}
+    {{ leadingText }}
     <p></p>
   </span>
-  <label *ngIf="label">{{label}} <span *ngIf="required" class="error-states">*</span></label>
+  <label *ngIf="label">{{ label }} <span *ngIf="required" class="error-states">*</span></label>
 
   <i *ngIf="afterLabelText">
-    <br>
-    {{afterLabelText}}
+    <br />
+    {{ afterLabelText }}
   </i>
 
-  <div style="align-items: center; display: flex;">
-    <section class="app-field-content-section" [ngClass]="{'fullWidth': isFullWidth}">
+  <div style="align-items: center; display: flex">
+    <section class="app-field-content-section" [ngClass]="{ fullWidth: isFullWidth }">
       <ng-content></ng-content>
     </section>
-    <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px;">
+    <div *ngIf="!valid && showChevrons" style="flex: 0 0 25px">
       <fa-icon [icon]="faChevronLeft" class="error-states" style="margin-left: 3px"></fa-icon>
       <fa-icon [icon]="faChevronLeft" class="error-states" style="margin-left: -5px"></fa-icon>
     </div>
@@ -22,7 +22,7 @@
 
   <div *ngIf="!valid" class="error-states error-container">
     <div>
-      {{errorMessage}}
+      {{ errorMessage }}
     </div>
   </div>
 </section>

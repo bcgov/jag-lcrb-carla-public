@@ -1,5 +1,5 @@
-import { DynamicsFormTab } from "./dynamics-form-tab.model";
-import { DynamicsFormSection } from "./dynamics-form-section.model";
+import { DynamicsFormSection } from './dynamics-form-section.model';
+import { DynamicsFormTab } from './dynamics-form-tab.model';
 
 export class DynamicsForm {
   id: string;
@@ -11,5 +11,5 @@ export class DynamicsForm {
   tabs: DynamicsFormTab[];
   sections: DynamicsFormSection[];
 
-  constructor() { }
+  constructor() {}
 }

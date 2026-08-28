@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-public-nav',
@@ -8,8 +8,7 @@ import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 export class PublicNavComponent implements OnInit {
   @Input() showMapLink = false;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }

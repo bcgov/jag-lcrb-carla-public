@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { PoliceGridApprovedComponent } from './police-grid-approved.component';
 
 describe('PoliceGridApprovedComponent', () => {
@@ -9,8 +8,7 @@ describe('PoliceGridApprovedComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [PoliceGridApprovedComponent]
-    })
-    .compileComponents();
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -1,5 +1,4 @@
-﻿using Gov.Lclb.Cllb.Interfaces.Models;
-using Gov.Lclb.Cllb.Public.Models;
+﻿using Gov.Lclb.Cllb.Public.Models;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -32,21 +31,21 @@ namespace Gov.Lclb.Cllb.Public.Test
             // try a random GET, should return unauthorized
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + id);
             var response = await _client.SendAsync(request);
-            Assert.Equal(HttpStatusCode.Unauthorized ,response.StatusCode);
+            Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
             string _discard = await response.Content.ReadAsStringAsync();
         }
 
-		//[Fact]
-		public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
-		{
-			string service = "legalentities";
-			string shareholders = "/shareholders";
-			string directors = "/director-officer-shareholder";
+        //[Fact]
+        public async System.Threading.Tasks.Task TestNewAccountHasNoShareholdersOrDirectors()
+        {
+            string service = "legalentities";
+            string shareholders = "/shareholders";
+            string directors = "/director-officer-shareholder";
 
-			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+            var loginUser = randomNewUserName("TestLegalEntityUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
-			// get the current account.
+            // get the current account.
             var request = new HttpRequestMessage(HttpMethod.Get, "/api/user/current");
             var response = await _client.SendAsync(request);
             string jsonString = await response.Content.ReadAsStringAsync();
@@ -56,39 +55,39 @@ namespace Gov.Lclb.Cllb.Public.Test
 
 
             // get shareholders
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + shareholders);
-			response = await _client.SendAsync(request);
-			jsonString = await response.Content.ReadAsStringAsync();
-			response.EnsureSuccessStatusCode();
-			var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
-			Assert.Empty(responseViewModel);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + shareholders);
+            response = await _client.SendAsync(request);
+            jsonString = await response.Content.ReadAsStringAsync();
+            response.EnsureSuccessStatusCode();
+            var responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
+            Assert.Empty(responseViewModel);
 
             // get directors
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + directors);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/position/" + user.accountid + directors);
             response = await _client.SendAsync(request);
-			jsonString = await response.Content.ReadAsStringAsync();
+            jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
-			responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
-			Assert.Empty(responseViewModel);
+            responseViewModel = JsonConvert.DeserializeObject<List<ViewModels.LegalEntity>>(jsonString);
+            Assert.Empty(responseViewModel);
 
-			await LogoutAndCleanupTestUser(strId);
-		}
+            await LogoutAndCleanupTestUser(strId);
+        }
 
         //[Fact]
         public async System.Threading.Tasks.Task TestCRUD()
         {
-			string changedName = randomNewUserName("LETest ChangedName", 6);
+            string changedName = randomNewUserName("LETest ChangedName", 6);
             string service = "legalentities";
             string firstName = "LETFirst";
             string middleName = "LETMiddle";
             string lastName = "LETLast";
-			string initialName = randomNewUserName(firstName + " " + lastName, 6);
+            string initialName = randomNewUserName(firstName + " " + lastName, 6);
             DateTime dateOfBirth = DateTime.Now;
             int commonNonVotingshares = 3000;
             int commonVotingshares = 2018;
             bool isIndividual = true;
 
-			var loginUser = randomNewUserName("TestLegalEntityUser", 6);
+            var loginUser = randomNewUserName("TestLegalEntityUser", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // get the current account.
@@ -124,7 +123,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 isindividual = isIndividual,
                 commonvotingshares = commonVotingshares,
                 commonnonvotingshares = commonNonVotingshares,
-                account = vmAccount 
+                account = vmAccount
             };
 
             jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
@@ -144,18 +143,18 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
 
             // parse as JSON.
-            
+
             ViewModels.LegalEntity responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
             // name should match.
             Assert.Equal(firstName + " " + lastName, responseViewModel.name);
             var newId = responseViewModel.id;
-            
+
             // R - Read
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
-			jsonString = await response.Content.ReadAsStringAsync();
+            jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
             Assert.Equal(firstName + " " + lastName, responseViewModel.name);
@@ -168,14 +167,14 @@ namespace Gov.Lclb.Cllb.Public.Test
                 Content = new StringContent(JsonConvert.SerializeObject(vmAdoxioLegalEntity), Encoding.UTF8, "application/json")
             };
             response = await _client.SendAsync(request);
-			var _discard = await response.Content.ReadAsStringAsync();
+            var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // verify that the update persisted.
 
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
-			_discard = await response.Content.ReadAsStringAsync();
+            _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             jsonString = await response.Content.ReadAsStringAsync();
@@ -187,30 +186,30 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + newId + "/delete");
             response = await _client.SendAsync(request);
-			_discard = await response.Content.ReadAsStringAsync();
+            _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // second delete should return a 404.
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + newId + "/delete");
             response = await _client.SendAsync(request);
-			_discard = await response.Content.ReadAsStringAsync();
+            _discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
             // should get a 404 if we try a get now.
             request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + newId);
             response = await _client.SendAsync(request);
-			_discard = await response.Content.ReadAsStringAsync();
+            _discard = await response.Content.ReadAsStringAsync();
             Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			await LogoutAndCleanupTestUser(strId);
+            await LogoutAndCleanupTestUser(strId);
         }
 
-		//[Fact]
-		public async System.Threading.Tasks.Task TestAddShareholderAndDirector()
-		{
-			string service = "legalentities";
+        //[Fact]
+        public async System.Threading.Tasks.Task TestAddShareholderAndDirector()
+        {
+            string service = "legalentities";
 
-			var loginUser = randomNewUserName("TestAddSD", 6);
+            var loginUser = randomNewUserName("TestAddSD", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser);
 
             // get the current account.
@@ -223,11 +222,11 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             string accountId = user.accountid;
 
-			// create a Shareholder and fetch it to verify
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            // create a Shareholder and fetch it to verify
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
             ViewModels.Account vmAccount = new ViewModels.Account
             {
-				id = user.accountid
+                id = user.accountid
             };
             ViewModels.LegalEntity vmAdoxioLegalEntity = new ViewModels.LegalEntity
             {
@@ -236,10 +235,10 @@ namespace Gov.Lclb.Cllb.Public.Test
                 firstname = "Test",
                 middlename = "The",
                 lastname = "Shareholder",
-				name = "Test Shareholder",
-				commonvotingshares = 100,
+                name = "Test Shareholder",
+                commonvotingshares = 100,
                 isindividual = true,
-                account = vmAccount 
+                account = vmAccount
             };
             jsonString = JsonConvert.SerializeObject(vmAdoxioLegalEntity);
             request.Content = new StringContent(jsonString, Encoding.UTF8, "application/json");
@@ -257,15 +256,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             ViewModels.LegalEntity responseShareholder = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseShareholder.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
             var responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
-			Assert.Equal(responseShareholder.name, responseViewModel.name);
+            Assert.Equal(responseShareholder.name, responseViewModel.name);
 
-			// create a Director and fetch it to verify
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
+            // create a Director and fetch it to verify
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
             vmAccount = new ViewModels.Account
             {
                 id = user.accountid
@@ -298,15 +297,15 @@ namespace Gov.Lclb.Cllb.Public.Test
             response.EnsureSuccessStatusCode();
             ViewModels.LegalEntity responseDirector = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
             responseViewModel = JsonConvert.DeserializeObject<ViewModels.LegalEntity>(jsonString);
-			Assert.Equal(responseDirector.name, responseViewModel.name);
+            Assert.Equal(responseDirector.name, responseViewModel.name);
 
-			// logout
-			await Logout();
+            // logout
+            await Logout();
 
             // login as new user and verify we can't see the Director or Shareholder
             var newLoginUser = randomNewUserName("TestAddSD2", 6);
@@ -317,9 +316,9 @@ namespace Gov.Lclb.Cllb.Public.Test
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             //response status code should be 404
-			Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
 
-			request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
+            request = new HttpRequestMessage(HttpMethod.Get, "/api/" + service + "/" + responseDirector.id);
             response = await _client.SendAsync(request);
             jsonString = await response.Content.ReadAsStringAsync();
             //response status code should be 404
@@ -332,27 +331,27 @@ namespace Gov.Lclb.Cllb.Public.Test
             await Login(loginUser);
 
             // delete Director and Shareholder
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseDirector.id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseDirector.id + "/delete");
             response = await _client.SendAsync(request);
             var _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
-			request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseShareholder.id + "/delete");
+            request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + responseShareholder.id + "/delete");
             response = await _client.SendAsync(request);
             _discard = await response.Content.ReadAsStringAsync();
             response.EnsureSuccessStatusCode();
 
             // logout and leanup account
-			await LogoutAndCleanupTestUser(strId);
-		}
+            await LogoutAndCleanupTestUser(strId);
+        }
 
         //[Fact]
         public async System.Threading.Tasks.Task TestFileUpload()
         {
             // First create a Legal Entity
 
-			string initialName = randomNewUserName("LETest InitialName", 6);
-			string changedName = randomNewUserName("LETest ChangedName", 6);
+            string initialName = randomNewUserName("LETest InitialName", 6);
+            string changedName = randomNewUserName("LETest ChangedName", 6);
             string service = "legalentities";
 
             var loginUser = randomNewUserName("NewLoginUser", 6);
@@ -368,7 +367,7 @@ namespace Gov.Lclb.Cllb.Public.Test
                 isDirector = true,
                 name = initialName
             };
-            
+
 
             string jsonString = JsonConvert.SerializeObject(viewmodel_adoxio_legalentity);
 
@@ -411,7 +410,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             multiPartContent.Add(fileContent);
             multiPartContent.Add(new StringContent(documentType), "documentType");   // form input
 
-            
+
 
             // create a new request object for the upload, as we will be using multipart form submission.
             var requestMessage = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/attachments");
@@ -426,7 +425,7 @@ namespace Gov.Lclb.Cllb.Public.Test
 
             // Cleanup the Legal Entity
 
-            
+
 
             request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service + "/" + id + "/delete");
             response = await _client.SendAsync(request);
@@ -515,7 +514,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             // C - Create a Legal Entity
 
             var request = new HttpRequestMessage(HttpMethod.Post, "/api/" + service);
-            
+
             ViewModels.LegalEntity viewmodel_adoxio_legalentity = new ViewModels.LegalEntity()
             {
                 legalentitytype = ViewModels.AdoxioApplicantTypeCodes.PrivateCorporation,
@@ -587,8 +586,8 @@ namespace Gov.Lclb.Cllb.Public.Test
         }
 
         //[Fact]
-		public async System.Threading.Tasks.Task TestGetDynamicsLegalEntitiesByPosition()
-		{
+        public async System.Threading.Tasks.Task TestGetDynamicsLegalEntitiesByPosition()
+        {
             var loginUser = randomNewUserName("LegalEntityByPosTest", 6);
             var strId = await LoginAndRegisterAsNewUser(loginUser, "LegalEntityByPosTest", "PrivateCorporation");
 
@@ -724,7 +723,7 @@ namespace Gov.Lclb.Cllb.Public.Test
             Assert.Equal("Cannabis Test Investor", responseViewModel.name);
             var levelTwoLegalEntityId = responseViewModel.id;
             var levelTwoAccountId = responseViewModel.shareholderAccountId;
-            var levelTwoAccount = new ViewModels.Account {id = levelTwoAccountId };
+            var levelTwoAccount = new ViewModels.Account { id = levelTwoAccountId };
 
             // Creating child 2
             vmAdoxioLegalEntity = new ViewModels.LegalEntity

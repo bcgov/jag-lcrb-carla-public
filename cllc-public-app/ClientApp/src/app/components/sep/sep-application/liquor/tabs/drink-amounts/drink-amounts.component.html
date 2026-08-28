@@ -1,76 +1,83 @@
 <form [formGroup]="form">
-    <p>
-        Tell us the drink quantities for your event:
-    </p>
-    <!--p>
+  <p>Tell us the drink quantities for your event:</p>
+  <!--p>
         Check the charge box for drinks you are selling and complete the table below. Not sure how many servings of each
         drink type you need? Use the handy tool below as a guide.
     </p-->
 
-    <mat-card class="mb-3 mat-elevation-z2" style="border: solid #ccc 1px;">
-        <!--h3 class="blue-header">
+  <mat-card class="mb-3 mat-elevation-z2" style="border: solid #ccc 1px">
+    <!--h3 class="blue-header">
             NEED HELP TO DETERMINE YOUR DRINK TYPES?
         </h3-->
-        <section class="p-3">
-            <app-drink-planner [disabled]="disableForm" [hideGuestsAndHours]="true" [sepApplication]="application" (validChange)="drinkAmountsValid = $event" #planner></app-drink-planner>
-        </section>
-    </mat-card>
+    <section class="p-3">
+      <app-drink-planner
+        [disabled]="disableForm"
+        [hideGuestsAndHours]="true"
+        [sepApplication]="application"
+        (validChange)="drinkAmountsValid = $event"
+        #planner></app-drink-planner>
+    </section>
+  </mat-card>
 
+  <!-- <mat-divider></mat-divider> -->
 
-    <!-- <mat-divider></mat-divider> -->
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title> PST Facts </mat-panel-title>
+    </mat-expansion-panel-header>
+    <section>
+      <p>
+        The provincial sales tax (PST) on liquor products is 10%. You will have to prepay the PST upon your approved
+        permit and then get reimbursed by collecting proceeds from drinks sold at your event. This tax is in addition to
+        the permit fee. PST calculations are based on the number of servings rather than the amount of alcohol you will
+        purchase.
+      </p>
+      <p>
+        PST Refund: If you pay too much PST or if you make less money than expected,
+        <a
+          href="https://www2.gov.bc.ca/assets/gov/taxes/sales-taxes/forms/fin-355sep-refund-provincial-sales-tax-special-event-permit.pdf"
+          target="_blank"
+          >you can apply for a refund to the Ministry of Finance</a
+        >, free of charge.
+      </p>
 
+      <p>
+        <span>How is PST Calculated</span><br />
+        <span>
+          Example: You purchase a Special Event Permit and $500 in liquor for your wedding. You expect to sell the
+          liquor for $800 at the wedding. The PST you pay when you buy the liquor will be $50.00 and the PST equivalent
+          amount you pay when you purchase the permit will be $30.00, calculated as follows:
+        </span>
+      </p>
+      <p>
+        Your cost of the liquor purchased (10% PST on $500) = $50.00 Your expected tax on resale revenue (10% PST on
+        $300) = $30.00 paid before you receive your permit.
+      </p>
+      <p>Total combined amount due = $80.00</p>
+    </section>
+  </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="true">
-        <mat-expansion-panel-header>
-            <mat-panel-title>
-                PST Facts
-            </mat-panel-title>
-        </mat-expansion-panel-header>
-        <section>
-            <p>
-                The provincial sales tax (PST) on liquor products is 10%. You will have to prepay the PST upon your
-                approved permit and then get reimbursed by collecting proceeds from drinks sold at your event. This tax
-                is in addition to the permit fee. PST calculations are based on the number of servings rather than the
-                amount of alcohol you will purchase.
-            </p>
-            <p>
-                PST Refund: If you pay too much PST or if you make less money than expected, <a href="https://www2.gov.bc.ca/assets/gov/taxes/sales-taxes/forms/fin-355sep-refund-provincial-sales-tax-special-event-permit.pdf" target="_blank">you can apply for a refund
-                to the Ministry of Finance</a>, free of charge.
-            </p>
+  <div class="note mb-3">
+    <p>
+      Remember: Liquor product purchased from and returned to BC Liquor Stores is subject to the Product Return policy
+      and a restocking fee.
+    </p>
+    <p>
+      <a href="https://www2.gov.bc.ca/gov/content?id=B2D6230B97CF420ABE6FB81E540EF4B9" target="_blank"
+        >Learn more about PST and Special Event Permits</a
+      >
+    </p>
+  </div>
 
-            <p>
-                <span>How is PST Calculated</span><br>
-                <span>
-                    Example: You purchase a Special Event Permit and $500 in liquor for your wedding. You expect to
-                    sell the liquor for $800 at the wedding. The PST you pay when you buy the liquor will be $50.00 and
-                    the PST equivalent amount you pay when you purchase the permit will be $30.00, calculated as
-                    follows:
-                </span>
-            </p>
-            <p>
-                Your cost of the liquor purchased (10% PST on $500) = $50.00 Your expected tax on resale revenue (10%
-                PST on $300) = $30.00 paid before you receive your permit.
-            </p>
-            <p>
-                Total combined amount due = $80.00
-            </p>
-
-        </section>
-    </mat-expansion-panel>
-
-    <div class="note mb-3">
-        <p>
-          Remember: Liquor product purchased from and returned to BC Liquor Stores is subject to the Product Return policy
-          and a restocking fee.
-        </p>
-        <p>
-          <a href="https://www2.gov.bc.ca/gov/content?id=B2D6230B97CF420ABE6FB81E540EF4B9" target="_blank">Learn more about PST and Special Event Permits</a>
-        </p>
-    </div>
-
-    <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" (click)="back.emit(true)">BACK</button>
-    <button [disabled]="disableForm || savingToAPI || !drinkAmountsValid" mat-raised-button color="primary" (click)="next(planner)">
-        <span>NEXT</span>
-        <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
-    </button>
+  <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3" (click)="back.emit(true)">
+    BACK
+  </button>
+  <button
+    [disabled]="disableForm || savingToAPI || !drinkAmountsValid"
+    mat-raised-button
+    color="primary"
+    (click)="next(planner)">
+    <span>NEXT</span>
+    <mat-progress-bar *ngIf="savingToAPI" mode="indeterminate"></mat-progress-bar>
+  </button>
 </form>

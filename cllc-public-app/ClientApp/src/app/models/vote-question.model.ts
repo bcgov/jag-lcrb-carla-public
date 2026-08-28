@@ -1,4 +1,4 @@
-import { VoteOption } from "./vote-option.model";
+import { VoteOption } from './vote-option.model';
 
 export class VoteQuestion {
   id: string;

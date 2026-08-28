@@ -1,9 +1,11 @@
 <h3 class="blue-header">Manufacturer Supporting Information</h3>
 <div class="content-bottom" [formGroup]="form">
-
   <p>Please select the type of application you are submitting:</p>
-  <app-field [showChevrons]="false" [valid]="!licenceSubCatControl.touched || licenceSubCatControl.valid"
-    errorMessage="Please select a licence type" [isFullWidth]="true">
+  <app-field
+    [showChevrons]="false"
+    [valid]="!licenceSubCatControl.touched || licenceSubCatControl.valid"
+    errorMessage="Please select a licence type"
+    [isFullWidth]="true">
     <mat-radio-group formControlName="licenceSubCategory">
       <mat-radio-button class="mr-5" [value]="'Winery'" (change)="categoryChange()">Winery</mat-radio-button>
       <mat-radio-button class="mr-5" [value]="'Distillery'" (change)="categoryChange()">Distillery</mat-radio-button>
@@ -13,15 +15,14 @@
   </app-field>
 
   <div *ngIf="hasType()">
-
     <div *ngIf="isDistillery()">
-      <hr>
+      <hr />
       <p>
         In order to maintain a distillery licence, and as a term and condition of the licence, you must maintain your
-        production equipment and continue to manufacture on-site at your establishment each year.
-        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor
-        Control and Licensing Regulation, and relevant Terms & Conditions handbook.
-        As a part of this application, you are required to confirm:
+        production equipment and continue to manufacture on-site at your establishment each year. This and other
+        regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor Control and
+        Licensing Regulation, and relevant Terms & Conditions handbook. As a part of this application, you are required
+        to confirm:
       </p>
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
@@ -36,21 +37,19 @@
           to final licensing.
         </mat-checkbox>
       </section>
-
     </div>
 
     <div *ngIf="isCopacker()">
-      <hr>
+      <hr />
       <p>
         A co-packer is a liquor packaging facility that is contracted by a manufacturer to bottle or otherwise put
-        liquor into containers intended for sale to the public or to other licensees.
-        The licence for co-packers authorizes manufacturing activities limited to the packaging, bottling, blending, and
-        flavouring of liquor on behalf of a licensed winery, brewery, or distillery.
-        In a co-packing arrangement, the product is always owned by the manufacturer (not the co-packer) and must be
-        immediately returned to the manufacturer once the packaging is complete.
-        The licence for co-packers does not authorize the fermenting, distilling or direct sale of liquor.
-        It is the responsibility of both the manufacturer (winery, brewery or distillery) and the co-packer to ensure
-        that the other party is licensed by the Liquor and Cannabis Regulation Branch.
+        liquor into containers intended for sale to the public or to other licensees. The licence for co-packers
+        authorizes manufacturing activities limited to the packaging, bottling, blending, and flavouring of liquor on
+        behalf of a licensed winery, brewery, or distillery. In a co-packing arrangement, the product is always owned by
+        the manufacturer (not the co-packer) and must be immediately returned to the manufacturer once the packaging is
+        complete. The licence for co-packers does not authorize the fermenting, distilling or direct sale of liquor. It
+        is the responsibility of both the manufacturer (winery, brewery or distillery) and the co-packer to ensure that
+        the other party is licensed by the Liquor and Cannabis Regulation Branch.
       </p>
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
@@ -61,7 +60,7 @@
     </div>
 
     <div *ngIf="isWinery()">
-      <hr>
+      <hr />
       <p>
         In order to maintain a winery licence, and as a term and condition of the licence, you must maintain your
         production equipment and continue to manufacture on-site at your establishment each year. This and other
@@ -69,7 +68,6 @@
         Licensing Regulation, and relevant Terms & Conditions handbook. As a part of this application, you are required
         to confirm:
       </p>
-
 
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
@@ -86,16 +84,14 @@
       </section>
     </div>
 
-
-
     <div *ngIf="isBrewery()">
-      <hr>
+      <hr />
       <p>
         In order to maintain a brewery licence, and as a term and condition of the licence, you must maintain your
-        production equipment and continue to manufacture on-site at your establishment each year.
-        This and other regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor
-        Control and Licensing Regulation, and relevant Terms & Conditions handbook.
-        As a part of this application, you are required to confirm:
+        production equipment and continue to manufacture on-site at your establishment each year. This and other
+        regulatory requirements are established variously in the Liquor Control and Licensing Act, Liquor Control and
+        Licensing Regulation, and relevant Terms & Conditions handbook. As a part of this application, you are required
+        to confirm:
       </p>
       <section>
         <mat-checkbox formControlName="mfrSupInfoReadUnderstand">
@@ -110,10 +106,13 @@
           to final licensing.
         </mat-checkbox>
       </section>
-      <hr>
-      <app-field label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
-        [valid]="isValidOrNotTouched('mfgBrewPubOnSite')" [showChevrons]="false"
-        errorMessage="Specify whether you will be operating in conjunction with a brewpub" [isFullWidth]="true">
+      <hr />
+      <app-field
+        label="Will your brewery operate in conjunction with a liquor primary (brewpub) at the same site?"
+        [valid]="isValidOrNotTouched('mfgBrewPubOnSite')"
+        [showChevrons]="false"
+        errorMessage="Specify whether you will be operating in conjunction with a brewpub"
+        [isFullWidth]="true">
         <mat-radio-group formControlName="mfgBrewPubOnSite">
           <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
           <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
@@ -121,10 +120,12 @@
       </app-field>
 
       <section *ngIf="isBrewPub()">
-
-        <app-field label="Will product be piped in from the brewery to serve on tap?"
-          [valid]="isValidOrNotTouched('mfgPipedInProduct')" [showChevrons]="false"
-          errorMessage="Specify whether you will be using piped in products" [isFullWidth]="true">
+        <app-field
+          label="Will product be piped in from the brewery to serve on tap?"
+          [valid]="isValidOrNotTouched('mfgPipedInProduct')"
+          [showChevrons]="false"
+          errorMessage="Specify whether you will be using piped in products"
+          [isFullWidth]="true">
           <mat-radio-group formControlName="mfgPipedInProduct">
             <mat-radio-button class="mr-5" value="Yes">Yes</mat-radio-button>
             <mat-radio-button class="mr-5" value="No">No</mat-radio-button>
@@ -134,10 +135,11 @@
     </div>
 
     <div *ngIf="application?.applicationType.name == 'Manufacturer' && !isCopacker()">
-      <hr><br>
+      <hr />
+      <br />
       <app-field
         label="Please list and describe products other than beer, wine, or distiller spirits, you intend to produce once licensed. (e.g. Alcoholic kombucha, Soju, hard seltzers or other alcohol based Ready to Drink (RTD) products)">
-        <textarea style="width: 800px;" class="form-control" formControlName="productsListAndDescription"></textarea>
+        <textarea style="width: 800px" class="form-control" formControlName="productsListAndDescription"></textarea>
       </app-field>
     </div>
   </div>

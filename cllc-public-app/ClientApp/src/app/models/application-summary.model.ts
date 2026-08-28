@@ -1,4 +1,4 @@
-import { ApplicationExtension } from "@models/application.model";
+import { ApplicationExtension } from '@models/application.model';
 
 export class ApplicationSummary {
   id: string;

@@ -1,4 +1,4 @@
-import { DynamicsFormSection } from "./dynamics-form-section.model";
+import { DynamicsFormSection } from './dynamics-form-section.model';
 
 export class DynamicsFormTab {
   id: string;

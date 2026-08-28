@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
+using Gov.Lclb.Cllb.Interfaces;
 
 namespace Gov.Lclb.Cllb.CarlaSpiceSync.Test
 {
@@ -20,7 +21,9 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Test
             {
                 {"DYNAMICS_ODATA_URI", "http://localhost"},
                 {"SSG_USERNAME", "test"},
-                {"SSG_PASSWORD", "test"}
+                {"SSG_PASSWORD", "test"},
+                {"SPICE_URI", "http://localhost"},
+                {"SPICE_JWT_TOKEN", "test"}
             };
 
             Configuration = new ConfigurationBuilder().AddInMemoryCollection(conf).Build();
@@ -33,9 +36,10 @@ namespace Gov.Lclb.Cllb.CarlaSpiceSync.Test
         {
             // All requests made with HttpClient go through its handler's SendAsync() which we mock
             var handler = new Mock<HttpMessageHandler>();
+            var dataverseMock = new Mock<IDataverseClient>();
 
             // subject under test (SUT)
-            var spiceUtils = new SpiceUtils(Configuration, LoggerFactory, new TestHttpHandler(handler.Object));
+            var spiceUtils = new SpiceUtils(Configuration, LoggerFactory, dataverseMock.Object);
 
         }
     }

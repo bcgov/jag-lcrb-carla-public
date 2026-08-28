@@ -1,34 +1,40 @@
 <form [formGroup]="form">
-    <p>
-        Almost there... Give us a few more details
-    </p>
-    <div class="d-flex justify-content-between">
-        <app-field label="Are you charging for drinks at your event?" [required]="true" [isFullWidth]="true"
-        errorMessage="Please select a value"
-        [valid]="isValidOrNotTouched('chargingForLiquorReason')">
-            <select formControlName="chargingForLiquorReason" class="form-control w-100">
-                <option value=""></option>
-                <option value="RecoverCost">Yes - To recover event operating costs</option>
-                <option value="LiquorIsFree">No - Drinks will be free of charge</option>
-                <option value="Combination">Combination - Some drinks will be sold and some will be given away for free
-                </option>
-                <option value="RaiseMoney">Combination - To raise money for a charitable purpose</option>
-            </select>
-        </app-field>
-        <div>
-            <fa-icon [icon]="faQuestionCircle" (click)="tooltip.toggle()"
-                matTooltip="Selecting “Combination - To raise money for a charitable purpose” will allow you to give some drinks away for free" #tooltip="matTooltip">
-            </fa-icon>
-        </div>
+  <p>Almost there... Give us a few more details</p>
+  <div class="d-flex justify-content-between">
+    <app-field
+      label="Are you charging for drinks at your event?"
+      [required]="true"
+      [isFullWidth]="true"
+      errorMessage="Please select a value"
+      [valid]="isValidOrNotTouched('chargingForLiquorReason')">
+      <select formControlName="chargingForLiquorReason" class="form-control w-100">
+        <option value=""></option>
+        <option value="RecoverCost">Yes - To recover event operating costs</option>
+        <option value="LiquorIsFree">No - Drinks will be free of charge</option>
+        <option value="Combination">Combination - Some drinks will be sold and some will be given away for free</option>
+        <option value="RaiseMoney">Combination - To raise money for a charitable purpose</option>
+      </select>
+    </app-field>
+    <div>
+      <fa-icon
+        [icon]="faQuestionCircle"
+        (click)="tooltip.toggle()"
+        matTooltip="Selecting “Combination - To raise money for a charitable purpose” will allow you to give some drinks away for free"
+        #tooltip="matTooltip">
+      </fa-icon>
     </div>
+  </div>
 
-    <section *ngIf="form.get('chargingForLiquorReason').value === 'RaiseMoney'" class="p-3">
-        <app-field label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
-            [required]="true" [isFullWidth]="true" errorMessage="Please enter a value"
-            [valid]="isValidOrNotTouched('nonProfitName')">
-            <input formControlName="nonProfitName" type="text" class="form-control w-100">
-        </app-field>
-        <!--app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
+  <section *ngIf="form.get('chargingForLiquorReason').value === 'RaiseMoney'" class="p-3">
+    <app-field
+      label="Enter the name of the non-profit organization receiving charitable proceeds from this event"
+      [required]="true"
+      [isFullWidth]="true"
+      errorMessage="Please enter a value"
+      [valid]="isValidOrNotTouched('nonProfitName')">
+      <input formControlName="nonProfitName" type="text" class="form-control w-100" />
+    </app-field>
+    <!--app-field label="Select the fund-raising purpose of your event " [required]="true" [isFullWidth]="true">
             <select formControlName="fundraisingPurpose" class="form-control w-100">
                 <option value=""></option>
                 <option value="ReliefOfPoverty">Relief of poverty</option>
@@ -52,35 +58,43 @@
                 <mat-radio-button value="false">No</mat-radio-button>
             </mat-radio-group>
         </app-field-->
-    </section>
+  </section>
 
-    <app-field   *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RecoverCost'"
-    label="Are you hosting this event as a GST registered organization?" [required]="true"  errorMessage="Please select a value"
+  <app-field
+    *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RecoverCost'"
+    label="Are you hosting this event as a GST registered organization?"
+    [required]="true"
+    errorMessage="Please select a value"
     [valid]="isValidOrNotTouched('isGSTRegisteredOrg')"
-        [isFullWidth]="true">
-        <mat-radio-group formControlName="isGSTRegisteredOrg">
-            <mat-radio-button [value]="true">Yes</mat-radio-button>
-            <mat-radio-button [value]="false">No</mat-radio-button>
-        </mat-radio-group>
-    </app-field>
+    [isFullWidth]="true">
+    <mat-radio-group formControlName="isGSTRegisteredOrg">
+      <mat-radio-button [value]="true">Yes</mat-radio-button>
+      <mat-radio-button [value]="false">No</mat-radio-button>
+    </mat-radio-group>
+  </app-field>
 
-    <app-field *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RaiseMoney'"
-        label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
-        [required]="true"  errorMessage="Please select a value"
-        [valid]="isValidOrNotTouched('donateOrConsular')">
-        <mat-radio-group formControlName="donateOrConsular">
-            <mat-radio-button value="Yes">Yes</mat-radio-button>
-            <mat-radio-button value="No">No</mat-radio-button>
-        </mat-radio-group>
-        <app-error-alert *ngIf="form.get('donateOrConsular').value === 'Yes'">
-          <p>The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are responsible for ensuring the
-            correct amount of PST is remunerated to the Ministry of Finance.
-          </p>
-      </app-error-alert>
-    </app-field>
+  <app-field
+    *ngIf="form.get('chargingForLiquorReason').value && form.get('chargingForLiquorReason').value === 'RaiseMoney'"
+    label="Are any of the liquor products at your event donated or have they been provided under consular privilege?"
+    [required]="true"
+    errorMessage="Please select a value"
+    [valid]="isValidOrNotTouched('donateOrConsular')">
+    <mat-radio-group formControlName="donateOrConsular">
+      <mat-radio-button value="Yes">Yes</mat-radio-button>
+      <mat-radio-button value="No">No</mat-radio-button>
+    </mat-radio-group>
+    <app-error-alert *ngIf="form.get('donateOrConsular').value === 'Yes'">
+      <p>
+        The estimated PST does not take into account donated liquor. As a Special Event Permit holder, you are
+        responsible for ensuring the correct amount of PST is remunerated to the Ministry of Finance.
+      </p>
+    </app-error-alert>
+  </app-field>
 
-    <section class="pt-3">
-        <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3=" (click)="back.emit(true)">BACK</button>
-        <button [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
-    </section>
+  <section class="pt-3">
+    <button [disabled]="disableForm" mat-raised-button color="secondary" class="mr-3=" (click)="back.emit(true)">
+      BACK
+    </button>
+    <button [disabled]="disableForm" mat-raised-button color="primary" (click)="next()">NEXT</button>
+  </section>
 </form>

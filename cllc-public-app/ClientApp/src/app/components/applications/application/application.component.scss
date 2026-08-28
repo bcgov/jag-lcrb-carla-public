@@ -22,8 +22,8 @@
   }
 
   .submit-container {
-    background-color: #38598A;
-    border-bottom: solid 4px #FFCC00;
+    background-color: #38598a;
+    border-bottom: solid 4px #ffcc00;
     color: #fff;
     margin-bottom: 20px;
     padding: 30px;
@@ -42,10 +42,10 @@
   }
 
   .error {
-    background-color: #F2DEDE;
+    background-color: #f2dede;
     border-radius: 5px;
-    border: 2px solid #EBCCD1;
-    color: #A12622;
+    border: 2px solid #ebccd1;
+    color: #a12622;
     padding-top: 15px;
     padding-left: 15px;
     margin-bottom: 20px;
@@ -71,8 +71,8 @@
     list-style-type: none;
 
     li::before {
-      color: #1E4176;
-      content: "\25AA";
+      color: #1e4176;
+      content: '\25AA';
       display: inline-block;
       font-size: 34px;
       line-height: 0;
@@ -106,7 +106,7 @@
   .normal-mode {
     display: none;
   }
-  
+
   .store-hours {
     width: 100%;
     border-collapse: separate;
@@ -119,7 +119,7 @@
     td,
     th {
       padding: 5px;
-      background-color: #E1E8F2;
+      background-color: #e1e8f2;
     }
 
     th.lead {
@@ -137,7 +137,7 @@
   }
 
   .light-blue-bg {
-    background-color: #E1E8F2;
+    background-color: #e1e8f2;
     padding: 5px;
   }
 
@@ -156,7 +156,7 @@
   }
 
   .mat-checkbox-inner-container {
-      margin-top: 4px !important;
+    margin-top: 4px !important;
   }
 
   .mat-checkbox-layout {
@@ -170,13 +170,11 @@
   }
 }
 
-H4{
-    font-weight:bold;
+H4 {
+  font-weight: bold;
 }
 
 .question-label {
-    font-weight: 600;
-    padding-right: 5px;
+  font-weight: 600;
+  padding-right: 5px;
 }
-
-

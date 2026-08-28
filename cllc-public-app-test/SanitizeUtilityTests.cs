@@ -9,11 +9,11 @@ namespace Gov.Lclb.Cllb.Public.Test
         [Fact]
         public void TestSanitize()
         {
-            string input =    "Joe_personal123123";
+            string input = "Joe_personal123123";
             string expected = "J**_p*******123123";
-            
+
             string resultingData = WordSanitizer.Sanitize(input);
-            Assert.Equal(expected, resultingData );
+            Assert.Equal(expected, resultingData);
         }
     }
 }

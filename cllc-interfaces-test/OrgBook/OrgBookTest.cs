@@ -1,7 +1,7 @@
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Net.Http;
+using System.Threading.Tasks;
 using Gov.Lclb.Cllb.Interfaces;
-using Microsoft.Rest;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace OrgBookTest
 {
@@ -9,27 +9,19 @@ namespace OrgBookTest
     public class SearchUnitTest
     {
         [TestMethod]
-        public void TestAutocomplete()
+        public async Task TestAutocomplete()
         {
-            ServiceClientCredentials credentials = new NoCredentials();
-            IOrgBookClient client = new OrgBookClient(new Uri("https://orgbook.gov.bc.ca/api"), credentials);
-
-            var searchResult = client.Search.Autocomplete("BC");
-
+            var client = new OrgBookClient(new HttpClient());
+            var searchResult = await client.V2SearchAutocompleteGetAsync(null, "BC", null, null, null, null);
             Assert.IsNotNull(searchResult);
         }
 
         [TestMethod]
-        public void TestSearchByName()
+        public async Task TestSearchByName()
         {
-            ServiceClientCredentials credentials = new NoCredentials();
-            IOrgBookClient client = new OrgBookClient(new Uri("https://orgbook.gov.bc.ca/api"), credentials);
-
-            var searchResult = client.Search.Autocomplete("BC");
-
+            var client = new OrgBookClient(new HttpClient());
+            var searchResult = await client.V2SearchAutocompleteGetAsync(null, "BC", null, null, null, null);
             Assert.IsNotNull(searchResult);
         }
-
-
     }
 }

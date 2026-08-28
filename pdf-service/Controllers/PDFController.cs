@@ -44,13 +44,17 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
-            string filename = $"Templates/{template}.mustache";
+            // Use an absolute path tied to where the assembly actually lives —
+            // a relative path here depends on Environment.CurrentDirectory,
+            // which isn't guaranteed to equal AppContext.BaseDirectory in every
+            // hosting context, and silently causes File.Exists to return false.
+            string filename = System.IO.Path.Combine(AppContext.BaseDirectory, "Templates", $"{template}.mustache");
 
             if (System.IO.File.Exists(filename))
             {
                 string format = System.IO.File.ReadAllText(filename);
                 var html = stubble.Render(format, rawdata);
-                
+
                 var doc = new HtmlToPdfDocument()
                 {
                     GlobalSettings = {
@@ -58,7 +62,7 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
                         Orientation = Orientation.Portrait,
                         Margins = new MarginSettings(5.0,5.0,5.0,5.0)
                     },
-                    
+
                     Objects = {
                         new ObjectSettings()
                         {
@@ -68,12 +72,12 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
                 };
                 try
                 {
-                    var pdf = _generatePdf.Convert(doc); 
+                    var pdf = _generatePdf.Convert(doc);
                     return File(pdf, "application/pdf");
                 }
                 catch (Exception e)
                 {
-                    _logger.LogError(e,"ERROR rendering PDF");
+                    _logger.LogError(e, "ERROR rendering PDF");
                     _logger.LogError(template);
                     _logger.LogError(html);
                 }
@@ -88,7 +92,11 @@ namespace Gov.Jag.Lcrb.PdfService.Controllers
         {
             // first do a mustache merge.
             var stubble = new StubbleBuilder().Build();
-            string filename = $"Templates/{template}.mustache";
+            // Use an absolute path tied to where the assembly actually lives —
+            // a relative path here depends on Environment.CurrentDirectory,
+            // which isn't guaranteed to equal AppContext.BaseDirectory in every
+            // hosting context, and silently causes File.Exists to return false.
+            string filename = System.IO.Path.Combine(AppContext.BaseDirectory, "Templates", $"{template}.mustache");
 
             if (System.IO.File.Exists(filename))
             {

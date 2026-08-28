@@ -1,46 +1,48 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { takeWhile } from "rxjs/operators";
-import { HttpClient } from "@angular/common/http";
-import { DocumentTypeStatus } from "@models/document-type-status.model";
-import { FileDataService } from "@services/file-data.service";
-import { FormBase } from "../../shared/form-base";
-import { Account } from "@models/account.model";
+import { HttpClient } from '@angular/common/http';
+import { Component, Input, OnInit } from '@angular/core';
+import { Account } from '@models/account.model';
+import { DocumentTypeStatus } from '@models/document-type-status.model';
+import { FileDataService } from '@services/file-data.service';
+import { takeWhile } from 'rxjs/operators';
+import { FormBase } from '../../shared/form-base';
 
 @Component({
-  selector: "app-account-completeness",
-  templateUrl: "./account-completeness.component.html",
-  styleUrls: ["./account-completeness.component.scss"]
+  selector: 'app-account-completeness',
+  templateUrl: './account-completeness.component.html',
+  styleUrls: ['./account-completeness.component.scss']
 })
 export class AccountCompletenessComponent extends FormBase implements OnInit {
-  @Input("entityName")
+  @Input('entityName')
   entityName: string;
-  @Input("entityId")
+  @Input('entityId')
   entityId: string;
-  @Input("formId")
+  @Input('formId')
   formId: string;
-  @Input("account")
+  @Input('account')
   account: Account;
 
   documentTypeStatusResult: DocumentTypeStatus[] = [];
 
-  constructor(private http: HttpClient, private fileDataService: FileDataService) { super(); }
+  constructor(
+    private http: HttpClient,
+    private fileDataService: FileDataService
+  ) {
+    super();
+  }
 
   ngOnInit() {
     if (this.entityName && this.entityId && this.formId) {
-
-      this.fileDataService.getDocumentStatus(this.entityName, this.entityId, this.formId)
+      this.fileDataService
+        .getDocumentStatus(this.entityName, this.entityId, this.formId)
         .pipe(takeWhile(() => this.componentActive))
         .subscribe((documentTypeStatusResult) => {
           this.documentTypeStatusResult = documentTypeStatusResult;
-
         });
     } else {
-      console.log("Invalid parameters for AccountCompletenessComponent");
+      console.log('Invalid parameters for AccountCompletenessComponent');
       console.log(this.entityName);
       console.log(this.entityId);
       console.log(this.formId);
-
     }
   }
-
 }
