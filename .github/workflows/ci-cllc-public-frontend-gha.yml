@@ -52,7 +52,7 @@ jobs:
         run: |
           # Auto-incrementing build number (CI run number) — set at build time
           # only, never committed back to git (avoids a bot-commit CI loop).
-          npm --prefix cllc-public-app/ClientApp version "1.0.${{ github.run_number }}" \
+          npm --prefix cllc-public-app/ClientApp version "8.0.${{ github.run_number }}" \
             --no-git-tag-version --allow-same-version
 
       - name: Log in to GitHub Container Registry

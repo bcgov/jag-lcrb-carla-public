@@ -48,7 +48,7 @@ jobs:
           file: ./cllc-public-app/Dockerfile.gha
           push: true
           build-args: |
-            VERSION=1.0.0.${{ github.run_number }}
+            VERSION=8.0.0.${{ github.run_number }}
           tags: |
             ${{ env.IMAGE_NAME }}:${{ steps.env-tag.outputs.ENV_TAG }}
             ${{ env.IMAGE_NAME }}:sha-${{ github.sha }}
