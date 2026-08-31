@@ -74,6 +74,20 @@ http {
             proxy_set_header   X-Forwarded-Proto $scheme;
         }
 
+        # BC Services Card sign-in (BCServiceController, [Route("bcservice")]).
+        # The SEP login page and the worker/cannabis screening pages navigate
+        # here directly, e.g. sep/login.component.ts: `bcservice?source=...`.
+        # Without this the request falls through to `location /`, nginx returns
+        # index.html, and the Angular router has no /bcservice route — so the
+        # user lands on the app's own 404 page and is never authenticated.
+        location /bcservice {
+            proxy_pass         http://cllc-public-app-gha:8080;
+            proxy_set_header   Host              $host;
+            proxy_set_header   X-Real-IP         $remote_addr;
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+        }
+
         location /hc {
             proxy_pass http://cllc-public-app-gha:8080;
         }
