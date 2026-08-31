@@ -68,6 +68,15 @@ jobs:
           context: ./cllc-public-app
           file: ./cllc-public-app/Dockerfile.frontend.gha
           push: true
+          # GitHub runners are ephemeral, so buildx starts with an empty layer
+          # cache every run and re-installs node_modules from scratch even when
+          # package-lock.json hasn't changed. The Dockerfile already copies
+          # package*.json before `npm ci` so that layer IS cacheable — it just
+          # had nowhere to persist. type=gha stores it in the Actions cache.
+          # mode=max is required: the expensive layer lives in the `builder`
+          # stage, and the default (min) only caches layers of the final image.
+          cache-from: type=gha,scope=frontend
+          cache-to: type=gha,mode=max,scope=frontend
           build-args: |
             BUILD_SCRIPT=${{ steps.env-tag.outputs.BUILD_SCRIPT }}
           tags: |
