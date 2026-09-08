@@ -374,7 +374,7 @@ namespace Gov.Lclb.Cllb.Public.Models
         private static async Task<adoxio_establishment?> GetCachedEstablishmentAsync(string id, IDataverseClient dataverse, IMemoryCache cache)
         {
             if (cache == null) return await dataverse.GetEstablishmentByIdAsync(id);
-            string key = "Establishment_" + id;
+            string key = CacheKeys.EstablishmentPrefix + id;
             if (!cache.TryGetValue(key, out adoxio_establishment result))
             {
                 result = await dataverse.GetEstablishmentByIdAsync(id);

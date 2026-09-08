@@ -1,4 +1,4 @@
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.PowerPlatform.Dataverse.Client;
 using Microsoft.Xrm.Sdk;
@@ -1629,12 +1629,15 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         };
         if (parentLibraryUrl == null) return;
 
-        var parentQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
-        parentQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, parentLibraryUrl);
-        parentQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.Null);
-        var parentResult = await _serviceClient.RetrieveMultipleAsync(parentQuery, ct);
-        var parentLib = parentResult.Entities.FirstOrDefault();
-        if (parentLib == null) return;
+        var parentLibId = await GetOrCreateParentDocumentLibraryAsync(parentLibraryUrl, ct);
+        if (parentLibId == null)
+        {
+            Serilog.Log.Error(
+                "Could not resolve or create the {RelativeUrl} document library. No SharePoint " +
+                "document location was created for {EntityName} {EntityId}.",
+                parentLibraryUrl, entityName, entityId);
+            return;
+        }
 
         var checkQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName) { ColumnSet = new ColumnSet(true), TopCount = 1 };
         checkQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, folderName);
@@ -1645,11 +1648,75 @@ public class DataverseClient : IDataverseClient, IHealthCheck
         var location = new SharePointDocumentLocation
         {
             RegardingObjectId = new EntityReference(entityLogicalName!, entityGuid),
-            ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, parentLib.Id),
+            ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, parentLibId.Value),
             RelativeUrl = folderName,
             Name = name
         };
         await _serviceClient.CreateAsync(location, ct);
+    }
+
+    /// <summary>
+    /// Resolves the parent SharePoint document library (e.g. "adoxio_application")
+    /// that entity folders hang off, creating it if it does not exist.
+    ///
+    /// Replicates the pre-migration behaviour of
+    /// SharePointDocumentLocation.GetDocumentLocationReferenceByRelativeURL /
+    /// GetParentDefaultSiteLocation: the library is the document location whose
+    /// relativeurl matches AND whose parentsiteorlocation is the SharePoint site
+    /// named "Default Site".
+    ///
+    /// This previously filtered on parentsiteorlocation being NULL, which is the
+    /// opposite condition — every real library has a parent site, so the query
+    /// never matched, the caller returned early, and NO document location was
+    /// created for any upload. The failure was silent: the file still reached
+    /// SharePoint through file-manager, so uploads appeared to succeed while
+    /// Dynamics received nothing.
+    /// </summary>
+    private async Task<Guid?> GetOrCreateParentDocumentLibraryAsync(string relativeUrl, CancellationToken ct)
+    {
+        // 1. Preferred: the library sitting under the "Default Site" SharePoint site.
+        var siteQuery = new QueryExpression("sharepointsite") { ColumnSet = new ColumnSet("sharepointsiteid") };
+        siteQuery.Criteria.AddCondition("name", ConditionOperator.Equal, "Default Site");
+        var siteIds = (await _serviceClient.RetrieveMultipleAsync(siteQuery, ct))
+            .Entities.Select(e => (object)e.Id).ToArray();
+
+        if (siteIds.Length > 0)
+        {
+            var libQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName)
+            { ColumnSet = new ColumnSet(true), TopCount = 1 };
+            libQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, relativeUrl);
+            libQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.In, siteIds);
+            var lib = (await _serviceClient.RetrieveMultipleAsync(libQuery, ct)).Entities.FirstOrDefault();
+            if (lib != null) return lib.Id;
+        }
+
+        // 2. Fall back to a parentless library of the same name. The pre-migration
+        //    code created these when the site lookup failed, so they may exist.
+        //    Matching them here avoids creating a duplicate on every upload.
+        var orphanQuery = new QueryExpression(SharePointDocumentLocation.EntityLogicalName)
+        { ColumnSet = new ColumnSet(true), TopCount = 1 };
+        orphanQuery.Criteria.AddCondition("relativeurl", ConditionOperator.Equal, relativeUrl);
+        orphanQuery.Criteria.AddCondition("parentsiteorlocation", ConditionOperator.Null);
+        var orphan = (await _serviceClient.RetrieveMultipleAsync(orphanQuery, ct)).Entities.FirstOrDefault();
+        if (orphan != null) return orphan.Id;
+
+        // 3. Still nothing — create it, as the pre-migration code did. Warn, because
+        //    a library with no parent site means SharePoint integration is not set
+        //    up as expected in this environment.
+        Serilog.Log.Warning(
+            "No {RelativeUrl} document library found under the 'Default Site' SharePoint site. " +
+            "Creating one without a parent site — check the SharePoint integration configuration " +
+            "for this environment.", relativeUrl);
+        try
+        {
+            return await _serviceClient.CreateAsync(
+                new SharePointDocumentLocation { RelativeUrl = relativeUrl }, ct);
+        }
+        catch (Exception ex)
+        {
+            Serilog.Log.Error(ex, "Failed to create the {RelativeUrl} document library.", relativeUrl);
+            return null;
+        }
     }
 
     public async Task<IList<FormDocumentField>> GetFormDocumentFieldsAsync(string formId, CancellationToken ct = default)
