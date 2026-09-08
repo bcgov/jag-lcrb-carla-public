@@ -307,7 +307,8 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   isCurrentUser(): boolean {
-    return this.contact?.name === this.sepApplication.policeDecisionBy?.name;
+    const assigneeId = this.sepApplication?.policeDecisionBy?.id;
+    return !!assigneeId && !!this.contact?.id && assigneeId === this.contact.id;
   }
 
   getSize(guests: number): string {

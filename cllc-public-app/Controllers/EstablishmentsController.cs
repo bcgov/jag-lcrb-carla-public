@@ -688,6 +688,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw new Exception("Unable to update establishment");
             }
 
+            // Evict the cached copy this record is read back through.
+            //
+            // The Licences page reads EstablishmentEmail/Name/IsOpen via
+            // License.GetCachedEstablishmentAsync, which caches under
+            // "Establishment_<id>" with a 60 minute SLIDING expiry. Nothing
+            // invalidated it on write, so an edit saved to Dataverse but the page
+            // kept serving the stale value — and because the expiry slides, every
+            // refresh renewed it, so a licence being actively viewed could stay
+            // stale indefinitely. Key format must match GetCachedEstablishmentAsync.
+            _cache.Remove(CacheKeys.EstablishmentPrefix + id);
+
             var updated = await _dataverse.GetEstablishmentByIdAsync(id);
             return new JsonResult(updated.ToViewModel());
         }

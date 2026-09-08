@@ -56,6 +56,8 @@ namespace Gov.Lclb.Cllb.Public.Models
                 MajorSignificanceRationale = se.adoxio_MajorSignificanceRationale,
                 NonProfitName = se.adoxio_NonProfitName,
                 PoliceApproval = (ViewModels.ApproverStatus?)(int?)se.adoxio_PoliceApproval,
+                PoliceDecisionBy = ToContactRef(se.adoxio_PoliceRepresentativeId),
+                PoliceAccount = ToAccountRef(se.adoxio_PoliceAccountId),
                 LcrbApproval = (ViewModels.ApproverStatus?)(int?)se.adoxio_LCRBApproval,
                 PrivateOrPublic = (ViewModels.SEPPublicOrPrivate?)(int?)se.adoxio_PrivateorPublic,
                 DenialReason = se.adoxio_DenialReason,
@@ -135,10 +137,13 @@ namespace Gov.Lclb.Cllb.Public.Models
                 SpecialEventId = se.Id == Guid.Empty ? null : se.Id.ToString(),
                 EventStartDate = se.adoxio_EventStartDate,
                 EventName = se.adoxio_eventname,
+                InvoiceId = se.adoxio_Invoice?.Id.ToString(),
                 IsInvoicePaid = se.adoxio_IsInvoicePaid,
                 MaximumNumberOfGuests = se.adoxio_MaxNumofGuests,
                 DateSubmitted = se.adoxio_DateSubmitted,
                 PoliceApproval = (ApproverStatus?)(int?)se.adoxio_PoliceApproval,
+                PoliceDecisionBy = ToContactRef(se.adoxio_PoliceRepresentativeId),
+                PoliceAccount = ToAccountRef(se.adoxio_PoliceAccountId),
                 LcrbApproval = (ApproverStatus?)(int?)se.adoxio_LCRBApproval,
                 DenialReason = se.adoxio_DenialReason,
                 CancelReason = se.adoxio_CancellationReason,
@@ -150,6 +155,16 @@ namespace Gov.Lclb.Cllb.Public.Models
                 result.EventStatus = (EventStatus)(int)se.statuscode;
             return result;
         }
+
+        private static ViewModels.Contact ToContactRef(Microsoft.Xrm.Sdk.EntityReference reference)
+            => reference == null
+                ? null
+                : new ViewModels.Contact { id = reference.Id.ToString(), name = reference.Name };
+
+        private static ViewModels.Account ToAccountRef(Microsoft.Xrm.Sdk.EntityReference reference)
+            => reference == null
+                ? null
+                : new ViewModels.Account { id = reference.Id.ToString(), name = reference.Name };
     }
 }
 

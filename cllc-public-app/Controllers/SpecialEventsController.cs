@@ -80,12 +80,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var locationsTask = _dataverse.GetSpecialEventLocationsByEventIdAsync(id);
             var forecastsTask = _dataverse.GetSepDrinkSalesForecastsByEventIdAsync(id);
             var tandcsTask = _dataverse.GetSpecialEventTandCsByEventIdAsync(id);
+            var invoiceTask = se.adoxio_Invoice != null
+                ? _dataverse.GetInvoiceByIdAsync(se.adoxio_Invoice.Id.ToString())
+                : Task.FromResult<DvInvoice?>(null);
 
-            await Task.WhenAll(contactTask, cityTask, locationsTask, forecastsTask, tandcsTask);
+            await Task.WhenAll(contactTask, cityTask, locationsTask, forecastsTask, tandcsTask, invoiceTask);
 
             vm.Applicant = (await contactTask)?.ToViewModel();
             vm.SepCity = (await cityTask)?.ToViewModel();
+            vm.Invoice = (await invoiceTask)?.ToViewModel();
             vm.DrinksSalesForecasts = (await forecastsTask).Select(f => f.ToViewModel()).ToList();
+
+            vm.TotalRevenue = vm.DrinksSalesForecasts.Sum(f => f.EstimatedRevenue ?? 0);
+            vm.TotalPurchaseCost = vm.DrinksSalesForecasts.Sum(f => f.EstimatedCost ?? 0);
+            vm.TotalProceeds = vm.TotalRevenue - vm.TotalPurchaseCost;
             vm.TermsAndConditions = (await tandcsTask).Select(tc => new SepTermAndCondition
             {
                 Id = tc.adoxio_specialeventtandcId?.ToString(),

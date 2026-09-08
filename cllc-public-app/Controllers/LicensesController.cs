@@ -1202,15 +1202,45 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return Forbid();
             }
 
-            var patch = new adoxio_licences
+            // Only patch fields the caller actually supplied.
+            //
+            // The generated setters call SetAttributeValue unconditionally, so
+            // assigning null still puts the attribute in the collection and the
+            // update CLEARS it in Dataverse. Callers here send one field at a
+            // time — licence-row.component.ts updatePhone() sends only the phone,
+            // and updateEmail() sends only the email (which is not even part of
+            // this patch; establishment email lives on the establishment entity).
+            // Building the patch with every field therefore wiped the address
+            // whenever a licensee edited their phone or email from the Licences
+            // page. A null here means "not supplied", not "clear it".
+            var patch = new adoxio_licences { Id = new Guid(licenceId) };
+            var hasChanges = false;
+
+            if (item.EstablishmentPhoneNumber != null)
             {
-                Id = new Guid(licenceId),
-                adoxio_EstablishmentPhone = item.EstablishmentPhoneNumber,
-                adoxio_EstablishmentAddressCity = item.EstablishmentAddressCity,
-                adoxio_EstablishmentAddressStreet = item.EstablishmentAddressStreet,
-                adoxio_EstablishmentAddressPostalCode = item.EstablishmentAddressPostalCode
-            };
-            await _dataverse.UpdateLicenceAsync(patch);
+                patch.adoxio_EstablishmentPhone = item.EstablishmentPhoneNumber;
+                hasChanges = true;
+            }
+            if (item.EstablishmentAddressCity != null)
+            {
+                patch.adoxio_EstablishmentAddressCity = item.EstablishmentAddressCity;
+                hasChanges = true;
+            }
+            if (item.EstablishmentAddressStreet != null)
+            {
+                patch.adoxio_EstablishmentAddressStreet = item.EstablishmentAddressStreet;
+                hasChanges = true;
+            }
+            if (item.EstablishmentAddressPostalCode != null)
+            {
+                patch.adoxio_EstablishmentAddressPostalCode = item.EstablishmentAddressPostalCode;
+                hasChanges = true;
+            }
+
+            if (hasChanges)
+            {
+                await _dataverse.UpdateLicenceAsync(patch);
+            }
 
             licence = await _dataverse.GetLicenceByIdWithChildrenAsync(licenceId);
             var allApps = await _dataverse.GetApplicationsForLicenceByApplicantAsync(licence.adoxio_Licencee?.Id.ToString() ?? "");
