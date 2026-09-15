@@ -281,6 +281,23 @@
                     "value": "${SITEMINDER_LOGOUT_URL}"
                   },
                   {
+                    "name": "AGENTIC_PLATFORM_BASE_URL",
+                    "value": "${AGENTIC_PLATFORM_BASE_URL}"
+                  },
+                  {
+                    "name": "AGENTIC_PLATFORM_AGENT_ID",
+                    "value": "${AGENTIC_PLATFORM_AGENT_ID}"
+                  },
+                  {
+                    "name": "AGENTIC_PLATFORM_SIGNING_KEY",
+                    "valueFrom": {
+                      "secretKeyRef": {
+                        "name": "${SECRET_RESOURCE_NAME}",
+                        "key": "agentic-platform-signing-key"
+                      }
+                    }
+                  },
+                  {
                     "name": "PDF_SERVICE_BASE_URI",
                     "value": "${PDF_SERVICE_BASE_URI}"
                   },
@@ -591,6 +608,20 @@
       "description": "Siteminder logout URL, e.g., https://logon.gov.bc.ca/clp-cgi/logoff.cgi, if left blank a value will be defaulted. Note this url is for prod and should be changed for dev and test.",
       "required": true,
       "value": "https://logon.gov.bc.ca/clp-cgi/logoff.cgi"
+    },
+    {
+      "name": "AGENTIC_PLATFORM_BASE_URL",
+      "displayName": "Agentic platform base URL",
+      "description": "Front Door origin of the LCRB agentic platform that the due diligence chat proxy calls. Differs per environment; this default is the test platform.",
+      "required": true,
+      "value": "https://lcrb-agenticai-test-dsbmehfbb7f6gphc.a03.azurefd.net"
+    },
+    {
+      "name": "AGENTIC_PLATFORM_AGENT_ID",
+      "displayName": "Agentic platform agent id",
+      "description": "The only agent the portal proxy will call. Pinned server-side, so a browser cannot request a different one.",
+      "required": true,
+      "value": "due_diligence_agent"
     },
     {
       "name": "PDF_SERVICE_BASE_URI",

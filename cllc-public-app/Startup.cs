@@ -1,4 +1,4 @@
-// change to a #define to enable MSSQL
+﻿// change to a #define to enable MSSQL
 #undef USE_MSSQL
 #undef USE_GEOCODER_CHECK
 
@@ -9,6 +9,7 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
 using Gov.Lclb.Cllb.Public.Contexts;
+using Gov.Lclb.Cllb.Public.Middleware;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Services.FileManager;
 using Grpc.Net.Client;
@@ -39,6 +40,7 @@ using Serilog;
 using Serilog.Exceptions;
 using System;
 using System.IO;
+using Microsoft.Extensions.FileProviders;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -331,6 +333,15 @@ namespace Gov.Lclb.Cllb.Public
             services.AddHttpClient<IGeocoderService, GeocoderService>()
                 .AddPolicyHandler(GetRetryPolicy());
 
+            // add the agentic platform chat proxy (see AgenticPlatformProxyMiddleware).
+            services.AddSingleton<IAgenticPlatformTokenService, AgenticPlatformTokenService>();
+            services.AddHttpClient("AgenticPlatform", client =>
+            {
+                // A streamed answer is long-lived by nature; the default 100 second timeout would
+                // cut a lengthy reply off partway through.
+                client.Timeout = System.Threading.Timeout.InfiniteTimeSpan;
+            });
+
             // add the file manager.
             string fileManagerURI = _configuration["FILE_MANAGER_URI"];
             if (!_env.IsProduction()) // needed for macOS TLS being turned off
@@ -473,12 +484,42 @@ namespace Gov.Lclb.Cllb.Public
 
             app.UseStaticFiles(staticFileOptions);
 
+            // The embedded chat UI, for local development only. Mapped explicitly against an
+            // absolute path rather than relying on the default wwwroot provider, which is not
+            // reliably resolved when the app is launched straight from bin/. In deployed
+            // environments nginx proxies /chat/ to the chat UI container and this directory does
+            // not exist, so the whole block is skipped.
+            var embeddedChatRoot = Path.Combine(env.ContentRootPath, "wwwroot", "chat");
+            if (Directory.Exists(embeddedChatRoot))
+            {
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(embeddedChatRoot),
+                    RequestPath = "/chat",
+                    OnPrepareResponse = ctx =>
+                    {
+                        // The portal frames this document from its own origin. app.UseXfo above
+                        // sets X-Frame-Options: DENY for everything, and DENY blocks same-origin
+                        // framing too -- which the browser reports as "refused to connect".
+                        ctx.Context.Response.Headers["X-Frame-Options"] = "SAMEORIGIN";
+                        ctx.Context.Response.Headers[HeaderNames.CacheControl] = "no-cache, no-store, must-revalidate, private";
+                    }
+                });
+            }
+
             app.UseSpaStaticFiles(staticFileOptions);
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
             // IMPORTANT: This session call MUST go before UseMvc()
             app.UseSession();
             app.UseAuthentication();
+            // Relays the embedded chat UI to the agentic platform, attaching a token minted
+            // from this session. Registered after UseSession/UseAuthentication because it reads
+            // the signed-in user, and before UseMvc because UseMvc is terminal. Deliberately not
+            // an MVC controller: the global NWebsec filters set headers after the action runs,
+            // which throws against a response that has already begun streaming.
+            app.UseAgenticPlatformProxy();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

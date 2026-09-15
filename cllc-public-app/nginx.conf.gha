@@ -92,6 +92,43 @@ http {
             proxy_pass http://cllc-public-app-gha:8080;
         }
 
+        # The embedded due diligence assistant (a separate single-page app).
+        #
+        # Proxied rather than built into this image so it can be released independently -- and,
+        # more importantly, so it shares this origin. Same-origin is the whole point: the chat
+        # calls /api/agent-framework/... which is proxied to the .NET app above, and only a
+        # same-origin request carries the portal session cookie. The .NET app exchanges that
+        # session for a short-lived platform token (AgenticPlatformProxyMiddleware). Served from
+        # its own hostname instead, the cookie would not be sent and every call would come back
+        # unauthenticated -- and browsers now block third-party cookies in an iframe regardless.
+        #
+        # DEPLOYMENT: replace CHATBOT_UI_HOST with the chat UI's own hostname. The chat UI must be
+        # built with base path /chat/ so its asset URLs come back through this same location, and
+        # with the portal's origin in VITE_ALLOWED_ORIGINS, which becomes its own
+        # Content-Security-Policy frame-ancestors.
+        location /chat/ {
+            proxy_pass         https://CHATBOT_UI_HOST/;
+            proxy_set_header   Host              CHATBOT_UI_HOST;
+            proxy_set_header   X-Real-IP         $remote_addr;
+            proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
+            proxy_set_header   X-Forwarded-Proto $scheme;
+
+            # The upstream sets its own X-Frame-Options. Two of them in one response is treated as
+            # a conflict by browsers and the frame is refused, so drop the upstream copy and set
+            # ours below.
+            proxy_hide_header  X-Frame-Options;
+
+            # nginx discards every inherited add_header as soon as a block declares one of its own,
+            # so the server-level set is repeated here rather than being lost. X-Frame-Options is
+            # SAMEORIGIN rather than DENY because this page is framed by the portal itself, and
+            # DENY blocks same-origin framing too.
+            add_header Content-Security-Policy "default-src * data: blob: filesystem: 'unsafe-inline' 'unsafe-eval'";
+            add_header Strict-Transport-Security "max-age=86400; includeSubDomains";
+            add_header X-Content-Type-Options "nosniff";
+            add_header X-XSS-Protection 1;
+            add_header X-Frame-Options SAMEORIGIN;
+        }
+
         location / {
             root  /usr/share/nginx/html;
             index index.html index.htm;
