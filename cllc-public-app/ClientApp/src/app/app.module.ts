@@ -25,7 +25,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -578,7 +577,6 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,
     MatSnackBarModule,
@@ -630,7 +628,6 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,
     MatSnackBarModule,
