@@ -11,21 +11,19 @@
   [attr.aria-hidden]="!isOpen"
   role="complementary"
   aria-label="Due Diligence Assistant">
+  <!--
+    A bar holding nothing but the close button. The assistant inside the frame supplies its own
+    heading and its own notice about what it can and cannot answer, so repeating either here said
+    the same thing twice. The bar stays because the button is positioned against this panel: with
+    the frame flush to the top, the close button would land on the chat's own New chat button.
+  -->
   <div class="dd-chat__header">
-    <h4
-      *ngIf="showTitle"
-      class="dd-chat__title">Due Diligence Assistant</h4>
     <button
       type="button"
       class="dd-chat__close"
       aria-label="Close Due Diligence Assistant"
       (click)="close()">&times;</button>
   </div>
-
-  <p class="dd-chat__disclaimer">
-    Educational information about due diligence only. This assistant cannot give legal advice,
-    assess the strength of a defence, or predict the outcome of an enforcement matter.
-  </p>
 
   <iframe
     *ngIf="hasOpened"

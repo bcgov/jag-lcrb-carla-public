@@ -40,17 +40,11 @@
     transition: transform 0.2s ease-in-out, visibility 0s linear 0s;
   }
 
+  // Reserves the strip the close button sits in, so the frame below starts clear of it rather
+  // than the button covering the chat's own controls.
   &__header {
-    padding: 16px 16px 0;
-    // Holds its height when the title is hidden (showTitle), so the text below never rides up
-    // under the close button floating at top: 8px.
-    min-height: 24px;
-  }
-
-  &__title {
-    font-weight: 600;
-    margin-bottom: 12px;
-    // h4 sizing is inherited, matching .sidebar-title on the AI Assistant panel.
+    flex: 0 0 auto;
+    height: 36px;
   }
 
   &__close {

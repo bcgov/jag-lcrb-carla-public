@@ -33,15 +33,6 @@ export class DueDiligenceChatComponent {
 
   public chatUrl: SafeResourceUrl | null = null;
 
-  /**
-   * Whether this panel shows its own title.
-   *
-   * Off, because the assistant inside the frame already displays the agent's name a few pixels
-   * below — two titles saying the same thing. Hidden rather than deleted: if the agent name is
-   * ever removed from the chat UI (VITE_HIDE_AGENT_TITLE in the chatbot-ui build), the panel
-   * would be left with no heading at all, and flipping this back to true is the fix.
-   */
-  public showTitle = false;
 
   constructor(private sanitizer: DomSanitizer) { }
 
