@@ -102,13 +102,17 @@ http {
         # its own hostname instead, the cookie would not be sent and every call would come back
         # unauthenticated -- and browsers now block third-party cookies in an iframe regardless.
         #
-        # DEPLOYMENT: replace CHATBOT_UI_HOST with the chat UI's own hostname. The chat UI must be
-        # built with base path /chat/ so its asset URLs come back through this same location, and
-        # with the portal's origin in VITE_ALLOWED_ORIGINS, which becomes its own
-        # Content-Security-Policy frame-ancestors.
+        # The host below is the embedded build's Front Door endpoint, a second deployment of the
+        # chat UI in the same AKS cluster as the staff one. It is a distinct image tag (:embedded)
+        # and a distinct ingress host, because the difference between the two builds is baked in at
+        # build time: this one carries no Entra client id, uses /chat/ as its base path so asset
+        # URLs come back through this location, keeps the transcript in the browser, and names the
+        # portal's origins in VITE_ALLOWED_ORIGINS, which become its Content-Security-Policy
+        # frame-ancestors. Pointing this at the staff endpoint would try to sign a licensee in with
+        # Entra, an account they do not have.
         location /chat/ {
-            proxy_pass         https://CHATBOT_UI_HOST/;
-            proxy_set_header   Host              CHATBOT_UI_HOST;
+            proxy_pass         https://lcrb-chatembed-test-dcbvdtbve5ade7gj.a03.azurefd.net/;
+            proxy_set_header   Host              lcrb-chatembed-test-dcbvdtbve5ade7gj.a03.azurefd.net;
             proxy_set_header   X-Real-IP         $remote_addr;
             proxy_set_header   X-Forwarded-For   $proxy_add_x_forwarded_for;
             proxy_set_header   X-Forwarded-Proto $scheme;
