@@ -1,0 +1,90 @@
+// Slide-out panel on the right.
+//
+// The values here are copied from .ai-sidebar / .sidebar-title / .sidebar-subtitle in
+// app.component.scss so this panel matches the AI Assistant sidebar it sits beside. They are
+// duplicated rather than shared because that sidebar is slated for removal, and this panel must
+// not lose its styling when it goes. Everything is in px for the same reason the original is:
+// rem here would drift if a root font size is ever introduced.
+.dd-chat {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1000;
+
+  display: flex;
+  flex-direction: column;
+  width: 360px;
+  max-width: 100vw;
+
+  background: #fff;
+  border-left: 1px solid #e0e0e0;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+
+  // Closed: parked just off-screen rather than removed, so the conversation inside the frame
+  // survives being closed and reopened. It stores nothing server-side, so a destroyed frame
+  // would mean a lost conversation.
+  transform: translateX(100%);
+  visibility: hidden;
+
+  // visibility is toggled as well as transform so the parked panel is not focusable and is
+  // skipped by screen readers. It cannot be animated, only delayed, so the two directions need
+  // different timing: on close, hold it visible for the length of the slide and hide it at the
+  // end; on open, make it visible immediately so the slide in is seen at all. Without the delay
+  // the panel vanishes on the first frame of closing and never appears to slide out.
+  transition: transform 0.2s ease-in-out, visibility 0s linear 0.2s;
+
+  &--open {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform 0.2s ease-in-out, visibility 0s linear 0s;
+  }
+
+  // Reserves the strip the close button sits in, so the frame below starts clear of it rather
+  // than the button covering the chat's own controls.
+  &__header {
+    flex: 0 0 auto;
+    height: 36px;
+  }
+
+  &__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    z-index: 1;
+
+    border: 0;
+    background: none;
+    font-size: 24px;
+    line-height: 1;
+    padding: 0 4px;
+    cursor: pointer;
+    color: #555;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  &__disclaimer {
+    font-size: 11px;
+    color: #777;
+    padding: 0 16px;
+    margin-bottom: 8px;
+  }
+
+  &__frame {
+    flex: 1 1 auto;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+  }
+}
+
+// On a narrow screen the panel takes the full width — a 360px panel beside the portal content
+// leaves neither usable.
+@media (max-width: 768px) {
+  .dd-chat {
+    width: 100vw;
+  }
+}
