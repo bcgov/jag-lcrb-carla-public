@@ -1,0 +1,36 @@
+<!--
+  The panel itself is always in the DOM, parked off-screen. A CSS transition needs a starting
+  frame to animate from, and an element created by *ngIf in the same tick that it gains the open
+  class has none — it jumps into place instead of sliding. Only the frame is created lazily, so
+  nothing loads the chat until it is first opened, and once created it is never destroyed:
+  the conversation lives only in the frame (the agent stores nothing server-side).
+-->
+<aside
+  class="dd-chat"
+  [class.dd-chat--open]="isOpen"
+  [attr.aria-hidden]="!isOpen"
+  role="complementary"
+  aria-label="Due Diligence Assistant">
+  <div class="dd-chat__header">
+    <h4
+      *ngIf="showTitle"
+      class="dd-chat__title">Due Diligence Assistant</h4>
+    <button
+      type="button"
+      class="dd-chat__close"
+      aria-label="Close Due Diligence Assistant"
+      (click)="close()">&times;</button>
+  </div>
+
+  <p class="dd-chat__disclaimer">
+    Educational information about due diligence only. This assistant cannot give legal advice,
+    assess the strength of a defence, or predict the outcome of an enforcement matter.
+  </p>
+
+  <iframe
+    *ngIf="hasOpened"
+    class="dd-chat__frame"
+    [src]="chatUrl"
+    title="LCRB Due Diligence Assistant"
+    allow="clipboard-write"></iframe>
+</aside>

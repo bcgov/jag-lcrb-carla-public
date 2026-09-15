@@ -254,11 +254,31 @@
             (click)="openChat('en-CA', 'main')">
             <strong>Chat with us</strong>
           </button>
+          <!--
+            The AI Smart Assistant (LCSD-8045) is superseded by the Due Diligence Assistant below,
+            which is backed by the agentic platform rather than the standalone orchestrator. Its
+            button is hidden here rather than deleted: the sidenav markup and its orchestrator
+            calls in app.component.ts are still present and should be removed under their own
+            ticket, once the application-lookup and validation flows it provides have somewhere to
+            go. Restoring it is a matter of uncommenting this block.
           <button
             *ngIf="currentUser && aiAssistantFeatureOn"
             class="ai-sidebar-button btn btn-primary btn-sm"
             (click)="toggleSidebar()">
             <strong>AI Assistant</strong>
+          </button>
+          -->
+          <!--
+            The due diligence assistant. Declared before the button that opens it so the template
+            reference resolves; the panel itself is position: fixed, so where it sits in the DOM
+            makes no difference to where it appears.
+          -->
+          <app-due-diligence-chat #ddChat></app-due-diligence-chat>
+          <button
+            *ngIf="currentUser"
+            class="dd-chat-button btn btn-primary btn-sm"
+            (click)="ddChat.toggle()">
+            <strong>Due Diligence</strong>
           </button>
           <button
             *ngIf="currentUser"
