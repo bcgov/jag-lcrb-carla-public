@@ -25,7 +25,6 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatSelectModule } from '@angular/material/select';
-import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -85,6 +84,7 @@ import {
 } from '@components/dashboard/applications-and-licences/applications-and-licences.component';
 import { AssociateContentComponent } from '@components/dashboard/associate-content/associate-content.component';
 import { DashboardComponent } from '@components/dashboard/dashboard.component';
+import { DueDiligenceChatComponent } from '@components/due-diligence-chat/due-diligence-chat.component';
 import { DynamicsFormComponent } from '@components/dynamics-form/dynamics-form.component';
 import { FederalReportingComponent } from '@components/federal-reporting/federal-reporting.component';
 import { ProductInventorySalesReportComponent } from '@components/federal-reporting/product-inventory-sales-report/product-inventory-sales-report.component';
@@ -333,6 +333,7 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
     AccountProfileComponent,
     ConnectionToProducersComponent,
     DashboardComponent,
+    DueDiligenceChatComponent,
     SepDashboardComponent,
     DelayedFileUploaderComponent,
     DirectorAndOfficerPersonDialogComponent,
@@ -576,7 +577,6 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,
     MatSnackBarModule,
@@ -628,7 +628,6 @@ import { RelatedLicencePickerComponent } from './shared/components/related-licen
     MatRadioModule,
     MatRippleModule,
     MatSelectModule,
-    MatSidenavModule,
     MatSlideToggleModule,
     MatSliderModule,
     MatSnackBarModule,

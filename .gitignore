@@ -51,3 +51,7 @@ cllc-public-app/sep.json
 cllc-public-app/.claude/
 dv-migration-risk-report.md
 localdocs/
+
+# Embedded chat UI build output, copied in for local development only.
+# In deployed environments nginx proxies /chat/ to the chat UI container instead.
+cllc-public-app/wwwroot/chat/
