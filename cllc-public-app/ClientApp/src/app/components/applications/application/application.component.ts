@@ -1821,16 +1821,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
         ? this.form.get('serviceAreas').value['areas']
         : this.form.get('serviceAreas').value;
 
+    // occupant load is never persisted, so once the form is locked (LG review complete,
+    // returning to submit and pay) this check can no longer be satisfied or corrected by the applicant.
     //if (this.showServiceArea() && serviceArea.length === 0 && (this.isLP() || ApplicationTypeNames.SpecialEventAreaEndorsement || ApplicationTypeNames.LoungeAreaEndorsment) )	{
-    if (this.showServiceArea() && serviceArea.length === 0) {
-      valid = false;
-      this.validationMessages.push('At least one service area is required.');
-    } else {
-      if (!this.isOccupantLoadCorrect()) {
+    if (!this.form.disabled) {
+      if (this.showServiceArea() && serviceArea.length === 0) {
         valid = false;
-        this.validationMessages.push(
-          'The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.'
-        );
+        this.validationMessages.push('At least one service area is required.');
+      } else {
+        if (!this.isOccupantLoadCorrect()) {
+          valid = false;
+          this.validationMessages.push(
+            'The sum of occupant loads across all service areas does not match the total occupant load entered in the total occupant load field.'
+          );
+        }
       }
     }
 
