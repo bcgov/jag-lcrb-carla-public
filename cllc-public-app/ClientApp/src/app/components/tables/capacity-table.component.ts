@@ -53,7 +53,8 @@ export class CapacityTableComponent extends BaseControlValueAccessor<ServiceArea
     });
 
     this.formGroup.valueChanges.subscribe((val) => {
-      this.onChange(val);
+      // always emit a flat array, never the wrapped form group value
+      this.onChange(val.areas);
       this.value = val.areas;
     });
   }
