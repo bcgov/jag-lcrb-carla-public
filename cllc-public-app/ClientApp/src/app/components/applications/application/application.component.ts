@@ -1382,15 +1382,9 @@ export class ApplicationComponent extends FormBase implements OnInit {
         : 'Will have valid interest = No';
     }
 
-    // flatten the service areas if need be
-    const serviceAreas =
-      'areas' in this.form.get('serviceAreas').value
-        ? this.form.get('serviceAreas').value['areas']
-        : this.form.get('serviceAreas').value;
-    const outsideAreas =
-      'areas' in this.form.get('outsideAreas').value
-        ? this.form.get('outsideAreas').value['areas']
-        : this.form.get('outsideAreas').value;
+    // fall back to [] for the unset default ('')
+    const serviceAreas = Array.isArray(this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value : [];
+    const outsideAreas = Array.isArray(this.form.get('outsideAreas').value) ? this.form.get('outsideAreas').value : [];
     const capacityArea = [this.form.get('capacityArea').value];
     if (capacityArea) {
       if (this.application.applicationType.name == ApplicationTypeNames.TemporaryExtensionOfLicensedAreaLP) {
@@ -1816,10 +1810,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       }
     }
 
-    const serviceArea =
-      'areas' in this.form.get('serviceAreas').value
-        ? this.form.get('serviceAreas').value['areas']
-        : this.form.get('serviceAreas').value;
+    const serviceArea = Array.isArray(this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value : [];
 
     // occupant load is never persisted, so once the form is locked (LG review complete,
     // returning to submit and pay) this check can no longer be satisfied or corrected by the applicant.
@@ -2599,10 +2590,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
       return true;
     }
 
-    const serviceArea =
-      'areas' in this.form.get('serviceAreas').value
-        ? this.form.get('serviceAreas').value['areas']
-        : this.form.get('serviceAreas').value;
+    const serviceArea = Array.isArray(this.form.get('serviceAreas').value) ? this.form.get('serviceAreas').value : [];
     let totalCapacity = serviceArea.reduce((sum, item) => Number(sum + +item.capacity), 0);
     let totalOccupantLoad = this.form.get('totalOccupantLoad').value | 0;
     const isExceeded: boolean = totalCapacity > totalOccupantLoad;
