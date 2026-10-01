@@ -12,7 +12,7 @@ import { Subject, takeUntil } from 'rxjs';
 export type ConnectionToProducersFormData = TiedHouseConnection;
 
 // Business rule: Tied House Connections are editable for certain licence types.
-const LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [];
+const LICENCE_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE: string[] = [];
 
 // Business rule: Tied House Connections are editable for certain application types.
 const APPLICATION_TYPES_FOR_WHICH_TIED_HOUSE_IS_EDITABLE = [
