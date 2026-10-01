@@ -95,7 +95,7 @@ namespace Gov.Lclb.Cllb.Public.Middleware
             {
                 // Deliberately logged: during UAT this is how we discover a UI call we have not
                 // allowed for yet, rather than it failing silently in the browser.
-                _logger.LogWarning("Agentic proxy refused un-allowlisted route {Method} {Path}", context.Request.Method, path);
+                _logger.LogWarning("Agentic proxy refused un-allowlisted route {Method} {Path}", ForLog(context.Request.Method), ForLog(path));
                 await WriteProblem(context, StatusCodes.Status404NotFound, "route_not_allowed");
                 return;
             }
@@ -108,7 +108,7 @@ namespace Gov.Lclb.Cllb.Public.Middleware
             var token = tokenService.MintToken(userSettings, out var failureReason);
             if (token == null)
             {
-                _logger.LogInformation("Agentic proxy rejected a request: {Reason}", failureReason);
+                _logger.LogInformation("Agentic proxy rejected a request: {Reason}", ForLog(failureReason));
                 await WriteProblem(context, StatusCodes.Status401Unauthorized, "not_signed_in");
                 return;
             }
@@ -253,16 +253,44 @@ namespace Gov.Lclb.Cllb.Public.Middleware
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
             {
                 // The user navigated away mid-answer. Ordinary, not an error.
-                _logger.LogDebug("Agentic proxy client disconnected from {Path}", upstreamPath);
+                _logger.LogDebug("Agentic proxy client disconnected from {Path}", ForLog(upstreamPath));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Agentic proxy failed forwarding to {Path}", upstreamPath);
+                _logger.LogError(ex, "Agentic proxy failed forwarding to {Path}", ForLog(upstreamPath));
                 if (!context.Response.HasStarted)
                 {
                     await WriteProblem(context, StatusCodes.Status502BadGateway, "chat_unavailable");
                 }
             }
+        }
+
+        /// <summary>
+        /// Makes a request-derived value safe to put in a log line.
+        ///
+        /// <para>Anything taken from the request can contain newlines, and a newline in a log entry
+        /// lets a caller forge what reads as a separate entry (CWE-117, flagged by CodeQL as
+        /// cs/log-forging). Line breaks are removed and tabs flattened, and the result is capped so
+        /// an overlong path cannot flood the log.</para>
+        ///
+        /// <para>String.Replace is used rather than a character loop because it is the form CodeQL
+        /// recognises as sanitising the value; an equivalent hand-rolled loop leaves the alert
+        /// standing.</para>
+        /// </summary>
+        private static string ForLog(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return string.Empty;
+            }
+
+            var sanitized = value
+                .Replace("\r", string.Empty)
+                .Replace("\n", string.Empty)
+                .Replace("\t", " ");
+
+            const int MaxLength = 200;
+            return sanitized.Length > MaxLength ? sanitized.Substring(0, MaxLength) + "..." : sanitized;
         }
 
         /// <summary>

@@ -64,6 +64,7 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy {
   parseInt = parseInt; // make available in template
   licenseeChangeFeatureOn: boolean;
   eligibilityFeatureOn: boolean;
+  dueDiligenceFeatureOn: boolean;
   isEligibilityDialogOpen: boolean;
   showNavbar = true;
   isOnSepDashboard = false;
@@ -94,6 +95,11 @@ export class AppComponent extends FormBase implements OnInit, OnDestroy {
     featureFlagService.featureOn('LicenseeChanges').subscribe((x) => (this.licenseeChangeFeatureOn = x));
 
     featureFlagService.featureOn('Eligibility').subscribe((x) => (this.eligibilityFeatureOn = x));
+
+    // 'AIAssistant' is the flag that used to gate the retired AI Assistant sidebar. The due
+    // diligence assistant reuses it rather than introducing a new one, because FEATURE_AI_ASSISTANT
+    // is already configured per environment in OpenShift.
+    featureFlagService.featureOn('AIAssistant').subscribe((x) => (this.dueDiligenceFeatureOn = x));
 
 
     this.isDevMode = isDevMode();

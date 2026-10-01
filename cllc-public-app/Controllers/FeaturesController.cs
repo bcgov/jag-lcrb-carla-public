@@ -54,6 +54,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             ("FEATURE_BRIDGE_LOGIN", "BridgeLogin"), // Login using bridge entity
             ("FEATURE_PRS_ENABLED", "PrsEnabled"),
             ("FEATURE_ORV_ENABLED", "ORVEnabled"), // Online Retailer Verification (ORV) enabled for the portal
+            ("FEATURE_AI_ASSISTANT", "AIAssistant"), // Gates the Due Diligence assistant. Named for the retired AI Assistant sidebar, whose OpenShift variable it reuses.
             ("FEATURE_DISABLE_LICENCE_RENEWAL_DATE", "DisableLicenceRenewalDate"), // Hides the renewal action for licences that expire on or after the specified date.
             // CONFIG SETTINGS - MONTHLY_REPORTS_MAX_MONTHS - number of months that will be used on the monthly reports.
         };

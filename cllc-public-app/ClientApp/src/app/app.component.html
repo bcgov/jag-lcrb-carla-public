@@ -131,17 +131,23 @@
           <strong>Chat with us</strong>
         </button>
         <!--
-          The due diligence assistant. Declared before the button that opens it so the template
-          reference resolves; the panel itself is position: fixed, so where it sits in the DOM
-          makes no difference to where it appears.
+          The due diligence assistant, behind the AIAssistant flag (FEATURE_AI_ASSISTANT in
+          OpenShift), reused from the retired AI Assistant sidebar.
+
+          Panel and button share one ng-container rather than carrying an *ngIf each: a template
+          reference declared inside an *ngIf is not visible outside it, so gating them separately
+          would leave ddChat unresolved on the button. The panel is declared first so the reference
+          resolves, and it is position: fixed, so where it sits in the DOM makes no difference to
+          where it appears.
         -->
-        <app-due-diligence-chat #ddChat></app-due-diligence-chat>
-        <button
-          *ngIf="currentUser"
-          class="dd-chat-button btn btn-primary btn-sm"
-          (click)="ddChat.toggle()">
-          <strong>Due Diligence</strong>
-        </button>
+        <ng-container *ngIf="currentUser && dueDiligenceFeatureOn">
+          <app-due-diligence-chat #ddChat></app-due-diligence-chat>
+          <button
+            class="dd-chat-button btn btn-primary btn-sm"
+            (click)="ddChat.toggle()">
+            <strong>Due Diligence</strong>
+          </button>
+        </ng-container>
         <button
           *ngIf="currentUser"
           type="button"
