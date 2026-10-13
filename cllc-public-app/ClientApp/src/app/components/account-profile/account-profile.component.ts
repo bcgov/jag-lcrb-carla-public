@@ -619,7 +619,7 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   }
 
   /**
-   * Checks if the form is valid.
+   * Checks if the form is valid. Ignores sections that are not displayed.
    *
    * @readonly
    * @type {boolean} `true` if the form is valid or disabled, `false` otherwise.
@@ -627,9 +627,39 @@ export class AccountProfileComponent extends FormBase implements OnInit {
   get _isFormValid(): boolean {
     return (
       isFormValid(this.form) &&
-      isFormValid(this.connectionToProducersComponent?.form) &&
-      isFormValid(this.connectionToOtherLiquorLicencesComponent?.form)
+      (this.showConnectionsToProducersSection ? isFormValid(this.connectionToProducersComponent?.form) : true) &&
+      (this.showConnectionToOtherLiquorLicencesSection
+        ? isFormValid(this.connectionToOtherLiquorLicencesComponent?.form)
+        : true)
     );
+  }
+
+  /**
+   * Whether or not to display the Connections To Producers Section.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get showConnectionsToProducersSection(): boolean {
+    return (
+      !this.isEthylAlcoholPermit &&
+      this.saveFormData?.businessProfile?.id &&
+      ['Police'].indexOf(this.getBusinessTypeName()) == -1
+    );
+  }
+
+  /**
+   * Whether or not to display the Connection To Other Liquor Licences Section.
+   *
+   * @readonly
+   * @type {boolean}
+   */
+  get showConnectionToOtherLiquorLicencesSection(): boolean {
+    return true;
+  }
+
+  get isEthylAlcoholPermit(): boolean {
+    return this.application?.applicationType?.name === 'Ethyl Alcohol Permit';
   }
 
   gotoReview() {

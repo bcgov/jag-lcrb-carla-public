@@ -239,7 +239,7 @@
               <div formGroupName="businessProfile" class="padded-section content-bottom">
                 <p></p>
                 <h3>Physical Address</h3>
-                <p *ngIf="application?.applicationType?.name === 'Ethyl Alcohol Permit'">
+                <p *ngIf="isEthylAlcoholPermit">
                   The physical address must be the address where the ethyl will be stored.
                 </p>
                 <div class="row">
@@ -461,18 +461,13 @@
                 </app-field>
               </div>
 
-              <div
-                *ngIf="
-                  application?.applicationType?.name !== 'Ethyl Alcohol Permit' &&
-                  saveFormData?.businessProfile?.id &&
-                  ['Police'].indexOf(getBusinessTypeName()) == -1
-                ">
+              <div *ngIf="showConnectionsToProducersSection">
                 <app-connection-to-producers
                   [account]="account"
                   [application]="application"
                   (onFormChanges)="connectionToProducersFormData = $event"></app-connection-to-producers>
               </div>
-              <div>
+              <div *ngIf="showConnectionToOtherLiquorLicencesSection">
                 <app-connection-to-other-liquor-licences
                   [account]="account"
                   [application]="application"
