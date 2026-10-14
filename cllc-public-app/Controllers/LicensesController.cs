@@ -747,8 +747,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (invoice.DueDate.HasValue)
                     {
                         var d = invoice.DueDate.Value;
-                        var offset = today.IsDaylightSavingTime() ? "-08:00" : "-07:00";
-                        temp.invoice.duedate = DateTime.Parse($"{d.Year}-{d.Month}-{d.Day}T00:00:00.0000000{offset}");
+                        var utcDueDate = new DateTimeOffset(d.Year, d.Month, d.Day, 0, 0, 0, TimeSpan.Zero);
+                        temp.invoice.duedate = DateUtility.FormatDatePacific(utcDueDate);
                         temp.overdue = temp.invoice.duedate <= today;
                     }
 
