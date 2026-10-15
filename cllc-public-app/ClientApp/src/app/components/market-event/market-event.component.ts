@@ -16,7 +16,14 @@ import {
   MarketEventType,
   SpecificLocation
 } from '../../models/licence-event.model';
-import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
+import {
+  DAYS,
+  DEFAULT_END_TIME,
+  DEFAULT_START_TIME,
+  getMonthlyWeekday,
+  formatDatePacific,
+  toPacificInstant
+} from '../../shared/date-fns';
 
 @Component({
   selector: 'app-market-event',
@@ -257,10 +264,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
 
     schedules.forEach((sched) => {
-      const startDate = new Date(sched['eventStartDateTime']);
-      const endDate = new Date(sched['eventEndDateTime']);
-      const liquorStart = new Date(sched['serviceStartDateTime']);
-      const liquorEnd = new Date(sched['serviceEndDateTime']);
+      const startDate = formatDatePacific(sched.eventStartDateTime, sched.createdOn);
+      const endDate = formatDatePacific(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = formatDatePacific(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = formatDatePacific(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -290,7 +297,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     let state = {};
     for (const sched of schedules) {
-      const d = new Date(sched['eventStartDateTime']);
+      const d = formatDatePacific(sched['eventStartDateTime'], sched['createdOn']);
       const index = d.getDay();
       const day = weekdays[index];
       state = {
@@ -307,7 +314,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
   /* Restores the state of the week of month (1st Monday of the month, etc) when showing the form in read-only mode */
   setWeekOfMonthFromEventSchedule(schedules: any[] = []) {
     const first = schedules.length > 0 ? schedules[0] : null;
-    const d = new Date(first['eventStartDateTime']);
+    const d = formatDatePacific(first['eventStartDateTime'], first['createdOn']);
     const week = getWeekOfMonth(d);
     this.eventForm.patchValue({ weekOfMonth: week });
   }
@@ -318,10 +325,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
       return;
     }
     const sched = schedules[0];
-    const eventBegin = new Date(sched['eventStartDateTime']);
-    const eventEnd = new Date(sched['eventEndDateTime']);
-    const serviceBegin = new Date(sched['serviceStartDateTime']);
-    const serviceEnd = new Date(sched['serviceEndDateTime']);
+    const eventBegin = formatDatePacific(sched['eventStartDateTime'], sched['createdOn']);
+    const eventEnd = formatDatePacific(sched['eventEndDateTime'], sched['createdOn']);
+    const serviceBegin = formatDatePacific(sched['serviceStartDateTime'], sched['createdOn']);
+    const serviceEnd = formatDatePacific(sched['serviceEndDateTime'], sched['createdOn']);
 
     this.defaultTimeForm.patchValue({
       startTime: { hour: eventBegin.getHours(), minute: eventBegin.getMinutes() },
@@ -380,10 +387,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
       }
 
       dateArray.push({
-        eventStartDateTime: eventBegin,
-        eventEndDateTime: eventEnd,
-        serviceStartDateTime: serviceBegin,
-        serviceEndDateTime: serviceEnd
+        eventStartDateTime: toPacificInstant(eventBegin),
+        eventEndDateTime: toPacificInstant(eventEnd),
+        serviceStartDateTime: toPacificInstant(serviceBegin),
+        serviceEndDateTime: toPacificInstant(serviceEnd)
       });
     }
 

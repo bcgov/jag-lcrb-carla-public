@@ -8,7 +8,15 @@ import { EventCategory, EventStatus, EventType, LicenceEvent, SpecificLocation }
 import { License } from '@models/license.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { LicenseDataService } from '@services/license-data.service';
-import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
+import {
+  dateRangeValidator,
+  DAYS,
+  DEFAULT_END_TIME,
+  DEFAULT_START_TIME,
+  getDaysArray,
+  formatDatePacific,
+  toPacificInstant
+} from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
 
@@ -186,10 +194,10 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     for (const sched of schedules) {
-      const startDate = new Date(sched.eventStartDateTime);
-      const endDate = new Date(sched.eventEndDateTime);
-      const liquorStart = new Date(sched.serviceStartDateTime);
-      const liquorEnd = new Date(sched.serviceEndDateTime);
+      const startDate = formatDatePacific(sched.eventStartDateTime, sched.createdOn);
+      const endDate = formatDatePacific(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = formatDatePacific(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = formatDatePacific(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -292,10 +300,10 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
       }
 
       const sched = new LicenceEventSchedule();
-      sched.eventStartDateTime = eventBegin;
-      sched.eventEndDateTime = eventEnd;
-      sched.serviceStartDateTime = serviceBegin;
-      sched.serviceEndDateTime = serviceEnd;
+      sched.eventStartDateTime = toPacificInstant(eventBegin);
+      sched.eventEndDateTime = toPacificInstant(eventEnd);
+      sched.serviceStartDateTime = toPacificInstant(serviceBegin);
+      sched.serviceEndDateTime = toPacificInstant(serviceEnd);
       dateArray.push(sched);
     }
 

@@ -8,6 +8,7 @@ import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { LicenceEventsService } from '@services/licence-events.service';
+import { formatDatePacific, toPacificInstant } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -184,10 +185,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach((sched) => {
-      const startDate = new Date(sched['eventStartDateTime']);
-      const endDate = new Date(sched['eventEndDateTime']);
-      const liquorStart = new Date(sched['serviceStartDateTime']);
-      const liquorEnd = new Date(sched['serviceEndDateTime']);
+      const startDate = formatDatePacific(sched.eventStartDateTime, sched.createdOn);
+      const endDate = formatDatePacific(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = formatDatePacific(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = formatDatePacific(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -268,10 +269,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       }
 
       dateArray.push({
-        eventStartDateTime: eventBegin,
-        eventEndDateTime: eventEnd,
-        serviceStartDateTime: serviceBegin,
-        serviceEndDateTime: serviceEnd
+        eventStartDateTime: toPacificInstant(eventBegin),
+        eventEndDateTime: toPacificInstant(eventEnd),
+        serviceStartDateTime: toPacificInstant(serviceBegin),
+        serviceEndDateTime: toPacificInstant(serviceEnd)
       });
     }
 

@@ -1,3 +1,4 @@
+import { formatDatePacific, toPacificInstant } from '@shared/date-fns';
 import { addDays, format } from 'date-fns';
 
 export class SepSchedule {
@@ -8,12 +9,14 @@ export class SepSchedule {
   eventEnd: Date;
   serviceStart: Date;
   serviceEnd: Date;
+  createdOn: Date; // when the times were encoded; unsaved drafts keep it so they decode correctly later
   liquorServiceHoursExtensionReason: string;
   disturbancePreventionMeasuresDetails: string;
 
   constructor(sched: IEventFormValue) {
     if (sched) {
       this.id = sched.id;
+      this.createdOn = new Date();
       this.eventStart = this.formatDate(sched.eventDate, sched.eventStartValue);
       this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue);
       this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue);
@@ -25,19 +28,20 @@ export class SepSchedule {
 
   toEventFormValue(): IEventFormValue {
     const result = { id: this.id } as IEventFormValue;
-    result.eventDate = this.eventStart;
+    const wallClock = (value: Date) => formatDatePacific(value, this.createdOn);
+    result.eventDate = this.eventStart ? wallClock(this.eventStart) : this.eventStart;
 
     if (this.eventStart) {
-      result.eventStartValue = format(new Date(this.eventStart), 'h:mm aa');
+      result.eventStartValue = format(wallClock(this.eventStart), 'h:mm aa');
     }
     if (this.eventEnd) {
-      result.eventEndValue = format(new Date(this.eventEnd), 'h:mm aa');
+      result.eventEndValue = format(wallClock(this.eventEnd), 'h:mm aa');
     }
     if (this.serviceStart) {
-      result.serviceStartValue = format(new Date(this.serviceStart), 'h:mm aa');
+      result.serviceStartValue = format(wallClock(this.serviceStart), 'h:mm aa');
     }
     if (this.serviceEnd) {
-      result.serviceEndValue = format(new Date(this.serviceEnd), 'h:mm aa');
+      result.serviceEndValue = format(wallClock(this.serviceEnd), 'h:mm aa');
     }
     result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
     result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
@@ -72,7 +76,7 @@ export class SepSchedule {
     // console.log("dateString:",dateString);
     const result = new Date(dateString);
     // console.log("result is: ", result);
-    return result;
+    return toPacificInstant(result);
   }
 
   private isNextDay(time: string): boolean {
