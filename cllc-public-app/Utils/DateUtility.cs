@@ -84,6 +84,15 @@ namespace Gov.Lclb.Cllb.Public.Utils
         }
 
         /// <summary>
+        /// Gets today's date in Pacific Time.
+        /// </summary>
+        /// <returns>Today's date in Pacific Time, with no time component.</returns>
+        public static DateTime GetPacificToday()
+        {
+            return FormatDatePacific(DateTimeOffset.UtcNow).Value.Date;
+        }
+
+        /// <summary>
         /// Converts the given UTC date to Pacific Time.
         /// </summary>
         /// <param name="inputDate">The UTC date to convert.</param>

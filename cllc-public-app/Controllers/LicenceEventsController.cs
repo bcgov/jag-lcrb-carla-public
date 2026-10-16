@@ -395,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "inspectorName", licenceEvent.adoxio_EventInspectorName },
                 { "inspectorPhone", licenceEvent.adoxio_EventInspectorPhone },
                 { "inspectorEmail", licenceEvent.adoxio_EventInspectorEmail },
-                { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
+                { "date", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
                 { "marketDuration", licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
                 { "restrictionsText", termsAndConditions },

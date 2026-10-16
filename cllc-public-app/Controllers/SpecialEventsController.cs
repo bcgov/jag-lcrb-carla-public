@@ -338,7 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'></td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>";
 
-            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateUtility.GetPacificToday().ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
 
             var locationDetails = "";
 
@@ -463,7 +463,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("title", title);
             parameters.Add("heading", heading);
             parameters.Add("appInfo", appInfo);
-            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("printDate", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy"));
             parameters.Add("eligibilityInfo", eligibilityInfo);
             parameters.Add("locationDetails", locationDetails);
             parameters.Add("feesInfo", feesInfo);
@@ -667,7 +667,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
 
-            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateUtility.GetPacificToday().ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
 
             var locationDetails = "";
             var locationNumber = 1;
@@ -778,7 +778,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("title", title);
             parameters.Add("heading", heading);
             parameters.Add("appInfo", appInfo);
-            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("printDate", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy"));
             parameters.Add("eligibilityInfo", eligibilityInfo);
             parameters.Add("locationDetails", locationDetails);
             parameters.Add("feesInfo", feesInfo);

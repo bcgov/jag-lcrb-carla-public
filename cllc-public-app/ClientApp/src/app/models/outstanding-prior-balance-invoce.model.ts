@@ -17,5 +17,6 @@ export class OutstandingPriorBalanceInvoice {
     description: string;
     duedate: Date;
   };
+  dueDate: string;
   overdue: boolean;
 }

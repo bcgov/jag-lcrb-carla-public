@@ -12,6 +12,9 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public string licenceNumber { get; set; }
         public Invoice invoice { get; set; }
 
+        // yyyy-MM-dd, so the browser's timezone can't shift the date.
+        public string dueDate { get; set; }
+
         public Boolean overdue { get; set; }
     }
 }

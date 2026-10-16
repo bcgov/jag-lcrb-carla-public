@@ -18,6 +18,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -722,7 +723,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 appType.adoxio_applicationtypeId!.Value.ToString(),
                 new List<int> { (int)AdoxioApplicationStatusCodes.PendingForLicenceFee });
 
-            DateTime today = DateTime.Now;
+            DateTime today = DateUtility.GetPacificToday();
             var resultTasks = applications
                 .Where(app => app.adoxio_Invoice != null)
                 .Select(async app =>
@@ -747,9 +748,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     if (invoice.DueDate.HasValue)
                     {
                         var d = invoice.DueDate.Value;
-                        var utcDueDate = new DateTimeOffset(d.Year, d.Month, d.Day, 0, 0, 0, TimeSpan.Zero);
-                        temp.invoice.duedate = DateUtility.FormatDatePacific(utcDueDate);
-                        temp.overdue = temp.invoice.duedate <= today;
+                        var dueDate = new DateTime(d.Year, d.Month, d.Day, 0, 0, 0, DateTimeKind.Unspecified);
+                        temp.dueDate = dueDate.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+                        temp.overdue = dueDate <= today;
                     }
 
                     return temp;
@@ -1080,7 +1081,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("restrictionsText", termsAndConditions);
             parameters.Add("endorsementsText", endorsementsText);
             parameters.Add("storeHours", storeHours);
-            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("printDate", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy"));
 
             switch (adoxioLicense.adoxio_LicenceType?.Name)
             {
