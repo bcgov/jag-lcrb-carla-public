@@ -13,7 +13,7 @@ export const DEFAULT_END_TIME = {
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 // BC moves to permanent UTC-7 at this instant (2026-11-01 02:00 PDT).
-const PERMANENT_PACIFIC_OFFSET_START = new Date('2026-10-15T23:59:59Z');
+const PERMANENT_PACIFIC_OFFSET_START = new Date('2026-11-01T09:00:00Z');
 
 const PERMANENT_PACIFIC_OFFSET_MS = -7 * 60 * 60 * 1000; // -7 hours
 

@@ -35,11 +35,11 @@ namespace Gov.Lclb.Cllb.Public.Utils
         /// </summary>
         private static readonly DateTimeOffset permanentPacificOffsetStart = new DateTimeOffset(
             2026,
-            10,
-            15,
-            23,
-            59,
-            59,
+            11,
+            1,
+            9,
+            0,
+            0,
             TimeSpan.Zero
         );
 

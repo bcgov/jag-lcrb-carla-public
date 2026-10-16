@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -566,7 +566,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
