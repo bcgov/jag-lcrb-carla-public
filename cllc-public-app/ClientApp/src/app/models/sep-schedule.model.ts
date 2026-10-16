@@ -1,4 +1,4 @@
-import { formatDatePacific, toPacificInstant } from '@shared/date-fns';
+import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
 import { addDays, format } from 'date-fns';
 
 export class SepSchedule {
@@ -28,7 +28,7 @@ export class SepSchedule {
 
   toEventFormValue(): IEventFormValue {
     const result = { id: this.id } as IEventFormValue;
-    const wallClock = (value: Date) => formatDatePacific(value, this.createdOn);
+    const wallClock = (value: Date) => fromUtcToPacificWallClock(value, this.createdOn);
     result.eventDate = this.eventStart ? wallClock(this.eventStart) : this.eventStart;
 
     if (this.eventStart) {
@@ -76,7 +76,7 @@ export class SepSchedule {
     // console.log("dateString:",dateString);
     const result = new Date(dateString);
     // console.log("result is: ", result);
-    return toPacificInstant(result);
+    return fromPacificWallClockToUtc(result);
   }
 
   private isNextDay(time: string): boolean {

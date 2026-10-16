@@ -7,7 +7,7 @@ import { SepApplication, SepTermAndCondtion } from '@models/sep-application.mode
 import { SepDrinkType } from '@models/sep-drink-type.model';
 import { SepPoliceHome } from '@models/sep-police-home';
 import { SepPoliceJobSummary } from '@models/sep-police-job-summary';
-import { formatDatePacific, toPacificInstant } from '@shared/date-fns';
+import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
 import { startOfDay } from 'date-fns';
 import { Observable } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
@@ -25,7 +25,7 @@ function decodeEventStartDate<T extends { eventStartDate?: Date | string; modifi
   if (!item?.eventStartDate) {
     return item;
   }
-  return { ...item, eventStartDate: startOfDay(formatDatePacific(item.eventStartDate, item.modifiedOn)) };
+  return { ...item, eventStartDate: startOfDay(fromUtcToPacificWallClock(item.eventStartDate, item.modifiedOn)) };
 }
 
 /**
@@ -38,7 +38,7 @@ function encodeEventStartDate(data: SepApplication): SepApplication {
   if (!data?.eventStartDate) {
     return data;
   }
-  return { ...data, eventStartDate: toPacificInstant(startOfDay(new Date(data.eventStartDate))) } as SepApplication;
+  return { ...data, eventStartDate: fromPacificWallClockToUtc(startOfDay(new Date(data.eventStartDate))) } as SepApplication;
 }
 
 function decodeSummaries(items: SepApplicationSummary[]): SepApplicationSummary[] {

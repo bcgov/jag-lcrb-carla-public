@@ -15,8 +15,8 @@ import {
   DEFAULT_END_TIME,
   DEFAULT_START_TIME,
   getDaysArray,
-  formatDatePacific,
-  toPacificInstant
+  fromUtcToPacificWallClock,
+  fromPacificWallClockToUtc
 } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
@@ -209,10 +209,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     for (const sched of schedules) {
-      const startDate = formatDatePacific(sched.eventStartDateTime, sched.createdOn);
-      const endDate = formatDatePacific(sched.eventEndDateTime, sched.createdOn);
-      const liquorStart = formatDatePacific(sched.serviceStartDateTime, sched.createdOn);
-      const liquorEnd = formatDatePacific(sched.serviceEndDateTime, sched.createdOn);
+      const startDate = fromUtcToPacificWallClock(sched.eventStartDateTime, sched.createdOn);
+      const endDate = fromUtcToPacificWallClock(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = fromUtcToPacificWallClock(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = fromUtcToPacificWallClock(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -351,10 +351,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
       }
 
       const sched = new LicenceEventSchedule();
-      sched.eventStartDateTime = toPacificInstant(eventBegin);
-      sched.eventEndDateTime = toPacificInstant(eventEnd);
-      sched.serviceStartDateTime = toPacificInstant(serviceBegin);
-      sched.serviceEndDateTime = toPacificInstant(serviceEnd);
+      sched.eventStartDateTime = fromPacificWallClockToUtc(eventBegin);
+      sched.eventEndDateTime = fromPacificWallClockToUtc(eventEnd);
+      sched.serviceStartDateTime = fromPacificWallClockToUtc(serviceBegin);
+      sched.serviceEndDateTime = fromPacificWallClockToUtc(serviceEnd);
       dateArray.push(sched);
     }
 

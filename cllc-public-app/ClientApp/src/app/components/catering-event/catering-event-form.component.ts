@@ -8,7 +8,7 @@ import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { formatDatePacific, toPacificInstant } from '@shared/date-fns';
+import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -185,10 +185,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach((sched) => {
-      const startDate = formatDatePacific(sched.eventStartDateTime, sched.createdOn);
-      const endDate = formatDatePacific(sched.eventEndDateTime, sched.createdOn);
-      const liquorStart = formatDatePacific(sched.serviceStartDateTime, sched.createdOn);
-      const liquorEnd = formatDatePacific(sched.serviceEndDateTime, sched.createdOn);
+      const startDate = fromUtcToPacificWallClock(sched.eventStartDateTime, sched.createdOn);
+      const endDate = fromUtcToPacificWallClock(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = fromUtcToPacificWallClock(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = fromUtcToPacificWallClock(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -269,10 +269,10 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       }
 
       dateArray.push({
-        eventStartDateTime: toPacificInstant(eventBegin),
-        eventEndDateTime: toPacificInstant(eventEnd),
-        serviceStartDateTime: toPacificInstant(serviceBegin),
-        serviceEndDateTime: toPacificInstant(serviceEnd)
+        eventStartDateTime: fromPacificWallClockToUtc(eventBegin),
+        eventEndDateTime: fromPacificWallClockToUtc(eventEnd),
+        serviceStartDateTime: fromPacificWallClockToUtc(serviceBegin),
+        serviceEndDateTime: fromPacificWallClockToUtc(serviceEnd)
       });
     }
 

@@ -43,6 +43,11 @@ namespace Gov.Jag.Lcrb.OneStopService
             TimeSpan.Zero
         );
 
+        /// <summary>
+        /// Finds the first available time zone from the given list of IDs.
+        /// </summary>
+        /// <param name="ids">The list of time zone IDs to search for.</param>
+        /// <returns>The first available time zone from the list.</returns>
         private static TimeZoneInfo FindTimeZone(string[] ids)
         {
             foreach (var id in ids)
@@ -60,11 +65,6 @@ namespace Gov.Jag.Lcrb.OneStopService
             throw new TimeZoneNotFoundException("No Pacific timezone found for this platform.");
         }
 
-        public static string GetTimeStamp()
-        {
-            return DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ss.000000");
-        }
-
         /// <summary>
         /// Gets the Pacific Time Zone information for the current platform.
         /// </summary>
@@ -74,6 +74,10 @@ namespace Gov.Jag.Lcrb.OneStopService
             return FindTimeZone(pacificTimeZoneIds);
         }
 
+        /// <summary>
+        /// Gets the legacy Pacific Time Zone information for the current platform.
+        /// </summary>
+        /// <returns>The legacy Pacific Time Zone information.</returns>
         private static TimeZoneInfo GetLegacyPacificTimeZone()
         {
             return FindTimeZone(legacyPacificTimeZoneIds);
@@ -84,9 +88,10 @@ namespace Gov.Jag.Lcrb.OneStopService
         /// </summary>
         /// <param name="inputDate">The UTC date to convert.</param>
         /// <param name="capturedOn">
-        /// When the value was entered. If it was entered before Nov 1, 2026 but contains a value on or after Nov 1,2026
-        /// then the date was created under the old PST/PDT rules when it was saved to Dynamics. The same rules should
-        /// be applied when converting the date back to Pacific Time..
+        /// When the "inputDate" value was actually captured. If it was captured before Nov 1, 2026 but contains a date
+        /// value on or after Nov 1,2026 then the date was created under the old PST/PDT rules when it was saved to
+        /// Dynamics. The same rules should be applied when converting the date back to Pacific Time, even if the date
+        /// itself is on or after Nov 1, 2026.
         /// </param>
         /// <returns>The converted date in Pacific Time, or null if the input date is null.</returns>
         public static DateTime? FormatDatePacific(
@@ -111,6 +116,11 @@ namespace Gov.Jag.Lcrb.OneStopService
                 : GetPacificTimeZone();
 
             return TimeZoneInfo.ConvertTimeFromUtc(inputDate.Value.DateTime, pacificTimeZone);
+        }
+
+        public static string GetTimeStamp()
+        {
+            return DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ss.000000");
         }
     }
 }
