@@ -34,6 +34,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EventEndDate = se.adoxio_EventEndDate,
                 EventName = se.adoxio_eventname,
                 EventStartDate = se.adoxio_EventStartDate,
+                ModifiedOn = se.ModifiedOn,
                 FundRaisingPurpose = (ViewModels.FundRaisingPurposes?)(int?)se.adoxio_FundraisingPurpose,
                 HostOrganizationAddress = se.adoxio_HostOrganisationAddress,
                 HostOrganizationCategory = (ViewModels.HostOrgCatergory?)(int?)se.adoxio_HostOrganisationCategory,
@@ -136,6 +137,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             {
                 SpecialEventId = se.Id == Guid.Empty ? null : se.Id.ToString(),
                 EventStartDate = se.adoxio_EventStartDate,
+                ModifiedOn = se.ModifiedOn,
                 EventName = se.adoxio_eventname,
                 InvoiceId = se.adoxio_Invoice?.Id.ToString(),
                 IsInvoicePaid = se.adoxio_IsInvoicePaid,

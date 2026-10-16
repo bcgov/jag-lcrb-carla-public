@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -338,7 +338,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'></td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>";
 
-            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateUtility.GetPacificToday().ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>";
 
             var locationDetails = "";
 
@@ -377,23 +377,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.adoxio_EventStart.HasValue)
                     {
-                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
+                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
 
                     var eventTimeParam = "";
                     if (sched.adoxio_EventStart.HasValue && sched.adoxio_EventEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd, sched.CreatedOn).Value;
                         eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
                     var serviceTimeParam = "";
                     if (sched.adoxio_ServiceStart.HasValue && sched.adoxio_ServiceEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart, sched.CreatedOn).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd, sched.CreatedOn).Value;
                         serviceTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
@@ -463,7 +463,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("title", title);
             parameters.Add("heading", heading);
             parameters.Add("appInfo", appInfo);
-            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("printDate", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy"));
             parameters.Add("eligibilityInfo", eligibilityInfo);
             parameters.Add("locationDetails", locationDetails);
             parameters.Add("feesInfo", feesInfo);
@@ -566,7 +566,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -667,7 +667,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             pageTop += "AAAAoQIAAAAIFQAAAACECgAAACBUAAAAABAqAAAAgFABAAAAQKgAAAAAIFQAAAAAoQIAAACAUAEAAACECgAAAABCBQAAACCb/1+AAQAeXUHaMpCpHwAAAABJRU5ErkJggg==' alt='BC Gov Logo'>\n</td><td width='80%'>";
             pageTop += $"<h1 class='title'>Liquor and Cannabis Regulation Branch</h1>{heading}</td></tr></table>\n";
 
-            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateTime.Today.ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
+            var pageBottom = $"<div class='footer'><div class='footer-box'><p></p></div><div class='issued-box'><p style='text-align:right;'><small>Printed: {DateUtility.GetPacificToday().ToString("MMMM dd, yyyy")}</small></p></div></div></div></div>\n";
 
             var locationDetails = "";
             var locationNumber = 1;
@@ -704,23 +704,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.adoxio_EventStart.HasValue)
                     {
-                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
+                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
 
                     var eventTimeParam = "";
                     if (sched.adoxio_EventStart.HasValue && sched.adoxio_EventEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd, sched.CreatedOn).Value;
                         eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
                     var serviceTimeParam = "";
                     if (sched.adoxio_ServiceStart.HasValue && sched.adoxio_ServiceEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart, sched.CreatedOn).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd, sched.CreatedOn).Value;
                         serviceTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
@@ -778,7 +778,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             parameters.Add("title", title);
             parameters.Add("heading", heading);
             parameters.Add("appInfo", appInfo);
-            parameters.Add("printDate", DateTime.Today.ToString("MMMM dd, yyyy"));
+            parameters.Add("printDate", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy"));
             parameters.Add("eligibilityInfo", eligibilityInfo);
             parameters.Add("locationDetails", locationDetails);
             parameters.Add("feesInfo", feesInfo);

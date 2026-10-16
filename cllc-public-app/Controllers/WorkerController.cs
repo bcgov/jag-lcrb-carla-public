@@ -7,6 +7,7 @@ using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Public.Extensions;
+using Gov.Lclb.Cllb.Public.Utils;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -250,7 +251,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 var parameters = new Dictionary<string, string>
                 {
                     { "title", "Worker_Qualification" },
-                    { "currentDate", DateTime.Now.ToLongDateString() },
+                    { "currentDate", DateUtility.GetPacificToday().ToLongDateString() },
                     { "firstName", adoxioWorker.adoxio_FirstName },
                     { "middleName", adoxioWorker.adoxio_MiddleName },
                     { "lastName", adoxioWorker.adoxio_LastName },
