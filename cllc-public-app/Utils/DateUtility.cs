@@ -8,26 +8,12 @@ namespace Gov.Lclb.Cllb.Public.Utils
     public class DateUtility
     {
         /// <summary>
-        /// <list type="bullet">
-        /// <item>"America/Vancouver" is the IANA time zone code used by most Unix-based systems.</item>
-        /// <item>"British Columbia Standard Time" is the new Windows time zone code for Pacific Time in British Columbia post Nov 1, 2026.</item>
-        /// <item>"Pacific Standard Time" is the traditional Windows time zone code for Pacific Time.</item>
-        /// </list>
-        /// </summary>
-        private static readonly string[] pacificTimeZoneIds = new[]
-        {
-            "America/Vancouver",
-            "British Columbia Standard Time",
-            "Pacific Standard Time",
-        };
-
-        /// <summary>
         /// Zones that keep the US daylight saving rules (PST/PDT), as BC did before Nov 1, 2026.
         /// </summary>
         private static readonly string[] legacyPacificTimeZoneIds = new[]
         {
-            "America/Los_Angeles",
-            "Pacific Standard Time",
+            "America/Los_Angeles", // IANA time zone code for US Pacific Time (PST/PDT)
+            "Pacific Standard Time", // Traditional Windows time zone code for Pacific Time (PST/PDT)
         };
 
         /// <summary>
@@ -66,16 +52,7 @@ namespace Gov.Lclb.Cllb.Public.Utils
         }
 
         /// <summary>
-        /// Gets the Pacific Time Zone information for the current platform.
-        /// </summary>
-        /// <returns>The Pacific Time Zone information.</returns>
-        public static TimeZoneInfo GetPacificTimeZone()
-        {
-            return FindTimeZone(pacificTimeZoneIds);
-        }
-
-        /// <summary>
-        /// Gets the legacy Pacific Time Zone information for the current platform.
+        /// Gets the zone with the US PST/PDT rules that BC followed before Nov 1, 2026.
         /// </summary>
         /// <returns>The legacy Pacific Time Zone information.</returns>
         private static TimeZoneInfo GetLegacyPacificTimeZone()
@@ -97,10 +74,9 @@ namespace Gov.Lclb.Cllb.Public.Utils
         /// </summary>
         /// <param name="inputDate">The UTC date to convert.</param>
         /// <param name="capturedOn">
-        /// When the "inputDate" value was actually captured. If it was captured before Nov 1, 2026 but contains a date
-        /// value on or after Nov 1,2026 then the date was created under the old PST/PDT rules when it was saved to
-        /// Dynamics. The same rules should be applied when converting the date back to Pacific Time, even if the date
-        /// itself is on or after Nov 1, 2026.
+        /// When the "inputDate" value was actually captured. If it was captured before Nov 1, 2026 then the date was 
+        /// created under the old PST/PDT rules when it was saved to Dynamics. The same rules should be applied when 
+        /// converting the date back to Pacific Time, even if the date value itself is on or after Nov 1, 2026.
         /// </param>
         /// <returns>The converted date in Pacific Time, or null if the input date is null.</returns>
         public static DateTime? FormatDatePacific(DateTimeOffset? inputDate, DateTimeOffset? capturedOn = null)
@@ -110,16 +86,17 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 return null;
             }
 
-            // Determine if the inputDate was captured before Nov 1, 2026 but contains a value on or after Nov 1, 2026.
-            // Such a date would be affected by the legacy PST/PDT rules rather than the new PCT rules.
-            var capturedUnderLegacyRules =
-                capturedOn.HasValue
-                && capturedOn.Value < permanentPacificOffsetStart
-                && inputDate.Value >= permanentPacificOffsetStart;
+            // A value captured before Nov 1, 2026 was saved under the legacy PST/PDT rules, even if it's dated after.
+            var capturedUnderLegacyRules = capturedOn.HasValue && capturedOn.Value < permanentPacificOffsetStart;
 
-            var pacificTimeZone = capturedUnderLegacyRules ? GetLegacyPacificTimeZone() : GetPacificTimeZone();
+            // Fixed UTC-7 after Nov 1, 2026, so hosts without BC's updated timezone data don't fall back to PST (UTC-8)
+            if (inputDate.Value >= permanentPacificOffsetStart && !capturedUnderLegacyRules)
+            {
+                return DateTime.SpecifyKind(inputDate.Value.UtcDateTime.AddHours(-7), DateTimeKind.Unspecified);
+            }
 
-            return TimeZoneInfo.ConvertTimeFromUtc(inputDate.Value.DateTime, pacificTimeZone);
+            // A value captured before Nov 1, 2026 should be converted using the legacy PST/PDT rules.
+            return TimeZoneInfo.ConvertTimeFromUtc(inputDate.Value.UtcDateTime, GetLegacyPacificTimeZone());
         }
     }
 }

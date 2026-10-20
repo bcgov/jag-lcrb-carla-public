@@ -13,7 +13,6 @@ export const DEFAULT_END_TIME = {
 export const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
 
 const PST_OFFSET_MS = -8 * 60 * 60 * 1000; // -8 hours - Pacific Standard Time (winter)
-const PDT_OFFSET_MS = -7 * 60 * 60 * 1000; // -7 hours - Pacific Daylight Time (summer)
 const PCT_OFFSET_MS = -7 * 60 * 60 * 1000; // -7 hours - Pacific Constant Time (permanent UTC-7)
 
 // BC moves to permanent UTC-7 at this instant (2026-11-01 02:00 PDT).
