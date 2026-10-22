@@ -176,7 +176,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 return;
             }
 
-            Guid? parentDocLocId = await GetSharePointDocLocIdByRelativeUrlAsync(DOCUMENT_LIBRARY, relativeUrl);
+            Guid? parentDocLocId = await GetRootFederalReportExportDocLocId();
 
             if (parentDocLocId.HasValue)
             {
@@ -206,28 +206,15 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
         }
 
-        private async Task<Guid?> GetSharePointDocLocIdByRelativeUrlAsync(string relativeUrl, string name)
+        private async Task<Guid?> GetRootFederalReportExportDocLocId()
         {
-            var locations = await _dataverseClient.GetSharePointDocLocsByRelativeUrlAndNameAsync(relativeUrl, name);
+            var locations = await _dataverseClient.GetSharePointDocLocsByRelativeUrlAndNameAsync(DOCUMENT_LIBRARY, "Federal Report Export");
             var location = locations.FirstOrDefault();
 
             if (location == null)
             {
-                var newRecord = new SharePointDocumentLocation
-                {
-                    RelativeUrl = relativeUrl,
-                    Name = name
-                };
-                try
-                {
-                    var id = await _dataverseClient.CreateSharePointDocLocAsync(newRecord);
-                    return id;
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Error creating document location");
-                    return null;
-                }
+                _logger.LogError("Unable to find document library adoxio_federalreportexport by the name 'Federal Report Export'.");
+                return null;
             }
 
             return location.Id;
