@@ -118,7 +118,7 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                             {
                                 string entityIdCleaned = export.Id.ToString().ToUpper().Replace("-", "");
                                 folderName = SanatiseRelativeUrl($"{export.adoxio_name}_{entityIdCleaned}");
-                                await CreateFederalReportDocumentLocation(export, DOCUMENT_LIBRARY, folderName);
+                                await CreateFederalReportDocumentLocation(export, folderName);
                             }
 
                             byte[] data = mem.ToArray();
@@ -156,13 +156,13 @@ namespace Gov.Lclb.Cllb.FederalReportingService
             }
         }
 
-        private async Task CreateFederalReportDocumentLocation(adoxio_federalreportexport federalReport, string folderName, string name)
+        private async Task CreateFederalReportDocumentLocation(adoxio_federalreportexport federalReport, string relativeUrl)
         {
             var mdcsdl = new SharePointDocumentLocation
             {
-                RelativeUrl = folderName,
+                RelativeUrl = relativeUrl,
                 Description = "Federal Report Files",
-                Name = name
+                Name = relativeUrl
             };
 
             Guid docLocId;
@@ -176,14 +176,14 @@ namespace Gov.Lclb.Cllb.FederalReportingService
                 return;
             }
 
-            Guid? parentDocLocId = await GetSharePointDocLocIdByRelativeUrlAsync("adoxio_federalreportexport", name);
+            Guid? parentDocLocId = await GetSharePointDocLocIdByRelativeUrlAsync(DOCUMENT_LIBRARY, relativeUrl);
 
             if (parentDocLocId.HasValue)
             {
                 var patchDocLoc = new SharePointDocumentLocation { Id = docLocId };
                 patchDocLoc.RegardingObjectId = new EntityReference(adoxio_federalreportexport.EntityLogicalName, federalReport.Id);
                 patchDocLoc.ParentSiteOrLocation = new EntityReference(SharePointDocumentLocation.EntityLogicalName, parentDocLocId.Value);
-                patchDocLoc.RelativeUrl = name;
+                patchDocLoc.RelativeUrl = relativeUrl;
                 patchDocLoc.Description = "Federal Report Files";
 
                 try
