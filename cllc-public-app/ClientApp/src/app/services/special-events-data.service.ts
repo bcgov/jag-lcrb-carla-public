@@ -54,10 +54,12 @@ function encodeSchedules(data: SepApplication): SepApplication {
 
   data?.eventLocations?.forEach((location) =>
     location.eventDates?.forEach((sched) => {
-      sched.eventStart = reencode(sched.eventStart, sched.createdOn);
-      sched.eventEnd = reencode(sched.eventEnd, sched.createdOn);
-      sched.serviceStart = reencode(sched.serviceStart, sched.createdOn);
-      sched.serviceEnd = reencode(sched.serviceEnd, sched.createdOn);
+      // Drafts saved before createdOn existed were encoded under the legacy PST/PDT rules.
+      const createdOn = sched.createdOn ?? new Date(0);
+      sched.eventStart = reencode(sched.eventStart, createdOn);
+      sched.eventEnd = reencode(sched.eventEnd, createdOn);
+      sched.serviceStart = reencode(sched.serviceStart, createdOn);
+      sched.serviceEnd = reencode(sched.serviceEnd, createdOn);
       sched.createdOn = now;
     })
   );

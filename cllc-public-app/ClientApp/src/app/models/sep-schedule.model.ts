@@ -28,24 +28,26 @@ export class SepSchedule {
 
   toEventFormValue(): IEventFormValue {
     const result = { id: this.id } as IEventFormValue;
+    // Drafts saved before createdOn existed were encoded under the legacy PST/PDT rules.
+    const createdOn = this.createdOn ?? new Date(0);
 
-    result.eventDate = this.eventStart ? fromUtcToPacificWallClock(this.eventStart, this.createdOn) : this.eventStart;
+    result.eventDate = this.eventStart ? fromUtcToPacificWallClock(this.eventStart, createdOn) : this.eventStart;
 
     if (this.eventStart) {
-      result.eventStartValue = format(fromUtcToPacificWallClock(this.eventStart, this.createdOn), 'h:mm aa');
+      result.eventStartValue = format(fromUtcToPacificWallClock(this.eventStart, createdOn), 'h:mm aa');
       // formatDate saved after-midnight starts on the next day, so step back to the event date.
       if (this.isNextDay(result.eventStartValue)) {
         result.eventDate = subDays(result.eventDate, 1);
       }
     }
     if (this.eventEnd) {
-      result.eventEndValue = format(fromUtcToPacificWallClock(this.eventEnd, this.createdOn), 'h:mm aa');
+      result.eventEndValue = format(fromUtcToPacificWallClock(this.eventEnd, createdOn), 'h:mm aa');
     }
     if (this.serviceStart) {
-      result.serviceStartValue = format(fromUtcToPacificWallClock(this.serviceStart, this.createdOn), 'h:mm aa');
+      result.serviceStartValue = format(fromUtcToPacificWallClock(this.serviceStart, createdOn), 'h:mm aa');
     }
     if (this.serviceEnd) {
-      result.serviceEndValue = format(fromUtcToPacificWallClock(this.serviceEnd, this.createdOn), 'h:mm aa');
+      result.serviceEndValue = format(fromUtcToPacificWallClock(this.serviceEnd, createdOn), 'h:mm aa');
     }
     result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
     result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
