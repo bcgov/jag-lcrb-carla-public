@@ -9,8 +9,17 @@ import { License } from '@models/license.model';
 import { ServiceArea } from '@models/service-area.model';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { LicenseDataService } from '@services/license-data.service';
-import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
+import {
+  dateRangeValidator,
+  DAYS,
+  DEFAULT_END_TIME,
+  DEFAULT_START_TIME,
+  getDaysArray,
+  fromUtcToPacificWallClock,
+  fromPacificWallClockToUtc
+} from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
+import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { Endorsement, HoursOfService } from '../../models/endorsement.model';
 
@@ -161,8 +170,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
       eventLocations: licenceEvent.eventLocations,
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
+      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,
       maxAttendance: licenceEvent.maxAttendance,
       minorsAttending: licenceEvent.minorsAttending,
@@ -201,10 +210,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     for (const sched of schedules) {
-      const startDate = new Date(sched.eventStartDateTime);
-      const endDate = new Date(sched.eventEndDateTime);
-      const liquorStart = new Date(sched.serviceStartDateTime);
-      const liquorEnd = new Date(sched.serviceEndDateTime);
+      const startDate = fromUtcToPacificWallClock(sched.eventStartDateTime, sched.createdOn);
+      const endDate = fromUtcToPacificWallClock(sched.eventEndDateTime, sched.createdOn);
+      const liquorStart = fromUtcToPacificWallClock(sched.serviceStartDateTime, sched.createdOn);
+      const liquorEnd = fromUtcToPacificWallClock(sched.serviceEndDateTime, sched.createdOn);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -343,10 +352,10 @@ export class TuaEventComponent extends FormBase implements OnInit {
       }
 
       const sched = new LicenceEventSchedule();
-      sched.eventStartDateTime = eventBegin;
-      sched.eventEndDateTime = eventEnd;
-      sched.serviceStartDateTime = serviceBegin;
-      sched.serviceEndDateTime = serviceEnd;
+      sched.eventStartDateTime = fromPacificWallClockToUtc(eventBegin);
+      sched.eventEndDateTime = fromPacificWallClockToUtc(eventEnd);
+      sched.serviceStartDateTime = fromPacificWallClockToUtc(serviceBegin);
+      sched.serviceEndDateTime = fromPacificWallClockToUtc(serviceEnd);
       dateArray.push(sched);
     }
 

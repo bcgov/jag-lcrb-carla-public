@@ -1,4 +1,5 @@
-import { addDays, format } from 'date-fns';
+import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
+import { addDays, format, subDays } from 'date-fns';
 
 export class SepSchedule {
   id: string; // server side primary key
@@ -8,12 +9,14 @@ export class SepSchedule {
   eventEnd: Date;
   serviceStart: Date;
   serviceEnd: Date;
+  createdOn: Date; // when the times were encoded; unsaved drafts keep it so they decode correctly later
   liquorServiceHoursExtensionReason: string;
   disturbancePreventionMeasuresDetails: string;
 
   constructor(sched: IEventFormValue) {
     if (sched) {
       this.id = sched.id;
+      this.createdOn = new Date();
       this.eventStart = this.formatDate(sched.eventDate, sched.eventStartValue);
       this.eventEnd = this.formatDate(sched.eventDate, sched.eventEndValue);
       this.serviceStart = this.formatDate(sched.eventDate, sched.serviceStartValue);
@@ -25,19 +28,26 @@ export class SepSchedule {
 
   toEventFormValue(): IEventFormValue {
     const result = { id: this.id } as IEventFormValue;
-    result.eventDate = this.eventStart;
+    // Drafts saved before createdOn existed were encoded under the legacy PST/PDT rules.
+    const createdOn = this.createdOn ?? new Date(0);
+
+    result.eventDate = this.eventStart ? fromUtcToPacificWallClock(this.eventStart, createdOn) : this.eventStart;
 
     if (this.eventStart) {
-      result.eventStartValue = format(new Date(this.eventStart), 'h:mm aa');
+      result.eventStartValue = format(fromUtcToPacificWallClock(this.eventStart, createdOn), 'h:mm aa');
+      // formatDate saved after-midnight starts on the next day, so step back to the event date.
+      if (this.isNextDay(result.eventStartValue)) {
+        result.eventDate = subDays(result.eventDate, 1);
+      }
     }
     if (this.eventEnd) {
-      result.eventEndValue = format(new Date(this.eventEnd), 'h:mm aa');
+      result.eventEndValue = format(fromUtcToPacificWallClock(this.eventEnd, createdOn), 'h:mm aa');
     }
     if (this.serviceStart) {
-      result.serviceStartValue = format(new Date(this.serviceStart), 'h:mm aa');
+      result.serviceStartValue = format(fromUtcToPacificWallClock(this.serviceStart, createdOn), 'h:mm aa');
     }
     if (this.serviceEnd) {
-      result.serviceEndValue = format(new Date(this.serviceEnd), 'h:mm aa');
+      result.serviceEndValue = format(fromUtcToPacificWallClock(this.serviceEnd, createdOn), 'h:mm aa');
     }
     result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
     result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
@@ -45,13 +55,8 @@ export class SepSchedule {
     return result;
   }
 
-  getServiceHours(): number {
-    const serviceHours =
-      parseInt(format(new Date(this.serviceEnd), 'H')) - parseInt(format(new Date(this.serviceStart), 'H'));
-    return serviceHours;
-  }
-
   /**
+   * Formats a date and time string into a UTC Date, taking into account if the time is on the next day.
    *
    * @param eventDate
    * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
@@ -59,20 +64,14 @@ export class SepSchedule {
   private formatDate(eventDate: Date, time: string): Date {
     let tempDate = new Date(eventDate);
 
-    // let day = parseInt(format(new Date(eventDate), "dd"), 10);
-
-    // console.log("formatting date: ", eventDate, time)
     if (this.isNextDay(time)) {
-      // console.log("is next day")
       tempDate = addDays(tempDate, 1);
-      // day += 1;
     }
-    // const dateString = `${day} ${format(tempDate, "d MMM yyyy")} ${time}`;
+
     const dateString = `${format(tempDate, 'd MMM yyyy')} ${time}`;
-    // console.log("dateString:",dateString);
     const result = new Date(dateString);
-    // console.log("result is: ", result);
-    return result;
+
+    return fromPacificWallClockToUtc(result);
   }
 
   private isNextDay(time: string): boolean {
