@@ -471,6 +471,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // get BCeID record for the current user
             Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
             _logger.LogDebug(LoggingEvents.Get, $"business Info from bceid: {JsonConvert.SerializeObject(bceidBusiness)}");
+            TempAuthDebug.LogHeaders(_logger, nameof(CreateAccount), _httpContextAccessor.HttpContext.Request.Headers);
+            TempAuthDebug.Log(_logger, nameof(CreateAccount),
+                "BCeID business query: " + TempAuthDebug.Json(bceidBusiness) + "; userSettings: " + TempAuthDebug.Json(userSettings));
 
             var cleanNumber = BusinessNumberSanitizer.SanitizeNumber(bceidBusiness?.businessNumber);
             if (cleanNumber != null)
@@ -526,6 +529,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 {
                     Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
                     _logger.LogDebug(LoggingEvents.Get, $"basic Info from bceid: {JsonConvert.SerializeObject(bceidBasic)}");
+                    TempAuthDebug.Log(_logger, nameof(CreateAccount),
+                        "BCeID basic query: " + TempAuthDebug.Json(bceidBasic));
                     if (bceidBasic != null)
                     {
                         userContact.FirstName = bceidBasic.individualFirstname;
@@ -534,6 +539,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
                 userContact.StatusCode = DV::Gov.Lclb.Cllb.Interfaces.contact_statuscode.Active;
             }
+            TempAuthDebug.Log(_logger, nameof(CreateAccount),
+                $"Contact to use (createContact={createContact}): " + TempAuthDebug.Json(userContact));
 
             // this may be an existing account, as this service is used during the account confirmation process.
             DvAccount account = await _dataverse.GetAccountByExternalIdAsync(accountSiteminderGuid);
@@ -691,6 +698,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // create the bridge entity for login.
+            var persistedContact = await _dataverse.GetContactByIdAsync(contactId);
+            TempAuthDebug.Log(_logger, nameof(CreateAccount),
+                $"Re-read from Dynamics contact {contactId}: " + TempAuthDebug.Json(persistedContact));
             if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
             {
                 await _dataverse.UpdateContactBridgeLoginAsync(contactId, contactSiteminderGuid, accountId, accountSiteminderGuid);
@@ -711,8 +721,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.ContactId = Guid.Parse(userSettings.ContactId);
                     user.UserType = userSettings.UserType;
                     user.SmUserId = userSettings.UserId;
+                    user.GivenName = userContact.FirstName;
+                    user.Surname = userContact.LastName;
+                    user.Email = userContact.EMailAddress1;
                     userSettings.AuthenticatedUser = user;
                 }
+
+                userSettings.UserDisplayName = $"{userContact.FirstName} {userContact.LastName}".Trim();
 
                 userSettings.IsNewUserRegistration = false;
 

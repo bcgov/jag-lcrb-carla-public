@@ -51,6 +51,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userSettings.SiteMinderGuid, _httpContextAccessor.HttpContext.Session.Id);
 
             user.id = userSettings.UserId;
+            TempAuthDebug.LogHeaders(_logger, nameof(UsersCurrentGet), _httpContextAccessor.HttpContext.Request.Headers);
+            TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                "Session userSettings: " + TempAuthDebug.Json(userSettings));
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
             user.businessname = userSettings.BusinessLegalName;
@@ -81,44 +84,56 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
+            if (userSettings.AuthenticatedUser != null)
+            {
+                user.name = $"{userSettings.AuthenticatedUser.GivenName} {userSettings.AuthenticatedUser.Surname}".Trim();
+                user.lastname = userSettings.AuthenticatedUser.Surname;
+                user.firstname = userSettings.AuthenticatedUser.GivenName;
+                user.email = userSettings.AuthenticatedUser.Email;
+            }
+
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
-                user.lastname = user.name.GetLastName();
-                user.firstname = user.name.GetFirstName();
                 user.accountid = userSettings.AccountId;
 
-                string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];
-                string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
+                if (userSettings.AuthenticatedUser == null)
+                {
+                    user.lastname = user.name.GetLastName();
+                    user.firstname = user.name.GetFirstName();
 
-                Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-                if (bceidBusiness != null)
-                {
-                    user.firstname = bceidBusiness.individualFirstname;
-                    user.lastname = bceidBusiness.individualSurname;
-                }
-                else
-                {
-                    Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
-                    if (bceidBasic != null)
+                    string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];
+                    string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
+
+                    Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+                    if (bceidBusiness != null)
                     {
-                        user.firstname = bceidBasic.individualFirstname;
-                        user.lastname = bceidBasic.individualSurname;
+                        user.firstname = bceidBusiness.individualFirstname;
+                        user.lastname = bceidBusiness.individualSurname;
                     }
+                    else
+                    {
+                        Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
+                        if (bceidBasic != null)
+                        {
+                            user.firstname = bceidBasic.individualFirstname;
+                            user.lastname = bceidBasic.individualSurname;
+                        }
+                    }
+
+                    TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                        "New user after BCeID lookup: " + TempAuthDebug.Json(user));
+
+                    user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
+                    if (string.IsNullOrEmpty(user.contactid))
+                        user.contactid = userSettings.SiteMinderGuid;
+
+                    user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 }
-
-                user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
-                if (string.IsNullOrEmpty(user.contactid))
-                    user.contactid = userSettings.SiteMinderGuid;
-
-                user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
             else
             {
-                user.lastname = userSettings.AuthenticatedUser.Surname;
-                user.firstname = userSettings.AuthenticatedUser.GivenName;
-                user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 if (!string.IsNullOrEmpty(user.accountid))
                 {
@@ -127,6 +142,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
+            TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                "Returning to frontend: " + TempAuthDebug.Json(user));
+            if (Guid.TryParse(user.contactid, out var dynamicsContactId))
+            {
+                var dynamicsContact = await _dataverse.GetContactByIdAsync(dynamicsContactId.ToString());
+                TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                    $"Dynamics contact {dynamicsContactId} (for comparison with Returning): " + TempAuthDebug.Json(dynamicsContact));
+            }
             return new JsonResult(user);
         }
     }

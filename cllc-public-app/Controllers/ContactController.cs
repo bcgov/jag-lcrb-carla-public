@@ -88,59 +88,74 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             return new JsonResult(result);
         }
 
-
         /// <summary>
         ///     Update a contact
         /// </summary>
-        /// <param name="item"></param>
+        /// <param name="contact"></param>
         /// <param name="id"></param>
-        /// <returns></returns>
+        /// <returns>The updated contact</returns>
+        /// <response code="400">If the request is invalid</response>
+        /// <response code="404">If the contact is not found or access is denied</response>
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
         {
-            if (id != null && item.id != null && id != item.id) return BadRequest();
-            var accessGranted = false;
-
-            // Allow access if the current user is the contact.
-            if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
+            TempAuthDebug.Log(_logger, nameof(UpdateContact),
+                $"Incoming contact {id}: " + TempAuthDebug.Json(item));
+            if (item == null || !Guid.TryParse(id, out var contactGuid))
             {
-                accessGranted = true;
+                return BadRequest();
             }
-            else
-            {
-                var contact = await _dataverse.GetContactByIdAsync(id);
 
-                // get the related account and determine if the current user is allowed access
-                if (contact?.ParentCustomerId != null)
+            if (item.id != null && id != item.id)
+            {
+                return BadRequest();
+            }
+
+            // The current user is the contact, so no lookup is needed to authorize.
+            var accessGranted = DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor);
+
+            if (!accessGranted)
+            {
+                var existingContact = await _dataverse.GetContactByIdAsync(id);
+                if (existingContact?.ParentCustomerId == null)
                 {
-                    var accountId = contact.ParentCustomerId.Id;
-                    accessGranted = await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(
-                        accountId, _httpContextAccessor, _dataverse);
+                    return NotFound();
                 }
+
+                accessGranted = await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(
+                    existingContact.ParentCustomerId.Id,
+                    _httpContextAccessor,
+                    _dataverse
+                );
             }
 
             if (!accessGranted)
             {
-                _logger.LogError(LoggingEvents.BadRequest, $"Current user has NO access to the contact record. Aborting update to contact {id} ");
+                _logger.LogWarning(
+                    LoggingEvents.BadRequest,
+                    "Current user has NO access to the contact record. Aborting update to contact {id}",
+                    id
+                );
                 return NotFound();
             }
 
-            var patchContact = new DvContact();
-            patchContact.ContactId = new Guid(id);
+            // Create an updated contact object with the new values
+            var patchContact = new DvContact { ContactId = contactGuid };
             patchContact.CopyValues(item);
-            try
-            {
-                await _dataverse.UpdateContactAsync(patchContact);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Error updating contact");
-            }
+            // Account profile does not allow the user to edit their name.
+            patchContact.Attributes.Remove("firstname");
+            patchContact.Attributes.Remove("middlename");
+            patchContact.Attributes.Remove("lastname");
 
+            // Update the contact in dynamics
+            await _dataverse.UpdateContactAsync(patchContact);
+
+            // Fetch and return the updated contact
             var result = await _dataverse.GetContactByIdAsync(id);
+            TempAuthDebug.Log(_logger, nameof(UpdateContact),
+                $"Re-read from Dynamics {id} after update (returned to frontend): " + TempAuthDebug.Json(result));
             return new JsonResult(result.ToViewModel());
         }
-
 
         /// <summary>
         ///     Update a contact using PHS or CASS token
@@ -154,6 +169,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         {
             if (token == null || item == null) return BadRequest();
 
+            TempAuthDebug.Log(_logger, nameof(UpdateContactByToken),
+                "Incoming contact: " + TempAuthDebug.Json(item));
             // get the contact
             var contactId = EncryptionUtility.DecryptStringHex(token, _encryptionKey);
             var contact = await _dataverse.GetContactByIdAsync(contactId);
@@ -162,6 +179,12 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             var patchContact = new DvContact();
             patchContact.ContactId = new Guid(contactId);
             patchContact.CopyValues(item);
+
+            // Names are managed by BCeID. The anonymous form must not overwrite or clear them.
+            patchContact.Attributes.Remove("firstname");
+            patchContact.Attributes.Remove("middlename");
+            patchContact.Attributes.Remove("lastname");
+
             try
             {
                 await _dataverse.UpdateContactAsync(patchContact);
@@ -174,6 +197,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             foreach (var alias in item.Aliases) CreateAlias(alias, contactId);
 
             contact = await _dataverse.GetContactByIdAsync(contactId);
+            TempAuthDebug.Log(_logger, nameof(UpdateContactByToken),
+                $"Re-read from Dynamics {contactId} after update (returned to frontend): " + TempAuthDebug.Json(contact));
             return new JsonResult(contact.ToViewModel());
         }
 
@@ -231,11 +256,16 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // create a new contact.
             var contact = new DvContact();
             contact.CopyValues(item);
+            TempAuthDebug.LogHeaders(_logger, nameof(CreateContact), _httpContextAccessor.HttpContext.Request.Headers);
+            TempAuthDebug.Log(_logger, nameof(CreateContact),
+                "Incoming body: " + TempAuthDebug.Json(item) + "; userSettings: " + TempAuthDebug.Json(userSettings));
 
             if (userSettings.IsNewUserRegistration)
                 // get additional information from the service card headers.
                 contact.CopyHeaderValues(_httpContextAccessor);
 
+            TempAuthDebug.Log(_logger, nameof(CreateContact),
+                "Creating Dynamics contact: " + TempAuthDebug.Json(contact));
             contact.adoxio_ExternalID = DynamicsExtensions.GetServiceCardID(contactSiteminderGuid);
             Guid contactId;
             try
@@ -249,6 +279,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             var createdContact = await _dataverse.GetContactByIdAsync(contactId.ToString());
+            TempAuthDebug.Log(_logger, nameof(CreateContact),
+                $"Re-read from Dynamics {contactId} after create: " + TempAuthDebug.Json(createdContact));
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
@@ -263,8 +295,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.ContactId = contactId;
                     user.UserType = userSettings.UserType;
                     user.SmUserId = userSettings.UserId;
+                    user.GivenName = createdContact.FirstName;
+                    user.Surname = createdContact.LastName;
+                    user.Email = createdContact.EMailAddress1;
                     userSettings.AuthenticatedUser = user;
                 }
+
+                userSettings.UserDisplayName = $"{createdContact.FirstName} {createdContact.LastName}".Trim();
 
                 userSettings.IsNewUserRegistration = false;
 
@@ -329,6 +366,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             contact.CopyValues(item);
             // set the type to Retail Worker.
             contact.CustomerTypeCode = (contact_customertypecode)845280000;
+            TempAuthDebug.LogHeaders(_logger, nameof(CreateWorkerContact), _httpContextAccessor.HttpContext.Request.Headers);
+            TempAuthDebug.Log(_logger, nameof(CreateWorkerContact),
+                "Incoming body: " + TempAuthDebug.Json(new { item, userSettings.NewContact, userSettings.NewWorker }));
 
             if (userSettings.NewWorker != null)
             {
@@ -361,6 +401,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             contact = await _dataverse.GetContactByIdAsync(contactId.ToString());
+            TempAuthDebug.Log(_logger, nameof(CreateWorkerContact),
+                $"Re-read from Dynamics {contactId} after create: " + TempAuthDebug.Json(contact));
 
             // if we have not yet authenticated, then this is the new record for the user.
             if (userSettings.IsNewUserRegistration)
@@ -375,8 +417,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     user.ContactId = contactId;
                     user.UserType = userSettings.UserType;
                     user.SmUserId = userSettings.UserId;
+                    user.GivenName = contact.FirstName;
+                    user.Surname = contact.LastName;
+                    user.Email = contact.EMailAddress1;
                     userSettings.AuthenticatedUser = user;
                 }
+
+                userSettings.UserDisplayName = $"{contact.FirstName} {contact.LastName}".Trim();
 
                 userSettings.IsNewUserRegistration = false;
 

@@ -1,11 +1,30 @@
 ﻿using System;
 using System.ServiceModel;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace Gov.Lclb.Cllb.Interfaces
 {
     public class BCeIDBusinessQuery
     {
+        // TEMP-DEBUG: remove this hook, TempDebug/Dump and their calls once the BCeID name investigation is finished.
+        public static Action<string> TempDebugLog { get; set; }
+
+        private static void TempDebug(string function, string message) => TempDebugLog?.Invoke($"[{function}] {message}");
+
+        private static string Dump(object value)
+        {
+            try
+            {
+                return JsonSerializer.Serialize(value, new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.IgnoreCycles });
+            }
+            catch (Exception ex)
+            {
+                return $"<serialization failed: {ex.Message}>";
+            }
+        }
+
         private string svcid;
         private string user;
         private string password;
@@ -30,6 +49,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (String.IsNullOrEmpty(url))
             {
+                TempDebug(nameof(ProcessBusinessQuery), "BCEID_SERVICE_URL is empty, skipping call");
                 return null;
             }
 
@@ -56,7 +76,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
+                TempDebug(nameof(ProcessBusinessQuery), $"Request: {Dump(myparams)}");
                 var response = await client.getAccountDetailAsync(myparams);
+                TempDebug(nameof(ProcessBusinessQuery), $"Raw response: {Dump(response)}");
 
                 if (response.code == ResponseCode.Success)
                 {
@@ -89,8 +111,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     return business;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempDebug(nameof(ProcessBusinessQuery), $"Exception: {ex}");
                 // ignore errors and just return null
             }
 
@@ -101,6 +124,7 @@ namespace Gov.Lclb.Cllb.Interfaces
         {
             if (String.IsNullOrEmpty(url))
             {
+                TempDebug(nameof(ProcessBasicQuery), "BCEID_SERVICE_URL is empty, skipping call");
                 return null;
             }
 
@@ -127,7 +151,9 @@ namespace Gov.Lclb.Cllb.Interfaces
 
             try
             {
+                TempDebug(nameof(ProcessBasicQuery), $"Request: {Dump(myparams)}");
                 var response = await client.getAccountDetailAsync(myparams);
+                TempDebug(nameof(ProcessBasicQuery), $"Raw response: {Dump(response)}");
 
                 if (response.code == ResponseCode.Success)
                 {
@@ -161,8 +187,9 @@ namespace Gov.Lclb.Cllb.Interfaces
                     return basic;
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                TempDebug(nameof(ProcessBasicQuery), $"Exception: {ex}");
                 // ignore errors and just return null
             }
 
