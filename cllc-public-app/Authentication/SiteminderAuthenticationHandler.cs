@@ -22,11 +22,9 @@ using Microsoft.Extensions.Hosting;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Services.FileManager;
 using System.Collections.Generic;
-using Microsoft.Extensions.Primitives;
 using Microsoft.Extensions.Configuration;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using System.Web;
-using Gov.Lclb.Cllb.Public.Utility;
 using System.Collections.Specialized;
 using Serilog;
 
@@ -62,7 +60,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private const string ConstMissingSiteMinderUserIdError = "Missing SiteMinder UserId";
         private const string ConstMissingSiteMinderGuidError = "Missing SiteMinder Guid";
-        private const string ConstMissingSiteMinderUserTypeError = "Missing SiteMinder User Type";
         private const string ConstMissingDbUserIdError = "Could not find UserId in the database";
         private const string ConstUnderageError = "You must be 19 years of age or older to access this website.";
 
@@ -246,6 +243,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task<AuthenticateResult> HandleBridgeAuthentication(UserSettings userSettings, HttpContext context)
         {
+            TempAuthDebug.LogHeaders(_ms_logger, nameof(HandleBridgeAuthentication), context.Request.Headers);
             // **************************************************
             // Authenticate based on SiteMinder Headers
             // **************************************************
@@ -303,6 +301,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
             _logger.Debug("Loading user external id = " + siteMinderGuid);
             userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, siteMinderGuid, context.Request.Headers);
+            ApplyDynamicsDisplayName(userSettings);
             _logger.Information("After getting authenticated user = " + userSettings.GetJson());
 
             // check that the user is active
@@ -420,7 +419,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
-                await HandleVerifiedIndividualLogin(userSettings, context);
                 if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
                 {
                     await HandleWorkerLogin(userSettings, context);
@@ -438,6 +436,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
         private async Task<AuthenticateResult> HandleLegacyAuthentication(UserSettings userSettings, HttpContext context)
         {
+            TempAuthDebug.LogHeaders(_ms_logger, nameof(HandleLegacyAuthentication), context.Request.Headers);
             // **************************************************
             // Authenticate based on SiteMinder Headers
             // **************************************************
@@ -495,8 +494,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
             _logger.Debug("Loading user external id = " + siteMinderGuid);
             userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, siteMinderGuid, context.Request.Headers);
+            ApplyDynamicsDisplayName(userSettings);
             _logger.Information("After getting authenticated user = " + userSettings.GetJson());
-
 
             // check that the user is active
             if (userSettings.AuthenticatedUser != null
@@ -596,7 +595,6 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
-                await HandleVerifiedIndividualLogin(userSettings, context);
                 if (HttpUtility.ParseQueryString(context.Request.QueryString.ToString()).Get("path") != "cannabis-associate-screening")
                 {
                     await HandleWorkerLogin(userSettings, context);
@@ -617,15 +615,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
         /// <returns></returns>
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
         {
+            TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync), $"Request path={Request.Path}");
+            TempAuthDebug.LogHeaders(_ms_logger, nameof(HandleAuthenticateAsync), Request.Headers);
+
             // get siteminder headers
             _logger.Debug("Parsing the HTTP headers for SiteMinder authentication credential");
 
-
-            string userId = null;
-            string devCompanyId = null;
-            string siteMinderGuid = "";
-            string siteMinderBusinessGuid = "";
-            string siteMinderUserType = "";
 
             try
             {
@@ -677,12 +672,20 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.Debug("No UserSettings found");
                 }
 
+                var userId = context.Request.Headers[_options.SiteMinderUserNameKey];
+                if (string.IsNullOrEmpty(userId))
+                {
+                    userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
+                }
+
                 // is user authenticated - if so we're done
                 if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
                     (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
                      !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
                 {
                     _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
+                    TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync),
+                        "Existing session userSettings: " + TempAuthDebug.Json(userSettings));
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
@@ -699,6 +702,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 {
                     try
                     {
+                        TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync), "Taking dev user login path");
                         return await LoginDevUser(context, _dataverse);
                     }
                     catch (Exception ex)
@@ -711,10 +715,12 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // determine if it is the new bridge entity based flow or the legacy.
                 if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
                 {
+                    TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync), "Taking bridge login path");
                     return await HandleBridgeAuthentication(userSettings, context);
                 }
                 else
                 {
+                    TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync), "Taking legacy login path");
                     return await HandleLegacyAuthentication(userSettings, context);
                 }
             }
@@ -811,35 +817,13 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
         }
 
-        private async Task HandleVerifiedIndividualLogin(UserSettings userSettings, HttpContext context)
+        private async Task<Models.User> SyncLoginContactAsync(DvIDataverseClient dataverse, DvContact savedContact, IHeaderDictionary headers)
         {
-            IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
-            DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
-
-            BCeIDBusinessQuery _bceid = (BCeIDBusinessQuery)context.RequestServices.GetService(typeof(BCeIDBusinessQuery));
-
-            ViewModels.Contact contact = new ViewModels.Contact();
-            contact.CopyHeaderValues(context.Request.Headers);
-            //LCSD-6488 - Change to Alway get First & Lastname from BCEID Web Query
-            //These fields (FIRSTNAME & LASTNAME) are READONLY on our form and managed in BCEID.
-            Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-            if (bceidBusiness != null)
-            {
-                contact.firstname = bceidBusiness.individualFirstname;
-                contact.lastname = bceidBusiness.individualSurname;
-            }
-            else
-            {
-                BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
-                if (bceidBasic != null)
-                {
-                    contact.firstname = bceidBasic.individualFirstname;
-                    contact.lastname = bceidBasic.individualSurname;
-                }
-            }
-
-            var savedContact = await _dataverse.GetContactByIdAsync(userSettings.ContactId);
-            if (savedContact != null && savedContact.Address1_Line1 != null && savedContact.Address1_Line1 != contact.address1_line1)
+            var patchContact = new DvContact();
+            patchContact.CopyLoginFields(headers);
+            if (headers[_options.SiteMinderUserTypeKey] == "VerifiedIndividual" &&
+                !string.IsNullOrWhiteSpace(patchContact.Address1_Line1) && savedContact.Address1_Line1 != null &&
+                savedContact.Address1_Line1 != patchContact.Address1_Line1)
             {
                 var prevAddress = new DvPreviousAddress
                 {
@@ -850,12 +834,19 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     adoxio_PostalCode = savedContact.Address1_PostalCode,
                     adoxio_ContactId = new Microsoft.Xrm.Sdk.EntityReference(DvContact.EntityLogicalName, savedContact.Id)
                 };
-                await _dataverse.CreatePreviousAddressAsync(prevAddress);
+                await dataverse.CreatePreviousAddressAsync(prevAddress);
             }
 
-            var patchContact = new DvContact { Id = Guid.Parse(userSettings.ContactId) };
-            patchContact.CopyValues(contact);
-            await _dataverse.UpdateContactAsync(patchContact);
+            if (patchContact.Attributes.Count > 0)
+            {
+                patchContact.Id = savedContact.Id;
+                await dataverse.UpdateContactAsync(patchContact);
+                savedContact = await dataverse.GetContactByIdAsync(savedContact.Id.ToString())
+                    ?? throw new InvalidOperationException($"Dynamics contact {patchContact.Id} was not found after its login update.");
+            }
+            var user = new Models.User();
+            user.FromContact(savedContact);
+            return user;
         }
 
         private async Task HandleWorkerLogin(UserSettings userSettings, HttpContext context)
@@ -874,6 +865,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 worker.CopyHeaderValues(context.Request.Headers);
 
                 var patchWorker = new DvWorker { Id = savedWorker.Id };
+                TempAuthDebug.Log(_ms_logger, nameof(HandleWorkerLogin),
+                    $"Patching worker {savedWorker.Id}: " + TempAuthDebug.Json(new { worker, savedWorker }));
                 patchWorker.adoxio_FirstName = worker.firstname;
                 patchWorker.adoxio_LastName = worker.lastname;
                 patchWorker.adoxio_MiddleName = worker.middlename;
@@ -1003,6 +996,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             }
 
             _logger.Debug("DEV MODE Setting identity and creating session for: " + userId);
+            TempAuthDebug.Log(_ms_logger, nameof(LoginDevUser), $"Dev user: userId={userId}, DisplayName={userSettings.UserDisplayName}, UserType={userSettings.UserType}");
 
             // create session info for the current user
             userSettings.AuthenticatedUser = await LoadUserLegacyAsync(_dataverse, userSettings.SiteMinderGuid, context.Request.Headers);
@@ -1050,6 +1044,8 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             Models.User user = null;
 
             _ms_logger.LogDebug(">>>> LoadUserLegacyAsync start.");
+            TempAuthDebug.LogHeaders(_ms_logger, nameof(LoadUserLegacyAsync), headers);
+            TempAuthDebug.Log(_ms_logger, nameof(LoadUserLegacyAsync), $"smGuid={smGuid}, isGuid={Guid.TryParse(smGuid, out _)}");
 
             if (Guid.TryParse(smGuid, out _))
             {
@@ -1067,19 +1063,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (contact != null)
                 {
                     _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BCEID: contact found.");
-                    user = new Models.User();
-                    user.FromContact(contact);
-
-                    var contactVM = new ViewModels.Contact();
-                    contactVM.CopyHeaderValues(headers);
-                    // Preserve existing email/phone if Siteminder headers didn't supply them —
-                    // BCeID Business headers often don't carry these, and CopyValues overwrites
-                    // unconditionally, silently wiping out contact info the user already saved.
-                    if (string.IsNullOrEmpty(contactVM.emailaddress1)) contactVM.emailaddress1 = contact.EMailAddress1;
-                    if (string.IsNullOrEmpty(contactVM.telephone1)) contactVM.telephone1 = contact.Telephone1;
-                    var patchContact = new DvContact { Id = contact.Id };
-                    patchContact.CopyValues(contactVM);
-                    await _dataverse.UpdateContactAsync(patchContact);
+                    TempAuthDebug.Log(_ms_logger, nameof(LoadUserLegacyAsync),
+                        "BCeID: existing Dynamics contact: " + TempAuthDebug.Json(contact));
+                    user = await SyncLoginContactAsync(_dataverse, contact, headers);
                 }
             }
             else
@@ -1098,14 +1084,9 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 if (contact != null)
                 {
                     _ms_logger.LogDebug(">>>> LoadUserLegacyAsync for BC Services Card: contact found.");
-                    user = new Models.User();
-                    user.FromContact(contact);
-
-                    var contactVM = new ViewModels.Contact();
-                    contactVM.CopyHeaderValues(headers);
-                    var patchContact = new DvContact { Id = contact.Id };
-                    patchContact.CopyValuesNoEmailPhone(contactVM);
-                    await _dataverse.UpdateContactAsync(patchContact);
+                    TempAuthDebug.Log(_ms_logger, nameof(LoadUserLegacyAsync),
+                        "BCSC: existing Dynamics contact: " + TempAuthDebug.Json(contact));
+                    user = await SyncLoginContactAsync(_dataverse, contact, headers);
 
                     var workerVm = new ViewModels.Worker();
                     workerVm.CopyHeaderValues(headers);
@@ -1119,7 +1100,23 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 }
             }
 
+            TempAuthDebug.Log(_ms_logger, nameof(LoadUserLegacyAsync),
+                $"Result: {(user == null ? "no contact found (new user)" : $"ContactId={user.ContactId}, GivenName={user.GivenName}, Surname={user.Surname}")}");
             return user;
+        }
+
+        private void ApplyDynamicsDisplayName(UserSettings userSettings)
+        {
+            var user = userSettings.AuthenticatedUser;
+            var before = userSettings.UserDisplayName;
+            var name = $"{user?.GivenName} {user?.Surname}".Trim();
+            if (!string.IsNullOrEmpty(name))
+            {
+                userSettings.UserDisplayName = name;
+            }
+
+            TempAuthDebug.Log(_ms_logger, nameof(ApplyDynamicsDisplayName),
+                $"DisplayName before={before}, after={userSettings.UserDisplayName}; AuthenticatedUser: " + TempAuthDebug.Json(user));
         }
 
         private static string ParseServiceCardId(string raw)

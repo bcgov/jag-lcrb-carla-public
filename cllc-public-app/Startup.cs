@@ -320,7 +320,13 @@ namespace Gov.Lclb.Cllb.Public
             string bceidUserid = _configuration["BCEID_SERVICE_USER"];
             string bceidPasswd = _configuration["BCEID_SERVICE_PASSWD"];
 
-            services.AddTransient(_ => new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl));
+            services.AddTransient(sp =>
+            {
+                // TEMP-DEBUG: route raw BCeID web service responses to the logs.
+                var bceidLogger = sp.GetRequiredService<ILoggerFactory>().CreateLogger("BCeIDBusinessQuery");
+                BCeIDBusinessQuery.TempDebugLog = message => bceidLogger.LogInformation("[TEMP-DEBUG-BCEID-NAMES]{Message}", message);
+                return new BCeIDBusinessQuery(bceidSvcId, bceidUserid, bceidPasswd, bceidUrl);
+            });
 
             // add BC Express Pay (Bambora) service
             services.AddHttpClient<IBCEPService, BCEPService>();
