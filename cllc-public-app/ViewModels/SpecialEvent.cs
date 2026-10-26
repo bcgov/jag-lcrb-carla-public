@@ -93,6 +93,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public bool? AdmissionFee { get; set; }
         public System.DateTimeOffset? EventStartDate { get; set; }
         public System.DateTimeOffset? EventEndDate { get; set; }
+        public System.DateTimeOffset? ModifiedOn { get; set; }
         public string EventName { get; set; }
 
         public bool? IsAgreeToTnC { get; set; }

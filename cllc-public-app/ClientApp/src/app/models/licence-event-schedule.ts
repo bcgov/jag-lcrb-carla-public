@@ -5,4 +5,5 @@ export class LicenceEventSchedule {
   eventEndDateTime: Date;
   serviceStartDateTime: Date;
   serviceEndDateTime: Date;
+  createdOn?: Date;
 }

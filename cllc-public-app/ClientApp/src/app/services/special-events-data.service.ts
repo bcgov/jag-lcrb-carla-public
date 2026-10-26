@@ -7,9 +7,88 @@ import { SepApplication, SepTermAndCondtion } from '@models/sep-application.mode
 import { SepDrinkType } from '@models/sep-drink-type.model';
 import { SepPoliceHome } from '@models/sep-police-home';
 import { SepPoliceJobSummary } from '@models/sep-police-job-summary';
+import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
+import { startOfDay } from 'date-fns';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { DataService } from './data.service';
+
+/**
+ * Converts a server eventStartDate (UTC instant) to a local-midnight Date of the Pacific calendar date.
+ * The record's modifiedOn dictates which Pacific rule the value was saved under.
+ *
+ * @template T
+ * @param {T} item
+ * @return {*}  {T}
+ */
+function decodeEventStartDate<T extends { eventStartDate?: Date | string; modifiedOn?: Date | string }>(item: T): T {
+  if (!item?.eventStartDate) {
+    return item;
+  }
+  return { ...item, eventStartDate: startOfDay(fromUtcToPacificWallClock(item.eventStartDate, item.modifiedOn)) };
+}
+
+/**
+ * Converts a local-midnight eventStartDate (from the date picker) to the UTC instant of midnight Pacific.
+ *
+ * @param {SepApplication} data
+ * @return {*}  {SepApplication}
+ */
+function encodeEventStartDate(data: SepApplication): SepApplication {
+  if (!data?.eventStartDate) {
+    return data;
+  }
+  return { ...data, eventStartDate: fromPacificWallClockToUtc(startOfDay(new Date(data.eventStartDate))) } as SepApplication;
+}
+
+/**
+ * Re-encodes schedule times under the rule in effect now, because Dynamics stamps createdon when it saves them.
+ *
+ * @param {SepApplication} data
+ * @return {*}  {SepApplication}
+ */
+function encodeSchedules(data: SepApplication): SepApplication {
+  const now = new Date();
+  const reencode = (value: Date, createdOn: Date) =>
+    value ? fromPacificWallClockToUtc(fromUtcToPacificWallClock(value, createdOn)) : value;
+
+  data?.eventLocations?.forEach((location) =>
+    location.eventDates?.forEach((sched) => {
+      // Drafts saved before createdOn existed were encoded under the legacy PST/PDT rules.
+      const createdOn = sched.createdOn ?? new Date(0);
+      sched.eventStart = reencode(sched.eventStart, createdOn);
+      sched.eventEnd = reencode(sched.eventEnd, createdOn);
+      sched.serviceStart = reencode(sched.serviceStart, createdOn);
+      sched.serviceEnd = reencode(sched.serviceEnd, createdOn);
+      sched.createdOn = now;
+    })
+  );
+
+  return data;
+}
+
+function encodeSepApplication(data: SepApplication): SepApplication {
+  return encodeSchedules(encodeEventStartDate(data));
+}
+
+function decodeSummaries(items: SepApplicationSummary[]): SepApplicationSummary[] {
+  return items?.map((item) => decodeEventStartDate(item));
+}
+
+function decodeJobSummary(result: SepPoliceJobSummary): SepPoliceJobSummary {
+  if (!result) {
+    return result;
+  }
+  return {
+    inProgress: decodeSummaries(result.inProgress),
+    policeApproved: decodeSummaries(result.policeApproved),
+    policeDenied: decodeSummaries(result.policeDenied)
+  };
+}
+
+function decodePage(result: PagingResult<SepApplicationSummary>): PagingResult<SepApplicationSummary> {
+  return result ? { ...result, value: decodeSummaries(result.value) } : result;
+}
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -19,19 +98,23 @@ export class SpecialEventsDataService extends DataService {
 
   getSpecialEventPolice(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/police/${id}`;
-    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http
+      .get<SepApplication>(apiPath, { headers: this.headers })
+      .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 
   getSpecialEventForApplicant(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/applicant/${id}`;
-    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http
+      .get<SepApplication>(apiPath, { headers: this.headers })
+      .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 
   getSubmittedApplications(): Observable<SepApplicationSummary[]> {
     const apiPath = `api/special-events/current/submitted`;
     return this.http
       .get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(map(decodeSummaries), catchError(this.handleError));
   }
 
   getSepDrinkTypes(): Observable<SepDrinkType[]> {
@@ -45,8 +128,8 @@ export class SpecialEventsDataService extends DataService {
    */
   createSepApplication(data: SepApplication) {
     return this.http
-      .post<SepApplication>('api/special-events/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .post<SepApplication>('api/special-events/', encodeSepApplication(data), { headers: this.headers })
+      .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 
   /**
@@ -55,8 +138,8 @@ export class SpecialEventsDataService extends DataService {
    */
   updateSepApplication(data: SepApplication, id: string) {
     return this.http
-      .put<SepApplication>(`api/special-events/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .put<SepApplication>(`api/special-events/${id}`, encodeSepApplication(data), { headers: this.headers })
+      .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 
   /**
@@ -141,7 +224,9 @@ export class SpecialEventsDataService extends DataService {
 
   getPoliceApprovalSepApplications(): Observable<SepPoliceJobSummary> {
     const apiPath = `api/special-events/police/all`;
-    return this.http.get<SepPoliceJobSummary>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http
+      .get<SepPoliceJobSummary>(apiPath, { headers: this.headers })
+      .pipe(map(decodeJobSummary), catchError(this.handleError));
   }
 
   getPolicePendingReviewSepApplications(
@@ -153,7 +238,7 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/pending-review?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(map(decodePage), catchError(this.handleError));
   }
 
   getPoliceApprovedSepApplications(
@@ -165,7 +250,7 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/approved?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(map(decodePage), catchError(this.handleError));
   }
 
   getPoliceDeniedSepApplications(
@@ -177,12 +262,14 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/denied?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(map(decodePage), catchError(this.handleError));
   }
 
   getPoliceApprovalMySepApplications(): Observable<SepPoliceJobSummary> {
     const apiPath = `api/special-events/police/my`;
-    return this.http.get<SepPoliceJobSummary>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http
+      .get<SepPoliceJobSummary>(apiPath, { headers: this.headers })
+      .pipe(map(decodeJobSummary), catchError(this.handleError));
   }
 
   getPoliceHome(): Observable<SepPoliceHome> {

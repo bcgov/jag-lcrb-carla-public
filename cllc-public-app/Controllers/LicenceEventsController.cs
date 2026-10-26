@@ -3,6 +3,7 @@ using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
+using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Gov.Lclb.Cllb.Public.Extensions;
 using Microsoft.AspNetCore.Authorization;
@@ -307,20 +308,11 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
 
             string eventTimings = "";
-            TimeZoneInfo hwZone;
-            try
-            {
-                hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
-            }
-            catch (TimeZoneNotFoundException)
-            {
-                hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
-            }
 
             foreach (var schedule in licenceEventVM.Schedules)
             {
-                DateTime? pstStart = schedule.EventStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
-                DateTime? pstEnd = schedule.EventEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+                DateTime? pstStart = DateUtility.FormatDatePacific(schedule.EventStartDateTime, schedule.CreatedOn);
+                DateTime? pstEnd = DateUtility.FormatDatePacific(schedule.EventEndDateTime, schedule.CreatedOn);
 
                 string eventDate = pstStart.HasValue ? pstStart.Value.ToString("MMMM dd, yyyy") : "";
                 string startTime = pstStart.HasValue ? pstStart.Value.ToString("h:mm tt") : "";
@@ -403,7 +395,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 { "inspectorName", licenceEvent.adoxio_EventInspectorName },
                 { "inspectorPhone", licenceEvent.adoxio_EventInspectorPhone },
                 { "inspectorEmail", licenceEvent.adoxio_EventInspectorEmail },
-                { "date", DateTime.Now.ToString("MMMM dd, yyyy") },
+                { "date", DateUtility.GetPacificToday().ToString("MMMM dd, yyyy") },
                 { "marketName", licenceEventVM.MarketName },
                 { "marketDuration", licenceEventVM.MarketDuration.HasValue ? EnumExtensions.GetEnumMemberValue(licenceEventVM.MarketDuration) : "" },
                 { "restrictionsText", termsAndConditions },

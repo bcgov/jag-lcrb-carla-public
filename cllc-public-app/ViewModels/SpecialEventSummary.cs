@@ -10,6 +10,7 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
     {
         public string SpecialEventId { get; set; } // server side primary key
         public DateTimeOffset? EventStartDate { get; set; }
+        public DateTimeOffset? ModifiedOn { get; set; }
         public string EventName { get; set; }
         public string InvoiceId { get; set; }
 
