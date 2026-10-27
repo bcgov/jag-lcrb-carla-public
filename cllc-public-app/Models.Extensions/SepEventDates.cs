@@ -27,6 +27,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EventEnd = sched.adoxio_EventEnd,
                 ServiceStart = sched.adoxio_ServiceStart,
                 ServiceEnd = sched.adoxio_ServiceEnd,
+                CreatedOn = sched.CreatedOn,
                 LiquorServiceHoursExtensionReason = sched.adoxio_LiquorServiceHoursExtensionReason,
                 DisturbancePreventionMeasuresDetails = sched.adoxio_DisturbancePreventionMeasuresDetails,
             };

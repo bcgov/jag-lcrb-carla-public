@@ -76,7 +76,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.partnerInfo1 = licence.LicenceNumber;
             if (licence.ExpiryDate != null)
                 body.partnerInfo2 = licence.ExpiryDate.Value.DateTime;
-            body.statusData.timeStamp = Utils.GetTimeStamp();
+            body.statusData.timeStamp = DateUtility.GetTimeStamp();
             return body;
         }
 
@@ -124,7 +124,8 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                     break;
             }
 
-            programAccountStatus.effectiveDate = DateTime.Now.AddHours(-8);
+            programAccountStatus.effectiveDate = DateUtility.FormatDatePacific(DateTime.UtcNow).Value;
+
             return programAccountStatus;
         }
     }

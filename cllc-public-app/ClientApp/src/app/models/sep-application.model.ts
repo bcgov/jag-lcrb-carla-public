@@ -28,6 +28,7 @@ export class SepApplication {
   donateOrConsular: boolean;
   eventName: string;
   eventStartDate: Date;
+  modifiedOn?: Date | string; // server-stamped; dictates which Pacific rule eventStartDate was saved under
   eventStatus: string;
   eventType: string;
   fundraisingPurpose: string;
