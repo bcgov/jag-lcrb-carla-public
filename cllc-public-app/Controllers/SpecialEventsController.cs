@@ -236,7 +236,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -377,23 +377,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.adoxio_EventStart.HasValue)
                     {
-                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
+                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
 
                     var eventTimeParam = "";
                     if (sched.adoxio_EventStart.HasValue && sched.adoxio_EventEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd, sched.CreatedOn).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd).Value;
                         eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
                     var serviceTimeParam = "";
                     if (sched.adoxio_ServiceStart.HasValue && sched.adoxio_ServiceEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart, sched.CreatedOn).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd, sched.CreatedOn).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd).Value;
                         serviceTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
@@ -566,7 +566,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var eligibilityInfo = "<h2 class='info'>Eligibility</h2>";
 
-            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate, se.ModifiedOn).Value;
+            DateTime eventStartDate = DateUtility.FormatDatePacific(se.adoxio_EventStartDate).Value;
             string eventStartDateParam = eventStartDate.ToString("MMMM dd, yyyy");
 
             eligibilityInfo += "<table class='info'>";
@@ -704,23 +704,23 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                     var startDateParam = "";
                     if (sched.adoxio_EventStart.HasValue)
                     {
-                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
+                        DateTime startDate = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
                         startDateParam = startDate.ToString("MMMM dd, yyyy");
                     }
 
                     var eventTimeParam = "";
                     if (sched.adoxio_EventStart.HasValue && sched.adoxio_EventEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart, sched.CreatedOn).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd, sched.CreatedOn).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_EventStart).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_EventEnd).Value;
                         eventTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 
                     var serviceTimeParam = "";
                     if (sched.adoxio_ServiceStart.HasValue && sched.adoxio_ServiceEnd.HasValue)
                     {
-                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart, sched.CreatedOn).Value;
-                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd, sched.CreatedOn).Value;
+                        DateTime startTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceStart).Value;
+                        DateTime endTime = DateUtility.FormatDatePacific(sched.adoxio_ServiceEnd).Value;
                         serviceTimeParam = startTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US")) + " - " + endTime.ToString("t", CultureInfo.CreateSpecificCulture("en-US"));
                     }
 

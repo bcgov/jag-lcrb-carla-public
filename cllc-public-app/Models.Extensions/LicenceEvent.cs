@@ -39,11 +39,19 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     if (schedule.ServiceEndDateTime.HasValue)
                     {
-                        // These times are being captured now, so classify them under the rules the client used.
-                        DateTime endTime = DateUtility.FormatDatePacific(schedule.ServiceEndDateTime, DateTimeOffset.UtcNow).Value;
+                        TimeZoneInfo hwZone;
+                        try
+                        {
+                            hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+                        }
+                        catch (TimeZoneNotFoundException)
+                        {
+                            hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+                        }
+
+                        DateTimeOffset endTime = TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.HasValue ? schedule.ServiceEndDateTime.Value.DateTime : DateTime.MaxValue, hwZone);
                         if ((endTime.Hour == 2 && endTime.Minute != 0) || (endTime.Hour > 2 && endTime.Hour < 9))
                         {
-                            // Event ends after 2am but before 9am, considered high risk
                             isHighRisk = true;
                         }
                     }

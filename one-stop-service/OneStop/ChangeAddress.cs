@@ -84,7 +84,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.businessProgramIdentifier = OneStopUtils.BUSINESS_PROGRAM_IDENTIFIER;
             body.address.effectiveDate = DateTime.Now;
             body.businessProgramAccountReferenceNumber = licence.BusinessProgramAccountReferenceNumber;
-            body.timeStamp = DateUtility.GetTimeStamp();
+            body.timeStamp = Utils.GetTimeStamp();
 
             return body;
         }

@@ -6,7 +6,6 @@ export class SepApplicationSummary {
   lastStepCompleted: string;
   specialEventId: string; // server side primary key
   eventStartDate: Date | string;
-  modifiedOn?: Date | string; // server-stamped; dictates which Pacific rule eventStartDate was saved under
   eventName: string;
   typeOfEvent: number;
   eventStatus: string;

@@ -24,7 +24,6 @@ namespace Gov.Lclb.Cllb.Public.Models
                 EventEndDateTime = item.adoxio_EventEndDateTime.HasValue ? (DateTimeOffset?)item.adoxio_EventEndDateTime.Value : null,
                 ServiceStartDateTime = item.adoxio_ServiceStartDateTime.HasValue ? (DateTimeOffset?)item.adoxio_ServiceStartDateTime.Value : null,
                 ServiceEndDateTime = item.adoxio_ServiceEndDateTime.HasValue ? (DateTimeOffset?)item.adoxio_ServiceEndDateTime.Value : null,
-                CreatedOn = item.CreatedOn.HasValue ? (DateTimeOffset?)item.CreatedOn.Value : null,
             };
         }
 

@@ -14,8 +14,5 @@ namespace Gov.Lclb.Cllb.Public.ViewModels
         public DateTimeOffset? EventEndDateTime { get; set; }
         public DateTimeOffset? ServiceStartDateTime { get; set; }
         public DateTimeOffset? ServiceEndDateTime { get; set; }
-
-        // When these times were last captured; schedules are recreated on every save.
-        public DateTimeOffset? CreatedOn { get; set; }
     }
 }
