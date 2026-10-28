@@ -74,7 +74,7 @@
                 <div title="Past Due Invoice!" *ngIf="item.overdue">
                   <fa-icon [icon]="faExclamationTriangle" style="margin-right: 5px"></fa-icon>
                 </div>
-                {{ item.dueDate | date: 'dd/MM/yy' }}
+                {{ item.invoice.duedate | date: 'dd/MM/yy' }}
               </td>
               <td>
                 <a

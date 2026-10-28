@@ -2,7 +2,6 @@ extern alias DV;
 using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Models;
-using Gov.Lclb.Cllb.Public.Utils;
 using Gov.Lclb.Cllb.Public.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -126,7 +125,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private string GetStartDateForMonthlyReports()
         {
-            var startDate = DateUtility.GetPacificToday().AddMonths(-1 * monthlyReportsMaxMonths);
+            var startDate = DateTimeOffset.Now.AddMonths(-1 * monthlyReportsMaxMonths);
             return startDate.ToString("yyyy-MM-dd");
         }
 
