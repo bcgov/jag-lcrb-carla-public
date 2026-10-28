@@ -18,8 +18,6 @@ export class OutstandingPriorBalanceInvoice {
   };
   /**
    * Format "yyyy-MM-dd", so the browser's timezone can't shift the date.
-   *
-   * @type {string}
    */
   dueDate: string;
   overdue: boolean;

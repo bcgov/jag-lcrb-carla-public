@@ -6,7 +6,6 @@ import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
-import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 import {
   EventCategory,
@@ -16,14 +15,7 @@ import {
   MarketEventType,
   SpecificLocation
 } from '../../models/licence-event.model';
-import {
-  DAYS,
-  DEFAULT_END_TIME,
-  DEFAULT_START_TIME,
-  getMonthlyWeekday,
-  fromUtcToPacificWallClock,
-  fromPacificWallClockToUtc
-} from '../../shared/date-fns';
+import { DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getMonthlyWeekday } from '../../shared/date-fns';
 
 @Component({
   selector: 'app-market-event',
@@ -209,8 +201,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
       city: licenceEvent.city,
       province: licenceEvent.province,
       postalCode: licenceEvent.postalCode,
-      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
-      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
+      startDate: new Date(licenceEvent.startDate),
+      endDate: new Date(licenceEvent.endDate),
       agreement: false,
       eventCategory: licenceEvent.eventCategory,
       isNoPreventingSaleofLiquor: licenceEvent.isNoPreventingSaleofLiquor,
@@ -264,10 +256,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
     }
 
     schedules.forEach((sched) => {
-      const startDate = fromUtcToPacificWallClock(sched.eventStartDateTime, sched.createdOn);
-      const endDate = fromUtcToPacificWallClock(sched.eventEndDateTime, sched.createdOn);
-      const liquorStart = fromUtcToPacificWallClock(sched.serviceStartDateTime, sched.createdOn);
-      const liquorEnd = fromUtcToPacificWallClock(sched.serviceEndDateTime, sched.createdOn);
+      const startDate = new Date(sched['eventStartDateTime']);
+      const endDate = new Date(sched['eventEndDateTime']);
+      const liquorStart = new Date(sched['serviceStartDateTime']);
+      const liquorEnd = new Date(sched['serviceEndDateTime']);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -297,7 +289,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
     const weekdays = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     let state = {};
     for (const sched of schedules) {
-      const d = fromUtcToPacificWallClock(sched['eventStartDateTime'], sched['createdOn']);
+      const d = new Date(sched['eventStartDateTime']);
       const index = d.getDay();
       const day = weekdays[index];
       state = {
@@ -314,7 +306,7 @@ export class MarketEventComponent extends FormBase implements OnInit {
   /* Restores the state of the week of month (1st Monday of the month, etc) when showing the form in read-only mode */
   setWeekOfMonthFromEventSchedule(schedules: any[] = []) {
     const first = schedules.length > 0 ? schedules[0] : null;
-    const d = fromUtcToPacificWallClock(first['eventStartDateTime'], first['createdOn']);
+    const d = new Date(first['eventStartDateTime']);
     // Nth weekday of the month (1st Monday = 1), not the calendar row that getWeekOfMonth returns.
     const week = Math.ceil(d.getDate() / 7);
     this.eventForm.patchValue({ weekOfMonth: week });
@@ -326,10 +318,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
       return;
     }
     const sched = schedules[0];
-    const eventBegin = fromUtcToPacificWallClock(sched['eventStartDateTime'], sched['createdOn']);
-    const eventEnd = fromUtcToPacificWallClock(sched['eventEndDateTime'], sched['createdOn']);
-    const serviceBegin = fromUtcToPacificWallClock(sched['serviceStartDateTime'], sched['createdOn']);
-    const serviceEnd = fromUtcToPacificWallClock(sched['serviceEndDateTime'], sched['createdOn']);
+    const eventBegin = new Date(sched['eventStartDateTime']);
+    const eventEnd = new Date(sched['eventEndDateTime']);
+    const serviceBegin = new Date(sched['serviceStartDateTime']);
+    const serviceEnd = new Date(sched['serviceEndDateTime']);
 
     this.defaultTimeForm.patchValue({
       startTime: { hour: eventBegin.getHours(), minute: eventBegin.getMinutes() },
@@ -388,10 +380,10 @@ export class MarketEventComponent extends FormBase implements OnInit {
       }
 
       dateArray.push({
-        eventStartDateTime: fromPacificWallClockToUtc(eventBegin),
-        eventEndDateTime: fromPacificWallClockToUtc(eventEnd),
-        serviceStartDateTime: fromPacificWallClockToUtc(serviceBegin),
-        serviceEndDateTime: fromPacificWallClockToUtc(serviceEnd)
+        eventStartDateTime: eventBegin,
+        eventEndDateTime: eventEnd,
+        serviceStartDateTime: serviceBegin,
+        serviceEndDateTime: serviceEnd
       });
     }
 

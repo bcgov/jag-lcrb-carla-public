@@ -8,9 +8,7 @@ import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { User } from '@models/user.model';
 import { Store } from '@ngrx/store';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
-import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { EventStatus, LicenceEvent } from '../../models/licence-event.model';
@@ -132,8 +130,8 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
       city: licenceEvent.city,
       province: licenceEvent.province,
       postalCode: licenceEvent.postalCode,
-      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
-      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
+      startDate: new Date(licenceEvent.startDate),
+      endDate: new Date(licenceEvent.endDate),
       agreement: false
     });
 
@@ -148,10 +146,10 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
 
   setTimeFormsToLicenceEventSchedule(schedules: LicenceEventSchedule[]) {
     schedules.forEach((sched) => {
-      const startDate = fromUtcToPacificWallClock(sched.eventStartDateTime, sched.createdOn);
-      const endDate = fromUtcToPacificWallClock(sched.eventEndDateTime, sched.createdOn);
-      const liquorStart = fromUtcToPacificWallClock(sched.serviceStartDateTime, sched.createdOn);
-      const liquorEnd = fromUtcToPacificWallClock(sched.serviceEndDateTime, sched.createdOn);
+      const startDate = new Date(sched['eventStartDateTime']);
+      const endDate = new Date(sched['eventEndDateTime']);
+      const liquorStart = new Date(sched['serviceStartDateTime']);
+      const liquorEnd = new Date(sched['serviceEndDateTime']);
 
       const isDefault = (endDate.getTime() - startDate.getTime()) / (1000 * 3600 * 24) > 1;
       if (!isDefault) {
@@ -232,10 +230,10 @@ export class TemporaryOffsiteComponent extends FormBase implements OnInit {
       }
 
       dateArray.push({
-        eventStartDateTime: fromPacificWallClockToUtc(eventBegin),
-        eventEndDateTime: fromPacificWallClockToUtc(eventEnd),
-        serviceStartDateTime: fromPacificWallClockToUtc(serviceBegin),
-        serviceEndDateTime: fromPacificWallClockToUtc(serviceEnd)
+        eventStartDateTime: eventBegin,
+        eventEndDateTime: eventEnd,
+        serviceStartDateTime: serviceBegin,
+        serviceEndDateTime: serviceEnd
       });
     }
 

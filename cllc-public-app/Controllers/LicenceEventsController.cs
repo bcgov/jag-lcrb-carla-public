@@ -308,11 +308,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return new NotFoundResult();
 
             string eventTimings = "";
+            TimeZoneInfo hwZone;
+            try
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            }
 
             foreach (var schedule in licenceEventVM.Schedules)
             {
-                DateTime? pstStart = DateUtility.FormatDatePacific(schedule.EventStartDateTime, schedule.CreatedOn);
-                DateTime? pstEnd = DateUtility.FormatDatePacific(schedule.EventEndDateTime, schedule.CreatedOn);
+                DateTime? pstStart = schedule.EventStartDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventStartDateTime.Value.DateTime, hwZone) : (DateTime?)null;
+                DateTime? pstEnd = schedule.EventEndDateTime.HasValue ? TimeZoneInfo.ConvertTimeFromUtc(schedule.EventEndDateTime.Value.DateTime, hwZone) : (DateTime?)null;
 
                 string eventDate = pstStart.HasValue ? pstStart.Value.ToString("MMMM dd, yyyy") : "";
                 string startTime = pstStart.HasValue ? pstStart.Value.ToString("h:mm tt") : "";

@@ -10,9 +10,7 @@ import { ApplicationTypeNames } from '@models/application-type.model';
 import { Application } from '@models/application.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenceEventsService } from '@services/licence-events.service';
-import { fromUtcToPacificWallClock } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
-import { parseISO, startOfDay } from 'date-fns';
 import { forkJoin, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -207,9 +205,9 @@ export class LicencesComponent extends FormBase implements OnInit {
             this.hasOutstandingPriorBalance = true;
           }
           if (!this.isOutstandingPriorBalanceInvoiceDue && item.dueDate != null) {
-            const toDay = startOfDay(fromUtcToPacificWallClock(new Date()));
-            const tmpDueDate = parseISO(item.dueDate);
-            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
+            // Pacific calendar day (yyyy-MM-dd), compared against the server's yyyy-MM-dd due date.
+            const toDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver' }).format(new Date());
+            this.isOutstandingPriorBalanceInvoiceDue = item.dueDate < toDay;
           }
         });
       });

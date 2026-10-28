@@ -88,7 +88,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
             body.partnerInfo1 = licence.LicenceNumber;
             if (changeNameType == ChangeNameType.Transfer)
                 body.partnerInfo2 = targetBusinessNumber;
-            body.timeStamp = DateUtility.GetTimeStamp();
+            body.timeStamp = Utils.GetTimeStamp();
             return body;
         }
     }
