@@ -15,7 +15,10 @@ export class OutstandingPriorBalanceInvoice {
     statecode: number;
     statuscode: number;
     description: string;
-    duedate: Date;
   };
+  /**
+   * Format "yyyy-MM-dd", so the browser's timezone can't shift the date.
+   */
+  dueDate: string;
   overdue: boolean;
 }

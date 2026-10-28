@@ -6,7 +6,6 @@ import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
-import { getWeekOfMonth } from 'date-fns';
 import { Subscription } from 'rxjs';
 import {
   EventCategory,
@@ -308,7 +307,8 @@ export class MarketEventComponent extends FormBase implements OnInit {
   setWeekOfMonthFromEventSchedule(schedules: any[] = []) {
     const first = schedules.length > 0 ? schedules[0] : null;
     const d = new Date(first['eventStartDateTime']);
-    const week = getWeekOfMonth(d);
+    // Nth weekday of the month (1st Monday = 1), not the calendar row that getWeekOfMonth returns.
+    const week = Math.ceil(d.getDate() / 7);
     this.eventForm.patchValue({ weekOfMonth: week });
   }
 

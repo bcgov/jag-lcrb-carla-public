@@ -24,5 +24,13 @@ namespace Gov.Lclb.Cllb.Public.Utils
                 : (DateTime?)null;
             return result;
         }
+
+        /// <summary>
+        /// Today's date in Pacific Time, regardless of the server's timezone.
+        /// </summary>
+        public static DateTime GetPacificToday()
+        {
+            return FormatDatePacific(DateTimeOffset.UtcNow).Value.Date;
+        }
     }
 }

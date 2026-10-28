@@ -204,10 +204,10 @@ export class LicencesComponent extends FormBase implements OnInit {
           if (!this.hasOutstandingPriorBalance) {
             this.hasOutstandingPriorBalance = true;
           }
-          if (!this.isOutstandingPriorBalanceInvoiceDue && item.invoice.duedate != null) {
-            const toDay = new Date(new Date().toISOString().split('T')[0]);
-            const tmpDueDate = new Date(item.invoice.duedate.toString().split('T')[0]);
-            this.isOutstandingPriorBalanceInvoiceDue = tmpDueDate < toDay;
+          if (!this.isOutstandingPriorBalanceInvoiceDue && item.dueDate != null) {
+            // Pacific calendar day (yyyy-MM-dd), compared against the server's yyyy-MM-dd due date.
+            const toDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver' }).format(new Date());
+            this.isOutstandingPriorBalanceInvoiceDue = item.dueDate < toDay;
           }
         });
       });

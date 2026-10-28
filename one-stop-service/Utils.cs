@@ -29,5 +29,20 @@ namespace Gov.Jag.Lcrb.OneStopService
         {
             return DateTime.Now.ToString("yyyy-MM-dd-hh.mm.ss.000000");
         }
+
+        public static DateTime GetPacificNow()
+        {
+            TimeZoneInfo pacificZone;
+            try
+            {
+                pacificZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                pacificZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            }
+
+            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, pacificZone);
+        }
     }
 }

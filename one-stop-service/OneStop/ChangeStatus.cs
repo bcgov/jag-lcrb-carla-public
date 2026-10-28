@@ -124,7 +124,7 @@ namespace Gov.Jag.Lcrb.OneStopService.OneStop
                     break;
             }
 
-            programAccountStatus.effectiveDate = DateTime.Now.AddHours(-8);
+            programAccountStatus.effectiveDate = Utils.GetPacificNow();
             return programAccountStatus;
         }
     }

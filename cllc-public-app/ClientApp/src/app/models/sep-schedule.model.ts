@@ -1,4 +1,4 @@
-import { addDays, format } from 'date-fns';
+import { addDays, format, subDays } from 'date-fns';
 
 export class SepSchedule {
   id: string; // server side primary key
@@ -29,6 +29,10 @@ export class SepSchedule {
 
     if (this.eventStart) {
       result.eventStartValue = format(new Date(this.eventStart), 'h:mm aa');
+      // formatDate saved after-midnight starts on the next day, so step back to the event date.
+      if (this.isNextDay(result.eventStartValue)) {
+        result.eventDate = subDays(new Date(result.eventDate), 1);
+      }
     }
     if (this.eventEnd) {
       result.eventEndValue = format(new Date(this.eventEnd), 'h:mm aa');
