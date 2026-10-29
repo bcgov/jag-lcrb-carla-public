@@ -50,5 +50,42 @@ namespace Gov.Lclb.Cllb.Public.Utils
         {
             return FormatDatePacific(DateTimeOffset.UtcNow).Value.Date;
         }
+
+        /// <summary>
+        /// True if the given instant falls on today's Pacific calendar day or later (e.g. a licence that expires today is still valid).
+        /// </summary>
+        public static bool IsOnOrAfterPacificToday(DateTimeOffset? instant)
+        {
+            return instant.HasValue && FormatDatePacific(instant).Value.Date >= GetPacificToday();
+        }
+
+        /// <summary>
+        /// Converts a Pacific wall-clock time (e.g. midnight at the start of a Pacific day) to a UTC instant.
+        /// </summary>
+        public static DateTime ConvertPacificToUtc(DateTime pacific)
+        {
+            var wallClock = DateTime.SpecifyKind(pacific, DateTimeKind.Unspecified);
+            if (wallClock >= PermanentUtcMinus7StartUtc + PermanentUtcMinus7Offset)
+            {
+                return DateTime.SpecifyKind(wallClock - PermanentUtcMinus7Offset, DateTimeKind.Utc);
+            }
+
+            TimeZoneInfo hwZone;
+            try
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
+            }
+            catch (TimeZoneNotFoundException)
+            {
+                hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
+            }
+
+            if (hwZone.IsInvalidTime(wallClock))
+            {
+                wallClock = wallClock.AddHours(1);
+            }
+
+            return TimeZoneInfo.ConvertTimeToUtc(wallClock, hwZone);
+        }
     }
 }

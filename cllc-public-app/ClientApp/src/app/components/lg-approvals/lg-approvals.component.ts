@@ -6,7 +6,8 @@ import { Account } from '@models/account.model';
 import { Application } from '@models/application.model';
 import { Store } from '@ngrx/store';
 import { ApplicationDataService } from '@services/application-data.service';
-import { add, differenceInDays, startOfToday } from 'date-fns';
+import { pacificToday, toPacificWallClock } from '@shared/pacific-time';
+import { add, differenceInDays } from 'date-fns';
 
 @Component({
   selector: 'app-lg-approvals',
@@ -70,8 +71,8 @@ export class LgApprovalsComponent implements OnInit {
   }
 
   get90dayCount(submissionDate: Date): number {
-    const submission = add(new Date(submissionDate), { days: 90 });
-    const count = differenceInDays(startOfToday(), submission);
+    const submission = add(toPacificWallClock(new Date(submissionDate)), { days: 90 });
+    const count = differenceInDays(pacificToday(), submission);
     return count;
   }
 

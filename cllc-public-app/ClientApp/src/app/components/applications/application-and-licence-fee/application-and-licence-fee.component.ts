@@ -19,6 +19,7 @@ import { EstablishmentWatchWordsService } from '@services/establishment-watch-wo
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
 import { forkJoin, Observable, of, Subject, Subscription } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
@@ -46,7 +47,7 @@ export class ApplicationAndLicenceFeeComponent extends FormBase implements OnIni
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
-  minDate = new Date();
+  minDate = pacificToday();
 
   constructor(
     private store: Store<AppState>,

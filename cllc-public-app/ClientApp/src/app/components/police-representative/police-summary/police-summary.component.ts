@@ -37,6 +37,7 @@ import { Store } from '@ngrx/store';
 import { ContactDataService } from '@services/contact-data.service';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { FormBase } from '@shared/form-base';
+import { pacificNow } from '@shared/pacific-time';
 import { differenceInBusinessDays } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { filter, switchMap, tap } from 'rxjs/operators';
@@ -192,7 +193,7 @@ export class PoliceSummaryComponent extends FormBase implements OnInit {
   }
 
   isEventPast(): boolean {
-    let diff = differenceInBusinessDays(new Date(this.sepApplication?.eventStartDate), new Date());
+    let diff = differenceInBusinessDays(new Date(this.sepApplication?.eventStartDate), pacificNow());
     return diff < 0;
   }
 

@@ -126,8 +126,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
         private string GetStartDateForMonthlyReports()
         {
+            // Start of the Pacific day, expressed as a UTC instant so the createdon filter isn't off by the UTC offset.
             var startDate = DateUtility.GetPacificToday().AddMonths(-1 * monthlyReportsMaxMonths);
-            return startDate.ToString("yyyy-MM-dd");
+            return DateUtility.ConvertPacificToUtc(startDate).ToString("o", System.Globalization.CultureInfo.InvariantCulture);
         }
 
         [HttpGet("{reportId}")]

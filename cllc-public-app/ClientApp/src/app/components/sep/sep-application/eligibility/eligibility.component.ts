@@ -6,6 +6,7 @@ import { Account } from '@models/account.model';
 import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { FormBase } from '@shared/form-base';
+import { pacificNow, pacificToday } from '@shared/pacific-time';
 import { differenceInBusinessDays, differenceInCalendarDays } from 'date-fns';
 import { distinctUntilChanged } from 'rxjs/operators';
 @Component({
@@ -24,7 +25,7 @@ export class EligibilityComponent extends FormBase implements OnInit {
   showValidationMessages: boolean;
   validationMessages: string[];
   get minDate() {
-    return new Date();
+    return pacificToday();
   }
 
   @Input()
@@ -122,11 +123,11 @@ export class EligibilityComponent extends FormBase implements OnInit {
   }
 
   isSoon(): boolean {
-    return differenceInCalendarDays(new Date(this.form.get('eventStartDate').value), new Date()) < 15;
+    return differenceInCalendarDays(new Date(this.form.get('eventStartDate').value), pacificNow()) < 15;
   }
 
   isTooSoon(): boolean {
-    return differenceInBusinessDays(new Date(this.form.get('eventStartDate').value), new Date()) < 2;
+    return differenceInBusinessDays(new Date(this.form.get('eventStartDate').value), pacificNow()) < 2;
   }
 
   isValid() {

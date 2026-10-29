@@ -29,7 +29,8 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { TermsAndConditionsDataService } from '@services/terms-and-condtions-data.service';
 import { FormBase } from '@shared/form-base';
-import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from 'date-fns';
+import { pacificStartOfDay, pacificToday } from '@shared/pacific-time';
+import { addYears, differenceInDays, isAfter } from 'date-fns';
 import { forkJoin, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import { LicenceTypeNames } from '../../../models/license-type.model';
@@ -40,7 +41,7 @@ export const LIQUOR_RENEWAL_LICENCE_TYPE_NAME = 'liquor';
 
 const ACTIVE = 'Active';
 const RENEWAL_DUE = 'Renewal Due';
-const NOW = startOfToday();
+const NOW = pacificToday();
 
 @Component({
   selector: 'app-licence-row',
@@ -138,7 +139,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
         return;
       }
 
-      this.disableLicenceRenewalDate = startOfDay(renewalDate);
+      this.disableLicenceRenewalDate = pacificStartOfDay(renewalDate);
     });
   }
 
@@ -157,7 +158,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
       return false;
     }
 
-    const expiryDate = startOfDay(new Date(licence.expiryDate));
+    const expiryDate = pacificStartOfDay(licence.expiryDate);
     const disableDate = this.disableLicenceRenewalDate;
     return expiryDate >= disableDate;
   }
@@ -375,13 +376,13 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isExpired(licence: ApplicationLicenseSummary) {
     // if NOW is after licence.expiryDate then expired is true
-    const expired = isAfter(NOW, startOfDay(new Date(licence.expiryDate)));
+    const expired = isAfter(NOW, pacificStartOfDay(licence.expiryDate));
     return expired && (licence.status === 'Active' || licence.status === 'Expired');
   }
 
   isExpiredOverOneYear(licence: ApplicationLicenseSummary) {
     // LCSD-6479 if NOW is after one year of licence.expiryDate
-    let licenceExpredDate = startOfDay(new Date(licence.expiryDate));
+    let licenceExpredDate = pacificStartOfDay(licence.expiryDate);
     const oneYearOfStartDay = addYears(licenceExpredDate, 1);
     const expired = isAfter(NOW, oneYearOfStartDay);
     return expired && (licence.status === 'Active' || licence.status === 'Expired');
@@ -389,7 +390,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isAboutToExpire(licence: ApplicationLicenseSummary) {
     if (!this.isExpired(licence)) {
-      const expiry = startOfDay(new Date(licence.expiryDate));
+      const expiry = pacificStartOfDay(licence.expiryDate);
       const diff = differenceInDays(expiry, NOW);
       return diff <= 60;
     } else {
@@ -399,7 +400,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
 
   isRecentlyExpired(licence: ApplicationLicenseSummary) {
     if (this.isExpired(licence)) {
-      const expiry = startOfDay(new Date(licence.expiryDate));
+      const expiry = pacificStartOfDay(licence.expiryDate);
       const diff = differenceInDays(NOW, expiry);
       return diff <= 30;
     }
@@ -407,7 +408,7 @@ export class LicenceRowComponent extends FormBase implements OnInit {
   }
 
   isCancelled(licence: ApplicationLicenseSummary) {
-    const expiry = startOfDay(new Date(licence.expiryDate));
+    const expiry = pacificStartOfDay(licence.expiryDate);
     const diff = Math.abs(differenceInDays(expiry, NOW));
     return diff >= 180 || licence.status === 'Cancelled';
   }

@@ -10,6 +10,7 @@ import { LicenceEventsService } from '@services/licence-events.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { dateRangeValidator, DAYS, DEFAULT_END_TIME, DEFAULT_START_TIME, getDaysArray } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -37,7 +38,7 @@ export class TakeHomeEventComponent extends FormBase implements OnInit {
   isReadOnly = false;
   showErrorSection = false;
   validationMessages: any[];
-  startDateMinimum = new Date();
+  startDateMinimum = pacificToday();
   endDateMinimum = new Date(this.startDateMinimum.valueOf());
   scheduleIsInconsistent = false;
 

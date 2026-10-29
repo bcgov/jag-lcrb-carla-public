@@ -17,6 +17,7 @@ import { LicenseDataService } from '@services/license-data.service';
 import { RelatedJobnumberPickerComponent } from '@shared/components/related-jobnumber-picker/related-jobnumber-picker.component';
 import { RelatedLicencePickerComponent } from '@shared/components/related-licence-picker/related-licence-picker.component';
 import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
 import { forkJoin, Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, first, mergeMap, takeWhile } from 'rxjs/operators';
 import { Application } from '../../../models/application.model';
@@ -48,7 +49,7 @@ export class ApplicationTiedHouseExemptionComponent extends FormBase implements 
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
-  minDate = new Date();
+  minDate = pacificToday();
   dataLoaded: boolean;
   applicationType: ApplicationType;
   applicationId: string;

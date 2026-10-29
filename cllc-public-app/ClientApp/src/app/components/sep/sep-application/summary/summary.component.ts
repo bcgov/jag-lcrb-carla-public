@@ -32,6 +32,7 @@ import { ContactDataService } from '@services/contact-data.service';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { pacificNow } from '@shared/pacific-time';
 import { differenceInBusinessDays } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { CancelSepApplicationDialogComponent } from '../cancel-sep-application-dialog/cancel-sep-application-dialog.component';
@@ -275,7 +276,7 @@ export class SummaryComponent implements OnInit {
   }
 
   isEventPast(): boolean {
-    let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), new Date());
+    let diff = differenceInBusinessDays(new Date(this.application?.eventStartDate), pacificNow());
     return diff < 0;
   }
 

@@ -161,7 +161,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 if (item.LicenseType == "Cannabis Retail Store"
                     && item.ApplicationStatus == AdoxioApplicationStatusCodes.Approved
                     && item.AssignedLicence != null
-                    && item.AssignedLicence.ExpiryDate > DateTime.Now)
+                    && DateUtility.IsOnOrAfterPacificToday(item.AssignedLicence.ExpiryDate))
                     item.IsLocationChangeInProgress = FindRelatedApplication(result, item, "CRS Location Change");
 
             return result;
@@ -1649,7 +1649,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         var licExpiryRaw = app.GetAttributeValue<AliasedValue>("lic.adoxio_expirydate")?.Value;
                         DateTime? expiryDate = licExpiryRaw is DateTime dt ? dt : (DateTime?)null;
 
-                        if (!string.IsNullOrEmpty(licNumber) && expiryDate > DateTime.Now)
+                        if (!string.IsNullOrEmpty(licNumber) && DateUtility.IsOnOrAfterPacificToday(expiryDate))
                         {
                             results.Add(new RelatedLicence
                             {
@@ -1664,7 +1664,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                                 Licensee = "",
                                 JobNumber = app.adoxio_JobNumber,
                                 LicenceNumber = licNumber,
-                                Valid = expiryDate.HasValue && expiryDate.Value >= DateTime.Now
+                                Valid = DateUtility.IsOnOrAfterPacificToday(expiryDate)
                             });
                         }
                     }

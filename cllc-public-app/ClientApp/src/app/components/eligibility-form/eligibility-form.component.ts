@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { EligibilityFormDataService } from '@services/eligibility-data.service';
+import { pacificToday } from '@shared/pacific-time';
 
 @Component({
   selector: 'app-eligibility-form',
@@ -36,11 +37,11 @@ export class EligibilityFormComponent implements OnInit {
     private service: EligibilityFormDataService,
     private dialogRef: MatDialogRef<EligibilityFormComponent>
   ) {
-    this.maxDate = new Date();
+    this.maxDate = pacificToday();
   }
 
   ngOnInit() {
-    this.eligibilityForm.controls['dateSignedOrDismissed'].setValue(new Date());
+    this.eligibilityForm.controls['dateSignedOrDismissed'].setValue(pacificToday());
   }
 
   submitForm() {

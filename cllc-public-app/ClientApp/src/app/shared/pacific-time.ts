@@ -120,3 +120,25 @@ export function fromPacificWallClock(value: Date | string | null | undefined): D
   instantMs = wallClockAsUtcMs - adjustedOffsetMs;
   return new Date(instantMs);
 }
+
+/** The current moment as a Pacific wall-clock Date. */
+export function pacificNow(): Date {
+  return toPacificWallClock(new Date());
+}
+
+/** Midnight at the start of today in Pacific Time, as a Pacific wall-clock Date. */
+export function pacificToday(): Date {
+  return pacificStartOfDay(new Date());
+}
+
+/**
+ * Midnight at the start of the Pacific calendar day containing the given instant, as a Pacific wall-clock Date.
+ * Use for comparing dates (e.g. licence expiry) against pacificToday().
+ */
+export function pacificStartOfDay(value: Date | string): Date {
+  const wallClock = toPacificWallClock(value);
+  if (!(wallClock instanceof Date)) {
+    return new Date(NaN);
+  }
+  return new Date(wallClock.getFullYear(), wallClock.getMonth(), wallClock.getDate());
+}

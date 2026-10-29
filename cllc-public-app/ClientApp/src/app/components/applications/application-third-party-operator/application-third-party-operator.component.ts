@@ -14,6 +14,7 @@ import { EstablishmentWatchWordsService } from '@services/establishment-watch-wo
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenseDataService } from '@services/license-data.service';
 import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
 import { Observable, of, Subscription } from 'rxjs';
 import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
 
@@ -41,7 +42,7 @@ export class ApplicationThirdPartyOperatorComponent extends FormBase implements 
   ApplicationTypeNames = ApplicationTypeNames;
   FormControlState = FormControlState;
   account: Account;
-  minDate = new Date();
+  minDate = pacificToday();
 
   constructor(
     private store: Store<AppState>,

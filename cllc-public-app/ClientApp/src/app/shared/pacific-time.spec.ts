@@ -1,4 +1,10 @@
-import { fromPacificWallClock, toPacificWallClock } from './pacific-time';
+import {
+  fromPacificWallClock,
+  pacificNow,
+  pacificStartOfDay,
+  pacificToday,
+  toPacificWallClock
+} from './pacific-time';
 
 // BC is on permanent UTC-7 from 2026-11-01; earlier winters were UTC-8.
 describe('pacific-time', () => {
@@ -57,6 +63,25 @@ describe('pacific-time', () => {
       expect(toPacificWallClock(null)).toBeNull();
       expect(toPacificWallClock(undefined)).toBeUndefined();
     });
+  });
+
+  describe('pacificStartOfDay', () => {
+    it('returns midnight of the Pacific calendar day', () => {
+      expect(fields(pacificStartOfDay('2026-11-10T06:30:00.000Z'))).toEqual([2026, 10, 9, 0, 0]);
+      expect(fields(pacificStartOfDay('2026-11-10T07:00:00.000Z'))).toEqual([2026, 10, 10, 0, 0]);
+      expect(fields(pacificStartOfDay(new Date('2026-07-10T06:59:00.000Z')))).toEqual([2026, 6, 9, 0, 0]);
+    });
+
+    it('returns an invalid date for empty or invalid input', () => {
+      expect(isNaN(pacificStartOfDay(undefined as any).getTime())).toBe(true);
+      expect(isNaN(pacificStartOfDay('not a date').getTime())).toBe(true);
+    });
+  });
+
+  it('pacificToday is midnight and pacificNow is not earlier than it', () => {
+    const today = pacificToday();
+    expect(fields(today).slice(3)).toEqual([0, 0]);
+    expect(pacificNow().getTime() >= today.getTime()).toBe(true);
   });
 
   it('round trips regardless of the time of day', () => {

@@ -34,6 +34,7 @@ import { SepApplication } from '@models/sep-application.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { SpecialEventsDataService } from '@services/special-events-data.service';
+import { pacificNow } from '@shared/pacific-time';
 import { isBefore } from 'date-fns';
 import { map } from 'rxjs/operators';
 
@@ -129,7 +130,7 @@ export class SubmittedApplicationsComponent implements OnInit {
    * @memberof SubmittedApplicationsComponent
    */
   isEventPast(eventStartDate: string): boolean {
-    return isBefore(new Date(eventStartDate), new Date());
+    return isBefore(new Date(eventStartDate), pacificNow());
   }
 
   /**

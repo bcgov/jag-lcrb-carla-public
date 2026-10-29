@@ -19,6 +19,7 @@ import { SepServiceArea } from '@models/sep-service-area.model';
 import { IndexedDBService } from '@services/indexed-db.service';
 import { AutoCompleteItem, SpecialEventsDataService } from '@services/special-events-data.service';
 import { CanadaPostalRegex, FormBase } from '@shared/form-base';
+import { pacificNow, pacificToday } from '@shared/pacific-time';
 import { debounceTime, distinct, filter, switchMap, tap } from 'rxjs/operators';
 
 @Component({
@@ -44,7 +45,7 @@ export class EventComponent extends FormBase implements OnInit {
   isPacificTimeZone: boolean;
   isOpen: boolean[][] = [];
   get minDate() {
-    return new Date();
+    return pacificToday();
   }
   @Input()
   set localId(value: number) {
@@ -399,7 +400,7 @@ export class EventComponent extends FormBase implements OnInit {
     const eventStart = new Date(dateForm.get('eventDate').value);
 
     // the maximum date starts off as a year from now.
-    var maxDate = new Date();
+    var maxDate = pacificNow();
     maxDate.setFullYear(maxDate.getFullYear() + 1);
 
     var noMaxDateFound = true;

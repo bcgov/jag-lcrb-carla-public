@@ -21,7 +21,8 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
-import { differenceInDays, startOfDay, startOfToday } from 'date-fns';
+import { pacificStartOfDay, pacificToday } from '@shared/pacific-time';
+import { differenceInDays } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -774,15 +775,15 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   }
 
   isAboutToExpire(expiryDate: string) {
-    const now = startOfToday();
-    const expiry = startOfDay(new Date(expiryDate));
+    const now = pacificToday();
+    const expiry = pacificStartOfDay(expiryDate);
     const diff = differenceInDays(now, expiry) + 1;
     return diff <= 60 || expiry < now;
   }
 
   licenceHasExpired(expiryDate: string) {
-    const now = startOfToday();
-    const expiry = startOfDay(new Date(expiryDate));
+    const now = pacificToday();
+    const expiry = pacificStartOfDay(expiryDate);
     return expiry < now;
   }
 

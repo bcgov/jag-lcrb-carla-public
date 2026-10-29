@@ -6,6 +6,7 @@ import { faQuestionCircle, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { LicenceEventSchedule } from '@models/licence-event-schedule';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
 import { Subscription } from 'rxjs';
 import {
   EventCategory,
@@ -118,9 +119,9 @@ export class MarketEventComponent extends FormBase implements OnInit {
         this.eventForm.controls['status'].setValue(this.getOptionFromLabel(this.eventStatus, 'Draft').value);
       }
     });
-    this.startDateMinimum = new Date();
+    this.startDateMinimum = pacificToday();
     this.startDateMinimum.setDate(this.startDateMinimum.getDate());
-    this.endDateMinimum = new Date();
+    this.endDateMinimum = pacificToday();
     this.endDateMinimum.setDate(this.endDateMinimum.getDate());
   }
 

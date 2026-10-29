@@ -11,6 +11,8 @@ import { Application } from '@models/application.model';
 import { FeatureFlagService } from '@services/feature-flag.service';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { FormBase } from '@shared/form-base';
+import { pacificToday } from '@shared/pacific-time';
+import { format } from 'date-fns';
 import { forkJoin, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -206,7 +208,7 @@ export class LicencesComponent extends FormBase implements OnInit {
           }
           if (!this.isOutstandingPriorBalanceInvoiceDue && item.dueDate != null) {
             // Pacific calendar day (yyyy-MM-dd), compared against the server's yyyy-MM-dd due date.
-            const toDay = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Vancouver' }).format(new Date());
+            const toDay = format(pacificToday(), 'yyyy-MM-dd');
             this.isOutstandingPriorBalanceInvoiceDue = item.dueDate < toDay;
           }
         });
