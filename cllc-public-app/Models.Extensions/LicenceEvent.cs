@@ -39,17 +39,7 @@ namespace Gov.Lclb.Cllb.Public.Models
                 {
                     if (schedule.ServiceEndDateTime.HasValue)
                     {
-                        TimeZoneInfo hwZone;
-                        try
-                        {
-                            hwZone = TimeZoneInfo.FindSystemTimeZoneById("America/Vancouver");
-                        }
-                        catch (TimeZoneNotFoundException)
-                        {
-                            hwZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
-                        }
-
-                        DateTimeOffset endTime = TimeZoneInfo.ConvertTimeFromUtc(schedule.ServiceEndDateTime.HasValue ? schedule.ServiceEndDateTime.Value.DateTime : DateTime.MaxValue, hwZone);
+                        DateTime endTime = DateUtility.ConvertUtcToPacific(schedule.ServiceEndDateTime.Value.UtcDateTime);
                         if ((endTime.Hour == 2 && endTime.Minute != 0) || (endTime.Hour > 2 && endTime.Hour < 9))
                         {
                             isHighRisk = true;

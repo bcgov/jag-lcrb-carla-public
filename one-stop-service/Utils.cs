@@ -32,6 +32,13 @@ namespace Gov.Jag.Lcrb.OneStopService
 
         public static DateTime GetPacificNow()
         {
+            // BC moves to permanent UTC-7 on 2026-11-01 at 09:00 UTC; applied explicitly so it doesn't depend on the host's tz database.
+            var utcNow = DateTime.UtcNow;
+            if (utcNow >= new DateTime(2026, 11, 1, 9, 0, 0, DateTimeKind.Utc))
+            {
+                return DateTime.SpecifyKind(utcNow.AddHours(-7), DateTimeKind.Unspecified);
+            }
+
             TimeZoneInfo pacificZone;
             try
             {
@@ -42,7 +49,7 @@ namespace Gov.Jag.Lcrb.OneStopService
                 pacificZone = TimeZoneInfo.FindSystemTimeZoneById("Pacific Standard Time");
             }
 
-            return TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, pacificZone);
+            return TimeZoneInfo.ConvertTimeFromUtc(utcNow, pacificZone);
         }
     }
 }

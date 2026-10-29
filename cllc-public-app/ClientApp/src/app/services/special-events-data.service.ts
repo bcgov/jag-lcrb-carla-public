@@ -5,11 +5,62 @@ import { PagingResult } from '@models/paging-result.model';
 import { SepApplicationSummary } from '@models/sep-application-summary.model';
 import { SepApplication, SepTermAndCondtion } from '@models/sep-application.model';
 import { SepDrinkType } from '@models/sep-drink-type.model';
+import { SepLocation } from '@models/sep-location.model';
+import { SepSchedule } from '@models/sep-schedule.model';
 import { SepPoliceHome } from '@models/sep-police-home';
 import { SepPoliceJobSummary } from '@models/sep-police-job-summary';
+import { fromPacificWallClock, toPacificWallClock } from '@shared/pacific-time';
 import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { DataService } from './data.service';
+
+type DateConverter = (value: Date | string) => Date;
+
+/**
+ * Event dates/times are always Pacific Time. The API works with real instants (UTC), while the UI works with
+ * "Pacific wall-clock" Dates (local fields read as Pacific Time). Convert at this boundary only.
+ */
+function convertSepApplicationDates(app: SepApplication, convert: DateConverter): SepApplication {
+  if (!app) {
+    return app;
+  }
+  const result = { ...app } as SepApplication;
+  if (result.eventStartDate) {
+    result.eventStartDate = convert(result.eventStartDate);
+  }
+  if (result.eventLocations) {
+    result.eventLocations = result.eventLocations.map(
+      (location) =>
+        ({
+          ...location,
+          eventDates: location.eventDates?.map((sched) => {
+            const converted = { ...sched } as SepSchedule;
+            (['eventStart', 'eventEnd', 'serviceStart', 'serviceEnd'] as const).forEach((key) => {
+              if (converted[key]) {
+                converted[key] = convert(converted[key]);
+              }
+            });
+            return converted;
+          })
+        } as SepLocation)
+    );
+  }
+  return result;
+}
+
+function convertSepSummaryDates(summary: SepApplicationSummary, convert: DateConverter): SepApplicationSummary {
+  if (!summary || !summary.eventStartDate) {
+    return summary;
+  }
+  return { ...summary, eventStartDate: convert(summary.eventStartDate) };
+}
+
+function convertSepPagedSummaryDates(result: PagingResult<SepApplicationSummary>) {
+  if (!result?.value) {
+    return result;
+  }
+  return { ...result, value: result.value.map((app) => convertSepSummaryDates(app, toPacificWallClock)) };
+}
 
 @Injectable()
 export class SpecialEventsDataService extends DataService {
@@ -19,19 +70,26 @@ export class SpecialEventsDataService extends DataService {
 
   getSpecialEventPolice(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/police/${id}`;
-    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(
+      map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+      catchError(this.handleError)
+    );
   }
 
   getSpecialEventForApplicant(id: string): Observable<SepApplication> {
     const apiPath = `api/special-events/applicant/${id}`;
-    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(catchError(this.handleError));
+    return this.http.get<SepApplication>(apiPath, { headers: this.headers }).pipe(
+      map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+      catchError(this.handleError)
+    );
   }
 
   getSubmittedApplications(): Observable<SepApplicationSummary[]> {
     const apiPath = `api/special-events/current/submitted`;
-    return this.http
-      .get<SepApplicationSummary[]>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.get<SepApplicationSummary[]>(apiPath, { headers: this.headers }).pipe(
+      map((apps) => apps?.map((app) => convertSepSummaryDates(app, toPacificWallClock))),
+      catchError(this.handleError)
+    );
   }
 
   getSepDrinkTypes(): Observable<SepDrinkType[]> {
@@ -45,8 +103,13 @@ export class SpecialEventsDataService extends DataService {
    */
   createSepApplication(data: SepApplication) {
     return this.http
-      .post<SepApplication>('api/special-events/', data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .post<SepApplication>('api/special-events/', convertSepApplicationDates(data, fromPacificWallClock), {
+        headers: this.headers
+      })
+      .pipe(
+        map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -55,8 +118,13 @@ export class SpecialEventsDataService extends DataService {
    */
   updateSepApplication(data: SepApplication, id: string) {
     return this.http
-      .put<SepApplication>(`api/special-events/${id}`, data, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .put<SepApplication>(`api/special-events/${id}`, convertSepApplicationDates(data, fromPacificWallClock), {
+        headers: this.headers
+      })
+      .pipe(
+        map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -64,9 +132,10 @@ export class SpecialEventsDataService extends DataService {
    * @param id - special event id
    */
   submitSepApplication(id: string) {
-    return this.http
-      .post<SepApplication>(`api/special-events/submit/${id}`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+    return this.http.post<SepApplication>(`api/special-events/submit/${id}`, {}, { headers: this.headers }).pipe(
+      map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+      catchError(this.handleError)
+    );
   }
 
   /**
@@ -76,7 +145,10 @@ export class SpecialEventsDataService extends DataService {
   generateInvoiceSepApplication(id: string) {
     return this.http
       .post<SepApplication>(`api/special-events/generate-invoice/${id}`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -121,7 +193,10 @@ export class SpecialEventsDataService extends DataService {
   policeSetMunicipality(id: string, cityId: string) {
     return this.http
       .post<SepApplication>(`api/special-events/police/${id}/setMunicipality/${cityId}`, {}, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((app) => convertSepApplicationDates(app, toPacificWallClock)),
+        catchError(this.handleError)
+      );
   }
 
   /**
@@ -153,7 +228,10 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/pending-review?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((result) => convertSepPagedSummaryDates(result)),
+        catchError(this.handleError)
+      );
   }
 
   getPoliceApprovedSepApplications(
@@ -165,7 +243,10 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/approved?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((result) => convertSepPagedSummaryDates(result)),
+        catchError(this.handleError)
+      );
   }
 
   getPoliceDeniedSepApplications(
@@ -177,7 +258,10 @@ export class SpecialEventsDataService extends DataService {
     const apiPath = `api/special-events/police/denied?pageIndex=${pageIndex}&pageSize=${pageSize}&sort=${sort}&sortdir=${sortdir}`;
     return this.http
       .get<PagingResult<SepApplicationSummary>>(apiPath, { headers: this.headers })
-      .pipe(catchError(this.handleError));
+      .pipe(
+        map((result) => convertSepPagedSummaryDates(result)),
+        catchError(this.handleError)
+      );
   }
 
   getPoliceApprovalMySepApplications(): Observable<SepPoliceJobSummary> {
