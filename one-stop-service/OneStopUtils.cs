@@ -1,4 +1,4 @@
-extern alias DV;
+﻿extern alias DV;
 using Hangfire;
 using Hangfire.Console;
 using Hangfire.Server;
@@ -54,8 +54,41 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string DOCUMENT_SUBTYPE_CHANGENAME_THIRDPARTY = "154";
         public const string DOCUMENT_SUBTYPE_CHANGEADDRESS = "107";
 
+        /* SBNChangeMiscData document subtypes (BNI Code Tables - Document Sub-type).
+        Each subtype is tied to one miscellaneous data type:
+        300  Winery Lounge Endorsement                    -> WINELNG
+        301  PST/Liquor Licence Relationship              (not an endorsement, out of scope)
+        302  Manufacturer Onsite Endorsement              -> MFRONS
+        303  Manufacturer Special Event Area Endorsement  -> MFRSEA
+        These three are the only endorsement subtypes confirmed to be accepted.
+        Sending a different miscDataTypeCode under one of them was tested and
+        rejected, so a subtype must not be reused - see EndorsementMiscDataMap. */
+        public const string DOCUMENT_SUBTYPE_MISCDATA_WINERY_LOUNGE = "300";
+        public const string DOCUMENT_SUBTYPE_MISCDATA_ONSITE = "302";
+        public const string DOCUMENT_SUBTYPE_MISCDATA_SEA = "303";
+
+        /* miscDataTypeCode values (BNI Code Tables - Miscellaneous Data Type). */
+        public const string MISC_DATA_TYPE_WINERY_LOUNGE = "WINELNG";
+        public const string MISC_DATA_TYPE_MANUFACTURER_ONSITE = "MFRONS";
+        public const string MISC_DATA_TYPE_MANUFACTURER_SEA = "MFRSEA";
+
+        /* Known miscDataTypeCode values with no confirmed documentSubType of their
+        own, so they cannot be sent yet:
+        MFRLNG  Manufacturer Lounge Endorsement
+        MFREND  Manufacturer Endorsement
+        Add a DOCUMENT_SUBTYPE_MISCDATA_* constant for each once LDB and the Hub
+        confirm its subtype, then map it in EndorsementMiscDataMap. */
+        public const string MISC_DATA_TYPE_MANUFACTURER_LOUNGE = "MFRLNG";
+        public const string MISC_DATA_TYPE_MANUFACTURER_ENDORSEMENT = "MFREND";
+
         public const string SENDER_ID = "LCRB";
         public const string RECEIVER_ID = "BCSBNHUB";
+
+        /// <summary>
+        /// SBNChangeMiscData is addressed to LDB rather than the Hub itself; the Hub
+        /// forwards it. Every LDB-accepted sample message carries receiverID LDB.
+        /// </summary>
+        public const string RECEIVER_ID_LDB = "LDB";
         public const string USER_APPLICATION = "BF";
         public const string USER_ROLE = "01";
         public const string BUSINESS_PROGRAM_IDENTIFIER = "BB";
@@ -70,6 +103,15 @@ namespace Gov.Jag.Lcrb.OneStopService
         public const string OPERATING_NAME_SEQUENCE_NUMBER = "1";
         public const string UPDATE_REASON_CODE = "01";
         public const string UPDATE_REASON_CODE_ADDRESS = "03";
+
+        /* Update Reason Code (BNI Code Tables). For SBNChangeMiscData this is the
+        field LDB uses to tell an added endorsement from a cancelled one. */
+        public const string UPDATE_REASON_CODE_MISCDATA_NEW = "03";
+        public const string UPDATE_REASON_CODE_MISCDATA_CANCEL = "05";
+        public const string UPDATE_REASON_CODE_MISCDATA_CORRECTION = "01";
+
+        /// <summary>partnerInfo3 in the LDB-accepted sample messages.</summary>
+        public const string MISC_DATA_PARTNER_INFO_SENDER = "LCRB";
 
 
 
@@ -171,9 +213,34 @@ namespace Gov.Jag.Lcrb.OneStopService
                     ? new DateTimeOffset(dvLicence.adoxio_ExpiryDate.Value)
                     : (DateTimeOffset?)null,
                 LicenceType = licenceType,
+                LicenceSubCategory = dvLicence.adoxio_LicenceSubCategoryId?.Name,
                 Establishment = est,
                 Licencee = licencee
             };
+        }
+
+        /// <summary>
+        /// The endorsements on a licence that OneStop has a confirmed miscDataTypeCode
+        /// for. Endorsements LCRB holds but OneStop has no code for are left out.
+        /// </summary>
+        private async Task<IList<OneStopEndorsement>> FetchSendableEndorsements(string licenceId, string licenceSubCategory)
+        {
+            var dvEndorsements = await _dataverse.GetEndorsementsByLicenceIdAsync(licenceId);
+
+            var result = new List<OneStopEndorsement>();
+            foreach (var dvEndorsement in dvEndorsements)
+            {
+                if (!EndorsementMiscDataMap.IsSupported(dvEndorsement.adoxio_name, licenceSubCategory))
+                    continue;
+
+                result.Add(new OneStopEndorsement
+                {
+                    EndorsementId = dvEndorsement.Id.ToString(),
+                    Name = dvEndorsement.adoxio_name
+                });
+            }
+
+            return result;
         }
 
         private async Task UpdateQueueItemForSend(PerformContext hangfireContext, string queueItemId, string payload, string response)
@@ -322,6 +389,116 @@ namespace Gov.Jag.Lcrb.OneStopService
                 hangfireContext?.WriteLine(outputXML);
                 hangfireContext?.WriteLine("End of OneStop REST ProgramAccountDetailsBroadcast  Job.");
             }
+        }
+
+        /// <summary>
+        /// Hangfire job to send the Miscellaneous Data Update (SBNChangeMiscData) message
+        /// to OneStop for an endorsement that has been approved or cancelled.
+        /// </summary>
+        /// <param name="endorsementIdRaw">
+        /// The endorsement to report. When null, every endorsement on the licence that
+        /// OneStop has a confirmed code for is reported - this is the interim behaviour
+        /// until adoxio_onestopmessageitem carries an endorsement lookup, at which point
+        /// the queue should pass the specific endorsement through.
+        /// </param>
+        /// <param name="updateReasonCode">
+        /// OneStopUtils.UPDATE_REASON_CODE_MISCDATA_NEW for an approval,
+        /// UPDATE_REASON_CODE_MISCDATA_CANCEL for a cancellation.
+        /// </param>
+        public async Task SendChangeMiscDataRest(PerformContext hangfireContext, string licenceGuidRaw,
+            string endorsementIdRaw, string updateReasonCode, string queueItemId)
+        {
+            hangfireContext?.WriteLine("Starting OneStop REST ChangeMiscData Job.");
+
+            string licenceGuid = Utils.ParseGuid(licenceGuidRaw);
+
+            if (string.IsNullOrEmpty(updateReasonCode))
+                updateReasonCode = UPDATE_REASON_CODE_MISCDATA_NEW;
+
+            var req = new ChangeMiscData();
+            var licence = await FetchLicenceForOneStop(licenceGuid);
+
+            if (hangfireContext != null && licence != null)
+                hangfireContext.WriteLine($"Got Licence {licenceGuid}.");
+
+            if (licence == null)
+            {
+                hangfireContext?.WriteLine($"Unable to get licence,SendChangeMiscDataRest,hangfireContext {licenceGuid}.");
+                Log.Logger?.Error($"Unable to get licence,SendChangeMiscDataRest {licenceGuid}.");
+                var msg = $"Failed updating OneStop queue item {queueItemId}, licence is null ";
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                return;
+            }
+
+            IList<OneStopEndorsement> endorsements;
+            string endorsementId = Utils.ParseGuid(endorsementIdRaw);
+            if (!string.IsNullOrEmpty(endorsementId))
+            {
+                var dvEndorsement = await _dataverse.GetEndorsementByIdAsync(endorsementId);
+                if (dvEndorsement == null)
+                {
+                    var msg = $"Failed updating OneStop queue item {queueItemId}, endorsement {endorsementId} was not found ";
+                    hangfireContext?.WriteLine(msg);
+                    await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                    return;
+                }
+
+                if (!EndorsementMiscDataMap.IsSupported(dvEndorsement.adoxio_name, licence.LicenceSubCategory))
+                {
+                    var msg = $"Failed updating OneStop queue item {queueItemId}, no OneStop miscDataTypeCode is mapped for endorsement '{dvEndorsement.adoxio_name}' ";
+                    hangfireContext?.WriteLine(msg);
+                    await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                    return;
+                }
+
+                endorsements = new List<OneStopEndorsement>
+                {
+                    new OneStopEndorsement
+                    {
+                        EndorsementId = dvEndorsement.Id.ToString(),
+                        Name = dvEndorsement.adoxio_name
+                    }
+                };
+            }
+            else
+            {
+                endorsements = await FetchSendableEndorsements(licenceGuid, licence.LicenceSubCategory);
+            }
+
+            if (endorsements.Count == 0)
+            {
+                var msg = $"Failed updating OneStop queue item {queueItemId}, licence {licence.LicenceNumber} has no endorsement with a mapped OneStop miscDataTypeCode ";
+                hangfireContext?.WriteLine(msg);
+                Log.Logger?.Information(msg);
+                await UpdateOneStopMessageStatus(hangfireContext, queueItemId, msg);
+                return;
+            }
+
+            // One SBNChangeMiscData document per endorsement; the message carries a single
+            // miscDataTypeCode so several endorsements cannot be combined.
+            var payloads = new StringBuilder();
+            var responses = new StringBuilder();
+
+            foreach (var endorsement in endorsements)
+            {
+                hangfireContext?.WriteLine($"Sending ChangeMiscData for endorsement '{endorsement.Name}'.");
+
+                var innerXml = req.CreateXML(licence, endorsement, updateReasonCode);
+                innerXml = _onestopRestClient.CleanXML(innerXml);
+                Log.Logger?.Information(innerXml);
+                hangfireContext?.WriteLine(innerXml);
+
+                var outputXML = await _onestopRestClient.ReceiveFromPartner(innerXml);
+
+                payloads.AppendLine(innerXml);
+                responses.AppendLine(outputXML);
+
+                hangfireContext?.WriteLine(outputXML);
+            }
+
+            await UpdateQueueItemForSend(hangfireContext, queueItemId, payloads.ToString().Trim(), responses.ToString().Trim());
+
+            hangfireContext?.WriteLine("End of OneStop REST ChangeMiscData  Job.");
         }
 
         /// <summary>
@@ -496,9 +673,15 @@ namespace Gov.Jag.Lcrb.OneStopService
                                 case OneStopHubStatusChange.Renewed:
                                 case OneStopHubStatusChange.Suspended:
                                 case OneStopHubStatusChange.SuspensionEnded:
-                                case OneStopHubStatusChange.EndorsementApproved:
                                     await SendChangeStatusRest(hangfireContext, licenceId,
                                         (OneStopHubStatusChange)queueItem.adoxio_StatusChangeDescription.Value, queueItemId);
+                                    break;
+
+                                // An endorsement is reported with SBNChangeMiscData, not
+                                // SBNChangeStatus: there is no program account status change.
+                                case OneStopHubStatusChange.EndorsementApproved:
+                                    await SendChangeMiscDataRest(hangfireContext, licenceId, null,
+                                        UPDATE_REASON_CODE_MISCDATA_NEW, queueItemId);
                                     break;
 
                                 case OneStopHubStatusChange.ChangeOfAddress:

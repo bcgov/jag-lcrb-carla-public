@@ -2675,6 +2675,20 @@ public class DataverseClient : IDataverseClient, IHealthCheck
     // -------------------------------------------------------------------------
     // Endorsement queries
     // -------------------------------------------------------------------------
+    public async Task<adoxio_endorsement?> GetEndorsementByIdAsync(string id, CancellationToken ct = default)
+    {
+        if (!Guid.TryParse(id, out var guid)) return null;
+        try
+        {
+            var entity = await _serviceClient.RetrieveAsync(adoxio_endorsement.EntityLogicalName, guid, new ColumnSet(true), ct);
+            return entity?.ToEntity<adoxio_endorsement>();
+        }
+        catch (Exception ex) when (ex.Message.Contains("Does Not Exist"))
+        {
+            return null;
+        }
+    }
+
     public async Task<IList<adoxio_endorsement>> GetEndorsementsByLicenceIdAsync(string licenceId, CancellationToken ct = default)
     {
         if (!Guid.TryParse(licenceId, out var guid)) return new List<adoxio_endorsement>();
