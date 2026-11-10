@@ -1,13 +1,8 @@
 name: Build and Deploy All GHA Services
-run-name: "Build all GHA services → ${{ inputs.ref || 'develop' }}"
+run-name: "Build all GHA services → ${{ github.ref_name }}"
 
 on:
   workflow_dispatch:
-    inputs:
-      ref:
-        description: 'Branch to build (defaults to develop)'
-        required: false
-        default: develop
 
 jobs:
   trigger-all:
@@ -19,7 +14,7 @@ jobs:
       - name: Trigger all CI workflows
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REF: ${{ inputs.ref || 'develop' }}
+          REF: ${{ github.ref_name }}
         run: |
           WORKFLOWS=(
             ci-geocoder-service-gha.yml
