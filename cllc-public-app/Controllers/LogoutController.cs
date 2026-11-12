@@ -14,6 +14,20 @@ namespace Gov.Lclb.Cllb.Public.Controllers
     [ApiController]
     public class LogoutController : ControllerBase
     {
+        /// <summary>SiteMinder's cookie family - SMSESSION, SMIDENTITY,
+        /// SMCHALLENGE and whatever else the SSO configuration adds.</summary>
+        private const string SiteMinderCookiePrefix = "SM";
+
+        /// <summary>This app's own cookies: the session cookie, antiforgery
+        /// and auth. Startup sets no custom session cookie name, so these are
+        /// the framework defaults (.AspNetCore.Session and friends).</summary>
+        private const string AppCookiePrefix = ".AspNetCore.";
+
+        /// <summary>Upper bound on Set-Cookie headers in the sign-out
+        /// response, so it can never again outgrow a proxy's response-header
+        /// buffer.</summary>
+        private const int MaxSetCookieHeaders = 24;
+
         private readonly IConfiguration Configuration;
         private readonly IWebHostEnvironment _env;
 
@@ -30,38 +44,68 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // clear session server-side
             HttpContext.Session.Clear();
 
-            // Expire every cookie the browser sent us (session cookie, SiteMinder
-            // cookies, dev tokens, etc.) so the next visit starts from a clean
-            // slate instead of silently re-authenticating off a stale cookie.
-            // This only runs on an explicit sign-out request.
+            // Expire the cookies that actually hold the session, so the next
+            // visit starts from a clean slate instead of silently
+            // re-authenticating off a stale cookie.
             //
-            // A clearing Set-Cookie only takes effect if its Domain (and Path)
-            // match what the cookie was originally set with. SiteMinder's
-            // SMSESSION is commonly scoped to a parent domain (e.g. .gov.bc.ca)
-            // so it's shared across the SSO realm — clearing with no Domain only
-            // targets the exact host and silently leaves that cookie in place.
+            // ONLY the session-bearing families, not every cookie the browser
+            // sent. On justice.gov.bc.ca a user carries cookies belonging to
+            // other .gov.bc.ca applications, analytics and consent banners;
+            // none of them sign anyone in or out, so clearing them achieved
+            // nothing except response headers. Clearing all of them - two
+            // Set-Cookie headers each - pushed the response past nginx's
+            // default 4KB proxy_buffer_size, which answered with a 502 and
+            // never delivered the clearing cookies at all. The user's browser
+            // kept SMSESSION, SiteMinder re-authenticated, and logout
+            // appeared to do nothing.
             //
-            // Deliberately only 2 domain variants (not every parent-domain level
-            // for every cookie): SiteMinder's SMSESSION cookie is large (~2-3KB)
-            // and a full combinatorial clear (many cookies x many domains)
-            // generates enough Set-Cookie response headers to exceed a proxy's
-            // response-header size limit between here and the browser (F5 /
-            // OpenShift Route), producing a 502 instead of the redirect.
+            // Prefix matching rather than an explicit list: SiteMinder adds
+            // cookies depending on configuration (SMSESSION, SMIDENTITY,
+            // SMCHALLENGE, SMUSRMSG...) and an enumerated list silently
+            // misses whichever one is added next.
             //
-            // Request.Host is NOT reliable for this — F5/the OpenShift Route can
-            // present a different Host than the public URL the browser actually
-            // used (observed: the internal *.apps.silver.devops.gov.bc.ca route
-            // name instead of dev.justice.gov.bc.ca). Derive the domain from the
-            // configured public BASE_URI instead.
+            // A clearing Set-Cookie only takes effect if its Domain and Path
+            // match what the cookie was set with. SMSESSION is scoped to a
+            // parent domain (.gov.bc.ca) so it is shared across the SSO
+            // realm, and needs both the host-scoped and parent-scoped clear.
+            // The app's own cookies are host-scoped, so a parent-domain
+            // variant for those would do nothing at all - which is half of
+            // what the old code was emitting.
+            //
+            // Request.Host is NOT reliable for deriving the parent domain -
+            // F5 or the OpenShift Route can present a different Host than the
+            // public URL the browser used (observed: the internal
+            // *.apps.silver.devops.gov.bc.ca route name instead of
+            // dev.justice.gov.bc.ca). Use the configured public BASE_URI.
             var publicHost = Uri.TryCreate(Configuration["BASE_URI"], UriKind.Absolute, out var baseUri)
                 ? baseUri.Host
                 : null;
-            var domainScopes = new[] { null, GetSsoParentDomain(publicHost) }.Distinct();
+            var ssoParentDomain = GetSsoParentDomain(publicHost);
 
+            var hostScopeOnly = new string[] { null };
+            var ssoScopes = new[] { null, ssoParentDomain }.Distinct().ToArray();
+
+            var emitted = 0;
             foreach (var cookieName in Request.Cookies.Keys)
             {
-                foreach (var domain in domainScopes)
+                var isSso = cookieName.StartsWith(SiteMinderCookiePrefix, StringComparison.OrdinalIgnoreCase);
+                var isApp = cookieName.StartsWith(AppCookiePrefix, StringComparison.OrdinalIgnoreCase);
+                if (!isSso && !isApp)
                 {
+                    continue;
+                }
+
+                foreach (var domain in isSso ? ssoScopes : hostScopeOnly)
+                {
+                    // A ceiling, so this failure mode cannot return quietly.
+                    // It depended on the USER's cookie count, which is why it
+                    // reproduced for some people and not others and survived
+                    // more than one round of fixes.
+                    if (emitted >= MaxSetCookieHeaders)
+                    {
+                        break;
+                    }
+
                     var options = new CookieOptions
                     {
                         Path = "/",
@@ -73,6 +117,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                         options.Domain = domain;
                     }
                     Response.Cookies.Append(cookieName, "", options);
+                    emitted++;
                 }
             }
 
@@ -85,7 +130,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // the failure from one environment to another.
             //
             // The teardown above is what actually signs the user out: the
-            // server-side session is cleared and every cookie the browser sent is
+            // server-side session is cleared and the session-bearing cookies are
             // expired, including SMSESSION at the .gov.bc.ca SSO scope. What is
             // given up is SiteMinder's own global sign-out, so a user holding a
             // live SMSESSION for a DIFFERENT .gov.bc.ca application may remain
@@ -94,7 +139,13 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             // To restore the global sign-out once a reachable logoff endpoint is
             // confirmed, redirect to SITEMINDER_LOGOUT_URL with
             //   ?returl={BASE_URI}{BASE_PATH}&retnow=1
-            return Redirect($"{Configuration["BASE_PATH"]}");
+            // Guarded like LoginController does with the same value:
+            // ControllerBase.Redirect throws ArgumentException on a null or
+            // empty url, so an unset BASE_PATH turns sign-out into a 500.
+            var basePath = string.IsNullOrEmpty(Configuration["BASE_PATH"])
+                ? "/"
+                : Configuration["BASE_PATH"];
+            return Redirect(basePath);
         }
 
         /// <summary>
