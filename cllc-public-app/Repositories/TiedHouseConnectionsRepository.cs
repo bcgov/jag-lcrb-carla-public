@@ -128,16 +128,19 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             if (incomingTiedHouseConnection.ApplicationId == applicationId)
             {
+                var connectionId = incomingTiedHouseConnection.id;
+
                 if (incomingTiedHouseConnection.MarkedForRemoval == true && incomingTiedHouseConnection.SupersededById == null)
                 {
-                    await _dataverse.DeleteTiedHouseConnectionAsync(connection.adoxio_tiedhouseconnectionId?.ToString());
+                    await _dataverse.DeleteTiedHouseConnectionAsync(connectionId);
                 }
                 else
                 {
+                    connection.adoxio_tiedhouseconnectionId = new Guid(connectionId);
                     await _dataverse.UpdateTiedHouseConnectionAsync(connection);
                     await RemoveAndAddAssociateLicenses(
                         incomingTiedHouseConnection.AssociatedLiquorLicense?.Select(item => item.Id).ToList() ?? new List<string>(),
-                        connection.adoxio_tiedhouseconnectionId?.ToString()
+                        connectionId
                     );
                 }
 
@@ -152,17 +155,13 @@ namespace Gov.Lclb.Cllb.Public.Repositories
             }
 
             connection.adoxio_Application = new Microsoft.Xrm.Sdk.EntityReference("adoxio_application", new Guid(applicationId));
-            connection.adoxio_tiedhouseconnectionId = null;
-            connection.Id = Guid.Empty;
             connection.adoxio_SelfDeclared = adoxio_generalyesno.Yes;
             connection.adoxio_DeclarationDate = DateTime.UtcNow;
 
             var newId = await _dataverse.CreateTiedHouseConnectionAsync(connection);
 
-            await AssociateTiedHouseConnectionToLicenses(
-                incomingTiedHouseConnection.AssociatedLiquorLicense?.Select(item => item.Id).ToList() ?? new List<string>(),
-                newId.ToString()
-            );
+            var licenceIds = incomingTiedHouseConnection.AssociatedLiquorLicense?.Select(item => item.Id).ToList() ?? new List<string>();
+            await AssociateTiedHouseConnectionToLicenses(licenceIds, newId.ToString());
 
             return await GetTiedHouseConnectionById(newId.ToString());
         }
@@ -181,16 +180,19 @@ namespace Gov.Lclb.Cllb.Public.Repositories
 
             if (incomingTiedHouseConnection.AccountId == accountId)
             {
+                var connectionId = incomingTiedHouseConnection.id;
+
                 if (incomingTiedHouseConnection.MarkedForRemoval == true && incomingTiedHouseConnection.SupersededById == null)
                 {
-                    await _dataverse.DeleteTiedHouseConnectionAsync(connection.adoxio_tiedhouseconnectionId?.ToString());
+                    await _dataverse.DeleteTiedHouseConnectionAsync(connectionId);
                 }
                 else
                 {
+                    connection.adoxio_tiedhouseconnectionId = new Guid(connectionId);
                     await _dataverse.UpdateTiedHouseConnectionAsync(connection);
                     await RemoveAndAddAssociateLicenses(
                         incomingTiedHouseConnection.AssociatedLiquorLicense?.Select(item => item.Id).ToList() ?? new List<string>(),
-                        connection.adoxio_tiedhouseconnectionId?.ToString()
+                        connectionId
                     );
                 }
 
@@ -203,8 +205,6 @@ namespace Gov.Lclb.Cllb.Public.Repositories
                 connection.adoxio_SupersededBy = new Microsoft.Xrm.Sdk.EntityReference("adoxio_tiedhouseconnection", predecessorGuid);
             }
 
-            connection.adoxio_tiedhouseconnectionId = null;
-            connection.Id = Guid.Empty;
             connection.statuscode = adoxio_tiedhouseconnection_statuscode.Existing;
             connection.adoxio_SelfDeclared = adoxio_generalyesno.Yes;
             connection.adoxio_DeclarationDate = DateTime.UtcNow;

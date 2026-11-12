@@ -1072,11 +1072,14 @@ namespace Gov.Lclb.Cllb.Public.Authentication
 
                     var contactVM = new ViewModels.Contact();
                     contactVM.CopyHeaderValues(headers);
-                    // Preserve existing email/phone if Siteminder headers didn't supply them —
+                    // Preserve existing values if Siteminder headers didn't supply them —
                     // BCeID Business headers often don't carry these, and CopyValues overwrites
                     // unconditionally, silently wiping out contact info the user already saved.
                     if (string.IsNullOrEmpty(contactVM.emailaddress1)) contactVM.emailaddress1 = contact.EMailAddress1;
                     if (string.IsNullOrEmpty(contactVM.telephone1)) contactVM.telephone1 = contact.Telephone1;
+                    if (string.IsNullOrEmpty(contactVM.firstname)) contactVM.firstname = contact.FirstName;
+                    if (string.IsNullOrEmpty(contactVM.middlename)) contactVM.middlename = contact.MiddleName;
+                    if (string.IsNullOrEmpty(contactVM.lastname)) contactVM.lastname = contact.LastName;
                     var patchContact = new DvContact { Id = contact.Id };
                     patchContact.CopyValues(contactVM);
                     await _dataverse.UpdateContactAsync(patchContact);
