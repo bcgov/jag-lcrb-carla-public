@@ -1,4 +1,4 @@
-extern alias DV;
+﻿extern alias DV;
 using DV::Gov.Lclb.Cllb.Interfaces;
 using Gov.Jag.Lcrb.OneStopService;
 using Hangfire;
@@ -68,6 +68,26 @@ namespace one_stop_service.Controllers
         {
             _logger.Information($"Reached SendChangeStatusMessage. licenceGuid: {licenceGuid}");
             BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeStatusRest(null, licenceGuid, statusChange, null));
+            return Ok();
+        }
+
+
+        /// <summary>
+        /// Send the endorsement (SBNChangeMiscData) message for a licence.
+        /// </summary>
+        /// <param name="licenceGuid">The licence.</param>
+        /// <param name="endorsementId">
+        /// Optional. The endorsement to report. Omit to report every endorsement on the
+        /// licence that OneStop has a confirmed miscDataTypeCode for.
+        /// </param>
+        /// <param name="updateReasonCode">
+        /// Optional. 03 (default) for an approved endorsement, 05 for a cancelled one.
+        /// </param>
+        [HttpGet("SendChangeMiscData/{licenceGuid}")]
+        public IActionResult SendChangeMiscDataMessage(string licenceGuid, string endorsementId, string updateReasonCode)
+        {
+            _logger.Information($"Reached SendChangeMiscDataMessage. licenceGuid: {licenceGuid}, endorsementId: {endorsementId}, updateReasonCode: {updateReasonCode}");
+            BackgroundJob.Enqueue<OneStopUtils>(utils => utils.SendChangeMiscDataRest(null, licenceGuid, endorsementId, updateReasonCode, null));
             return Ok();
         }
 

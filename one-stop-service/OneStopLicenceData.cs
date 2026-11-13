@@ -10,6 +10,14 @@ namespace Gov.Jag.Lcrb.OneStopService
         public bool? OneStopSent { get; set; }
         public DateTimeOffset? ExpiryDate { get; set; }
         public OneStopLicenceType LicenceType { get; set; }
+
+        /// <summary>
+        /// Manufacturer sub-category name (Winery, Brewery, Distillery, Co-Packer).
+        /// Selects between the winery and the generic manufacturer miscDataTypeCode
+        /// for the same endorsement - see EndorsementMiscDataMap.
+        /// </summary>
+        public string LicenceSubCategory { get; set; }
+
         public OneStopEstablishment Establishment { get; set; }
         public OneStopAccount Licencee { get; set; }
     }
@@ -39,5 +47,15 @@ namespace Gov.Jag.Lcrb.OneStopService
         public string Address1City { get; set; }
         public string Address1PostalCode { get; set; }
         public string PrimaryContactLastName { get; set; }
+    }
+
+    /// <summary>
+    /// A single endorsement on a licence, resolved far enough to build an
+    /// SBNChangeMiscData message for it.
+    /// </summary>
+    public class OneStopEndorsement
+    {
+        public string EndorsementId { get; set; }
+        public string Name { get; set; }
     }
 }
