@@ -41,6 +41,34 @@ function encodeEventStartDate(data: SepApplication): SepApplication {
   return { ...data, eventStartDate: fromPacificWallClockToUtc(startOfDay(new Date(data.eventStartDate))) } as SepApplication;
 }
 
+/**
+ * Re-encodes schedule times under the rule in effect now, because Dynamics stamps createdon when it saves them.
+ *
+ * @param {SepApplication} data
+ * @return {*}  {SepApplication}
+ */
+function encodeSchedules(data: SepApplication): SepApplication {
+  const now = new Date();
+  const reencode = (value: Date, createdOn: Date) =>
+    value ? fromPacificWallClockToUtc(fromUtcToPacificWallClock(value, createdOn)) : value;
+
+  data?.eventLocations?.forEach((location) =>
+    location.eventDates?.forEach((sched) => {
+      sched.eventStart = reencode(sched.eventStart, sched.createdOn);
+      sched.eventEnd = reencode(sched.eventEnd, sched.createdOn);
+      sched.serviceStart = reencode(sched.serviceStart, sched.createdOn);
+      sched.serviceEnd = reencode(sched.serviceEnd, sched.createdOn);
+      sched.createdOn = now;
+    })
+  );
+
+  return data;
+}
+
+function encodeSepApplication(data: SepApplication): SepApplication {
+  return encodeSchedules(encodeEventStartDate(data));
+}
+
 function decodeSummaries(items: SepApplicationSummary[]): SepApplicationSummary[] {
   return items?.map((item) => decodeEventStartDate(item));
 }
@@ -98,7 +126,7 @@ export class SpecialEventsDataService extends DataService {
    */
   createSepApplication(data: SepApplication) {
     return this.http
-      .post<SepApplication>('api/special-events/', encodeEventStartDate(data), { headers: this.headers })
+      .post<SepApplication>('api/special-events/', encodeSepApplication(data), { headers: this.headers })
       .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 
@@ -108,7 +136,7 @@ export class SpecialEventsDataService extends DataService {
    */
   updateSepApplication(data: SepApplication, id: string) {
     return this.http
-      .put<SepApplication>(`api/special-events/${id}`, encodeEventStartDate(data), { headers: this.headers })
+      .put<SepApplication>(`api/special-events/${id}`, encodeSepApplication(data), { headers: this.headers })
       .pipe(map(decodeEventStartDate), catchError(this.handleError));
   }
 

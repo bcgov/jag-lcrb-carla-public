@@ -18,6 +18,7 @@ import {
   fromPacificWallClockToUtc
 } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
+import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -147,8 +148,8 @@ export class LiquorFreeEventComponent extends FormBase implements OnInit {
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
       // date & time
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
+      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
 
       isAgreement1: licenceEvent.isAgreement1,
       isAgreement2: licenceEvent.isAgreement2

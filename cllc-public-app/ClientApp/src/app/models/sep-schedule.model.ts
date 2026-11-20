@@ -1,5 +1,5 @@
 import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
-import { addDays, format } from 'date-fns';
+import { addDays, format, subDays } from 'date-fns';
 
 export class SepSchedule {
   id: string; // server side primary key
@@ -28,20 +28,24 @@ export class SepSchedule {
 
   toEventFormValue(): IEventFormValue {
     const result = { id: this.id } as IEventFormValue;
-    const wallClock = (value: Date) => fromUtcToPacificWallClock(value, this.createdOn);
-    result.eventDate = this.eventStart ? wallClock(this.eventStart) : this.eventStart;
+
+    result.eventDate = this.eventStart ? fromUtcToPacificWallClock(this.eventStart, this.createdOn) : this.eventStart;
 
     if (this.eventStart) {
-      result.eventStartValue = format(wallClock(this.eventStart), 'h:mm aa');
+      result.eventStartValue = format(fromUtcToPacificWallClock(this.eventStart, this.createdOn), 'h:mm aa');
+      // formatDate saved after-midnight starts on the next day, so step back to the event date.
+      if (this.isNextDay(result.eventStartValue)) {
+        result.eventDate = subDays(result.eventDate, 1);
+      }
     }
     if (this.eventEnd) {
-      result.eventEndValue = format(wallClock(this.eventEnd), 'h:mm aa');
+      result.eventEndValue = format(fromUtcToPacificWallClock(this.eventEnd, this.createdOn), 'h:mm aa');
     }
     if (this.serviceStart) {
-      result.serviceStartValue = format(wallClock(this.serviceStart), 'h:mm aa');
+      result.serviceStartValue = format(fromUtcToPacificWallClock(this.serviceStart, this.createdOn), 'h:mm aa');
     }
     if (this.serviceEnd) {
-      result.serviceEndValue = format(wallClock(this.serviceEnd), 'h:mm aa');
+      result.serviceEndValue = format(fromUtcToPacificWallClock(this.serviceEnd, this.createdOn), 'h:mm aa');
     }
     result.liquorServiceHoursExtensionReason = this.liquorServiceHoursExtensionReason;
     result.disturbancePreventionMeasuresDetails = this.disturbancePreventionMeasuresDetails;
@@ -49,13 +53,8 @@ export class SepSchedule {
     return result;
   }
 
-  getServiceHours(): number {
-    const serviceHours =
-      parseInt(format(new Date(this.serviceEnd), 'H')) - parseInt(format(new Date(this.serviceStart), 'H'));
-    return serviceHours;
-  }
-
   /**
+   * Formats a date and time string into a UTC Date, taking into account if the time is on the next day.
    *
    * @param eventDate
    * @param time, assumed format "HH:MM [AM,PM]" e.g. '6:30 PM'
@@ -63,19 +62,13 @@ export class SepSchedule {
   private formatDate(eventDate: Date, time: string): Date {
     let tempDate = new Date(eventDate);
 
-    // let day = parseInt(format(new Date(eventDate), "dd"), 10);
-
-    // console.log("formatting date: ", eventDate, time)
     if (this.isNextDay(time)) {
-      // console.log("is next day")
       tempDate = addDays(tempDate, 1);
-      // day += 1;
     }
-    // const dateString = `${day} ${format(tempDate, "d MMM yyyy")} ${time}`;
+
     const dateString = `${format(tempDate, 'd MMM yyyy')} ${time}`;
-    // console.log("dateString:",dateString);
     const result = new Date(dateString);
-    // console.log("result is: ", result);
+
     return fromPacificWallClockToUtc(result);
   }
 

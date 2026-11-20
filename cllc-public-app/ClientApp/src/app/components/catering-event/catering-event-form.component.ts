@@ -10,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { LicenceEventsService } from '@services/licence-events.service';
 import { fromUtcToPacificWallClock, fromPacificWallClockToUtc } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
+import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 import {
@@ -168,8 +169,8 @@ export class CateringEventFormComponent extends FormBase implements OnInit {
       city: licenceEvent.city,
       province: licenceEvent.province,
       postalCode: licenceEvent.postalCode,
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
+      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Catering').value,
       agreement: false
     });

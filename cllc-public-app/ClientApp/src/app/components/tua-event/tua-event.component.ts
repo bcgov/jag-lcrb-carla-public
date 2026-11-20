@@ -19,6 +19,7 @@ import {
   fromPacificWallClockToUtc
 } from '@shared/date-fns';
 import { FormBase } from '@shared/form-base';
+import { startOfDay } from 'date-fns';
 import { Subscription } from 'rxjs';
 import { Endorsement, HoursOfService } from '../../models/endorsement.model';
 
@@ -169,8 +170,8 @@ export class TuaEventComponent extends FormBase implements OnInit {
       contactEmail: licenceEvent.contactEmail,
       contactEmailConfirmation: licenceEvent.contactEmail,
       eventLocations: licenceEvent.eventLocations,
-      startDate: new Date(licenceEvent.startDate),
-      endDate: new Date(licenceEvent.endDate),
+      startDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.startDate, licenceEvent.modifiedOn)),
+      endDate: startOfDay(fromUtcToPacificWallClock(licenceEvent.endDate, licenceEvent.modifiedOn)),
       eventCategory: this.getOptionFromLabel(this.eventCategory, 'Temporary Use Area').value,
       maxAttendance: licenceEvent.maxAttendance,
       minorsAttending: licenceEvent.minorsAttending,

@@ -74,7 +74,7 @@ function isCapturedUnderPermanentOffset(capturedOn?: Date | string | null): bool
  * Pass capturedOn for stored values. A value saved before BC moved to permanent UTC-7 (Nov 1, 2026) used the legacy PST/PDT rules,
  * even if it is dated after the move, so capturedOn dictates which rule to use when decoding it.
  *
- * @param value The UTC instant to convert
+ * @param utcInstant The UTC instant to convert
  * @param capturedOn When the value was saved (e.g. the record's createdOn); defaults to now
  * @example
  * // Saved Oct 15, before the move, so Nov 20 is decoded as PST (UTC-8).
@@ -152,9 +152,11 @@ export function fromPacificWallClockToUtc(pacificWallClock: Date): Date {
     return new Date(permanentInstant);
   }
 
-  // The offset depends on the instant, so estimate it from PST and then re-check after.
+  // We need the offset (-7 PDT or -8 PST) to find the UTC instant, but the offset depends on that instant.
+  // Step 1: guess the instant assuming PST, look up the offset in effect then, and use it to estimate the instant.
   const estimate = wallAsUtc - getLegacyPacificOffset(wallAsUtc - PST_OFFSET_MS); // Subtract the negative PST offset
 
+  // Step 2: look up the offset again at the estimate. This only changes the result near a PST/PDT switch.
   return new Date(wallAsUtc - getLegacyPacificOffset(estimate));
 }
 
@@ -241,19 +243,19 @@ export function dateRangeValidator(firstControl: string, secondControl: string):
  *
  * @example
  * ```typescript
- * const date = safeToDateString('2023-03-15');
+ * const date = safeToISOString('2023-03-15');
  * console.log(date); // Output: '2023-03-15T00:00:00.000Z'
  * ```
  *
  * @example
  * ```typescript
- * const date = safeToDateString(new Date());
+ * const date = safeToISOString(new Date());
  * console.log(date); // Output: '2023-03-15T00:00:00.000Z'
  * ```
  *
  * @example
  * ```typescript
- * const date = safeToDateString(null);
+ * const date = safeToISOString(null);
  * console.log(date); // Output: null
  * ```
  *
