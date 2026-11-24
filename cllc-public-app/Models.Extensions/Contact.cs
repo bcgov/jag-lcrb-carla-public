@@ -91,66 +91,73 @@ namespace Gov.Lclb.Cllb.Public.Models
             return result;
         }
 
+        /// <summary>
+        /// Copies values from the view model onto a Dataverse contact used as an update patch.
+        /// Null values are skipped so that fields not supplied by the caller are left unchanged in Dataverse.
+        /// </summary>
         public static void CopyValues(this DataverseContact to, Contact from)
         {
-            to.EMailAddress1 = from.emailaddress1;
-            to.Telephone1 = from.telephone1;
+            if (from.emailaddress1 != null) to.EMailAddress1 = from.emailaddress1;
+            if (from.telephone1 != null) to.Telephone1 = from.telephone1;
             to.CopyValuesNoEmailPhone(from);
         }
 
+        /// <summary>
+        /// Copies values from the view model onto a Dataverse contact used as an update patch, excluding email and phone.
+        /// Null values are skipped so that fields not supplied by the caller are left unchanged in Dataverse.
+        /// </summary>
         public static void CopyValuesNoEmailPhone(this DataverseContact to, Contact from)
         {
-            to.FirstName = from.firstname;
-            to.MiddleName = from.middlename;
-            to.LastName = from.lastname;
-            to.JobTitle = from.jobTitle;
-            to.EMailAddress1 = from.emailaddress1;
-            to.Address1_City = from.address1_city;
-            to.Address1_Country = from.address1_country;
-            to.Address1_Line1 = from.address1_line1;
+            if (from.firstname != null) to.FirstName = from.firstname;
+            if (from.middlename != null) to.MiddleName = from.middlename;
+            if (from.lastname != null) to.LastName = from.lastname;
+            if (from.jobTitle != null) to.JobTitle = from.jobTitle;
+            if (from.address1_city != null) to.Address1_City = from.address1_city;
+            if (from.address1_country != null) to.Address1_Country = from.address1_country;
+            if (from.address1_line1 != null) to.Address1_Line1 = from.address1_line1;
             if (!string.IsNullOrEmpty(from.address1_postalcode))
                 to.Address1_PostalCode = from.address1_postalcode.Replace(" ", "");
-            to.Address1_StateOrProvince = from.address1_stateorprovince;
-            to.Address2_City = from.address2_city;
-            to.Address2_Country = from.address2_country;
-            to.Address2_Line1 = from.address2_line1;
-            to.Address2_PostalCode = from.address2_postalcode;
-            to.Address2_StateOrProvince = from.address2_stateorprovince;
-            to.adoxio_CanAttendComplianceMeetings = from.adoxio_canattendcompliancemeetings;
-            to.adoxio_CanObtainLicenceInfoFromBranch = from.adoxio_canobtainlicenceinfofrombranch;
-            to.adoxio_CanRepresentLicenseeAtHearings = from.adoxio_canrepresentlicenseeathearings;
-            to.adoxio_CanSignGroceryStoreProofOfSalesRevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
-            to.adoxio_CanSignPermanentChangeApplications = from.adoxio_cansignpermanentchangeapplications;
-            to.adoxio_CanSignTemporaryChangeApplications = from.adoxio_cansigntemporarychangeapplications;
-            to.BirthDate = from.Birthdate?.DateTime;
-            to.adoxio_Birthplace = from.BirthPlace;
-            to.adoxio_GenderCode = (adoxio_gender?)(int?)from.Gender;
-            to.MobilePhone = from.MobilePhone;
-            to.adoxio_PrimaryIDNumber = from.PrimaryIdNumber;
-            to.adoxio_SecondaryIDNumber = from.SecondaryIdNumber;
-            to.adoxio_IsWorker = from.IsWorker;
-            to.adoxio_SelfDisclosure = (adoxio_generalyesno?)(int?)from.SelfDisclosure;
-            to.adoxio_IdentificationType = (adoxio_contact_adoxio_identificationtype?)(int?)from.PrimaryIdentificationType;
-            to.adoxio_SecondaryIdentificationType = (adoxio_contact_adoxio_secondaryidentificationtype?)(int?)from.SecondaryIdentificationType;
-            to.adoxio_cascomplete = (adoxio_contact_adoxio_cascomplete?)(int?)from.CasComplete;
-            to.adoxio_casdatesubmitted = from.CasDateSubmitted?.DateTime;
-            to.adoxio_ConsentValidated = (adoxio_contact_adoxio_consentvalidated?)(int?)from.CasConsentValidated;
-            to.adoxio_ConsentValidatedExpiryDate = from.CasConsentValidatedExpiryDate?.DateTime;
-            to.adoxio_PHSLivesInCanada = (adoxio_contact_adoxio_phslivesincanada?)(int?)from.PhsLivesInCanada;
-            to.adoxio_PHSHasLivedInCanada = (adoxio_contact_adoxio_phshaslivedincanada?)(int?)from.PhsHasLivedInCanada;
-            to.adoxio_PHSExpired = (adoxio_contact_adoxio_phsexpired?)(int?)from.PhsExpired;
-            to.adoxio_PHSComplete = (adoxio_contact_adoxio_phscomplete?)(int?)from.PhsComplete;
-            to.adoxio_PHSConnectionsToOtherLicences = (adoxio_contact_adoxio_phsconnectionstootherlicences?)(int?)from.PhsConnectionsToOtherLicences;
-            to.adoxio_PHSCanadianDrugAlchoholDrivingOffence = (adoxio_contact_adoxio_phscanadiandrugalchoholdrivingoffence?)(int?)from.PhsCanadianDrugAlchoholDrivingOffence;
-            to.adoxio_PHSDateSubmitted = from.PhsDateSubmitted?.DateTime;
-            to.adoxio_PHSForeignDrugAlchoholOffence = (adoxio_contact_adoxio_phsforeigndrugalchoholoffence?)(int?)from.PhsForeignDrugAlchoholOffence;
-            to.adoxio_PHSExclusiveMFG = (adoxio_contact_adoxio_phsexclusivemfg?)(int?)from.PhsExclusiveMFG;
-            to.adoxio_PHSExclusiveDetails = from.phsExclusiveDetails;
-            to.adoxio_phsFinancialInt = (adoxio_contact_adoxio_phsfinancialint?)(int?)from.phsFinancialInt;
-            to.adoxio_PHSFinancialInterestDetails = from.phsFinancialIntDetails;
-            to.adoxio_PHSProfitAgreement = (adoxio_contact_adoxio_phsprofitagreement?)(int?)from.phsProfitAgreement;
-            to.adoxio_PHSProfitAgreementDetails = from.phsProfitAgreementDetails;
-            to.adoxio_PHSConnectionsDetails = from.PhsConnectionsDetails;
+            if (from.address1_stateorprovince != null) to.Address1_StateOrProvince = from.address1_stateorprovince;
+            if (from.address2_city != null) to.Address2_City = from.address2_city;
+            if (from.address2_country != null) to.Address2_Country = from.address2_country;
+            if (from.address2_line1 != null) to.Address2_Line1 = from.address2_line1;
+            if (from.address2_postalcode != null) to.Address2_PostalCode = from.address2_postalcode;
+            if (from.address2_stateorprovince != null) to.Address2_StateOrProvince = from.address2_stateorprovince;
+            if (from.adoxio_canattendcompliancemeetings != null) to.adoxio_CanAttendComplianceMeetings = from.adoxio_canattendcompliancemeetings;
+            if (from.adoxio_canobtainlicenceinfofrombranch != null) to.adoxio_CanObtainLicenceInfoFromBranch = from.adoxio_canobtainlicenceinfofrombranch;
+            if (from.adoxio_canrepresentlicenseeathearings != null) to.adoxio_CanRepresentLicenseeAtHearings = from.adoxio_canrepresentlicenseeathearings;
+            if (from.adoxio_cansigngrocerystoreproofofsalesrevenue != null) to.adoxio_CanSignGroceryStoreProofOfSalesRevenue = from.adoxio_cansigngrocerystoreproofofsalesrevenue;
+            if (from.adoxio_cansignpermanentchangeapplications != null) to.adoxio_CanSignPermanentChangeApplications = from.adoxio_cansignpermanentchangeapplications;
+            if (from.adoxio_cansigntemporarychangeapplications != null) to.adoxio_CanSignTemporaryChangeApplications = from.adoxio_cansigntemporarychangeapplications;
+            if (from.Birthdate != null) to.BirthDate = from.Birthdate.Value.DateTime;
+            if (from.BirthPlace != null) to.adoxio_Birthplace = from.BirthPlace;
+            if (from.Gender != null) to.adoxio_GenderCode = (adoxio_gender?)(int?)from.Gender;
+            if (from.MobilePhone != null) to.MobilePhone = from.MobilePhone;
+            if (from.PrimaryIdNumber != null) to.adoxio_PrimaryIDNumber = from.PrimaryIdNumber;
+            if (from.SecondaryIdNumber != null) to.adoxio_SecondaryIDNumber = from.SecondaryIdNumber;
+            if (from.IsWorker != null) to.adoxio_IsWorker = from.IsWorker;
+            if (from.SelfDisclosure != null) to.adoxio_SelfDisclosure = (adoxio_generalyesno?)(int?)from.SelfDisclosure;
+            if (from.PrimaryIdentificationType != null) to.adoxio_IdentificationType = (adoxio_contact_adoxio_identificationtype?)(int?)from.PrimaryIdentificationType;
+            if (from.SecondaryIdentificationType != null) to.adoxio_SecondaryIdentificationType = (adoxio_contact_adoxio_secondaryidentificationtype?)(int?)from.SecondaryIdentificationType;
+            if (from.CasComplete != null) to.adoxio_cascomplete = (adoxio_contact_adoxio_cascomplete?)(int?)from.CasComplete;
+            if (from.CasDateSubmitted != null) to.adoxio_casdatesubmitted = from.CasDateSubmitted.Value.DateTime;
+            if (from.CasConsentValidated != null) to.adoxio_ConsentValidated = (adoxio_contact_adoxio_consentvalidated?)(int?)from.CasConsentValidated;
+            if (from.CasConsentValidatedExpiryDate != null) to.adoxio_ConsentValidatedExpiryDate = from.CasConsentValidatedExpiryDate.Value.DateTime;
+            if (from.PhsLivesInCanada != null) to.adoxio_PHSLivesInCanada = (adoxio_contact_adoxio_phslivesincanada?)(int?)from.PhsLivesInCanada;
+            if (from.PhsHasLivedInCanada != null) to.adoxio_PHSHasLivedInCanada = (adoxio_contact_adoxio_phshaslivedincanada?)(int?)from.PhsHasLivedInCanada;
+            if (from.PhsExpired != null) to.adoxio_PHSExpired = (adoxio_contact_adoxio_phsexpired?)(int?)from.PhsExpired;
+            if (from.PhsComplete != null) to.adoxio_PHSComplete = (adoxio_contact_adoxio_phscomplete?)(int?)from.PhsComplete;
+            if (from.PhsConnectionsToOtherLicences != null) to.adoxio_PHSConnectionsToOtherLicences = (adoxio_contact_adoxio_phsconnectionstootherlicences?)(int?)from.PhsConnectionsToOtherLicences;
+            if (from.PhsCanadianDrugAlchoholDrivingOffence != null) to.adoxio_PHSCanadianDrugAlchoholDrivingOffence = (adoxio_contact_adoxio_phscanadiandrugalchoholdrivingoffence?)(int?)from.PhsCanadianDrugAlchoholDrivingOffence;
+            if (from.PhsDateSubmitted != null) to.adoxio_PHSDateSubmitted = from.PhsDateSubmitted.Value.DateTime;
+            if (from.PhsForeignDrugAlchoholOffence != null) to.adoxio_PHSForeignDrugAlchoholOffence = (adoxio_contact_adoxio_phsforeigndrugalchoholoffence?)(int?)from.PhsForeignDrugAlchoholOffence;
+            if (from.PhsExclusiveMFG != null) to.adoxio_PHSExclusiveMFG = (adoxio_contact_adoxio_phsexclusivemfg?)(int?)from.PhsExclusiveMFG;
+            if (from.phsExclusiveDetails != null) to.adoxio_PHSExclusiveDetails = from.phsExclusiveDetails;
+            if (from.phsFinancialInt != null) to.adoxio_phsFinancialInt = (adoxio_contact_adoxio_phsfinancialint?)(int?)from.phsFinancialInt;
+            if (from.phsFinancialIntDetails != null) to.adoxio_PHSFinancialInterestDetails = from.phsFinancialIntDetails;
+            if (from.phsProfitAgreement != null) to.adoxio_PHSProfitAgreement = (adoxio_contact_adoxio_phsprofitagreement?)(int?)from.phsProfitAgreement;
+            if (from.phsProfitAgreementDetails != null) to.adoxio_PHSProfitAgreementDetails = from.phsProfitAgreementDetails;
+            if (from.PhsConnectionsDetails != null) to.adoxio_PHSConnectionsDetails = from.PhsConnectionsDetails;
         }
 
         public static void CopyHeaderValues(this Contact to, IHeaderDictionary headers)
