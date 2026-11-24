@@ -1,0 +1,1015 @@
+    <div class="fixed inset-0 z-50 bg-background/80 backdrop-blur-sm">
+      <div class="fixed inset-4 md:inset-10 bg-card rounded-lg shadow-2xl border flex flex-col overflow-hidden">
+        <div class="flex items-center justify-between p-4 border-b bg-muted/30">
+          <div class="flex items-center gap-3">
+            <div class="p-2 bg-primary/10 rounded-lg">
+              <svg lucide="Settings" class="w-5 h-5 text-primary"></svg>
+            </div>
+            <div>
+              <h2 class="font-semibold">System Settings</h2>
+              <p class="text-sm text-muted-foreground">Configure application settings and preferences</p>
+            </div>
+          </div>
+          <button uiButton variant="ghost" size="icon" (click)="closed.emit()">
+            <svg lucide="X" class="w-5 h-5"></svg>
+          </button>
+        </div>
+
+        <div class="flex-1 overflow-hidden">
+          <div uiScrollArea class="h-full">
+            <div class="p-6">
+              <div uiTabs value="general" class="w-full">
+                <div uiTabsList class="grid w-full grid-cols-7 mb-6">
+                  <button uiTabsTrigger
+                    value="general"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="MapPin" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">General</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="ai-analytics"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Bot" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">AI &amp; Analytics</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="notifications"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Bell" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">Notifications</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="workforce"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Briefcase" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">Workforce</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="users"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Users" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">Users</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="data"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Database" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">Data</span>
+                  </button>
+                  <button uiTabsTrigger
+                    value="integrations"
+                    class="data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+                  >
+                    <svg lucide="Globe" class="w-4 h-4 mr-2"></svg>
+                    <span class="hidden sm:inline">Integrations</span>
+                  </button>
+                </div>
+
+                <div uiTabsContent value="general" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg">Map Defaults</div>
+                      <div uiCardDescription>Configure default map view settings for all users</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="space-y-2">
+                          <label uiLabel for="defaultZoom">Default Zoom Level</label>
+                          <ui-select [value]="mapDefaultZoom()" (valueChange)="mapDefaultZoom.set($event ?? '')">
+                            <button uiSelectTrigger id="defaultZoom">
+                              <span uiSelectValue></span>
+                            </button>
+                            <ng-template uiSelectContent>
+                              <ui-select-item value="5">Province Overview (5)</ui-select-item>
+                              <ui-select-item value="6">Regional View (6)</ui-select-item>
+                              <ui-select-item value="7">City Level (7)</ui-select-item>
+                              <ui-select-item value="8">Neighborhood (8)</ui-select-item>
+                              <ui-select-item value="9">Street Level (9)</ui-select-item>
+                            </ng-template>
+                          </ui-select>
+                        </div>
+                        <div class="space-y-2">
+                          <label uiLabel for="defaultRegion">Default Region</label>
+                          <ui-select [value]="mapDefaultRegion()" (valueChange)="mapDefaultRegion.set($event ?? '')">
+                            <button uiSelectTrigger id="defaultRegion">
+                              <span uiSelectValue></span>
+                            </button>
+                            <ng-template uiSelectContent>
+                              <ui-select-item value="all">All BC</ui-select-item>
+                              <ui-select-item value="region1">Region 1 - Lower Mainland</ui-select-item>
+                              <ui-select-item value="region2">Region 2 - Fraser Valley</ui-select-item>
+                              <ui-select-item value="region3">Region 3 - Vancouver Island</ui-select-item>
+                              <ui-select-item value="region4">Region 4 - Interior &amp; Kootenays</ui-select-item>
+                              <ui-select-item value="region5">Region 5 - Northern BC</ui-select-item>
+                            </ng-template>
+                          </ui-select>
+                        </div>
+                      </div>
+                      <div uiSeparator></div>
+                      <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Show Applications by Default</label>
+                            <p class="text-sm text-muted-foreground">
+                              Display application pins on initial map load for staff
+                            </p>
+                          </div>
+                          <button uiSwitch [checked]="showApplicationsByDefault()" (checkedChange)="showApplicationsByDefault.set($event)"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Show Special Events by Default</label>
+                            <p class="text-sm text-muted-foreground">
+                              Display special event pins on initial map load
+                            </p>
+                          </div>
+                          <button uiSwitch [checked]="showSpecialEventsByDefault()" (checkedChange)="showSpecialEventsByDefault.set($event)"></button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- AI &amp; Analytics Tab -->
+                <div uiTabsContent value="ai-analytics" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="AlertTriangle" class="w-5 h-5"></svg>
+                        Risk Score Thresholds
+                      </div>
+                      <div uiCardDescription>
+                        Configure risk score levels that trigger alerts and visual indicators
+                      </div>
+                    </div>
+                    <div uiCardContent class="space-y-6">
+                      <div class="space-y-4">
+                        <div class="space-y-2">
+                          <div class="flex items-center justify-between">
+                            <label uiLabel>High Risk Threshold</label>
+                            <span uiBadge variant="destructive">{{ riskScoreHighThreshold() }}+</span>
+                          </div>
+                          <span uiSlider [value]="[riskScoreHighThreshold()]" (valueChange)="riskScoreHighThreshold.set($event![0])" [min]="50" [max]="90" [step]="5" class="w-full"></span>
+                          <p class="text-xs text-muted-foreground">
+                            Scores at or above this level are flagged as high risk
+                          </p>
+                        </div>
+                        <div class="space-y-2">
+                          <div class="flex items-center justify-between">
+                            <label uiLabel>Medium Risk Threshold</label>
+                            <span uiBadge variant="outline" class="bg-amber-100 text-amber-800 border-amber-300">
+                              {{ riskScoreMediumThreshold() }}-{{ riskScoreHighThreshold() - 1 }}
+                            </span>
+                          </div>
+                          <span uiSlider [value]="[riskScoreMediumThreshold()]" (valueChange)="riskScoreMediumThreshold.set($event![0])" [min]="20" [max]="riskScoreHighThreshold() - 10" [step]="5" class="w-full"></span>
+                          <p class="text-xs text-muted-foreground">
+                            Scores between this and high threshold are medium risk
+                          </p>
+                        </div>
+                      </div>
+                      <div class="p-3 bg-muted/50 rounded-lg">
+                        <p class="text-sm text-muted-foreground">
+                          <span class="font-medium">Current Ranges:</span> Low (0-{{ riskScoreMediumThreshold() - 1 }}), Medium ({{ riskScoreMediumThreshold() }}-{{ riskScoreHighThreshold() - 1 }}), High ({{ riskScoreHighThreshold() }}+)
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="DollarSign" class="w-5 h-5"></svg>
+                        BCLDB Sales Analytics
+                      </div>
+                      <div uiCardDescription>Configure sales data analysis and anomaly detection settings</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Sales Anomaly Detection</label>
+                          <p class="text-sm text-muted-foreground">
+                            Flag unusual purchase patterns compared to historical data
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enableSalesAnomalyDetection()" (checkedChange)="enableSalesAnomalyDetection.set($event)"></button>
+                      </div>
+                      @if (enableSalesAnomalyDetection()) {
+                          <div uiSeparator></div>
+                          <div class="space-y-2">
+                            <label uiLabel>Anomaly Detection Sensitivity</label>
+                            <ui-select [value]="salesAnomalySensitivity()" (valueChange)="salesAnomalySensitivity.set($event ?? '')">
+                              <button uiSelectTrigger>
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="low">Low (Flag only major deviations)</ui-select-item>
+                                <ui-select-item value="medium">Medium (Balanced detection)</ui-select-item>
+                                <ui-select-item value="high">High (Flag minor variations)</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                            <p class="text-xs text-muted-foreground">
+                              Higher sensitivity detects smaller deviations from expected sales patterns
+                            </p>
+                          </div>
+                      }
+                      <div uiSeparator></div>
+                      <div class="space-y-2">
+                        <label uiLabel>BCLDB Data Sync Frequency</label>
+                        <ui-select [value]="bcldSyncFrequency()" (valueChange)="bcldSyncFrequency.set($event ?? '')">
+                          <button uiSelectTrigger>
+                            <span uiSelectValue></span>
+                          </button>
+                          <ng-template uiSelectContent>
+                            <ui-select-item value="realtime">Real-time</ui-select-item>
+                            <ui-select-item value="hourly">Hourly</ui-select-item>
+                            <ui-select-item value="daily">Daily</ui-select-item>
+                            <ui-select-item value="weekly">Weekly</ui-select-item>
+                          </ng-template>
+                        </ui-select>
+                        <p class="text-xs text-muted-foreground">
+                          How often to sync wholesale purchase data from BCLDB
+                        </p>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Peer Comparison</label>
+                          <p class="text-sm text-muted-foreground">
+                            Compare sales against similar licensees in the region
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enablePeerComparison()" (checkedChange)="enablePeerComparison.set($event)"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="FileText" class="w-5 h-5"></svg>
+                        Application Intelligence
+                      </div>
+                      <div uiCardDescription>
+                        Configure AI-powered application analysis including Tied House and Fit &amp; Proper assessments
+                      </div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="space-y-2">
+                          <label uiLabel>Application Age Warning (days)</label>
+                          <input uiInput type="number" [value]="applicationAgeWarningDays()" (input)="applicationAgeWarningDays.set($any($event.target).value)" />
+                          <p class="text-xs text-muted-foreground">Show amber indicator after this many days</p>
+                        </div>
+                        <div class="space-y-2">
+                          <label uiLabel>Application Age Critical (days)</label>
+                          <input uiInput type="number" [value]="applicationAgeCriticalDays()" (input)="applicationAgeCriticalDays.set($any($event.target).value)" />
+                          <p class="text-xs text-muted-foreground">Show red indicator after this many days</p>
+                        </div>
+                      </div>
+                      <div uiSeparator></div>
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Tied House Detection</label>
+                          <p class="text-sm text-muted-foreground">
+                            Analyze connections between applicants and manufacturers/producers
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enableTiedHouseDetection()" (checkedChange)="enableTiedHouseDetection.set($event)"></button>
+                      </div>
+                      @if (enableTiedHouseDetection()) {
+                        <div class="space-y-2 pl-4">
+                          <label uiLabel>Tied House Detection Sensitivity</label>
+                          <ui-select [value]="tiedHouseSensitivity()" (valueChange)="tiedHouseSensitivity.set($event ?? '')">
+                            <button uiSelectTrigger>
+                              <span uiSelectValue></span>
+                            </button>
+                            <ng-template uiSelectContent>
+                              <ui-select-item value="low">Low (Direct connections only)</ui-select-item>
+                              <ui-select-item value="medium">Medium (Include indirect connections)</ui-select-item>
+                              <ui-select-item value="high">High (Flag all potential associations)</ui-select-item>
+                            </ng-template>
+                          </ui-select>
+                          <p class="text-xs text-muted-foreground">
+                            Higher sensitivity detects more indirect relationships
+                          </p>
+                        </div>
+                      }
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Fit &amp; Proper Alerts</label>
+                          <p class="text-sm text-muted-foreground">
+                            Show alerts for security screening and financial integrity issues (Cannabis)
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enableFitProperAlerts()" (checkedChange)="enableFitProperAlerts.set($event)"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Globe" class="w-5 h-5"></svg>
+                        Online Research Sources
+                      </div>
+                      <div uiCardDescription>Configure which online sources AI uses for application research</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Online Research for Applications</label>
+                          <p class="text-sm text-muted-foreground">
+                            AI searches online sources for applicant information
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enableOnlineResearch()" (checkedChange)="enableOnlineResearch.set($event)"></button>
+                      </div>
+                      @if (enableOnlineResearch()) {
+                          <div uiSeparator></div>
+                          <div class="space-y-3">
+                            <label uiLabel>Enabled Research Sources</label>
+                            <div class="space-y-2">
+                              <div class="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                <span class="text-sm">News Articles &amp; Media</span>
+                                <button uiSwitch [checked]="onlineResearchSources().news" (checkedChange)="setSource('news', $event)"></button>
+                              </div>
+                              <div class="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                <span class="text-sm">Social Media Profiles</span>
+                                <button uiSwitch [checked]="onlineResearchSources().socialMedia" (checkedChange)="setSource('socialMedia', $event)"></button>
+                              </div>
+                              <div class="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                <span class="text-sm">Public Records (BC Registry, WorkSafeBC)</span>
+                                <button uiSwitch [checked]="onlineResearchSources().publicRecords" (checkedChange)="setSource('publicRecords', $event)"></button>
+                              </div>
+                              <div class="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                <span class="text-sm">Court Records &amp; Legal Filings</span>
+                                <button uiSwitch [checked]="onlineResearchSources().courtRecords" (checkedChange)="setSource('courtRecords', $event)"></button>
+                              </div>
+                              <div class="flex items-center justify-between p-2 bg-muted/50 rounded">
+                                <span class="text-sm">Corporate Registry Analysis</span>
+                                <button uiSwitch [checked]="onlineResearchSources().corporateRegistry" (checkedChange)="setSource('corporateRegistry', $event)"></button>
+                              </div>
+                            </div>
+                          </div>
+                      }
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Search" class="w-5 h-5"></svg>
+                        Search Defaults
+                      </div>
+                      <div uiCardDescription>Configure default search behavior and sorting</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="grid gap-4 sm:grid-cols-2">
+                        <div class="space-y-2">
+                          <label uiLabel>Default Sort Order</label>
+                          <ui-select [value]="defaultSearchSort()" (valueChange)="defaultSearchSort.set($event ?? '')">
+                            <button uiSelectTrigger>
+                              <span uiSelectValue></span>
+                            </button>
+                            <ng-template uiSelectContent>
+                              <ui-select-item value="default">Default (Relevance)</ui-select-item>
+                              <ui-select-item value="sales-high">Sales (High to Low)</ui-select-item>
+                              <ui-select-item value="sales-low">Sales (Low to High)</ui-select-item>
+                              <ui-select-item value="risk-high">Risk Score (Highest First)</ui-select-item>
+                              <ui-select-item value="risk-low">Risk Score (Lowest First)</ui-select-item>
+                              <ui-select-item value="contraventions-high">Contraventions (Most First)</ui-select-item>
+                              <ui-select-item value="app-age-old">Application Age (Oldest First)</ui-select-item>
+                            </ng-template>
+                          </ui-select>
+                        </div>
+                        <div class="space-y-2">
+                          <label uiLabel>Results Per Page</label>
+                          <ui-select [value]="searchResultsPerPage()" (valueChange)="searchResultsPerPage.set($event ?? '')">
+                            <button uiSelectTrigger>
+                              <span uiSelectValue></span>
+                            </button>
+                            <ng-template uiSelectContent>
+                              <ui-select-item value="10">10 results</ui-select-item>
+                              <ui-select-item value="20">20 results</ui-select-item>
+                              <ui-select-item value="50">50 results</ui-select-item>
+                              <ui-select-item value="100">100 results</ui-select-item>
+                            </ng-template>
+                          </ui-select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div uiTabsContent value="notifications" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg">Email Notifications</div>
+                      <div uiCardDescription>Configure email alerts for system events</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Email Notifications</label>
+                          <p class="text-sm text-muted-foreground">Send email alerts for important events</p>
+                        </div>
+                        <button uiSwitch [checked]="emailNotifications()" (checkedChange)="emailNotifications.set($event)"></button>
+                      </div>
+                      <div uiSeparator></div>
+                      <div class="space-y-4 pl-4">
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>New Application Alerts</label>
+                            <p class="text-sm text-muted-foreground">Notify when new applications are submitted</p>
+                          </div>
+                          <button uiSwitch [checked]="newApplicationAlerts()" (checkedChange)="newApplicationAlerts.set($event)" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Contravention Alerts</label>
+                            <p class="text-sm text-muted-foreground">Notify when contraventions are recorded</p>
+                          </div>
+                          <button uiSwitch [checked]="contraventionAlerts()" (checkedChange)="contraventionAlerts.set($event)" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Inspection Reminders</label>
+                            <p class="text-sm text-muted-foreground">Send reminders for upcoming inspections</p>
+                          </div>
+                          <button uiSwitch [checked]="inspectionReminders()" (checkedChange)="inspectionReminders.set($event)" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>High Risk Score Alerts</label>
+                            <p class="text-sm text-muted-foreground">
+                              Notify when a licensee reaches high risk threshold
+                            </p>
+                          </div>
+                          <button uiSwitch [checked]="true" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Sales Anomaly Alerts</label>
+                            <p class="text-sm text-muted-foreground">Notify when unusual sales patterns detected</p>
+                          </div>
+                          <button uiSwitch [checked]="true" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Aged Application Alerts</label>
+                            <p class="text-sm text-muted-foreground">
+                              Notify when applications exceed age thresholds
+                            </p>
+                          </div>
+                          <button uiSwitch [checked]="true" [disabled]="!emailNotifications()"></button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <div class="space-y-0.5">
+                            <label uiLabel>Tied House Detection Alerts</label>
+                            <p class="text-sm text-muted-foreground">
+                              Notify when potential tied house connections found
+                            </p>
+                          </div>
+                          <button uiSwitch [checked]="true" [disabled]="!emailNotifications()"></button>
+                        </div>
+                      </div>
+                      @if (inspectionReminders() && emailNotifications()) {
+                          <div uiSeparator></div>
+                          <div class="space-y-2">
+                            <label uiLabel for="reminderTime">Reminder Lead Time</label>
+                            <ui-select [value]="reminderLeadTime()" (valueChange)="reminderLeadTime.set($event ?? '')">
+                              <button uiSelectTrigger id="reminderTime">
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="1">1 hour before</ui-select-item>
+                                <ui-select-item value="2">2 hours before</ui-select-item>
+                                <ui-select-item value="24">1 day before</ui-select-item>
+                                <ui-select-item value="48">2 days before</ui-select-item>
+                                <ui-select-item value="168">1 week before</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                          </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+
+                <div uiTabsContent value="workforce" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Briefcase" class="w-5 h-5"></svg>
+                        Workforce Management
+                      </div>
+                      <div uiCardDescription>
+                        Configure scheduling rules, work hours, and collective agreement compliance for AI-powered
+                        scheduling
+                      </div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Workforce Optimization</label>
+                          <p class="text-sm text-muted-foreground">Apply workforce rules to AI scheduling</p>
+                        </div>
+                        <button uiSwitch [checked]="workforceEnabled()" (checkedChange)="workforceEnabled.set($event)"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  @if (workforceEnabled()) {
+                      <div uiCard>
+                        <div uiCardHeader>
+                          <div uiCardTitle class="text-lg flex items-center gap-2">
+                            <svg lucide="Clock" class="w-5 h-5"></svg>
+                            Work Hours &amp; Limits
+                          </div>
+                          <div uiCardDescription>Set constraints for inspector scheduling</div>
+                        </div>
+                        <div uiCardContent class="space-y-4">
+                          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div class="space-y-2">
+                              <label uiLabel for="maxHours">Maximum Hours Per Week</label>
+                              <input uiInput id="maxHours" type="number" [value]="maxHoursPerWeek()" (input)="maxHoursPerWeek.set($any($event.target).value)" />
+                              <p class="text-xs text-muted-foreground">Standard work week hours</p>
+                            </div>
+                            <div class="space-y-2">
+                              <label uiLabel for="maxInspections">Max Inspections Per Day</label>
+                              <input uiInput id="maxInspections" type="number" [value]="maxInspectionsPerDay()" (input)="maxInspectionsPerDay.set($any($event.target).value)" />
+                              <p class="text-xs text-muted-foreground">Limit per inspector per day</p>
+                            </div>
+                            <div class="space-y-2">
+                              <label uiLabel for="breakTime">Break Between Inspections (min)</label>
+                              <input uiInput id="breakTime" type="number" [value]="breakBetweenInspections()" (input)="breakBetweenInspections.set($any($event.target).value)" />
+                              <p class="text-xs text-muted-foreground">Minimum rest period</p>
+                            </div>
+                            <div class="space-y-2">
+                              <label uiLabel for="travelBuffer">Travel Time Buffer (min)</label>
+                              <input uiInput id="travelBuffer" type="number" [value]="travelTimeBuffer()" (input)="travelTimeBuffer.set($any($event.target).value)" />
+                              <p class="text-xs text-muted-foreground">Average travel between sites</p>
+                            </div>
+                          </div>
+
+                          <div uiSeparator></div>
+
+                          <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                              <div class="space-y-0.5">
+                                <label uiLabel>Respect Seniority in Scheduling</label>
+                                <p class="text-sm text-muted-foreground">
+                                  Senior inspectors get scheduling preferences
+                                </p>
+                              </div>
+                              <button uiSwitch [checked]="respectSeniority()" (checkedChange)="respectSeniority.set($event)"></button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                              <div class="space-y-0.5">
+                                <label uiLabel>Allow Overtime Scheduling</label>
+                                <p class="text-sm text-muted-foreground">Permit scheduling beyond standard hours</p>
+                              </div>
+                              <button uiSwitch [checked]="allowOvertime()" (checkedChange)="allowOvertime.set($event)"></button>
+                            </div>
+                            <div class="flex items-center justify-between">
+                              <div class="space-y-0.5">
+                                <label uiLabel>Vacation Blackout Enforcement</label>
+                                <p class="text-sm text-muted-foreground">Block scheduling during approved leave</p>
+                              </div>
+                              <button uiSwitch [checked]="vacationBlackout()" (checkedChange)="vacationBlackout.set($event)"></button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div uiCard>
+                        <div uiCardHeader>
+                          <div uiCardTitle class="text-lg flex items-center gap-2">
+                            <svg lucide="FileText" class="w-5 h-5"></svg>
+                            Policy Documents
+                          </div>
+                          <div uiCardDescription>
+                            Upload collective agreements and policy documents for AI analysis
+                          </div>
+                        </div>
+                        <div uiCardContent class="space-y-4">
+                          <div class="p-4 bg-purple-50 dark:bg-purple-950/30 border border-purple-200 dark:border-purple-800 rounded-lg">
+                            <div class="flex items-start gap-3">
+                              <svg lucide="Bot" class="w-5 h-5 text-purple-600 mt-0.5"></svg>
+                              <div>
+                                <p class="text-sm font-medium text-purple-800 dark:text-purple-200">
+                                  AI-Powered Document Analysis
+                                </p>
+                                <p class="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                                  Upload collective bargaining agreements, HR policies, and scheduling rules. Our AI
+                                  will analyze these documents to automatically apply constraints during scheduling,
+                                  ensuring compliance with union agreements and workplace policies.
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="space-y-2">
+                            <label uiLabel>Uploaded Documents</label>
+                            @for (doc of uploadedDocuments(); track $index) {
+                              <div class="flex items-center gap-3 p-3 bg-muted/50 rounded-lg border">
+                                <svg lucide="FileText" class="w-5 h-5 text-muted-foreground flex-shrink-0"></svg>
+                                <div class="flex-1 min-w-0">
+                                  <p class="text-sm font-medium truncate">{{ doc.name }}</p>
+                                  <p class="text-xs text-muted-foreground">
+                                    Uploaded: {{ doc.uploadDate }} · {{ doc.type === 'collective-agreement' ? 'Collective Agreement' : 'Policy Document' }}
+                                  </p>
+                                </div>
+                                <span uiBadge variant="secondary" class="flex-shrink-0">
+                                  <svg lucide="Bot" class="w-3 h-3 mr-1"></svg>
+                                  Analyzed
+                                </span>
+                              </div>
+                            }
+                          </div>
+
+                          <div uiSeparator></div>
+
+                          <div class="space-y-3">
+                            <label uiLabel>Upload New Document</label>
+                            <div class="border-2 border-dashed rounded-lg p-6 text-center hover:border-primary/50 transition-colors cursor-pointer">
+                              <svg lucide="Upload" class="w-8 h-8 mx-auto text-muted-foreground mb-2"></svg>
+                              <p class="text-sm font-medium">Drop files here or click to upload</p>
+                              <p class="text-xs text-muted-foreground mt-1">Supports PDF, DOCX, TXT (Max 10MB)</p>
+                            </div>
+                            <div class="flex gap-2">
+                              <ui-select defaultValue="collective-agreement">
+                                <button uiSelectTrigger class="flex-1">
+                                  <span uiSelectValue placeholder="Document Type"></span>
+                                </button>
+                                <ng-template uiSelectContent>
+                                  <ui-select-item value="collective-agreement">Collective Bargaining Agreement</ui-select-item>
+                                  <ui-select-item value="hr-policy">HR Policy</ui-select-item>
+                                  <ui-select-item value="scheduling-rules">Scheduling Rules</ui-select-item>
+                                  <ui-select-item value="safety-guidelines">Safety Guidelines</ui-select-item>
+                                  <ui-select-item value="other">Other</ui-select-item>
+                                </ng-template>
+                              </ui-select>
+                              <button uiButton variant="outline" disabled>
+                                <svg lucide="Upload" class="w-4 h-4 mr-2"></svg>
+                                Upload
+                              </button>
+                            </div>
+                          </div>
+
+                          <div class="p-4 bg-muted/50 rounded-lg space-y-3">
+                            <div class="flex items-center gap-2">
+                              <svg lucide="Bot" class="w-4 h-4 text-purple-600"></svg>
+                              <span class="text-sm font-medium">AI Analysis Summary</span>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3 text-sm">
+                              <div class="p-2 bg-background rounded border">
+                                <p class="text-muted-foreground text-xs">Work Week Limit</p>
+                                <p class="font-medium">37.5 hours</p>
+                              </div>
+                              <div class="p-2 bg-background rounded border">
+                                <p class="text-muted-foreground text-xs">Overtime Rate</p>
+                                <p class="font-medium">1.5x after 7.5hrs/day</p>
+                              </div>
+                              <div class="p-2 bg-background rounded border">
+                                <p class="text-muted-foreground text-xs">Rest Period</p>
+                                <p class="font-medium">30 min per 5 hours</p>
+                              </div>
+                              <div class="p-2 bg-background rounded border">
+                                <p class="text-muted-foreground text-xs">Vacation Notice</p>
+                                <p class="font-medium">2 weeks minimum</p>
+                              </div>
+                            </div>
+                            <p class="text-xs text-muted-foreground">
+                              Extracted from: BCGEU Collective Agreement 2023-2025.pdf
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div uiCard>
+                        <div uiCardHeader>
+                          <div uiCardTitle class="text-lg flex items-center gap-2">
+                            <svg lucide="Calendar" class="w-5 h-5"></svg>
+                            Scheduling Preferences
+                          </div>
+                          <div uiCardDescription>Configure how AI distributes workload across the team</div>
+                        </div>
+                        <div uiCardContent class="space-y-4">
+                          <div class="space-y-2">
+                            <label uiLabel>Workload Distribution Strategy</label>
+                            <ui-select defaultValue="balanced">
+                              <button uiSelectTrigger>
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="balanced">Balanced (Equal distribution)</ui-select-item>
+                                <ui-select-item value="efficiency">Efficiency (Minimize travel)</ui-select-item>
+                                <ui-select-item value="seniority">Seniority-based</ui-select-item>
+                                <ui-select-item value="specialization">Specialization-based</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                            <p class="text-xs text-muted-foreground">
+                              Determines how inspections are distributed among available inspectors
+                            </p>
+                          </div>
+
+                          <div class="space-y-2">
+                            <label uiLabel>Schedule Generation Window</label>
+                            <ui-select defaultValue="2weeks">
+                              <button uiSelectTrigger>
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="1week">1 Week Ahead</ui-select-item>
+                                <ui-select-item value="2weeks">2 Weeks Ahead</ui-select-item>
+                                <ui-select-item value="1month">1 Month Ahead</ui-select-item>
+                                <ui-select-item value="quarter">Quarterly</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                            <p class="text-xs text-muted-foreground">
+                              How far in advance AI should generate schedules
+                            </p>
+                          </div>
+
+                          <div class="space-y-2">
+                            <label uiLabel>Auto-Rebalance Trigger</label>
+                            <ui-select defaultValue="daily">
+                              <button uiSelectTrigger>
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="realtime">Real-time</ui-select-item>
+                                <ui-select-item value="daily">Daily</ui-select-item>
+                                <ui-select-item value="weekly">Weekly</ui-select-item>
+                                <ui-select-item value="manual">Manual Only</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                            <p class="text-xs text-muted-foreground">
+                              When AI should automatically rebalance workloads
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                  }
+                </div>
+
+                <div uiTabsContent value="users" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Shield" class="w-5 h-5"></svg>
+                        Security Settings
+                      </div>
+                      <div uiCardDescription>Configure authentication and access control</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Allow Self-Registration</label>
+                          <p class="text-sm text-muted-foreground">
+                            Allow users to create their own accounts (for public licensee view)
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="allowSelfRegistration()" (checkedChange)="allowSelfRegistration.set($event)"></button>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Require Multi-Factor Authentication</label>
+                          <p class="text-sm text-muted-foreground">Enforce MFA for all staff accounts</p>
+                        </div>
+                        <button uiSwitch [checked]="requireMFA()" (checkedChange)="requireMFA.set($event)"></button>
+                      </div>
+                      <div uiSeparator></div>
+                      <div class="space-y-2">
+                        <label uiLabel for="sessionTimeout">Session Timeout (minutes)</label>
+                        <ui-select [value]="sessionTimeout()" (valueChange)="sessionTimeout.set($event ?? '')">
+                          <button uiSelectTrigger id="sessionTimeout">
+                            <span uiSelectValue></span>
+                          </button>
+                          <ng-template uiSelectContent>
+                            <ui-select-item value="15">15 minutes</ui-select-item>
+                            <ui-select-item value="30">30 minutes</ui-select-item>
+                            <ui-select-item value="60">1 hour</ui-select-item>
+                            <ui-select-item value="120">2 hours</ui-select-item>
+                            <ui-select-item value="480">8 hours</ui-select-item>
+                          </ng-template>
+                        </ui-select>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Users" class="w-5 h-5"></svg>
+                        User Roles
+                      </div>
+                      <div uiCardDescription>Manage user roles and permissions</div>
+                    </div>
+                    <div uiCardContent>
+                      <div class="space-y-3">
+                        @for (r of userRoles; track $index) {
+                          <div class="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+                            <div>
+                              <p class="font-medium">{{ r.role }}</p>
+                              <p class="text-xs text-muted-foreground">{{ r.permissions }}</p>
+                            </div>
+                            <div class="flex items-center gap-2">
+                              <span uiBadge variant="secondary">{{ r.count }} users</span>
+                              <button uiButton variant="ghost" size="sm">
+                                Edit
+                              </button>
+                            </div>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div uiTabsContent value="data" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg">Data Management</div>
+                      <div uiCardDescription>Configure data retention and archival policies</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="space-y-2">
+                        <label uiLabel for="retention">Data Retention Period (months)</label>
+                        <ui-select [value]="dataRetentionPeriod()" (valueChange)="dataRetentionPeriod.set($event ?? '')">
+                          <button uiSelectTrigger id="retention">
+                            <span uiSelectValue></span>
+                          </button>
+                          <ng-template uiSelectContent>
+                            <ui-select-item value="12">12 months (1 year)</ui-select-item>
+                            <ui-select-item value="24">24 months (2 years)</ui-select-item>
+                            <ui-select-item value="36">36 months (3 years)</ui-select-item>
+                            <ui-select-item value="60">60 months (5 years)</ui-select-item>
+                            <ui-select-item value="84">84 months (7 years)</ui-select-item>
+                            <ui-select-item value="0">Indefinite</ui-select-item>
+                          </ng-template>
+                        </ui-select>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Auto-Archive Completed Inspections</label>
+                          <p class="text-sm text-muted-foreground">
+                            Move completed inspections to archive after retention period
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="autoArchiveCompleted()" (checkedChange)="autoArchiveCompleted.set($event)"></button>
+                      </div>
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Audit Logging</label>
+                          <p class="text-sm text-muted-foreground">
+                            Track all user actions and data changes for compliance
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="enableAuditLog()" (checkedChange)="enableAuditLog.set($event)"></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg">Data Export</div>
+                      <div uiCardDescription>Export data for reporting and analysis</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="grid gap-3 sm:grid-cols-2">
+                        <button uiButton variant="outline" class="justify-start bg-transparent">
+                          <svg lucide="FileText" class="w-4 h-4 mr-2"></svg>
+                          Export Licenses (CSV)
+                        </button>
+                        <button uiButton variant="outline" class="justify-start bg-transparent">
+                          <svg lucide="FileText" class="w-4 h-4 mr-2"></svg>
+                          Export Inspections (CSV)
+                        </button>
+                        <button uiButton variant="outline" class="justify-start bg-transparent">
+                          <svg lucide="FileText" class="w-4 h-4 mr-2"></svg>
+                          Export Applications (CSV)
+                        </button>
+                        <button uiButton variant="outline" class="justify-start bg-transparent">
+                          <svg lucide="FileText" class="w-4 h-4 mr-2"></svg>
+                          Export Contraventions (CSV)
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div uiTabsContent value="integrations" class="space-y-6">
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Database" class="w-5 h-5"></svg>
+                        MS Dynamics Integration
+                      </div>
+                      <div uiCardDescription>Connect to Microsoft Dynamics for license data synchronization</div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable Dynamics Integration</label>
+                          <p class="text-sm text-muted-foreground">
+                            Sync license and application data with MS Dynamics
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="dynamicsIntegration()" (checkedChange)="dynamicsIntegration.set($event)"></button>
+                      </div>
+                      @if (dynamicsIntegration()) {
+                          <div uiSeparator></div>
+                          <div class="space-y-2">
+                            <label uiLabel for="dynamicsUrl">Dynamics Endpoint URL</label>
+                            <input uiInput id="dynamicsUrl" placeholder="https://your-org.crm.dynamics.com" [value]="dynamicsEndpoint()" (input)="dynamicsEndpoint.set($any($event.target).value)" />
+                          </div>
+                          <div class="flex gap-2">
+                            <button uiButton variant="outline" class="flex-1 bg-transparent">
+                              Test Connection
+                            </button>
+                            <button uiButton class="flex-1">Save &amp; Sync</button>
+                          </div>
+                      }
+                    </div>
+                  </div>
+
+                  <div uiCard>
+                    <div uiCardHeader>
+                      <div uiCardTitle class="text-lg flex items-center gap-2">
+                        <svg lucide="Bot" class="w-5 h-5"></svg>
+                        AI Web Intelligence
+                      </div>
+                      <div uiCardDescription>
+                        Configure AI-powered web crawling for online intelligence gathering
+                      </div>
+                    </div>
+                    <div uiCardContent class="space-y-4">
+                      <div class="flex items-center justify-between">
+                        <div class="space-y-0.5">
+                          <label uiLabel>Enable AI Web Crawling</label>
+                          <p class="text-sm text-muted-foreground">
+                            Automatically gather intelligence from online sources
+                          </p>
+                        </div>
+                        <button uiSwitch [checked]="aiWebCrawlEnabled()" (checkedChange)="aiWebCrawlEnabled.set($event)"></button>
+                      </div>
+                      @if (aiWebCrawlEnabled()) {
+                          <div uiSeparator></div>
+                          <div class="space-y-2">
+                            <label uiLabel>Crawl Frequency</label>
+                            <ui-select [value]="crawlFrequency()" (valueChange)="crawlFrequency.set($event ?? '')">
+                              <button uiSelectTrigger>
+                                <span uiSelectValue></span>
+                              </button>
+                              <ng-template uiSelectContent>
+                                <ui-select-item value="realtime">Real-time monitoring</ui-select-item>
+                                <ui-select-item value="hourly">Hourly</ui-select-item>
+                                <ui-select-item value="daily">Daily</ui-select-item>
+                                <ui-select-item value="weekly">Weekly</ui-select-item>
+                              </ng-template>
+                            </ui-select>
+                          </div>
+                          <div uiSeparator></div>
+                          <div class="space-y-2">
+                            <label uiLabel>Custom Monitoring Websites</label>
+                            <div class="space-y-2">
+                              @for (url of customWebsites(); track url) {
+                                <div class="flex items-center gap-2 p-2 bg-muted/50 rounded">
+                                  <svg lucide="Globe" class="w-4 h-4 text-muted-foreground flex-shrink-0"></svg>
+                                  <span class="text-sm flex-1 truncate">{{ url }}</span>
+                                  <button uiButton variant="ghost" size="sm" (click)="removeWebsite(url)">
+                                    <svg lucide="X" class="w-4 h-4"></svg>
+                                  </button>
+                                </div>
+                              }
+                            </div>
+                            <div class="flex gap-2">
+                              <input uiInput placeholder="https://example.com" [value]="newWebsite()" (input)="newWebsite.set($any($event.target).value)" (keydown)="$event.key === 'Enter' && addWebsite()" />
+                              <button uiButton variant="outline" (click)="addWebsite()">
+                                <svg lucide="Plus" class="w-4 h-4"></svg>
+                              </button>
+                            </div>
+                          </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-2 p-4 border-t bg-muted/30">
+          <button uiButton variant="outline" (click)="closed.emit()">
+            Cancel
+          </button>
+          <button uiButton (click)="closed.emit()">Save Changes</button>
+        </div>
+      </div>
+    </div>

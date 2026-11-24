@@ -1,0 +1,5 @@
+{
+  "description": "Initial bundle size baseline: main, 4 module preloads and the global stylesheet, as referenced from index.html.",
+  "initialBytes": 698356,
+  "tolerance": 0.05
+}

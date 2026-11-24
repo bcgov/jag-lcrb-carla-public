@@ -1,0 +1,9 @@
+/* TypeScript config for the Express server (server/) and the Node-side tests (tests/). */
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "types": ["node"],
+    "noEmit": true
+  },
+  "include": ["server/**/*.ts", "tests/**/*.ts", "e2e/**/*.ts", "tools/**/*.ts", "*.config.ts", "src/app/domain/**/*.ts", "src/app/data-access/**/*.ts"]
+}

@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://localhost:8090",
+    "secure": false
+  },
+  "/gate": {
+    "target": "http://localhost:8090",
+    "secure": false
+  }
+}

@@ -1,0 +1,1264 @@
+{
+  "info": {
+    "name": "portal-frontend-angular",
+    "description": "Access gate and the 21 API routes of the Angular app. Set baseUrl to the port (gate off) and gatedUrl to a server with ACCESS_CODE set. accessCode defaults to the dummy GATE_TEST_CODE. Without AI_GATEWAY_API_KEY or BLOB_READ_WRITE_TOKEN the AI and Blob routes return their friendly errors, which the tests accept. Run it with make v2-postman.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8090"
+    },
+    {
+      "key": "gatedUrl",
+      "value": "http://angular-gated:8080"
+    },
+    {
+      "key": "accessCode",
+      "value": "parity-gate-code"
+    },
+    {
+      "key": "gateCookie",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Gate",
+      "description": "Port of proxy.ts and app/gate/actions.ts, against gatedUrl.",
+      "item": [
+        {
+          "name": "API without cookie is 401",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('401', () => pm.response.to.have.status(401));",
+                  "pm.test('JSON error', () => pm.expect(pm.response.json()).to.eql({ error: 'Access code required.' }));"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "disableCookies": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatedUrl}}/api/entity-directory",
+              "host": [
+                "{{gatedUrl}}"
+              ],
+              "path": [
+                "api",
+                "entity-directory"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Page without cookie redirects to the gate",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('307', () => pm.response.to.have.status(307));",
+                  "pm.test('to /gate with next', () => pm.expect(pm.response.headers.get('Location')).to.match(/\\/gate\\?next=%2Fdashboard$/));"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "disableCookies": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{gatedUrl}}/dashboard",
+              "host": [
+                "{{gatedUrl}}"
+              ],
+              "path": [
+                "dashboard"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unlock with a wrong code",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('303 back to the gate with the error', () => { pm.response.to.have.status(303); pm.expect(pm.response.headers.get('Location')).to.eql('/gate?error=1&next=%2Flicences'); });",
+                  "pm.test('no cookie', () => pm.expect(pm.response.headers.has('Set-Cookie')).to.be.false);"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "disableCookies": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "code",
+                  "value": "wrong-code"
+                },
+                {
+                  "key": "next",
+                  "value": "/licences"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{gatedUrl}}/gate",
+              "host": [
+                "{{gatedUrl}}"
+              ],
+              "path": [
+                "gate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "Unlock with the access code",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('303 to next', () => { pm.response.to.have.status(303); pm.expect(pm.response.headers.get('Location')).to.eql('/licences'); });",
+                  "const c = pm.response.headers.get('Set-Cookie') || '';",
+                  "pm.test('5 h HttpOnly lax cookie', () => { pm.expect(c).to.match(/^lcrb_access=[0-9a-f]{64};/); pm.expect(c).to.include('Max-Age=18000'); pm.expect(c).to.include('HttpOnly'); pm.expect(c).to.include('SameSite=lax'); });",
+                  "pm.collectionVariables.set('gateCookie', c.split(';')[0]);"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "disableCookies": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "key": "code",
+                  "value": "{{accessCode}}"
+                },
+                {
+                  "key": "next",
+                  "value": "/licences"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{gatedUrl}}/gate",
+              "host": [
+                "{{gatedUrl}}"
+              ],
+              "path": [
+                "gate"
+              ]
+            }
+          }
+        },
+        {
+          "name": "API with the cookie",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200', () => pm.response.to.have.status(200));"
+                ]
+              }
+            }
+          ],
+          "protocolProfileBehavior": {
+            "followRedirects": false,
+            "disableCookies": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Cookie",
+                "value": "{{gateCookie}}"
+              }
+            ],
+            "url": {
+              "raw": "{{gatedUrl}}/api/entity-directory",
+              "host": [
+                "{{gatedUrl}}"
+              ],
+              "path": [
+                "api",
+                "entity-directory"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Documents and directory",
+      "item": [
+        {
+          "name": "entity-directory",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 results', () => { pm.response.to.have.status(200); pm.expect(pm.response.json().results).to.be.an('array'); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/entity-directory?q=pub&scope=all&source=all",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "entity-directory"
+              ],
+              "query": [
+                {
+                  "key": "q",
+                  "value": "pub"
+                },
+                {
+                  "key": "scope",
+                  "value": "all"
+                },
+                {
+                  "key": "source",
+                  "value": "all"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "upload (no file)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('400 No file provided', () => { pm.response.to.have.status(400); pm.expect(pm.response.json()).to.eql({ error: 'No file provided' }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "subjectId",
+                  "value": "postman",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "upload"
+              ]
+            }
+          }
+        },
+        {
+          "name": "upload",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('blob metadata', () => pm.expect(j).to.include.keys('url', 'pathname', 'filename', 'contentType', 'size'));",
+                  "else pm.test('500 Upload failed', () => { pm.response.to.have.status(500); pm.expect(j).to.eql({ error: 'Upload failed' }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": "sample-upload.txt"
+                },
+                {
+                  "key": "subjectId",
+                  "value": "postman",
+                  "type": "text"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/upload",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "upload"
+              ]
+            },
+            "description": "Needs BLOB_READ_WRITE_TOKEN for a 200; without it the route answers 500 Upload failed."
+          }
+        },
+        {
+          "name": "file (missing pathname)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('400', () => { pm.response.to.have.status(400); pm.expect(pm.response.json()).to.eql({ error: 'Missing pathname' }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/file",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "file"
+              ]
+            }
+          }
+        },
+        {
+          "name": "file",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('file, not found or failure', () => pm.expect([200, 304, 404, 500]).to.include(pm.response.code));",
+                  "if (pm.response.code === 200) pm.test('private no-cache', () => pm.expect(pm.response.headers.get('Cache-Control')).to.eql('private, no-cache'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/file?pathname=documents/postman/sample-upload.txt",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "file"
+              ],
+              "query": [
+                {
+                  "key": "pathname",
+                  "value": "documents/postman/sample-upload.txt"
+                }
+              ]
+            },
+            "description": "Needs BLOB_READ_WRITE_TOKEN and an uploaded file; otherwise 404 or 500."
+          }
+        },
+        {
+          "name": "files",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('files list', () => pm.expect(j.files).to.be.an('array'));",
+                  "else pm.test('500', () => pm.expect(j).to.eql({ error: 'Failed to list files' }));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/files",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "files"
+              ]
+            },
+            "description": "Needs BLOB_READ_WRITE_TOKEN for a 200; otherwise 500."
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI JSON",
+      "description": "The 13 JSON AI routes. Without AI_GATEWAY_API_KEY each returns its friendly error (nudges returns 200 with an empty list).",
+      "item": [
+        {
+          "name": "activity-search",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"who approved?\",\n  \"entries\": [\n    {\n      \"id\": \"a\",\n      \"at\": \"2026-01-01\",\n      \"category\": \"c\",\n      \"action\": \"a\",\n      \"summary\": \"s\",\n      \"actor\": \"x\",\n      \"subjectId\": null\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/activity-search",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "activity-search"
+              ]
+            }
+          }
+        },
+        {
+          "name": "adverse-media",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"program\": \"cannabis\",\n  \"applicantName\": \"Acme\",\n  \"people\": [\n    {\n      \"name\": \"Jo\",\n      \"roles\": [\n        \"Director\"\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/adverse-media",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "adverse-media"
+              ]
+            }
+          }
+        },
+        {
+          "name": "assessment",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Liquor Primary\",\n  \"applicant\": \"Acme\",\n  \"summary\": [\n    {\n      \"label\": \"Name\",\n      \"value\": \"Acme\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/assessment",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assessment"
+              ]
+            }
+          }
+        },
+        {
+          "name": "decision-rationale",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"decision\": \"Deny permit\",\n  \"tone\": \"deny\",\n  \"subjectType\": \"SEP\",\n  \"title\": \"Fair\",\n  \"reviewerRole\": \"police\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/decision-rationale",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "decision-rationale"
+              ]
+            }
+          }
+        },
+        {
+          "name": "document-check",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"fileData\": \"data:application/pdf;base64,JVBERi0xLjQKMSAwIG9iago8PCAvVHlwZSAvQ2F0YWxvZyAvUGFnZXMgMiAwIFIgPj4KZW5kb2JqCjIgMCBvYmoKPDwgL1R5cGUgL1BhZ2VzIC9LaWRzIFszIDAgUl0gL0NvdW50IDEgPj4KZW5kb2JqCjMgMCBvYmoKPDwgL1R5cGUgL1BhZ2UgL1BhcmVudCAyIDAgUiAvTWVkaWFCb3ggWzAgMCAzMDAgMjAwXSAvQ29udGVudHMgNCAwIFIgL1Jlc291cmNlcyA8PCAvRm9udCA8PCAvRjEgNSAwIFIgPj4gPj4gPj4KZW5kb2JqCjQgMCBvYmoKPDwgL0xlbmd0aCA1NSA+PgpzdHJlYW0KQlQgL0YxIDE0IFRmIDIwIDE1MCBUZCAoRmxvb3IgcGxhbiAtIHNjYWxlIDE6MTAwKSBUaiBFVAplbmRzdHJlYW0KZW5kb2JqCjUgMCBvYmoKPDwgL1R5cGUgL0ZvbnQgL1N1YnR5cGUgL1R5cGUxIC9CYXNlRm9udCAvSGVsdmV0aWNhID4+CmVuZG9iagp4cmVmCjAgNgowMDAwMDAwMDAwIDY1NTM1IGYgCjAwMDAwMDAwMDkgMDAwMDAgbiAKMDAwMDAwMDA1OCAwMDAwMCBuIAowMDAwMDAwMTE1IDAwMDAwIG4gCjAwMDAwMDAyNDEgMDAwMDAgbiAKMDAwMDAwMDM0NiAwMDAwMCBuIAp0cmFpbGVyCjw8IC9TaXplIDYgL1Jvb3QgMSAwIFIgPj4Kc3RhcnR4cmVmCjQxNgolJUVPRgo=\",\n  \"filename\": \"floor-plan.pdf\",\n  \"mediaType\": \"application/pdf\",\n  \"label\": \"Floor plan\",\n  \"criteria\": [\n    \"Scale\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/document-check",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "document-check"
+              ]
+            }
+          }
+        },
+        {
+          "name": "interpret-answer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"field\": {\n    \"label\": \"Opening time\",\n    \"type\": \"time\"\n  },\n  \"text\": \"half eight in the evening\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/interpret-answer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "interpret-answer"
+              ]
+            }
+          }
+        },
+        {
+          "name": "licence-actions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"licenceType\": \"LP\",\n  \"licenceName\": \"Pub\",\n  \"status\": \"Active\",\n  \"expiryDate\": \"2027-01-01\",\n  \"daysToExpiry\": 30,\n  \"flags\": [],\n  \"isOperated\": false,\n  \"hasScheduledInspection\": false,\n  \"availableActions\": [\n    {\n      \"slug\": \"renew\",\n      \"title\": \"Renew\",\n      \"description\": \"d\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/licence-actions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "licence-actions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "nudges",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"kind\": \"renewal\",\n      \"label\": \"Pub\",\n      \"detail\": \"Due\",\n      \"href\": \"/licences\"\n    }\n  ],\n  \"today\": \"2026-01-01\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/nudges",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "nudges"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reviewer-actions",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"role\": \"police\",\n  \"itemTitle\": \"Fair\",\n  \"itemId\": \"sep-1\",\n  \"status\": \"Unassigned\",\n  \"facts\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reviewer-actions",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reviewer-actions"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reviewer-brief",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subjectType\": \"SEP\",\n  \"title\": \"Fair\",\n  \"reviewerRole\": \"police\",\n  \"facts\": [],\n  \"decisionOptions\": [\n    \"Approve\",\n    \"Deny\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reviewer-brief",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reviewer-brief"
+              ]
+            }
+          }
+        },
+        {
+          "name": "status-explainer",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subjectType\": \"SEP\",\n  \"title\": \"Fair\",\n  \"status\": \"submitted\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/status-explainer",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "status-explainer"
+              ]
+            }
+          }
+        },
+        {
+          "name": "suggest-applications",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"legalName\": \"Acme\",\n  \"licences\": [\n    {\n      \"type\": \"LP\",\n      \"name\": \"Pub\",\n      \"status\": \"Active\",\n      \"expiryDate\": \"2027-01-01\",\n      \"daysToExpiry\": -5,\n      \"flags\": [\n        \"Renewal Due\"\n      ]\n    }\n  ],\n  \"availableApplications\": [\n    {\n      \"slug\": \"renew\",\n      \"title\": \"Renew\",\n      \"description\": \"d\",\n      \"licenceType\": \"LP\",\n      \"kind\": \"renewal\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/suggest-applications",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "suggest-applications"
+              ]
+            }
+          }
+        },
+        {
+          "name": "workload-suggest",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('answers 200 or a friendly error', () => pm.expect([200, 429, 500, 502, 503]).to.include(pm.response.code));",
+                  "const j = pm.response.json();",
+                  "if (pm.response.code === 200) pm.test('JSON result', () => pm.expect(j).to.be.an('object').that.does.not.have.property('error'));",
+                  "else pm.test('error message', () => pm.expect(j.error).to.be.a('string'));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"scope\": \"police\",\n  \"stats\": [\n    {\n      \"label\": \"Unassigned\",\n      \"value\": \"3\"\n    }\n  ],\n  \"items\": [],\n  \"links\": [\n    {\n      \"label\": \"Queue\",\n      \"href\": \"/q\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/workload-suggest",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "workload-suggest"
+              ]
+            }
+          }
+        },
+        {
+          "name": "reviewer-brief (invalid body)",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('400 Missing brief data.', () => { pm.response.to.have.status(400); pm.expect(pm.response.json()).to.eql({ error: 'Missing brief data.' }); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"subjectType\": \"SEP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/reviewer-brief",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "reviewer-brief"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI streaming",
+      "description": "The 4 streaming routes (AI SDK UI message streams). Without AI_GATEWAY_API_KEY the stream carries an error chunk.",
+      "item": [
+        {
+          "name": "assistant",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 UI message stream', () => { pm.response.to.have.status(200); pm.expect(pm.response.headers.get('x-vercel-ai-ui-message-stream')).to.eql('v1'); });",
+                  "pm.test('SSE body', () => pm.expect(pm.response.text()).to.include('data: '));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"m1\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"How do I renew my licence?\"\n        }\n      ]\n    }\n  ],\n  \"context\": {\n    \"role\": \"licensee\",\n    \"pathname\": \"/dashboard\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/assistant",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "assistant"
+              ]
+            }
+          }
+        },
+        {
+          "name": "licence-finder",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 UI message stream', () => { pm.response.to.have.status(200); pm.expect(pm.response.headers.get('x-vercel-ai-ui-message-stream')).to.eql('v1'); });",
+                  "pm.test('SSE body', () => pm.expect(pm.response.text()).to.include('data: '));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"m1\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"I want to open a pub\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/licence-finder",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "licence-finder"
+              ]
+            }
+          }
+        },
+        {
+          "name": "planner-advisor",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 UI message stream', () => { pm.response.to.have.status(200); pm.expect(pm.response.headers.get('x-vercel-ai-ui-message-stream')).to.eql('v1'); });",
+                  "pm.test('SSE body', () => pm.expect(pm.response.text()).to.include('data: '));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"m1\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"Is this location feasible?\"\n        }\n      ]\n    }\n  ],\n  \"context\": {\n    \"planSummary\": \"A pub\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/planner-advisor",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "planner-advisor"
+              ]
+            }
+          }
+        },
+        {
+          "name": "one-door",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test('200 UI message stream', () => { pm.response.to.have.status(200); pm.expect(pm.response.headers.get('x-vercel-ai-ui-message-stream')).to.eql('v1'); });",
+                  "pm.test('SSE body', () => pm.expect(pm.response.text()).to.include('data: '));"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"messages\": [\n    {\n      \"id\": \"m1\",\n      \"role\": \"user\",\n      \"parts\": [\n        {\n          \"type\": \"text\",\n          \"text\": \"I need help with a liquor licence\"\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/one-door",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "one-door"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
