@@ -82,6 +82,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (copyIfNull || from.physicalAddressPostalCode != null)
                 to.Address1_PostalCode = from.physicalAddressPostalCode?.Replace(" ", "");
             if (copyIfNull || from.accountUrls != null) to.adoxio_AccountURLs = from.accountUrls;
+            if (copyIfNull || from.websiteUrl != null) to.WebSiteURL = from.websiteUrl;
             if (copyIfNull || from.isLateHoursApproval != null) to.adoxio_IsLateHoursApproval = from.isLateHoursApproval;
             if (copyIfNull || from.maxGuestsForPublicEvents != null) to.adoxio_MaxGuestsforPublic = from.maxGuestsForPublicEvents;
             if (copyIfNull || from.maxGuestsForPrivateEvents != null) to.adoxio_MaxGuestsforPrivate = from.maxGuestsForPrivateEvents;
