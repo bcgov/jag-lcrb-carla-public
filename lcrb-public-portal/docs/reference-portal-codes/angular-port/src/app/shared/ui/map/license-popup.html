@@ -1,0 +1,678 @@
+<div
+  class="w-[340px] max-h-[520px] bg-card rounded-lg flex flex-col overflow-hidden cursor-default"
+  (wheel)="$event.stopPropagation()"
+  (touchmove)="$event.stopPropagation()"
+>
+  <div [class]="headerClass()">
+    <div class="flex items-start justify-between gap-2">
+      <div class="flex-1 min-w-0">
+        <div class="flex items-center gap-2 mb-1 flex-wrap">
+          @if (license().licenseType === 'liquor') {
+            <svg lucide="Wine" class="w-5 h-5 text-[#C4784A]"></svg>
+          } @else if (license().licenseType === 'cannabis') {
+            <svg lucide="Leaf" class="w-5 h-5 text-green-600"></svg>
+          } @else {
+            <svg lucide="PartyPopper" class="w-5 h-5 text-purple-600"></svg>
+          }
+          <span uiBadge [variant]="license().status === 'application' ? 'secondary' : 'default'" class="text-xs">
+            {{ license().status === 'application' ? 'Application' : isSpecialEvent() ? 'Special Event' : 'Licensed' }}
+          </span>
+          @if (isLoggedIn() && hasContraventions()) {
+            <span uiBadge variant="destructive" class="text-xs">
+              <svg lucide="AlertTriangle" class="w-3 h-3 mr-1"></svg>
+              {{ license().contraventions }}
+            </span>
+          }
+        </div>
+        <h3 class="font-semibold text-foreground text-lg leading-tight truncate">{{ license().businessName }}</h3>
+        <p class="text-sm text-muted-foreground mt-1">
+          {{ license().applicationType ? getApplicationTypeDisplayName(license().applicationType!) : license().licenseType }}
+        </p>
+      </div>
+      <div class="flex items-center gap-1 shrink-0 -mt-1 -mr-2">
+        @if (isLoggedIn()) {
+          <button
+            uiButton
+            variant="ghost"
+            size="icon"
+            (click)="toggleFollow.emit(license().id)"
+            [class]="isFollowed() ? 'text-primary' : 'text-muted-foreground'"
+            [attr.title]="isFollowed() ? 'Unfollow' : 'Follow'"
+          >
+            @if (isFollowed()) {
+              <svg lucide="Eye" class="w-4 h-4"></svg>
+            } @else {
+              <svg lucide="EyeOff" class="w-4 h-4"></svg>
+            }
+          </button>
+        }
+        <button uiButton variant="ghost" size="icon" (click)="closed.emit()">
+          <svg lucide="X" class="w-4 h-4"></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex-1 overflow-y-auto overscroll-contain">
+    <div class="p-4 space-y-4">
+      <div class="flex items-center gap-2 text-sm">
+        <svg lucide="FileText" class="w-4 h-4 text-muted-foreground shrink-0"></svg>
+        <span class="font-medium">{{ isSpecialEvent() ? 'Permit #:' : 'License #:' }}</span>
+        <span class="text-muted-foreground">{{ license().licenseNumber }}</span>
+      </div>
+
+      @if (isSpecialEvent() && license().eventDate) {
+        <div class="flex items-center gap-2 text-sm">
+          <svg lucide="Calendar" class="w-4 h-4 text-purple-600 shrink-0"></svg>
+          <span class="font-medium">Event Date:</span>
+          <span class="text-muted-foreground">{{ eventDateLabel() }}</span>
+        </div>
+      }
+
+      @if (isSpecialEvent() && license().expectedAttendees) {
+        <div class="flex items-center gap-2 text-sm">
+          <svg lucide="Users" class="w-4 h-4 text-purple-600 shrink-0"></svg>
+          <span class="font-medium">Expected Attendees:</span>
+          <span class="text-muted-foreground">{{ license().expectedAttendees!.toLocaleString() }}</span>
+        </div>
+      }
+
+      @if (isApplication() && license().applicationPhase) {
+        <div class="flex items-center gap-2 text-sm">
+          @if (license().applicationPhase === 'approved-in-principle') {
+            <svg lucide="ThumbsUp" class="w-4 h-4 text-green-600 shrink-0"></svg>
+          } @else if (license().applicationPhase === 'incomplete-info-requested') {
+            <svg lucide="AlertTriangle" class="w-4 h-4 text-amber-600 shrink-0"></svg>
+          } @else {
+            <svg lucide="Hourglass" class="w-4 h-4 text-blue-600 shrink-0"></svg>
+          }
+          <span class="font-medium">Status:</span>
+          <span uiBadge variant="outline" [class]="phaseBadgeClass()">
+            {{ getApplicationPhaseDisplayName(license().applicationPhase!) }}
+          </span>
+        </div>
+      }
+
+      @if (isApplication() && license().applicationType) {
+        <div class="flex items-center gap-2 text-sm">
+          <svg lucide="FileText" class="w-4 h-4 text-slate-600 shrink-0"></svg>
+          <span class="font-medium">Application Type:</span>
+          <span uiBadge variant="secondary" class="text-xs">
+            {{ getApplicationTypeDisplayName(license().applicationType!) }}
+          </span>
+        </div>
+      }
+
+      @if (isApplication() && license().applicationReceivedDate) {
+        <div class="flex items-center gap-2 text-sm">
+          <svg lucide="Calendar" class="w-4 h-4 text-muted-foreground shrink-0"></svg>
+          <span class="font-medium">Application Age:</span>
+          <span [class]="ageClass()">
+            {{ formatApplicationAge(license().applicationReceivedDate) }}
+          </span>
+          @if (getApplicationAgeDays(license().applicationReceivedDate) > 180) {
+            <span uiBadge variant="outline" class="bg-red-50 text-red-700 border-red-300 text-xs"> Extended </span>
+          }
+        </div>
+      }
+
+      @if (!isApplication() && !isSpecialEvent()) {
+        <div class="flex items-center gap-2 text-sm">
+          @if (license().activeStatus === 'active') {
+            <svg lucide="CheckCircle" class="w-4 h-4 text-green-600 shrink-0"></svg>
+          } @else {
+            <svg lucide="XCircle" class="w-4 h-4 text-red-600 shrink-0"></svg>
+          }
+          <span class="font-medium">Status:</span>
+          <span uiBadge variant="outline" [class]="statusBadgeClass()">
+            {{ license().activeStatus === 'active' ? 'Active' : 'Suspended' }}
+          </span>
+        </div>
+      }
+
+      @if (isLoggedIn() && !isApplication() && !isSpecialEvent()) {
+        <div class="flex items-center gap-2 text-sm">
+          <svg lucide="Shield" [class]="riskIconClass()"></svg>
+          <span class="font-medium">Risk Score:</span>
+          <span uiBadge variant="outline" [class]="riskBadgeClass()">
+            {{ riskLabel() }}
+          </span>
+          <span class="text-xs text-muted-foreground">({{ license().complaints || 0 }} complaints)</span>
+        </div>
+      }
+
+      <div class="flex items-start gap-2 text-sm">
+        <svg lucide="MapPin" class="w-4 h-4 text-muted-foreground shrink-0 mt-0.5"></svg>
+        <div>
+          <p>{{ license().address }}</p>
+          <p class="text-muted-foreground">{{ license().city }}, BC</p>
+        </div>
+      </div>
+
+      <div class="space-y-2">
+        <a [href]="'tel:' + license().phone" class="flex items-center gap-2 text-sm hover:text-primary transition-colors">
+          <svg lucide="Phone" class="w-4 h-4 text-muted-foreground"></svg>
+          <span>{{ license().phone }}</span>
+        </a>
+        <a [href]="'mailto:' + license().email" class="flex items-center gap-2 text-sm hover:text-primary transition-colors truncate">
+          <svg lucide="Mail" class="w-4 h-4 text-muted-foreground shrink-0"></svg>
+          <span class="truncate">{{ license().email }}</span>
+        </a>
+        @if (license().website) {
+          <a
+            [href]="license().website"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 text-sm hover:text-primary transition-colors"
+          >
+            <svg lucide="Globe" class="w-4 h-4 text-muted-foreground shrink-0"></svg>
+            <span class="truncate">Visit Website</span>
+            <svg lucide="ExternalLink" class="w-3 h-3"></svg>
+          </a>
+        }
+      </div>
+
+      @if (isLoggedIn()) {
+        @if (isPolice() || isLocalGovernment()) {
+          <!-- Police/Local Government: only show Licensing Portal button for Special Event Permits -->
+          @if (isSpecialEvent()) {
+            <button uiButton variant="outline" class="w-full bg-transparent" disabled>
+              <svg lucide="ExternalLink" class="w-4 h-4 mr-2"></svg>
+              Go to Licensing Portal
+            </button>
+          }
+        } @else {
+          <!-- Staff and other logged-in users: show Dynamics Record button -->
+          <button uiButton variant="outline" class="w-full bg-transparent" disabled>
+            <svg lucide="Database" class="w-4 h-4 mr-2"></svg>
+            Dynamics Record
+          </button>
+        }
+      }
+
+      @if (isStaff()) {
+        <div uiSeparator></div>
+        <div class="space-y-3">
+          <h4 class="font-medium text-sm flex items-center gap-2">
+            <svg lucide="User" class="w-4 h-4"></svg>
+            Staff Information
+          </h4>
+
+          @if (license().assignedInspector) {
+            <div class="text-sm">
+              <span class="text-muted-foreground">Assigned Inspector:</span>
+              <span class="ml-2">{{ license().assignedInspector }}</span>
+            </div>
+          }
+
+          @if (license().lastInspection) {
+            <div class="text-sm">
+              <span class="text-muted-foreground">Last Inspection:</span>
+              <span class="ml-2">{{ license().lastInspection }}</span>
+            </div>
+          }
+
+          @if (!isSpecialEvent() && !isApplication() && license().monthlySales) {
+            <div class="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-lg">
+              <div class="flex items-center gap-2 mb-2">
+                <svg lucide="DollarSign" class="w-4 h-4 text-blue-600"></svg>
+                <span class="text-sm font-medium">BCLDB Wholesale Purchases</span>
+              </div>
+              <div class="space-y-2">
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-muted-foreground">Current Month:</span>
+                  <span class="font-medium">${{ currentMonthSales().toLocaleString() }}</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-muted-foreground">Annual Total:</span>
+                  <span class="font-medium">${{ annualSales().toLocaleString() }}</span>
+                </div>
+                <div class="flex items-center justify-between text-sm">
+                  <span class="text-muted-foreground">3-Month Trend:</span>
+                  <div class="flex items-center gap-1">
+                    @if (salesTrend()?.trend === 'up') {
+                      <svg lucide="TrendingUp" class="w-4 h-4 text-green-600"></svg>
+                    } @else if (salesTrend()?.trend === 'down') {
+                      <svg lucide="TrendingDown" class="w-4 h-4 text-red-600"></svg>
+                    } @else {
+                      <svg lucide="Minus" class="w-4 h-4 text-muted-foreground"></svg>
+                    }
+                    <span [class]="trendTextClass()">
+                      {{ salesTrend()?.trend === 'stable' ? 'Stable' : salesTrend()?.percentage + '%' }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+
+          @if (!isSpecialEvent()) {
+            <div class="bg-muted/50 p-3 rounded-lg">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium">Contraventions (3yr)</span>
+                <span uiBadge [variant]="license().contraventions > 0 ? 'destructive' : 'secondary'">
+                  {{ license().contraventions }}
+                </span>
+              </div>
+            </div>
+          }
+
+          <div class="bg-amber-50 dark:bg-amber-950/30 p-3 rounded-lg">
+            <div class="flex items-center gap-2 mb-2">
+              <svg lucide="Lightbulb" class="w-4 h-4 text-amber-600"></svg>
+              <span class="text-sm font-medium text-amber-800 dark:text-amber-200"> AI Inspection Summary </span>
+            </div>
+            <p class="text-sm text-amber-700 dark:text-amber-300">{{ aiInspectionSummary }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2">
+              <svg lucide="StickyNote" class="w-4 h-4 text-muted-foreground"></svg>
+              <span class="text-sm font-medium">Inspector Notes</span>
+            </div>
+            <textarea
+              uiTextarea
+              placeholder="Add notes for this location... (Will sync with MS Dynamics)"
+              [value]="inspectorNotes()"
+              (input)="inspectorNotes.set($any($event.target).value)"
+              class="min-h-[80px] text-sm"
+            ></textarea>
+            <p class="text-xs text-muted-foreground">Notes will be saved to MS Dynamics when integrated.</p>
+          </div>
+
+          @if (isStaff() && !isSpecialEvent() && !isApplication()) {
+            <div class="bg-blue-50 dark:bg-blue-950/30 p-3 rounded-lg space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <svg lucide="Search" class="w-4 h-4 text-blue-600"></svg>
+                  <span class="text-sm font-medium text-blue-800 dark:text-blue-200"> Online Intelligence </span>
+                </div>
+                <span uiBadge variant="outline" class="text-xs bg-blue-100 dark:bg-blue-900 border-blue-300"> AI Powered </span>
+              </div>
+              <p class="text-xs text-blue-600 dark:text-blue-400">Potential compliance issues detected by AI web crawling</p>
+              <div class="space-y-2">
+                @for (finding of onlineFindings; track finding.id) {
+                  <div [class]="sevBox(finding.severity)">
+                    <div class="flex items-start gap-2">
+                      <svg [lucide]="finding.icon" [class]="sevIcon(finding.severity)"></svg>
+                      <div class="flex-1 min-w-0">
+                        <div class="flex items-center gap-2 flex-wrap">
+                          <span class="text-xs font-medium">{{ finding.source }}</span>
+                          <span uiBadge variant="outline" [class]="sevBadge(finding.severity)">
+                            {{ finding.severity }}
+                          </span>
+                        </div>
+                        <p class="text-xs text-muted-foreground mt-1">{{ finding.description }}</p>
+                        <div class="flex items-center gap-1 mt-1 text-[10px] text-muted-foreground">
+                          <svg lucide="Clock" class="w-3 h-3"></svg>
+                          <span>Detected: {{ finding.date }}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                }
+              </div>
+              <button uiButton variant="outline" size="sm" class="w-full text-xs bg-white dark:bg-blue-950" disabled>
+                <svg lucide="Search" class="w-3 h-3 mr-1"></svg>
+                Run New Web Scan
+              </button>
+            </div>
+          }
+
+          @if (!isSpecialEvent() && salesIntelligence(); as intel) {
+            <div class="bg-emerald-50 dark:bg-emerald-950/30 p-3 rounded-lg space-y-3">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <svg lucide="BarChart3" class="w-4 h-4 text-emerald-600"></svg>
+                  <span class="text-sm font-medium text-emerald-800 dark:text-emerald-200"> Sales Intelligence </span>
+                </div>
+                <span
+                  uiBadge
+                  variant="outline"
+                  [class]="
+                    'text-xs ' +
+                    (intel.hasAnomalies
+                      ? 'bg-amber-100 dark:bg-amber-900 border-amber-300 text-amber-700 dark:text-amber-300'
+                      : 'bg-emerald-100 dark:bg-emerald-900 border-emerald-300')
+                  "
+                >
+                  {{ intel.hasAnomalies ? 'Anomalies Detected' : 'Normal' }}
+                </span>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2 text-center">
+                <div class="bg-white dark:bg-emerald-900/50 rounded p-2">
+                  <div class="text-xs text-muted-foreground">Current Month</div>
+                  <div class="text-sm font-semibold">${{ intel.currentMonth.toLocaleString() }}</div>
+                </div>
+                <div class="bg-white dark:bg-emerald-900/50 rounded p-2">
+                  <div class="text-xs text-muted-foreground">Hist. Avg</div>
+                  <div class="text-sm font-semibold">${{ intel.historicalAvg.toLocaleString() }}</div>
+                </div>
+                <div class="bg-white dark:bg-emerald-900/50 rounded p-2">
+                  <div class="text-xs text-muted-foreground">3-Mo Trend</div>
+                  <div [class]="intelTrendClass()">
+                    @if (intel.trend.trend === 'up') {
+                      <svg lucide="TrendingUp" class="w-3 h-3"></svg>
+                    }
+                    @if (intel.trend.trend === 'down') {
+                      <svg lucide="TrendingDown" class="w-3 h-3"></svg>
+                    }
+                    @if (intel.trend.trend === 'stable') {
+                      <svg lucide="Minus" class="w-3 h-3"></svg>
+                    }
+                    {{ intel.trend.trend === 'stable' ? 'Stable' : intel.trend.percentage + '%' }}
+                  </div>
+                </div>
+              </div>
+
+              @if (intel.findings.length > 0) {
+                <div class="space-y-2">
+                  <p class="text-xs text-emerald-600 dark:text-emerald-400">AI-detected patterns and correlations</p>
+                  @for (finding of intel.findings; track $index) {
+                    <div [class]="sevBox(finding.severity)">
+                      <div class="flex items-start gap-2">
+                        @if (finding.icon === 'up') {
+                          <svg lucide="ArrowUpRight" [class]="arrowIconClass(finding.severity)"></svg>
+                        }
+                        @if (finding.icon === 'down') {
+                          <svg lucide="ArrowDownRight" [class]="arrowIconClass(finding.severity)"></svg>
+                        }
+                        @if (finding.icon === 'alert') {
+                          <svg lucide="AlertTriangle" class="w-4 h-4 shrink-0 mt-0.5 text-red-600"></svg>
+                        }
+                        @if (finding.icon === 'chart') {
+                          <svg lucide="Activity" [class]="chartIconClass(finding.severity)"></svg>
+                        }
+                        @if (finding.icon === 'link') {
+                          <svg lucide="Sparkles" class="w-4 h-4 shrink-0 mt-0.5 text-amber-600"></svg>
+                        }
+                        <div class="flex-1 min-w-0">
+                          <div class="flex items-center gap-2 flex-wrap">
+                            <span class="text-xs font-medium">{{ finding.title }}</span>
+                            <span uiBadge variant="outline" [class]="sevBadge(finding.severity)">
+                              {{ finding.type }}
+                            </span>
+                          </div>
+                          <p class="text-xs text-muted-foreground mt-1">{{ finding.description }}</p>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <p class="text-xs text-emerald-600 dark:text-emerald-400 text-center py-2">No significant patterns or anomalies detected</p>
+              }
+
+              <div class="text-[10px] text-muted-foreground text-center pt-1 border-t border-emerald-200 dark:border-emerald-800">
+                Based on BCLDB wholesale purchase data • Updated monthly
+              </div>
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Police/Local Government view - limited info -->
+      @if ((isPolice() || isLocalGovernment()) && !isStaff()) {
+        <div uiSeparator></div>
+        <div class="space-y-3">
+          <h4 class="font-medium text-sm flex items-center gap-2">
+            <svg lucide="User" class="w-4 h-4"></svg>
+            {{ isLocalGovernment() ? 'Local Government Access' : 'Police Access' }}
+          </h4>
+          @if (license().assignedInspector) {
+            <div class="text-sm">
+              <span class="text-muted-foreground">Assigned Inspector:</span>
+              <span class="ml-2">{{ license().assignedInspector }}</span>
+            </div>
+          }
+        </div>
+      }
+
+      @if (!isStaff() && !isPolice() && !isLocalGovernment() && !isSpecialEvent()) {
+        <div uiSeparator></div>
+        <button uiButton variant="outline" class="w-full bg-transparent" (click)="showComplaint.set(true)">
+          <svg lucide="AlertTriangle" class="w-4 h-4 mr-2"></svg>
+          File a Complaint
+        </button>
+      }
+
+      <!-- Application Intelligence - for applications only -->
+      @if (isApplication() && license().applicationIntelligence; as ai) {
+        <div class="bg-indigo-50 dark:bg-indigo-950 border border-indigo-200 dark:border-indigo-800 rounded-lg p-3 space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <svg lucide="Shield" class="w-4 h-4 text-indigo-600"></svg>
+              <span class="text-sm font-medium text-indigo-800 dark:text-indigo-200"> Application Intelligence </span>
+            </div>
+            <span uiBadge variant="outline" class="text-xs bg-indigo-100 dark:bg-indigo-900 border-indigo-300"> AI Analysis </span>
+          </div>
+
+          <div class="flex items-center justify-between bg-white dark:bg-indigo-900/50 p-2 rounded">
+            <span class="text-xs font-medium text-indigo-700 dark:text-indigo-300">AI Risk Score</span>
+            <div class="flex items-center gap-2">
+              <div class="w-24 h-2 bg-indigo-200 dark:bg-indigo-800 rounded-full overflow-hidden">
+                <div [class]="aiScoreBar(ai.aiRiskScore)" [style.width]="ai.aiRiskScore + '%'"></div>
+              </div>
+              <span [class]="aiScoreText(ai.aiRiskScore)">{{ ai.aiRiskScore }}/100</span>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-xs font-medium text-indigo-700 dark:text-indigo-300">
+              <svg lucide="Users" class="w-3 h-3"></svg>
+              Directors &amp; Officers ({{ ai.directorsOfficers.length }})
+            </div>
+            <div class="space-y-1 max-h-32 overflow-y-auto">
+              @for (person of ai.directorsOfficers; track $index) {
+                <div class="flex items-center justify-between bg-white dark:bg-indigo-900/50 rounded p-2 text-xs">
+                  <div class="flex items-center gap-2">
+                    <svg lucide="User" class="w-3 h-3 text-muted-foreground"></svg>
+                    <span class="font-medium">{{ person.name }}</span>
+                    <span uiBadge variant="outline" class="text-[10px] capitalize">
+                      {{ person.role }}{{ person.sharePercentage ? ' (' + person.sharePercentage + '%)' : '' }}
+                    </span>
+                  </div>
+                  <div class="flex items-center gap-1">
+                    @if (person.securityScreeningStatus === 'cleared') {
+                      <span uiBadge class="text-[10px] bg-green-100 text-green-700 dark:bg-green-900 dark:text-green-300">
+                        <svg lucide="CheckCircle2" class="w-2 h-2 mr-1"></svg>
+                        Cleared
+                      </span>
+                    }
+                    @if (person.securityScreeningStatus === 'pending') {
+                      <span uiBadge class="text-[10px] bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300">
+                        <svg lucide="Clock" class="w-2 h-2 mr-1"></svg>
+                        Pending
+                      </span>
+                    }
+                    @if (person.securityScreeningStatus === 'flagged') {
+                      <span uiBadge class="text-[10px] bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300">
+                        <svg lucide="AlertTriangle" class="w-2 h-2 mr-1"></svg>
+                        Flagged
+                      </span>
+                    }
+                    @if (person.otherLicenseConnections && person.otherLicenseConnections.length > 0) {
+                      <span uiBadge variant="outline" class="text-[10px]">
+                        <svg lucide="Link" class="w-2 h-2 mr-1"></svg>
+                        {{ person.otherLicenseConnections.length }} other
+                      </span>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="flex items-center gap-2 text-xs font-medium text-indigo-700 dark:text-indigo-300">
+              <svg lucide="Network" class="w-3 h-3"></svg>
+              Tied House Analysis
+            </div>
+            @if (ai.tiedHouseConnections.length > 0) {
+              <div class="space-y-1">
+                @for (connection of ai.tiedHouseConnections; track $index) {
+                  <div [class]="tiedBox(connection.riskLevel)">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">{{ connection.entityName }}</span>
+                      <span uiBadge [class]="tiedBadge(connection.riskLevel)"> {{ connection.riskLevel }} risk </span>
+                    </div>
+                    <div class="flex items-center gap-2 mt-1 text-muted-foreground">
+                      <span class="capitalize">{{ connection.type }}</span>
+                      <span>•</span>
+                      <span class="capitalize">{{ connection.relationshipType }} relationship</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            } @else {
+              <div class="bg-green-50 dark:bg-green-950 rounded p-2 text-xs text-green-700 dark:text-green-300 flex items-center gap-2">
+                <svg lucide="CheckCircle2" class="w-3 h-3"></svg>
+                No tied house connections detected
+              </div>
+            }
+          </div>
+
+          <!-- Fit and Proper Assessment - Cannabis only -->
+          @if (license().licenseType === 'cannabis' && ai.fitAndProperAssessment; as fp) {
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-xs font-medium text-indigo-700 dark:text-indigo-300">
+                <svg lucide="Fingerprint" class="w-3 h-3"></svg>
+                Fit &amp; Proper Assessment
+              </div>
+              <div [class]="fitBox(fp.status)">
+                <div class="flex items-center justify-between mb-2">
+                  <span class="font-medium">Assessment Status</span>
+                  <span uiBadge [class]="fitBadge(fp.status)">
+                    {{ fp.status }}
+                  </span>
+                </div>
+                <div class="grid grid-cols-2 gap-2 text-muted-foreground">
+                  <div class="flex items-center gap-1">
+                    @if (fp.securityScreeningComplete) {
+                      <svg lucide="CheckCircle2" class="w-3 h-3 text-green-500"></svg>
+                    } @else {
+                      <svg lucide="Clock" class="w-3 h-3 text-amber-500"></svg>
+                    }
+                    Security Screening
+                  </div>
+                  <div class="flex items-center gap-1">
+                    @if (fp.financialIntegrityComplete) {
+                      <svg lucide="CheckCircle2" class="w-3 h-3 text-green-500"></svg>
+                    } @else {
+                      <svg lucide="Clock" class="w-3 h-3 text-amber-500"></svg>
+                    }
+                    Financial Integrity
+                  </div>
+                  <div>Associates: {{ fp.associatesCleared }}/{{ fp.associatesIdentified }} cleared</div>
+                  @if (fp.estimatedCompletionDays) {
+                    <div>Est. {{ fp.estimatedCompletionDays }} days remaining</div>
+                  }
+                </div>
+                @if (fp.illicitOperationHistory || fp.criminalRecordFlags) {
+                  <div class="mt-2 pt-2 border-t border-red-200 dark:border-red-800">
+                    @if (fp.illicitOperationHistory) {
+                      <div class="flex items-center gap-1 text-red-600">
+                        <svg lucide="FileWarning" class="w-3 h-3"></svg>
+                        Prior illicit operation history
+                      </div>
+                    }
+                    @if (fp.criminalRecordFlags) {
+                      <div class="flex items-center gap-1 text-red-600">
+                        <svg lucide="AlertTriangle" class="w-3 h-3"></svg>
+                        Criminal record flags
+                      </div>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          @if (ai.onlineResearchFindings && ai.onlineResearchFindings.length > 0) {
+            <div class="space-y-2">
+              <div class="flex items-center gap-2">
+                <svg lucide="Newspaper" class="w-3 h-3 text-indigo-600"></svg>
+                <span class="text-xs font-medium text-indigo-700 dark:text-indigo-300"> Online Research Findings </span>
+                <span uiBadge variant="outline" class="text-[10px] px-1 py-0"> {{ ai.onlineResearchFindings.length }} found </span>
+              </div>
+              <div class="space-y-2 max-h-48 overflow-y-auto">
+                @for (finding of ai.onlineResearchFindings; track $index) {
+                  <div [class]="researchBox(finding.sentiment)">
+                    <div class="flex items-start justify-between gap-2">
+                      <div class="flex-1">
+                        <div class="flex items-center gap-2 mb-1">
+                          <span uiBadge variant="outline" [class]="researchTypeBadge(finding.type)">
+                            {{ researchTypeLabel(finding.type) }}
+                          </span>
+                          <span class="text-[10px] text-muted-foreground">{{ finding.source }}</span>
+                          @if (finding.relevance === 'high') {
+                            <span uiBadge variant="destructive" class="text-[10px] px-1 py-0"> High Relevance </span>
+                          }
+                        </div>
+                        <p class="font-medium text-foreground">{{ finding.title }}</p>
+                        <p class="text-muted-foreground mt-1">{{ finding.summary }}</p>
+                        @if (finding.date) {
+                          <p class="text-[10px] text-muted-foreground mt-1">Found: {{ shortDate(finding.date) }}</p>
+                        }
+                      </div>
+                      <div [class]="researchDot(finding.sentiment)"></div>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          @if (ai.aiFindings.length > 0) {
+            <div class="space-y-2">
+              <div class="flex items-center gap-2 text-xs font-medium text-indigo-700 dark:text-indigo-300">
+                <svg lucide="Scale" class="w-3 h-3"></svg>
+                AI Findings ({{ ai.aiFindings.length }})
+              </div>
+              <div class="space-y-1 max-h-48 overflow-y-auto">
+                @for (finding of ai.aiFindings; track $index) {
+                  <div [class]="findingBox(finding.severity)">
+                    <div class="flex items-center justify-between">
+                      <span class="font-medium">{{ finding.title }}</span>
+                      <span uiBadge [class]="findingBadge(finding.severity)">
+                        {{ finding.type.replace('-', ' ') }}
+                      </span>
+                    </div>
+                    <p class="text-muted-foreground mt-1">{{ finding.description }}</p>
+                    @if (finding.source) {
+                      <p class="text-[10px] text-muted-foreground mt-1 italic">Source: {{ finding.source }}</p>
+                    }
+                    @if (finding.recommendation) {
+                      <p class="text-[10px] mt-1 font-medium text-indigo-600 dark:text-indigo-400">→ {{ finding.recommendation }}</p>
+                    }
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <div class="flex items-center justify-between bg-white dark:bg-indigo-900/50 rounded p-2 text-xs">
+            <div class="flex items-center gap-2">
+              <svg lucide="Building2" class="w-3 h-3 text-muted-foreground"></svg>
+              <span>Corporate Structure</span>
+            </div>
+            <span
+              uiBadge
+              variant="outline"
+              [class]="'capitalize ' + (ai.corporateStructureComplexity === 'complex' ? 'border-amber-300 text-amber-700' : '')"
+            >
+              {{ ai.corporateStructureComplexity }}
+            </span>
+          </div>
+
+          @if (ai.similarApplicationsInArea > 0) {
+            <div class="text-[10px] text-muted-foreground text-center">{{ ai.similarApplicationsInArea }} similar application(s) in this area</div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+
+<complaint-dialog [open]="showComplaint()" (openChange)="showComplaint.set($event)" [license]="license()" />

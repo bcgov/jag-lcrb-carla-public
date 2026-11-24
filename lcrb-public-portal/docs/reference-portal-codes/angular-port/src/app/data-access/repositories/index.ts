@@ -1,0 +1,16 @@
+/** Service layer barrel. The portal's features depend on these service modules - never on localStorage directly. */
+
+export * from "./mock-storage/kv-store"
+export * from "./activity/audit-service"
+export * from "./notifications/notification-service"
+export * from "./payments/payment-service"
+export * from "./activity/dynamics-service"
+export * from "./documents/document-service"
+export * from "./mock-storage/collection-version"
+export * from "./notifications/notifications.signals"
+export * from "./activity/activity.signals"
+export * from "./payments/payments.signals"
+export * from "./documents/documents.signals"
+export * from "./applications/applications.signals"
+export * from "./messaging/messaging.signals"
+export * from "./special-events/special-events.signals"

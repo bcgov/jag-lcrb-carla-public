@@ -1,0 +1,806 @@
+<ng-template #inspectionCard let-inspection>
+  <div uiCard class="mb-3">
+    <div uiCardContent class="p-4">
+      <div class="flex items-start justify-between">
+        <div class="flex-1 min-w-0">
+          <p class="font-medium text-sm truncate">{{ inspection.license.businessName }}</p>
+          <p class="text-xs text-muted-foreground">{{ inspection.license.city }}</p>
+          <p class="text-xs text-muted-foreground">{{ getRegionName(inspection.license.region) }}</p>
+          <div class="flex items-center gap-2 mt-1 flex-wrap">
+            <span uiBadge variant="outline" class="text-xs">
+              <svg lucide="Calendar" class="w-3 h-3 mr-1"></svg>
+              {{ inspection.scheduledDate }}
+            </span>
+            <span uiBadge variant="outline" [class]="getInspectionTypeColor(inspection.inspectionType) + ' text-xs'">
+              {{ getInspectionTypeLabel(inspection.inspectionType) }}
+            </span>
+            @if (inspection.completedDate) {
+              <span uiBadge variant="outline" class="text-xs bg-green-50 text-green-700 border-green-200">
+                <svg lucide="Clock" class="w-3 h-3 mr-1"></svg>
+                {{ inspection.duration }}s
+              </span>
+            }
+            <!-- Display number of photos if available -->
+            @if (inspection.photos && inspection.photos.length > 0) {
+              <span uiBadge variant="outline" class="text-xs">
+                <svg lucide="ImageIcon" class="w-3 h-3 mr-1"></svg>
+                {{ inspection.photos.length }} Photos
+              </span>
+            }
+          </div>
+          <p class="text-xs text-muted-foreground mt-1">Inspector: {{ inspection.assignedInspector }}</p>
+        </div>
+        @if (inspection.status === 'scheduled') {
+          <button uiButton size="sm" variant="outline" (click)="startInspection(inspection.id)" class="ml-2 shrink-0">
+            <svg lucide="Play" class="w-3 h-3 mr-1"></svg>
+            Start Inspection
+          </button>
+        }
+        @if (inspection.status === 'paused') {
+          <button uiButton size="sm" variant="default" (click)="startInspection(inspection.id)" class="ml-2 shrink-0 bg-amber-600 hover:bg-amber-700">
+            <svg lucide="Play" class="w-3 h-3 mr-1"></svg>
+            Resume Inspection
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+@if (isOpen()) {
+  <div class="absolute top-0 right-0 w-full sm:w-[420px] h-full bg-card border-l shadow-xl z-50 flex flex-col">
+    <div class="p-4 border-b flex items-center justify-between shrink-0">
+      <div>
+        <h2 class="font-semibold text-lg">Inspections</h2>
+        <p class="text-sm text-muted-foreground">Schedule, track, and review inspections</p>
+      </div>
+      <button uiButton variant="ghost" size="icon" (click)="closed.emit()">
+        <svg lucide="X" class="w-5 h-5"></svg>
+      </button>
+    </div>
+
+    @if (activeInspection() && activeInspectionData(); as data) {
+      <div uiScrollArea class="flex-1">
+        <div class="p-4 space-y-4">
+          <div class="bg-primary/5 rounded-lg p-4 border">
+            <div class="flex items-center justify-between mb-2">
+              <span class="font-semibold">{{ data.license.businessName }}</span>
+              <span uiBadge variant="default">
+                {{ data.status === 'in-progress' ? 'In Progress' : 'Paused' }}
+              </span>
+            </div>
+            <p class="text-sm text-muted-foreground mb-3">{{ data.license.address }}, {{ data.license.city }}</p>
+
+            <div class="text-3xl font-mono font-bold text-center my-3">{{ formatTime(timerSeconds()) }}</div>
+            <div class="flex items-center justify-center gap-2">
+              @if (data.status === 'paused') {
+                <button uiButton size="sm" (click)="resumeInspection()">
+                  <svg lucide="Play" class="w-4 h-4 mr-1"></svg>
+                  Resume
+                </button>
+              } @else {
+                <button uiButton variant="outline" size="sm" (click)="pauseTimer()">
+                  <svg lucide="Pause" class="w-4 h-4 mr-1"></svg>
+                  Pause
+                </button>
+              }
+              <button uiButton variant="outline" size="sm" (click)="resetTimer()">
+                <svg lucide="RotateCcw" class="w-4 h-4 mr-1"></svg>
+                Reset
+              </button>
+              <button uiButton size="sm" (click)="completeInspection(activeInspection()!)">
+                <svg lucide="Check" class="w-4 h-4 mr-1"></svg>
+                Complete
+              </button>
+            </div>
+          </div>
+
+          <div class="bg-accent/50 rounded-lg p-4 border">
+            <div class="flex items-center gap-2 mb-2">
+              <svg lucide="Sparkles" class="w-4 h-4 text-primary"></svg>
+              <span class="font-medium text-sm">AI Inspection Summary</span>
+            </div>
+            <p class="text-sm text-muted-foreground">{{ aiInspectionSummary }}</p>
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="font-medium text-sm">Inspection Checklist</h3>
+            @for (item of data.checklist; track item.id) {
+              <div class="border rounded-lg overflow-hidden">
+                <button
+                  (click)="toggleChecklistItem(activeInspection()!, item.id)"
+                  class="w-full flex items-center justify-between p-3 hover:bg-accent/50 transition-colors text-left"
+                >
+                  <div class="flex items-center gap-2">
+                    @if (item.response === 'yes') {
+                      <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center">
+                        <svg lucide="CheckCircle" class="w-3 h-3 text-white"></svg>
+                      </div>
+                    }
+                    @if (item.response === 'no') {
+                      <div class="w-5 h-5 rounded-full bg-destructive flex items-center justify-center">
+                        <svg lucide="X" class="w-3 h-3 text-white"></svg>
+                      </div>
+                    }
+                    @if (item.response === null) {
+                      <div class="w-5 h-5 rounded-full border-2 border-muted-foreground/30"></div>
+                    }
+                    <span class="text-sm font-medium">{{ item.label }}</span>
+                  </div>
+                  @if (item.expanded) {
+                    <svg lucide="ChevronUp" class="w-4 h-4 text-muted-foreground"></svg>
+                  } @else {
+                    <svg lucide="ChevronDown" class="w-4 h-4 text-muted-foreground"></svg>
+                  }
+                </button>
+
+                @if (item.expanded) {
+                  <div class="p-3 pt-0 border-t bg-muted/30 space-y-3">
+                    <div class="relative">
+                      <textarea
+                        uiTextarea
+                        [attr.placeholder]="listeningItemId() === item.id ? 'Listening... speak now' : 'Add notes for this item...'"
+                        [value]="item.notes"
+                        (input)="updateChecklistNotes(activeInspection()!, item.id, $any($event.target).value)"
+                        [class]="
+                          'min-h-[80px] text-sm pr-12 ' + (listeningItemId() === item.id ? 'border-red-500 bg-red-50 dark:bg-red-950/20' : '')
+                        "
+                      ></textarea>
+                      <button
+                        uiButton
+                        type="button"
+                        [variant]="listeningItemId() === item.id ? 'destructive' : 'outline'"
+                        size="icon"
+                        [class]="'absolute top-2 right-2 h-8 w-8 ' + (listeningItemId() === item.id ? 'animate-pulse' : '')"
+                        (click)="toggleSpeechToText(activeInspection()!, item.id, item.notes)"
+                        [attr.title]="listeningItemId() === item.id ? 'Stop listening' : 'Start voice input'"
+                      >
+                        @if (listeningItemId() === item.id) {
+                          <svg lucide="MicOff" class="h-4 w-4"></svg>
+                        } @else {
+                          <svg lucide="Mic" class="h-4 w-4"></svg>
+                        }
+                      </button>
+                    </div>
+                    <div class="flex gap-2">
+                      <button
+                        uiButton
+                        [variant]="item.response === 'no' ? 'destructive' : 'outline'"
+                        size="sm"
+                        class="flex-1"
+                        (click)="updateChecklistResponse(activeInspection()!, item.id, 'no')"
+                      >
+                        No
+                      </button>
+                      <button
+                        uiButton
+                        [variant]="item.response === 'yes' ? 'default' : 'outline'"
+                        size="sm"
+                        class="flex-1"
+                        (click)="updateChecklistResponse(activeInspection()!, item.id, 'yes')"
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+
+          <div class="space-y-2">
+            <h3 class="font-medium text-sm">Inspector Notes</h3>
+            <div class="relative">
+              <textarea
+                uiTextarea
+                [attr.placeholder]="isListeningInspectorNotes() ? 'Listening... speak now' : 'General inspection notes (will sync with MS Dynamics)...'"
+                [value]="data.inspectorNotes"
+                (input)="updateInspectorNotes(activeInspection()!, $any($event.target).value)"
+                [class]="'min-h-[120px] text-sm pr-12 ' + (isListeningInspectorNotes() ? 'border-red-500 bg-red-50/50' : '')"
+              ></textarea>
+              <button
+                uiButton
+                type="button"
+                variant="ghost"
+                size="icon"
+                [class]="
+                  'absolute top-2 right-2 h-8 w-8 ' +
+                  (isListeningInspectorNotes() ? 'text-red-500 animate-pulse' : 'text-muted-foreground hover:text-foreground')
+                "
+                (click)="toggleInspectorNotesSpeech(activeInspection()!, data.inspectorNotes)"
+                [attr.title]="isListeningInspectorNotes() ? 'Stop listening' : 'Start voice input'"
+              >
+                @if (isListeningInspectorNotes()) {
+                  <svg lucide="MicOff" class="h-4 w-4"></svg>
+                } @else {
+                  <svg lucide="Mic" class="h-4 w-4"></svg>
+                }
+              </button>
+            </div>
+          </div>
+
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium text-sm">Inspection Photos</h3>
+              <span class="text-xs text-muted-foreground"> {{ selectedPhotoCount(data) }} selected for Dynamics </span>
+            </div>
+
+            <!-- Hidden file input for camera/gallery access -->
+            <!-- Camera input - uses capture attribute to trigger native camera on mobile -->
+            <input #cameraInput type="file" accept="image/*" capture="environment" multiple (change)="handlePhotoCapture($event)" class="hidden" />
+            <!-- Gallery input - no capture attribute allows file/photo library selection -->
+            <input #galleryInput type="file" accept="image/*" multiple (change)="handlePhotoCapture($event)" class="hidden" />
+
+            <div class="flex gap-2">
+              <button uiButton variant="outline" size="sm" class="flex-1 bg-transparent" (click)="openCamera()">
+                <svg lucide="Camera" class="w-4 h-4 mr-2"></svg>
+                Take Photo
+              </button>
+              <button uiButton variant="outline" size="sm" class="flex-1 bg-transparent" (click)="openGallery()">
+                <svg lucide="ImageIcon" class="w-4 h-4 mr-2"></svg>
+                From Gallery
+              </button>
+            </div>
+
+            @if (data.photos && data.photos.length > 0) {
+              <div class="space-y-2">
+                <div class="flex items-center justify-between">
+                  <div class="flex gap-2">
+                    <button uiButton variant="ghost" size="sm" class="h-7 text-xs" (click)="selectAllPhotos()">Select All</button>
+                    <button uiButton variant="ghost" size="sm" class="h-7 text-xs" (click)="deselectAllPhotos()">Deselect All</button>
+                  </div>
+                  @if (hasUnselectedPhoto(data)) {
+                    <button uiButton variant="destructive" size="sm" class="h-7 text-xs" (click)="deleteUnselectedPhotos()">
+                      <svg lucide="Trash2" class="w-3 h-3 mr-1"></svg>
+                      Remove Unselected
+                    </button>
+                  }
+                </div>
+
+                <div class="grid grid-cols-3 gap-2">
+                  @for (photo of data.photos; track photo.id) {
+                    <div
+                      [class]="
+                        'relative aspect-square rounded-lg overflow-hidden border-2 transition-all ' +
+                        (photo.selected ? 'border-primary ring-2 ring-primary/20' : 'border-muted opacity-60')
+                      "
+                    >
+                      <img [src]="photo.dataUrl || '/placeholder.svg'" alt="Inspection photo" class="w-full h-full object-cover" />
+
+                      <button
+                        (click)="togglePhotoSelection(photo.id)"
+                        class="absolute inset-0 bg-black/0 hover:bg-black/20 transition-colors flex items-start justify-start p-1"
+                      >
+                        @if (photo.selected) {
+                          <svg lucide="CheckSquare" class="w-5 h-5 text-primary bg-white rounded"></svg>
+                        } @else {
+                          <svg lucide="Square" class="w-5 h-5 text-white bg-black/40 rounded"></svg>
+                        }
+                      </button>
+
+                      <button
+                        (click)="deletePhoto(photo.id)"
+                        class="absolute top-1 right-1 p-1 bg-destructive/90 hover:bg-destructive text-white rounded transition-colors"
+                      >
+                        <svg lucide="X" class="w-3 h-3"></svg>
+                      </button>
+
+                      <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-[10px] px-1 py-0.5 truncate">
+                        {{ timeLabel(photo.timestamp) }}
+                      </div>
+                    </div>
+                  }
+                </div>
+
+                <p class="text-xs text-muted-foreground text-center">Tap photo to select/deselect. Selected photos will sync to MS Dynamics.</p>
+              </div>
+            } @else {
+              <!-- Message when no photos are available -->
+              <div class="border-2 border-dashed rounded-lg p-6 text-center text-muted-foreground">
+                <svg lucide="Camera" class="w-8 h-8 mx-auto mb-2 opacity-50"></svg>
+                <p class="text-sm">No photos captured yet</p>
+                <p class="text-xs">Use the buttons above to take photos or select from gallery</p>
+              </div>
+            }
+          </div>
+
+          <button uiButton variant="outline" class="w-full bg-transparent" (click)="goBackToList()">Back to Inspection List</button>
+        </div>
+      </div>
+    } @else {
+      <div uiTabs [(value)]="activeTab" class="flex-1 flex flex-col overflow-hidden">
+        <div uiTabsList class="grid w-full grid-cols-4 shrink-0 rounded-none border-b bg-muted/30 h-auto p-1 gap-1 mx-0">
+          <button uiTabsTrigger value="schedule" [class]="tabTriggerClass">
+            <svg lucide="Plus" class="w-4 h-4 shrink-0"></svg>
+            <span class="hidden md:inline">New</span>
+          </button>
+          <button uiTabsTrigger value="ai-schedule" [class]="tabTriggerClass">
+            <svg lucide="Sparkles" class="w-4 h-4 shrink-0"></svg>
+            <span class="hidden md:inline">AI</span>
+          </button>
+          <button uiTabsTrigger value="upcoming" [class]="tabTriggerClass">
+            <svg lucide="Clock" class="w-4 h-4 shrink-0"></svg>
+            <span class="hidden md:inline">Soon</span>
+            @if (upcomingInspections().length > 0) {
+              <span uiBadge variant="secondary" class="text-[10px] px-1 py-0 h-4 min-w-4">
+                {{ upcomingInspections().length }}
+              </span>
+            }
+          </button>
+          <button uiTabsTrigger value="completed" [class]="tabTriggerClass">
+            <svg lucide="CheckCircle2" class="w-4 h-4 shrink-0"></svg>
+            <span class="hidden md:inline">Done</span>
+          </button>
+        </div>
+
+        <div uiTabsContent value="schedule" class="flex-1 overflow-hidden mt-0">
+          <div uiScrollArea class="h-full">
+            <div class="px-4 py-4">
+                <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                    <svg lucide="RefreshCw" class="w-4 h-4 shrink-0"></svg>
+                    <span class="text-sm font-medium">Real-time sync with MS Dynamics</span>
+                  </div>
+                  <p class="text-xs text-blue-600 dark:text-blue-400 mt-1 ml-6 break-words">
+                    Inspections scheduled here are automatically synced to MS Dynamics, and vice versa.
+                  </p>
+                </div>
+
+              <div class="p-4 border rounded-lg space-y-3 shrink-0">
+                <h3 class="font-medium text-sm">Schedule New Inspection</h3>
+
+                <ui-select [value]="selectedRegion()" (valueChange)="selectedRegion.set($event ?? '')">
+                  <button uiSelectTrigger>
+                    <span uiSelectValue placeholder="Select region"></span>
+                  </button>
+                  <ng-template uiSelectContent>
+                    @for (region of regions; track region.id) {
+                      <ui-select-item [value]="region.id">{{ region.name }}</ui-select-item>
+                    }
+                  </ng-template>
+                </ui-select>
+
+                <ui-select [value]="selectedLicense()" (valueChange)="selectedLicense.set($event ?? '')" [disabled]="!selectedRegion()">
+                  <button uiSelectTrigger>
+                    <span uiSelectValue [placeholder]="selectedRegion() ? 'Select establishment' : 'Select region first'"></span>
+                  </button>
+                  <ng-template uiSelectContent>
+                    @for (license of licensedEstablishments(); track license.id) {
+                      <ui-select-item [value]="license.id">{{ license.businessName }} - {{ license.city }}</ui-select-item>
+                    }
+                  </ng-template>
+                </ui-select>
+
+                <div class="grid grid-cols-2 gap-2">
+                  <ui-select [value]="selectedInspector()" (valueChange)="selectedInspector.set($event ?? '')" [disabled]="!selectedRegion()">
+                    <button uiSelectTrigger>
+                      <span uiSelectValue [placeholder]="selectedRegion() ? 'Inspector' : 'Select region first'"></span>
+                    </button>
+                    <ng-template uiSelectContent>
+                      @for (inspector of filteredInspectors(); track inspector.id) {
+                        <ui-select-item [value]="inspector.name">{{ inspector.name }}</ui-select-item>
+                      }
+                    </ng-template>
+                  </ui-select>
+
+                  <input type="date" [value]="selectedDate()" (input)="selectedDate.set($any($event.target).value)" [class]="dateInputClass" />
+                </div>
+
+                <ui-select [value]="selectedInspectionType()" (valueChange)="selectedInspectionType.set($any($event))">
+                  <button uiSelectTrigger>
+                    <span uiSelectValue placeholder="Inspection Type"></span>
+                  </button>
+                  <ng-template uiSelectContent>
+                    <ui-select-item value="administration">Administration</ui-select-item>
+                    <ui-select-item value="public-safety">Public Safety</ui-select-item>
+                    <ui-select-item value="minors-underage">Minors Underage</ui-select-item>
+                  </ng-template>
+                </ui-select>
+
+                <div class="flex items-center gap-2 flex-wrap">
+                  <ui-select [value]="selectedPriority()" (valueChange)="selectedPriority.set($any($event))">
+                    <button uiSelectTrigger class="flex-1 min-w-[140px]">
+                      <span uiSelectValue placeholder="Priority"></span>
+                    </button>
+                    <ng-template uiSelectContent>
+                      <ui-select-item value="low">Low Priority</ui-select-item>
+                      <ui-select-item value="medium">Medium Priority</ui-select-item>
+                      <ui-select-item value="high">High Priority</ui-select-item>
+                    </ng-template>
+                  </ui-select>
+
+                  <button uiButton (click)="addInspection()" [disabled]="!selectedLicense() || !selectedInspector() || !selectedDate()">
+                    <svg lucide="Plus" class="w-4 h-4 mr-1"></svg>
+                    Add
+                  </button>
+                </div>
+              </div>
+
+              @if (scheduledInspections().length > 0) {
+                <div class="mt-4 pb-4">
+                  <h4 class="text-sm font-medium mb-2">Scheduled Inspections</h4>
+                  <div class="space-y-3">
+                    @for (inspection of scheduledInspections(); track inspection.id) {
+                      <ng-container [ngTemplateOutlet]="inspectionCard" [ngTemplateOutletContext]="{ $implicit: inspection }" />
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        <div uiTabsContent value="ai-schedule" class="flex-1 overflow-hidden mt-0">
+          <div uiScrollArea class="h-full">
+            <div class="px-4 py-4">
+                <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                    <svg lucide="RefreshCw" class="w-4 h-4 shrink-0"></svg>
+                    <span class="text-sm font-medium">Real-time sync with MS Dynamics</span>
+                  </div>
+                  <p class="text-xs text-blue-600 dark:text-blue-400 mt-1 ml-6 break-words">
+                    AI-generated schedules sync automatically with MS Dynamics once applied.
+                  </p>
+                </div>
+
+              <div uiCard class="mb-4">
+                <div uiCardHeader class="pb-3">
+                  <div uiCardTitle class="text-base flex items-center gap-2">
+                    <svg lucide="Sparkles" class="w-4 h-4 text-purple-500"></svg>
+                    AI-Powered Inspection Scheduling
+                  </div>
+                  <div uiCardDescription>
+                    Automatically generate optimized inspection schedules based on risk scores, AI intelligence findings, and workforce availability.
+                  </div>
+                </div>
+                <div uiCardContent class="space-y-4">
+                  <div class="space-y-4">
+                    <div class="space-y-2">
+                      <label uiLabel>Schedule Duration (Weeks)</label>
+                      <ui-select [value]="aiScheduleWeeks().toString()" (valueChange)="setAiScheduleWeeks($event)">
+                        <button uiSelectTrigger>
+                          <span uiSelectValue></span>
+                        </button>
+                        <ng-template uiSelectContent>
+                          <ui-select-item value="1">1 Week</ui-select-item>
+                          <ui-select-item value="2">2 Weeks</ui-select-item>
+                          <ui-select-item value="4">4 Weeks</ui-select-item>
+                          <ui-select-item value="8">8 Weeks</ui-select-item>
+                        </ng-template>
+                      </ui-select>
+                    </div>
+
+                    <div class="space-y-2">
+                      <label uiLabel>Region Filter</label>
+                      <ui-select [value]="selectedRegionForAi()" (valueChange)="selectedRegionForAi.set($event ?? '')">
+                        <button uiSelectTrigger>
+                          <span uiSelectValue></span>
+                        </button>
+                        <ng-template uiSelectContent>
+                          <ui-select-item value="all">All Regions</ui-select-item>
+                          @for (region of regions; track region.id) {
+                            <ui-select-item [value]="region.name">{{ region.name }}</ui-select-item>
+                          }
+                        </ng-template>
+                      </ui-select>
+                    </div>
+
+                    <div uiSeparator></div>
+
+                    <div class="space-y-3">
+                      <label uiLabel class="text-sm font-medium">Risk Priority Weighting</label>
+                      <p class="text-xs text-muted-foreground">Higher values prioritize high-risk establishments</p>
+                      <div class="flex items-center gap-4">
+                        <span uiSlider [value]="aiPriorityWeight()" (valueChange)="aiPriorityWeight.set($event ?? [])" [max]="100" [step]="10" class="flex-1"></span>
+                        <span class="text-sm font-medium w-12">{{ aiPriorityWeight()[0] }}%</span>
+                      </div>
+                    </div>
+
+                    <div class="space-y-3">
+                      <label uiLabel class="text-sm font-medium">Workload Balance</label>
+                      <p class="text-xs text-muted-foreground">Balance between equal distribution vs. efficiency</p>
+                      <div class="flex items-center gap-4">
+                        <span class="text-xs text-muted-foreground">Efficient</span>
+                        <span uiSlider [value]="aiWorkloadBalance()" (valueChange)="aiWorkloadBalance.set($event ?? [])" [max]="100" [step]="10" class="flex-1"></span>
+                        <span class="text-xs text-muted-foreground">Equal</span>
+                      </div>
+                    </div>
+
+                    <div uiSeparator></div>
+
+                    <div class="space-y-3">
+                      <label uiLabel class="text-sm font-medium">Include Risk Levels</label>
+                      <div class="flex flex-wrap gap-2">
+                        <button
+                          uiButton
+                          [variant]="aiIncludeHighRisk() ? 'default' : 'outline'"
+                          size="sm"
+                          (click)="aiIncludeHighRisk.set(!aiIncludeHighRisk())"
+                          [class]="aiIncludeHighRisk() ? 'bg-red-600 hover:bg-red-700' : ''"
+                        >
+                          <svg lucide="AlertTriangle" class="w-3 h-3 mr-1"></svg>
+                          High Risk
+                        </button>
+                        <button
+                          uiButton
+                          [variant]="aiIncludeMediumRisk() ? 'default' : 'outline'"
+                          size="sm"
+                          (click)="aiIncludeMediumRisk.set(!aiIncludeMediumRisk())"
+                          [class]="aiIncludeMediumRisk() ? 'bg-amber-600 hover:bg-amber-700' : ''"
+                        >
+                          <svg lucide="AlertCircle" class="w-3 h-3 mr-1"></svg>
+                          Medium Risk
+                        </button>
+                        <button
+                          uiButton
+                          [variant]="aiIncludeLowRisk() ? 'default' : 'outline'"
+                          size="sm"
+                          (click)="aiIncludeLowRisk.set(!aiIncludeLowRisk())"
+                          [class]="aiIncludeLowRisk() ? 'bg-green-600 hover:bg-green-700' : ''"
+                        >
+                          <svg lucide="CheckCircle2" class="w-3 h-3 mr-1"></svg>
+                          Low Risk
+                        </button>
+                      </div>
+                    </div>
+
+                    <div class="flex items-center justify-between p-3 bg-purple-50 dark:bg-purple-950/30 rounded-lg">
+                      <div class="flex items-center gap-2">
+                        <svg lucide="Bot" class="w-4 h-4 text-purple-600"></svg>
+                        <div>
+                          <p class="text-sm font-medium">Include AI Intelligence Flags</p>
+                          <p class="text-xs text-muted-foreground">Prioritize licensees with active online intelligence findings</p>
+                        </div>
+                      </div>
+                      <button uiSwitch [checked]="aiIncludeIntelligenceFlags()" (checkedChange)="aiIncludeIntelligenceFlags.set($event)"></button>
+                    </div>
+                  </div>
+
+                  <button uiButton (click)="generateAiSchedule()" [disabled]="isGenerating()" class="w-full bg-purple-600 hover:bg-purple-700">
+                    @if (isGenerating()) {
+                      <svg lucide="RefreshCw" class="w-4 h-4 mr-2 animate-spin"></svg>
+                      Generating Optimal Schedule...
+                    } @else {
+                      <svg lucide="Sparkles" class="w-4 h-4 mr-2"></svg>
+                      Generate AI Schedule
+                    }
+                  </button>
+                </div>
+              </div>
+
+              @if (aiGeneratedSchedule().length > 0) {
+                <div uiCard class="mb-4 border-purple-200 dark:border-purple-800">
+                  <div uiCardHeader class="pb-3">
+                    <div uiCardTitle class="text-base flex items-center justify-between">
+                      <span class="flex items-center gap-2">
+                        <svg lucide="Calendar" class="w-4 h-4"></svg>
+                        Generated Schedule Preview
+                      </span>
+                      <span uiBadge variant="secondary">{{ aiGeneratedSchedule().length }} inspections</span>
+                    </div>
+                  </div>
+                  <div uiCardContent class="space-y-3">
+                    <div class="p-3 bg-muted/50 rounded-lg space-y-2">
+                      <p class="text-sm font-medium">Inspector Workload Distribution</p>
+                      @for (row of workloadRows(); track row.inspector.id) {
+                        <div class="space-y-1">
+                          <div class="flex justify-between text-xs">
+                            <span>{{ row.inspector.name }}</span>
+                            <span>{{ row.workload }} inspections</span>
+                          </div>
+                          <div uiProgress [value]="row.percent" class="h-1.5"></div>
+                        </div>
+                      }
+                    </div>
+
+                    <div class="space-y-2 max-h-48 overflow-y-auto">
+                      @for (inspection of aiGeneratedSchedule().slice(0, 10); track inspection.id) {
+                        <div class="flex items-center gap-2 p-2 bg-background border rounded text-xs">
+                          <span
+                            uiBadge
+                            variant="outline"
+                            [class]="
+                              inspection.priority === 'high'
+                                ? 'border-red-500 text-red-600'
+                                : inspection.priority === 'medium'
+                                  ? 'border-amber-500 text-amber-600'
+                                  : 'border-green-500 text-green-600'
+                            "
+                          >
+                            {{ inspection.priority }}
+                          </span>
+                          <span class="flex-1 truncate">{{ inspection.license.businessName }}</span>
+                          <span class="text-muted-foreground">{{ inspection.scheduledDate }}</span>
+                        </div>
+                      }
+                      @if (aiGeneratedSchedule().length > 10) {
+                        <p class="text-xs text-muted-foreground text-center">+ {{ aiGeneratedSchedule().length - 10 }} more inspections</p>
+                      }
+                    </div>
+
+                    <div class="flex gap-2 pt-2">
+                      <button uiButton variant="outline" class="flex-1 bg-transparent" (click)="aiGeneratedSchedule.set([])">Discard</button>
+                      <button uiButton class="flex-1 bg-green-600 hover:bg-green-700" (click)="applyAiSchedule()">
+                        <svg lucide="CheckCircle2" class="w-4 h-4 mr-2"></svg>
+                        Apply Schedule
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              <div uiCard>
+                <div uiCardHeader class="pb-3">
+                  <div uiCardTitle class="text-base flex items-center gap-2">
+                    <svg lucide="Bot" class="w-4 h-4"></svg>
+                    How AI Scheduling Works
+                  </div>
+                </div>
+                <div uiCardContent class="space-y-3 text-sm text-muted-foreground">
+                  <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center flex-shrink-0">
+                      <svg lucide="AlertTriangle" class="w-3 h-3 text-red-600"></svg>
+                    </div>
+                    <p>
+                      <strong class="text-foreground">Risk Analysis:</strong> Prioritizes high-risk licensees based on contraventions, complaints, and
+                      calculated risk scores.
+                    </p>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center flex-shrink-0">
+                      <svg lucide="Globe" class="w-3 h-3 text-purple-600"></svg>
+                    </div>
+                    <p>
+                      <strong class="text-foreground">Online Intelligence:</strong> Incorporates findings from AI web crawling to identify potential
+                      compliance issues.
+                    </p>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center flex-shrink-0">
+                      <svg lucide="Users" class="w-3 h-3 text-blue-600"></svg>
+                    </div>
+                    <p>
+                      <strong class="text-foreground">Workforce Optimization:</strong> Balances workload across inspectors while respecting regional
+                      assignments and collective agreements.
+                    </p>
+                  </div>
+                  <div class="flex gap-3">
+                    <div class="w-6 h-6 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center flex-shrink-0">
+                      <svg lucide="MapPin" class="w-3 h-3 text-green-600"></svg>
+                    </div>
+                    <p>
+                      <strong class="text-foreground">Geographic Efficiency:</strong> Groups inspections by region to minimize travel time and maximize
+                      productivity.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div uiTabsContent value="upcoming" class="flex-1 overflow-hidden mt-0">
+          <div uiScrollArea class="h-full">
+            <div class="px-4 py-4">
+                <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                    <svg lucide="RefreshCw" class="w-4 h-4 shrink-0"></svg>
+                    <span class="text-sm font-medium">Real-time sync with MS Dynamics</span>
+                  </div>
+                  <p class="text-xs text-blue-600 dark:text-blue-400 mt-1 ml-6 break-words">
+                    Upcoming inspections include those scheduled in MS Dynamics.
+                  </p>
+                </div>
+
+              <div class="mb-4">
+                <div class="relative">
+                  <svg lucide="Search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"></svg>
+                  <input
+                    type="text"
+                    placeholder="Search by name, license #, inspector, city..."
+                    [value]="inspectionSearch()"
+                    (input)="inspectionSearch.set($any($event.target).value)"
+                    [class]="searchInputClass"
+                  />
+                </div>
+              </div>
+
+              <div class="p-4 border-b space-y-3 shrink-0">
+                <h3 class="font-medium text-sm">Date Range</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-xs text-muted-foreground mb-1 block">From</label>
+                    <input type="date" [value]="upcomingStartDate()" (input)="upcomingStartDate.set($any($event.target).value)" [class]="dateInputClass" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-muted-foreground mb-1 block">To</label>
+                    <input type="date" [value]="upcomingEndDate()" (input)="upcomingEndDate.set($any($event.target).value)" [class]="dateInputClass" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3 pb-4">
+                @if (filteredUpcoming().length > 0) {
+                  @for (inspection of filteredUpcoming(); track inspection.id) {
+                    <ng-container [ngTemplateOutlet]="inspectionCard" [ngTemplateOutletContext]="{ $implicit: inspection }" />
+                  }
+                } @else if (inspectionSearch()) {
+                  <div class="text-center py-8 text-muted-foreground">
+                    <svg lucide="Search" class="w-8 h-8 mx-auto mb-2 opacity-50"></svg>
+                    <p class="text-sm">No matching inspections found</p>
+                  </div>
+                } @else {
+                  <div class="text-center py-8 text-muted-foreground">
+                    <svg lucide="Clock" class="w-8 h-8 mx-auto mb-2 opacity-50"></svg>
+                    <p class="text-sm">No upcoming inspections</p>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div uiTabsContent value="completed" class="flex-1 overflow-hidden mt-0">
+          <div uiScrollArea class="h-full">
+            <div class="px-4 py-4">
+                <div class="mb-4 p-3 bg-blue-50 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-lg">
+                  <div class="flex items-center gap-2 text-blue-700 dark:text-blue-300">
+                    <svg lucide="RefreshCw" class="w-4 h-4 shrink-0"></svg>
+                    <span class="text-sm font-medium">Real-time sync with MS Dynamics</span>
+                  </div>
+                  <p class="text-xs text-blue-600 dark:text-blue-400 mt-1 ml-6 break-words">
+                    Completed inspections are synced back to MS Dynamics.
+                  </p>
+                </div>
+
+              <div class="mb-4">
+                <div class="relative">
+                  <svg lucide="Search" class="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground"></svg>
+                  <input
+                    type="text"
+                    placeholder="Search by name, license #, inspector, city..."
+                    [value]="inspectionSearch()"
+                    (input)="inspectionSearch.set($any($event.target).value)"
+                    [class]="searchInputClass"
+                  />
+                </div>
+              </div>
+
+              <div class="p-4 border-b space-y-3 shrink-0">
+                <h3 class="font-medium text-sm">Date Range</h3>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <label class="text-xs text-muted-foreground mb-1 block">From</label>
+                    <input type="date" [value]="completedStartDate()" (input)="completedStartDate.set($any($event.target).value)" [class]="dateInputClass" />
+                  </div>
+                  <div>
+                    <label class="text-xs text-muted-foreground mb-1 block">To</label>
+                    <input type="date" [value]="completedEndDate()" (input)="completedEndDate.set($any($event.target).value)" [class]="dateInputClass" />
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-3 pb-4">
+                @if (filteredCompleted().length > 0) {
+                  @for (inspection of filteredCompleted(); track inspection.id) {
+                    <ng-container [ngTemplateOutlet]="inspectionCard" [ngTemplateOutletContext]="{ $implicit: inspection }" />
+                  }
+                } @else if (inspectionSearch()) {
+                  <div class="text-center py-8 text-muted-foreground">
+                    <svg lucide="Search" class="w-8 h-8 mx-auto mb-2 opacity-50"></svg>
+                    <p class="text-sm">No matching inspections found</p>
+                  </div>
+                } @else {
+                  <div class="text-center py-8 text-muted-foreground">
+                    <svg lucide="CheckCircle2" class="w-8 h-8 mx-auto mb-2 opacity-50"></svg>
+                    <p class="text-sm">No completed inspections in this date range</p>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+}

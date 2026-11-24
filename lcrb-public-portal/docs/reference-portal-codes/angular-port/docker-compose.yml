@@ -1,0 +1,44 @@
+# Local run of the Angular port and the Playwright test runner (profile "test").
+name: portal-frontend-angular-v2
+
+services:
+  angular:
+    build: .
+    image: portal-frontend-angular-v2-angular
+    env_file:
+      - path: .env
+        required: false
+    ports:
+      - "${V2_ANGULAR_PORT:-8090}:8080"
+    environment:
+      PORT: "8080"
+
+  # Same image with the access gate on (ACCESS_CODE from the dummy GATE_TEST_CODE), for the gate screenshots and flow 1.
+  angular-gated:
+    image: portal-frontend-angular-v2-angular
+    depends_on:
+      - angular
+    ports:
+      - "${V2_ANGULAR_GATED_PORT:-8091}:8080"
+    environment:
+      PORT: "8080"
+      ACCESS_CODE: "${GATE_TEST_CODE:-parity-gate-code}"
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.65.0-noble
+    profiles: ["test"]
+    working_dir: /workspaces/lcrb-local/portal-frontend-angular-v2
+    volumes:
+      - .:/workspaces/lcrb-local/portal-frontend-angular-v2
+    ipc: host
+    environment:
+      ANGULAR_URL: "${ANGULAR_URL:-http://angular:8080}"
+      ANGULAR_GATED_URL: "${ANGULAR_GATED_URL:-http://angular-gated:8080}"
+      GATE_TEST_CODE: "${GATE_TEST_CODE:-parity-gate-code}"
+      CI: "1"
+    depends_on:
+      angular:
+        condition: service_healthy
+      angular-gated:
+        condition: service_healthy
+    entrypoint: ["node_modules/.bin/playwright", "test"]

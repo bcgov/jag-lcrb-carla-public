@@ -1,0 +1,11 @@
+node_modules
+dist
+.angular
+test-results
+playwright-report
+blob-report
+.env
+.env.*
+!.env.example
+.vscode
+.nx
