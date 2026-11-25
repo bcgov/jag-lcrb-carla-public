@@ -849,9 +849,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 throw;
             }
 
-            var createdIdStr = createdId.ToString();
-
-            await SaveTotalServingsAsync(specialEvent, createdIdStr);
+            await SaveTotalServingsAsync(specialEvent, specialEvent.Id);
 
             if (specialEvent.EventLocations?.Count > 0)
             {
@@ -1299,18 +1297,18 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             var typeData = new List<(string, int, bool, decimal?)>
             {
-                ("Beer/Cider/Cooler", (int)specialEvent.Beer, true, specialEvent.AverageBeerPrice),
-                ("Wine", (int)specialEvent.Wine, true, specialEvent.AverageWinePrice),
-                ("Spirits", (int)specialEvent.Spirits, true, specialEvent.AverageSpiritsPrice)
+                ("Beer/Cider/Cooler", specialEvent.Beer.Value, true, specialEvent.AverageBeerPrice),
+                ("Wine", specialEvent.Wine.Value, true, specialEvent.AverageWinePrice),
+                ("Spirits", specialEvent.Spirits.Value, true, specialEvent.AverageSpiritsPrice)
             };
 
-            if (specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.Combination || specialEvent.ChargingForLiquorReason == ChargingForLiquorReasons.RaiseMoney)
+            if (specialEvent.ChargingForLiquorReason is ChargingForLiquorReasons.Combination or ChargingForLiquorReasons.RaiseMoney)
             {
                 typeData.AddRange(new List<(string, int, bool, decimal?)>
                 {
-                    ("Beer/Cider/Cooler", (int)(specialEvent.Beer_free ?? 0), false, 0),
-                    ("Wine", (int)(specialEvent.Wine_free ?? 0), false, 0),
-                    ("Spirits", (int)(specialEvent.Spirits_free ?? 0), false, 0)
+                    ("Beer/Cider/Cooler", specialEvent.Beer_free ?? 0, false, 0),
+                    ("Wine", specialEvent.Wine_free ?? 0, false, 0),
+                    ("Spirits", specialEvent.Spirits_free ?? 0, false, 0)
                 });
             }
 
