@@ -21,8 +21,8 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { UserDataService } from '@services/user-data.service';
 import { FormBase } from '@shared/form-base';
-import { differenceInDays, startOfDay, startOfToday } from 'date-fns';
-import { Subscription } from 'rxjs';
+import { addYears, differenceInDays, isAfter, startOfDay, startOfToday } from 'date-fns';
+import { forkJoin, Subscription } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
 export const UPLOAD_FILES_MODE = 'UploadFilesMode';
@@ -56,13 +56,17 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
   marketerApplicationExists = new EventEmitter<boolean>();
   @Output()
   hasLicenceChange = new EventEmitter<boolean>();
+  /**
+   * If all required page data has loaded.
+   */
   dataLoaded = false;
-  private _loadedApplications: ApplicationSummary[] = [];
   licencePresentLabel: string;
   licenceAbsentLabel: string;
   submittedApplications = 8;
-  marketerExists: boolean;
-  nonMarketerExists: boolean;
+  /**
+   * If the user has an active marketer licence or application.
+   */
+  marketerExists: boolean = true;
   ApplicationTypeNames = ApplicationTypeNames;
   licenceTransferFeatureOn = false;
   licenseeChangeFeatureOn: boolean;
@@ -150,16 +154,17 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
    */
   private displayApplications() {
     this.dataLoaded = false;
-    this._loadedApplications = [];
     this.inProgressApplications = [];
+    this.marketerExists = true;
 
-    // Applications: show "In Progress Applications" tab as soon as this call returns
-    const appsSub = this.applicationDataService
-      .getAllCurrentApplications()
+    const sub = forkJoin([
+      this.applicationDataService.getAllCurrentApplications(),
+      this.licenceDataService.getAllCurrentLicenses()
+    ])
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe((applications) => {
-        this._loadedApplications = applications;
+      .subscribe(([applications, licenses]) => {
         this.checkIndigenousNationState(applications);
+
         applications
           .filter(
             (app) => ['Approved', 'Renewal Due', 'Payment Required', 'Active'].indexOf(app.applicationStatus) === -1
@@ -169,30 +174,17 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
               this.inProgressApplications.push(application);
             }
           });
+
         this.hasInProgressLeReviewApplication = this.userHasInProgressLegalEntityReviewApplication(applications);
+
+        this.marketerExists = this.hasValidMarketerLicenceOrApplication(applications, licenses);
+
+        this.hasLicenceChange.emit(licenses.length > 0);
+
         this.dataLoaded = true;
       });
 
-    // Licences: fires in parallel; updates marketer flags and emits hasLicence when ready
-    const licSub = this.licenceDataService
-      .getAllCurrentLicenses()
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((licenses) => {
-        const applications = this._loadedApplications;
-        // LCSD-6843: 2024-03-01 waynezen; executes asynchronously on long-running thread
-        this.marketerExists = this.marketerExistsFunc(applications, licenses);
-        this.nonMarketerExists =
-          applications
-            .filter((item) => item.applicationTypeName === ApplicationTypeNames.CannabisRetailStore)
-            .map((item) => item as any)
-            .concat(licenses.filter((item) => item.licenceTypeName !== ApplicationTypeNames.Marketer)).length > 0;
-        this.hasLicenceChange.emit(licenses.length > 0);
-      });
-
-    // LCSD-6843: 2024-03-01 waynezen; executes immediately; set marketerExists flag here first which hides the Cannabis tiles initially
-    this.marketerExists = true;
-
-    this.subscriptionList.push(appsSub, licSub);
+    this.subscriptionList.push(sub);
   }
 
   /**
@@ -210,15 +202,54 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     );
   }
 
-  // LCSD-6843: 2024-03-01 waynezen
-  private marketerExistsFunc(applications: ApplicationSummary[], licenses: ApplicationLicenseSummary[]): boolean {
-    const isMarketerExist =
-      applications
-        .filter((item) => item.applicationTypeName === ApplicationTypeNames.Marketer)
-        .map((item) => item as any)
-        .concat(licenses.filter((item) => item.licenceTypeName === ApplicationTypeNames.Marketer)).length > 0;
+  /**
+   * Return `true` if a valid marketer licence exists or there is an in-progress marketer application, `false` otherwise.
+   * Why? An account cannot apply for a marketer licence if it already has a valid one or an in-progress application for a marketer licence.
+   *
+   * @private
+   * @param {ApplicationSummary[]} applications
+   * @param {ApplicationLicenseSummary[]} licenses
+   * @return {*}  {boolean}
+   */
+  private hasValidMarketerLicenceOrApplication(applications: ApplicationSummary[], licenses: ApplicationLicenseSummary[]): boolean {
+    const allMarketerLicenses = licenses.filter((item) => item.licenceTypeName === ApplicationTypeNames.Marketer);
 
-    return isMarketerExist;
+    // Marketer licence is invalid if it was cancelled or has been expired for more than 1 year
+    const hasValidMarketerLicense = allMarketerLicenses.some((license) => !this.isMarketerLicenceInvalid(license));
+
+    // An application without a matching licence still blocks, as the application is still in progress.
+    // A historical application linked to an invalid licence does not.
+    const hasBlockingMarketerApplication = applications.some((application) => {
+      if (application.applicationTypeName !== ApplicationTypeNames.Marketer) {
+        // Skip non-marketer applications
+        return false;
+      }
+
+      // Skip applications linked to a marketer licence (as we've already accounted for them in hasValidMarketerLicense)
+      const applicationHasMarketerLicence = allMarketerLicenses.find(
+        (license) => license.licenseId === application.licenceId
+      );
+
+      // Any remaining applications are marketer applications without a valid linked licence, and thus are considered blocking.
+      // These are likely applications that are still in progress.
+      return !applicationHasMarketerLicence;
+    });
+
+    return hasValidMarketerLicense || hasBlockingMarketerApplication;
+  }
+
+  /**
+   * Return `true` if the licence has been cancelled or has been expired for more than 1 year, `false` otherwise.
+   *
+   * @param {ApplicationLicenseSummary} license
+   * @return {*}  {boolean}
+   */
+  isMarketerLicenceInvalid(license: ApplicationLicenseSummary): boolean {
+    return (
+      license.status === 'Cancelled' ||
+      (license.expiryDate &&
+        isAfter(startOfToday(), addYears(startOfDay(new Date(license.expiryDate)), 1)))
+    );
   }
 
   uploadMoreFiles(application: Application) {
