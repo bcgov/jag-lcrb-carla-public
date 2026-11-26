@@ -59,9 +59,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     beer_free: [0],
     wine_free: [0],
     spirits_free: [0],
-    averageBeerPrice: [null],
-    averageWinePrice: [null],
-    averageSpiritsPrice: [null]
+    averageBeerPrice: [null, [Validators.required, Validators.min(0)]],
+    averageWinePrice: [null, [Validators.required, Validators.min(0)]],
+    averageSpiritsPrice: [null, [Validators.required, Validators.min(0)]]
   });
 
   // Some of the drinks are provided free
