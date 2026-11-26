@@ -34,7 +34,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this._app = value;
       this.totalServings = this._app.totalServings;
       this.form.patchValue(this._app);
-      this.updateFormValidation();
+      this.updateFormValidationAndDefaults();
     }
   }
 
@@ -118,7 +118,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       (data || []).forEach((drinkType) => {
         this.drinkTypes[drinkType.name] = drinkType;
       });
-      this.updateFormValidation();
+      this.updateFormValidationAndDefaults();
 
       if (this.disabled) {
         this.form.disable();
@@ -127,7 +127,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    const isRaiseMoney = this.canRaisePrice();
+    const isRaiseMoney = this.canPriceAboveMax();
     const notCharging = this.sepApplication?.chargingForLiquorReason === 'LiquorIsFree';
     //const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;  // Add GST for GST Registered Organizations
     const multiplier = 1; // Don't use the GST multiplier until LCSD-8637 has the goahead.
@@ -220,11 +220,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     return curDrinkType?.unitSize;
   }
 
-  editPrice(): boolean {
-    return true;
-  }
-
-  canRaisePrice(): boolean {
+  // Applicants can raise drink prices above the maximum when operating certain types of charitable/significant events
+  canPriceAboveMax(): boolean {
     return (
       this.sepApplication?.chargingForLiquorReason === 'RaiseMoney' ||
       this.sepApplication?.isLocalSignificance ||
@@ -245,32 +242,37 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
   }
 
-  updateFormValidation() {
+  updateFormValidationAndDefaults() {
     if (!this.drinkTypes || !this.sepApplication) {
       return;
     }
 
-    // applicants can change drink prices when operating certain types of charitable/significant events
-    const isRaiseMoney = this.canRaisePrice();
-    const notCharging = this.sepApplication?.chargingForLiquorReason === 'LiquorIsFree';
-
+    const isFree = this.sepApplication.chargingForLiquorReason === 'LiquorIsFree';
+    
     // GST Registered Organizations can add GST to the sell price;
     // otherwise the max price is the price set by LCRB
-    const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
+    const multiplier = this.sepApplication.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
 
-    let maxBeerPrice = 0;
-    let maxWinePrice = 0;
-    let maxSpiritsPrice = 0;
+    const maxBeerPrice = isFree ? 0 : this.drinkTypes['Beer/Cider/Cooler'].pricePerServing * multiplier;
+    const maxWinePrice = isFree ? 0 : this.drinkTypes['Wine'].pricePerServing * multiplier;
+    const maxSpiritsPrice = isFree ? 0 : this.drinkTypes['Spirits'].pricePerServing * multiplier;
 
-    // calculate the default/max price using the multiplier
-    if (!notCharging) {
-      maxBeerPrice = (this.drinkTypes['Beer/Cider/Cooler']?.pricePerServing || 0) * multiplier;
-      maxWinePrice = (this.drinkTypes['Wine']?.pricePerServing || 0) * multiplier;
-      maxSpiritsPrice = (this.drinkTypes['Spirits']?.pricePerServing || 0) * multiplier;
+    let beerPriceControl = this.form.get('averageBeerPrice')!;
+    let winePriceControl = this.form.get('averageWinePrice')!;
+    let spiritsPriceControl = this.form.get('averageSpiritsPrice')!;
+
+    beerPriceControl.setValidators([Validators.required, Validators.min(0)]);
+    winePriceControl.setValidators([Validators.required, Validators.min(0)]);
+    spiritsPriceControl.setValidators([Validators.required, Validators.min(0)]);
+
+    if (!this.canPriceAboveMax()) {
+      beerPriceControl.addValidators(Validators.max(maxBeerPrice));
+      winePriceControl.addValidators(Validators.max(maxWinePrice));
+      spiritsPriceControl.addValidators(Validators.max(maxSpiritsPrice));
     }
 
     if (this.someFree) {
-      const values = {};
+      const values: { [key: string]: number } = {};
       for (const item of this.sepApplication.drinksSalesForecasts.filter((k) => k.isCharging == false)) {
         if (item.name.indexOf('Wine') > -1) {
           values['wine_free'] = item.estimatedServings;
@@ -283,46 +285,21 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
       this.form.patchValue(values);
     }
 
-    const minBeerPrice = 0;
-    const minWinePrice = 0;
-    const minSpiritsPrice = 0;
-
-    if (this.sepApplication && this.drinkTypes) {
-      this.form.get('averageBeerPrice').clearValidators();
-      this.form.get('averageWinePrice').clearValidators();
-      this.form.get('averageSpiritsPrice').clearValidators();
-
-      // if they aren't raising the price, set the maximum
-      if (!isRaiseMoney) {
-        this.form.get('averageBeerPrice').setValidators([Validators.max(maxBeerPrice), Validators.min(0)]);
-        this.form.get('averageWinePrice').setValidators([Validators.max(maxWinePrice), Validators.min(0)]);
-        this.form.get('averageSpiritsPrice').setValidators([Validators.max(maxSpiritsPrice), Validators.min(0)]);
-      } else {
-        this.form.get('averageBeerPrice').setValidators([Validators.min(minBeerPrice)]);
-        this.form.get('averageWinePrice').setValidators([Validators.min(minWinePrice)]);
-        this.form.get('averageSpiritsPrice').setValidators([Validators.min(minSpiritsPrice)]);
-      }
-
-      // if there is no price; or if the price is greater than the max, set it to the max
-      // if they've entered a different value, they will need to change it back if they're navigating back and forth
-      if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice > maxBeerPrice) {
-        this.form.get('averageBeerPrice').setValue(maxBeerPrice);
-      }
-      if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice > maxWinePrice) {
-        this.form.get('averageWinePrice').setValue(maxWinePrice);
-      }
-      if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice > maxSpiritsPrice) {
-        this.form.get('averageSpiritsPrice').setValue(maxSpiritsPrice);
-      }
-
-      this.form.get('averageBeerPrice').updateValueAndValidity();
-      this.form.get('averageWinePrice').updateValueAndValidity();
-      this.form.get('averageSpiritsPrice').updateValueAndValidity();
+    // if there is no price; or if the price is greater than the max, set it to the max
+    // if they've entered a different value, they will need to change it back if they're navigating back and forth
+    if (!this.form.value?.averageBeerPrice || this.form.value?.averageBeerPrice > maxBeerPrice) {
+      beerPriceControl.setValue(maxBeerPrice);
     }
-  }
+    if (!this.form.value?.averageWinePrice || this.form.value?.averageWinePrice > maxWinePrice) {
+      winePriceControl.setValue(maxWinePrice);
+    }
+    if (!this.form.value?.averageSpiritsPrice || this.form.value?.averageSpiritsPrice > maxSpiritsPrice) {
+      spiritsPriceControl.setValue(maxSpiritsPrice);
+    }
 
-  greaterThanMax(field, max): boolean {
-    return field > max && this.canRaisePrice();
+    beerPriceControl.updateValueAndValidity();
+    winePriceControl.updateValueAndValidity();
+    spiritsPriceControl.updateValueAndValidity();
   }
 
   getErrorMessage(controlName) {
@@ -330,9 +307,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     let error = 'Invalid input';
 
     if (control?.errors?.min) {
-      error = `Please enter a value greater or equal to ${control.errors.min.min}`;
+      error = `Please enter a value greater than or equal to ${control.errors.min.min}`;
     } else if (control?.errors?.max) {
-      error = `Please enter a value less or equal to ${control.errors.max.max}`;
+      error = `Please enter a value less than or equal to ${control.errors.max.max}`;
     }
     return error;
   }
