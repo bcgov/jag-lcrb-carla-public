@@ -226,7 +226,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   updateFormValidationAndDefaults() {
-    if (!this.drinkTypes || !this.sepApplication) {
+    if (!this.sepApplication || Object.keys(this.drinkTypes).length === 0) {
       return;
     }
 
