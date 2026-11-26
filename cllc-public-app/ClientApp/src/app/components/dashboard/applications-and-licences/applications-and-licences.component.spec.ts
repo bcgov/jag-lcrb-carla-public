@@ -129,6 +129,11 @@ describe('ApplicationsAndLicencesComponent', () => {
     expect(component.marketerExists).toBe(true);
   });
 
+  it('allows applications for an approved marketer application whose cancelled licence is filtered out', () => {
+    load([{ ...marketerApplication, applicationStatus: 'Approved' }], []);
+    expect(component.marketerExists).toBe(false);
+  });
+
   it('keeps cannabis applications hidden until both requests complete when licences arrive first', () => {
     const applications = new Subject<ApplicationSummary[]>();
     const licenses = new Subject<ApplicationLicenseSummary[]>();

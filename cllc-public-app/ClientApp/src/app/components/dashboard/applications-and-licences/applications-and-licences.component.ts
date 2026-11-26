@@ -217,25 +217,35 @@ export class ApplicationsAndLicencesComponent extends FormBase implements OnInit
     // Marketer licence is invalid if it was cancelled or has been expired for more than 1 year
     const hasValidMarketerLicense = allMarketerLicenses.some((license) => !this.isMarketerLicenceInvalid(license));
 
-    // An application without a matching licence still blocks, as the application is still in progress.
-    // A historical application linked to an invalid licence does not.
+    if (hasValidMarketerLicense) {
+      // If there is a valid marketer licence, the user cannot apply for new cannabis applications.
+      return true;
+    }
+
+    // An in-progress marketer application blocks new cannabis applications.
+    // A historical marketer application linked to an invalid licence does not.
     const hasBlockingMarketerApplication = applications.some((application) => {
       if (application.applicationTypeName !== ApplicationTypeNames.Marketer) {
         // Skip non-marketer applications
         return false;
       }
 
-      // Skip applications linked to a marketer licence (as we've already accounted for them in hasValidMarketerLicense)
-      const applicationHasMarketerLicence = allMarketerLicenses.find(
-        (license) => license.licenseId === application.licenceId
-      );
+      if (application.applicationStatus === 'Approved') {
+        // Skip approved applications as they are no longer in progress.
+        // Any valid licence they may have, has already been accounted for in `hasValidMarketerLicense`.
+        return false;
+      }
 
-      // Any remaining applications are marketer applications without a valid linked licence, and thus are considered blocking.
-      // These are likely applications that are still in progress.
-      return !applicationHasMarketerLicence;
+      // Skip applications linked to a marketer licence, as we've already accounted for them in `hasValidMarketerLicense`
+      if (allMarketerLicenses.find((license) => license.licenseId === application.licenceId)) {
+        return false;
+      }
+
+      // Any remaining applications must be in-progress marketer applications.
+      return true;
     });
 
-    return hasValidMarketerLicense || hasBlockingMarketerApplication;
+    return hasBlockingMarketerApplication;
   }
 
   /**
