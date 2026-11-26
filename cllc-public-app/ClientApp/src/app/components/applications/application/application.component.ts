@@ -41,6 +41,7 @@ import {
   delay,
   distinctUntilChanged,
   filter,
+  map,
   mergeMap,
   switchMap,
   takeWhile,
@@ -1433,24 +1434,20 @@ export class ApplicationComponent extends FormBase implements OnInit {
     )
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
-        catchError(() => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          const res: [boolean, Application] = [false, null];
-          return of(res);
-        })
-      )
-      .pipe(
-        mergeMap((data) => {
+        mergeMap(() => this.updateApplicationInStore()),
+        map((application) => {
           this.savedFormData = saveData;
-          let application = data[0];
-          this.updateApplicationInStore();
           if (showProgress === true) {
             this.snackBar.open('Application has been saved', 'Success', {
               duration: 2500,
               panelClass: ['green-snackbar']
             });
           }
-          const res: [boolean, Application] = [true, <Application>application];
+          return [true, application] as [boolean, Application];
+        }),
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          const res: [boolean, Application] = [false, null];
           return of(res);
         })
       );
@@ -1489,13 +1486,16 @@ export class ApplicationComponent extends FormBase implements OnInit {
     }
   }
 
-  updateApplicationInStore() {
-    this.applicationDataService
+  updateApplicationInStore(): Observable<Application> {
+    return this.applicationDataService
       .getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      });
+      .pipe(
+        takeWhile(() => this.componentActive),
+        tap((data: Application) => {
+          this.application = data;
+          this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+        })
+      );
   }
 
   //LCSD-6495 NOTE: this logic is no necessary. If an application.applicationType is free, then the endorsement is free.
@@ -1554,7 +1554,11 @@ export class ApplicationComponent extends FormBase implements OnInit {
               // mark application as complete so dynamics handles the status change correctly
               this.save(this.application.applicationType.isFree || this.isFreeEndorsement(), <Application>{
                 isApplicationComplete: 'Yes'
-              }).subscribe((res) => {
+              }).subscribe(([saveSucceeded]) => {
+                this.submitApplicationInProgress = false;
+                if (!saveSucceeded) {
+                  return;
+                }
                 this.saveComplete.emit(true);
                 // saving for later will redirect to the dashboard on its own
                 // if this was a free app, we will need to redirect to the dashboard
@@ -1618,25 +1622,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
         this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
       )
         .pipe(
+          mergeMap(() => this.updateApplicationInStore()),
+          map(() => {
+            this.savedFormData = saveData;
+            this.snackBar.open('Application has been saved', 'Success', {
+              duration: 2500,
+              panelClass: ['green-snackbar']
+            });
+            return true;
+          }),
           catchError(() => {
             this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
             this.disableSubmitForLGINApproval = false;
             return of(false);
           })
         )
-        .pipe(
-          mergeMap(() => {
-            this.savedFormData = saveData;
-            this.updateApplicationInStore();
-            this.snackBar.open('Application has been saved', 'Success', {
-              duration: 2500,
-              panelClass: ['green-snackbar']
-            });
-            return of(true);
-          })
-        )
         .pipe(takeWhile(() => this.componentActive))
-        .subscribe(() => {
+        .subscribe((success) => {
+          if (!success) {
+            return;
+          }
           this.saveComplete.emit(true);
           this.snackBar.open('Application Submitted to Local Government For Approval', 'Success', {
             duration: 2500,
@@ -1665,25 +1670,26 @@ export class ApplicationComponent extends FormBase implements OnInit {
       this.prepareTiedHouseSaveRequest(this.tiedHouseFormData)
     )
       .pipe(
+        mergeMap(() => this.updateApplicationInStore()),
+        map(() => {
+          this.savedFormData = saveData;
+          this.snackBar.open('Application has been saved', 'Success', {
+            duration: 2500,
+            panelClass: ['green-snackbar']
+          });
+          return true;
+        }),
         catchError(() => {
           this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
           this.disableIncomplete = false;
           return of(false);
         })
       )
-      .pipe(
-        mergeMap(() => {
-          this.savedFormData = saveData;
-          this.updateApplicationInStore();
-          this.snackBar.open('Application has been saved', 'Success', {
-            duration: 2500,
-            panelClass: ['green-snackbar']
-          });
-          return of(true);
-        })
-      )
       .pipe(takeWhile(() => this.componentActive))
-      .subscribe(() => {
+      .subscribe((success) => {
+        if (!success) {
+          return;
+        }
         this.saveComplete.emit(true);
         this.snackBar.open('Application Submitted to the Branch for Review', 'Success', {
           duration: 2500,
