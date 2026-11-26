@@ -95,19 +95,16 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   getAVControlName(groupName: string): string {
-    let controlName = '';
     switch (groupName) {
       case 'beer':
-        controlName = 'averageBeerPrice';
-        break;
+        return 'averageBeerPrice';
       case 'wine':
-        controlName = 'averageWinePrice';
-        break;
+        return 'averageWinePrice';
       case 'spirits':
-        controlName = 'averageSpiritsPrice';
-        break;
+        return 'averageSpiritsPrice';
+      default:
+        return '';
     }
-    return controlName;
   }
 
   constructor(
