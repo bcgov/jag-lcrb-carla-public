@@ -1,4 +1,5 @@
 import { EventEmitter } from '@angular/core';
+import { fakeAsync, flushMicrotasks } from '@angular/core/testing';
 import { FormGroup } from '@angular/forms';
 import { Application } from '@models/application.model';
 import { ApplicationDataService } from '@services/application-data.service';
@@ -40,6 +41,7 @@ describe('Application refresh after saving', () => {
         snackBar,
         store,
         componentActive: true,
+        savesInProgress: 0,
         form: new FormGroup({}),
         saveComplete: new EventEmitter<boolean>()
       });
@@ -82,8 +84,51 @@ describe('Application refresh after saving', () => {
       expect(service.updateApplication).toHaveBeenCalledTimes(1);
       expect(component.saveComplete.emit).not.toHaveBeenCalled();
       expect(component.submitApplicationInProgress).toBeFalse();
+      expect(component.savesInProgress).toBe(0);
       expect(snackBar.open).toHaveBeenCalled();
     });
+
+    it('tracks overlapping saves until each refresh completes or is cancelled', () => {
+      const firstRefresh = new Subject<Application>();
+      const secondRefresh = new Subject<Application>();
+      service.getApplicationById.and.returnValues(firstRefresh, secondRefresh);
+
+      const firstSave = component.save().subscribe();
+      const secondSave = component.save().subscribe();
+      expect(component.savesInProgress).toBe(2);
+
+      firstRefresh.next(application);
+      firstRefresh.complete();
+      expect(component.savesInProgress).toBe(1);
+
+      secondSave.unsubscribe();
+      expect(component.savesInProgress).toBe(0);
+      expect(firstSave.closed).toBeTrue();
+    });
+
+    it('keeps submission in progress until navigation after a free submission', fakeAsync(() => {
+      application.applicationType.isFree = true;
+      const submitted = { ...application, applicationStatus: 'Submitted' };
+      let finishNavigation: (value: boolean) => void;
+      const navigation = new Promise<boolean>((resolve) => (finishNavigation = resolve));
+      const router = { navigateByUrl: jasmine.createSpy('navigateByUrl').and.returnValue(navigation) };
+      Object.assign(component, { router });
+      service.getApplicationById.and.returnValues(of(application), of(submitted));
+
+      component.submit_application();
+
+      expect(component.application.applicationStatus).toBe('Submitted');
+      expect(component.savesInProgress).toBe(0);
+      expect(component.submitApplicationInProgress).toBeTrue();
+      expect(component.saveOnDeactivate).toBeFalse();
+      expect(router.navigateByUrl).toHaveBeenCalledWith('/dashboard');
+      expect(snackBar.open).toHaveBeenCalledWith('Application submitted', 'Success', jasmine.any(Object));
+
+      finishNavigation(false);
+      flushMicrotasks();
+      expect(component.submitApplicationInProgress).toBeFalse();
+      expect(snackBar.open).toHaveBeenCalledWith('Error returning to the dashboard', 'Fail', jasmine.any(Object));
+    }));
 
     it('uses the refreshed invoice to decide whether to proceed to payment', () => {
       const refresh = new Subject<Application>();
