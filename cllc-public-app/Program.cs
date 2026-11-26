@@ -1,5 +1,9 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
@@ -11,6 +15,20 @@ namespace Gov.Lclb.Cllb.Public
         public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
+
+            host.Services.GetRequiredService<IHostApplicationLifetime>()
+                .ApplicationStarted.Register(() =>
+                {
+                    var environment = host.Services.GetRequiredService<IHostEnvironment>().EnvironmentName;
+                    var addresses = host
+                        .Services.GetRequiredService<IServer>()
+                        .Features.Get<IServerAddressesFeature>()
+                        ?.Addresses;
+                    Console.WriteLine(
+                        $"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] cllc-public-app started and ready to accept requests. Environment: {environment}. Listening on: {string.Join(", ", addresses ?? Array.Empty<string>())}"
+                    );
+                });
+
             host.Run();
         }
 

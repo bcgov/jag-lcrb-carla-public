@@ -64,6 +64,8 @@ namespace Gov.Lclb.Cllb.Public
 
         public IConfiguration _configuration { get; }
 
+        private const string ConsoleOutputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
+
         public IWebHostEnvironment _env { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -507,7 +509,12 @@ namespace Gov.Lclb.Cllb.Public
                 });
             }
 
-            app.UseSpaStaticFiles(staticFileOptions);
+            // In Development, the Angular dev server supplies the frontend assets; a leftover ClientApp/dist build would otherwise shadow them.
+            if (!env.IsDevelopment())
+            {
+                app.UseSpaStaticFiles(staticFileOptions);
+            }
+
             app.UseXXssProtection(options => options.EnabledWithBlockMode());
             app.UseNoCacheHttpHeaders();
             // IMPORTANT: This session call MUST go before UseMvc()
@@ -550,7 +557,7 @@ namespace Gov.Lclb.Cllb.Public
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: ConsoleOutputTemplate)
                     .WriteTo.EventCollector(splunkHost: _configuration["SPLUNK_COLLECTOR_URL"],
                        sourceType: "portal", eventCollectorToken: _configuration["SPLUNK_TOKEN"],
                        restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information,
@@ -574,7 +581,7 @@ namespace Gov.Lclb.Cllb.Public
                     .MinimumLevel.Debug()
                     .Enrich.FromLogContext()
                     .Enrich.WithExceptionDetails()
-                    .WriteTo.Console()
+                    .WriteTo.Console(outputTemplate: ConsoleOutputTemplate)
                     .CreateLogger();
             }
 
