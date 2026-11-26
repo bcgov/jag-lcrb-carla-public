@@ -1,0 +1,10 @@
+packages:
+  - '.'
+
+allowBuilds:
+  '@parcel/watcher': false
+  esbuild: false
+  lmdb: false
+  core-js: false
+  msgpackr-extract: false
+  nx: false

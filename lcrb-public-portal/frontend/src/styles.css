@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* BC Government Design System Colors */
+:root {
+  /* Primary BC Gov Colors */
+  --bc-blue: #013366;
+  --bc-gold: #FCBA19;
+  --bc-blue-light: #38598A;
+  --bc-blue-dark: #002244;
+  
+  /* Typography Colors */
+  --bc-text-primary: #2D2D2D;
+  --bc-text-secondary: #474543;
+  --bc-text-link: #255A90;
+  
+  /* Support Colors */
+  --bc-info: #F7F9FC;
+  --bc-info-border: #255A90;
+  --bc-danger: #CE3E39;
+  --bc-danger-bg: #F4E1E2;
+  --bc-success: #2E8540;
+  --bc-success-bg: #F6FFF8;
+  --bc-warning: #F5A623;
+  --bc-warning-bg: #FEF1D8;
+  
+  /* Surface Colors */
+  --background: #FFFFFF;
+  --foreground: #2D2D2D;
+  --card: #FFFFFF;
+  --card-foreground: #2D2D2D;
+  --popover: #FFFFFF;
+  --popover-foreground: #2D2D2D;
+  --primary: #013366;
+  --primary-foreground: #FFFFFF;
+  --secondary: #F2F2F2;
+  --secondary-foreground: #2D2D2D;
+  --muted: #F7F7F7;
+  --muted-foreground: #474543;
+  --accent: #FCBA19;
+  --accent-foreground: #2D2D2D;
+  --destructive: #CE3E39;
+  --destructive-foreground: #FFFFFF;
+  --border: #D9D9D9;
+  --input: #D9D9D9;
+  --ring: #255A90;
+  --radius: 4px;
+  
+  /* Chart Colors */
+  --chart-1: #013366;
+  --chart-2: #38598A;
+  --chart-3: #FCBA19;
+  --chart-4: #2E8540;
+  --chart-5: #CE3E39;
+  
+  /* Sidebar */
+  --sidebar: #FFFFFF;
+  --sidebar-foreground: #2D2D2D;
+  --sidebar-primary: #013366;
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: #F2F2F2;
+  --sidebar-accent-foreground: #2D2D2D;
+  --sidebar-border: #D9D9D9;
+  --sidebar-ring: #255A90;
+}
+
+@theme inline {
+  --font-sans: 'BC Sans', 'Noto Sans', 'Verdana', 'Arial', sans-serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 2px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  
+  /* BC Gov specific color tokens */
+  --color-bc-blue: var(--bc-blue);
+  --color-bc-gold: var(--bc-gold);
+  --color-bc-blue-light: var(--bc-blue-light);
+  --color-bc-blue-dark: var(--bc-blue-dark);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* High-contrast mode (accessibility bar): stronger borders, text and focus indicators. */
+.high-contrast {
+  --background: #ffffff;
+  --foreground: #000000;
+  --card: #ffffff;
+  --card-foreground: #000000;
+  --muted: #ffffff;
+  --muted-foreground: #1a1a1a;
+  --border: #000000;
+  --input: #000000;
+  --primary: #002244;
+  --ring: #0033cc;
+  --bc-text-secondary: #1a1a1a;
+  --bc-text-link: #0b3d91;
+}
+
+.high-contrast * {
+  border-color: var(--border);
+}
+
+.high-contrast a:not([class*="bg-"]) {
+  text-decoration: underline;
+}
+
+.high-contrast :focus-visible {
+  outline: 3px solid #0033cc !important;
+  outline-offset: 2px !important;
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Guided Mode sets data-guided-mode on <body> so portal-rendered select options get the large text too. */
+body[data-guided-mode] .guided-options [role='option'] {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
+/* BC Sans font-face */
+@font-face {
+  font-family: 'BC Sans';
+  src: url('https://www2.gov.bc.ca/StaticWebResources/static/gov3/fonts/BCSans/BCsans-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BC Sans';
+  src: url('https://www2.gov.bc.ca/StaticWebResources/static/gov3/fonts/BCSans/BCSans-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'BC Sans';
+  src: url('https://www2.gov.bc.ca/StaticWebResources/static/gov3/fonts/BCSans/BCSans-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}

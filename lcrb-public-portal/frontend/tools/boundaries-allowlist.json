@@ -1,0 +1,4 @@
+{
+  "description": "Known boundary violations (tests/boundaries.test.ts). Keys: RULE|from|to, paths without src/app/. A new violation fails the test unless it is fixed or listed here with a reason agreed in review. Entries may only be removed.",
+  "violations": []
+}
