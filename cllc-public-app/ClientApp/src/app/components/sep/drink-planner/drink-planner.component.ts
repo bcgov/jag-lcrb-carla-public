@@ -234,7 +234,8 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
 
     // GST Registered Organizations can add GST to the sell price;
     // otherwise the max price is the price set by LCRB
-    const multiplier = this.sepApplication.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
+    // const multiplier = this.sepApplication.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
+    const multiplier = 1; // Don't use the GST multiplier until LCSD-8637 has the go-ahead.
 
     const maxBeerPrice = isFree ? 0 : this.drinkTypes['Beer/Cider/Cooler'].pricePerServing * multiplier;
     const maxWinePrice = isFree ? 0 : this.drinkTypes['Wine'].pricePerServing * multiplier;
@@ -248,7 +249,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     winePriceControl.setValidators([Validators.required, Validators.min(0)]);
     spiritsPriceControl.setValidators([Validators.required, Validators.min(0)]);
 
-    if (!this.priceMayExceedMax()) {
+    if (isFree || !this.priceMayExceedMax()) {
       beerPriceControl.addValidators(Validators.max(maxBeerPrice));
       winePriceControl.addValidators(Validators.max(maxWinePrice));
       spiritsPriceControl.addValidators(Validators.max(maxSpiritsPrice));
