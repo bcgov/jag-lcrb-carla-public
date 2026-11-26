@@ -699,9 +699,6 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             }
 
             // create the bridge entity for login.
-            var persistedContact = await _dataverse.GetContactByIdAsync(contactId);
-            TempAuthDebug.Log(_logger, nameof(CreateAccount),
-                $"Re-read from Dynamics contact {contactId}: " + TempAuthDebug.Json(persistedContact));
             if (!string.IsNullOrEmpty(_configuration["FEATURE_BRIDGE_LOGIN"]))
             {
                 await _dataverse.UpdateContactBridgeLoginAsync(contactId, contactSiteminderGuid, accountId, accountSiteminderGuid);
@@ -715,7 +712,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
                 // we can now authenticate.
                 var user = userSettings.AuthenticatedUser ?? new Models.User();
-                user.FromContact(persistedContact ?? throw new InvalidOperationException($"Dynamics contact {contactId} was not found after registration."));
+                user.FromContact(userContact);
                 user.AccountId = Guid.Parse(accountId);
                 user.UserType = userSettings.UserType;
                 user.SmUserId = userSettings.UserId;

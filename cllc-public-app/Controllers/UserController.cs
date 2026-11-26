@@ -72,7 +72,9 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 user.firstname = contact.FirstName;
                 user.lastname = contact.LastName;
                 user.email = contact.EMailAddress1;
-                user.name = $"{contact.FirstName} {contact.LastName}".Trim();
+                user.name = string.IsNullOrWhiteSpace(contact.FullName)
+                    ? $"{contact.FirstName} {contact.LastName}".Trim()
+                    : contact.FullName;
             }
             else
             {

@@ -153,33 +153,6 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.adoxio_PHSConnectionsDetails = from.PhsConnectionsDetails;
         }
 
-        /// <summary>
-        /// Returns the trimmed given names after removing a leading first name, if present.
-        /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="givenNames"></param>
-        /// <returns>The middle names extracted from the given names, or null if none are present.</returns>
-        private static string ParseMiddleNames(string firstName, string givenNames)
-        {
-            if (string.IsNullOrWhiteSpace(givenNames))
-            {
-                return null;
-            }
-
-            firstName = firstName?.Trim();
-            givenNames = givenNames.Trim();
-
-            if (string.Equals(givenNames, firstName, StringComparison.OrdinalIgnoreCase))
-            {
-                // First name matches the given names exactly, so there are no middle names.
-                return null;
-            }
-
-            // Remove the leading first name from the given names, if present. Else return the given names as-is.
-            return givenNames.StartsWith($"{firstName} ", StringComparison.OrdinalIgnoreCase)
-                ? givenNames.Substring(firstName.Length).Trim() : givenNames;
-        }
-
         public static void CopyHeaderValues(this Contact to, IHeaderDictionary headers, bool useDisplayName = true)
         {
             string smgov_useremail = headers["smgov_useremail"];
@@ -203,8 +176,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.address1_country = smgov_country;
 
             if (!string.IsNullOrEmpty(smgov_givenname)) to.firstname = smgov_givenname;
-            var middleName = ParseMiddleNames(smgov_givenname, smgov_givennames);
-            if (!string.IsNullOrEmpty(middleName)) to.middlename = middleName;
+            if (!string.IsNullOrEmpty(smgov_givennames))
+                to.middlename = string.IsNullOrEmpty(smgov_givenname)
+                    ? smgov_givennames.Trim() : smgov_givennames.Replace(smgov_givenname, "").Trim();
             to.telephone1 = headers["smgov_userphone"];
             if (!string.IsNullOrEmpty(smgov_surname)) to.lastname = smgov_surname;
             if (!string.IsNullOrEmpty(smgov_useremail)) to.emailaddress1 = smgov_useremail;
@@ -227,8 +201,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_surname = headers["smgov_surname"];
 
             if (!string.IsNullOrEmpty(smgov_givenname)) to.firstname = smgov_givenname;
-            var middleName = ParseMiddleNames(smgov_givenname, smgov_givennames);
-            if (!string.IsNullOrEmpty(middleName)) to.middlename = middleName;
+            if (!string.IsNullOrEmpty(smgov_givennames))
+                to.middlename = string.IsNullOrEmpty(smgov_givenname)
+                    ? smgov_givennames.Trim() : smgov_givennames.Replace(smgov_givenname, "").Trim();
             if (!string.IsNullOrEmpty(smgov_surname)) to.lastname = smgov_surname;
             if (!string.IsNullOrEmpty(smgov_useremail)) to.email = smgov_useremail;
             if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
@@ -254,6 +229,11 @@ namespace Gov.Lclb.Cllb.Public.Models
         {
             var fields = new Contact();
             fields.CopyHeaderValues(headers, useDisplayName: false);
+            to.CopyLoginFields(fields);
+        }
+
+        public static void CopyLoginFields(this DataverseContact to, Contact fields)
+        {
             if (!string.IsNullOrWhiteSpace(fields.firstname)) to.FirstName = fields.firstname;
             if (!string.IsNullOrWhiteSpace(fields.middlename)) to.MiddleName = fields.middlename;
             if (!string.IsNullOrWhiteSpace(fields.lastname)) to.LastName = fields.lastname;
@@ -268,20 +248,5 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (fields.Gender.HasValue) to.adoxio_GenderCode = (adoxio_gender)(int)fields.Gender.Value;
         }
 
-        public static void CopyContactUserSettings(this DataverseContact contact, Contact newContact)
-        {
-            contact.Address1_Line1 = newContact.address1_line1;
-            if (!string.IsNullOrEmpty(newContact.address1_postalcode))
-                contact.Address1_PostalCode = newContact.address1_postalcode.Replace(" ", "");
-            contact.Address1_City = newContact.address1_city;
-            contact.Address1_StateOrProvince = newContact.address1_stateorprovince;
-            contact.Address1_Country = newContact.address1_country;
-            contact.FirstName = newContact.firstname;
-            contact.MiddleName = newContact.middlename;
-            contact.LastName = newContact.lastname;
-            contact.EMailAddress1 = newContact.emailaddress1;
-            contact.adoxio_GenderCode = (adoxio_gender?)(int?)newContact.Gender;
-            contact.BirthDate = newContact.Birthdate?.DateTime;
-        }
     }
 }

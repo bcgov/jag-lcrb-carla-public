@@ -415,7 +415,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
 
                 userSettings.NewContact = new ViewModels.Contact();
-                userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+                userSettings.NewContact.CopyHeaderValues(context.Request.Headers, useDisplayName: false);
             }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
@@ -591,7 +591,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 userSettings.NewWorker.CopyHeaderValues(context.Request.Headers);
 
                 userSettings.NewContact = new ViewModels.Contact();
-                userSettings.NewContact.CopyHeaderValues(context.Request.Headers);
+                userSettings.NewContact.CopyHeaderValues(context.Request.Headers, useDisplayName: false);
             }
             else if (siteMinderUserType == "VerifiedIndividual")
             {
@@ -626,7 +626,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
             {
                 ClaimsPrincipal principal;
                 HttpContext context = Request.HttpContext;
-                UserSettings userSettings = new UserSettings();
+                UserSettings userSettings = null;
 
                 IConfiguration _configuration = (IConfiguration)context.RequestServices.GetService(typeof(IConfiguration));
                 DvIDataverseClient _dataverse = (DvIDataverseClient)context.RequestServices.GetService(typeof(DvIDataverseClient));
@@ -648,14 +648,28 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                 // **************************************************
                 // Check if the user session is already created
                 // **************************************************
+                string userId = context.Request.Headers[_options.SiteMinderUserNameKey];
+                if (string.IsNullOrEmpty(userId))
+                {
+                    userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
+                }
+                string siteMinderGuid = context.Request.Headers[_options.SiteMinderUserGuidKey];
+                string businessGuid = context.Request.Headers[_options.SiteMinderBusinessGuidKey];
+                string userType = context.Request.Headers[_options.SiteMinderUserTypeKey];
+                bool reuseSession = false;
                 try
                 {
                     _logger.Debug("Checking user session");
                     userSettings = UserSettings.ReadUserSettings(context);
+                    reuseSession = userSettings?.UserAuthenticated == true &&
+                        (string.IsNullOrEmpty(userId) || userId == userSettings.UserId) &&
+                        (string.IsNullOrEmpty(siteMinderGuid) || string.Equals(siteMinderGuid, userSettings.SiteMinderGuid, StringComparison.OrdinalIgnoreCase)) &&
+                        (string.IsNullOrEmpty(businessGuid) || string.Equals(businessGuid, userSettings.SiteMinderBusinessGuid, StringComparison.OrdinalIgnoreCase)) &&
+                        (string.IsNullOrEmpty(userType) || userType == userSettings.UserType);
 
                     // fix for cases where AuthenticatedUser contact is empty.
-                    if (userSettings?.AuthenticatedUser?.ContactId != null &&
-                        userSettings?.AuthenticatedUser?.ContactId == Guid.Empty && !string.IsNullOrEmpty(userSettings?.SiteMinderGuid))
+                    if (reuseSession && userSettings.AuthenticatedUser?.ContactId == Guid.Empty &&
+                        !string.IsNullOrEmpty(userSettings.SiteMinderGuid))
                     {
                         var contact = await _dataverse.GetContactByExternalIdAsync(GuidUtility.SanitizeGuidString(userSettings.SiteMinderGuid));
                         if (contact != null)
@@ -672,16 +686,7 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     _logger.Debug("No UserSettings found");
                 }
 
-                var userId = context.Request.Headers[_options.SiteMinderUserNameKey];
-                if (string.IsNullOrEmpty(userId))
-                {
-                    userId = context.Request.Headers[_options.SiteMinderUniversalIdKey];
-                }
-
-                // is user authenticated - if so we're done
-                if ((userSettings.UserAuthenticated && string.IsNullOrEmpty(userId)) ||
-                    (userSettings.UserAuthenticated && !string.IsNullOrEmpty(userId) &&
-                     !string.IsNullOrEmpty(userSettings.UserId) && userSettings.UserId == userId))
+                if (reuseSession)
                 {
                     _logger.Debug("User already authenticated with active session: " + userSettings.UserId);
                     TempAuthDebug.Log(_ms_logger, nameof(HandleAuthenticateAsync),
@@ -689,6 +694,10 @@ namespace Gov.Lclb.Cllb.Public.Authentication
                     principal = userSettings.AuthenticatedUser.ToClaimsPrincipal(_options.Scheme, userSettings.UserType);
                     return AuthenticateResult.Success(new AuthenticationTicket(principal, null, Options.Scheme));
                 }
+
+                // Discard the previous identity even if the new login fails or has no contact yet.
+                context.Session.Remove("UserSettings");
+                userSettings = new UserSettings();
 
                 // **************************************************
                 // Check if we have a Dev Environment Cookie

@@ -91,7 +91,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         /// <summary>
         ///     Update a contact
         /// </summary>
-        /// <param name="contact"></param>
+        /// <param name="item"></param>
         /// <param name="id"></param>
         /// <returns>The updated contact</returns>
         /// <response code="400">If the request is invalid</response>
@@ -355,13 +355,7 @@ namespace Gov.Lclb.Cllb.Public.Controllers
 
             // create a new contact and worker.
             var contact = new DvContact();
-            var worker = new adoxio_worker
-            {
-                adoxio_FirstName = item.firstname,
-                adoxio_MiddleName = item.middlename,
-                adoxio_LastName = item.lastname,
-                adoxio_IsManual = adoxio_generalyesno.No
-            };
+            var worker = new adoxio_worker { adoxio_IsManual = adoxio_generalyesno.No };
 
             contact.CopyValues(item);
             // set the type to Retail Worker.
@@ -370,12 +364,14 @@ namespace Gov.Lclb.Cllb.Public.Controllers
             TempAuthDebug.Log(_logger, nameof(CreateWorkerContact),
                 "Incoming body: " + TempAuthDebug.Json(new { item, userSettings.NewContact, userSettings.NewWorker }));
 
+            if (userSettings.NewContact != null)
+                contact.CopyLoginFields(userSettings.NewContact);
             if (userSettings.NewWorker != null)
-            {
-                // get additional information from the service card headers.
-                contact.CopyContactUserSettings(userSettings.NewContact);
                 worker.CopyValues(userSettings.NewWorker);
-            }
+
+            worker.adoxio_FirstName = contact.FirstName;
+            worker.adoxio_MiddleName = contact.MiddleName;
+            worker.adoxio_LastName = contact.LastName;
 
             //Default the country to Canada
             if (string.IsNullOrEmpty(contact.Address1_Country)) contact.Address1_Country = "Canada";
