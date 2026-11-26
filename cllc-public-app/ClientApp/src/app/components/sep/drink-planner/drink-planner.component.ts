@@ -204,7 +204,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   // Applicants can raise drink prices above the maximum when operating certain types of charitable/significant events
-  canPriceAboveMax(): boolean {
+  priceMayExceedMax(): boolean {
     return (
       this.sepApplication?.chargingForLiquorReason === 'RaiseMoney' ||
       this.sepApplication?.isLocalSignificance ||
@@ -248,7 +248,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     winePriceControl.setValidators([Validators.required, Validators.min(0)]);
     spiritsPriceControl.setValidators([Validators.required, Validators.min(0)]);
 
-    if (!this.canPriceAboveMax()) {
+    if (!this.priceMayExceedMax()) {
       beerPriceControl.addValidators(Validators.max(maxBeerPrice));
       winePriceControl.addValidators(Validators.max(maxWinePrice));
       spiritsPriceControl.addValidators(Validators.max(maxSpiritsPrice));

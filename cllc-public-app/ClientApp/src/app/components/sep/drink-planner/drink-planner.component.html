@@ -182,8 +182,8 @@
         </ng-container>
 
         <mat-form-field appearance="outline" floatLabel="always" *ngIf="hideGuestsAndHours">
-          <mat-label *ngIf="!canPriceAboveMax()">Max Drink Price (inc. PST)<sup>1,2</sup></mat-label>
-          <mat-label *ngIf="canPriceAboveMax()">Avg. Drink Price (inc. PST)</mat-label>
+          <mat-label *ngIf="!priceMayExceedMax()">Max Drink Price (inc. PST)<sup>1,2</sup></mat-label>
+          <mat-label *ngIf="priceMayExceedMax()">Avg. Drink Price (inc. PST)</mat-label>
           <input
             matInput
             [formControlName]="getAVControlName(item.group)"
@@ -201,7 +201,7 @@
       </div>
       <!-- ngFor -->
     </div>
-    <p *ngIf="!canPriceAboveMax()" style="text-align: center">
+    <p *ngIf="!priceMayExceedMax()" style="text-align: center">
       <small>
         <sup>1</sup>The maximum sales price for drinks cannot exceed the price set by the Branch for non-charitable
         events.
