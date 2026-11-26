@@ -127,24 +127,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
   }
 
   isValid(): boolean {
-    const isRaiseMoney = this.canPriceAboveMax();
-    const notCharging = this.sepApplication?.chargingForLiquorReason === 'LiquorIsFree';
-    //const multiplier = this.sepApplication?.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;  // Add GST for GST Registered Organizations
-    const multiplier = 1; // Don't use the GST multiplier until LCSD-8637 has the goahead.
-
-    if (isRaiseMoney != true && notCharging != true) {
-      if (
-        (this.form.value.averageBeerPrice &&
-          this.drinkTypes?.['Beer/Cider/Cooler']?.pricePerServing * multiplier < this.form.value.averageBeerPrice) ||
-        (this.form.value.averageWinePrice &&
-          this.drinkTypes?.['Wine']?.pricePerServing * multiplier < this.form.value.averageWinePrice) ||
-        (this.form.value.averageSpiritsPrice &&
-          this.drinkTypes?.['Spirits']?.pricePerServing * multiplier < this.form.value.averageSpiritsPrice)
-      ) {
-        return false;
-      }
-    }
-    return this.totalPercentage === this.totalServings;
+    return this.form.valid && this.totalPercentage === this.totalServings;
   }
 
   ngOnInit() {
@@ -248,7 +231,7 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     }
 
     const isFree = this.sepApplication.chargingForLiquorReason === 'LiquorIsFree';
-    
+
     // GST Registered Organizations can add GST to the sell price;
     // otherwise the max price is the price set by LCRB
     const multiplier = this.sepApplication.isGSTRegisteredOrg ? GST_MULTIPLIER : 1;
@@ -306,7 +289,9 @@ export class DrinkPlannerComponent extends FormBase implements OnInit {
     const control = this.form.get(controlName);
     let error = 'Invalid input';
 
-    if (control?.errors?.min) {
+    if (control?.errors?.required) {
+      error = 'Please enter a price';
+    } else if (control?.errors?.min) {
       error = `Please enter a value greater than or equal to ${control.errors.min.min}`;
     } else if (control?.errors?.max) {
       error = `Please enter a value less than or equal to ${control.errors.max.max}`;
