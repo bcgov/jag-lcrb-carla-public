@@ -100,6 +100,27 @@ describe('ApplicationComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('hides the forbidden view during saves and submission navigation, but not on direct visits', () => {
+    component.account = account;
+    component.application = { applicationStatus: 'Submitted' } as Application;
+    component.dataLoaded = true;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('app-forbidden-modal'))).toBeTruthy();
+
+    component.savesInProgress = 1;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('app-forbidden-modal'))).toBeFalsy();
+
+    component.savesInProgress = 0;
+    component.submitApplicationInProgress = true;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('app-forbidden-modal'))).toBeFalsy();
+
+    component.submitApplicationInProgress = false;
+    fixture.detectChanges();
+    expect(fixture.debugElement.query(By.css('app-forbidden-modal'))).toBeTruthy();
+  });
+
   it('should have the title specified in the application type', () => {
     applicationService.getApplicationById = () =>
       of({

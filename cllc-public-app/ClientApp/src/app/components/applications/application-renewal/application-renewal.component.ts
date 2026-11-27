@@ -23,7 +23,7 @@ import { FeatureFlagService } from '@services/feature-flag.service';
 import { PaymentDataService } from '@services/payment-data.service';
 import { ApplicationHTMLContent, FormBase } from '@shared/form-base';
 import { forkJoin, Observable, of, Subject } from 'rxjs';
-import { catchError, filter, mergeMap, takeWhile } from 'rxjs/operators';
+import { catchError, filter, map, mergeMap, takeWhile, tap } from 'rxjs/operators';
 
 const ValidationErrorMap = {
   renewalCriminalOffenceCheck: 'Please answer question 1',
@@ -333,36 +333,37 @@ export class ApplicationRenewalComponent extends FormBase implements OnInit {
   save(showProgress: boolean = false): Observable<boolean> {
     const saveData = this.form.value;
 
-    return forkJoin([this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })])
+    return this.applicationDataService.updateApplication({ ...this.application, ...this.form.value })
       .pipe(takeWhile(() => this.componentActive))
       .pipe(
-        catchError(() => {
-          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
-          return of(false);
-        })
-      )
-      .pipe(
-        mergeMap(() => {
+        mergeMap(() => this.updateApplicationInStore()),
+        map(() => {
           this.savedFormData = saveData;
-          this.updateApplicationInStore();
           if (showProgress === true) {
             this.snackBar.open('Application has been saved', 'Success', {
               duration: 2500,
               panelClass: ['green-snackbar']
             });
           }
-          return of(true);
+          return true;
+        }),
+        catchError(() => {
+          this.snackBar.open('Error saving Application', 'Fail', { duration: 3500, panelClass: ['red-snackbar'] });
+          return of(false);
         })
       );
   }
 
-  updateApplicationInStore() {
-    this.applicationDataService
+  updateApplicationInStore(): Observable<Application> {
+    return this.applicationDataService
       .getApplicationById(this.applicationId)
-      .pipe(takeWhile(() => this.componentActive))
-      .subscribe((data: Application) => {
-        this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
-      });
+      .pipe(
+        takeWhile(() => this.componentActive),
+        tap((data: Application) => {
+          this.application = data;
+          this.store.dispatch(new currentApplicationActions.SetCurrentApplicationAction(data));
+        })
+      );
   }
 
   /**
