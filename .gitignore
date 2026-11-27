@@ -14,6 +14,8 @@ cllc-public-app/ClientApp/e2e-reports
 one-stop-service/.vs/one-stop-service/v15/
 one-stop-service/bin/
 one-stop-service/obj/
+one-stop-service-test/bin/
+one-stop-service-test/obj/
 pdf-service/.vscode/*
 one-stop-service/.vs/one-stop-service/
 cllc-public-app/.vscode/*

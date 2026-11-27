@@ -1,4 +1,4 @@
-using Microsoft.Xrm.Sdk;
+﻿using Microsoft.Xrm.Sdk;
 
 namespace Gov.Lclb.Cllb.Interfaces;
 
@@ -172,6 +172,7 @@ public interface IDataverseClient
     // -------------------------------------------------------------------------
     // Endorsement (adoxio_endorsement)
     // -------------------------------------------------------------------------
+    Task<adoxio_endorsement?> GetEndorsementByIdAsync(string id, CancellationToken ct = default);
     Task<IList<adoxio_endorsement>> GetEndorsementsByLicenceIdAsync(string licenceId, CancellationToken ct = default);
     Task<IList<adoxio_hoursofservice>> GetHoursOfSaleByEndorsementIdAsync(string endorsementId, bool activeOnly = false, CancellationToken ct = default);
     Task<IList<adoxio_servicearea>> GetServiceAreasByEndorsementIdAsync(string endorsementId, bool activeOnly = false, CancellationToken ct = default);
