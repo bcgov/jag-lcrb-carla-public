@@ -78,12 +78,26 @@ public class TypeDependencyTests
     {
         var misplaced = Types.InAssembly(Backend.Load(module)).GetTypes()
             .Where(type => !type.Name.StartsWith('<'))
-            .Where(type => type.Namespace != module && !Layers.Any(layer => type.Namespace?.StartsWith($"{module}.{layer}") == true))
+            .Where(type => !IsInModuleOrLayer(module, type.Namespace))
             .Select(type => type.FullName)
             .ToList();
 
         Assert.True(misplaced.Count == 0, $"{module} types outside its layers: {string.Join(", ", misplaced)}");
     }
+
+    [Theory]
+    [InlineData("Portal.Accounts", true)]
+    [InlineData("Portal.Accounts.Domain", true)]
+    [InlineData("Portal.Accounts.Domain.Rules", true)]
+    [InlineData("Portal.Accounts.DomainOther", false)]
+    [InlineData("Portal.Accounts.ApplicationExtra", false)]
+    [InlineData("Portal.AccountsOther", false)]
+    [InlineData(null, false)]
+    public void Layer_namespace_check_requires_exact_or_dotted_match(string? ns, bool expected) =>
+        Assert.Equal(expected, IsInModuleOrLayer("Portal.Accounts", ns));
+
+    private static bool IsInModuleOrLayer(string module, string? ns) =>
+        ns == module || Layers.Any(layer => ns == $"{module}.{layer}" || ns?.StartsWith($"{module}.{layer}.") == true);
 
     private static void AssertSuccess(NetArchTest.Rules.TestResult result) =>
         Assert.True(result.IsSuccessful, $"Failing types: {string.Join(", ", result.FailingTypeNames ?? [])}");
