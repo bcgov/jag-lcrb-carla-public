@@ -291,7 +291,7 @@ export class ActivityItem {
 
             <!-- AI-generated proactive reminders -->
             <div class="max-w-2xl mx-auto mt-6">
-              <smart-reminders [items]="reminderItems" />
+              <smart-reminders [items]="reminderItems()" />
             </div>
           </div>
 
@@ -300,7 +300,7 @@ export class ActivityItem {
             <dashboard-stat-card label="Active Licences" value="3" [href]="path('licences.list')" />
             <dashboard-stat-card label="Pending Applications" value="2" [href]="path('applications.list') + '?status=pending'" [highlight]="true" />
             <dashboard-stat-card label="Upcoming Renewals" value="1" [href]="path('licences.list') + '?filter=renewal'" />
-            <dashboard-stat-card label="Unread Notices" [value]="unreadNotices" [href]="path('dashboard.notices')" [highlight]="unreadNoticeCount > 0" />
+            <dashboard-stat-card label="Unread Notices" [value]="unreadNotices()" [href]="path('dashboard.notices')" [highlight]="unreadNoticeCount() > 0" />
           </div>
 
           <!-- Recent Activity Section -->
@@ -343,7 +343,7 @@ export class DashboardPage {
   protected readonly licences = mockLicences;
   private readonly notificationsRepository = inject(NOTIFICATIONS_REPOSITORY);
   // Unread count comes from the shared notices data so it matches the notices page.
-  protected readonly unreadNoticeCount = this.notificationsRepository.notices().filter((n) => !n.read).length;
-  protected readonly reminderItems = buildReminderItems(this.unreadNoticeCount);
-  protected readonly unreadNotices = String(this.unreadNoticeCount);
+  protected readonly unreadNoticeCount = computed(() => this.notificationsRepository.notices().filter((n) => !n.read).length);
+  protected readonly reminderItems = computed(() => buildReminderItems(this.unreadNoticeCount()));
+  protected readonly unreadNotices = computed(() => String(this.unreadNoticeCount()));
 }

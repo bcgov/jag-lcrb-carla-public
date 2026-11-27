@@ -172,9 +172,7 @@ export class SmartReminders {
 
   protected readonly priorityStyles = PRIORITY_STYLES;
   private readonly today = new Date().toISOString().slice(0, 10);
-  private readonly initial = computed(() => buildDeterministicNudges(this.items(), this.today));
-  private frozen: Nudge[] | undefined;
-  protected readonly shown = computed(() => (this.frozen ??= this.initial()));
+  protected readonly shown = computed(() => buildDeterministicNudges(this.items(), this.today));
 
   protected readonly refining = signal(false);
   protected readonly refined = signal(false);

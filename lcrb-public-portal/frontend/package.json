@@ -11,7 +11,7 @@
     "test": "ng test --watch=false",
     "test:tools": "vitest run --config vitest.tools.config.ts",
     "lint": "eslint .",
-    "boundaries": "tsx tools/check-boundaries.ts",
+    "boundaries": "vitest run --config vitest.tools.config.ts tests/boundaries.test.ts",
     "format": "prettier --write \"src/**/*.{ts,html,css}\"",
     "e2e": "playwright test"
   },

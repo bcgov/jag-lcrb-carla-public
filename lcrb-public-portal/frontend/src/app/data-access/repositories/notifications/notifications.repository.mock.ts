@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { signal } from '@angular/core';
+import { computed, signal } from '@angular/core';
 import { ANNOUNCEMENTS, latestAnnouncementId, injectUnreadAnnouncements } from './mock/announcements';
-import { NOTICES } from './mock/notices';
 import { injectInboxFeed } from './inbox';
-import { markNoticeRead } from './notices-store';
+import { injectNoticesFeed, markNoticeRead } from './notices-store';
 import { listDeliveryLog } from './notification-service';
 import { injectNotifications } from './notifications.signals';
 import type { NotificationsRepository } from './notifications.repository';
@@ -17,7 +16,9 @@ export class MockNotificationsRepository implements NotificationsRepository {
 
   readonly unreadAnnouncements = injectUnreadAnnouncements;
 
-  readonly notices = signal(NOTICES).asReadonly();
+  private readonly noticesFeed = injectNoticesFeed();
+
+  readonly notices = computed(() => this.noticesFeed().notices);
 
   readonly inboxFeed = injectInboxFeed;
 

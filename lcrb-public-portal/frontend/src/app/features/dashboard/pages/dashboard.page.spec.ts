@@ -8,6 +8,7 @@ import { SmartReminders } from '../components/smart-reminders';
 import { StartHere } from '../components/start-here';
 import { SessionProvider } from '@core/session/session-provider';
 import { NOTICES } from '@data-access/repositories/notifications/mock/notices';
+import { markAllNoticesRead } from '@data-access/repositories/notifications/notices-store';
 import { DashboardPage, RenewalsBox } from './dashboard.page';
 
 @Component({ template: '' })
@@ -64,6 +65,19 @@ describe('DashboardPage', () => {
 
     expect(el.querySelector('smart-reminders')).toBeTruthy();
     expect((globalThis.fetch as ReturnType<typeof vi.fn>).mock.calls).toHaveLength(0);
+  });
+  it('updates the unread count and reminder after all notices are marked read', async () => {
+    TestBed.inject(SessionProvider).login({ role: 'licensee', firstName: 'Matt', lastName: 'Harding', organization: 'X' } as never);
+    const { fixture, el } = await mount(DashboardPage);
+    const unreadCard = () => el.querySelectorAll('dashboard-stat-card a')[3];
+    expect(unreadCard().textContent).toContain(String(NOTICES.filter((n) => !n.read).length));
+    expect(el.querySelector('smart-reminders')?.textContent).toContain('unread notice');
+
+    markAllNoticesRead();
+    fixture.detectChanges();
+    await fixture.whenStable();
+    expect(unreadCard().textContent).toContain('0');
+    expect(el.querySelector('smart-reminders')?.textContent).not.toContain('unread notice');
   });
 });
 

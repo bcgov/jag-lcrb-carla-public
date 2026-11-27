@@ -126,7 +126,12 @@ export function createCollection<T extends Entity>(name: string): Collection<T> 
       return () => set.delete(cb)
     },
     snapshot() {
-      return typeof window === "undefined" ? "{}" : localStorage.getItem(storageKey) ?? "{}"
+      if (typeof window === "undefined") return "{}"
+      try {
+        return localStorage.getItem(storageKey) ?? "{}"
+      } catch {
+        return "{}"
+      }
     },
   }
 }

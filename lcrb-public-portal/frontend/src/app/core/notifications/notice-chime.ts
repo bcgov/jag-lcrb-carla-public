@@ -23,17 +23,40 @@ function getContext(): AudioContext | null {
 const CHIME_MUTE_KEY = "lcrb.notice-chime.muted"
 const CHIME_LOGIN_KEY = "lcrb.notice-chime.login-played"
 
+// Used when localStorage is unavailable, so the preference still holds for this page.
+let mutedFallback = false
+
 /** Whether the user has muted the notice chime (persists across sessions). */
 export function isNoticeChimeMuted(): boolean {
   if (typeof window === "undefined") return false
-  return window.localStorage.getItem(CHIME_MUTE_KEY) === "1"
+  try {
+    return window.localStorage.getItem(CHIME_MUTE_KEY) === "1"
+  } catch {
+    return mutedFallback
+  }
 }
 
 /** Persist the user's mute preference for the notice chime. */
 export function setNoticeChimeMuted(muted: boolean): void {
   if (typeof window === "undefined") return
-  if (muted) window.localStorage.setItem(CHIME_MUTE_KEY, "1")
-  else window.localStorage.removeItem(CHIME_MUTE_KEY)
+  mutedFallback = muted
+  try {
+    if (muted) window.localStorage.setItem(CHIME_MUTE_KEY, "1")
+    else window.localStorage.removeItem(CHIME_MUTE_KEY)
+  } catch {
+    // keep the in-memory value
+  }
+}
+
+/** Marks the login chime as played for this browser session; false if already played or storage is unavailable. */
+function claimLoginChime(): boolean {
+  try {
+    if (window.sessionStorage.getItem(CHIME_LOGIN_KEY) === "1") return false
+    window.sessionStorage.setItem(CHIME_LOGIN_KEY, "1")
+    return true
+  } catch {
+    return false
+  }
 }
 
 // Play the chime once; no-op when muted or when the browser blocks audio.
@@ -84,10 +107,7 @@ export function injectNoticeChime(unreadArg: Arg<number>, readyArg: Arg<boolean>
     // First reading after hydration: chime at most once per browser session, then track increases.
     if (prevUnread.current === null) {
       prevUnread.current = unread
-      if (unread > 0 && window.sessionStorage.getItem(CHIME_LOGIN_KEY) !== "1") {
-        window.sessionStorage.setItem(CHIME_LOGIN_KEY, "1")
-        playNoticeChime()
-      }
+      if (unread > 0 && claimLoginChime()) playNoticeChime()
       return
     }
 
