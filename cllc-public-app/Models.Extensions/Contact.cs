@@ -160,7 +160,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             if (from.PhsConnectionsDetails != null) to.adoxio_PHSConnectionsDetails = from.PhsConnectionsDetails;
         }
 
-        public static void CopyHeaderValues(this Contact to, IHeaderDictionary headers)
+        public static void CopyHeaderValues(this Contact to, IHeaderDictionary headers, bool useDisplayName = true)
         {
             string smgov_useremail = headers["smgov_useremail"];
             string smgov_birthdate = headers["smgov_birthdate"];
@@ -169,6 +169,7 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_city = headers["smgov_city"];
             string smgov_postalcode = headers["smgov_postalcode"];
             string smgov_stateorprovince = headers["smgov_province"];
+            if (string.IsNullOrWhiteSpace(smgov_stateorprovince)) smgov_stateorprovince = headers["smgov_stateorprovince"];
             string smgov_country = headers["smgov_country"];
             string smgov_givenname = headers["smgov_givenname"];
             string smgov_givennames = headers["smgov_givennames"];
@@ -182,15 +183,18 @@ namespace Gov.Lclb.Cllb.Public.Models
             to.address1_country = smgov_country;
 
             if (!string.IsNullOrEmpty(smgov_givenname)) to.firstname = smgov_givenname;
-            if (!string.IsNullOrEmpty(smgov_givennames)) to.middlename = smgov_givennames.Replace(smgov_givenname ?? "", "").Trim();
+            if (!string.IsNullOrEmpty(smgov_givennames))
+                to.middlename = string.IsNullOrEmpty(smgov_givenname)
+                    ? smgov_givennames.Trim() : smgov_givennames.Replace(smgov_givenname, "").Trim();
+            to.telephone1 = headers["smgov_userphone"];
             if (!string.IsNullOrEmpty(smgov_surname)) to.lastname = smgov_surname;
             if (!string.IsNullOrEmpty(smgov_useremail)) to.emailaddress1 = smgov_useremail;
-            if (!string.IsNullOrEmpty(smgov_sex)) to.Gender = (Gender)GetIntGenderCode(smgov_sex);
+            if (!string.IsNullOrWhiteSpace(smgov_sex)) to.Gender = (Gender)GetIntGenderCode(smgov_sex);
             if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
                 to.Birthdate = tempDate;
-            if (string.IsNullOrEmpty(to.lastname) && smgov_userdisplayname != null)
+            if (useDisplayName && string.IsNullOrEmpty(to.lastname) && smgov_userdisplayname != null)
                 to.lastname = smgov_userdisplayname.GetLastName();
-            if (string.IsNullOrEmpty(to.firstname) && smgov_userdisplayname != null)
+            if (useDisplayName && string.IsNullOrEmpty(to.firstname) && smgov_userdisplayname != null)
                 to.firstname = smgov_userdisplayname.GetFirstName();
         }
 
@@ -204,7 +208,9 @@ namespace Gov.Lclb.Cllb.Public.Models
             string smgov_surname = headers["smgov_surname"];
 
             if (!string.IsNullOrEmpty(smgov_givenname)) to.firstname = smgov_givenname;
-            if (!string.IsNullOrEmpty(smgov_givennames)) to.middlename = smgov_givennames.Replace(smgov_givenname ?? "", "").Trim();
+            if (!string.IsNullOrEmpty(smgov_givennames))
+                to.middlename = string.IsNullOrEmpty(smgov_givenname)
+                    ? smgov_givennames.Trim() : smgov_givennames.Replace(smgov_givenname, "").Trim();
             if (!string.IsNullOrEmpty(smgov_surname)) to.lastname = smgov_surname;
             if (!string.IsNullOrEmpty(smgov_useremail)) to.email = smgov_useremail;
             if (!string.IsNullOrEmpty(smgov_birthdate) && DateTimeOffset.TryParse(smgov_birthdate, out DateTimeOffset tempDate))
@@ -223,49 +229,31 @@ namespace Gov.Lclb.Cllb.Public.Models
 
         public static void CopyHeaderValues(this DataverseContact to, IHttpContextAccessor httpContextAccessor)
         {
-            var headers = httpContextAccessor.HttpContext.Request.Headers;
-            string smgov_useremail = headers["SMGOV_USEREMAIL"];
-            string smgov_birthdate = headers["SMGOV_BIRTHDATE"];
-            string smgov_sex = headers["SMGOV_SEX"];
-            string smgov_streetaddress = headers["SMGOV_STREETADDRESS"];
-            string smgov_city = headers["SMGOV_CITY"];
-            string smgov_postalcode = headers["SMGOV_POSTALCODE"];
-            string smgov_stateorprovince = headers["SMGOV_STATEORPROVINCE"];
-            string smgov_country = headers["SMGOV_COUNTRY"];
-            string smgov_givenname = headers["SMGOV_GIVENNAME"];
-            string smgov_givennames = headers["SMGOV_GIVENNAMES"];
-            string smgov_surname = headers["SMGOV_SURNAME"];
-
-            if (!string.IsNullOrEmpty(smgov_useremail)) to.EMailAddress1 = smgov_useremail;
-            if (!string.IsNullOrEmpty(smgov_givenname)) to.FirstName = smgov_givenname;
-            if (!string.IsNullOrEmpty(smgov_givennames)) to.MiddleName = smgov_givennames;
-            if (!string.IsNullOrEmpty(smgov_surname)) to.LastName = smgov_surname;
-            if (!string.IsNullOrEmpty(smgov_streetaddress)) to.Address1_Line1 = smgov_streetaddress;
-            if (!string.IsNullOrEmpty(smgov_postalcode)) to.Address1_PostalCode = smgov_postalcode;
-            if (!string.IsNullOrEmpty(smgov_city)) to.Address1_City = smgov_city;
-            if (!string.IsNullOrEmpty(smgov_stateorprovince)) to.Address1_StateOrProvince = smgov_stateorprovince;
-            if (!string.IsNullOrEmpty(smgov_country)) to.Address1_Country = smgov_country;
-            if (!string.IsNullOrEmpty(smgov_sex))
-            {
-                var genderInt = GetIntGenderCode(smgov_sex);
-                if (genderInt.HasValue) to.adoxio_GenderCode = (adoxio_gender?)genderInt;
-            }
+            to.CopyLoginFields(httpContextAccessor.HttpContext.Request.Headers);
         }
 
-        public static void CopyContactUserSettings(this DataverseContact contact, Contact newContact)
+        public static void CopyLoginFields(this DataverseContact to, IHeaderDictionary headers)
         {
-            contact.Address1_Line1 = newContact.address1_line1;
-            if (!string.IsNullOrEmpty(newContact.address1_postalcode))
-                contact.Address1_PostalCode = newContact.address1_postalcode.Replace(" ", "");
-            contact.Address1_City = newContact.address1_city;
-            contact.Address1_StateOrProvince = newContact.address1_stateorprovince;
-            contact.Address1_Country = newContact.address1_country;
-            contact.FirstName = newContact.firstname;
-            contact.MiddleName = newContact.middlename;
-            contact.LastName = newContact.lastname;
-            contact.EMailAddress1 = newContact.emailaddress1;
-            contact.adoxio_GenderCode = (adoxio_gender?)(int?)newContact.Gender;
-            contact.BirthDate = newContact.Birthdate?.DateTime;
+            var fields = new Contact();
+            fields.CopyHeaderValues(headers, useDisplayName: false);
+            to.CopyLoginFields(fields);
         }
+
+        public static void CopyLoginFields(this DataverseContact to, Contact fields)
+        {
+            if (!string.IsNullOrWhiteSpace(fields.firstname)) to.FirstName = fields.firstname;
+            if (!string.IsNullOrWhiteSpace(fields.middlename)) to.MiddleName = fields.middlename;
+            if (!string.IsNullOrWhiteSpace(fields.lastname)) to.LastName = fields.lastname;
+            if (!string.IsNullOrWhiteSpace(fields.emailaddress1)) to.EMailAddress1 = fields.emailaddress1;
+            if (!string.IsNullOrWhiteSpace(fields.telephone1)) to.Telephone1 = fields.telephone1;
+            if (!string.IsNullOrWhiteSpace(fields.address1_line1)) to.Address1_Line1 = fields.address1_line1;
+            if (!string.IsNullOrWhiteSpace(fields.address1_postalcode)) to.Address1_PostalCode = fields.address1_postalcode.Replace(" ", "");
+            if (!string.IsNullOrWhiteSpace(fields.address1_city)) to.Address1_City = fields.address1_city;
+            if (!string.IsNullOrWhiteSpace(fields.address1_stateorprovince)) to.Address1_StateOrProvince = fields.address1_stateorprovince;
+            if (!string.IsNullOrWhiteSpace(fields.address1_country)) to.Address1_Country = fields.address1_country;
+            if (fields.Birthdate.HasValue) to.BirthDate = fields.Birthdate.Value.Date;
+            if (fields.Gender.HasValue) to.adoxio_GenderCode = (adoxio_gender)(int)fields.Gender.Value;
+        }
+
     }
 }

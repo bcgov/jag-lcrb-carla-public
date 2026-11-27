@@ -51,74 +51,78 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 userSettings.SiteMinderGuid, _httpContextAccessor.HttpContext.Session.Id);
 
             user.id = userSettings.UserId;
+            TempAuthDebug.LogHeaders(_logger, nameof(UsersCurrentGet), _httpContextAccessor.HttpContext.Request.Headers);
+            TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                "Session userSettings: " + TempAuthDebug.Json(userSettings));
             user.contactid = userSettings.ContactId;
             user.accountid = userSettings.AccountId;
             user.businessname = userSettings.BusinessLegalName;
             user.name = userSettings.UserDisplayName;
             user.UserType = userSettings.UserType;
 
-            if (userSettings.AuthenticatedUser == null)
+            // Bridge login can have an account before a Dynamics contact exists.
+            var contactId = Guid.TryParse(userSettings.ContactId, out var id) && id != Guid.Empty
+                ? id : userSettings.AuthenticatedUser?.ContactId ?? Guid.Empty;
+            var contact = contactId != Guid.Empty
+                ? await _dataverse.GetContactByIdAsync(contactId.ToString())
+                : await _dataverse.GetContactByExternalIdAsync(userSettings.SiteMinderGuid);
+            if (contact != null)
             {
-                try
-                {
-                    var contact = await _dataverse.GetContactByExternalIdAsync(userSettings.SiteMinderGuid);
-                    if (contact != null)
-                    {
-                        userSettings.AuthenticatedUser = new Models.User();
-                        userSettings.AuthenticatedUser.FromContact(contact);
-                        _logger.LogInformation("UsersCurrentGet: contact FOUND via GetContactByExternalIdAsync for SiteMinderGuid={Guid}, ContactId={ContactId}", userSettings.SiteMinderGuid, contact.Id);
-                    }
-                    else
-                    {
-                        userSettings.IsNewUserRegistration = true;
-                        _logger.LogWarning("UsersCurrentGet: contact NOT FOUND via GetContactByExternalIdAsync for SiteMinderGuid={Guid} — treating as new user", userSettings.SiteMinderGuid);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    userSettings.IsNewUserRegistration = true;
-                    _logger.LogError(ex, "UsersCurrentGet: exception looking up contact for SiteMinderGuid={Guid} — treating as new user", userSettings.SiteMinderGuid);
-                }
+                user.contactid = contact.Id.ToString();
+                user.firstname = contact.FirstName;
+                user.lastname = contact.LastName;
+                user.email = contact.EMailAddress1;
+                user.name = string.IsNullOrWhiteSpace(contact.FullName)
+                    ? $"{contact.FirstName} {contact.LastName}".Trim()
+                    : contact.FullName;
+            }
+            else
+            {
+                userSettings.IsNewUserRegistration = true;
             }
 
             if (userSettings.IsNewUserRegistration)
             {
                 user.isNewUser = true;
-                user.lastname = user.name.GetLastName();
-                user.firstname = user.name.GetFirstName();
                 user.accountid = userSettings.AccountId;
 
-                string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];
-                string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
+                if (contact == null)
+                {
+                    var headers = _httpContextAccessor.HttpContext.Request.Headers;
+                    var tokenContact = new ViewModels.Contact();
+                    tokenContact.CopyHeaderValues(headers, useDisplayName: false);
+                    user.email = tokenContact.emailaddress1;
+                    user.lastname = tokenContact.lastname;
+                    user.firstname = tokenContact.firstname;
 
-                Gov.Lclb.Cllb.Interfaces.BCeIDBusiness bceidBusiness = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
-                if (bceidBusiness != null)
-                {
-                    user.firstname = bceidBusiness.individualFirstname;
-                    user.lastname = bceidBusiness.individualSurname;
-                }
-                else
-                {
-                    Gov.Lclb.Cllb.Interfaces.BCeIDBasic bceidBasic = await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid);
-                    if (bceidBasic != null)
+                    string siteminderBusinessGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderBusinessGuidKey];
+                    string siteminderUserGuid = _httpContextAccessor.HttpContext.Request.Headers[siteMinderAuthOptions.SiteMinderUserGuidKey];
+
+                    if ((string.IsNullOrWhiteSpace(user.firstname) || string.IsNullOrWhiteSpace(user.lastname)) &&
+                        Guid.TryParse(userSettings.SiteMinderGuid, out _))
                     {
-                        user.firstname = bceidBasic.individualFirstname;
-                        user.lastname = bceidBasic.individualSurname;
+                        var business = await _bceid.ProcessBusinessQuery(userSettings.SiteMinderGuid);
+                        var basic = business == null ? await _bceid.ProcessBasicQuery(userSettings.SiteMinderGuid) : null;
+                        if (string.IsNullOrWhiteSpace(user.firstname)) user.firstname = business?.individualFirstname ?? basic?.individualFirstname;
+                        if (string.IsNullOrWhiteSpace(user.lastname)) user.lastname = business?.individualSurname ?? basic?.individualSurname;
                     }
+                    if (string.IsNullOrWhiteSpace(user.firstname)) user.firstname = user.name?.GetFirstName();
+                    if (string.IsNullOrWhiteSpace(user.lastname)) user.lastname = user.name?.GetLastName();
+                    user.name = $"{user.firstname} {user.lastname}".Trim();
+
+                    TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                        "New user after BCeID lookup: " + TempAuthDebug.Json(user));
+
+                    user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
+                    if (string.IsNullOrEmpty(user.contactid))
+                        user.contactid = userSettings.SiteMinderGuid;
+
+                    user.accountid = userSettings.AccountId ?? siteminderBusinessGuid;
                 }
-
-                user.contactid = string.IsNullOrEmpty(siteminderUserGuid) ? userSettings.ContactId : siteminderUserGuid;
-                if (string.IsNullOrEmpty(user.contactid))
-                    user.contactid = userSettings.SiteMinderGuid;
-
-                user.accountid = string.IsNullOrEmpty(siteminderBusinessGuid) ? userSettings.AccountId : siteminderBusinessGuid;
                 user.isEligibilityRequired = true;
             }
             else
             {
-                user.lastname = userSettings.AuthenticatedUser.Surname;
-                user.firstname = userSettings.AuthenticatedUser.GivenName;
-                user.email = userSettings.AuthenticatedUser.Email;
                 user.isNewUser = false;
                 if (!string.IsNullOrEmpty(user.accountid))
                 {
@@ -127,6 +131,8 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 }
             }
 
+            TempAuthDebug.Log(_logger, nameof(UsersCurrentGet),
+                "Returning to frontend: " + TempAuthDebug.Json(user));
             return new JsonResult(user);
         }
     }
