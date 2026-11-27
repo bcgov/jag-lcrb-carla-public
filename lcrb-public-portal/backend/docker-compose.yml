@@ -1,0 +1,15 @@
+# Local run of the public portal backend.
+name: lcrb-public-portal-backend
+
+services:
+  api:
+    build: .
+    image: lcrb-public-portal-backend-api
+    ports:
+      - "${PUBLIC_BE_PORT:-8200}:8080"
+    healthcheck:
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/127.0.0.1/8080 && printf 'GET /healthz/live HTTP/1.0\\r\\n\\r\\n' >&3 && grep -q '200 OK' <&3"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s

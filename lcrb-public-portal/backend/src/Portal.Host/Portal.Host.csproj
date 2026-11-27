@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <ItemGroup>
+    <InternalsVisibleTo Include="Portal.UnitTests" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Portal.SharedKernel\Portal.SharedKernel.csproj" />
+    <ProjectReference Include="..\Portal.Platform\Portal.Platform.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Dataverse\Portal.Integrations.Dataverse.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Documents\Portal.Integrations.Documents.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Geocoding\Portal.Integrations.Geocoding.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.IdentityDirectory\Portal.Integrations.IdentityDirectory.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Notifications\Portal.Integrations.Notifications.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.OneStop\Portal.Integrations.OneStop.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Payments\Portal.Integrations.Payments.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Pdf\Portal.Integrations.Pdf.csproj" />
+    <ProjectReference Include="..\Integrations\Portal.Integrations.Registries\Portal.Integrations.Registries.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Accounts\Portal.Accounts.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Applications\Portal.Applications.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Assistant\Portal.Assistant.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Identity\Portal.Identity.csproj" />
+    <ProjectReference Include="..\Modules\Portal.LegalEntity\Portal.LegalEntity.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Licences\Portal.Licences.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Partners\Portal.Partners.csproj" />
+    <ProjectReference Include="..\Modules\Portal.ReferenceData\Portal.ReferenceData.csproj" />
+    <ProjectReference Include="..\Modules\Portal.SpecialEvents\Portal.SpecialEvents.csproj" />
+    <ProjectReference Include="..\Modules\Portal.Staff\Portal.Staff.csproj" />
+  </ItemGroup>
+</Project>
