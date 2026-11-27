@@ -8,7 +8,6 @@ using DataverseClient = DV::Gov.Lclb.Cllb.Interfaces.DataverseClient;
 using Gov.Lclb.Cllb.Interfaces;
 using Gov.Lclb.Cllb.Public.Authentication;
 using Gov.Lclb.Cllb.Public.Authorization;
-using Gov.Lclb.Cllb.Public.Contexts;
 using Gov.Lclb.Cllb.Public.Middleware;
 using Gov.Lclb.Cllb.Public.Models;
 using Gov.Lclb.Cllb.Services.FileManager;
@@ -45,7 +44,6 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Mime;
-using StackExchange.Redis;
 using static Gov.Lclb.Cllb.Services.FileManager.FileManager;
 using Gov.Lclb.Cllb.Public.Repositories;
 
@@ -53,7 +51,6 @@ namespace Gov.Lclb.Cllb.Public
 {
     public class Startup
     {
-
         public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             _configuration = configuration;
@@ -90,7 +87,6 @@ namespace Gov.Lclb.Cllb.Public
             {
                 SetupServices(services);
             }
-
 
             // Add a memory cache
             services.AddMemoryCache();
@@ -210,7 +206,6 @@ namespace Gov.Lclb.Cllb.Public
             var orgBook = new OrgBookClient(new HttpClient());
             orgBook.ReadResponseAsString = true;
             services.AddTransient(_ => (IOrgBookClient)orgBook);
-
 
             if (redisConfiguration != null)
             {
@@ -396,10 +391,6 @@ namespace Gov.Lclb.Cllb.Public
         {
             var log = loggerFactory.CreateLogger("Startup");
 
-            string connectionString = "unknown.";
-
-
-
             string pathBase = _configuration["BASE_PATH"];
 
             if (!string.IsNullOrEmpty(pathBase))
@@ -466,8 +457,6 @@ namespace Gov.Lclb.Cllb.Public
                 Predicate = _ => false
             });
 
-
-
             app.UseXContentTypeOptions();
             app.UseXfo(xfo => xfo.Deny());
 
@@ -527,15 +516,11 @@ namespace Gov.Lclb.Cllb.Public
                     template: "{controller}/{action=Index}/{id?}");
             });
 
-
-
-
             // enable Splunk logger using Serilog
             if (!string.IsNullOrEmpty(_configuration["SPLUNK_COLLECTOR_URL"]) &&
                 !string.IsNullOrEmpty(_configuration["SPLUNK_TOKEN"])
                 )
             {
-
                 Serilog.Sinks.Splunk.CustomFields fields = new Serilog.Sinks.Splunk.CustomFields();
                 if (!string.IsNullOrEmpty(_configuration["SPLUNK_CHANNEL"]))
                 {
@@ -543,9 +528,6 @@ namespace Gov.Lclb.Cllb.Public
                 }
                 var splunkUri = new Uri(_configuration["SPLUNK_COLLECTOR_URL"]);
                 var upperSplunkHost = splunkUri.Host?.ToUpperInvariant() ?? string.Empty;
-
-                // Fix for bad SSL issues
-
 
                 Log.Logger = new LoggerConfiguration()
                     .Enrich.FromLogContext()
@@ -599,8 +581,6 @@ namespace Gov.Lclb.Cllb.Public
             {
                 Log.Logger.Information("Not enabling single page application hosting from Dotnet - using externally hosted static content.");
             }
-
         }
-
     }
 }
