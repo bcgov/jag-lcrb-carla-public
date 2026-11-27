@@ -233,20 +233,21 @@ export class ApplicationComponent extends FormBase implements OnInit {
   saveOnDeactivate: boolean = true;
 
   get isOpenedByLGForApproval(): boolean {
-    let openedByLG = false;
+    let openedByLGIN = false;
     if (
       this.account &&
       this.application &&
       this.application.applicant &&
-      this.account.businessType === 'LocalGovernment' &&
+      (this.account.businessType === 'LocalGovernment' || this.account.businessType === 'IndigenousNation') &&
       this.application.applicant.id !== this.account.id && // Application was not made by the LG/IN
       this.account.localGovernmentId &&
       this.application.indigenousNationId && // make sure these values are not null
       this.account.localGovernmentId === this.application.indigenousNationId
     ) {
-      openedByLG = true;
+      openedByLGIN = true;
     }
-    return openedByLG;
+
+    return openedByLGIN;
   }
 
   get licenceCapacity(): number {
@@ -1250,6 +1251,7 @@ export class ApplicationComponent extends FormBase implements OnInit {
     if (this.application && this.application.lGDecisionSubmissionDate && this.application.lGApprovalDecision) {
       hasMadeDecision = true;
     }
+
     return hasMadeDecision;
   }
 
