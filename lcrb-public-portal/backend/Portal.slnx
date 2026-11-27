@@ -1,0 +1,36 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Portal.Host/Portal.Host.csproj" />
+    <Project Path="src/Portal.Platform/Portal.Platform.csproj" />
+    <Project Path="src/Portal.SharedKernel/Portal.SharedKernel.csproj" />
+  </Folder>
+  <Folder Name="/src/Integrations/">
+    <Project Path="src/Integrations/Portal.Integrations.Dataverse/Portal.Integrations.Dataverse.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Documents/Portal.Integrations.Documents.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Geocoding/Portal.Integrations.Geocoding.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.IdentityDirectory/Portal.Integrations.IdentityDirectory.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Notifications/Portal.Integrations.Notifications.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.OneStop/Portal.Integrations.OneStop.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Payments/Portal.Integrations.Payments.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Pdf/Portal.Integrations.Pdf.csproj" />
+    <Project Path="src/Integrations/Portal.Integrations.Registries/Portal.Integrations.Registries.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/">
+    <Project Path="src/Modules/Portal.Accounts/Portal.Accounts.csproj" />
+    <Project Path="src/Modules/Portal.Applications/Portal.Applications.csproj" />
+    <Project Path="src/Modules/Portal.Assistant/Portal.Assistant.csproj" />
+    <Project Path="src/Modules/Portal.Identity/Portal.Identity.csproj" />
+    <Project Path="src/Modules/Portal.LegalEntity/Portal.LegalEntity.csproj" />
+    <Project Path="src/Modules/Portal.Licences/Portal.Licences.csproj" />
+    <Project Path="src/Modules/Portal.Partners/Portal.Partners.csproj" />
+    <Project Path="src/Modules/Portal.ReferenceData/Portal.ReferenceData.csproj" />
+    <Project Path="src/Modules/Portal.SpecialEvents/Portal.SpecialEvents.csproj" />
+    <Project Path="src/Modules/Portal.Staff/Portal.Staff.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Portal.ArchitectureTests/Portal.ArchitectureTests.csproj" />
+    <Project Path="tests/Portal.ContractTests/Portal.ContractTests.csproj" />
+    <Project Path="tests/Portal.IntegrationTests/Portal.IntegrationTests.csproj" />
+    <Project Path="tests/Portal.UnitTests/Portal.UnitTests.csproj" />
+  </Folder>
+</Solution>
