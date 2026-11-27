@@ -68,7 +68,7 @@ function timeAgo(iso: string): string {
             }
           </div>
         </div>
-        <div uiScrollArea class="max-h-96 overflow-hidden">
+        <div uiScrollArea class="overflow-hidden [&>[data-slot=scroll-area-viewport]]:max-h-96">
           @if (feed().items.length === 0) {
             <p class="px-4 py-10 text-center text-sm text-muted-foreground">You have no notifications yet.</p>
           } @else {

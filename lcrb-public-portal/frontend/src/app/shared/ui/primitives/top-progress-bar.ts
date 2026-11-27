@@ -1,6 +1,6 @@
 // Slim top progress bar that starts on navigation or startProgress() and completes when routing ends.
 import { ChangeDetectionStrategy, Component, DestroyRef, inject, signal } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationCancel, NavigationEnd, NavigationError, Router } from '@angular/router';
 import { doneProgress, startProgress, subscribeProgress } from '@core/progress/progress-bus';
 
 @Component({
@@ -102,9 +102,9 @@ export class TopProgressBar {
     document.addEventListener('click', onClick);
     window.addEventListener('popstate', onPopState);
 
-    // When the route finishes changing, complete the bar.
+    // Complete the bar when routing ends, including cancelled or failed navigations.
     const sub = inject(Router).events.subscribe((e) => {
-      if (e instanceof NavigationEnd) doneProgress();
+      if (e instanceof NavigationEnd || e instanceof NavigationCancel || e instanceof NavigationError) doneProgress();
     });
 
     inject(DestroyRef).onDestroy(() => {

@@ -33,3 +33,15 @@ test('an unbuilt or unknown route shows Not Found', async ({ page }) => {
     await expect(page.getByRole('heading', { name: "We couldn't find that page" })).toBeVisible();
   }
 });
+
+test('the notification list scrolls within its height', async ({ page }) => {
+  await page.goto('/login');
+  await page.getByRole('button', { name: /Sign in as Licensee/ }).click();
+  await page.getByRole('button', { name: 'Sign in', exact: true }).click();
+  await page.getByRole('button', { name: /^Notifications/ }).click();
+  const viewport = page.locator('[data-slot=scroll-area-viewport]');
+  await expect(viewport).toBeVisible();
+  const box = await viewport.evaluate((el) => ({ client: el.clientHeight, scroll: el.scrollHeight }));
+  expect(box.client).toBeLessThanOrEqual(384);
+  expect(box.scroll).toBeGreaterThan(box.client);
+});
