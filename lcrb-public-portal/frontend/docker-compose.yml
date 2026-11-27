@@ -1,0 +1,24 @@
+# Local run of the public portal frontend and the Playwright runner (profile "test").
+name: lcrb-public-portal-frontend
+
+services:
+  web:
+    build: .
+    image: lcrb-public-portal-frontend-web
+    ports:
+      - "${PUBLIC_FE_PORT:-8100}:8080"
+
+  playwright:
+    image: mcr.microsoft.com/playwright:v1.65.0-noble
+    profiles: ["test"]
+    working_dir: /work
+    volumes:
+      - .:/work
+    ipc: host
+    environment:
+      BASE_URL: "${BASE_URL:-http://web:8080}"
+      CI: "1"
+    depends_on:
+      web:
+        condition: service_healthy
+    entrypoint: ["node_modules/.bin/playwright", "test"]

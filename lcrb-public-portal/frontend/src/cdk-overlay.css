@@ -1,0 +1,7 @@
+/* Angular CDK overlay styles for spartan brain dialogs, menus, popovers and selects. */
+@import '@angular/cdk/overlay-prebuilt.css';
+
+/* display: contents lets the dialog content take the CDK container box that carries role="dialog". */
+cdk-dialog-container.cdk-dialog-container {
+  display: contents;
+}
