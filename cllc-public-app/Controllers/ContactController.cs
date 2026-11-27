@@ -98,25 +98,27 @@ namespace Gov.Lclb.Cllb.Public.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateContact([FromBody] ViewModels.Contact item, string id)
         {
-            if (id != null && item.id != null && id != item.id) return BadRequest();
-            var accessGranted = false;
+            if (item == null || string.IsNullOrEmpty(id))
+            {
+                return BadRequest();
+            }
+
+            if (id != null && item.id != null && id != item.id) 
+            {
+                return BadRequest();
+            }
+
+            var existingContact = await _dataverse.GetContactByIdAsync(id);
 
             // Allow access if the current user is the contact.
-            if (DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor))
-            {
-                accessGranted = true;
-            }
-            else
-            {
-                var contact = await _dataverse.GetContactByIdAsync(id);
+            var accessGranted = DynamicsExtensions.CurrentUserIsContact(id, _httpContextAccessor);
 
-                // get the related account and determine if the current user is allowed access
-                if (contact?.ParentCustomerId != null)
-                {
-                    var accountId = contact.ParentCustomerId.Id;
-                    accessGranted = await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(
-                        accountId, _httpContextAccessor, _dataverse);
-                }
+            // Otherwise, check whether the current user has access to the contact's account.
+            if (!accessGranted && existingContact?.ParentCustomerId != null)
+            {
+                var accountId = existingContact.ParentCustomerId.Id;
+                accessGranted = await DynamicsExtensions.CurrentUserHasAccessToAccountAsync(
+                    accountId, _httpContextAccessor, _dataverse);
             }
 
             if (!accessGranted)
@@ -125,9 +127,17 @@ namespace Gov.Lclb.Cllb.Public.Controllers
                 return NotFound();
             }
 
+            if (existingContact == null)
+            {
+                return NotFound();
+            }
+
             var patchContact = new DvContact();
             patchContact.ContactId = new Guid(id);
             patchContact.CopyValues(item);
+            // Account profile does not allow editing first/last name. Prevent edits to these fields.
+            patchContact.Attributes.Remove("firstname");
+            patchContact.Attributes.Remove("lastname");
             try
             {
                 await _dataverse.UpdateContactAsync(patchContact);
